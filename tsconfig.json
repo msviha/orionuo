@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "module": "none",
+        "noImplicitAny": false,
+        "removeComments": true,
+        "outFile": "./dist/scripts.js",
+        "sourceMap": false
+    },
+    "include": [
+		"src/**/*",
+		"typings/**/*"
+    ],
+    "exclude": [
+		"node_modules",
+		"dist/**/*"
+    ]
+}

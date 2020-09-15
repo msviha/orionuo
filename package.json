@@ -1,0 +1,14 @@
+{
+  "name": "orionuo",
+  "version": "1.0.0",
+  "description": "Scripts for OrionUO assistant on Darkparadise.cz",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "author": "Michal Sviha",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^3.6.3"
+  }
+}
