@@ -1,4 +1,4 @@
-# Orion_uo typescript definitions
+# OrionUO scripts for Darkparadise
 
 ```
 npm i
