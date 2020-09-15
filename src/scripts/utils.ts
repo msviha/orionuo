@@ -75,9 +75,12 @@ namespace Scripts {
             }
         }
 
-        static waitWhileSomethingInJournal(messages:string[]) {
-            while (!Orion.InJournal(messages.join('|'))) {
-                Orion.Wait(200);
+        static waitWhileSomethingInJournal(messages:string[], maximumWait?:number) {
+            const w = 200;
+            let waitTotal = 0;
+            while (!Orion.InJournal(messages.join('|')) || maximumWait !== undefined && waitTotal >= maximumWait) {
+                waitTotal += w;
+                Orion.Wait(w);
             }
         }
 

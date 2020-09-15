@@ -168,7 +168,8 @@ namespace Scripts {
                 Orion.Wait(responseDelay);
                 Orion.UseType(blank.graphic, blank.color);
 
-                Scripts.Utils.waitWhileSomethingInJournal(['You fail', 'You put the']);
+                Scripts.Utils.waitWhileSomethingInJournal(['You fail', 'You put the'], 30000);
+                Orion.CancelWaitMenu();
 
                 if (Orion.InJournal('You put the')) {
                     finishedCount++;
