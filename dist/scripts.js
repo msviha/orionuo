@@ -520,6 +520,39 @@ var o = {
                 y: 180
             }
         }
+    },
+    klamaci: {
+        lvl1: {
+            giantRat: {
+                graphic: '0x20D0'
+            },
+            rat: {
+                graphic: '0x2123'
+            },
+            chicken: {
+                graphic: '0x20D1'
+            },
+            rabbit: {
+                graphic: '0x2125'
+            },
+            bird: {
+                graphic: '0x20EE'
+            }
+        },
+        lvl2: {
+            bullFrog: {
+                graphic: '0x2130'
+            },
+            squirrel: {
+                graphic: '0x2D97'
+            },
+            dog: {
+                graphic: '0x211C'
+            },
+            cat: {
+                graphic: '0x211B'
+            }
+        }
     }
 };
 var Scripts;
@@ -787,15 +820,24 @@ var Scripts;
             var lists = ['petlvl1', 'petlvl2', 'petlvl3', 'petlvl4', 'petlvl5'];
             var current = Orion.GetGlobal('klamak');
             if (!current) {
-                Orion.SetGlobal('klamak', lists[0]);
+                Orion.SetGlobal('klamak', lists[lists.length - 1]);
+                current = Orion.GetGlobal('klamak');
             }
-            else {
-                var currentIndex = lists.indexOf(current);
-                var nextIndex = currentIndex + 1 === lists.length ? 0 : currentIndex + 1;
+            var currentIndex = lists.indexOf(current);
+            var nextIndex;
+            var i = 0;
+            do {
+                i++;
+                nextIndex = (currentIndex + i) % lists.length;
                 Orion.SetGlobal('klamak', lists[nextIndex]);
+            } while (i < lists.length && !Orion.FindList(Orion.GetGlobal('klamak')).length);
+            var numberOfKlamaks = Orion.FindList(Orion.GetGlobal('klamak')).length;
+            if (!numberOfKlamaks) {
+                Scripts.Utils.playerPrint('nemas klamaky', ColorEnum.red);
+                return;
             }
             var nextList = Orion.GetGlobal('klamak');
-            Scripts.Utils.playerPrint(nextList);
+            Scripts.Utils.playerPrint(nextList + " [" + numberOfKlamaks + "]");
         };
         return Klamak;
     }());
@@ -807,28 +849,34 @@ var Scripts;
         function Loot() {
         }
         Loot.harving = function (_a) {
-            var cut = _a.cut, wayPoints = _a.wayPoints, enemiesTypesToHarv = _a.enemiesTypesToHarv, _b = _a.trapDelay, trapDelay = _b === void 0 ? 10000 : _b, _c = _a.dmgToStartHeal, dmgToStartHeal = _c === void 0 ? 40 : _c, _d = _a.fullHeal, fullHeal = _d === void 0 ? false : _d, _e = _a.castCure, castCure = _e === void 0 ? false : _e, _f = _a.drinkCure, drinkCure = _f === void 0 ? false : _f, _g = _a.castReactive, castReactive = _g === void 0 ? false : _g;
+            var cut = _a.cut, wayPoints = _a.wayPoints, enemiesTypesToHarv = _a.enemiesTypesToHarv, _b = _a.trapDelay, trapDelay = _b === void 0 ? 10000 : _b, _c = _a.dmgToStartHeal, dmgToStartHeal = _c === void 0 ? 40 : _c, _d = _a.fullHeal, fullHeal = _d === void 0 ? false : _d, _e = _a.castCure, castCure = _e === void 0 ? false : _e, _f = _a.drinkCure, drinkCure = _f === void 0 ? false : _f, _g = _a.castReactive, castReactive = _g === void 0 ? false : _g, _h = _a.weapon, weapon = _h === void 0 ? true : _h;
             Orion.SetTimer('ReactiveArmorTimer');
             var currentWaypointIndex = 0;
             Scripts.Utils.playerPrint('Target your cut weapon');
             var selection_1 = Orion.WaitForAddObject('cutWeapon', 60000);
             Scripts.Utils.playerPrint('Target your loot bag');
             var selection_2 = Orion.WaitForAddObject('myLootBag', 60000);
-            if (1 === selection_1 && 1 === selection_2) {
+            var selection_3 = 1;
+            if (weapon) {
+                Scripts.Utils.playerPrint('Target your weapon');
+                selection_3 = Orion.WaitForAddObject('fightWeapon', 60000);
+            }
+            if (1 !== selection_1 || 1 !== selection_2 || 1 !== selection_3) {
                 Scripts.Utils.log('All selections must be game objects', ColorEnum.red);
+                return;
             }
             while (true) {
                 if (castReactive && Orion.Timer('ReactiveArmorTimer') > 300000) {
                     Scripts.Utils.resetTimer('ReactiveArmorTimer');
                     Scripts.Spells.castUntilSuccess('Reactive Armor', TargetEnum.self, 2500);
                 }
-                Scripts.Loot.lootCorpsesAround(cut);
+                Scripts.Loot.lootCorpsesAround(cut, weapon);
                 Scripts.Loot.healAndCureWhenHarving(dmgToStartHeal, fullHeal, castCure, drinkCure);
                 currentWaypointIndex = Scripts.Loot.moveToNextWaypointWhenNeeded(wayPoints, enemiesTypesToHarv, currentWaypointIndex, trapDelay);
                 Orion.Wait(500);
             }
         };
-        Loot.lootCorpsesAround = function (cut) {
+        Loot.lootCorpsesAround = function (cut, weapon) {
             var listOfCorpses = Orion.FindType('0x2006', '-1', 'ground', 'fast', 2, 'red');
             while (listOfCorpses.length) {
                 for (var _i = 0, listOfCorpses_1 = listOfCorpses; _i < listOfCorpses_1.length; _i++) {
@@ -837,6 +885,10 @@ var Scripts;
                         Orion.UseObject('cutWeapon');
                         Orion.WaitForTarget(1000);
                         Orion.TargetObject(id);
+                        if (weapon) {
+                            Orion.UseObject('fightWeapon');
+                            Orion.WaitForTarget(1000) && Orion.CancelTarget();
+                        }
                     }
                     Scripts.Loot.lootCorpseId(id);
                     Orion.Ignore(id);
@@ -846,14 +898,13 @@ var Scripts;
             }
         };
         Loot.lootCorpseId = function (id) {
-            Orion.UseObject(id);
-            Orion.Wait(250);
+            Orion.OpenContainer(id, 5000, "Container id " + id + " not found");
             var itemsInCorpse = Orion.FindList('lootItems', id);
             if (itemsInCorpse.length) {
                 for (var _i = 0, itemsInCorpse_1 = itemsInCorpse; _i < itemsInCorpse_1.length; _i++) {
                     var itemId = itemsInCorpse_1[_i];
                     Orion.MoveItem(itemId, 0, "myLootBag");
-                    Orion.Wait(350);
+                    Orion.Wait(50);
                 }
             }
         };
@@ -891,8 +942,7 @@ var Scripts;
                     Orion.Attack(enemiesToHarv[0]);
                     var enemy = Orion.FindObject(enemiesToHarv[0]);
                     if (enemy) {
-                        Orion.WalkTo(enemy.X(), enemy.Y(), Player.Z(), 0);
-                        Orion.Wait(500);
+                        Orion.WalkTo(enemy.X(), enemy.Y(), Player.Z(), 5);
                     }
                     return currentWaypointIndex;
                 }
@@ -1562,7 +1612,9 @@ var Scripts;
     var Utils = (function () {
         function Utils() {
         }
-        Utils.selectMenu = function (menuName, selections) {
+        Utils.selectMenu = function (menuName, selections, firstCall) {
+            if (firstCall === void 0) { firstCall = true; }
+            firstCall && Orion.CancelWaitMenu();
             if (!selections || !selections.length) {
                 return;
             }
@@ -1570,7 +1622,7 @@ var Scripts;
             var menuToSelect = selections[0];
             Orion.WaitMenu(menuName, menuToSelect);
             selections.splice(0, 1);
-            Scripts.Utils.selectMenu(menuToSelect, selections);
+            Scripts.Utils.selectMenu(menuToSelect, selections, false);
         };
         Utils.refill = function (obj, sourceContainerId, quantity, targetContainerId, refillJustWhenIHaveNothing) {
             if (quantity === void 0) { quantity = 1; }
