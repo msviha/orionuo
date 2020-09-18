@@ -549,6 +549,60 @@ const o:any = {
 				y: 180
 			}
 		}
+	},
+	klamaci: {
+		lvl1: {
+			giantRat: {
+				graphic: '0x20D0'
+			},
+			rat: {
+				graphic: '0x2123'
+			},
+			chicken: {
+				graphic: '0x20D1'
+			},
+			rabbit: {
+				graphic: '0x2125'
+			},
+			bird: {
+				graphic: '0x20EE'
+			}
+		},
+		lvl2: {
+			bullFrog: {
+				graphic: '0x2130'
+			},
+			// pig: {
+			// 	graphic: ''
+			// },
+			squirrel: {
+				graphic: '0x2D97'
+			},
+			dog: {
+				graphic: '0x211C'
+			},
+			cat: {
+				graphic: '0x211B'
+			},
+			// grayWolf: {
+			// 	graphic: ''
+			// },
+			// mountainGoat: {
+			// 	graphic: ''
+			// },
+			// blackCat: {
+			// 	graphic: ''
+			// },
+			// lamb: {
+			// 	graphic: ''
+			// },
+			// jackRabbit: {
+			// 	graphic: ''
+			// },
+			// boar: {
+			// 	graphic: ''
+			// }
+		}
 	}
 };
 //endregion
