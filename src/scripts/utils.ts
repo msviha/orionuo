@@ -5,16 +5,17 @@ namespace Scripts {
      */
     export class Utils {
 
-        static selectMenu(menuName:string, selections:string[]) {
+        static selectMenu(menuName:string, selections:string[], firstCall = true) {
+            firstCall && Orion.CancelWaitMenu();
             if (!selections || !selections.length) {
                 return;
             }
 
-             Scripts.Utils.worldSaveCheckWait();
+            Scripts.Utils.worldSaveCheckWait();
             const menuToSelect = selections[0];
             Orion.WaitMenu(menuName, menuToSelect);
             selections.splice(0, 1);
-            Scripts.Utils.selectMenu(menuToSelect, selections);
+            Scripts.Utils.selectMenu(menuToSelect, selections, false);
         }
 
         static refill(
