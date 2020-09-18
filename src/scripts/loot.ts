@@ -19,6 +19,7 @@ namespace Scripts {
          * @param castCure ma na sebe kouzlit cure ?
          * @param drinkCure ma pit cure ? // todo checknout.. je to ted nastavene jen na lessercure, ktere leci i deadly
          * @param castReactive ma na sebe kouzlit reactive armor v 5ti minutovych intervalech
+         * @param weapon zepta se kterou zbrani budes mlatit
          */
         static harving({
             cut,
@@ -29,7 +30,8 @@ namespace Scripts {
             fullHeal = false,
             castCure = false,
             drinkCure = false,
-            castReactive = false
+            castReactive = false,
+            weapon = true
         }: {
             cut?:boolean,
             wayPoints?:ICoordinates[],
@@ -39,7 +41,8 @@ namespace Scripts {
             fullHeal?:boolean,
             castCure?:boolean,
             drinkCure?:boolean,
-            castReactive?:boolean
+            castReactive?:boolean,
+            weapon?:boolean
         }) {
             Orion.SetTimer('ReactiveArmorTimer');
             let currentWaypointIndex = 0;
@@ -49,9 +52,17 @@ namespace Scripts {
             Scripts.Utils.playerPrint('Target your loot bag');
             const selection_2 = Orion.WaitForAddObject('myLootBag', 60000);
 
+            let selection_3 = 1;
+            if (weapon) {
+                Scripts.Utils.playerPrint('Target your weapon');
+                selection_3 = Orion.WaitForAddObject('fightWeapon', 60000);
+            }
+
+
             // check the proper selection (game objects)
-            if (1 === selection_1 && 1 === selection_2) {
+            if (1 !== selection_1 || 1 !== selection_2 || 1 !== selection_3) {
                 Scripts.Utils.log('All selections must be game objects', ColorEnum.red);
+                return;
             }
 
             while (true) {
@@ -61,7 +72,7 @@ namespace Scripts {
                     Scripts.Spells.castUntilSuccess('Reactive Armor', TargetEnum.self, 2500);
                 }
 
-                Scripts.Loot.lootCorpsesAround(cut);
+                Scripts.Loot.lootCorpsesAround(cut, weapon);
                 Scripts.Loot.healAndCureWhenHarving(dmgToStartHeal, fullHeal, castCure, drinkCure);
                 currentWaypointIndex = Scripts.Loot.moveToNextWaypointWhenNeeded(wayPoints, enemiesTypesToHarv, currentWaypointIndex, trapDelay);
 
@@ -75,7 +86,7 @@ namespace Scripts {
          *
          * vylotuje mrtvolky v okoli
          */
-        static lootCorpsesAround(cut?:boolean) {
+        static lootCorpsesAround(cut?:boolean, weapon?:boolean) {
             let listOfCorpses = Orion.FindType('0x2006', '-1', 'ground', 'fast', 2, 'red');
             while (listOfCorpses.length) {
                 for (const id of listOfCorpses) {
@@ -83,6 +94,10 @@ namespace Scripts {
                         Orion.UseObject('cutWeapon');
                         Orion.WaitForTarget(1000);
                         Orion.TargetObject(id);
+                        if (weapon) {
+                            Orion.UseObject('fightWeapon');
+                            Orion.WaitForTarget(1000) && Orion.CancelTarget();
+                        }
                     }
 
                     Scripts.Loot.lootCorpseId(id);
@@ -100,16 +115,13 @@ namespace Scripts {
          * vylotuje z konkretni mrtvolky veci nastavene v lootItems listu
          */
         static lootCorpseId(id:string) {
-            Orion.UseObject(id);
-            Orion.Wait(250);
-
-            const itemsInCorpse = Orion.FindList('lootItems', id)
-
+            Orion.OpenContainer(id, 5000, `Container id ${id} not found`);
+            let itemsInCorpse = Orion.FindList('lootItems', id);
             if (itemsInCorpse.length) {
                 for (const itemId of itemsInCorpse) {
                     // TODO doresit prehazeni veci z hlavniho baglu do myLootBag pri lotovani pytliku
                     Orion.MoveItem(itemId, 0, "myLootBag");
-                    Orion.Wait(350);
+                    Orion.Wait(50);
                 }
             }
         }
@@ -164,8 +176,7 @@ namespace Scripts {
                     Orion.Attack(enemiesToHarv[0]);
                     const enemy = Orion.FindObject(enemiesToHarv[0]);
                     if (enemy) {
-                        Orion.WalkTo(enemy.X(), enemy.Y(), Player.Z(), 0);
-                        Orion.Wait(500);
+                        Orion.WalkTo(enemy.X(), enemy.Y(), Player.Z(), 5);
                     }
                     return currentWaypointIndex;
                 }
