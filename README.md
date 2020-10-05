@@ -1,16 +1,14 @@
 # OrionUO scripts for Darkparadise
 
-```
-npm i
-```
+##[CHANGELOG](./CHANGELOG.md)
 
+## how to build scripts
 ```
+# installing node_modules for development and build
+npm i
+
+# build the scripts.js
 npm run build
 ```
-
-```
-npm run watch
-```
-
-## Output after build/watch
-/dist/scripts.js 
+#### Output after build
+`/dist/scripts.js`
