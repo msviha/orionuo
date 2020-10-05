@@ -365,7 +365,6 @@ namespace Scripts {
                     }
 
                     if (Orion.InJournal("You loosen")) {
-                        keepMine = false;
                         continue;
                     }
 

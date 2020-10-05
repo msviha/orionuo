@@ -46,6 +46,7 @@ namespace Scripts {
         }) {
             Orion.SetTimer('ReactiveArmorTimer');
             let currentWaypointIndex = 0;
+            let lastAttack = undefined;
 
             Scripts.Utils.playerPrint('Target your cut weapon');
             const selection_1 = Orion.WaitForAddObject('cutWeapon', 60000);
@@ -66,6 +67,7 @@ namespace Scripts {
             }
 
             while (true) {
+                lastAttack = Orion.ClientLastAttack();
                 // reactive armor
                 if (castReactive && Orion.Timer('ReactiveArmorTimer') > 300000) {
                     Scripts.Utils.resetTimer('ReactiveArmorTimer');
@@ -74,7 +76,9 @@ namespace Scripts {
 
                 Scripts.Loot.lootCorpsesAround(cut, weapon);
                 Scripts.Loot.healAndCureWhenHarving(dmgToStartHeal, fullHeal, castCure, drinkCure);
-                currentWaypointIndex = Scripts.Loot.moveToNextWaypointWhenNeeded(wayPoints, enemiesTypesToHarv, currentWaypointIndex, trapDelay);
+                const enemySerialsAround = Orion.FindType(enemiesTypesToHarv.join('|'), '-1', 'ground', 'fast', 4, 'red');
+                currentWaypointIndex = Scripts.Loot.moveToNextWaypointWhenNeeded(wayPoints, enemySerialsAround, currentWaypointIndex, trapDelay);
+                Scripts.Loot.attackOnEnemy(enemySerialsAround, lastAttack);
 
                 Orion.Wait(500);
             }
@@ -115,13 +119,15 @@ namespace Scripts {
          * vylotuje z konkretni mrtvolky veci nastavene v lootItems listu
          */
         static lootCorpseId(id:string) {
+            let serverLagActionsLeft = 4;
             Orion.OpenContainer(id, 5000, `Container id ${id} not found`);
             let itemsInCorpse = Orion.FindList('lootItems', id);
             if (itemsInCorpse.length) {
                 for (const itemId of itemsInCorpse) {
                     // TODO doresit prehazeni veci z hlavniho baglu do myLootBag pri lotovani pytliku
                     Orion.MoveItem(itemId, 0, "myLootBag");
-                    Orion.Wait(50);
+                    Orion.Wait(serverLagActionsLeft ? 50 : 350);
+                    serverLagActionsLeft--;
                 }
             }
         }
@@ -160,10 +166,14 @@ namespace Scripts {
          * presouva se na dalsi waypoint pokud je potreba
          * return nextWaypointIndex
          */
-        static moveToNextWaypointWhenNeeded(wayPoints:ICoordinates[], enemiesTypesToHarv:string[], currentWaypointIndex:number, trapDelay:number):number {
-            if (wayPoints && enemiesTypesToHarv) {
-                const enemiesToHarv = Orion.FindType(enemiesTypesToHarv.join('|'), '-1', 'ground', 'fast', 4, 'red');
-                if (!enemiesToHarv.length) {
+        static moveToNextWaypointWhenNeeded(
+            wayPoints:ICoordinates[],
+            enemySerialsAround:string[],
+            currentWaypointIndex:number,
+            trapDelay:number
+        ):number {
+            if (wayPoints && enemySerialsAround) {
+                if (!enemySerialsAround.length) {
                     const w = wayPoints[currentWaypointIndex];
                     Orion.WalkTo(w.x, w.y, Player.Z(), 0);
                     if ((<any>w).trap) {
@@ -172,14 +182,28 @@ namespace Scripts {
                     return currentWaypointIndex + 1 === wayPoints.length ? 0 : currentWaypointIndex + 1;
                 }
                 else {
-                    Orion.Wait(500);
-                    Orion.Attack(enemiesToHarv[0]);
-                    const enemy = Orion.FindObject(enemiesToHarv[0]);
-                    if (enemy) {
-                        Orion.WalkTo(enemy.X(), enemy.Y(), Player.Z(), 5);
-                    }
                     return currentWaypointIndex;
                 }
+            }
+        }
+
+        static attackOnEnemy(enemySerialsAround:string[], lastAttackSerial?:string):string|undefined {
+            if (!enemySerialsAround.length || (lastAttackSerial && enemySerialsAround.indexOf(lastAttackSerial) > -1)) {
+                return;
+            }
+            const serialToAttack = enemySerialsAround[0];
+            Orion.Attack(serialToAttack);
+            Orion.Wait(6000); // due to unknown extended msg when attacking new creature which just spawns
+
+            let enemy = Orion.FindObject(serialToAttack);
+            if (enemy) {
+                Scripts.Utils.log('WalkTo');
+                while (enemy && !enemy.Dead()) {
+                    Orion.WalkTo(enemy.X(), enemy.Y(), enemy.Z(), 1);
+                    Orion.Wait(2000);
+                    enemy = Orion.FindObject(serialToAttack);
+                }
+                Scripts.Utils.log('end');
             }
         }
     }

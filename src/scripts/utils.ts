@@ -6,45 +6,44 @@ namespace Scripts {
     export class Utils {
 
         static selectMenu(menuName:string, selections:string[], firstCall = true) {
-            firstCall && Orion.CancelWaitMenu();
             if (!selections || !selections.length) {
                 return;
             }
-
+            let s = [...selections];
+            firstCall && Orion.CancelWaitMenu();
             Scripts.Utils.worldSaveCheckWait();
-            const menuToSelect = selections[0];
+            const menuToSelect = s[0];
             Orion.WaitMenu(menuName, menuToSelect);
-            selections.splice(0, 1);
-            Scripts.Utils.selectMenu(menuToSelect, selections, false);
+            s.splice(0, 1);
+            Scripts.Utils.selectMenu(menuToSelect, s, false);
         }
 
+        // return missing quantity
         static refill(
             obj:IMyGameObject,
             sourceContainerId:string,
             quantity = 1,
             targetContainerId = 'backpack',
             refillJustWhenIHaveNothing = false
-        ):boolean {
+        ):number {
             const serialsInTargetContainer = Orion.FindType(obj.graphic, obj.color, targetContainerId);
             const serialsInSourceContainer = Orion.FindType(obj.graphic, obj.color, sourceContainerId);
             const itemsInTarget = Scripts.Utils.countObjectInContainer(obj, targetContainerId)
             const itemsInSource = Scripts.Utils.countObjectInContainer(obj, sourceContainerId)
 
             if (itemsInTarget > quantity) {
-                Scripts.Utils.moveItems(serialsInTargetContainer, sourceContainerId, itemsInTarget - quantity);
+                return Scripts.Utils.moveItems(serialsInTargetContainer, sourceContainerId, itemsInTarget - quantity);
             }
             else if (itemsInTarget < quantity) {
                 if (refillJustWhenIHaveNothing && itemsInTarget) {
-                    return true;
+                    return 0;
                 }
                 if (!itemsInSource) {
                     Scripts.Utils.log('Nothing to refill', ColorEnum.red);
-                    return false;
+                    return quantity;
                 }
-                Scripts.Utils.moveItems(serialsInSourceContainer, targetContainerId, quantity - itemsInTarget);
+                return Scripts.Utils.moveItems(serialsInSourceContainer, targetContainerId, quantity - itemsInTarget);
             }
-
-            return true;
         }
 
         static countObjectInContainer(obj:IMyGameObject, container:string):number {
@@ -60,7 +59,11 @@ namespace Scripts {
             return result;
         }
 
-        static moveItems(itemsSerials:string[], targetContainerId:string, quantity:number) {
+        // return missing quantity
+        static moveItems(itemsSerials:string[], targetContainerId:string, quantity:number):number {
+            if (quantity < 1) {
+                return 0;
+            }
             let needToMove = quantity;
             for (const item of itemsSerials) {
                 const itemCount = Orion.FindObject(item).Count();
@@ -74,14 +77,17 @@ namespace Scripts {
                 }
                 Orion.Wait(responseDelay);
             }
+            return needToMove;
         }
 
-        static waitWhileSomethingInJournal(messages:string[], maximumWait?:number) {
-            const w = 200;
-            let waitTotal = 0;
-            while (!Orion.InJournal(messages.join('|')) || maximumWait !== undefined && waitTotal >= maximumWait) {
-                waitTotal += w;
-                Orion.Wait(w);
+        static waitWhileSomethingInJournal(messages:string[], wait?:number) {
+            let keepWait = true;
+            while (!Orion.InJournal(messages.join('|')) && keepWait) {
+                Orion.Wait(200);
+                if (wait) {
+                    wait -= 200;
+                    keepWait = wait > 0;
+                }
             }
         }
 
@@ -163,6 +169,21 @@ namespace Scripts {
                     return myDefinition;
                 }
             }
+        }
+
+        /**
+         * parses the given string into object which is in the global object 'o'
+         * @param objectAsString
+         * @returns IMyGameObject
+         */
+        static parseObject(objectAsString:string):IMyGameObject {
+            const arr = objectAsString.split('.');
+            arr.shift(); // remove the 'o'
+            let item:any = o;
+            for (const i of arr) {
+                item = item[i];
+            }
+            return item;
         }
     }
 }

@@ -42,7 +42,7 @@ namespace Scripts {
                     Orion.WaitTargetObject(Orion.ClientLastAttack());
                     Orion.Say(`${newName} kill`);
                     Orion.WaitForTarget(1000);
-                     Scripts.Utils.waitWhileTargeting();
+                    Scripts.Utils.waitWhileTargeting();
                 }
 
                 Orion.Ignore(monsterSerial);

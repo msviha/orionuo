@@ -43,6 +43,9 @@ var TimersEnum;
 function isMyGameObject(val) {
     return val && val.graphic;
 }
+function isCreatableGameObject(val) {
+    return val && val.make && isMyGameObject(val);
+}
 var o = {
     uncategorized: {
         emptyBottles: {
@@ -86,6 +89,160 @@ var o = {
             bag: {
                 x: 116,
                 y: 24
+            }
+        },
+        lockpicks: {
+            graphic: '0x14FB',
+            color: '0x0000'
+        }
+    },
+    crafting: {
+        tools: {
+            saw: {
+                graphic: '0x1035',
+                color: '0x0000'
+            },
+            tinkerTools: {
+                graphic: '0x1EBC',
+                color: '0x0000'
+            }
+        },
+        resources: {
+            logs: {
+                graphic: '0x1BDD',
+                color: '0x0000'
+            },
+            boards: {
+                graphic: '0x1BD7',
+                color: '0x0000'
+            },
+            ingots: {
+                iron: {
+                    graphic: '0x1BEF',
+                    color: '0x0000'
+                },
+                copper: {
+                    graphic: '0x1BE3',
+                    color: '0x0000'
+                },
+                gold: {
+                    graphic: '0x1BE9',
+                    color: '0x0000'
+                }
+            },
+            stones: {
+                pieceOfAmber: {
+                    graphic: '0x0F25',
+                    color: '0x0000'
+                },
+                starSapphire: {
+                    graphic: '0x0F0F',
+                    color: '0x0000'
+                }
+            }
+        },
+        carpentry: {
+            miscellaneous: {
+                boards: {
+                    graphic: '0x1BD7',
+                    color: '0x0000',
+                    make: {
+                        tool: 'o.crafting.tools.saw',
+                        refill: [
+                            { resource: 'o.crafting.resources.logs', count: 2 }
+                        ],
+                        menu: {
+                            name: 'Carpentry',
+                            selections: ['Miscellaneous', 'Boards']
+                        },
+                        outputCount: 3
+                    }
+                }
+            },
+            containersAndParts: {
+                barrelLid: {
+                    graphic: '0x1DB8',
+                    color: '0x0000',
+                    make: {
+                        tool: 'o.crafting.tools.saw',
+                        refill: [
+                            { resource: 'o.crafting.resources.logs', count: 1 },
+                            { resource: 'o.crafting.carpentry.miscellaneous.boards', count: 2 }
+                        ],
+                        menu: {
+                            name: 'Carpentry',
+                            selections: ['Containers & Cont. parts', 'Barrel Lid']
+                        }
+                    }
+                },
+                barrelStaves: {
+                    graphic: '0x1EB1',
+                    color: '0x0000',
+                    make: {
+                        tool: 'o.crafting.tools.saw',
+                        refill: [
+                            { resource: 'o.crafting.resources.logs', count: 3 }
+                        ],
+                        menu: {
+                            name: 'Carpentry',
+                            selections: ['Containers & Cont. parts', 'Barrel Staves']
+                        }
+                    }
+                }
+            }
+        },
+        tinkering: {
+            parts: {
+                springs: {
+                    graphic: '0x105D',
+                    color: '0x0000',
+                    make: {
+                        tool: 'o.crafting.tools.tinkerTools',
+                        refill: [{ resource: 'o.crafting.resources.ingots.iron', count: 1 }],
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Parts', 'Springs']
+                        }
+                    }
+                }
+            },
+            wires: {
+                copper: {
+                    graphic: '0x1879',
+                    color: '0x0000',
+                    make: {
+                        tool: 'o.crafting.tools.tinkerTools',
+                        refill: [
+                            { resource: 'o.crafting.resources.ingots.copper', count: 1 },
+                            { resource: 'o.crafting.resources.ingots.iron', count: 1 }
+                        ],
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Wires', 'Copper Wire']
+                        }
+                    }
+                }
+            },
+            specialItems: {
+                magicBall: {
+                    graphic: '0x0E2D',
+                    color: '0x0B86',
+                    make: {
+                        tool: 'o.crafting.tools.tinkerTools',
+                        refill: [
+                            { resource: 'o.crafting.tinkering.parts.springs', count: 2 },
+                            { resource: 'o.crafting.tinkering.wires.copper', count: 5 },
+                            { resource: 'o.crafting.resources.ingots.gold', count: 1 },
+                            { resource: 'o.crafting.resources.stones.pieceOfAmber', count: 1 },
+                            { resource: 'o.crafting.resources.stones.starSapphire', count: 3 },
+                            { resource: 'o.crafting.resources.ingots.iron', count: 1 }
+                        ],
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Special Items', 'Magic Ball (10 charges)']
+                        }
+                    }
+                }
             }
         }
     },
@@ -520,39 +677,6 @@ var o = {
                 y: 180
             }
         }
-    },
-    klamaci: {
-        lvl1: {
-            giantRat: {
-                graphic: '0x20D0'
-            },
-            rat: {
-                graphic: '0x2123'
-            },
-            chicken: {
-                graphic: '0x20D1'
-            },
-            rabbit: {
-                graphic: '0x2125'
-            },
-            bird: {
-                graphic: '0x20EE'
-            }
-        },
-        lvl2: {
-            bullFrog: {
-                graphic: '0x2130'
-            },
-            squirrel: {
-                graphic: '0x2D97'
-            },
-            dog: {
-                graphic: '0x211C'
-            },
-            cat: {
-                graphic: '0x211B'
-            }
-        }
     }
 };
 var Scripts;
@@ -724,6 +848,68 @@ var Scripts;
 })(Scripts || (Scripts = {}));
 var Scripts;
 (function (Scripts) {
+    var Crafting = (function () {
+        function Crafting() {
+        }
+        Crafting.setInputs = function (itemName) {
+            Scripts.Utils.playerPrint("Target container with resources for making \"" + itemName + "\"");
+            Orion.WaitForAddObject('resourcesContainer', 60000);
+            Orion.UseObject('resourcesContainer');
+            Scripts.Utils.playerPrint("Target your container where to put finished \"" + itemName + "\"");
+            Orion.WaitForAddObject('outputContainer', 60000);
+        };
+        Crafting.makeProgress = function () {
+            Orion.ClearJournal();
+            Scripts.Utils.waitWhileSomethingInJournal(['You fail', 'You put']);
+            return !!Orion.InJournal('You put');
+        };
+        Crafting.refOrMake = function (count, resourcePath) {
+            var res = Scripts.Utils.parseObject(resourcePath);
+            var missingCount = Scripts.Utils.refill(res, 'resourcesContainer', count, 'backpack');
+            if (missingCount) {
+                Scripts.Crafting.make(missingCount, resourcePath, false);
+                Scripts.Utils.refill(res, 'resourcesContainer', count, 'backpack');
+            }
+        };
+        Crafting.make = function (count, objectAsString, setInputs) {
+            if (setInputs === void 0) { setInputs = true; }
+            Orion.ClearJournal();
+            var itemObject = Scripts.Utils.parseObject(objectAsString);
+            if (!isCreatableGameObject(itemObject)) {
+                throw "cant make " + objectAsString;
+            }
+            if (setInputs) {
+                Scripts.Crafting.setInputs(objectAsString);
+            }
+            var finishedCount = 0;
+            var totalTries = 0;
+            while (count > 0) {
+                Scripts.Utils.worldSaveCheckWait();
+                for (var _i = 0, _a = itemObject.make.refill; _i < _a.length; _i++) {
+                    var ref = _a[_i];
+                    Scripts.Crafting.refOrMake(ref.count, ref.resource);
+                }
+                Orion.ClearJournal();
+                Scripts.Utils.selectMenu(itemObject.make.menu.name, itemObject.make.menu.selections);
+                var tool = Scripts.Utils.parseObject(itemObject.make.tool);
+                Orion.UseType(tool.graphic, tool.color);
+                var success = Scripts.Crafting.makeProgress();
+                if (success) {
+                    count -= itemObject.make.outputCount || 1;
+                    finishedCount++;
+                    var item = Orion.FindType(itemObject.graphic, itemObject.color)[0];
+                    Orion.MoveItem(item, 1, setInputs ? 'outputContainer' : 'resourcesContainer');
+                    Orion.Wait(responseDelay);
+                }
+                Scripts.Utils.log("vyrobeno " + finishedCount + " / " + ++totalTries);
+            }
+        };
+        return Crafting;
+    }());
+    Scripts.Crafting = Crafting;
+})(Scripts || (Scripts = {}));
+var Scripts;
+(function (Scripts) {
     var Dress = (function () {
         function Dress() {
         }
@@ -820,28 +1006,91 @@ var Scripts;
             var lists = ['petlvl1', 'petlvl2', 'petlvl3', 'petlvl4', 'petlvl5'];
             var current = Orion.GetGlobal('klamak');
             if (!current) {
-                Orion.SetGlobal('klamak', lists[lists.length - 1]);
-                current = Orion.GetGlobal('klamak');
+                Orion.SetGlobal('klamak', lists[0]);
             }
-            var currentIndex = lists.indexOf(current);
-            var nextIndex;
-            var i = 0;
-            do {
-                i++;
-                nextIndex = (currentIndex + i) % lists.length;
+            else {
+                var currentIndex = lists.indexOf(current);
+                var nextIndex = currentIndex + 1 === lists.length ? 0 : currentIndex + 1;
                 Orion.SetGlobal('klamak', lists[nextIndex]);
-            } while (i < lists.length && !Orion.FindList(Orion.GetGlobal('klamak')).length);
-            var numberOfKlamaks = Orion.FindList(Orion.GetGlobal('klamak')).length;
-            if (!numberOfKlamaks) {
-                Scripts.Utils.playerPrint('nemas klamaky', ColorEnum.red);
-                return;
             }
             var nextList = Orion.GetGlobal('klamak');
-            Scripts.Utils.playerPrint(nextList + " [" + numberOfKlamaks + "]");
+            Scripts.Utils.playerPrint(nextList);
         };
         return Klamak;
     }());
     Scripts.Klamak = Klamak;
+})(Scripts || (Scripts = {}));
+var Scripts;
+(function (Scripts) {
+    var Lockpicking = (function () {
+        function Lockpicking() {
+        }
+        Lockpicking.unlock = function (targetSerial) {
+            if (!targetSerial) {
+                Scripts.Utils.playerPrint('Target what do you want to unlock');
+                Orion.WaitForAddObject('unlockTarget', 60000);
+                targetSerial = Orion.FindObject('unlockTarget').Serial();
+            }
+            var l = o.uncategorized.lockpicks;
+            var lockpicks = Orion.FindType(l.graphic, l.color);
+            var unlocked = false;
+            while (lockpicks.length && !unlocked) {
+                Orion.ClearJournal();
+                var lockpick = lockpicks[0];
+                Orion.CancelWaitTarget();
+                Orion.WaitTargetObject(targetSerial);
+                Orion.UseObject(lockpick);
+                Scripts.Utils.waitWhileSomethingInJournal(['You fail', 'cannot be'], 500);
+                Orion.InJournal('cannot be') && (unlocked = true);
+                lockpicks = Orion.FindType(l.graphic, l.color);
+            }
+            if (!unlocked) {
+                Scripts.Utils.log('No lockpicks !!! Cannot unlock container !!!', ColorEnum.red);
+            }
+            return unlocked;
+        };
+        Lockpicking.lock = function (targetSerial, key) {
+            if (!targetSerial) {
+                Scripts.Utils.playerPrint('Target what do you want to lock');
+                Orion.WaitForAddObject('lockTarget', 60000);
+                targetSerial = Orion.FindObject('lockTarget').Serial();
+            }
+            if (!key) {
+                Scripts.Utils.playerPrint('Target the key');
+                Orion.WaitForAddObject('lockKey', 60000);
+                key = Orion.FindObject('lockKey').Serial();
+            }
+            Orion.ClearJournal();
+            Orion.CancelWaitTarget();
+            Orion.WaitTargetObject(targetSerial);
+            Orion.UseObject(key);
+            Scripts.Utils.waitWhileSomethingInJournal(['You lock', 'You unlock']);
+            if (Orion.InJournal('You unlock')) {
+                Orion.WaitTargetObject(targetSerial);
+                Orion.UseObject(key);
+            }
+        };
+        Lockpicking.lockpicking = function (targetSerial, key) {
+            if (!targetSerial) {
+                Scripts.Utils.playerPrint('Target what do you want to lock');
+                Orion.WaitForAddObject('lockTarget', 60000);
+                targetSerial = Orion.FindObject('lockTarget').Serial();
+            }
+            if (!key) {
+                Scripts.Utils.playerPrint('Target the key');
+                Orion.WaitForAddObject('lockKey', 60000);
+                key = Orion.FindObject('lockKey').Serial();
+            }
+            while (true) {
+                Scripts.Lockpicking.lock(targetSerial, key);
+                if (!Scripts.Lockpicking.unlock(targetSerial)) {
+                    break;
+                }
+            }
+        };
+        return Lockpicking;
+    }());
+    Scripts.Lockpicking = Lockpicking;
 })(Scripts || (Scripts = {}));
 var Scripts;
 (function (Scripts) {
@@ -852,6 +1101,7 @@ var Scripts;
             var cut = _a.cut, wayPoints = _a.wayPoints, enemiesTypesToHarv = _a.enemiesTypesToHarv, _b = _a.trapDelay, trapDelay = _b === void 0 ? 10000 : _b, _c = _a.dmgToStartHeal, dmgToStartHeal = _c === void 0 ? 40 : _c, _d = _a.fullHeal, fullHeal = _d === void 0 ? false : _d, _e = _a.castCure, castCure = _e === void 0 ? false : _e, _f = _a.drinkCure, drinkCure = _f === void 0 ? false : _f, _g = _a.castReactive, castReactive = _g === void 0 ? false : _g, _h = _a.weapon, weapon = _h === void 0 ? true : _h;
             Orion.SetTimer('ReactiveArmorTimer');
             var currentWaypointIndex = 0;
+            var lastAttack = undefined;
             Scripts.Utils.playerPrint('Target your cut weapon');
             var selection_1 = Orion.WaitForAddObject('cutWeapon', 60000);
             Scripts.Utils.playerPrint('Target your loot bag');
@@ -866,13 +1116,16 @@ var Scripts;
                 return;
             }
             while (true) {
+                lastAttack = Orion.ClientLastAttack();
                 if (castReactive && Orion.Timer('ReactiveArmorTimer') > 300000) {
                     Scripts.Utils.resetTimer('ReactiveArmorTimer');
                     Scripts.Spells.castUntilSuccess('Reactive Armor', TargetEnum.self, 2500);
                 }
                 Scripts.Loot.lootCorpsesAround(cut, weapon);
                 Scripts.Loot.healAndCureWhenHarving(dmgToStartHeal, fullHeal, castCure, drinkCure);
-                currentWaypointIndex = Scripts.Loot.moveToNextWaypointWhenNeeded(wayPoints, enemiesTypesToHarv, currentWaypointIndex, trapDelay);
+                var enemySerialsAround = Orion.FindType(enemiesTypesToHarv.join('|'), '-1', 'ground', 'fast', 4, 'red');
+                currentWaypointIndex = Scripts.Loot.moveToNextWaypointWhenNeeded(wayPoints, enemySerialsAround, currentWaypointIndex, trapDelay);
+                Scripts.Loot.attackOnEnemy(enemySerialsAround, lastAttack);
                 Orion.Wait(500);
             }
         };
@@ -898,13 +1151,15 @@ var Scripts;
             }
         };
         Loot.lootCorpseId = function (id) {
+            var serverLagActionsLeft = 4;
             Orion.OpenContainer(id, 5000, "Container id " + id + " not found");
             var itemsInCorpse = Orion.FindList('lootItems', id);
             if (itemsInCorpse.length) {
                 for (var _i = 0, itemsInCorpse_1 = itemsInCorpse; _i < itemsInCorpse_1.length; _i++) {
                     var itemId = itemsInCorpse_1[_i];
                     Orion.MoveItem(itemId, 0, "myLootBag");
-                    Orion.Wait(50);
+                    Orion.Wait(serverLagActionsLeft ? 50 : 350);
+                    serverLagActionsLeft--;
                 }
             }
         };
@@ -926,10 +1181,9 @@ var Scripts;
                 }
             }
         };
-        Loot.moveToNextWaypointWhenNeeded = function (wayPoints, enemiesTypesToHarv, currentWaypointIndex, trapDelay) {
-            if (wayPoints && enemiesTypesToHarv) {
-                var enemiesToHarv = Orion.FindType(enemiesTypesToHarv.join('|'), '-1', 'ground', 'fast', 4, 'red');
-                if (!enemiesToHarv.length) {
+        Loot.moveToNextWaypointWhenNeeded = function (wayPoints, enemySerialsAround, currentWaypointIndex, trapDelay) {
+            if (wayPoints && enemySerialsAround) {
+                if (!enemySerialsAround.length) {
                     var w = wayPoints[currentWaypointIndex];
                     Orion.WalkTo(w.x, w.y, Player.Z(), 0);
                     if (w.trap) {
@@ -938,14 +1192,26 @@ var Scripts;
                     return currentWaypointIndex + 1 === wayPoints.length ? 0 : currentWaypointIndex + 1;
                 }
                 else {
-                    Orion.Wait(500);
-                    Orion.Attack(enemiesToHarv[0]);
-                    var enemy = Orion.FindObject(enemiesToHarv[0]);
-                    if (enemy) {
-                        Orion.WalkTo(enemy.X(), enemy.Y(), Player.Z(), 5);
-                    }
                     return currentWaypointIndex;
                 }
+            }
+        };
+        Loot.attackOnEnemy = function (enemySerialsAround, lastAttackSerial) {
+            if (!enemySerialsAround.length || (lastAttackSerial && enemySerialsAround.indexOf(lastAttackSerial) > -1)) {
+                return;
+            }
+            var serialToAttack = enemySerialsAround[0];
+            Orion.Attack(serialToAttack);
+            Orion.Wait(6000);
+            var enemy = Orion.FindObject(serialToAttack);
+            if (enemy) {
+                Scripts.Utils.log('WalkTo');
+                while (enemy && !enemy.Dead()) {
+                    Orion.WalkTo(enemy.X(), enemy.Y(), enemy.Z(), 1);
+                    Orion.Wait(2000);
+                    enemy = Orion.FindObject(serialToAttack);
+                }
+                Scripts.Utils.log('end');
             }
         };
         return Loot;
@@ -1243,7 +1509,6 @@ var Scripts;
                         Orion.Wait(200);
                     }
                     if (Orion.InJournal("You loosen")) {
-                        keepMine = false;
                         continue;
                     }
                     if (!Orion.InJournal("You put the")) {
@@ -1462,8 +1727,7 @@ var Scripts;
                 Scripts.Utils.selectMenu(menuName, [spellCircle, spell]);
                 Orion.Wait(responseDelay);
                 Orion.UseType(blank.graphic, blank.color);
-                Scripts.Utils.waitWhileSomethingInJournal(['You fail', 'You put the'], 30000);
-                Orion.CancelWaitMenu();
+                Scripts.Utils.waitWhileSomethingInJournal(['You fail', 'You put the']);
                 if (Orion.InJournal('You put the')) {
                     finishedCount++;
                     var scroll_1 = Orion.FindType(finishedScroll.graphic, finishedScroll.color, 'backpack');
@@ -1614,15 +1878,16 @@ var Scripts;
         }
         Utils.selectMenu = function (menuName, selections, firstCall) {
             if (firstCall === void 0) { firstCall = true; }
-            firstCall && Orion.CancelWaitMenu();
             if (!selections || !selections.length) {
                 return;
             }
+            var s = __spreadArrays(selections);
+            firstCall && Orion.CancelWaitMenu();
             Scripts.Utils.worldSaveCheckWait();
-            var menuToSelect = selections[0];
+            var menuToSelect = s[0];
             Orion.WaitMenu(menuName, menuToSelect);
-            selections.splice(0, 1);
-            Scripts.Utils.selectMenu(menuToSelect, selections, false);
+            s.splice(0, 1);
+            Scripts.Utils.selectMenu(menuToSelect, s, false);
         };
         Utils.refill = function (obj, sourceContainerId, quantity, targetContainerId, refillJustWhenIHaveNothing) {
             if (quantity === void 0) { quantity = 1; }
@@ -1633,19 +1898,18 @@ var Scripts;
             var itemsInTarget = Scripts.Utils.countObjectInContainer(obj, targetContainerId);
             var itemsInSource = Scripts.Utils.countObjectInContainer(obj, sourceContainerId);
             if (itemsInTarget > quantity) {
-                Scripts.Utils.moveItems(serialsInTargetContainer, sourceContainerId, itemsInTarget - quantity);
+                return Scripts.Utils.moveItems(serialsInTargetContainer, sourceContainerId, itemsInTarget - quantity);
             }
             else if (itemsInTarget < quantity) {
                 if (refillJustWhenIHaveNothing && itemsInTarget) {
-                    return true;
+                    return 0;
                 }
                 if (!itemsInSource) {
                     Scripts.Utils.log('Nothing to refill', ColorEnum.red);
-                    return false;
+                    return quantity;
                 }
-                Scripts.Utils.moveItems(serialsInSourceContainer, targetContainerId, quantity - itemsInTarget);
+                return Scripts.Utils.moveItems(serialsInSourceContainer, targetContainerId, quantity - itemsInTarget);
             }
-            return true;
         };
         Utils.countObjectInContainer = function (obj, container) {
             var serials = Orion.FindType(obj.graphic, obj.color, container);
@@ -1660,6 +1924,9 @@ var Scripts;
             return result;
         };
         Utils.moveItems = function (itemsSerials, targetContainerId, quantity) {
+            if (quantity < 1) {
+                return 0;
+            }
             var needToMove = quantity;
             for (var _i = 0, itemsSerials_2 = itemsSerials; _i < itemsSerials_2.length; _i++) {
                 var item = itemsSerials_2[_i];
@@ -1674,13 +1941,16 @@ var Scripts;
                 }
                 Orion.Wait(responseDelay);
             }
+            return needToMove;
         };
-        Utils.waitWhileSomethingInJournal = function (messages, maximumWait) {
-            var w = 200;
-            var waitTotal = 0;
-            while (!Orion.InJournal(messages.join('|')) || maximumWait !== undefined && waitTotal >= maximumWait) {
-                waitTotal += w;
-                Orion.Wait(w);
+        Utils.waitWhileSomethingInJournal = function (messages, wait) {
+            var keepWait = true;
+            while (!Orion.InJournal(messages.join('|')) && keepWait) {
+                Orion.Wait(200);
+                if (wait) {
+                    wait -= 200;
+                    keepWait = wait > 0;
+                }
             }
         };
         Utils.worldSaveCheckWait = function () {
@@ -1749,6 +2019,16 @@ var Scripts;
                     return myDefinition;
                 }
             }
+        };
+        Utils.parseObject = function (objectAsString) {
+            var arr = objectAsString.split('.');
+            arr.shift();
+            var item = o;
+            for (var _i = 0, arr_1 = arr; _i < arr_1.length; _i++) {
+                var i = arr_1[_i];
+                item = item[i];
+            }
+            return item;
         };
         return Utils;
     }());

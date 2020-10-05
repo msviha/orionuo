@@ -10,11 +10,32 @@ interface IMyGameObject {
 }
 
 interface IPotion extends IMyGameObject {
-	kad: IMyGameObject
+	kad:IMyGameObject
+}
+
+interface ICreatableGameObject extends IMyGameObject {
+	make:IMakeProps
 }
 
 interface IBagDestination extends ICoordinates{
 	objectAlias?:string
+}
+
+interface IMakeProps {
+	tool:string,
+	refill:IRefillProps[],
+	menu:IMenuWithSelections,
+	outputCount?:number
+}
+
+interface IRefillProps {
+	resource:string,
+	count:number
+}
+
+interface IMenuWithSelections {
+	name:string,
+	selections:string[]
 }
 
 interface ICoordinates {
@@ -68,6 +89,10 @@ enum TimersEnum {
 function isMyGameObject(val:any):val is IMyGameObject {
 	return val && val.graphic;
 }
+
+function isCreatableGameObject(val:any):val is ICreatableGameObject {
+	return val && val.make && isMyGameObject(val);
+}
 //endregion
 
 //region Objects
@@ -115,8 +140,161 @@ const o:any = {
 				x: 116,
 				y: 24
 			}
+		},
+		lockpicks: {
+			graphic: '0x14FB',
+			color: '0x0000'
 		}
-
+	},
+	crafting: {
+		tools: {
+			saw: {
+				graphic: '0x1035',
+				color: '0x0000'
+			},
+			tinkerTools: {
+				graphic: '0x1EBC',
+				color: '0x0000'
+			}
+		},
+		resources: {
+			logs: {
+				graphic: '0x1BDD',
+				color: '0x0000'
+			},
+			boards: {
+				graphic: '0x1BD7',
+				color: '0x0000'
+			},
+			ingots: {
+				iron: {
+					graphic: '0x1BEF',
+					color: '0x0000'
+				},
+				copper: {
+					graphic: '0x1BE3',
+					color: '0x0000'
+				},
+				gold: {
+					graphic: '0x1BE9',
+					color: '0x0000'
+				}
+			},
+			stones: {
+				pieceOfAmber: {
+					graphic: '0x0F25',
+					color: '0x0000'
+				},
+				starSapphire: {
+					graphic: '0x0F0F',
+					color: '0x0000'
+				}
+			}
+		},
+		carpentry: {
+			miscellaneous: {
+				boards: {
+					graphic: '0x1BD7',
+					color: '0x0000',
+					make: {
+						tool: 'o.crafting.tools.saw',
+						refill: [
+							{resource: 'o.crafting.resources.logs', count: 2}
+						],
+						menu: {
+							name: 'Carpentry',
+							selections: ['Miscellaneous', 'Boards']
+						},
+						outputCount: 3
+					}
+				}
+			},
+			containersAndParts: {
+				barrelLid: {
+					graphic: '0x1DB8',
+					color: '0x0000',
+					make: {
+						tool: 'o.crafting.tools.saw',
+						refill: [
+							{resource: 'o.crafting.resources.logs', count: 1},
+							{resource: 'o.crafting.carpentry.miscellaneous.boards', count: 2}
+						],
+						menu: {
+							name: 'Carpentry',
+							selections: ['Containers & Cont. parts', 'Barrel Lid']
+						}
+					}
+				},
+				barrelStaves: {
+					graphic: '0x1EB1',
+					color: '0x0000',
+					make: {
+						tool: 'o.crafting.tools.saw',
+						refill: [
+							{resource: 'o.crafting.resources.logs', count: 3}
+						],
+						menu: {
+							name: 'Carpentry',
+							selections: ['Containers & Cont. parts', 'Barrel Staves']
+						}
+					}
+				}
+			}
+		},
+		tinkering: {
+			parts: {
+				springs: {
+					graphic: '0x105D',
+					color: '0x0000',
+					make: {
+						tool: 'o.crafting.tools.tinkerTools',
+						refill: [{resource: 'o.crafting.resources.ingots.iron', count: 1}],
+						menu: {
+							name: 'Tinkering',
+							selections: ['Parts', 'Springs']
+						}
+					}
+				}
+			},
+			wires: {
+				copper: {
+					graphic: '0x1879',
+					color: '0x0000',
+					make: {
+						tool: 'o.crafting.tools.tinkerTools',
+						refill: [
+							{resource: 'o.crafting.resources.ingots.copper', count: 1},
+							{resource: 'o.crafting.resources.ingots.iron', count: 1}
+						],
+						menu: {
+							name: 'Tinkering',
+							selections: ['Wires', 'Copper Wire']
+						}
+					}
+				}
+			},
+			specialItems: {
+				magicBall: {
+					graphic: '0x0E2D',
+					color: '0x0B86',
+					make: {
+						tool: 'o.crafting.tools.tinkerTools',
+						refill: [
+							{resource: 'o.crafting.tinkering.parts.springs', count: 2},
+							{resource: 'o.crafting.tinkering.wires.copper', count: 5},
+							{resource: 'o.crafting.resources.ingots.gold', count: 1},
+							{resource: 'o.crafting.resources.stones.pieceOfAmber', count: 1},
+							{resource: 'o.crafting.resources.stones.starSapphire', count: 3},
+							{resource: 'o.crafting.resources.ingots.iron', count: 1}
+						],
+						menu: {
+							name: 'Tinkering',
+							selections: ['Special Items', 'Magic Ball (10 charges)']
+						}
+					}
+				}
+			}
+		}
 	},
 	potions: {
 		tmr: {
@@ -548,60 +726,6 @@ const o:any = {
 				x: 155,
 				y: 180
 			}
-		}
-	},
-	klamaci: {
-		lvl1: {
-			giantRat: {
-				graphic: '0x20D0'
-			},
-			rat: {
-				graphic: '0x2123'
-			},
-			chicken: {
-				graphic: '0x20D1'
-			},
-			rabbit: {
-				graphic: '0x2125'
-			},
-			bird: {
-				graphic: '0x20EE'
-			}
-		},
-		lvl2: {
-			bullFrog: {
-				graphic: '0x2130'
-			},
-			// pig: {
-			// 	graphic: ''
-			// },
-			squirrel: {
-				graphic: '0x2D97'
-			},
-			dog: {
-				graphic: '0x211C'
-			},
-			cat: {
-				graphic: '0x211B'
-			},
-			// grayWolf: {
-			// 	graphic: ''
-			// },
-			// mountainGoat: {
-			// 	graphic: ''
-			// },
-			// blackCat: {
-			// 	graphic: ''
-			// },
-			// lamb: {
-			// 	graphic: ''
-			// },
-			// jackRabbit: {
-			// 	graphic: ''
-			// },
-			// boar: {
-			// 	graphic: ''
-			// }
 		}
 	}
 };
