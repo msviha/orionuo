@@ -1,6 +1,6 @@
 # OrionUO scripts for Darkparadise
 
-##[CHANGELOG](./CHANGELOG.md)
+## [CHANGELOG](./CHANGELOG.md)
 
 ## how to build scripts
 ```
