@@ -6,15 +6,12 @@ const responseDelay = 350;
 interface IMyGameObject {
 	graphic:string,
 	color?:string,
-	bag?:IBagDestination
+	bag?:IBagDestination,
+	make?:IMakeProps;
 }
 
 interface IPotion extends IMyGameObject {
 	kad:IMyGameObject
-}
-
-interface ICreatableGameObject extends IMyGameObject {
-	make:IMakeProps
 }
 
 interface IBagDestination extends ICoordinates{
@@ -23,13 +20,18 @@ interface IBagDestination extends ICoordinates{
 
 interface IMakeProps {
 	tool:string,
-	refill:IRefillProps[],
+	refill?:IRefillProps,
 	menu:IMenuWithSelections,
 	outputCount?:number
 }
 
 interface IRefillProps {
-	resource:string,
+	resources?:IRefillItem[],
+	crafting?:IRefillItem[]
+}
+
+interface IRefillItem {
+	item:string,
 	count:number
 }
 
@@ -90,8 +92,45 @@ function isMyGameObject(val:any):val is IMyGameObject {
 	return val && val.graphic;
 }
 
-function isCreatableGameObject(val:any):val is ICreatableGameObject {
-	return val && val.make && isMyGameObject(val);
+function isMakeProps(val:any):val is IMakeProps {
+	let success = val && val.tool && val.menu;
+	!success && Scripts.Utils.log('tool and menu are mandatory properties', ColorEnum.red);
+	const outputCountType = typeof val.outputCount === 'undefined' || typeof val.outputCount === 'number';
+	success = success && outputCountType;
+	!success && Scripts.Utils.log('outputCount is not a number', ColorEnum.red);
+
+	if (val.refill) {
+		success = success && isRefillProps(val.refill);
+	}
+
+	return success;
+}
+
+function isRefillProps(val:any):val is IRefillProps {
+	let success = true;
+	if (val.resources) {
+		for (const r of val.resources) {
+			success = success && isRefillItem(r);
+		}
+	}
+	if (val.crafting) {
+		for (const c of val.crafting) {
+			success = success && isRefillItem(c);
+		}
+	}
+	return success;
+}
+
+function isRefillItem(val:any):val is IRefillItem {
+	let success = val && val.item && typeof val.count === 'number';
+	!success && Scripts.Utils.log('item should be defined and count should be a number', ColorEnum.red);
+	return success;
+}
+
+function isBagDestination(val:any):val is IBagDestination {
+	let success = val && typeof val.x === 'number' && typeof val.y === 'number';
+	!success && Scripts.Utils.log('x and y should be a number', ColorEnum.red);
+	return success;
 }
 //endregion
 
@@ -146,66 +185,95 @@ const o:any = {
 			color: '0x0000'
 		}
 	},
+	tools: {
+		saw: {
+			graphic: '0x1035',
+			color: '0x0000'
+		},
+		tinkerTools: {
+			graphic: '0x1EBC',
+			color: '0x0000'
+		}
+	},
+	resources: {
+		logs: {
+			graphic: '0x1BDD',
+			color: '0x0000'
+		},
+		furs: {
+			graphic: '0x11FA',
+			color: '0x0000'
+		},
+		ore: {
+			iron: {
+				graphic: '0x19B9',
+				color: '0x0000'
+			}
+		},
+		boards: {
+			graphic: '0x1BD7',
+			color: '0x0000'
+		},
+		ingots: {
+			iron: {
+				graphic: '0x1BEF',
+				color: '0x0000'
+			},
+			copper: {
+				graphic: '0x1BE3',
+				color: '0x0000'
+			},
+			bronze: {
+				graphic: '0x1BEF',
+				color: '0x06D6'
+			},
+			gold: {
+				graphic: '0x1BE9',
+				color: '0x0000'
+			}
+		},
+		stones: {
+			pieceOfAmber: {
+				graphic: '0x0F25',
+				color: '0x0000'
+			},
+			starSapphire: {
+				graphic: '0x0F0F',
+				color: '0x0000'
+			}
+		}
+	},
 	crafting: {
-		tools: {
-			saw: {
-				graphic: '0x1035',
-				color: '0x0000'
-			},
-			tinkerTools: {
-				graphic: '0x1EBC',
-				color: '0x0000'
-			}
-		},
-		resources: {
-			logs: {
-				graphic: '0x1BDD',
-				color: '0x0000'
-			},
-			boards: {
-				graphic: '0x1BD7',
-				color: '0x0000'
-			},
-			ingots: {
-				iron: {
-					graphic: '0x1BEF',
-					color: '0x0000'
-				},
-				copper: {
-					graphic: '0x1BE3',
-					color: '0x0000'
-				},
-				gold: {
-					graphic: '0x1BE9',
-					color: '0x0000'
-				}
-			},
-			stones: {
-				pieceOfAmber: {
-					graphic: '0x0F25',
-					color: '0x0000'
-				},
-				starSapphire: {
-					graphic: '0x0F0F',
-					color: '0x0000'
-				}
-			}
-		},
 		carpentry: {
 			miscellaneous: {
 				boards: {
 					graphic: '0x1BD7',
 					color: '0x0000',
 					make: {
-						tool: 'o.crafting.tools.saw',
-						refill: [
-							{resource: 'o.crafting.resources.logs', count: 2}
-						],
+						tool: 'o.tools.saw',
+						refill: {
+							resources: [{item: 'o.resources.logs', count: 2}]
+						},
 						menu: {
 							name: 'Carpentry',
 							selections: ['Miscellaneous', 'Boards']
 						},
 						outputCount: 3
+					}
+				},
+				krabiceKadi: {
+					graphic: '0x185E',
+					color: '0x07E0',
+					make: {
+						tool: 'o.tools.saw',
+						refill: {
+							resources: [{item: 'o.resources.logs', count: 2}],
+							crafting: [{item: 'o.crafting.tinkering.containers.kadNaPotiony', count: 20}]
+						},
+						menu: {
+							name: 'Carpentry',
+							selections: ['Miscellaneous', 'Krabice kadi']
+						}
 					}
 				}
 			},
@@ -214,11 +282,11 @@ const o:any = {
 					graphic: '0x1DB8',
 					color: '0x0000',
 					make: {
-						tool: 'o.crafting.tools.saw',
-						refill: [
-							{resource: 'o.crafting.resources.logs', count: 1},
-							{resource: 'o.crafting.carpentry.miscellaneous.boards', count: 2}
-						],
+						tool: 'o.tools.saw',
+						refill: {
+							resources: [{item: 'o.resources.logs', count: 1}],
+							crafting: [{item: 'o.crafting.carpentry.miscellaneous.boards', count: 2}]
+						},
 						menu: {
 							name: 'Carpentry',
 							selections: ['Containers & Cont. parts', 'Barrel Lid']
@@ -229,13 +297,31 @@ const o:any = {
 					graphic: '0x1EB1',
 					color: '0x0000',
 					make: {
-						tool: 'o.crafting.tools.saw',
-						refill: [
-							{resource: 'o.crafting.resources.logs', count: 3}
-						],
+						tool: 'o.tools.saw',
+						refill: {
+							resources: [{item: 'o.resources.logs', count: 3}],
+						},
 						menu: {
 							name: 'Carpentry',
 							selections: ['Containers & Cont. parts', 'Barrel Staves']
+						}
+					}
+				},
+				formaNaLahve: {
+					graphic: '0x0E7F',
+					color: '0x0909',
+					make: {
+						tool: 'o.tools.saw',
+						refill: {
+							resources: [{item: 'o.resources.logs', count: 1}],
+							crafting: [
+								{item: 'o.crafting.carpentry.containersAndParts.barrelLid', count: 2},
+								{item: 'o.crafting.carpentry.containersAndParts.barrelStaves', count: 2}
+							]
+						},
+						menu: {
+							name: 'Carpentry',
+							selections: ['Containers & Cont. parts', 'Forma na lahve']
 						}
 					}
 				}
@@ -247,8 +333,10 @@ const o:any = {
 					graphic: '0x105D',
 					color: '0x0000',
 					make: {
-						tool: 'o.crafting.tools.tinkerTools',
-						refill: [{resource: 'o.crafting.resources.ingots.iron', count: 1}],
+						tool: 'o.tools.tinkerTools',
+						refill: {
+							resources: [{item: 'o.resources.ingots.iron', count: 1}]
+						},
 						menu: {
 							name: 'Tinkering',
 							selections: ['Parts', 'Springs']
@@ -261,14 +349,98 @@ const o:any = {
 					graphic: '0x1879',
 					color: '0x0000',
 					make: {
-						tool: 'o.crafting.tools.tinkerTools',
-						refill: [
-							{resource: 'o.crafting.resources.ingots.copper', count: 1},
-							{resource: 'o.crafting.resources.ingots.iron', count: 1}
-						],
+						tool: 'o.tools.tinkerTools',
+						refill: {
+							resources: [
+								{item: 'o.resources.ingots.copper', count: 1},
+								{item: 'o.resources.ingots.iron', count: 1}
+							]
+						},
 						menu: {
 							name: 'Tinkering',
 							selections: ['Wires', 'Copper Wire']
+						}
+					}
+				}
+			},
+			containers: {
+				kadNaPotiony: {
+					graphic: '0x1843',
+					color: '0x0000',
+					make: {
+						tool: 'o.tools.tinkerTools',
+						refill: {
+							resources: [
+								{item: 'o.resources.logs', count: 2},
+								{item: 'o.resources.ore.iron', count: 2},
+								{item: 'o.resources.ingots.bronze', count: 1},
+								{item: 'o.resources.ingots.iron', count: 1}
+							],
+							crafting: [
+								{item: 'o.crafting.carpentry.containersAndParts.formaNaLahve', count: 1}
+							]
+						},
+						menu: {
+							name: 'Tinkering',
+							selections: ['Containers', 'Kad na potiony']
+						}
+					}
+				},
+				goldenBox: {
+					graphic: '0x0E80',
+					color: '0x0000',
+					make: {
+						tool: 'o.tools.tinkerTools',
+						refill: {
+							resources: [
+								{item: 'o.resources.logs', count: 5},
+								{item: 'o.resources.ingots.gold', count: 5},
+								{item: 'o.resources.ingots.iron', count: 1}
+							]
+						},
+						menu: {
+							name: 'Tinkering',
+							selections: ['Containers', 'Golden Box (W)']
+						}
+					}
+				},
+				animalBox: {
+					graphic: '0x09A8',
+					color: '0x051E',
+					make: {
+						tool: 'o.tools.tinkerTools',
+						refill: {
+							resources: [
+								{item: 'o.resources.logs', count: 5},
+								{item: 'o.resources.furs', count: 5}
+							],
+							crafting: [
+								{item: 'o.crafting.tinkering.containers.goldenBox', count: 1}
+							]
+						},
+						menu: {
+							name: 'Tinkering',
+							selections: ['Containers', 'Animal Box']
+						}
+					}
+				},
+				univerzalAnimalBox: {
+					graphic: '0x09A8',
+					color: '0x0000',
+					make: {
+						tool: 'o.tools.tinkerTools',
+						refill: {
+							resources: [
+								{item: 'o.resources.logs', count: 5},
+								{item: 'o.resources.furs', count: 5}
+							],
+							crafting: [
+								{item: 'o.crafting.tinkering.containers.animalBox', count: 1}
+							]
+						},
+						menu: {
+							name: 'Tinkering',
+							selections: ['Containers', 'Univerzal Animal Box']
 						}
 					}
 				}
@@ -278,15 +450,19 @@ const o:any = {
 					graphic: '0x0E2D',
 					color: '0x0B86',
 					make: {
-						tool: 'o.crafting.tools.tinkerTools',
-						refill: [
-							{resource: 'o.crafting.tinkering.parts.springs', count: 2},
-							{resource: 'o.crafting.tinkering.wires.copper', count: 5},
-							{resource: 'o.crafting.resources.ingots.gold', count: 1},
-							{resource: 'o.crafting.resources.stones.pieceOfAmber', count: 1},
-							{resource: 'o.crafting.resources.stones.starSapphire', count: 3},
-							{resource: 'o.crafting.resources.ingots.iron', count: 1}
-						],
+						tool: 'o.tools.tinkerTools',
+						refill: {
+							resources: [
+								{item: 'o.resources.ingots.gold', count: 1},
+								{item: 'o.resources.ingots.iron', count: 1},
+								{item: 'o.resources.stones.pieceOfAmber', count: 1},
+								{item: 'o.resources.stones.starSapphire', count: 3}
+							],
+							crafting: [
+								{item: 'o.crafting.tinkering.parts.springs', count: 2},
+								{item: 'o.crafting.tinkering.wires.copper', count: 5}
+							]
+						},
 						menu: {
 							name: 'Tinkering',
 							selections: ['Special Items', 'Magic Ball (10 charges)']
@@ -729,4 +905,34 @@ const o:any = {
 		}
 	}
 };
+//endregion
+
+//region autostart
+function Autostart() {
+	let previousLastAttackSerial:string;
+	let previousLastAttackHp:number;
+	let previousPlayerHp:number;
+	let updateRate = 500;
+
+	while (true) {
+		Scripts.Utils.printDamage(Player.Serial(), previousPlayerHp);
+		previousPlayerHp = Player.Hits();
+
+		const lastAttackSerial = Orion.ClientLastAttack();
+		const lastAttack = Scripts.Utils.getLivingObjectInDistance(lastAttackSerial);
+		if (lastAttack) {
+			if (previousLastAttackSerial !== lastAttackSerial) {
+				previousLastAttackHp = lastAttack.Hits();
+				Scripts.Utils.printDamage(lastAttackSerial, previousLastAttackHp, true);
+			}
+			else {
+				Scripts.Utils.printDamage(lastAttackSerial, previousLastAttackHp);
+				previousLastAttackHp = lastAttack.Hits();
+			}
+			previousLastAttackSerial = lastAttackSerial;
+		}
+
+		Orion.Wait(updateRate);
+	}
+}
 //endregion

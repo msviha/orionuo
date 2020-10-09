@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 0.0.2
+### features
+- added `Targeting` package with `targetNext` function
+- added 'Autostart' function which updates the hp on player and attacklast
+### enhancements
+- few new crafting stuffs are defined `krabiceKadi`, `univerzalAnimalBox`, `magicBall` etc.
+- fixed some issues with `Crafting.make` 
+
 ## 0.0.1
 ### info
 - first changelog (does not contain all changes from the current and previous releases)

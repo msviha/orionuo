@@ -139,6 +139,8 @@ export default interface NonCategorized {
 	*/
 	CharPrint(serial: string, color: string | number, text: string): void;
 
+	PrintFast(serial: string, color: string | number, font: number, text: string): void;
+
 	/**
 	* void Orion.Say('text');
 	* Say in the chat 'text'

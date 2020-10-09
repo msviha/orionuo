@@ -28,7 +28,7 @@ namespace Scripts {
          */
         static makeProgress():boolean {
             Orion.ClearJournal();
-            Scripts.Utils.waitWhileSomethingInJournal(['You fail', 'You put']);
+            Scripts.Utils.waitWhileSomethingInJournal(['You fail', 'You put', 'failed']);
             return !!Orion.InJournal('You put');
         }
 
@@ -42,6 +42,7 @@ namespace Scripts {
             const missingCount = Scripts.Utils.refill(res, 'resourcesContainer', count, 'backpack');
             if (missingCount) {
                 Scripts.Crafting.make(missingCount, resourcePath, false);
+                Orion.Wait(responseDelay);
                 Scripts.Utils.refill(res, 'resourcesContainer', count, 'backpack');
             }
         }
@@ -55,8 +56,12 @@ namespace Scripts {
         static make(count:number, objectAsString:string, setInputs = true) {
             Orion.ClearJournal();
             const itemObject = Scripts.Utils.parseObject(objectAsString);
-            if (!isCreatableGameObject(itemObject)) {
-                throw `cant make ${objectAsString}`
+            if (!itemObject.make) {
+                Scripts.Utils.log(`cant make/refill ${objectAsString}`, ColorEnum.red);
+                throw `cant make/refill ${objectAsString}`;
+            }
+            if (!isMakeProps(itemObject.make)) {
+                throw `!isMakeProps`;
             }
             if (setInputs) {
                 Scripts.Crafting.setInputs(objectAsString);
@@ -66,8 +71,11 @@ namespace Scripts {
             let totalTries = 0;
             while (count > 0) {
                 Scripts.Utils.worldSaveCheckWait();
-                for (const ref of itemObject.make.refill) {
-                    Scripts.Crafting.refOrMake(ref.count, ref.resource);
+                for (const ref of itemObject.make.refill?.crafting) {
+                    Scripts.Crafting.refOrMake(ref.count, ref.item);
+                }
+                for (const ref of itemObject.make.refill?.resources) {
+                    Scripts.Crafting.refOrMake(ref.count, ref.item);
                 }
                 Orion.ClearJournal();
                 Scripts.Utils.selectMenu(itemObject.make.menu.name, itemObject.make.menu.selections);

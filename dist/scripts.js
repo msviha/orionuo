@@ -43,8 +43,42 @@ var TimersEnum;
 function isMyGameObject(val) {
     return val && val.graphic;
 }
-function isCreatableGameObject(val) {
-    return val && val.make && isMyGameObject(val);
+function isMakeProps(val) {
+    var success = val && val.tool && val.menu;
+    !success && Scripts.Utils.log('tool and menu are mandatory properties', ColorEnum.red);
+    var outputCountType = typeof val.outputCount === 'undefined' || typeof val.outputCount === 'number';
+    success = success && outputCountType;
+    !success && Scripts.Utils.log('outputCount is not a number', ColorEnum.red);
+    if (val.refill) {
+        success = success && isRefillProps(val.refill);
+    }
+    return success;
+}
+function isRefillProps(val) {
+    var success = true;
+    if (val.resources) {
+        for (var _i = 0, _a = val.resources; _i < _a.length; _i++) {
+            var r = _a[_i];
+            success = success && isRefillItem(r);
+        }
+    }
+    if (val.crafting) {
+        for (var _b = 0, _c = val.crafting; _b < _c.length; _b++) {
+            var c = _c[_b];
+            success = success && isRefillItem(c);
+        }
+    }
+    return success;
+}
+function isRefillItem(val) {
+    var success = val && val.item && typeof val.count === 'number';
+    !success && Scripts.Utils.log('item should be defined and count should be a number', ColorEnum.red);
+    return success;
+}
+function isBagDestination(val) {
+    var success = val && typeof val.x === 'number' && typeof val.y === 'number';
+    !success && Scripts.Utils.log('x and y should be a number', ColorEnum.red);
+    return success;
 }
 var o = {
     uncategorized: {
@@ -96,66 +130,95 @@ var o = {
             color: '0x0000'
         }
     },
+    tools: {
+        saw: {
+            graphic: '0x1035',
+            color: '0x0000'
+        },
+        tinkerTools: {
+            graphic: '0x1EBC',
+            color: '0x0000'
+        }
+    },
+    resources: {
+        logs: {
+            graphic: '0x1BDD',
+            color: '0x0000'
+        },
+        furs: {
+            graphic: '0x11FA',
+            color: '0x0000'
+        },
+        ore: {
+            iron: {
+                graphic: '0x19B9',
+                color: '0x0000'
+            }
+        },
+        boards: {
+            graphic: '0x1BD7',
+            color: '0x0000'
+        },
+        ingots: {
+            iron: {
+                graphic: '0x1BEF',
+                color: '0x0000'
+            },
+            copper: {
+                graphic: '0x1BE3',
+                color: '0x0000'
+            },
+            bronze: {
+                graphic: '0x1BEF',
+                color: '0x06D6'
+            },
+            gold: {
+                graphic: '0x1BE9',
+                color: '0x0000'
+            }
+        },
+        stones: {
+            pieceOfAmber: {
+                graphic: '0x0F25',
+                color: '0x0000'
+            },
+            starSapphire: {
+                graphic: '0x0F0F',
+                color: '0x0000'
+            }
+        }
+    },
     crafting: {
-        tools: {
-            saw: {
-                graphic: '0x1035',
-                color: '0x0000'
-            },
-            tinkerTools: {
-                graphic: '0x1EBC',
-                color: '0x0000'
-            }
-        },
-        resources: {
-            logs: {
-                graphic: '0x1BDD',
-                color: '0x0000'
-            },
-            boards: {
-                graphic: '0x1BD7',
-                color: '0x0000'
-            },
-            ingots: {
-                iron: {
-                    graphic: '0x1BEF',
-                    color: '0x0000'
-                },
-                copper: {
-                    graphic: '0x1BE3',
-                    color: '0x0000'
-                },
-                gold: {
-                    graphic: '0x1BE9',
-                    color: '0x0000'
-                }
-            },
-            stones: {
-                pieceOfAmber: {
-                    graphic: '0x0F25',
-                    color: '0x0000'
-                },
-                starSapphire: {
-                    graphic: '0x0F0F',
-                    color: '0x0000'
-                }
-            }
-        },
         carpentry: {
             miscellaneous: {
                 boards: {
                     graphic: '0x1BD7',
                     color: '0x0000',
                     make: {
-                        tool: 'o.crafting.tools.saw',
-                        refill: [
-                            { resource: 'o.crafting.resources.logs', count: 2 }
-                        ],
+                        tool: 'o.tools.saw',
+                        refill: {
+                            resources: [{ item: 'o.resources.logs', count: 2 }]
+                        },
                         menu: {
                             name: 'Carpentry',
                             selections: ['Miscellaneous', 'Boards']
                         },
                         outputCount: 3
+                    }
+                },
+                krabiceKadi: {
+                    graphic: '0x185E',
+                    color: '0x07E0',
+                    make: {
+                        tool: 'o.tools.saw',
+                        refill: {
+                            resources: [{ item: 'o.resources.logs', count: 2 }],
+                            crafting: [{ item: 'o.crafting.tinkering.containers.kadNaPotiony', count: 20 }]
+                        },
+                        menu: {
+                            name: 'Carpentry',
+                            selections: ['Miscellaneous', 'Krabice kadi']
+                        }
                     }
                 }
             },
@@ -164,11 +227,11 @@ var o = {
                     graphic: '0x1DB8',
                     color: '0x0000',
                     make: {
-                        tool: 'o.crafting.tools.saw',
-                        refill: [
-                            { resource: 'o.crafting.resources.logs', count: 1 },
-                            { resource: 'o.crafting.carpentry.miscellaneous.boards', count: 2 }
-                        ],
+                        tool: 'o.tools.saw',
+                        refill: {
+                            resources: [{ item: 'o.resources.logs', count: 1 }],
+                            crafting: [{ item: 'o.crafting.carpentry.miscellaneous.boards', count: 2 }]
+                        },
                         menu: {
                             name: 'Carpentry',
                             selections: ['Containers & Cont. parts', 'Barrel Lid']
@@ -179,13 +242,31 @@ var o = {
                     graphic: '0x1EB1',
                     color: '0x0000',
                     make: {
-                        tool: 'o.crafting.tools.saw',
-                        refill: [
-                            { resource: 'o.crafting.resources.logs', count: 3 }
-                        ],
+                        tool: 'o.tools.saw',
+                        refill: {
+                            resources: [{ item: 'o.resources.logs', count: 3 }]
+                        },
                         menu: {
                             name: 'Carpentry',
                             selections: ['Containers & Cont. parts', 'Barrel Staves']
+                        }
+                    }
+                },
+                formaNaLahve: {
+                    graphic: '0x0E7F',
+                    color: '0x0909',
+                    make: {
+                        tool: 'o.tools.saw',
+                        refill: {
+                            resources: [{ item: 'o.resources.logs', count: 1 }],
+                            crafting: [
+                                { item: 'o.crafting.carpentry.containersAndParts.barrelLid', count: 2 },
+                                { item: 'o.crafting.carpentry.containersAndParts.barrelStaves', count: 2 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Carpentry',
+                            selections: ['Containers & Cont. parts', 'Forma na lahve']
                         }
                     }
                 }
@@ -197,8 +278,10 @@ var o = {
                     graphic: '0x105D',
                     color: '0x0000',
                     make: {
-                        tool: 'o.crafting.tools.tinkerTools',
-                        refill: [{ resource: 'o.crafting.resources.ingots.iron', count: 1 }],
+                        tool: 'o.tools.tinkerTools',
+                        refill: {
+                            resources: [{ item: 'o.resources.ingots.iron', count: 1 }]
+                        },
                         menu: {
                             name: 'Tinkering',
                             selections: ['Parts', 'Springs']
@@ -211,14 +294,98 @@ var o = {
                     graphic: '0x1879',
                     color: '0x0000',
                     make: {
-                        tool: 'o.crafting.tools.tinkerTools',
-                        refill: [
-                            { resource: 'o.crafting.resources.ingots.copper', count: 1 },
-                            { resource: 'o.crafting.resources.ingots.iron', count: 1 }
-                        ],
+                        tool: 'o.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'o.resources.ingots.copper', count: 1 },
+                                { item: 'o.resources.ingots.iron', count: 1 }
+                            ]
+                        },
                         menu: {
                             name: 'Tinkering',
                             selections: ['Wires', 'Copper Wire']
+                        }
+                    }
+                }
+            },
+            containers: {
+                kadNaPotiony: {
+                    graphic: '0x1843',
+                    color: '0x0000',
+                    make: {
+                        tool: 'o.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'o.resources.logs', count: 2 },
+                                { item: 'o.resources.ore.iron', count: 2 },
+                                { item: 'o.resources.ingots.bronze', count: 1 },
+                                { item: 'o.resources.ingots.iron', count: 1 }
+                            ],
+                            crafting: [
+                                { item: 'o.crafting.carpentry.containersAndParts.formaNaLahve', count: 1 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Containers', 'Kad na potiony']
+                        }
+                    }
+                },
+                goldenBox: {
+                    graphic: '0x0E80',
+                    color: '0x0000',
+                    make: {
+                        tool: 'o.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'o.resources.logs', count: 5 },
+                                { item: 'o.resources.ingots.gold', count: 5 },
+                                { item: 'o.resources.ingots.iron', count: 1 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Containers', 'Golden Box (W)']
+                        }
+                    }
+                },
+                animalBox: {
+                    graphic: '0x09A8',
+                    color: '0x051E',
+                    make: {
+                        tool: 'o.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'o.resources.logs', count: 5 },
+                                { item: 'o.resources.furs', count: 5 }
+                            ],
+                            crafting: [
+                                { item: 'o.crafting.tinkering.containers.goldenBox', count: 1 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Containers', 'Animal Box']
+                        }
+                    }
+                },
+                univerzalAnimalBox: {
+                    graphic: '0x09A8',
+                    color: '0x0000',
+                    make: {
+                        tool: 'o.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'o.resources.logs', count: 5 },
+                                { item: 'o.resources.furs', count: 5 }
+                            ],
+                            crafting: [
+                                { item: 'o.crafting.tinkering.containers.animalBox', count: 1 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Containers', 'Univerzal Animal Box']
                         }
                     }
                 }
@@ -228,15 +395,19 @@ var o = {
                     graphic: '0x0E2D',
                     color: '0x0B86',
                     make: {
-                        tool: 'o.crafting.tools.tinkerTools',
-                        refill: [
-                            { resource: 'o.crafting.tinkering.parts.springs', count: 2 },
-                            { resource: 'o.crafting.tinkering.wires.copper', count: 5 },
-                            { resource: 'o.crafting.resources.ingots.gold', count: 1 },
-                            { resource: 'o.crafting.resources.stones.pieceOfAmber', count: 1 },
-                            { resource: 'o.crafting.resources.stones.starSapphire', count: 3 },
-                            { resource: 'o.crafting.resources.ingots.iron', count: 1 }
-                        ],
+                        tool: 'o.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'o.resources.ingots.gold', count: 1 },
+                                { item: 'o.resources.ingots.iron', count: 1 },
+                                { item: 'o.resources.stones.pieceOfAmber', count: 1 },
+                                { item: 'o.resources.stones.starSapphire', count: 3 }
+                            ],
+                            crafting: [
+                                { item: 'o.crafting.tinkering.parts.springs', count: 2 },
+                                { item: 'o.crafting.tinkering.wires.copper', count: 5 }
+                            ]
+                        },
                         menu: {
                             name: 'Tinkering',
                             selections: ['Special Items', 'Magic Ball (10 charges)']
@@ -679,6 +850,30 @@ var o = {
         }
     }
 };
+function Autostart() {
+    var previousLastAttackSerial;
+    var previousLastAttackHp;
+    var previousPlayerHp;
+    var updateRate = 500;
+    while (true) {
+        Scripts.Utils.printDamage(Player.Serial(), previousPlayerHp);
+        previousPlayerHp = Player.Hits();
+        var lastAttackSerial = Orion.ClientLastAttack();
+        var lastAttack = Scripts.Utils.getLivingObjectInDistance(lastAttackSerial);
+        if (lastAttack) {
+            if (previousLastAttackSerial !== lastAttackSerial) {
+                previousLastAttackHp = lastAttack.Hits();
+                Scripts.Utils.printDamage(lastAttackSerial, previousLastAttackHp, true);
+            }
+            else {
+                Scripts.Utils.printDamage(lastAttackSerial, previousLastAttackHp);
+                previousLastAttackHp = lastAttack.Hits();
+            }
+            previousLastAttackSerial = lastAttackSerial;
+        }
+        Orion.Wait(updateRate);
+    }
+}
 var Scripts;
 (function (Scripts) {
     var Clean = (function () {
@@ -860,7 +1055,7 @@ var Scripts;
         };
         Crafting.makeProgress = function () {
             Orion.ClearJournal();
-            Scripts.Utils.waitWhileSomethingInJournal(['You fail', 'You put']);
+            Scripts.Utils.waitWhileSomethingInJournal(['You fail', 'You put', 'failed']);
             return !!Orion.InJournal('You put');
         };
         Crafting.refOrMake = function (count, resourcePath) {
@@ -868,15 +1063,21 @@ var Scripts;
             var missingCount = Scripts.Utils.refill(res, 'resourcesContainer', count, 'backpack');
             if (missingCount) {
                 Scripts.Crafting.make(missingCount, resourcePath, false);
+                Orion.Wait(responseDelay);
                 Scripts.Utils.refill(res, 'resourcesContainer', count, 'backpack');
             }
         };
         Crafting.make = function (count, objectAsString, setInputs) {
+            var _a, _b;
             if (setInputs === void 0) { setInputs = true; }
             Orion.ClearJournal();
             var itemObject = Scripts.Utils.parseObject(objectAsString);
-            if (!isCreatableGameObject(itemObject)) {
-                throw "cant make " + objectAsString;
+            if (!itemObject.make) {
+                Scripts.Utils.log("cant make/refill " + objectAsString, ColorEnum.red);
+                throw "cant make/refill " + objectAsString;
+            }
+            if (!isMakeProps(itemObject.make)) {
+                throw "!isMakeProps";
             }
             if (setInputs) {
                 Scripts.Crafting.setInputs(objectAsString);
@@ -885,9 +1086,13 @@ var Scripts;
             var totalTries = 0;
             while (count > 0) {
                 Scripts.Utils.worldSaveCheckWait();
-                for (var _i = 0, _a = itemObject.make.refill; _i < _a.length; _i++) {
-                    var ref = _a[_i];
-                    Scripts.Crafting.refOrMake(ref.count, ref.resource);
+                for (var _i = 0, _c = (_a = itemObject.make.refill) === null || _a === void 0 ? void 0 : _a.crafting; _i < _c.length; _i++) {
+                    var ref = _c[_i];
+                    Scripts.Crafting.refOrMake(ref.count, ref.item);
+                }
+                for (var _d = 0, _e = (_b = itemObject.make.refill) === null || _b === void 0 ? void 0 : _b.resources; _d < _e.length; _d++) {
+                    var ref = _e[_d];
+                    Scripts.Crafting.refOrMake(ref.count, ref.item);
                 }
                 Orion.ClearJournal();
                 Scripts.Utils.selectMenu(itemObject.make.menu.name, itemObject.make.menu.selections);
@@ -1867,6 +2072,62 @@ var Scripts;
     var Targeting = (function () {
         function Targeting() {
         }
+        Targeting.TargetNext = function (reverse) {
+            if (reverse === void 0) { reverse = false; }
+            if (Orion.Timer('targetTimer') === -1) {
+                Orion.SetTimer('targetTimer');
+                Orion.SetGlobal('targetStore', '[]');
+            }
+            Orion.Timer('targetTimer') > 2500 && Orion.SetGlobal('targetStore', '[]');
+            Scripts.Utils.resetTimer('targetTimer');
+            var storeAsString = Orion.GetGlobal('targetStore');
+            var store = JSON.parse(storeAsString);
+            for (var _i = 0, store_1 = store; _i < store_1.length; _i++) {
+                var item = store_1[_i];
+                Orion.Ignore(item.serial);
+            }
+            var currentIndex = parseInt(Orion.GetGlobal('currentTargetIndex'));
+            if (store.length && ((currentIndex < store.length - 1 && !reverse) ||
+                (reverse && currentIndex))) {
+                currentIndex += (reverse ? -1 : 1);
+                Orion.SetGlobal('currentTargetIndex', currentIndex.toString());
+                Orion.SetGlobal('currentTarget', store[currentIndex]);
+            }
+            else {
+                var nearestNewTarget = Orion.FindType("any", "any", "ground", "near|mobile|live|ignoreself", 15);
+                var isSomeNewTargetAround = !!(nearestNewTarget === null || nearestNewTarget === void 0 ? void 0 : nearestNewTarget.length);
+                if (isSomeNewTargetAround) {
+                    currentIndex = reverse ? 0 : store.length;
+                    var item = { serial: nearestNewTarget[0], name: Orion.FindObject(nearestNewTarget[0]).Name() };
+                    reverse ? store.unshift(item) : store.push(item);
+                    Orion.SetGlobal('targetStore', JSON.stringify(store));
+                }
+                else {
+                    if (typeof currentIndex !== 'number') {
+                        Scripts.Utils.playerPrint("NO TARGET", ColorEnum.green);
+                        return;
+                    }
+                    currentIndex = reverse ? store.length - 1 : 0;
+                }
+                Orion.SetGlobal('currentTargetIndex', currentIndex.toString());
+                Orion.SetGlobal('currentTarget', store[currentIndex]);
+            }
+            Orion.IgnoreReset();
+            var enemySerial = store[currentIndex].serial;
+            var enemy = Orion.FindObject(enemySerial);
+            if (enemy) {
+                Scripts.Utils.playerPrint("[" + (enemy.Name() || 'target') + "]: " + enemy.Hits() + "/" + enemy.MaxHits());
+                Scripts.Utils.printColoredHpBar(enemySerial, enemy.Hits() / enemy.MaxHits() * 100);
+                Scripts.Utils.updateCurrentStatusBar(enemySerial);
+                Orion.Attack(enemySerial);
+                Orion.WarMode(false);
+                Orion.WarMode(true);
+            }
+            else {
+                var enemyNameFromStore = store[currentIndex].name;
+                Scripts.Utils.playerPrint("[" + enemyNameFromStore + "] out of distance", ColorEnum.red);
+            }
+        };
         return Targeting;
     }());
     Scripts.Targeting = Targeting;
@@ -1940,6 +2201,9 @@ var Scripts;
                     needToMove = 0;
                 }
                 Orion.Wait(responseDelay);
+                if (needToMove < 1) {
+                    break;
+                }
             }
             return needToMove;
         };
@@ -2029,6 +2293,40 @@ var Scripts;
                 item = item[i];
             }
             return item;
+        };
+        Utils.updateCurrentStatusBar = function (newSerial) {
+            var currentStatusBarSerial = Orion.GetGlobal('currentStatusBarSerial');
+            currentStatusBarSerial && Orion.CloseStatusbar(currentStatusBarSerial);
+            Orion.SetGlobal('currentStatusBarSerial', newSerial);
+            Orion.ShowStatusbar(newSerial, 20, 20);
+        };
+        Utils.determineHpColor = function (percent) {
+            var c = Math.ceil(percent * 3 / 100);
+            return c === 1 ? ColorEnum.red : c === 2 ? ColorEnum.orange : ColorEnum.green;
+        };
+        Utils.printColoredHpBar = function (target, percent) {
+            var fullBoxCount = Math.ceil(percent * 6 / 100);
+            var color = Scripts.Utils.determineHpColor(percent);
+            var text = '';
+            for (var i = 0; i < 6; i++) {
+                text += i < fullBoxCount ? '■' : '□';
+            }
+            Orion.CharPrint(target, color, text);
+        };
+        Utils.getLivingObjectInDistance = function (objectSerial) {
+            var o = Orion.FindObject(objectSerial);
+            return (o && !o.Dead()) ? o : null;
+        };
+        Utils.printDamage = function (serial, previousHp, force) {
+            if (force === void 0) { force = false; }
+            var o = Orion.FindObject(serial);
+            var hp = o.Hits();
+            var max = o.MaxHits();
+            var diff = hp - previousHp;
+            if (diff !== 0 || force) {
+                diff !== 0 && Orion.PrintFast(serial, diff > 0 ? ColorEnum.green : ColorEnum.red, 0, "" + (diff > 0 ? '+' : '') + diff.toString());
+                Orion.PrintFast(serial, Scripts.Utils.determineHpColor(hp / max * 100), 0, "[" + hp + "/" + max + "]");
+            }
         };
         return Utils;
     }());
@@ -2177,62 +2475,6 @@ var Scripts;
                 Orion.MoveItem(itemIDArr[i], 0, destination, destinationX, destinationY);
                 destinationX += 3;
                 Orion.Wait(300);
-            }
-        };
-        Wip.TargetNext = function () {
-            if (Orion.Timer('targetTimer') > 4000) {
-                Orion.IgnoreReset();
-                Orion.SetGlobal('targets', '[]');
-            }
-            Scripts.Utils.resetTimer('targetTimer');
-            var target = Orion.FindType("-1", "-1", "ground", "nearest|mobile|ignoreself ", 30);
-            if (!target.length) {
-                Orion.IgnoreReset();
-                Orion.SetGlobal('targets', '[]');
-                return;
-            }
-            var targets = JSON.parse(Orion.GetGlobal('targets')) || [];
-            var enemySerial = target[0];
-            var enemy = Orion.FindObject(enemySerial);
-            if (!enemy) {
-                Scripts.Utils.playerPrint('no enemies around', ColorEnum.green);
-                return;
-            }
-            targets.push(enemySerial);
-            Orion.Ignore(enemySerial, true);
-            Orion.SetGlobal('targets', JSON.stringify(targets));
-            var notoColor = Scripts.Wip.getColorByNotoriety(enemy && enemy.Notoriety());
-            Orion.CloseStatusbar(Orion.GetGlobal('target'));
-            Orion.CharPrint(enemySerial, notoColor, enemy.Name() + ': ' + enemy.Hits() + '/' + enemy.MaxHits());
-            Orion.SetGlobal('target', enemySerial);
-            Orion.ShowStatusbar(enemySerial, 350, 150);
-        };
-        Wip.TargetPrevious = function () {
-            if (Orion.Timer('targetTimer') > 4000) {
-                Orion.IgnoreReset();
-                Orion.SetGlobal('targets', '[]');
-            }
-            Scripts.Utils.resetTimer('targetTimer');
-            var currentTarget = Orion.GetGlobal('target');
-            var targetsFinded = JSON.parse(Orion.GetGlobal('targets')) || [];
-            var indexOfPrevious = targetsFinded.indexOf(currentTarget) - 1;
-            if (indexOfPrevious >= 0) {
-                var enemySerial = targetsFinded[indexOfPrevious];
-                var enemy = Orion.FindObject(enemySerial);
-                if (!enemy) {
-                    Scripts.Utils.playerPrint('previous enemy disappear', ColorEnum.none);
-                    targetsFinded.splice(indexOfPrevious, 1);
-                    Orion.SetGlobal('targets', JSON.stringify(targetsFinded));
-                    return;
-                }
-                var notoColor = Scripts.Wip.getColorByNotoriety(enemy && enemy.Notoriety());
-                Orion.CloseStatusbar(Orion.GetGlobal('target'));
-                Orion.CharPrint(enemySerial, notoColor, enemy.Name() + ': ' + enemy.Hits() + '/' + enemy.MaxHits());
-                Orion.SetGlobal('target', enemySerial);
-                Orion.ShowStatusbar(enemySerial, 350, 150);
-            }
-            else {
-                Scripts.Utils.playerPrint('no previous target', ColorEnum.red);
             }
         };
         Wip.getColorByNotoriety = function (notoriety) {

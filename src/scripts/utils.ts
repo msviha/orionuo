@@ -28,8 +28,8 @@ namespace Scripts {
         ):number {
             const serialsInTargetContainer = Orion.FindType(obj.graphic, obj.color, targetContainerId);
             const serialsInSourceContainer = Orion.FindType(obj.graphic, obj.color, sourceContainerId);
-            const itemsInTarget = Scripts.Utils.countObjectInContainer(obj, targetContainerId)
-            const itemsInSource = Scripts.Utils.countObjectInContainer(obj, sourceContainerId)
+            const itemsInTarget = Scripts.Utils.countObjectInContainer(obj, targetContainerId);
+            const itemsInSource = Scripts.Utils.countObjectInContainer(obj, sourceContainerId);
 
             if (itemsInTarget > quantity) {
                 return Scripts.Utils.moveItems(serialsInTargetContainer, sourceContainerId, itemsInTarget - quantity);
@@ -76,6 +76,9 @@ namespace Scripts {
                     needToMove = 0;
                 }
                 Orion.Wait(responseDelay);
+                if (needToMove < 1) {
+                    break;
+                }
             }
             return needToMove;
         }
@@ -102,7 +105,7 @@ namespace Scripts {
             Orion.Print(<string>color, message);
         }
 
-        static playerPrint(message:string, color = ColorEnum.none) {
+        static playerPrint(message:string, color:ColorEnum|number = ColorEnum.none) {
             Orion.CharPrint(Player.Serial(), color, message);
         }
 
@@ -184,6 +187,45 @@ namespace Scripts {
                 item = item[i];
             }
             return item;
+        }
+
+        static updateCurrentStatusBar(newSerial:string) {
+            const currentStatusBarSerial = Orion.GetGlobal('currentStatusBarSerial');
+            currentStatusBarSerial && Orion.CloseStatusbar(currentStatusBarSerial);
+            Orion.SetGlobal('currentStatusBarSerial', newSerial);
+            Orion.ShowStatusbar(newSerial, 20, 20);
+        }
+
+        static determineHpColor(percent:number):ColorEnum {
+            const c = Math.ceil(percent * 3 / 100)
+            return c === 1 ? ColorEnum.red : c === 2 ? ColorEnum.orange : ColorEnum.green;
+        }
+
+        static printColoredHpBar(target:string, percent:number) {
+            const fullBoxCount = Math.ceil(percent * 6 / 100);
+            const color = Scripts.Utils.determineHpColor(percent);
+            let text = '';
+            for (let i = 0; i < 6; i++) {
+                text += i < fullBoxCount ? '■' : '□'
+            }
+
+            Orion.CharPrint(target, color, text);
+        }
+
+        static getLivingObjectInDistance(objectSerial:string):GameObject|null {
+            const o = Orion.FindObject(objectSerial);
+            return (o && !o.Dead()) ? o : null;
+        }
+
+        static printDamage(serial:string, previousHp:number, force = false) {
+            const o = Orion.FindObject(serial);
+            const hp = o.Hits();
+            const max = o.MaxHits();
+            const diff = hp - previousHp;
+            if (diff !== 0 || force) {
+                diff !== 0 && Orion.PrintFast(serial, diff > 0 ? ColorEnum.green : ColorEnum.red, 0, `${diff > 0 ? '+' : ''}${diff.toString()}`);
+                Orion.PrintFast(serial, Scripts.Utils.determineHpColor(hp / max * 100), 0, `[${hp}/${max}]`);
+            }
         }
     }
 }
