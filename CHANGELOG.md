@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.0.4
+### documentation
+- added md documentation 
+
 ## 0.0.3
 ### features
 - added `mysticCounter` function to `Common` package

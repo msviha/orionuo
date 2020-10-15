@@ -4,6 +4,9 @@
         "noImplicitAny": false,
         "removeComments": true,
         "outFile": "./dist/scripts.js",
+        "types": [
+            "./typings"
+        ],
         "sourceMap": false
     },
     "include": [

@@ -1,6 +1,8 @@
-# OrionUO scripts for Darkparadise
+**[orionuo](README.md)**
 
-## [DOCUMENTATION](./docs/globals.md)
+> [Globals](globals.md)
+
+# OrionUO scripts for Darkparadise
 
 ## [CHANGELOG](./CHANGELOG.md)
 

@@ -1,14 +1,19 @@
 {
   "name": "orionuo",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Scripts for OrionUO assistant on Darkparadise.cz",
   "scripts": {
     "build": "tsc",
-    "watch": "tsc -w"
+    "watch": "tsc -w",
+    "doc": "typedoc --out docs src --includeDeclarations --excludeExternals --ignoreCompilerErrors --mode file --plugin typedoc-plugin-markdown"
   },
   "author": "Michal Sviha",
   "license": "ISC",
   "dependencies": {
     "typescript": "^3.6.3"
+  },
+  "devDependencies": {
+    "typedoc": "^0.19.2",
+    "typedoc-plugin-markdown": "^3.0.9"
   }
 }
