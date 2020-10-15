@@ -24,7 +24,7 @@ lockpicking
 
 ▸ `Static`**lock**(`targetSerial?`: string, `key?`: string): void
 
-*Defined in [scripts/lockpicking.ts:38](https://github.com/msviha/orionuo/blob/9c015c7/src/scripts/lockpicking.ts#L38)*
+*Defined in [scripts/lockpicking.ts:38](https://github.com/msviha/orionuo/blob/dc3b709/src/scripts/lockpicking.ts#L38)*
 
 #### Parameters:
 
@@ -41,7 +41,7 @@ ___
 
 ▸ `Static`**lockpicking**(`targetSerial?`: string, `key?`: string): void
 
-*Defined in [scripts/lockpicking.ts:61](https://github.com/msviha/orionuo/blob/9c015c7/src/scripts/lockpicking.ts#L61)*
+*Defined in [scripts/lockpicking.ts:61](https://github.com/msviha/orionuo/blob/dc3b709/src/scripts/lockpicking.ts#L61)*
 
 #### Parameters:
 
@@ -58,7 +58,7 @@ ___
 
 ▸ `Static`**unlock**(`targetSerial?`: string): boolean
 
-*Defined in [scripts/lockpicking.ts:8](https://github.com/msviha/orionuo/blob/9c015c7/src/scripts/lockpicking.ts#L8)*
+*Defined in [scripts/lockpicking.ts:8](https://github.com/msviha/orionuo/blob/dc3b709/src/scripts/lockpicking.ts#L8)*
 
 #### Parameters:
 

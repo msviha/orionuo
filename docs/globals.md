@@ -30,7 +30,7 @@
 
 • `Const` **responseDelay**: 350 = 350
 
-*Defined in [globals.ts:1](https://github.com/msviha/orionuo/blob/9c015c7/src/globals.ts#L1)*
+*Defined in [globals.ts:1](https://github.com/msviha/orionuo/blob/dc3b709/src/globals.ts#L1)*
 
 ## Functions
 
@@ -38,7 +38,7 @@
 
 ▸ **Autostart**(): void
 
-*Defined in [scripts.ts:4](https://github.com/msviha/orionuo/blob/9c015c7/src/scripts.ts#L4)*
+*Defined in [scripts.ts:4](https://github.com/msviha/orionuo/blob/dc3b709/src/scripts.ts#L4)*
 
 Zaskrtnete si v Orion Assistantovi Autostart checkbox
 
@@ -50,9 +50,11 @@ ___
 
 ▸ **hiding**(): void
 
-*Defined in [scripts.ts:42](https://github.com/msviha/orionuo/blob/9c015c7/src/scripts.ts#L42)*
+*Defined in [scripts.ts:44](https://github.com/msviha/orionuo/blob/dc3b709/src/scripts.ts#L44)*
 
 Hidne hrace
+
+**`example`** [_hiding](./examples/lootAll.gif)
 
 **Returns:** void
 
@@ -62,15 +64,17 @@ ___
 
 ▸ **lootAll**(`delay`: number): void
 
-*Defined in [scripts.ts:36](https://github.com/msviha/orionuo/blob/9c015c7/src/scripts.ts#L36)*
+*Defined in [scripts.ts:37](https://github.com/msviha/orionuo/blob/dc3b709/src/scripts.ts#L37)*
 
 Zameri target a premisti z nej vse do backpacku
+
+**`example`** [_lootAll 2000](./examples/lootAll.gif)
 
 #### Parameters:
 
 Name | Type | Default value | Description |
 ------ | ------ | ------ | ------ |
-`delay` | number | responseDelay |   |
+`delay` | number | responseDelay | cas mezi presunem dvou itemu |
 
 **Returns:** void
 
@@ -80,7 +84,7 @@ Name | Type | Default value | Description |
 
 ▪ `Const` **gameObject**: object
 
-*Defined in [globals.ts:2](https://github.com/msviha/orionuo/blob/9c015c7/src/globals.ts#L2)*
+*Defined in [globals.ts:2](https://github.com/msviha/orionuo/blob/dc3b709/src/globals.ts#L2)*
 
 #### Properties:
 
