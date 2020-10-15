@@ -230,6 +230,26 @@ const o:any = {
 			gold: {
 				graphic: '0x1BE9',
 				color: '0x0000'
+			},
+			rose: {
+				graphic: '0x1BEF',
+				color: '0x0665'
+			},
+			shadow: {
+				graphic: '0x1BEF',
+				color: '0x0770'
+			},
+			blood: {
+				graphic: '0x1BEF',
+				color: '0x04C2'
+			},
+			black: {
+				graphic: '0x1BEF',
+				color: '0x0455'
+			},
+			mytheril: {
+				graphic: '0x1BEF',
+				color: '0x052D'
 			}
 		},
 		stones: {
@@ -352,13 +372,98 @@ const o:any = {
 						tool: 'o.tools.tinkerTools',
 						refill: {
 							resources: [
-								{item: 'o.resources.ingots.copper', count: 1},
-								{item: 'o.resources.ingots.iron', count: 1}
+								{item: 'o.resources.ingots.copper', count: 2}, // 1 is enough but this is safe for the picking
+								{item: 'o.resources.ingots.iron', count: 2}
 							]
 						},
 						menu: {
 							name: 'Tinkering',
 							selections: ['Wires', 'Copper Wire']
+						}
+					}
+				},
+				rose: {
+					graphic: '0x1876',
+					color: '0x0665',
+					make: {
+						tool: 'o.tools.tinkerTools',
+						refill: {
+							resources: [
+								{item: 'o.resources.ingots.rose', count: 2}, // 1 is enough but this is safe for the picking
+								{item: 'o.resources.ingots.iron', count: 2}
+							]
+						},
+						menu: {
+							name: 'Tinkering',
+							selections: ['Wires', 'Rose Wire']
+						}
+					}
+				},
+				shadow: {
+					graphic: '0x1876',
+					color: '0x0770',
+					make: {
+						tool: 'o.tools.tinkerTools',
+						refill: {
+							resources: [
+								{item: 'o.resources.ingots.shadow', count: 2}, // 1 is enough but this is safe for the picking
+								{item: 'o.resources.ingots.iron', count: 2}
+							]
+						},
+						menu: {
+							name: 'Tinkering',
+							selections: ['Wires', 'Shadow Wire']
+						}
+					}
+				},
+				blood: {
+					graphic: '0x1876',
+					color: '0x04C2',
+					make: {
+						tool: 'o.tools.tinkerTools',
+						refill: {
+							resources: [
+								{item: 'o.resources.ingots.blood', count: 2}, // 1 is enough but this is safe for the picking
+								{item: 'o.resources.ingots.iron', count: 2}
+							]
+						},
+						menu: {
+							name: 'Tinkering',
+							selections: ['Wires', 'Blood Rock Wire']
+						}
+					}
+				},
+				black: {
+					graphic: '0x1876',
+					color: '0x0455',
+					make: {
+						tool: 'o.tools.tinkerTools',
+						refill: {
+							resources: [
+								{item: 'o.resources.ingots.black', count: 2}, // 1 is enough but this is safe for the picking
+								{item: 'o.resources.ingots.iron', count: 2}
+							]
+						},
+						menu: {
+							name: 'Tinkering',
+							selections: ['Wires', 'Black Rock Wire']
+						}
+					}
+				},
+				mytheril: {
+					graphic: '0x1876',
+					color: '0x052D',
+					make: {
+						tool: 'o.tools.tinkerTools',
+						refill: {
+							resources: [
+								{item: 'o.resources.ingots.mytheril', count: 2}, // 1 is enough but this is safe for the picking
+								{item: 'o.resources.ingots.iron', count: 2}
+							]
+						},
+						menu: {
+							name: 'Tinkering',
+							selections: ['Wires', 'Mytheril Wire']
 						}
 					}
 				}

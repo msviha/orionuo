@@ -206,7 +206,7 @@ namespace Scripts {
             const color = Scripts.Utils.determineHpColor(percent);
             let text = '';
             for (let i = 0; i < 6; i++) {
-                text += i < fullBoxCount ? '■' : '□'
+                text += i < fullBoxCount ? '\u25A0' : '\u25A1'
             }
 
             Orion.CharPrint(target, color, text);

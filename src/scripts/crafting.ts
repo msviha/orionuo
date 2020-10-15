@@ -71,11 +71,15 @@ namespace Scripts {
             let totalTries = 0;
             while (count > 0) {
                 Scripts.Utils.worldSaveCheckWait();
-                for (const ref of itemObject.make.refill?.crafting) {
-                    Scripts.Crafting.refOrMake(ref.count, ref.item);
+                if (itemObject.make.refill?.crafting) {
+                    for (const ref of itemObject.make.refill?.crafting) {
+                        Scripts.Crafting.refOrMake(ref.count, ref.item);
+                    }
                 }
-                for (const ref of itemObject.make.refill?.resources) {
-                    Scripts.Crafting.refOrMake(ref.count, ref.item);
+                if (itemObject.make.refill?.resources) {
+                    for (const ref of itemObject.make.refill?.resources) {
+                        Scripts.Crafting.refOrMake(ref.count, ref.item);
+                    }
                 }
                 Orion.ClearJournal();
                 Scripts.Utils.selectMenu(itemObject.make.menu.name, itemObject.make.menu.selections);
