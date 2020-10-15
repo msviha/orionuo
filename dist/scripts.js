@@ -175,6 +175,26 @@ var o = {
             gold: {
                 graphic: '0x1BE9',
                 color: '0x0000'
+            },
+            rose: {
+                graphic: '0x1BEF',
+                color: '0x0665'
+            },
+            shadow: {
+                graphic: '0x1BEF',
+                color: '0x0770'
+            },
+            blood: {
+                graphic: '0x1BEF',
+                color: '0x04C2'
+            },
+            black: {
+                graphic: '0x1BEF',
+                color: '0x0455'
+            },
+            mytheril: {
+                graphic: '0x1BEF',
+                color: '0x052D'
             }
         },
         stones: {
@@ -297,13 +317,98 @@ var o = {
                         tool: 'o.tools.tinkerTools',
                         refill: {
                             resources: [
-                                { item: 'o.resources.ingots.copper', count: 1 },
-                                { item: 'o.resources.ingots.iron', count: 1 }
+                                { item: 'o.resources.ingots.copper', count: 2 },
+                                { item: 'o.resources.ingots.iron', count: 2 }
                             ]
                         },
                         menu: {
                             name: 'Tinkering',
                             selections: ['Wires', 'Copper Wire']
+                        }
+                    }
+                },
+                rose: {
+                    graphic: '0x1876',
+                    color: '0x0665',
+                    make: {
+                        tool: 'o.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'o.resources.ingots.rose', count: 2 },
+                                { item: 'o.resources.ingots.iron', count: 2 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Wires', 'Rose Wire']
+                        }
+                    }
+                },
+                shadow: {
+                    graphic: '0x1876',
+                    color: '0x0770',
+                    make: {
+                        tool: 'o.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'o.resources.ingots.shadow', count: 2 },
+                                { item: 'o.resources.ingots.iron', count: 2 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Wires', 'Shadow Wire']
+                        }
+                    }
+                },
+                blood: {
+                    graphic: '0x1876',
+                    color: '0x04C2',
+                    make: {
+                        tool: 'o.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'o.resources.ingots.blood', count: 2 },
+                                { item: 'o.resources.ingots.iron', count: 2 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Wires', 'Blood Rock Wire']
+                        }
+                    }
+                },
+                black: {
+                    graphic: '0x1876',
+                    color: '0x0455',
+                    make: {
+                        tool: 'o.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'o.resources.ingots.black', count: 2 },
+                                { item: 'o.resources.ingots.iron', count: 2 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Wires', 'Black Rock Wire']
+                        }
+                    }
+                },
+                mytheril: {
+                    graphic: '0x1876',
+                    color: '0x052D',
+                    make: {
+                        tool: 'o.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'o.resources.ingots.mytheril', count: 2 },
+                                { item: 'o.resources.ingots.iron', count: 2 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Wires', 'Mytheril Wire']
                         }
                     }
                 }
@@ -848,6 +953,53 @@ var o = {
                 y: 180
             }
         }
+    },
+    mystics: {
+        flower: {
+            name: 'Flower',
+            graphic: '0x0DC3',
+            color: '0x005B'
+        },
+        stone: {
+            name: 'Stone',
+            graphic: '0x136C',
+            color: '0x0B94'
+        },
+        plant: {
+            name: 'Stone',
+            graphic: '0x0CB0',
+            color: '0x0899'
+        },
+        leaf: {
+            name: 'Leaf',
+            graphic: '0x0DBD',
+            color: '0x0B9F'
+        },
+        stick: {
+            name: 'Stick',
+            graphic: '0x1A9D',
+            color: '0x0481'
+        },
+        beeds: {
+            name: 'Beeds',
+            graphic: '0x108B',
+            color: '0x0BB5'
+        },
+        mushroom: {
+            name: 'Mushroom',
+            graphic: '0x0D16',
+            color: '0x00A3'
+        },
+        ball: {
+            name: 'Ball',
+            graphic: '0x0E73',
+            color: '0x0B9F'
+        },
+        crystal: {
+            name: 'Crystal',
+            graphic: '0x0F5A',
+            color: '0x0044'
+        }
     }
 };
 function Autostart() {
@@ -926,6 +1078,17 @@ var Scripts;
     }());
     Scripts.Clean = Clean;
 })(Scripts || (Scripts = {}));
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var Scripts;
 (function (Scripts) {
     var Common = (function () {
@@ -1037,6 +1200,33 @@ var Scripts;
                 Orion.PlayWav(pathToNoBandagesWavFile);
             }
         };
+        Common.mysticCounter = function () {
+            var _a;
+            Orion.ClearJournal();
+            var recepts = Orion.FindType('0x14ED', '0x06ED');
+            var mystics = __assign({}, o.mystics);
+            for (var _i = 0, recepts_1 = recepts; _i < recepts_1.length; _i++) {
+                var recept = recepts_1[_i];
+                Orion.UseObject(recept);
+                Orion.Wait(responseDelay);
+                for (var m in mystics) {
+                    !mystics[m].required && (mystics[m].required = 0);
+                    var text = (_a = Orion.InJournal(m.charAt(0).toUpperCase() + m.slice(1))) === null || _a === void 0 ? void 0 : _a.Text();
+                    if (text) {
+                        mystics[m].required += parseInt(text.replace(/x.*/, ''));
+                    }
+                }
+                Orion.ClearJournal();
+            }
+            Orion.Print(-1, '* zbyva doplnit *');
+            for (var m in mystics) {
+                var required = mystics[m].required;
+                var have = Scripts.Utils.countObjectInContainer(mystics[m], 'backpack');
+                var count = required - have < 0 ? 0 : required - have;
+                Orion.Print(-1, m + ': ' + count.toString());
+            }
+            Orion.Print(-1, '*****************');
+        };
         return Common;
     }());
     Scripts.Common = Common;
@@ -1068,7 +1258,7 @@ var Scripts;
             }
         };
         Crafting.make = function (count, objectAsString, setInputs) {
-            var _a, _b;
+            var _a, _b, _c, _d;
             if (setInputs === void 0) { setInputs = true; }
             Orion.ClearJournal();
             var itemObject = Scripts.Utils.parseObject(objectAsString);
@@ -1086,13 +1276,17 @@ var Scripts;
             var totalTries = 0;
             while (count > 0) {
                 Scripts.Utils.worldSaveCheckWait();
-                for (var _i = 0, _c = (_a = itemObject.make.refill) === null || _a === void 0 ? void 0 : _a.crafting; _i < _c.length; _i++) {
-                    var ref = _c[_i];
-                    Scripts.Crafting.refOrMake(ref.count, ref.item);
+                if ((_a = itemObject.make.refill) === null || _a === void 0 ? void 0 : _a.crafting) {
+                    for (var _i = 0, _e = (_b = itemObject.make.refill) === null || _b === void 0 ? void 0 : _b.crafting; _i < _e.length; _i++) {
+                        var ref = _e[_i];
+                        Scripts.Crafting.refOrMake(ref.count, ref.item);
+                    }
                 }
-                for (var _d = 0, _e = (_b = itemObject.make.refill) === null || _b === void 0 ? void 0 : _b.resources; _d < _e.length; _d++) {
-                    var ref = _e[_d];
-                    Scripts.Crafting.refOrMake(ref.count, ref.item);
+                if ((_c = itemObject.make.refill) === null || _c === void 0 ? void 0 : _c.resources) {
+                    for (var _f = 0, _g = (_d = itemObject.make.refill) === null || _d === void 0 ? void 0 : _d.resources; _f < _g.length; _f++) {
+                        var ref = _g[_f];
+                        Scripts.Crafting.refOrMake(ref.count, ref.item);
+                    }
                 }
                 Orion.ClearJournal();
                 Scripts.Utils.selectMenu(itemObject.make.menu.name, itemObject.make.menu.selections);
@@ -2309,7 +2503,7 @@ var Scripts;
             var color = Scripts.Utils.determineHpColor(percent);
             var text = '';
             for (var i = 0; i < 6; i++) {
-                text += i < fullBoxCount ? '■' : '□';
+                text += i < fullBoxCount ? '\u25A0' : '\u25A1';
             }
             Orion.CharPrint(target, color, text);
         };

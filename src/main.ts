@@ -1008,6 +1008,53 @@ const o:any = {
 				y: 180
 			}
 		}
+	},
+	mystics:{
+		flower: {
+			name: 'Flower',
+			graphic: '0x0DC3',
+			color: '0x005B'
+		},
+		stone: {
+			name: 'Stone',
+			graphic: '0x136C',
+			color: '0x0B94'
+		},
+		plant: {
+			name: 'Stone',
+			graphic: '0x0CB0',
+			color: '0x0899'
+		},
+		leaf: {
+			name: 'Leaf',
+			graphic: '0x0DBD',
+			color: '0x0B9F'
+		},
+		stick: {
+			name: 'Stick',
+			graphic: '0x1A9D',
+			color: '0x0481'
+		},
+		beeds: {
+			name: 'Beeds',
+			graphic: '0x108B',
+			color: '0x0BB5'
+		},
+		mushroom: {
+			name: 'Mushroom',
+			graphic: '0x0D16',
+			color: '0x00A3'
+		},
+		ball: {
+			name: 'Ball',
+			graphic: '0x0E73',
+			color: '0x0B9F'
+		},
+		crystal: {
+			name: 'Crystal',
+			graphic: '0x0F5A',
+			color: '0x0044'
+		}
 	}
 };
 //endregion

@@ -157,5 +157,33 @@ namespace Scripts {
                 Orion.PlayWav(pathToNoBandagesWavFile);
             }
         }
+
+        static mysticCounter() {
+            Orion.ClearJournal();
+            const recepts = Orion.FindType('0x14ED', '0x06ED'); // recept
+            const mystics = {...o.mystics};
+
+            for (const recept of recepts) {
+                Orion.UseObject(recept);
+                Orion.Wait(responseDelay);
+                for (const m in mystics) {
+                    !mystics[m].required && (mystics[m].required = 0);
+                    const text = Orion.InJournal(m.charAt(0).toUpperCase() + m.slice(1))?.Text();
+                    if (text) {
+                        mystics[m].required += parseInt(text.replace(/x.*/, ''));
+                    }
+                }
+                Orion.ClearJournal();
+            }
+
+            Orion.Print(-1 , '* zbyva doplnit *');
+            for (const m in mystics) {
+                const required = mystics[m].required;
+                const have = Scripts.Utils.countObjectInContainer(mystics[m], 'backpack');
+                const count = required - have < 0 ? 0 : required - have;
+                Orion.Print(-1 , m + ': ' + count.toString());
+            }
+            Orion.Print(-1 , '*****************');
+        }
     }
 }

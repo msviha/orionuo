@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.0.3
+### features
+- added `mysticCounter` function to `Common` package
+### enhancements
+- fixed some issues with `Crafting.make` 
+
 ## 0.0.2
 ### features
 - added `Targeting` package with `targetNext` function
