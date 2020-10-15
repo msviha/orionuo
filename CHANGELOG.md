@@ -1,6 +1,12 @@
 # CHANGELOG
 
 ## 0.0.4
+### breaking changes
+- `main.ts` is sliced to several files.
+- main `o` object has been renamed to `gameObject`
+### features
+- added `mysticCounter` function to `Common` package
+- `scripts.ts` has been created for the shortcuts to `Scripts` namespace
 ### documentation
 - added md documentation 
 
