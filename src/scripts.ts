@@ -32,14 +32,14 @@ function Autostart() {
 /**
  * Zameri target a premisti z nej vse do backpacku
  * @param delay cas mezi presunem dvou itemu
- * @example [_lootAll 2000](./examples/lootAll.gif)
+ * @example [_lootAll 2000](../examples/lootAll.gif)
  */
 function lootAll(delay = responseDelay) {
     Scripts.Loot.lootAllFrom(delay);
 }
 /**
  * Hidne hrace
- * @example [_hiding](./examples/lootAll.gif)
+ * @example [_hiding](../examples/lootAll.gif)
  */
 function hiding() {
     Scripts.Common.hiding();
