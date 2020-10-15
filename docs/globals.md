@@ -10,26 +10,6 @@
 
 * [Scripts](modules/scripts.md)
 
-### Enumerations
-
-* [ColorEnum](enums/colorenum.md)
-* [DirectionEnum](enums/directionenum.md)
-* [NecroScrollEnum](enums/necroscrollenum.md)
-* [ScrollEnum](enums/scrollenum.md)
-* [TargetEnum](enums/targetenum.md)
-* [TimersEnum](enums/timersenum.md)
-
-### Interfaces
-
-* [IBagDestination](interfaces/ibagdestination.md)
-* [ICoordinates](interfaces/icoordinates.md)
-* [IMakeProps](interfaces/imakeprops.md)
-* [IMenuWithSelections](interfaces/imenuwithselections.md)
-* [IMyGameObject](interfaces/imygameobject.md)
-* [IPotion](interfaces/ipotion.md)
-* [IRefillItem](interfaces/irefillitem.md)
-* [IRefillProps](interfaces/irefillprops.md)
-
 ### Variables
 
 * [responseDelay](globals.md#responsedelay)
@@ -37,15 +17,12 @@
 ### Functions
 
 * [Autostart](globals.md#autostart)
-* [isBagDestination](globals.md#isbagdestination)
-* [isMakeProps](globals.md#ismakeprops)
-* [isMyGameObject](globals.md#ismygameobject)
-* [isRefillItem](globals.md#isrefillitem)
-* [isRefillProps](globals.md#isrefillprops)
+* [hiding](globals.md#hiding)
+* [lootAll](globals.md#lootall)
 
 ### Object literals
 
-* [o](globals.md#o)
+* [gameObject](globals.md#gameobject)
 
 ## Variables
 
@@ -53,7 +30,7 @@
 
 • `Const` **responseDelay**: 350 = 350
 
-*Defined in [main.ts:2](https://github.com/msviha/orionuo/blob/f4a5ce9/src/main.ts#L2)*
+*Defined in [globals.ts:1](https://github.com/msviha/orionuo/blob/9c015c7/src/globals.ts#L1)*
 
 ## Functions
 
@@ -61,104 +38,56 @@
 
 ▸ **Autostart**(): void
 
-*Defined in [main.ts:1063](https://github.com/msviha/orionuo/blob/f4a5ce9/src/main.ts#L1063)*
+*Defined in [scripts.ts:4](https://github.com/msviha/orionuo/blob/9c015c7/src/scripts.ts#L4)*
+
+Zaskrtnete si v Orion Assistantovi Autostart checkbox
 
 **Returns:** void
 
 ___
 
-### isBagDestination
+### hiding
 
-▸ **isBagDestination**(`val`: any): val is IBagDestination
+▸ **hiding**(): void
 
-*Defined in [main.ts:130](https://github.com/msviha/orionuo/blob/f4a5ce9/src/main.ts#L130)*
+*Defined in [scripts.ts:42](https://github.com/msviha/orionuo/blob/9c015c7/src/scripts.ts#L42)*
 
-#### Parameters:
+Hidne hrace
 
-Name | Type |
------- | ------ |
-`val` | any |
-
-**Returns:** val is IBagDestination
+**Returns:** void
 
 ___
 
-### isMakeProps
+### lootAll
 
-▸ **isMakeProps**(`val`: any): val is IMakeProps
+▸ **lootAll**(`delay`: number): void
 
-*Defined in [main.ts:95](https://github.com/msviha/orionuo/blob/f4a5ce9/src/main.ts#L95)*
+*Defined in [scripts.ts:36](https://github.com/msviha/orionuo/blob/9c015c7/src/scripts.ts#L36)*
 
-#### Parameters:
-
-Name | Type |
------- | ------ |
-`val` | any |
-
-**Returns:** val is IMakeProps
-
-___
-
-### isMyGameObject
-
-▸ **isMyGameObject**(`val`: any): val is IMyGameObject
-
-*Defined in [main.ts:91](https://github.com/msviha/orionuo/blob/f4a5ce9/src/main.ts#L91)*
+Zameri target a premisti z nej vse do backpacku
 
 #### Parameters:
 
-Name | Type |
------- | ------ |
-`val` | any |
+Name | Type | Default value | Description |
+------ | ------ | ------ | ------ |
+`delay` | number | responseDelay |   |
 
-**Returns:** val is IMyGameObject
-
-___
-
-### isRefillItem
-
-▸ **isRefillItem**(`val`: any): val is IRefillItem
-
-*Defined in [main.ts:124](https://github.com/msviha/orionuo/blob/f4a5ce9/src/main.ts#L124)*
-
-#### Parameters:
-
-Name | Type |
------- | ------ |
-`val` | any |
-
-**Returns:** val is IRefillItem
-
-___
-
-### isRefillProps
-
-▸ **isRefillProps**(`val`: any): val is IRefillProps
-
-*Defined in [main.ts:109](https://github.com/msviha/orionuo/blob/f4a5ce9/src/main.ts#L109)*
-
-#### Parameters:
-
-Name | Type |
------- | ------ |
-`val` | any |
-
-**Returns:** val is IRefillProps
+**Returns:** void
 
 ## Object literals
 
-### o
+### gameObject
 
-▪ `Const` **o**: object
+▪ `Const` **gameObject**: object
 
-*Defined in [main.ts:138](https://github.com/msviha/orionuo/blob/f4a5ce9/src/main.ts#L138)*
+*Defined in [globals.ts:2](https://github.com/msviha/orionuo/blob/9c015c7/src/globals.ts#L2)*
 
 #### Properties:
 
 Name | Type | Value |
 ------ | ------ | ------ |
 `books` | object | { bookOfDead: { color: string = "0x0455"; graphic: string = "0x0EFA"; bag: { x: number = 132; y: number = 5 }  } ; highMagicSpellBook: { color: string = "0x0021"; graphic: string = "0x0EFA"; bag: { x: number = 142; y: number = 5 }  } ; runeBook: { color: string = "0x08A5"; graphic: string = "0x0FF0"; bag: { x: number = 112; y: number = 5 }  } ; travelBook: { color: string = "0x0482"; graphic: string = "0x0FEF"; bag: { x: number = 122; y: number = 5 }  } ; unholySpellbook: { color: string = "0x0413"; graphic: string = "0x0EFA"; bag: { x: number = 142; y: number = 5 }  }  } |
-`crafting` | object | { carpentry: { containersAndParts: { barrelLid: { color: string = "0x0000"; graphic: string = "0x1DB8"; make: { tool: string = "o.tools.saw"; menu: { name: string = "Carpentry"; selections: string[] = ['Containers & Cont. parts', 'Barrel Lid'] } ; refill: { crafting: { count: number = 2; item: string = "o.crafting.carpentry.miscellaneous.boards" }[] = [{item: 'o.crafting.carpentry.miscellaneous.boards', count: 2}]; resources: { count: number = 1; item: string = "o.resources.logs" }[] = [{item: 'o.resources.logs', count: 1}] }  }  } ; barrelStaves: { color: string = "0x0000"; graphic: string = "0x1EB1"; make: { tool: string = "o.tools.saw"; menu: { name: string = "Carpentry"; selections: string[] = ['Containers & Cont. parts', 'Barrel Staves'] } ; refill: { resources: { count: number = 3; item: string = "o.resources.logs" }[] = [{item: 'o.resources.logs', count: 3}] }  }  } ; formaNaLahve: { color: string = "0x0909"; graphic: string = "0x0E7F"; make: { tool: string = "o.tools.saw"; menu: { name: string = "Carpentry"; selections: string[] = ['Containers & Cont. parts', 'Forma na lahve'] } ; refill: { crafting: { count: number = 2; item: string = "o.crafting.carpentry.containersAndParts.barrelLid" }[] = [          {item: 'o.crafting.carpentry.containersAndParts.barrelLid', count: 2},          {item: 'o.crafting.carpentry.containersAndParts.barrelStaves', count: 2}         ]; resources: { count: number = 1; item: string = "o.resources.logs" }[] = [{item: 'o.resources.logs', count: 1}] }  }  }  } ; miscellaneous: { boards: { color: string = "0x0000"; graphic: string = "0x1BD7"; make: { outputCount: number = 3; tool: string = "o.tools.saw"; menu: { name: string = "Carpentry"; selections: string[] = ['Miscellaneous', 'Boards'] } ; refill: { resources: { count: number = 2; item: string = "o.resources.logs" }[] = [{item: 'o.resources.logs', count: 2}] }  }  } ; krabiceKadi: { color: string = "0x07E0"; graphic: string = "0x185E"; make: { tool: string = "o.tools.saw"; menu: { name: string = "Carpentry"; selections: string[] = ['Miscellaneous', 'Krabice kadi'] } ; refill: { crafting: { count: number = 20; item: string = "o.crafting.tinkering.containers.kadNaPotiony" }[] = [{item: 'o.crafting.tinkering.containers.kadNaPotiony', count: 20}]; resources: { count: number = 2; item: string = "o.resources.logs" }[] = [{item: 'o.resources.logs', count: 2}] }  }  }  }  } ; tinkering: { containers: { animalBox: { color: string = "0x051E"; graphic: string = "0x09A8"; make: { tool: string = "o.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Animal Box'] } ; refill: { crafting: { count: number = 1; item: string = "o.crafting.tinkering.containers.goldenBox" }[] = [          {item: 'o.crafting.tinkering.containers.goldenBox', count: 1}         ]; resources: { count: number = 5; item: string = "o.resources.logs" }[] = [          {item: 'o.resources.logs', count: 5},          {item: 'o.resources.furs', count: 5}         ] }  }  } ; goldenBox: { color: string = "0x0000"; graphic: string = "0x0E80"; make: { tool: string = "o.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Golden Box (W)'] } ; refill: { resources: { count: number = 5; item: string = "o.resources.logs" }[] = [          {item: 'o.resources.logs', count: 5},          {item: 'o.resources.ingots.gold', count: 5},          {item: 'o.resources.ingots.iron', count: 1}         ] }  }  } ; kadNaPotiony: { color: string = "0x0000"; graphic: string = "0x1843"; make: { tool: string = "o.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Kad na potiony'] } ; refill: { crafting: { count: number = 1; item: string = "o.crafting.carpentry.containersAndParts.formaNaLahve" }[] = [          {item: 'o.crafting.carpentry.containersAndParts.formaNaLahve', count: 1}         ]; resources: { count: number = 2; item: string = "o.resources.logs" }[] = [          {item: 'o.resources.logs', count: 2},          {item: 'o.resources.ore.iron', count: 2},          {item: 'o.resources.ingots.bronze', count: 1},          {item: 'o.resources.ingots.iron', count: 1}         ] }  }  } ; univerzalAnimalBox: { color: string = "0x0000"; graphic: string = "0x09A8"; make: { tool: string = "o.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Univerzal Animal Box'] } ; refill: { crafting: { count: number = 1; item: string = "o.crafting.tinkering.containers.animalBox" }[] = [          {item: 'o.crafting.tinkering.containers.animalBox', count: 1}         ]; resources: { count: number = 5; item: string = "o.resources.logs" }[] = [          {item: 'o.resources.logs', count: 5},          {item: 'o.resources.furs', count: 5}         ] }  }  }  } ; parts: { springs: { color: string = "0x0000"; graphic: string = "0x105D"; make: { tool: string = "o.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Parts', 'Springs'] } ; refill: { resources: { count: number = 1; item: string = "o.resources.ingots.iron" }[] = [{item: 'o.resources.ingots.iron', count: 1}] }  }  }  } ; specialItems: { magicBall: { color: string = "0x0B86"; graphic: string = "0x0E2D"; make: { tool: string = "o.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Special Items', 'Magic Ball (10 charges)'] } ; refill: { crafting: { count: number = 2; item: string = "o.crafting.tinkering.parts.springs" }[] = [          {item: 'o.crafting.tinkering.parts.springs', count: 2},          {item: 'o.crafting.tinkering.wires.copper', count: 5}         ]; resources: { count: number = 1; item: string = "o.resources.ingots.gold" }[] = [          {item: 'o.resources.ingots.gold', count: 1},          {item: 'o.resources.ingots.iron', count: 1},          {item: 'o.resources.stones.pieceOfAmber', count: 1},          {item: 'o.resources.stones.starSapphire', count: 3}         ] }  }  }  } ; wires: { black: { color: string = "0x0455"; graphic: string = "0x1876"; make: { tool: string = "o.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Black Rock Wire'] } ; refill: { resources: { count: number = 2; item: string = "o.resources.ingots.black" }[] = [          {item: 'o.resources.ingots.black', count: 2}, // 1 is enough but this is safe for the picking          {item: 'o.resources.ingots.iron', count: 2}         ] }  }  } ; blood: { color: string = "0x04C2"; graphic: string = "0x1876"; make: { tool: string = "o.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Blood Rock Wire'] } ; refill: { resources: { count: number = 2; item: string = "o.resources.ingots.blood" }[] = [          {item: 'o.resources.ingots.blood', count: 2}, // 1 is enough but this is safe for the picking          {item: 'o.resources.ingots.iron', count: 2}         ] }  }  } ; copper: { color: string = "0x0000"; graphic: string = "0x1879"; make: { tool: string = "o.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Copper Wire'] } ; refill: { resources: { count: number = 2; item: string = "o.resources.ingots.copper" }[] = [          {item: 'o.resources.ingots.copper', count: 2}, // 1 is enough but this is safe for the picking          {item: 'o.resources.ingots.iron', count: 2}         ] }  }  } ; mytheril: { color: string = "0x052D"; graphic: string = "0x1876"; make: { tool: string = "o.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Mytheril Wire'] } ; refill: { resources: { count: number = 2; item: string = "o.resources.ingots.mytheril" }[] = [          {item: 'o.resources.ingots.mytheril', count: 2}, // 1 is enough but this is safe for the picking          {item: 'o.resources.ingots.iron', count: 2}         ] }  }  } ; rose: { color: string = "0x0665"; graphic: string = "0x1876"; make: { tool: string = "o.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Rose Wire'] } ; refill: { resources: { count: number = 2; item: string = "o.resources.ingots.rose" }[] = [          {item: 'o.resources.ingots.rose', count: 2}, // 1 is enough but this is safe for the picking          {item: 'o.resources.ingots.iron', count: 2}         ] }  }  } ; shadow: { color: string = "0x0770"; graphic: string = "0x1876"; make: { tool: string = "o.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Shadow Wire'] } ; refill: { resources: { count: number = 2; item: string = "o.resources.ingots.shadow" }[] = [          {item: 'o.resources.ingots.shadow', count: 2}, // 1 is enough but this is safe for the picking          {item: 'o.resources.ingots.iron', count: 2}         ] }  }  }  }  }  } |
+`crafting` | object | { carpentry: { containersAndParts: { barrelLid: { color: string = "0x0000"; graphic: string = "0x1DB8"; make: { tool: string = "o.tools.saw"; menu: { name: string = "Carpentry"; selections: string[] = ['Containers & Cont. parts', 'Barrel Lid'] } ; refill: { crafting: { count: number = 2; item: string = "o.crafting.carpentry.miscellaneous.boards" }[] = [{item: 'o.crafting.carpentry.miscellaneous.boards', count: 2}]; resources: { count: number = 1; item: string = "o.resources.logs" }[] = [{item: 'o.resources.logs', count: 1}] }  }  } ; barrelStaves: { color: string = "0x0000"; graphic: string = "0x1EB1"; make: { tool: string = "o.tools.saw"; menu: { name: string = "Carpentry"; selections: string[] = ['Containers & Cont. parts', 'Barrel Staves'] } ; refill: { resources: { count: number = 3; item: string = "o.resources.logs" }[] = [{item: 'o.resources.logs', count: 3}] }  }  } ; formaNaLahve: { color: string = "0x0909"; graphic: string = "0x0E7F"; make: { tool: string = "o.tools.saw"; menu: { name: string = "Carpentry"; selections: string[] = ['Containers & Cont. parts', 'Forma na lahve'] } ; refill: { crafting: { count: number = 2; item: string = "o.crafting.carpentry.containersAndParts.barrelLid" }[] = [                                  {item: 'o.crafting.carpentry.containersAndParts.barrelLid', count: 2},                                  {item: 'o.crafting.carpentry.containersAndParts.barrelStaves', count: 2}                              ]; resources: { count: number = 1; item: string = "o.resources.logs" }[] = [{item: 'o.resources.logs', count: 1}] }  }  }  } ; miscellaneous: { boards: { color: string = "0x0000"; graphic: string = "0x1BD7"; make: { outputCount: number = 3; tool: string = "o.tools.saw"; menu: { name: string = "Carpentry"; selections: string[] = ['Miscellaneous', 'Boards'] } ; refill: { resources: { count: number = 2; item: string = "o.resources.logs" }[] = [{item: 'o.resources.logs', count: 2}] }  }  } ; krabiceKadi: { color: string = "0x07E0"; graphic: string = "0x185E"; make: { tool: string = "o.tools.saw"; menu: { name: string = "Carpentry"; selections: string[] = ['Miscellaneous', 'Krabice kadi'] } ; refill: { crafting: { count: number = 20; item: string = "o.crafting.tinkering.containers.kadNaPotiony" }[] = [{item: 'o.crafting.tinkering.containers.kadNaPotiony', count: 20}]; resources: { count: number = 2; item: string = "o.resources.logs" }[] = [{item: 'o.resources.logs', count: 2}] }  }  }  }  } ; tinkering: { containers: { animalBox: { color: string = "0x051E"; graphic: string = "0x09A8"; make: { tool: string = "o.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Animal Box'] } ; refill: { crafting: { count: number = 1; item: string = "o.crafting.tinkering.containers.goldenBox" }[] = [                                  {item: 'o.crafting.tinkering.containers.goldenBox', count: 1}                              ]; resources: { count: number = 5; item: string = "o.resources.logs" }[] = [                                  {item: 'o.resources.logs', count: 5},                                  {item: 'o.resources.furs', count: 5}                              ] }  }  } ; goldenBox: { color: string = "0x0000"; graphic: string = "0x0E80"; make: { tool: string = "o.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Golden Box (W)'] } ; refill: { resources: { count: number = 5; item: string = "o.resources.logs" }[] = [                                  {item: 'o.resources.logs', count: 5},                                  {item: 'o.resources.ingots.gold', count: 5},                                  {item: 'o.resources.ingots.iron', count: 1}                              ] }  }  } ; kadNaPotiony: { color: string = "0x0000"; graphic: string = "0x1843"; make: { tool: string = "o.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Kad na potiony'] } ; refill: { crafting: { count: number = 1; item: string = "o.crafting.carpentry.containersAndParts.formaNaLahve" }[] = [                                  {item: 'o.crafting.carpentry.containersAndParts.formaNaLahve', count: 1}                              ]; resources: { count: number = 2; item: string = "o.resources.logs" }[] = [                                  {item: 'o.resources.logs', count: 2},                                  {item: 'o.resources.ore.iron', count: 2},                                  {item: 'o.resources.ingots.bronze', count: 1},                                  {item: 'o.resources.ingots.iron', count: 1}                              ] }  }  } ; univerzalAnimalBox: { color: string = "0x0000"; graphic: string = "0x09A8"; make: { tool: string = "o.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Univerzal Animal Box'] } ; refill: { crafting: { count: number = 1; item: string = "o.crafting.tinkering.containers.animalBox" }[] = [                                  {item: 'o.crafting.tinkering.containers.animalBox', count: 1}                              ]; resources: { count: number = 5; item: string = "o.resources.logs" }[] = [                                  {item: 'o.resources.logs', count: 5},                                  {item: 'o.resources.furs', count: 5}                              ] }  }  }  } ; parts: { springs: { color: string = "0x0000"; graphic: string = "0x105D"; make: { tool: string = "o.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Parts', 'Springs'] } ; refill: { resources: { count: number = 1; item: string = "o.resources.ingots.iron" }[] = [{item: 'o.resources.ingots.iron', count: 1}] }  }  }  } ; specialItems: { magicBall: { color: string = "0x0B86"; graphic: string = "0x0E2D"; make: { tool: string = "o.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Special Items', 'Magic Ball (10 charges)'] } ; refill: { crafting: { count: number = 2; item: string = "o.crafting.tinkering.parts.springs" }[] = [                                  {item: 'o.crafting.tinkering.parts.springs', count: 2},                                  {item: 'o.crafting.tinkering.wires.copper', count: 5}                              ]; resources: { count: number = 1; item: string = "o.resources.ingots.gold" }[] = [                                  {item: 'o.resources.ingots.gold', count: 1},                                  {item: 'o.resources.ingots.iron', count: 1},                                  {item: 'o.resources.stones.pieceOfAmber', count: 1},                                  {item: 'o.resources.stones.starSapphire', count: 3}                              ] }  }  }  } ; wires: { black: { color: string = "0x0455"; graphic: string = "0x1876"; make: { tool: string = "o.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Black Rock Wire'] } ; refill: { resources: { count: number = 2; item: string = "o.resources.ingots.black" }[] = [                                  {item: 'o.resources.ingots.black', count: 2}, // 1 is enough but this is safe for the picking                                  {item: 'o.resources.ingots.iron', count: 2}                              ] }  }  } ; blood: { color: string = "0x04C2"; graphic: string = "0x1876"; make: { tool: string = "o.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Blood Rock Wire'] } ; refill: { resources: { count: number = 2; item: string = "o.resources.ingots.blood" }[] = [                                  {item: 'o.resources.ingots.blood', count: 2}, // 1 is enough but this is safe for the picking                                  {item: 'o.resources.ingots.iron', count: 2}                              ] }  }  } ; copper: { color: string = "0x0000"; graphic: string = "0x1879"; make: { tool: string = "o.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Copper Wire'] } ; refill: { resources: { count: number = 2; item: string = "o.resources.ingots.copper" }[] = [                                  {item: 'o.resources.ingots.copper', count: 2}, // 1 is enough but this is safe for the picking                                  {item: 'o.resources.ingots.iron', count: 2}                              ] }  }  } ; mytheril: { color: string = "0x052D"; graphic: string = "0x1876"; make: { tool: string = "o.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Mytheril Wire'] } ; refill: { resources: { count: number = 2; item: string = "o.resources.ingots.mytheril" }[] = [                                  {item: 'o.resources.ingots.mytheril', count: 2}, // 1 is enough but this is safe for the picking                                  {item: 'o.resources.ingots.iron', count: 2}                              ] }  }  } ; rose: { color: string = "0x0665"; graphic: string = "0x1876"; make: { tool: string = "o.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Rose Wire'] } ; refill: { resources: { count: number = 2; item: string = "o.resources.ingots.rose" }[] = [                                  {item: 'o.resources.ingots.rose', count: 2}, // 1 is enough but this is safe for the picking                                  {item: 'o.resources.ingots.iron', count: 2}                              ] }  }  } ; shadow: { color: string = "0x0770"; graphic: string = "0x1876"; make: { tool: string = "o.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Shadow Wire'] } ; refill: { resources: { count: number = 2; item: string = "o.resources.ingots.shadow" }[] = [                                  {item: 'o.resources.ingots.shadow', count: 2}, // 1 is enough but this is safe for the picking                                  {item: 'o.resources.ingots.iron', count: 2}                              ] }  }  }  }  }  } |
 `mystics` | object | { ball: { color: string = "0x0B9F"; graphic: string = "0x0E73"; name: string = "Ball" } ; beeds: { color: string = "0x0BB5"; graphic: string = "0x108B"; name: string = "Beeds" } ; crystal: { color: string = "0x0044"; graphic: string = "0x0F5A"; name: string = "Crystal" } ; flower: { color: string = "0x005B"; graphic: string = "0x0DC3"; name: string = "Flower" } ; leaf: { color: string = "0x0B9F"; graphic: string = "0x0DBD"; name: string = "Leaf" } ; mushroom: { color: string = "0x00A3"; graphic: string = "0x0D16"; name: string = "Mushroom" } ; plant: { color: string = "0x0899"; graphic: string = "0x0CB0"; name: string = "Stone" } ; stick: { color: string = "0x0481"; graphic: string = "0x1A9D"; name: string = "Stick" } ; stone: { color: string = "0x0B94"; graphic: string = "0x136C"; name: string = "Stone" }  } |
 `necroRegy` | object | { batwings: { graphic: string = "0x0F78"; bag: { x: number = 155; y: number = 180 }  } ; blackmoor: { graphic: string = "0x0F79"; bag: { x: number = 155; y: number = 180 }  } ; bloodspawn: { graphic: string = "0x0F7C"; bag: { x: number = 155; y: number = 180 }  } ; bones: { graphic: string = "0x0F7E"; bag: { x: number = 155; y: number = 180 }  } ; brimstone: { graphic: string = "0x0F7F"; bag: { x: number = 155; y: number = 180 }  } ; daemon\_bones: { graphic: string = "0x0F80"; bag: { x: number = 155; y: number = 180 }  } ; deamon\_blood: { graphic: string = "0x0F7D"; bag: { x: number = 155; y: number = 180 }  } ; dragons\_blood: { graphic: string = "0x0F82"; bag: { x: number = 155; y: number = 180 }  } ; executioners\_cap: { graphic: string = "0x0F83"; bag: { x: number = 155; y: number = 180 }  } ; eyes\_of\_newt: { color: string = "0x0000"; graphic: string = "0x0F87"; bag: { x: number = 155; y: number = 180 }  } ; fertile\_dirt: { graphic: string = "0x0F81"; bag: { x: number = 155; y: number = 180 }  } ; obsidian: { graphic: string = "0x0F89"; bag: { x: number = 155; y: number = 180 }  } ; pumice: { graphic: string = "0x0F8B"; bag: { x: number = 155; y: number = 180 }  } ; serpent\_scales: { graphic: string = "0x0F8E"; bag: { x: number = 155; y: number = 180 }  } ; volcanic\_ash: { graphic: string = "0x0F8F"; bag: { x: number = 155; y: number = 180 }  } ; wyrms\_hearts: { graphic: string = "0x0F91"; bag: { x: number = 155; y: number = 180 }  }  } |
 `potions` | object | { gc: { color: string = "0x0000"; graphic: string = "0x0F07"; bag: { x: number = 80; y: number = 15 } ; kad: { color: string = "0x0842"; graphic: string = "0x1843" }  } ; gh: { color: string = "0x0000"; graphic: string = "0x0F0C"; bag: { x: number = 25; y: number = 15 } ; kad: { color: string = "0x08A7"; graphic: string = "0x1843" }  } ; gs: { color: string = "0x0000"; graphic: string = "0x0F09"; bag: { x: number = 25; y: number = 25 } ; kad: { color: string = "0x0481"; graphic: string = "0x1843" }  } ; lavabomb: { color: string = "0x000E"; graphic: string = "0x0F0D"; kad: { color: string = "0x000E"; graphic: string = "0x1843" }  } ; lc: { color: string = "0x0000"; graphic: string = "0x0F07"; bag: { x: number = 80; y: number = 15 } ; kad: { color: string = "0x0091"; graphic: string = "0x1843" }  } ; ns: { color: string = "0x0000"; graphic: string = "0x0F06"; kad: { color: string = "0x03C4"; graphic: string = "0x1843" }  } ; shrink: { color: string = "0x045E"; graphic: string = "0x0F09"; bag: { x: number = 80; y: number = 25 } ; kad: { color: string = "0x0724"; graphic: string = "0x1843" }  } ; tmr: { color: string = "0x0003"; graphic: string = "0x0F09"; bag: { x: number = 25; y: number = 5 } ; kad: { color: string = "0x0003"; graphic: string = "0x1843" }  } ; tr: { color: string = "0x0000"; graphic: string = "0x0F0B"; bag: { x: number = 80; y: number = 5 } ; kad: { color: string = "0x014D"; graphic: string = "0x1843" }  }  } |

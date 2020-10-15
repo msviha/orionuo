@@ -4,6 +4,8 @@
 
 # OrionUO scripts for Darkparadise
 
+## [DOCUMENTATION](./docs/globals.md)
+
 ## [CHANGELOG](./CHANGELOG.md)
 
 ## how to build scripts

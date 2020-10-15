@@ -8,7 +8,7 @@ namespace Scripts {
          * resetuje staty pomoci travel booku
          */
         static resetStats() {
-            const tbObj = <IMyGameObject>o.books.travelBook;
+            const tbObj = <IMyGameObject>gameObject.books.travelBook;
             const travelBooks = Orion.FindType(tbObj.graphic, tbObj.color);
             if (!travelBooks.length) {
                 Scripts.Utils.log('NEMAS TRAVEL BOOK', ColorEnum.red);

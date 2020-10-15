@@ -206,5 +206,19 @@ namespace Scripts {
                 Scripts.Utils.log('end');
             }
         }
+
+        static lootAllFrom(delay = responseDelay) {
+            Scripts.Utils.playerPrint(`Target object to loot`);
+            Orion.WaitForAddObject('lootAllContainer', 60000);
+
+            Orion.OpenContainer('lootAllContainer', 5000, `Container not found`);
+            let itemsInCorpse = Orion.FindType('any', 'any', 'lootAllContainer');
+            if (itemsInCorpse.length) {
+                for (const itemId of itemsInCorpse) {
+                    Orion.MoveItem(itemId, 0, "myLootBag");
+                    Orion.Wait(delay);
+                }
+            }
+        }
     }
 }

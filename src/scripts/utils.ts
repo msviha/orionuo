@@ -153,7 +153,7 @@ namespace Scripts {
         static findMyDefinitionForGameObject(gameObject:GameObject, obj?:any):IMyGameObject|undefined {
             const graphic = gameObject.Graphic().toUpperCase();
             const color = gameObject.Color().toUpperCase();
-            obj === undefined && (obj = o);
+            obj === undefined && (obj = gameObject);
 
             if (isMyGameObject(obj)) {
                 if (
@@ -182,7 +182,7 @@ namespace Scripts {
         static parseObject(objectAsString:string):IMyGameObject {
             const arr = objectAsString.split('.');
             arr.shift(); // remove the 'o'
-            let item:any = o;
+            let item:any = gameObject;
             for (const i of arr) {
                 item = item[i];
             }

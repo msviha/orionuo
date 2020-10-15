@@ -22,7 +22,7 @@
 
 ▸ `Static`**cleanBag**(): void
 
-*Defined in [scripts/clean.ts:9](https://github.com/msviha/orionuo/blob/f4a5ce9/src/scripts/clean.ts#L9)*
+*Defined in [scripts/clean.ts:9](https://github.com/msviha/orionuo/blob/9c015c7/src/scripts/clean.ts#L9)*
 
 Scripts.Clean.cleanBag()
 stability released
@@ -35,9 +35,9 @@ ___
 
 ### cleanMyGameObjectInBag
 
-▸ `Static`**cleanMyGameObjectInBag**(`type`: [IMyGameObject](../interfaces/imygameobject.md), `tName?`: string): void
+▸ `Static`**cleanMyGameObjectInBag**(`type`: IMyGameObject, `tName?`: string): void
 
-*Defined in [scripts/clean.ts:44](https://github.com/msviha/orionuo/blob/f4a5ce9/src/scripts/clean.ts#L44)*
+*Defined in [scripts/clean.ts:44](https://github.com/msviha/orionuo/blob/9c015c7/src/scripts/clean.ts#L44)*
 
 Scripts.Clean.cleanMyGameObjectInBag
 stability released
@@ -48,7 +48,7 @@ Uklidi vsechny veci ktere maji nastaveny bag v danem objectu
 
 Name | Type |
 ------ | ------ |
-`type` | [IMyGameObject](../interfaces/imygameobject.md) |
+`type` | IMyGameObject |
 `tName?` | string |
 
 **Returns:** void
@@ -59,7 +59,7 @@ ___
 
 ▸ `Static`**cleanObjectInBag**(`object`: any, `objectName?`: string): void
 
-*Defined in [scripts/clean.ts:24](https://github.com/msviha/orionuo/blob/f4a5ce9/src/scripts/clean.ts#L24)*
+*Defined in [scripts/clean.ts:24](https://github.com/msviha/orionuo/blob/9c015c7/src/scripts/clean.ts#L24)*
 
 Scripts.Clean.cleanObjectInBag()
 stability released

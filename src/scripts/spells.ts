@@ -41,7 +41,7 @@ namespace Scripts {
             target?:TargetEnum,
             backupHeadCast?:string
         ) {
-            const s = o.scrolls['standard'][scroll];
+            const s = gameObject.scrolls['standard'][scroll];
 
             if (s.minMana > Player.Mana()) {
                 Scripts.Utils.playerPrint('!! MANA !!', ColorEnum.red);
@@ -82,7 +82,7 @@ namespace Scripts {
             scroll:NecroScrollEnum,
             target?:TargetEnum
         ) {
-            const s = o.scrolls['necro'][scroll];
+            const s = gameObject.scrolls['necro'][scroll];
 
             if (s.minMana > Player.Mana()) {
                 Scripts.Utils.playerPrint('!! MANA !!', ColorEnum.red);
@@ -137,7 +137,7 @@ namespace Scripts {
         static inscription(circle:number, spell:string, quantity = 0) {
             const menuName = 'Spell Circles';
             const spellCircle = `Spell Circle ${circle}`;
-            const blank = o.scrolls.blank;
+            const blank = gameObject.scrolls.blank;
 
             Scripts.Utils.playerPrint('Target your container with blank scrolls');
             const selection_1 = Orion.WaitForAddObject('blankScrollsContainer', 60000);

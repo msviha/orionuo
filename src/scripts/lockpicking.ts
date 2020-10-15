@@ -12,7 +12,7 @@ namespace Scripts {
                 targetSerial = Orion.FindObject('unlockTarget').Serial();
             }
 
-            const l = o.uncategorized.lockpicks;
+            const l = gameObject.uncategorized.lockpicks;
             let lockpicks = Orion.FindType(l.graphic, l.color);
 
             let unlocked = false;

@@ -12,9 +12,9 @@ namespace Scripts {
          * Pouzije shrink kad
          */
         static useRR() {
-            const rr = <IMyGameObject>o.rings.rr;
-            const grr = <IMyGameObject>o.rings.grr;
-            const grr2 = <IMyGameObject>o.rings.grr2;
+            const rr = <IMyGameObject>gameObject.rings.rr;
+            const grr = <IMyGameObject>gameObject.rings.grr;
+            const grr2 = <IMyGameObject>gameObject.rings.grr2;
             let rrSerials = Orion.FindType(rr.graphic, rr.color);
             let grrSerials = Orion.FindType(grr.graphic, grr.color);
             let grr2Serials = Orion.FindType(grr2.graphic, grr2.color);

@@ -1026,6 +1026,9 @@ function Autostart() {
         Orion.Wait(updateRate);
     }
 }
+function lootAll(delay) {
+    Scripts.Loot.lootAllFrom(delay);
+}
 var Scripts;
 (function (Scripts) {
     var Clean = (function () {
@@ -1611,6 +1614,20 @@ var Scripts;
                     enemy = Orion.FindObject(serialToAttack);
                 }
                 Scripts.Utils.log('end');
+            }
+        };
+        Loot.lootAllFrom = function (delay) {
+            if (delay === void 0) { delay = responseDelay; }
+            Scripts.Utils.playerPrint("Target object to loot");
+            Orion.WaitForAddObject('lootAllContainer', 60000);
+            Orion.OpenContainer('lootAllContainer', 5000, "Container not found");
+            var itemsInCorpse = Orion.FindType('any', 'any', 'lootAllContainer');
+            if (itemsInCorpse.length) {
+                for (var _i = 0, itemsInCorpse_2 = itemsInCorpse; _i < itemsInCorpse_2.length; _i++) {
+                    var itemId = itemsInCorpse_2[_i];
+                    Orion.MoveItem(itemId, 0, "myLootBag");
+                    Orion.Wait(delay);
+                }
             }
         };
         return Loot;

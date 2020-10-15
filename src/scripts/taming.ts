@@ -16,7 +16,7 @@ namespace Scripts {
         static useTrainingTamingStaff(targetSerial:string):boolean {
             Orion.Disarm();
             Orion.Wait(500);
-            let staff = Orion.FindType(o.taming.staffs.training.graphic, o.taming.staffs.training.color);
+            let staff = Orion.FindType(gameObject.taming.staffs.training.graphic, gameObject.taming.staffs.training.color);
             if (!staff.length) {
                 Scripts.Utils.log('missing training taming staff', ColorEnum.red);
                 return false;

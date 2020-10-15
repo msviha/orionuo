@@ -7,12 +7,12 @@ namespace Scripts {
          * Hlavni script pro uklizeni veci v baglu, tento script je mozne si upravit podle sebe
          */
         static cleanBag() {
-            Scripts.Clean.cleanObjectInBag(o.potions, 'potions');
-            Scripts.Clean.cleanObjectInBag(o.books, 'books');
-            Scripts.Clean.cleanObjectInBag(o.regy, 'regy');
-            Scripts.Clean.cleanObjectInBag(o.necroRegy, 'necroRegy');
-            Scripts.Clean.cleanObjectInBag(o.uncategorized, 'uncategorized');
-            Scripts.Clean.cleanObjectInBag(o.rings, 'rings');
+            Scripts.Clean.cleanObjectInBag(gameObject.potions, 'potions');
+            Scripts.Clean.cleanObjectInBag(gameObject.books, 'books');
+            Scripts.Clean.cleanObjectInBag(gameObject.regy, 'regy');
+            Scripts.Clean.cleanObjectInBag(gameObject.necroRegy, 'necroRegy');
+            Scripts.Clean.cleanObjectInBag(gameObject.uncategorized, 'uncategorized');
+            Scripts.Clean.cleanObjectInBag(gameObject.rings, 'rings');
         }
 
         /**

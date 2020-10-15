@@ -6,8 +6,8 @@ namespace Scripts {
     export class Wip {
 
         static lavaBomba() {
-            const bomb = <IPotion>o.potions.lavabomb;
-            const emptyBottles = <IMyGameObject>o.uncategorized.emptyBottles;
+            const bomb = <IPotion>gameObject.potions.lavabomb;
+            const emptyBottles = <IMyGameObject>gameObject.uncategorized.emptyBottles;
             const bombKad:IMyGameObject = bomb.kad;
             const emptyBottlesSerials = Orion.FindType(emptyBottles.graphic, emptyBottles.color, 'backpack','item', 3 , '-1', true);
 
@@ -92,7 +92,7 @@ namespace Scripts {
         }
 
         static Travel() {
-            const travel = <IMyGameObject>o.books.travel;
+            const travel = <IMyGameObject>gameObject.books.travel;
             const travelSerials = Orion.FindType(travel.graphic, travel.color);
             if (!travelSerials.length) {
                 Scripts.Utils.log('NEMAS TRAVEL BOOK', ColorEnum.red);
@@ -112,7 +112,7 @@ namespace Scripts {
         }
 
         static Nbruna() {
-            const nbRuna = <IMyGameObject>o.nonCategorized.nbRuna;
+            const nbRuna = <IMyGameObject>gameObject.nonCategorized.nbRuna;
             const nbRunesSerials = Orion.FindType(nbRuna.graphic, nbRuna.color);
             if (!nbRunesSerials.length) {
                 Scripts.Utils.log('NEMAS NB RUNU', ColorEnum.red);

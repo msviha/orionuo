@@ -14,7 +14,7 @@ namespace Scripts {
          * Kouzleni lze zakazat pomoci parametru Scripts.Common.svetlo(false)
          */
         static svetlo(shouldCast = true) {
-            const ns = <IPotion>o.potions.ns;
+            const ns = <IPotion>gameObject.potions.ns;
             const kad = Orion.FindType(ns.kad.graphic, ns.kad.color);
             if (kad.length) {
                 Orion.WaitTargetObject('self');
@@ -32,7 +32,7 @@ namespace Scripts {
          * Pouzije shrink kad
          */
         static shrinkKad() {
-            const shrink = <IPotion>o.potions.ns;
+            const shrink = <IPotion>gameObject.potions.ns;
             const kad = Orion.FindType(shrink.kad.graphic, shrink.kad.color);
             if (kad.length) {
                 Orion.UseObject(kad[0]);
@@ -82,13 +82,13 @@ namespace Scripts {
          * @param switchWarModeWhenNeeded prepne war, pokud je potreba docepnout
          */
         static drinkPotion(potionName:string, switchWarModeWhenNeeded = true) {
-            const potion = o.potions[potionName];
+            const potion = gameObject.potions[potionName];
             if (!potion) {
                 Scripts.Utils.log(`Definice potionu '${potionName}' neexistuje.`, ColorEnum.red);
                 return;
             }
 
-            const emptyBottles = Orion.FindType(o.uncategorized.emptyBottles.graphic, o.uncategorized.emptyBottles.color);
+            const emptyBottles = Orion.FindType(gameObject.uncategorized.emptyBottles.graphic, gameObject.uncategorized.emptyBottles.color);
             const isEmptyBottle = emptyBottles.length > 0;
 
             let isPotion = Orion.Count(potion.graphic, potion.color) > 0;
@@ -152,7 +152,7 @@ namespace Scripts {
                 Orion.Wait(200);
             }
 
-            const bandages = Orion.FindType(o.uncategorized.bandy.graphic, o.uncategorized.bandy.color);
+            const bandages = Orion.FindType(gameObject.uncategorized.bandy.graphic, gameObject.uncategorized.bandy.color);
             if (!bandages.length) {
                 Orion.PlayWav(pathToNoBandagesWavFile);
             }
@@ -161,7 +161,7 @@ namespace Scripts {
         static mysticCounter() {
             Orion.ClearJournal();
             const recepts = Orion.FindType('0x14ED', '0x06ED'); // recept
-            const mystics = {...o.mystics};
+            const mystics = {...gameObject.mystics};
 
             for (const recept of recepts) {
                 Orion.UseObject(recept);
