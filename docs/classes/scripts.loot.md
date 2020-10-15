@@ -26,7 +26,7 @@
 
 ▸ `Static`**attackOnEnemy**(`enemySerialsAround`: string[], `lastAttackSerial?`: string): string \| undefined
 
-*Defined in [scripts/loot.ts:190](https://github.com/msviha/orionuo/blob/533e846/src/scripts/loot.ts#L190)*
+*Defined in [scripts/loot.ts:190](https://github.com/msviha/orionuo/blob/f416b2b/src/scripts/loot.ts#L190)*
 
 #### Parameters:
 
@@ -43,7 +43,7 @@ ___
 
 ▸ `Static`**harving**(`__namedParameters`: { castCure: boolean = false; castReactive: boolean = false; cut: boolean ; dmgToStartHeal: number = 40; drinkCure: boolean = false; enemiesTypesToHarv: string[] ; fullHeal: boolean = false; trapDelay: number = 10000; wayPoints: any[] ; weapon: boolean = true }): void
 
-*Defined in [scripts/loot.ts:24](https://github.com/msviha/orionuo/blob/533e846/src/scripts/loot.ts#L24)*
+*Defined in [scripts/loot.ts:24](https://github.com/msviha/orionuo/blob/f416b2b/src/scripts/loot.ts#L24)*
 
 Scripts.Loot.harving
 stability beta
@@ -64,7 +64,7 @@ ___
 
 ▸ `Static`**healAndCureWhenHarving**(`dmgToStartHeal`: number, `fullHeal`: boolean, `castCure`: boolean, `drinkCure`: boolean): void
 
-*Defined in [scripts/loot.ts:141](https://github.com/msviha/orionuo/blob/533e846/src/scripts/loot.ts#L141)*
+*Defined in [scripts/loot.ts:141](https://github.com/msviha/orionuo/blob/f416b2b/src/scripts/loot.ts#L141)*
 
 Scripts.Loot.healAndCureWhenHarving
 stability beta
@@ -88,7 +88,7 @@ ___
 
 ▸ `Static`**lootAllFrom**(`delay`: number): void
 
-*Defined in [scripts/loot.ts:210](https://github.com/msviha/orionuo/blob/533e846/src/scripts/loot.ts#L210)*
+*Defined in [scripts/loot.ts:210](https://github.com/msviha/orionuo/blob/f416b2b/src/scripts/loot.ts#L210)*
 
 #### Parameters:
 
@@ -104,7 +104,7 @@ ___
 
 ▸ `Static`**lootCorpseId**(`id`: string): void
 
-*Defined in [scripts/loot.ts:121](https://github.com/msviha/orionuo/blob/533e846/src/scripts/loot.ts#L121)*
+*Defined in [scripts/loot.ts:121](https://github.com/msviha/orionuo/blob/f416b2b/src/scripts/loot.ts#L121)*
 
 Scripts.Loot.lootCorpseId
 stability beta
@@ -125,7 +125,7 @@ ___
 
 ▸ `Static`**lootCorpsesAround**(`cut?`: boolean, `weapon?`: boolean): void
 
-*Defined in [scripts/loot.ts:93](https://github.com/msviha/orionuo/blob/533e846/src/scripts/loot.ts#L93)*
+*Defined in [scripts/loot.ts:93](https://github.com/msviha/orionuo/blob/f416b2b/src/scripts/loot.ts#L93)*
 
 Scripts.Loot.lootCorpseId
 stability beta
@@ -147,7 +147,7 @@ ___
 
 ▸ `Static`**moveToNextWaypointWhenNeeded**(`wayPoints`: ICoordinates[], `enemySerialsAround`: string[], `currentWaypointIndex`: number, `trapDelay`: number): number
 
-*Defined in [scripts/loot.ts:169](https://github.com/msviha/orionuo/blob/533e846/src/scripts/loot.ts#L169)*
+*Defined in [scripts/loot.ts:169](https://github.com/msviha/orionuo/blob/f416b2b/src/scripts/loot.ts#L169)*
 
 Scripts.Loot.moveToNextWaypointWhenNeeded
 stability beta

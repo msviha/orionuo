@@ -30,7 +30,7 @@
 
 • `Const` **responseDelay**: 350 = 350
 
-*Defined in [globals.ts:1](https://github.com/msviha/orionuo/blob/533e846/src/globals.ts#L1)*
+*Defined in [globals.ts:1](https://github.com/msviha/orionuo/blob/f416b2b/src/globals.ts#L1)*
 
 ## Functions
 
@@ -38,7 +38,7 @@
 
 ▸ **Autostart**(): void
 
-*Defined in [scripts.ts:4](https://github.com/msviha/orionuo/blob/533e846/src/scripts.ts#L4)*
+*Defined in [scripts.ts:4](https://github.com/msviha/orionuo/blob/f416b2b/src/scripts.ts#L4)*
 
 Zaskrtnete si v Orion Assistantovi Autostart checkbox
 
@@ -50,11 +50,11 @@ ___
 
 ▸ **hiding**(): void
 
-*Defined in [scripts.ts:44](https://github.com/msviha/orionuo/blob/533e846/src/scripts.ts#L44)*
+*Defined in [scripts.ts:44](https://github.com/msviha/orionuo/blob/f416b2b/src/scripts.ts#L44)*
 
 Hidne hrace
 
-**`example`** [_hiding](../examples/lootAll.gif)
+**`example`** [_hiding](../examples/hiding.gif)
 
 **Returns:** void
 
@@ -64,7 +64,7 @@ ___
 
 ▸ **lootAll**(`delay`: number): void
 
-*Defined in [scripts.ts:37](https://github.com/msviha/orionuo/blob/533e846/src/scripts.ts#L37)*
+*Defined in [scripts.ts:37](https://github.com/msviha/orionuo/blob/f416b2b/src/scripts.ts#L37)*
 
 Zameri target a premisti z nej vse do backpacku
 
@@ -84,7 +84,7 @@ Name | Type | Default value | Description |
 
 ▪ `Const` **gameObject**: object
 
-*Defined in [globals.ts:2](https://github.com/msviha/orionuo/blob/533e846/src/globals.ts#L2)*
+*Defined in [globals.ts:2](https://github.com/msviha/orionuo/blob/f416b2b/src/globals.ts#L2)*
 
 #### Properties:
 

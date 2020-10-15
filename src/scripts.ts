@@ -39,7 +39,7 @@ function lootAll(delay = responseDelay) {
 }
 /**
  * Hidne hrace
- * @example [_hiding](../examples/lootAll.gif)
+ * @example [_hiding](../examples/hiding.gif)
  */
 function hiding() {
     Scripts.Common.hiding();
