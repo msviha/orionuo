@@ -1,4 +1,3 @@
-var responseDelay = 350;
 var DirectionEnum;
 (function (DirectionEnum) {
     DirectionEnum[DirectionEnum["West"] = 6] = "West";
@@ -40,47 +39,8 @@ var TimersEnum;
 (function (TimersEnum) {
     TimersEnum["drink"] = "drink";
 })(TimersEnum || (TimersEnum = {}));
-function isMyGameObject(val) {
-    return val && val.graphic;
-}
-function isMakeProps(val) {
-    var success = val && val.tool && val.menu;
-    !success && Scripts.Utils.log('tool and menu are mandatory properties', ColorEnum.red);
-    var outputCountType = typeof val.outputCount === 'undefined' || typeof val.outputCount === 'number';
-    success = success && outputCountType;
-    !success && Scripts.Utils.log('outputCount is not a number', ColorEnum.red);
-    if (val.refill) {
-        success = success && isRefillProps(val.refill);
-    }
-    return success;
-}
-function isRefillProps(val) {
-    var success = true;
-    if (val.resources) {
-        for (var _i = 0, _a = val.resources; _i < _a.length; _i++) {
-            var r = _a[_i];
-            success = success && isRefillItem(r);
-        }
-    }
-    if (val.crafting) {
-        for (var _b = 0, _c = val.crafting; _b < _c.length; _b++) {
-            var c = _c[_b];
-            success = success && isRefillItem(c);
-        }
-    }
-    return success;
-}
-function isRefillItem(val) {
-    var success = val && val.item && typeof val.count === 'number';
-    !success && Scripts.Utils.log('item should be defined and count should be a number', ColorEnum.red);
-    return success;
-}
-function isBagDestination(val) {
-    var success = val && typeof val.x === 'number' && typeof val.y === 'number';
-    !success && Scripts.Utils.log('x and y should be a number', ColorEnum.red);
-    return success;
-}
-var o = {
+var responseDelay = 350;
+var gameObject = {
     uncategorized: {
         emptyBottles: {
             graphic: '0x0F0E',
@@ -1027,7 +987,78 @@ function Autostart() {
     }
 }
 function lootAll(delay) {
+    if (delay === void 0) { delay = responseDelay; }
     Scripts.Loot.lootAllFrom(delay);
+}
+function hiding() {
+    Scripts.Common.hiding();
+}
+function light(shouldCast) {
+    if (shouldCast === void 0) { shouldCast = true; }
+    shouldCast = parseParam(shouldCast);
+    Scripts.Common.svetlo(shouldCast);
+}
+function kill() {
+    Scripts.PetCommander.kill();
+}
+function cast(spell, target) {
+    Scripts.Spells.cast(spell, target);
+}
+function castScroll(scroll, target, backupHeadCast) {
+    Scripts.Spells.castScroll(scroll, target, backupHeadCast);
+}
+function make(count, objectAsString, setInputs) {
+    if (setInputs === void 0) { setInputs = true; }
+    Scripts.Crafting.make(count, objectAsString, setInputs);
+}
+function isMyGameObject(val) {
+    return val && val.graphic;
+}
+function isMakeProps(val) {
+    var success = val && val.tool && val.menu;
+    !success && Scripts.Utils.log('tool and menu are mandatory properties', ColorEnum.red);
+    var outputCountType = typeof val.outputCount === 'undefined' || typeof val.outputCount === 'number';
+    success = success && outputCountType;
+    !success && Scripts.Utils.log('outputCount is not a number', ColorEnum.red);
+    if (val.refill) {
+        success = success && isRefillProps(val.refill);
+    }
+    return success;
+}
+function isRefillProps(val) {
+    var success = true;
+    if (val.resources) {
+        for (var _i = 0, _a = val.resources; _i < _a.length; _i++) {
+            var r = _a[_i];
+            success = success && isRefillItem(r);
+        }
+    }
+    if (val.crafting) {
+        for (var _b = 0, _c = val.crafting; _b < _c.length; _b++) {
+            var c = _c[_b];
+            success = success && isRefillItem(c);
+        }
+    }
+    return success;
+}
+function isRefillItem(val) {
+    var success = val && val.item && typeof val.count === 'number';
+    !success && Scripts.Utils.log('item should be defined and count should be a number', ColorEnum.red);
+    return success;
+}
+function isBagDestination(val) {
+    var success = val && typeof val.x === 'number' && typeof val.y === 'number';
+    !success && Scripts.Utils.log('x and y should be a number', ColorEnum.red);
+    return success;
+}
+function parseParam(param) {
+    if (param === 'true') {
+        return true;
+    }
+    else if (param === 'false') {
+        return false;
+    }
+    return param;
 }
 var Scripts;
 (function (Scripts) {
@@ -1035,12 +1066,12 @@ var Scripts;
         function Clean() {
         }
         Clean.cleanBag = function () {
-            Scripts.Clean.cleanObjectInBag(o.potions, 'potions');
-            Scripts.Clean.cleanObjectInBag(o.books, 'books');
-            Scripts.Clean.cleanObjectInBag(o.regy, 'regy');
-            Scripts.Clean.cleanObjectInBag(o.necroRegy, 'necroRegy');
-            Scripts.Clean.cleanObjectInBag(o.uncategorized, 'uncategorized');
-            Scripts.Clean.cleanObjectInBag(o.rings, 'rings');
+            Scripts.Clean.cleanObjectInBag(gameObject.potions, 'potions');
+            Scripts.Clean.cleanObjectInBag(gameObject.books, 'books');
+            Scripts.Clean.cleanObjectInBag(gameObject.regy, 'regy');
+            Scripts.Clean.cleanObjectInBag(gameObject.necroRegy, 'necroRegy');
+            Scripts.Clean.cleanObjectInBag(gameObject.uncategorized, 'uncategorized');
+            Scripts.Clean.cleanObjectInBag(gameObject.rings, 'rings');
         };
         Clean.cleanObjectInBag = function (object, objectName) {
             if (isMyGameObject(object)) {
@@ -1099,7 +1130,7 @@ var Scripts;
         }
         Common.svetlo = function (shouldCast) {
             if (shouldCast === void 0) { shouldCast = true; }
-            var ns = o.potions.ns;
+            var ns = gameObject.potions.ns;
             var kad = Orion.FindType(ns.kad.graphic, ns.kad.color);
             if (kad.length) {
                 Orion.WaitTargetObject('self');
@@ -1110,7 +1141,7 @@ var Scripts;
             }
         };
         Common.shrinkKad = function () {
-            var shrink = o.potions.ns;
+            var shrink = gameObject.potions.ns;
             var kad = Orion.FindType(shrink.kad.graphic, shrink.kad.color);
             if (kad.length) {
                 Orion.UseObject(kad[0]);
@@ -1143,12 +1174,12 @@ var Scripts;
         };
         Common.drinkPotion = function (potionName, switchWarModeWhenNeeded) {
             if (switchWarModeWhenNeeded === void 0) { switchWarModeWhenNeeded = true; }
-            var potion = o.potions[potionName];
+            var potion = gameObject.potions[potionName];
             if (!potion) {
                 Scripts.Utils.log("Definice potionu '" + potionName + "' neexistuje.", ColorEnum.red);
                 return;
             }
-            var emptyBottles = Orion.FindType(o.uncategorized.emptyBottles.graphic, o.uncategorized.emptyBottles.color);
+            var emptyBottles = Orion.FindType(gameObject.uncategorized.emptyBottles.graphic, gameObject.uncategorized.emptyBottles.color);
             var isEmptyBottle = emptyBottles.length > 0;
             var isPotion = Orion.Count(potion.graphic, potion.color) > 0;
             var kade = Orion.FindType(potion.kad.graphic, potion.kad.color);
@@ -1198,7 +1229,7 @@ var Scripts;
             while (!Orion.InJournal('You put') && !Orion.InJournal('You apply') && !Orion.InJournal('Chces vytvorit')) {
                 Orion.Wait(200);
             }
-            var bandages = Orion.FindType(o.uncategorized.bandy.graphic, o.uncategorized.bandy.color);
+            var bandages = Orion.FindType(gameObject.uncategorized.bandy.graphic, gameObject.uncategorized.bandy.color);
             if (!bandages.length) {
                 Orion.PlayWav(pathToNoBandagesWavFile);
             }
@@ -1207,7 +1238,7 @@ var Scripts;
             var _a;
             Orion.ClearJournal();
             var recepts = Orion.FindType('0x14ED', '0x06ED');
-            var mystics = __assign({}, o.mystics);
+            var mystics = __assign({}, gameObject.mystics);
             for (var _i = 0, recepts_1 = recepts; _i < recepts_1.length; _i++) {
                 var recept = recepts_1[_i];
                 Orion.UseObject(recept);
@@ -1317,7 +1348,7 @@ var Scripts;
         }
         Dress.resetStats = function () {
             var _a;
-            var tbObj = o.books.travelBook;
+            var tbObj = gameObject.books.travelBook;
             var travelBooks = Orion.FindType(tbObj.graphic, tbObj.color);
             if (!travelBooks.length) {
                 Scripts.Utils.log('NEMAS TRAVEL BOOK', ColorEnum.red);
@@ -1375,9 +1406,9 @@ var Scripts;
         function Jewelry() {
         }
         Jewelry.useRR = function () {
-            var rr = o.rings.rr;
-            var grr = o.rings.grr;
-            var grr2 = o.rings.grr2;
+            var rr = gameObject.rings.rr;
+            var grr = gameObject.rings.grr;
+            var grr2 = gameObject.rings.grr2;
             var rrSerials = Orion.FindType(rr.graphic, rr.color);
             var grrSerials = Orion.FindType(grr.graphic, grr.color);
             var grr2Serials = Orion.FindType(grr2.graphic, grr2.color);
@@ -1433,7 +1464,7 @@ var Scripts;
                 Orion.WaitForAddObject('unlockTarget', 60000);
                 targetSerial = Orion.FindObject('unlockTarget').Serial();
             }
-            var l = o.uncategorized.lockpicks;
+            var l = gameObject.uncategorized.lockpicks;
             var lockpicks = Orion.FindType(l.graphic, l.color);
             var unlocked = false;
             while (lockpicks.length && !unlocked) {
@@ -2057,7 +2088,7 @@ var Scripts;
             Scripts.Spells.cast('Summ. Creature', target);
         };
         Spells.castScroll = function (scroll, target, backupHeadCast) {
-            var s = o.scrolls['standard'][scroll];
+            var s = gameObject.scrolls['standard'][scroll];
             if (s.minMana > Player.Mana()) {
                 Scripts.Utils.playerPrint('!! MANA !!', ColorEnum.red);
                 return;
@@ -2085,7 +2116,7 @@ var Scripts;
             Orion.SetGlobal('lastScrollTimerLimit', s.timer);
         };
         Spells.castNecroScroll = function (scroll, target) {
-            var s = o.scrolls['necro'][scroll];
+            var s = gameObject.scrolls['necro'][scroll];
             if (s.minMana > Player.Mana()) {
                 Scripts.Utils.playerPrint('!! MANA !!', ColorEnum.red);
                 return;
@@ -2120,7 +2151,7 @@ var Scripts;
             if (quantity === void 0) { quantity = 0; }
             var menuName = 'Spell Circles';
             var spellCircle = "Spell Circle " + circle;
-            var blank = o.scrolls.blank;
+            var blank = gameObject.scrolls.blank;
             Scripts.Utils.playerPrint('Target your container with blank scrolls');
             var selection_1 = Orion.WaitForAddObject('blankScrollsContainer', 60000);
             Scripts.Utils.playerPrint('Target your container where to put finished scrolls');
@@ -2173,7 +2204,7 @@ var Scripts;
         Taming.useTrainingTamingStaff = function (targetSerial) {
             Orion.Disarm();
             Orion.Wait(500);
-            var staff = Orion.FindType(o.taming.staffs.training.graphic, o.taming.staffs.training.color);
+            var staff = Orion.FindType(gameObject.taming.staffs.training.graphic, gameObject.taming.staffs.training.color);
             if (!staff.length) {
                 Scripts.Utils.log('missing training taming staff', ColorEnum.red);
                 return false;
@@ -2479,7 +2510,7 @@ var Scripts;
         Utils.findMyDefinitionForGameObject = function (gameObject, obj) {
             var graphic = gameObject.Graphic().toUpperCase();
             var color = gameObject.Color().toUpperCase();
-            obj === undefined && (obj = o);
+            obj === undefined && (obj = gameObject);
             if (isMyGameObject(obj)) {
                 if (obj.graphic.toUpperCase() === graphic &&
                     (!obj.color && color === '0X0000' || obj.color.toUpperCase() === color)) {
@@ -2498,7 +2529,7 @@ var Scripts;
         Utils.parseObject = function (objectAsString) {
             var arr = objectAsString.split('.');
             arr.shift();
-            var item = o;
+            var item = gameObject;
             for (var _i = 0, arr_1 = arr; _i < arr_1.length; _i++) {
                 var i = arr_1[_i];
                 item = item[i];
@@ -2549,8 +2580,8 @@ var Scripts;
         function Wip() {
         }
         Wip.lavaBomba = function () {
-            var bomb = o.potions.lavabomb;
-            var emptyBottles = o.uncategorized.emptyBottles;
+            var bomb = gameObject.potions.lavabomb;
+            var emptyBottles = gameObject.uncategorized.emptyBottles;
             var bombKad = bomb.kad;
             var emptyBottlesSerials = Orion.FindType(emptyBottles.graphic, emptyBottles.color, 'backpack', 'item', 3, '-1', true);
             if (!emptyBottlesSerials.length) {
@@ -2624,7 +2655,7 @@ var Scripts;
             }
         };
         Wip.Travel = function () {
-            var travel = o.books.travel;
+            var travel = gameObject.books.travel;
             var travelSerials = Orion.FindType(travel.graphic, travel.color);
             if (!travelSerials.length) {
                 Scripts.Utils.log('NEMAS TRAVEL BOOK', ColorEnum.red);
@@ -2642,7 +2673,7 @@ var Scripts;
             }
         };
         Wip.Nbruna = function () {
-            var nbRuna = o.nonCategorized.nbRuna;
+            var nbRuna = gameObject.nonCategorized.nbRuna;
             var nbRunesSerials = Orion.FindType(nbRuna.graphic, nbRuna.color);
             if (!nbRunesSerials.length) {
                 Scripts.Utils.log('NEMAS NB RUNU', ColorEnum.red);

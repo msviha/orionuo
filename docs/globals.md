@@ -10,6 +10,15 @@
 
 * [Scripts](modules/scripts.md)
 
+### Enumerations
+
+* [ColorEnum](enums/colorenum.md)
+* [DirectionEnum](enums/directionenum.md)
+* [NecroScrollEnum](enums/necroscrollenum.md)
+* [ScrollEnum](enums/scrollenum.md)
+* [TargetEnum](enums/targetenum.md)
+* [TimersEnum](enums/timersenum.md)
+
 ### Variables
 
 * [responseDelay](globals.md#responsedelay)
@@ -17,8 +26,13 @@
 ### Functions
 
 * [Autostart](globals.md#autostart)
+* [cast](globals.md#cast)
+* [castScroll](globals.md#castscroll)
 * [hiding](globals.md#hiding)
+* [kill](globals.md#kill)
+* [light](globals.md#light)
 * [lootAll](globals.md#lootall)
+* [make](globals.md#make)
 
 ### Object literals
 
@@ -30,7 +44,7 @@
 
 • `Const` **responseDelay**: 350 = 350
 
-*Defined in [globals.ts:1](https://github.com/msviha/orionuo/blob/f416b2b/src/globals.ts#L1)*
+*Defined in [globals.ts:1](https://github.com/msviha/orionuo/blob/3c173cb/src/globals.ts#L1)*
 
 ## Functions
 
@@ -38,9 +52,56 @@
 
 ▸ **Autostart**(): void
 
-*Defined in [scripts.ts:4](https://github.com/msviha/orionuo/blob/f416b2b/src/scripts.ts#L4)*
+*Defined in [scripts.ts:4](https://github.com/msviha/orionuo/blob/3c173cb/src/scripts.ts#L4)*
 
 Zaskrtnete si v Orion Assistantovi Autostart checkbox
+
+**Returns:** void
+
+___
+
+### cast
+
+▸ **cast**(`spell`: string, `target?`: [TargetEnum](enums/targetenum.md)): void
+
+*Defined in [scripts.ts:73](https://github.com/msviha/orionuo/blob/3c173cb/src/scripts.ts#L73)*
+
+Kouzli na pozadovany target, pokud je uveden
+
+**`example`** external code `cast("Harm", "lastattack");`
+
+**`example`** external code `cast("Magic Reflection", "self");`
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`spell` | string |
+`target?` | [TargetEnum](enums/targetenum.md) |
+
+**Returns:** void
+
+___
+
+### castScroll
+
+▸ **castScroll**(`scroll`: [ScrollEnum](enums/scrollenum.md), `target?`: [TargetEnum](enums/targetenum.md), `backupHeadCast?`: string): void
+
+*Defined in [scripts.ts:82](https://github.com/msviha/orionuo/blob/3c173cb/src/scripts.ts#L82)*
+
+Kouzli svitek na pozadovany target, pokud je uveden, pokud neni timer na svitek zakouzli z hlavy backupHeadCast
+
+**`example`** external code `castScroll("ijs", "self", "Magic Reflection");`
+
+**`example`** external code `astScroll("pog", "lastattack");`
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`scroll` | [ScrollEnum](enums/scrollenum.md) |
+`target?` | [TargetEnum](enums/targetenum.md) |
+`backupHeadCast?` | string |
 
 **Returns:** void
 
@@ -50,7 +111,7 @@ ___
 
 ▸ **hiding**(): void
 
-*Defined in [scripts.ts:44](https://github.com/msviha/orionuo/blob/f416b2b/src/scripts.ts#L44)*
+*Defined in [scripts.ts:45](https://github.com/msviha/orionuo/blob/3c173cb/src/scripts.ts#L45)*
 
 Hidne hrace
 
@@ -60,15 +121,51 @@ Hidne hrace
 
 ___
 
+### kill
+
+▸ **kill**(): void
+
+*Defined in [scripts.ts:64](https://github.com/msviha/orionuo/blob/3c173cb/src/scripts.ts#L64)*
+
+Prejmenuje vsechny summony a posle na lastattack
+
+**`example`** `_kill`
+
+**Returns:** void
+
+___
+
+### light
+
+▸ **light**(`shouldCast`: boolean): void
+
+*Defined in [scripts.ts:55](https://github.com/msviha/orionuo/blob/3c173cb/src/scripts.ts#L55)*
+
+Hodi svetlo z kade, pokud kad neni, tak hodi z hlavy (pokud za to nenapisete false)
+
+**`example`** `_light`
+
+**`example`** `_light false`
+
+#### Parameters:
+
+Name | Type | Default value | Description |
+------ | ------ | ------ | ------ |
+`shouldCast` | boolean | true | default je true, takze pokud nemas kad tak zakouzli svetlo |
+
+**Returns:** void
+
+___
+
 ### lootAll
 
 ▸ **lootAll**(`delay`: number): void
 
-*Defined in [scripts.ts:37](https://github.com/msviha/orionuo/blob/f416b2b/src/scripts.ts#L37)*
+*Defined in [scripts.ts:37](https://github.com/msviha/orionuo/blob/3c173cb/src/scripts.ts#L37)*
 
 Zameri target a premisti z nej vse do backpacku
 
-**`example`** [_lootAll 2000](../examples/lootAll.gif)
+**`example`** `_lootAll 2000`
 
 #### Parameters:
 
@@ -78,13 +175,37 @@ Name | Type | Default value | Description |
 
 **Returns:** void
 
+___
+
+### make
+
+▸ **make**(`count`: number, `objectAsString`: string, `setInputs`: boolean): void
+
+*Defined in [scripts.ts:92](https://github.com/msviha/orionuo/blob/3c173cb/src/scripts.ts#L92)*
+
+Vyrabi s craftem
+
+**`example`** external code `make(100, 'gameObject.crafting.carpentry.miscellaneous.krabiceKadi');`
+
+**`example`** external code `make(70, 'gameObject.crafting.tinkering.wires.shadow');`
+
+#### Parameters:
+
+Name | Type | Default value | Description |
+------ | ------ | ------ | ------ |
+`count` | number | - | - |
+`objectAsString` | string | - | zde je potreba nadefinovat cestu k itemu skrze [gameObject](./globals.md#gameObject) |
+`setInputs` | boolean | true | - |
+
+**Returns:** void
+
 ## Object literals
 
 ### gameObject
 
 ▪ `Const` **gameObject**: object
 
-*Defined in [globals.ts:2](https://github.com/msviha/orionuo/blob/f416b2b/src/globals.ts#L2)*
+*Defined in [globals.ts:2](https://github.com/msviha/orionuo/blob/3c173cb/src/globals.ts#L2)*
 
 #### Properties:
 

@@ -37,17 +37,17 @@ mineAround() kope okolo sebe
 
 ### getNextDirectionsArray
 
-▸ `Static`**getNextDirectionsArray**(`comesFrom`: DirectionEnum): DirectionEnum[]
+▸ `Static`**getNextDirectionsArray**(`comesFrom`: [DirectionEnum](../enums/directionenum.md)): [DirectionEnum](../enums/directionenum.md)[]
 
-*Defined in [scripts/mining.ts:107](https://github.com/msviha/orionuo/blob/f416b2b/src/scripts/mining.ts#L107)*
+*Defined in [scripts/mining.ts:107](https://github.com/msviha/orionuo/blob/3c173cb/src/scripts/mining.ts#L107)*
 
 #### Parameters:
 
 Name | Type |
 ------ | ------ |
-`comesFrom` | DirectionEnum |
+`comesFrom` | [DirectionEnum](../enums/directionenum.md) |
 
-**Returns:** DirectionEnum[]
+**Returns:** [DirectionEnum](../enums/directionenum.md)[]
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 ▸ `Static`**kopaniFire**(`direction`: number, `fullMine`: boolean): void
 
-*Defined in [scripts/mining.ts:291](https://github.com/msviha/orionuo/blob/f416b2b/src/scripts/mining.ts#L291)*
+*Defined in [scripts/mining.ts:291](https://github.com/msviha/orionuo/blob/3c173cb/src/scripts/mining.ts#L291)*
 
 #### Parameters:
 
@@ -72,7 +72,7 @@ ___
 
 ▸ `Static`**mineAround**(): void
 
-*Defined in [scripts/mining.ts:254](https://github.com/msviha/orionuo/blob/f416b2b/src/scripts/mining.ts#L254)*
+*Defined in [scripts/mining.ts:254](https://github.com/msviha/orionuo/blob/3c173cb/src/scripts/mining.ts#L254)*
 
 **Returns:** void
 
@@ -82,7 +82,7 @@ ___
 
 ▸ `Static`**mining**(): void
 
-*Defined in [scripts/mining.ts:15](https://github.com/msviha/orionuo/blob/f416b2b/src/scripts/mining.ts#L15)*
+*Defined in [scripts/mining.ts:15](https://github.com/msviha/orionuo/blob/3c173cb/src/scripts/mining.ts#L15)*
 
 **Returns:** void
 
@@ -90,15 +90,15 @@ ___
 
 ### moveDirection
 
-▸ `Static`**moveDirection**(`direction`: DirectionEnum, `visitedPositions`: ICoordinates[]): boolean
+▸ `Static`**moveDirection**(`direction`: [DirectionEnum](../enums/directionenum.md), `visitedPositions`: ICoordinates[]): boolean
 
-*Defined in [scripts/mining.ts:61](https://github.com/msviha/orionuo/blob/f416b2b/src/scripts/mining.ts#L61)*
+*Defined in [scripts/mining.ts:61](https://github.com/msviha/orionuo/blob/3c173cb/src/scripts/mining.ts#L61)*
 
 #### Parameters:
 
 Name | Type |
 ------ | ------ |
-`direction` | DirectionEnum |
+`direction` | [DirectionEnum](../enums/directionenum.md) |
 `visitedPositions` | ICoordinates[] |
 
 **Returns:** boolean
@@ -109,7 +109,7 @@ ___
 
 ▸ `Static`**pickOresAround**(): void
 
-*Defined in [scripts/mining.ts:228](https://github.com/msviha/orionuo/blob/f416b2b/src/scripts/mining.ts#L228)*
+*Defined in [scripts/mining.ts:228](https://github.com/msviha/orionuo/blob/3c173cb/src/scripts/mining.ts#L228)*
 
 **Returns:** void
 
@@ -117,15 +117,15 @@ ___
 
 ### recurseMine
 
-▸ `Static`**recurseMine**(`comesFrom`: DirectionEnum, `visitedCoordinates`: ICoordinates[]): void
+▸ `Static`**recurseMine**(`comesFrom`: [DirectionEnum](../enums/directionenum.md), `visitedCoordinates`: ICoordinates[]): void
 
-*Defined in [scripts/mining.ts:29](https://github.com/msviha/orionuo/blob/f416b2b/src/scripts/mining.ts#L29)*
+*Defined in [scripts/mining.ts:29](https://github.com/msviha/orionuo/blob/3c173cb/src/scripts/mining.ts#L29)*
 
 #### Parameters:
 
 Name | Type |
 ------ | ------ |
-`comesFrom` | DirectionEnum |
+`comesFrom` | [DirectionEnum](../enums/directionenum.md) |
 `visitedCoordinates` | ICoordinates[] |
 
 **Returns:** void
@@ -136,7 +136,7 @@ ___
 
 ▸ `Static`**rockMine**(): boolean
 
-*Defined in [scripts/mining.ts:120](https://github.com/msviha/orionuo/blob/f416b2b/src/scripts/mining.ts#L120)*
+*Defined in [scripts/mining.ts:120](https://github.com/msviha/orionuo/blob/3c173cb/src/scripts/mining.ts#L120)*
 
 **Returns:** boolean
 
@@ -146,7 +146,7 @@ ___
 
 ▸ `Static`**saveCurrentPositionToArray**(`arr`: ICoordinates[]): void
 
-*Defined in [scripts/mining.ts:25](https://github.com/msviha/orionuo/blob/f416b2b/src/scripts/mining.ts#L25)*
+*Defined in [scripts/mining.ts:25](https://github.com/msviha/orionuo/blob/3c173cb/src/scripts/mining.ts#L25)*
 
 #### Parameters:
 
@@ -162,7 +162,7 @@ ___
 
 ▸ `Static`**wasVisited**(`currentPosition`: ICoordinates, `visitedPositions`: ICoordinates[]): boolean
 
-*Defined in [scripts/mining.ts:98](https://github.com/msviha/orionuo/blob/f416b2b/src/scripts/mining.ts#L98)*
+*Defined in [scripts/mining.ts:98](https://github.com/msviha/orionuo/blob/3c173cb/src/scripts/mining.ts#L98)*
 
 #### Parameters:
 
