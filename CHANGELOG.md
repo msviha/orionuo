@@ -5,9 +5,10 @@
 - `main.ts` is sliced to several files.
 - main `o` object has been renamed to `gameObject`
 ### features
+- `scripts.ts` has been created for the shortcuts to `Scripts` namespace
 - added `mysticCounter` function to `Common` package
 - added `gmMortar` function
-- `scripts.ts` has been created for the shortcuts to `Scripts` namespace
+- added `hideAll` function
 - `kill` now renames summons just once
 ### fixes
 - fixed `kill` with new version of Orion

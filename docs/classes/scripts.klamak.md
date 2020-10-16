@@ -20,7 +20,7 @@
 
 ▸ `Static`**next**(): void
 
-*Defined in [scripts/klamak.ts:12](https://github.com/msviha/orionuo/blob/60ea7a5/src/scripts/klamak.ts#L12)*
+*Defined in [scripts/klamak.ts:12](https://github.com/msviha/orionuo/blob/43b8a75/src/scripts/klamak.ts#L12)*
 
 Scripts.Klamak.next
 stability beta

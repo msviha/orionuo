@@ -102,3 +102,12 @@ function make(count:number, objectAsString:string, setInputs = true) {
 function gmMortar(potionName:PotionsEnum) {
     Scripts.Common.gmMortar(potionName);
 }
+
+/**
+ * Prepina mezi dvema stavy - hiduje hrace v okruhu 15ti policek a nasledne dava resync/resend. Pouziti vyhradne pro dungovani (hazim zed a prekazi mi neco v zamereni policka)
+ * @example in client `_hideAll`
+ * @example in client `hideAll();`
+ */
+function hideAll() {
+    Scripts.Common.hideAll();
+}

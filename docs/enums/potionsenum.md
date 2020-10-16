@@ -24,7 +24,7 @@
 
 •  **gc**:  = "gc"
 
-*Defined in [enums.ts:37](https://github.com/msviha/orionuo/blob/60ea7a5/src/enums.ts#L37)*
+*Defined in [enums.ts:37](https://github.com/msviha/orionuo/blob/43b8a75/src/enums.ts#L37)*
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 •  **gh**:  = "gh"
 
-*Defined in [enums.ts:34](https://github.com/msviha/orionuo/blob/60ea7a5/src/enums.ts#L34)*
+*Defined in [enums.ts:34](https://github.com/msviha/orionuo/blob/43b8a75/src/enums.ts#L34)*
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 •  **gs**:  = "gs"
 
-*Defined in [enums.ts:35](https://github.com/msviha/orionuo/blob/60ea7a5/src/enums.ts#L35)*
+*Defined in [enums.ts:35](https://github.com/msviha/orionuo/blob/43b8a75/src/enums.ts#L35)*
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 •  **lavabomb**:  = "lavabomb"
 
-*Defined in [enums.ts:41](https://github.com/msviha/orionuo/blob/60ea7a5/src/enums.ts#L41)*
+*Defined in [enums.ts:41](https://github.com/msviha/orionuo/blob/43b8a75/src/enums.ts#L41)*
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 •  **lc**:  = "lc"
 
-*Defined in [enums.ts:38](https://github.com/msviha/orionuo/blob/60ea7a5/src/enums.ts#L38)*
+*Defined in [enums.ts:38](https://github.com/msviha/orionuo/blob/43b8a75/src/enums.ts#L38)*
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 •  **ns**:  = "ns"
 
-*Defined in [enums.ts:39](https://github.com/msviha/orionuo/blob/60ea7a5/src/enums.ts#L39)*
+*Defined in [enums.ts:39](https://github.com/msviha/orionuo/blob/43b8a75/src/enums.ts#L39)*
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 •  **shrink**:  = "shrink"
 
-*Defined in [enums.ts:40](https://github.com/msviha/orionuo/blob/60ea7a5/src/enums.ts#L40)*
+*Defined in [enums.ts:40](https://github.com/msviha/orionuo/blob/43b8a75/src/enums.ts#L40)*
 
 ___
 
@@ -80,7 +80,7 @@ ___
 
 •  **tmr**:  = "tmr"
 
-*Defined in [enums.ts:33](https://github.com/msviha/orionuo/blob/60ea7a5/src/enums.ts#L33)*
+*Defined in [enums.ts:33](https://github.com/msviha/orionuo/blob/43b8a75/src/enums.ts#L33)*
 
 ___
 
@@ -88,4 +88,4 @@ ___
 
 •  **tr**:  = "tr"
 
-*Defined in [enums.ts:36](https://github.com/msviha/orionuo/blob/60ea7a5/src/enums.ts#L36)*
+*Defined in [enums.ts:36](https://github.com/msviha/orionuo/blob/43b8a75/src/enums.ts#L36)*

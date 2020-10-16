@@ -23,7 +23,7 @@ scripty na pvp a targetovani
 
 ▸ `Static`**TargetNext**(`reverse`: boolean): void
 
-*Defined in [scripts/targeting.ts:13](https://github.com/msviha/orionuo/blob/60ea7a5/src/scripts/targeting.ts#L13)*
+*Defined in [scripts/targeting.ts:13](https://github.com/msviha/orionuo/blob/43b8a75/src/scripts/targeting.ts#L13)*
 
 #### Parameters:
 

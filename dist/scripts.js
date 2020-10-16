@@ -1037,6 +1037,9 @@ function make(count, objectAsString, setInputs) {
 function gmMortar(potionName) {
     Scripts.Common.gmMortar(potionName);
 }
+function hideAll() {
+    Scripts.Common.hideAll();
+}
 function isMyGameObject(val) {
     return val && val.graphic;
 }
@@ -1349,6 +1352,28 @@ var Scripts;
                 var state_1 = _loop_1();
                 if (typeof state_1 === "object")
                     return state_1.value;
+            }
+        };
+        Common.hideAll = function () {
+            Orion.Timer('resendTime') === -1 && Orion.SetTimer('resendTime', 10000);
+            !Orion.GetGlobal('hideAll') && Orion.SetGlobal('hideAll', '0');
+            var hidden = !!parseInt(Orion.GetGlobal('hideAll'));
+            var timer = Orion.Timer('resendTime');
+            if (!hidden) {
+                var mobiles = Orion.FindType('any', "any", "ground", 'mobile', 15);
+                for (var _i = 0, mobiles_1 = mobiles; _i < mobiles_1.length; _i++) {
+                    var m = mobiles_1[_i];
+                    Orion.Hide(m);
+                }
+                Orion.SetGlobal('hideAll', '1');
+            }
+            else if (timer >= 10000) {
+                Scripts.Utils.resetTimer('resendTime');
+                Orion.Resend();
+                Orion.SetGlobal('hideAll', '0');
+            }
+            else {
+                Scripts.Utils.log("jeste nemuzes dat znovu resync/resend, pockej jeste " + (10000 - timer) / 1000 + " sekund(y)");
             }
         };
         return Common;
