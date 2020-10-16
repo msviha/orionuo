@@ -2122,6 +2122,8 @@ var Scripts;
         function PetCommander() {
         }
         PetCommander.kill = function () {
+            !Orion.GetGlobal('myMonstersKill') && Orion.SetGlobal('myMonstersKill', '[]');
+            var globalMyMonsters = JSON.parse(Orion.GetGlobal('myMonstersKill'));
             var namesPool = ['Andres', 'Blanca', 'Carlos', 'Dolores', 'Enrique', 'Felicia', 'Guillermo', 'Hilda', 'Ignacio', 'Jimena', 'Kevin', 'Linda', 'Marty', 'Nora', 'Olaf', 'Damrey',
                 'Haikui', 'Kirogi', 'Tembin', 'Bolaven', 'Sanba', 'Jelawat', 'Ewiniar', 'Malaksi', 'Gaemi', 'Prapiroon', 'Maria', 'SonTinh', 'Bopha', 'Wukong', 'Sonamu',
                 'Shanshan', 'Yagi', 'Leepi', 'Bebinca', 'Rumbia', 'Soulik', 'Cimaron', 'Jebi', 'Mangkhut', 'Utor', 'Trami', 'Yutu', 'Toraji', 'Usagi', 'Pabuk', 'Wutip', 'Sepat',
@@ -2141,27 +2143,38 @@ var Scripts;
                 'Doksuri', 'Khanun', 'Vicente', 'Saola'
             ];
             var monstersAlive = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "fast|live", 13, "blue|gray|criminal|orange|red");
-            Orion.Print(-1, 'findType done');
+            var myMonsters = [];
             while (monstersAlive.length) {
                 var monsterSerial = monstersAlive[0];
                 var isMyMonster = Orion.FindObject(monsterSerial).CanChangeName();
                 if (isMyMonster) {
-                    Orion.Print(-1, monsterSerial);
-                    var random = Math.floor(Math.random() * (namesPool.length));
-                    var newName = namesPool[random];
-                    Orion.RenameMount(monstersAlive[0], newName);
-                    Orion.Wait(responseDelay);
-                    namesPool.splice(random, 1);
+                    var name_1 = '';
+                    var isAlreadyRenamed = false;
+                    for (var _i = 0, globalMyMonsters_1 = globalMyMonsters; _i < globalMyMonsters_1.length; _i++) {
+                        var m = globalMyMonsters_1[_i];
+                        isAlreadyRenamed = m.serial === monsterSerial;
+                        if (isAlreadyRenamed) {
+                            name_1 = m.name;
+                            break;
+                        }
+                    }
+                    if (!isAlreadyRenamed) {
+                        var random = Math.floor(Math.random() * (namesPool.length));
+                        name_1 = namesPool[random];
+                        Orion.RenameMount(monsterSerial, name_1);
+                        Orion.Wait(50);
+                        namesPool.splice(random, 1);
+                    }
+                    myMonsters.push({ serial: monsterSerial, name: name_1 });
                     Orion.WaitTargetObject(Orion.ClientLastAttack());
-                    Orion.Say(newName + " kill");
+                    Orion.Say(name_1 + " kill");
                     Orion.WaitForTarget(1000);
                     Scripts.Utils.waitWhileTargeting();
                 }
                 Orion.Ignore(monsterSerial);
-                Orion.Print(-1, 'ignored ' + monsterSerial);
                 monstersAlive = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "near|live", 13, "blue|gray|criminal|orange|red");
-                Orion.Print(-1, 'findType done');
             }
+            Orion.SetGlobal('myMonstersKill', JSON.stringify(myMonsters));
             Orion.IgnoreReset();
         };
         return PetCommander;

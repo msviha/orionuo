@@ -8,6 +8,9 @@
 - added `mysticCounter` function to `Common` package
 - added `gmMortar` function
 - `scripts.ts` has been created for the shortcuts to `Scripts` namespace
+- `kill` now renames summons just once
+### fixes
+- fixed `kill` with new version of Orion
 ### documentation
 - added md documentation 
 

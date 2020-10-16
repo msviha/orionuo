@@ -46,7 +46,7 @@
 
 • `Const` **responseDelay**: 350 = 350
 
-*Defined in [globals.ts:1](https://github.com/msviha/orionuo/blob/4da48c7/src/globals.ts#L1)*
+*Defined in [globals.ts:1](https://github.com/msviha/orionuo/blob/60ea7a5/src/globals.ts#L1)*
 
 ## Functions
 
@@ -54,7 +54,7 @@
 
 ▸ **Autostart**(): void
 
-*Defined in [scripts.ts:4](https://github.com/msviha/orionuo/blob/4da48c7/src/scripts.ts#L4)*
+*Defined in [scripts.ts:4](https://github.com/msviha/orionuo/blob/60ea7a5/src/scripts.ts#L4)*
 
 Zaskrtnete si v Orion Assistantovi Autostart checkbox
 
@@ -66,7 +66,7 @@ ___
 
 ▸ **cast**(`spell`: string, `target?`: [TargetEnum](enums/targetenum.md)): void
 
-*Defined in [scripts.ts:73](https://github.com/msviha/orionuo/blob/4da48c7/src/scripts.ts#L73)*
+*Defined in [scripts.ts:73](https://github.com/msviha/orionuo/blob/60ea7a5/src/scripts.ts#L73)*
 
 Kouzli na pozadovany target, pokud je uveden
 
@@ -89,7 +89,7 @@ ___
 
 ▸ **castScroll**(`scroll`: [ScrollEnum](enums/scrollenum.md), `target?`: [TargetEnum](enums/targetenum.md), `backupHeadCast?`: string): void
 
-*Defined in [scripts.ts:82](https://github.com/msviha/orionuo/blob/4da48c7/src/scripts.ts#L82)*
+*Defined in [scripts.ts:82](https://github.com/msviha/orionuo/blob/60ea7a5/src/scripts.ts#L82)*
 
 Kouzli svitek na pozadovany target, pokud je uveden, pokud neni timer na svitek zakouzli z hlavy backupHeadCast
 
@@ -113,7 +113,7 @@ ___
 
 ▸ **gmMortar**(`potionName`: [PotionsEnum](enums/potionsenum.md)): void
 
-*Defined in [scripts.ts:102](https://github.com/msviha/orionuo/blob/4da48c7/src/scripts.ts#L102)*
+*Defined in [scripts.ts:102](https://github.com/msviha/orionuo/blob/60ea7a5/src/scripts.ts#L102)*
 
 Micha na gm mortaru
 
@@ -135,7 +135,7 @@ ___
 
 ▸ **hiding**(): void
 
-*Defined in [scripts.ts:45](https://github.com/msviha/orionuo/blob/4da48c7/src/scripts.ts#L45)*
+*Defined in [scripts.ts:45](https://github.com/msviha/orionuo/blob/60ea7a5/src/scripts.ts#L45)*
 
 Hidne hrace
 
@@ -149,7 +149,7 @@ ___
 
 ▸ **kill**(): void
 
-*Defined in [scripts.ts:64](https://github.com/msviha/orionuo/blob/4da48c7/src/scripts.ts#L64)*
+*Defined in [scripts.ts:64](https://github.com/msviha/orionuo/blob/60ea7a5/src/scripts.ts#L64)*
 
 Prejmenuje vsechny summony a posle na lastattack
 
@@ -163,7 +163,7 @@ ___
 
 ▸ **light**(`shouldCast`: boolean): void
 
-*Defined in [scripts.ts:55](https://github.com/msviha/orionuo/blob/4da48c7/src/scripts.ts#L55)*
+*Defined in [scripts.ts:55](https://github.com/msviha/orionuo/blob/60ea7a5/src/scripts.ts#L55)*
 
 Hodi svetlo z kade, pokud kad neni, tak hodi z hlavy (pokud za to nenapisete false)
 
@@ -185,7 +185,7 @@ ___
 
 ▸ **lootAll**(`delay`: number): void
 
-*Defined in [scripts.ts:37](https://github.com/msviha/orionuo/blob/4da48c7/src/scripts.ts#L37)*
+*Defined in [scripts.ts:37](https://github.com/msviha/orionuo/blob/60ea7a5/src/scripts.ts#L37)*
 
 Zameri target a premisti z nej vse do backpacku
 
@@ -205,7 +205,7 @@ ___
 
 ▸ **make**(`count`: number, `objectAsString`: string, `setInputs`: boolean): void
 
-*Defined in [scripts.ts:92](https://github.com/msviha/orionuo/blob/4da48c7/src/scripts.ts#L92)*
+*Defined in [scripts.ts:92](https://github.com/msviha/orionuo/blob/60ea7a5/src/scripts.ts#L92)*
 
 Vyrabi s craftem
 
@@ -229,7 +229,7 @@ Name | Type | Default value | Description |
 
 ▪ `Const` **gameObject**: object
 
-*Defined in [globals.ts:2](https://github.com/msviha/orionuo/blob/4da48c7/src/globals.ts#L2)*
+*Defined in [globals.ts:2](https://github.com/msviha/orionuo/blob/60ea7a5/src/globals.ts#L2)*
 
 #### Properties:
 
