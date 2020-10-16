@@ -185,5 +185,65 @@ namespace Scripts {
             }
             Orion.Print(-1 , '*****************');
         }
+
+        static gmMortar(potionName:PotionsEnum) {
+            if (!isPotionsEnum(potionName)) {
+                return;
+            }
+            const potion = gameObject.potions[potionName];
+            const potionKade = Orion.FindType(potion.kad.graphic, potion.kad.color)
+            const isKad = potion.kad && potionKade.length || false;
+            if (!isKad) {
+                Scripts.Utils.log('Nemas kad s potiony', ColorEnum.red);
+                return;
+            }
+            const isEmptyKad = Orion.FindType(gameObject.uncategorized.emptyKad.graphic, gameObject.uncategorized.emptyKad.color);
+            if (!isEmptyKad) {
+                Scripts.Utils.log('Nemas praznou kad', ColorEnum.red);
+                return;
+            }
+            const emptyBottles = Orion.FindType(gameObject.uncategorized.emptyBottles.graphic, gameObject.uncategorized.emptyBottles.color);
+            const isEmptyBottle = emptyBottles.length > 0;
+            if (!isEmptyKad) {
+                Scripts.Utils.log('Nemas praznou lahvicku', ColorEnum.red);
+                return;
+            }
+
+            Scripts.Utils.playerPrint(`Target gmmortar for making "${potionName}"`);
+            Orion.WaitForAddObject('gmMortar', 60000);
+
+            while (true) {
+                Orion.ClearJournal();
+
+                const cilovaKadSerial = potionKade[0];
+                const kade = Orion.FindType(gameObject.uncategorized.emptyKad.graphic);
+
+                Scripts.Utils.selectMenu('Vyber typ potionu', [potion.gmMortarSelection]);
+                Orion.UseObject('gmMortar');
+                Scripts.Utils.waitWhileSomethingInJournal(['You vylil', 'Musis mit']);
+                if (Orion.InJournal('Musis mit')) {
+                    Scripts.Utils.log('Dosly regy', ColorEnum.red);
+                    return;
+                }
+
+                const noveKade = Orion.FindType(gameObject.uncategorized.emptyKad.graphic);
+                const michnutaKadSerial = noveKade.filter(i => kade.indexOf(i) === -1)[0];
+
+                Orion.ClearJournal();
+                Orion.WaitTargetObject(cilovaKadSerial);
+                Orion.UseObject(michnutaKadSerial);
+                Scripts.Utils.waitWhileSomethingInJournal(['Prelil jsi']);
+
+                Orion.ClearJournal();
+                Orion.WaitTargetType(gameObject.uncategorized.emptyBottles.graphic, gameObject.uncategorized.emptyBottles.color);
+                Orion.UseObject(michnutaKadSerial);
+                Scripts.Utils.waitWhileSomethingInJournal(['You put']);
+
+                Orion.ClearJournal();
+                Orion.WaitTargetType(potion.graphic, potion.color);
+                Orion.UseObject(cilovaKadSerial);
+                Scripts.Utils.waitWhileSomethingInJournal(['You put']);
+            }
+        }
     }
 }

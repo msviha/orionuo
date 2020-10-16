@@ -28,15 +28,18 @@ namespace Scripts {
             ];
 
             let monstersAlive = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "fast|live", 13, "blue|gray|criminal|orange|red");
+            Orion.Print(-1, 'findType done');
 
             while (monstersAlive.length) {
                 const monsterSerial = monstersAlive[0];
                 const isMyMonster = Orion.FindObject(monsterSerial).CanChangeName();
 
                 if (isMyMonster) {
+                    Orion.Print(-1, monsterSerial);
                     const random = Math.floor(Math.random() * (namesPool.length));
                     const newName = namesPool[random];
                     Orion.RenameMount(monstersAlive[0], newName);
+                    Orion.Wait(responseDelay);
                     namesPool.splice(random, 1);
 
                     Orion.WaitTargetObject(Orion.ClientLastAttack());
@@ -46,7 +49,9 @@ namespace Scripts {
                 }
 
                 Orion.Ignore(monsterSerial);
-                monstersAlive = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "fast|live", 13, "blue|gray|criminal|orange|red");
+                Orion.Print(-1, 'ignored ' + monsterSerial);
+                monstersAlive = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "near|live", 13, "blue|gray|criminal|orange|red");
+                Orion.Print(-1, 'findType done');
             }
 
             Orion.IgnoreReset();

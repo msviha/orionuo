@@ -6,6 +6,7 @@
 - main `o` object has been renamed to `gameObject`
 ### features
 - added `mysticCounter` function to `Common` package
+- added `gmMortar` function
 - `scripts.ts` has been created for the shortcuts to `Scripts` namespace
 ### documentation
 - added md documentation 

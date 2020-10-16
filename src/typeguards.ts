@@ -37,6 +37,15 @@ function isRefillItem(val:any):val is IRefillItem {
     return success;
 }
 
+function isPotionsEnum(val:any):val is PotionsEnum {
+    let success = val && PotionsEnum[val] !== undefined;
+    if (!success) {
+        Scripts.Utils.log(`Definice potionu '${val}' neexistuje.`, ColorEnum.red);
+        Scripts.Utils.log(`pouzij definici z PotionsEnum "${JSON.stringify(PotionsEnum)}"`);
+    }
+    return success;
+}
+
 function isBagDestination(val:any):val is IBagDestination {
     let success = val && typeof val.x === 'number' && typeof val.y === 'number';
     !success && Scripts.Utils.log('x and y should be a number', ColorEnum.red);

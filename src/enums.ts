@@ -29,6 +29,18 @@ enum ScrollEnum {
     ivm = 'ivm'
 }
 
+enum PotionsEnum {
+    tmr = 'tmr',
+    gh = 'gh',
+    gs = 'gs',
+    tr = 'tr',
+    gc = 'gc',
+    lc = 'lc',
+    ns = 'ns',
+    shrink = 'shrink',
+    lavabomb = 'lavabomb'
+}
+
 enum NecroScrollEnum {
     vfp = 'vfp',
     kalnox = 'kalnox',

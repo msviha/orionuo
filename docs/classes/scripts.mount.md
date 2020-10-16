@@ -21,7 +21,7 @@
 
 ▸ `Static`**addMount**(): void
 
-*Defined in [scripts/mount.ts:29](https://github.com/msviha/orionuo/blob/1042e5b/src/scripts/mount.ts#L29)*
+*Defined in [scripts/mount.ts:29](https://github.com/msviha/orionuo/blob/4da48c7/src/scripts/mount.ts#L29)*
 
 Scripts.Mount.addMount
 stability released
@@ -36,7 +36,7 @@ ___
 
 ▸ `Static`**mountAndDismount**(): void
 
-*Defined in [scripts/mount.ts:10](https://github.com/msviha/orionuo/blob/1042e5b/src/scripts/mount.ts#L10)*
+*Defined in [scripts/mount.ts:10](https://github.com/msviha/orionuo/blob/4da48c7/src/scripts/mount.ts#L10)*
 
 Scripts.Mount.mountAndDismount
 stability released

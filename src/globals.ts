@@ -5,6 +5,10 @@ const gameObject:any = {
             graphic: '0x0F0E',
             color: '0x0000'
         },
+        emptyKad: {
+            graphic: '0x1843',
+            color: '0x0000'
+        },
         bandy: {
             graphic: '0x0E21',
             color: '0x0000',
@@ -452,7 +456,8 @@ const gameObject:any = {
             kad: {
                 graphic: '0x1843',
                 color: '0x0003'
-            }
+            },
+            gmMortarSelection: 'Total Mana Refresh (612 Eyes of Newt nebo 306 Blue Eyes of Newt)'
         },
         gh: {
             graphic: '0x0F0C',
@@ -464,7 +469,8 @@ const gameObject:any = {
             kad: {
                 graphic: '0x1843',
                 color: '0x08A7'
-            }
+            },
+            gmMortarSelection: 'Greater Heal (714 Ginsengs)'
         },
         gs: {
             graphic: '0x0F09',
@@ -476,7 +482,8 @@ const gameObject:any = {
             kad: {
                 graphic: '0x1843',
                 color: '0x0481'
-            }
+            },
+            gmMortarSelection: 'Greater Strength (612 Mandrake Roots)'
         },
         tr: {
             graphic: '0x0F0B',
@@ -488,7 +495,8 @@ const gameObject:any = {
             kad: {
                 graphic: '0x1843',
                 color: '0x014D'
-            }
+            },
+            gmMortarSelection: 'Total Refresh (510 Black Pearls)'
         },
         gc: {
             graphic: '0x0F07',
@@ -500,7 +508,8 @@ const gameObject:any = {
             kad: {
                 graphic: '0x1843',
                 color: '0x0842'
-            }
+            },
+            gmMortarSelection: 'Greater Cure (612 Garlics)'
         },
         lc: {
             graphic: '0x0F07',
@@ -532,7 +541,8 @@ const gameObject:any = {
             kad: {
                 graphic: '0x1843',
                 color: '0x0724'
-            }
+            },
+            gmMortarSelection: 'Shrink (306 Batwings)'
         },
         lavabomb: {
             graphic: '0x0F0D',
@@ -540,7 +550,8 @@ const gameObject:any = {
             kad: {
                 graphic: '0x1843',
                 color: '0x000E'
-            }
+            },
+            gmMortarSelection: 'Lava Bomb (612 Volcanic Ashes)'
         }
     },
     books: {

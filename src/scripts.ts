@@ -77,7 +77,7 @@ function cast(spell:string, target?:TargetEnum) {
 /**
  * Kouzli svitek na pozadovany target, pokud je uveden, pokud neni timer na svitek zakouzli z hlavy backupHeadCast
  * @example external code `castScroll("ijs", "self", "Magic Reflection");`
- * @example external code `astScroll("pog", "lastattack");`
+ * @example external code `castScroll("pog", "lastattack");`
  */
 function castScroll(scroll:ScrollEnum, target?:TargetEnum, backupHeadCast?:string) {
     Scripts.Spells.castScroll(scroll, target, backupHeadCast);
@@ -91,4 +91,14 @@ function castScroll(scroll:ScrollEnum, target?:TargetEnum, backupHeadCast?:strin
  */
 function make(count:number, objectAsString:string, setInputs = true) {
     Scripts.Crafting.make(count, objectAsString, setInputs);
+}
+
+/**
+ * Micha na gm mortaru
+ * @param potionName
+ * @example in client `_gmMortar tmr`
+ * @example external code `gmMortar('tmr');`
+ */
+function gmMortar(potionName:PotionsEnum) {
+    Scripts.Common.gmMortar(potionName);
 }

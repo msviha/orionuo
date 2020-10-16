@@ -16,6 +16,7 @@ Obsahuje zakladni scripty
 
 * [bandageSelf](scripts.common.md#bandageself)
 * [drinkPotion](scripts.common.md#drinkpotion)
+* [gmMortar](scripts.common.md#gmmortar)
 * [hiding](scripts.common.md#hiding)
 * [mysticCounter](scripts.common.md#mysticcounter)
 * [shrinkKad](scripts.common.md#shrinkkad)
@@ -27,7 +28,7 @@ Obsahuje zakladni scripty
 
 ▸ `Static`**bandageSelf**(`pathToNoBandagesWavFile`: string): void
 
-*Defined in [scripts/common.ts:148](https://github.com/msviha/orionuo/blob/1042e5b/src/scripts/common.ts#L148)*
+*Defined in [scripts/common.ts:148](https://github.com/msviha/orionuo/blob/4da48c7/src/scripts/common.ts#L148)*
 
 Scripts.Common.bandageSelf
 stability beta
@@ -48,7 +49,7 @@ ___
 
 ▸ `Static`**drinkPotion**(`potionName`: string, `switchWarModeWhenNeeded`: boolean): void
 
-*Defined in [scripts/common.ts:84](https://github.com/msviha/orionuo/blob/1042e5b/src/scripts/common.ts#L84)*
+*Defined in [scripts/common.ts:84](https://github.com/msviha/orionuo/blob/4da48c7/src/scripts/common.ts#L84)*
 
 Scripts.Common.drinkPotion
 stability beta
@@ -64,11 +65,27 @@ Name | Type | Default value | Description |
 
 ___
 
+### gmMortar
+
+▸ `Static`**gmMortar**(`potionName`: [PotionsEnum](../enums/potionsenum.md)): void
+
+*Defined in [scripts/common.ts:189](https://github.com/msviha/orionuo/blob/4da48c7/src/scripts/common.ts#L189)*
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`potionName` | [PotionsEnum](../enums/potionsenum.md) |
+
+**Returns:** void
+
+___
+
 ### hiding
 
 ▸ `Static`**hiding**(): void
 
-*Defined in [scripts/common.ts:51](https://github.com/msviha/orionuo/blob/1042e5b/src/scripts/common.ts#L51)*
+*Defined in [scripts/common.ts:51](https://github.com/msviha/orionuo/blob/4da48c7/src/scripts/common.ts#L51)*
 
 Scripts.Common.hiding
 stability beta
@@ -83,7 +100,7 @@ ___
 
 ▸ `Static`**mysticCounter**(): void
 
-*Defined in [scripts/common.ts:161](https://github.com/msviha/orionuo/blob/1042e5b/src/scripts/common.ts#L161)*
+*Defined in [scripts/common.ts:161](https://github.com/msviha/orionuo/blob/4da48c7/src/scripts/common.ts#L161)*
 
 **Returns:** void
 
@@ -93,7 +110,7 @@ ___
 
 ▸ `Static`**shrinkKad**(): void
 
-*Defined in [scripts/common.ts:34](https://github.com/msviha/orionuo/blob/1042e5b/src/scripts/common.ts#L34)*
+*Defined in [scripts/common.ts:34](https://github.com/msviha/orionuo/blob/4da48c7/src/scripts/common.ts#L34)*
 
 Scripts.Common.shrinkKad
 stability beta
@@ -108,7 +125,7 @@ ___
 
 ▸ `Static`**svetlo**(`shouldCast`: boolean): void
 
-*Defined in [scripts/common.ts:16](https://github.com/msviha/orionuo/blob/1042e5b/src/scripts/common.ts#L16)*
+*Defined in [scripts/common.ts:16](https://github.com/msviha/orionuo/blob/4da48c7/src/scripts/common.ts#L16)*
 
 Scripts.Common.svetlo
 stability released

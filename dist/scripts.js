@@ -29,6 +29,18 @@ var ScrollEnum;
     ScrollEnum["wos"] = "wos";
     ScrollEnum["ivm"] = "ivm";
 })(ScrollEnum || (ScrollEnum = {}));
+var PotionsEnum;
+(function (PotionsEnum) {
+    PotionsEnum["tmr"] = "tmr";
+    PotionsEnum["gh"] = "gh";
+    PotionsEnum["gs"] = "gs";
+    PotionsEnum["tr"] = "tr";
+    PotionsEnum["gc"] = "gc";
+    PotionsEnum["lc"] = "lc";
+    PotionsEnum["ns"] = "ns";
+    PotionsEnum["shrink"] = "shrink";
+    PotionsEnum["lavabomb"] = "lavabomb";
+})(PotionsEnum || (PotionsEnum = {}));
 var NecroScrollEnum;
 (function (NecroScrollEnum) {
     NecroScrollEnum["vfp"] = "vfp";
@@ -44,6 +56,10 @@ var gameObject = {
     uncategorized: {
         emptyBottles: {
             graphic: '0x0F0E',
+            color: '0x0000'
+        },
+        emptyKad: {
+            graphic: '0x1843',
             color: '0x0000'
         },
         bandy: {
@@ -493,7 +509,8 @@ var gameObject = {
             kad: {
                 graphic: '0x1843',
                 color: '0x0003'
-            }
+            },
+            gmMortarSelection: 'Total Mana Refresh (612 Eyes of Newt nebo 306 Blue Eyes of Newt)'
         },
         gh: {
             graphic: '0x0F0C',
@@ -505,7 +522,8 @@ var gameObject = {
             kad: {
                 graphic: '0x1843',
                 color: '0x08A7'
-            }
+            },
+            gmMortarSelection: 'Greater Heal (714 Ginsengs)'
         },
         gs: {
             graphic: '0x0F09',
@@ -517,7 +535,8 @@ var gameObject = {
             kad: {
                 graphic: '0x1843',
                 color: '0x0481'
-            }
+            },
+            gmMortarSelection: 'Greater Strength (612 Mandrake Roots)'
         },
         tr: {
             graphic: '0x0F0B',
@@ -529,7 +548,8 @@ var gameObject = {
             kad: {
                 graphic: '0x1843',
                 color: '0x014D'
-            }
+            },
+            gmMortarSelection: 'Total Refresh (510 Black Pearls)'
         },
         gc: {
             graphic: '0x0F07',
@@ -541,7 +561,8 @@ var gameObject = {
             kad: {
                 graphic: '0x1843',
                 color: '0x0842'
-            }
+            },
+            gmMortarSelection: 'Greater Cure (612 Garlics)'
         },
         lc: {
             graphic: '0x0F07',
@@ -573,7 +594,8 @@ var gameObject = {
             kad: {
                 graphic: '0x1843',
                 color: '0x0724'
-            }
+            },
+            gmMortarSelection: 'Shrink (306 Batwings)'
         },
         lavabomb: {
             graphic: '0x0F0D',
@@ -581,7 +603,8 @@ var gameObject = {
             kad: {
                 graphic: '0x1843',
                 color: '0x000E'
-            }
+            },
+            gmMortarSelection: 'Lava Bomb (612 Volcanic Ashes)'
         }
     },
     books: {
@@ -1011,6 +1034,9 @@ function make(count, objectAsString, setInputs) {
     if (setInputs === void 0) { setInputs = true; }
     Scripts.Crafting.make(count, objectAsString, setInputs);
 }
+function gmMortar(potionName) {
+    Scripts.Common.gmMortar(potionName);
+}
 function isMyGameObject(val) {
     return val && val.graphic;
 }
@@ -1044,6 +1070,14 @@ function isRefillProps(val) {
 function isRefillItem(val) {
     var success = val && val.item && typeof val.count === 'number';
     !success && Scripts.Utils.log('item should be defined and count should be a number', ColorEnum.red);
+    return success;
+}
+function isPotionsEnum(val) {
+    var success = val && PotionsEnum[val] !== undefined;
+    if (!success) {
+        Scripts.Utils.log("Definice potionu '" + val + "' neexistuje.", ColorEnum.red);
+        Scripts.Utils.log("pouzij definici z PotionsEnum \"" + JSON.stringify(PotionsEnum) + "\"");
+    }
     return success;
 }
 function isBagDestination(val) {
@@ -1260,6 +1294,62 @@ var Scripts;
                 Orion.Print(-1, m + ': ' + count.toString());
             }
             Orion.Print(-1, '*****************');
+        };
+        Common.gmMortar = function (potionName) {
+            if (!isPotionsEnum(potionName)) {
+                return;
+            }
+            var potion = gameObject.potions[potionName];
+            var potionKade = Orion.FindType(potion.kad.graphic, potion.kad.color);
+            var isKad = potion.kad && potionKade.length || false;
+            if (!isKad) {
+                Scripts.Utils.log('Nemas kad s potiony', ColorEnum.red);
+                return;
+            }
+            var isEmptyKad = Orion.FindType(gameObject.uncategorized.emptyKad.graphic, gameObject.uncategorized.emptyKad.color);
+            if (!isEmptyKad) {
+                Scripts.Utils.log('Nemas praznou kad', ColorEnum.red);
+                return;
+            }
+            var emptyBottles = Orion.FindType(gameObject.uncategorized.emptyBottles.graphic, gameObject.uncategorized.emptyBottles.color);
+            var isEmptyBottle = emptyBottles.length > 0;
+            if (!isEmptyKad) {
+                Scripts.Utils.log('Nemas praznou lahvicku', ColorEnum.red);
+                return;
+            }
+            Scripts.Utils.playerPrint("Target gmmortar for making \"" + potionName + "\"");
+            Orion.WaitForAddObject('gmMortar', 60000);
+            var _loop_1 = function () {
+                Orion.ClearJournal();
+                var cilovaKadSerial = potionKade[0];
+                var kade = Orion.FindType(gameObject.uncategorized.emptyKad.graphic);
+                Scripts.Utils.selectMenu('Vyber typ potionu', [potion.gmMortarSelection]);
+                Orion.UseObject('gmMortar');
+                Scripts.Utils.waitWhileSomethingInJournal(['You vylil', 'Musis mit']);
+                if (Orion.InJournal('Musis mit')) {
+                    Scripts.Utils.log('Dosly regy', ColorEnum.red);
+                    return { value: void 0 };
+                }
+                var noveKade = Orion.FindType(gameObject.uncategorized.emptyKad.graphic);
+                var michnutaKadSerial = noveKade.filter(function (i) { return kade.indexOf(i) === -1; })[0];
+                Orion.ClearJournal();
+                Orion.WaitTargetObject(cilovaKadSerial);
+                Orion.UseObject(michnutaKadSerial);
+                Scripts.Utils.waitWhileSomethingInJournal(['Prelil jsi']);
+                Orion.ClearJournal();
+                Orion.WaitTargetType(gameObject.uncategorized.emptyBottles.graphic, gameObject.uncategorized.emptyBottles.color);
+                Orion.UseObject(michnutaKadSerial);
+                Scripts.Utils.waitWhileSomethingInJournal(['You put']);
+                Orion.ClearJournal();
+                Orion.WaitTargetType(potion.graphic, potion.color);
+                Orion.UseObject(cilovaKadSerial);
+                Scripts.Utils.waitWhileSomethingInJournal(['You put']);
+            };
+            while (true) {
+                var state_1 = _loop_1();
+                if (typeof state_1 === "object")
+                    return state_1.value;
+            }
         };
         return Common;
     }());
@@ -2051,13 +2141,16 @@ var Scripts;
                 'Doksuri', 'Khanun', 'Vicente', 'Saola'
             ];
             var monstersAlive = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "fast|live", 13, "blue|gray|criminal|orange|red");
+            Orion.Print(-1, 'findType done');
             while (monstersAlive.length) {
                 var monsterSerial = monstersAlive[0];
                 var isMyMonster = Orion.FindObject(monsterSerial).CanChangeName();
                 if (isMyMonster) {
+                    Orion.Print(-1, monsterSerial);
                     var random = Math.floor(Math.random() * (namesPool.length));
                     var newName = namesPool[random];
                     Orion.RenameMount(monstersAlive[0], newName);
+                    Orion.Wait(responseDelay);
                     namesPool.splice(random, 1);
                     Orion.WaitTargetObject(Orion.ClientLastAttack());
                     Orion.Say(newName + " kill");
@@ -2065,7 +2158,9 @@ var Scripts;
                     Scripts.Utils.waitWhileTargeting();
                 }
                 Orion.Ignore(monsterSerial);
-                monstersAlive = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "fast|live", 13, "blue|gray|criminal|orange|red");
+                Orion.Print(-1, 'ignored ' + monsterSerial);
+                monstersAlive = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "near|live", 13, "blue|gray|criminal|orange|red");
+                Orion.Print(-1, 'findType done');
             }
             Orion.IgnoreReset();
         };
