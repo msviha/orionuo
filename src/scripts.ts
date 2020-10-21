@@ -192,13 +192,13 @@ function make(count:number, objectAsString:string, setInputs = true) {
 }
 
 /**
- * Micha pres alchemku
+ * Micha pres obyc mortar
  * @param potionName zkratka potionu
- * @example in client `_michani tmr`
- * @example external code `michani('tmr');`
+ * @example in client `_alchemy tmr`
+ * @example external code `alchemy('tmr');`
  */
-function michani(potionName:PotionsEnum) {
-    Scripts.Potions.michani(potionName);
+function alchemy(potionName:PotionsEnum) {
+    Scripts.Potions.alchemy(potionName);
 }
 
 /**

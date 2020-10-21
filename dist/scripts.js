@@ -1092,8 +1092,8 @@ function make(count, objectAsString, setInputs) {
     if (setInputs === void 0) { setInputs = true; }
     Scripts.Crafting.make(count, objectAsString, setInputs);
 }
-function michani(potionName) {
-    Scripts.Potions.michani(potionName);
+function alchemy(potionName) {
+    Scripts.Potions.alchemy(potionName);
 }
 function mount() {
     Scripts.Mount.mountAndDismount();
@@ -2295,7 +2295,7 @@ var Scripts;
                     return state_1.value;
             }
         };
-        Potions.michani = function (potionName) {
+        Potions.alchemy = function (potionName) {
             if (!isPotionsEnum(potionName)) {
                 return;
             }

@@ -141,7 +141,7 @@ namespace Scripts {
             }
         }
 
-        static michani(potionName:PotionsEnum) {
+        static alchemy(potionName:PotionsEnum) {
             if (!isPotionsEnum(potionName)) {
                 return;
             }
