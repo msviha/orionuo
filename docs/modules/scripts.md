@@ -19,6 +19,7 @@
 * [Mining](../classes/scripts.mining.md)
 * [Mount](../classes/scripts.mount.md)
 * [PetCommander](../classes/scripts.petcommander.md)
+* [Potions](../classes/scripts.potions.md)
 * [Spells](../classes/scripts.spells.md)
 * [Taming](../classes/scripts.taming.md)
 * [Targeting](../classes/scripts.targeting.md)

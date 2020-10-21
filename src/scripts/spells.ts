@@ -185,7 +185,7 @@ namespace Scripts {
                     while (isDrinkTimerSet && Orion.Timer(TimersEnum.drink) < 18000) {
                         Orion.Wait(200);
                     }
-                    Scripts.Common.drinkPotion('tmr');
+                    Scripts.Potions.drinkPotion(PotionsEnum.tmr);
                 }
             }
         }

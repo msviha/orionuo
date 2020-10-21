@@ -73,6 +73,9 @@ const gameObject:any = {
             color: '0x0000'
         },
         ore: {
+            anyOre: {
+                graphic: '0x19B9'
+            },
             iron: {
                 graphic: '0x19B9',
                 color: '0x0000'
@@ -337,6 +340,23 @@ const gameObject:any = {
                 }
             },
             containers: {
+                bottle: {
+                    graphic: '0x0F0E',
+                    color: '0x0000',
+                    make: {
+                        tool: 'o.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                {item: 'o.resources.logs', count: 2},
+                                {item: 'o.resources.ore.anyOre', count: 5}
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Containers', 'Bottle']
+                        }
+                    }
+                },
                 kadNaPotiony: {
                     graphic: '0x1843',
                     color: '0x0000',
@@ -457,7 +477,8 @@ const gameObject:any = {
                 graphic: '0x1843',
                 color: '0x0003'
             },
-            gmMortarSelection: 'Total Mana Refresh (612 Eyes of Newt nebo 306 Blue Eyes of Newt)'
+            gmMortarSelection: 'Total Mana Refresh (612 Eyes of Newt nebo 306 Blue Eyes of Newt)',
+            alchemySelection: 'Total Mana Refresh'
         },
         gh: {
             graphic: '0x0F0C',
@@ -470,7 +491,8 @@ const gameObject:any = {
                 graphic: '0x1843',
                 color: '0x08A7'
             },
-            gmMortarSelection: 'Greater Heal (714 Ginsengs)'
+            gmMortarSelection: 'Greater Heal (714 Ginsengs)',
+            alchemySelection: 'Greater Heal'
         },
         gs: {
             graphic: '0x0F09',
@@ -483,7 +505,8 @@ const gameObject:any = {
                 graphic: '0x1843',
                 color: '0x0481'
             },
-            gmMortarSelection: 'Greater Strength (612 Mandrake Roots)'
+            gmMortarSelection: 'Greater Strength (612 Mandrake Roots)',
+            alchemySelection: 'Greater Strength'
         },
         tr: {
             graphic: '0x0F0B',
@@ -496,7 +519,8 @@ const gameObject:any = {
                 graphic: '0x1843',
                 color: '0x014D'
             },
-            gmMortarSelection: 'Total Refresh (510 Black Pearls)'
+            gmMortarSelection: 'Total Refresh (510 Black Pearls)',
+            alchemySelection: 'Total Refresh'
         },
         gc: {
             graphic: '0x0F07',
@@ -509,7 +533,8 @@ const gameObject:any = {
                 graphic: '0x1843',
                 color: '0x0842'
             },
-            gmMortarSelection: 'Greater Cure (612 Garlics)'
+            gmMortarSelection: 'Greater Cure (612 Garlics)',
+            alchemySelection: 'Greater Cure'
         },
         lc: {
             graphic: '0x0F07',
@@ -529,7 +554,8 @@ const gameObject:any = {
             kad: {
                 graphic: '0x1843',
                 color: '0x03C4'
-            }
+            },
+            alchemySelection: 'Nightsight'
         },
         shrink: {
             graphic: '0x0F09',
@@ -542,7 +568,8 @@ const gameObject:any = {
                 graphic: '0x1843',
                 color: '0x0724'
             },
-            gmMortarSelection: 'Shrink (306 Batwings)'
+            gmMortarSelection: 'Shrink (306 Batwings)',
+            alchemySelection: 'Shrink'
         },
         lavabomb: {
             graphic: '0x0F0D',
@@ -551,7 +578,8 @@ const gameObject:any = {
                 graphic: '0x1843',
                 color: '0x000E'
             },
-            gmMortarSelection: 'Lava Bomb (612 Volcanic Ashes)'
+            gmMortarSelection: 'Lava Bomb (612 Volcanic Ashes)',
+            alchemySelection: 'Lava Bomb'
         }
     },
     books: {

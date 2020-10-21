@@ -75,71 +75,6 @@ namespace Scripts {
         }
 
         /**
-         * Scripts.Common.drinkPotion
-         * stability beta
-         *
-         * @param potionName nazev potionu, ktery je definovan jako klic v objectu o.potions
-         * @param switchWarModeWhenNeeded prepne war, pokud je potreba docepnout
-         */
-        static drinkPotion(potionName:string, switchWarModeWhenNeeded = true) {
-            const potion = gameObject.potions[potionName];
-            if (!potion) {
-                Scripts.Utils.log(`Definice potionu '${potionName}' neexistuje.`, ColorEnum.red);
-                return;
-            }
-
-            const emptyBottles = Orion.FindType(gameObject.uncategorized.emptyBottles.graphic, gameObject.uncategorized.emptyBottles.color);
-            const isEmptyBottle = emptyBottles.length > 0;
-
-            let isPotion = Orion.Count(potion.graphic, potion.color) > 0;
-            const kade = Orion.FindType(potion.kad.graphic, potion.kad.color)
-            const isKad = potion.kad && kade.length || false;
-
-            if (!isPotion && isKad) {
-                //docepnuti
-                if (!isEmptyBottle) {
-                    Scripts.Utils.log('Nemas prazdne lahve na docepnuti', ColorEnum.red);
-                    return;
-                }
-
-                Orion.ClearJournal();
-                Orion.WaitTargetObject(emptyBottles[0]);
-                Orion.UseObject(kade[0]);
-                Orion.Wait(responseDelay);
-
-                if (Orion.InJournal('Pri praci s nadobou nemuzes delat neco')) {
-                    if (!switchWarModeWhenNeeded) {
-                        Scripts.Utils.log('Nemuzes pit, kdyz neco delas', ColorEnum.red);
-                        return;
-                    }
-                    Scripts.Utils.playerPrint('[War mode]', ColorEnum.red);
-                    Orion.WarMode(true);
-                    Orion.Wait(100);
-                    Orion.WaitTargetObject(emptyBottles[0]);
-                    Orion.UseObject(kade[0]);
-                    Orion.Wait(responseDelay);
-                }
-
-                isPotion = Orion.Count(potion.graphic, potion.color) > 0;
-            }
-
-            if (isPotion) {
-                Orion.UseType(potion.graphic, potion.color);
-                Orion.Wait(responseDelay);
-                if (Orion.InJournal('You put the empty bottless')) {
-                    Orion.AddDisplayTimer(TimersEnum.drink, 18000, 'RightTop', 'Circle', 'Drink potion', 0, 0, '0x100', 0, 'red');
-                    Scripts.Utils.resetTimer(TimersEnum.drink);
-                    const currentPotions = Orion.Count(potion.graphic, potion.color);
-                    const textColor = currentPotions === 0 ? ColorEnum.red : ColorEnum.green
-                    Scripts.Utils.playerPrint(`[ ${potionName} ${Orion.Count(potion.graphic, potion.color)} ]`);
-                }
-            }
-            else {
-                Scripts.Utils.playerPrint('Nemas ' + potionName, ColorEnum.red);
-            }
-        }
-
-        /**
          * Scripts.Common.bandageSelf
          * stability beta
          *
@@ -184,66 +119,6 @@ namespace Scripts {
                 Orion.Print(-1 , m + ': ' + count.toString());
             }
             Orion.Print(-1 , '*****************');
-        }
-
-        static gmMortar(potionName:PotionsEnum) {
-            if (!isPotionsEnum(potionName)) {
-                return;
-            }
-            const potion = gameObject.potions[potionName];
-            const potionKade = Orion.FindType(potion.kad.graphic, potion.kad.color)
-            const isKad = potion.kad && potionKade.length || false;
-            if (!isKad) {
-                Scripts.Utils.log('Nemas kad s potiony', ColorEnum.red);
-                return;
-            }
-            const isEmptyKad = Orion.FindType(gameObject.uncategorized.emptyKad.graphic, gameObject.uncategorized.emptyKad.color);
-            if (!isEmptyKad) {
-                Scripts.Utils.log('Nemas praznou kad', ColorEnum.red);
-                return;
-            }
-            const emptyBottles = Orion.FindType(gameObject.uncategorized.emptyBottles.graphic, gameObject.uncategorized.emptyBottles.color);
-            const isEmptyBottle = emptyBottles.length > 0;
-            if (!isEmptyKad) {
-                Scripts.Utils.log('Nemas praznou lahvicku', ColorEnum.red);
-                return;
-            }
-
-            Scripts.Utils.playerPrint(`Target gmmortar for making "${potionName}"`);
-            Orion.WaitForAddObject('gmMortar', 60000);
-
-            while (true) {
-                Orion.ClearJournal();
-
-                const cilovaKadSerial = potionKade[0];
-                const kade = Orion.FindType(gameObject.uncategorized.emptyKad.graphic);
-
-                Scripts.Utils.selectMenu('Vyber typ potionu', [potion.gmMortarSelection]);
-                Orion.UseObject('gmMortar');
-                Scripts.Utils.waitWhileSomethingInJournal(['You vylil', 'Musis mit']);
-                if (Orion.InJournal('Musis mit')) {
-                    Scripts.Utils.log('Dosly regy', ColorEnum.red);
-                    return;
-                }
-
-                const noveKade = Orion.FindType(gameObject.uncategorized.emptyKad.graphic);
-                const michnutaKadSerial = noveKade.filter(i => kade.indexOf(i) === -1)[0];
-
-                Orion.ClearJournal();
-                Orion.WaitTargetObject(cilovaKadSerial);
-                Orion.UseObject(michnutaKadSerial);
-                Scripts.Utils.waitWhileSomethingInJournal(['Prelil jsi']);
-
-                Orion.ClearJournal();
-                Orion.WaitTargetType(gameObject.uncategorized.emptyBottles.graphic, gameObject.uncategorized.emptyBottles.color);
-                Orion.UseObject(michnutaKadSerial);
-                Scripts.Utils.waitWhileSomethingInJournal(['You put']);
-
-                Orion.ClearJournal();
-                Orion.WaitTargetType(potion.graphic, potion.color);
-                Orion.UseObject(cilovaKadSerial);
-                Scripts.Utils.waitWhileSomethingInJournal(['You put']);
-            }
         }
 
         static hideAll() {

@@ -48,8 +48,7 @@ namespace Scripts {
             let currentWaypointIndex = 0;
             let lastAttack = undefined;
 
-            Scripts.Utils.playerPrint('Target your cut weapon');
-            const selection_1 = Orion.WaitForAddObject('cutWeapon', 60000);
+            const selection_1 = Scripts.Loot.addCutWeapon();
             Scripts.Utils.playerPrint('Target your loot bag');
             const selection_2 = Orion.WaitForAddObject('myLootBag', 60000);
 
@@ -84,6 +83,11 @@ namespace Scripts {
             }
         }
 
+        static addCutWeapon():number {
+            Scripts.Utils.playerPrint('Target your cut weapon');
+            return Orion.WaitForAddObject('cutWeapon', 60000);
+        }
+
         /**
          * Scripts.Loot.lootCorpseId
          * stability beta
@@ -94,7 +98,7 @@ namespace Scripts {
             let listOfCorpses = Orion.FindType('0x2006', '-1', 'ground', 'fast', 2, 'red');
             while (listOfCorpses.length) {
                 for (const id of listOfCorpses) {
-                    if (cut) {
+                    if (cut && !Orion.FindObject(id).IsHuman()) {
                         Orion.UseObject('cutWeapon');
                         Orion.WaitForTarget(1000);
                         Orion.TargetObject(id);
@@ -154,7 +158,7 @@ namespace Scripts {
                     Scripts.Spells.castUntilSuccess('Cure', TargetEnum.self, 2500);
                 }
                 else if (drinkCure) {
-                    Scripts.Common.drinkPotion('lc');
+                    Scripts.Potions.drinkPotion(PotionsEnum.lc);
                 }
             }
         }

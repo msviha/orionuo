@@ -25,7 +25,7 @@
 
 ▸ `Static`**cast**(`spell`: string, `target?`: [TargetEnum](../enums/targetenum.md)): void
 
-*Defined in [scripts/spells.ts:11](https://github.com/msviha/orionuo/blob/43b8a75/src/scripts/spells.ts#L11)*
+*Defined in [scripts/spells.ts:11](https://github.com/msviha/orionuo/blob/b1a86be/src/scripts/spells.ts#L11)*
 
 Scripts.Spells.cast
 stability released
@@ -45,7 +45,7 @@ ___
 
 ▸ `Static`**castNecroScroll**(`scroll`: [NecroScrollEnum](../enums/necroscrollenum.md), `target?`: [TargetEnum](../enums/targetenum.md)): void
 
-*Defined in [scripts/spells.ts:81](https://github.com/msviha/orionuo/blob/43b8a75/src/scripts/spells.ts#L81)*
+*Defined in [scripts/spells.ts:81](https://github.com/msviha/orionuo/blob/b1a86be/src/scripts/spells.ts#L81)*
 
 CastScroll(NecroScrollEnum.vfp, TargetEnum.lastattack)
 CastScroll('vfp', 'lastattack')
@@ -66,7 +66,7 @@ ___
 
 ▸ `Static`**castScroll**(`scroll`: [ScrollEnum](../enums/scrollenum.md), `target?`: [TargetEnum](../enums/targetenum.md), `backupHeadCast?`: string): void
 
-*Defined in [scripts/spells.ts:39](https://github.com/msviha/orionuo/blob/43b8a75/src/scripts/spells.ts#L39)*
+*Defined in [scripts/spells.ts:39](https://github.com/msviha/orionuo/blob/b1a86be/src/scripts/spells.ts#L39)*
 
 Scripts.Spells.CastScroll
 stability beta
@@ -95,7 +95,7 @@ ___
 
 ▸ `Static`**castUntilSuccess**(`spell`: string, `target`: [TargetEnum](../enums/targetenum.md), `castTime`: number): void
 
-*Defined in [scripts/spells.ts:120](https://github.com/msviha/orionuo/blob/43b8a75/src/scripts/spells.ts#L120)*
+*Defined in [scripts/spells.ts:120](https://github.com/msviha/orionuo/blob/b1a86be/src/scripts/spells.ts#L120)*
 
 Scripts.Spells.castUntilSuccess
 stability beta
@@ -118,7 +118,7 @@ ___
 
 ▸ `Static`**inscription**(`circle`: number, `spell`: string, `quantity`: number): void
 
-*Defined in [scripts/spells.ts:137](https://github.com/msviha/orionuo/blob/43b8a75/src/scripts/spells.ts#L137)*
+*Defined in [scripts/spells.ts:137](https://github.com/msviha/orionuo/blob/b1a86be/src/scripts/spells.ts#L137)*
 
 Scripts.Spells.inscription
 stability beta
@@ -141,7 +141,7 @@ ___
 
 ▸ `Static`**summon**(`creature`: string, `target?`: [TargetEnum](../enums/targetenum.md)): void
 
-*Defined in [scripts/spells.ts:21](https://github.com/msviha/orionuo/blob/43b8a75/src/scripts/spells.ts#L21)*
+*Defined in [scripts/spells.ts:21](https://github.com/msviha/orionuo/blob/b1a86be/src/scripts/spells.ts#L21)*
 
 Scripts.Spells.summon
 

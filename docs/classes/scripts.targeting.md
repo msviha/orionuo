@@ -15,15 +15,15 @@ scripty na pvp a targetovani
 
 ### Methods
 
-* [TargetNext](scripts.targeting.md#targetnext)
+* [targetNext](scripts.targeting.md#targetnext)
 
 ## Methods
 
-### TargetNext
+### targetNext
 
-▸ `Static`**TargetNext**(`reverse`: boolean): void
+▸ `Static`**targetNext**(`reverse`: boolean): void
 
-*Defined in [scripts/targeting.ts:13](https://github.com/msviha/orionuo/blob/43b8a75/src/scripts/targeting.ts#L13)*
+*Defined in [scripts/targeting.ts:13](https://github.com/msviha/orionuo/blob/b1a86be/src/scripts/targeting.ts#L13)*
 
 #### Parameters:
 

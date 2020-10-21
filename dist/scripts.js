@@ -126,6 +126,9 @@ var gameObject = {
             color: '0x0000'
         },
         ore: {
+            anyOre: {
+                graphic: '0x19B9'
+            },
             iron: {
                 graphic: '0x19B9',
                 color: '0x0000'
@@ -390,6 +393,23 @@ var gameObject = {
                 }
             },
             containers: {
+                bottle: {
+                    graphic: '0x0F0E',
+                    color: '0x0000',
+                    make: {
+                        tool: 'o.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'o.resources.logs', count: 2 },
+                                { item: 'o.resources.ore.anyOre', count: 5 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Containers', 'Bottle']
+                        }
+                    }
+                },
                 kadNaPotiony: {
                     graphic: '0x1843',
                     color: '0x0000',
@@ -510,7 +530,8 @@ var gameObject = {
                 graphic: '0x1843',
                 color: '0x0003'
             },
-            gmMortarSelection: 'Total Mana Refresh (612 Eyes of Newt nebo 306 Blue Eyes of Newt)'
+            gmMortarSelection: 'Total Mana Refresh (612 Eyes of Newt nebo 306 Blue Eyes of Newt)',
+            alchemySelection: 'Total Mana Refresh'
         },
         gh: {
             graphic: '0x0F0C',
@@ -523,7 +544,8 @@ var gameObject = {
                 graphic: '0x1843',
                 color: '0x08A7'
             },
-            gmMortarSelection: 'Greater Heal (714 Ginsengs)'
+            gmMortarSelection: 'Greater Heal (714 Ginsengs)',
+            alchemySelection: 'Greater Heal'
         },
         gs: {
             graphic: '0x0F09',
@@ -536,7 +558,8 @@ var gameObject = {
                 graphic: '0x1843',
                 color: '0x0481'
             },
-            gmMortarSelection: 'Greater Strength (612 Mandrake Roots)'
+            gmMortarSelection: 'Greater Strength (612 Mandrake Roots)',
+            alchemySelection: 'Greater Strength'
         },
         tr: {
             graphic: '0x0F0B',
@@ -549,7 +572,8 @@ var gameObject = {
                 graphic: '0x1843',
                 color: '0x014D'
             },
-            gmMortarSelection: 'Total Refresh (510 Black Pearls)'
+            gmMortarSelection: 'Total Refresh (510 Black Pearls)',
+            alchemySelection: 'Total Refresh'
         },
         gc: {
             graphic: '0x0F07',
@@ -562,7 +586,8 @@ var gameObject = {
                 graphic: '0x1843',
                 color: '0x0842'
             },
-            gmMortarSelection: 'Greater Cure (612 Garlics)'
+            gmMortarSelection: 'Greater Cure (612 Garlics)',
+            alchemySelection: 'Greater Cure'
         },
         lc: {
             graphic: '0x0F07',
@@ -582,7 +607,8 @@ var gameObject = {
             kad: {
                 graphic: '0x1843',
                 color: '0x03C4'
-            }
+            },
+            alchemySelection: 'Nightsight'
         },
         shrink: {
             graphic: '0x0F09',
@@ -595,7 +621,8 @@ var gameObject = {
                 graphic: '0x1843',
                 color: '0x0724'
             },
-            gmMortarSelection: 'Shrink (306 Batwings)'
+            gmMortarSelection: 'Shrink (306 Batwings)',
+            alchemySelection: 'Shrink'
         },
         lavabomb: {
             graphic: '0x0F0D',
@@ -604,7 +631,8 @@ var gameObject = {
                 graphic: '0x1843',
                 color: '0x000E'
             },
-            gmMortarSelection: 'Lava Bomb (612 Volcanic Ashes)'
+            gmMortarSelection: 'Lava Bomb (612 Volcanic Ashes)',
+            alchemySelection: 'Lava Bomb'
         }
     },
     books: {
@@ -1009,36 +1037,78 @@ function Autostart() {
         Orion.Wait(updateRate);
     }
 }
-function lootAll(delay) {
-    if (delay === void 0) { delay = responseDelay; }
-    Scripts.Loot.lootAllFrom(delay);
+function addCutWeapon() {
+    Scripts.Loot.addCutWeapon();
+}
+function addMount() {
+    Scripts.Mount.addMount();
+}
+function cast(spell, target) {
+    Scripts.Spells.cast(spell, target);
+}
+function castNecroScroll(scroll, target) {
+    Scripts.Spells.castNecroScroll(scroll, target);
+}
+function castScroll(scroll, target, backupHeadCast) {
+    Scripts.Spells.castScroll(scroll, target, backupHeadCast);
+}
+function drink(potionName) {
+    Scripts.Potions.drinkPotion(potionName);
+}
+function gmMortar(potionName) {
+    Scripts.Potions.gmMortar(potionName);
+}
+function hideAll() {
+    Scripts.Common.hideAll();
 }
 function hiding() {
     Scripts.Common.hiding();
+}
+function inscription(circle, spell, quantity) {
+    if (quantity === void 0) { quantity = 0; }
+    Scripts.Spells.inscription(circle, spell, quantity);
+}
+function kill() {
+    Scripts.PetCommander.kill();
 }
 function light(shouldCast) {
     if (shouldCast === void 0) { shouldCast = true; }
     shouldCast = parseParam(shouldCast);
     Scripts.Common.svetlo(shouldCast);
 }
-function kill() {
-    Scripts.PetCommander.kill();
+function lockpicking() {
+    Scripts.Lockpicking.lockpicking();
 }
-function cast(spell, target) {
-    Scripts.Spells.cast(spell, target);
+function loot(cut) {
+    if (cut === void 0) { cut = true; }
+    cut = parseParam(cut);
+    Scripts.Loot.lootCorpsesAround(cut);
 }
-function castScroll(scroll, target, backupHeadCast) {
-    Scripts.Spells.castScroll(scroll, target, backupHeadCast);
+function lootAll(delay) {
+    if (delay === void 0) { delay = responseDelay; }
+    Scripts.Loot.lootAllFrom(delay);
 }
 function make(count, objectAsString, setInputs) {
     if (setInputs === void 0) { setInputs = true; }
     Scripts.Crafting.make(count, objectAsString, setInputs);
 }
-function gmMortar(potionName) {
-    Scripts.Common.gmMortar(potionName);
+function michani(potionName) {
+    Scripts.Potions.michani(potionName);
 }
-function hideAll() {
-    Scripts.Common.hideAll();
+function mount() {
+    Scripts.Mount.mountAndDismount();
+}
+function summon(creature, target) {
+    Scripts.Spells.summon(creature, target);
+}
+function targetNext() {
+    Scripts.Targeting.targetNext();
+}
+function targetPrevious() {
+    Scripts.Targeting.targetNext(true);
+}
+function unlock() {
+    Scripts.Lockpicking.unlock();
 }
 function isMyGameObject(val) {
     return val && val.graphic;
@@ -1209,56 +1279,6 @@ var Scripts;
                 Orion.CharPrint(Player.Serial(), ColorEnum.red, '[ FAILED ]');
             }
         };
-        Common.drinkPotion = function (potionName, switchWarModeWhenNeeded) {
-            if (switchWarModeWhenNeeded === void 0) { switchWarModeWhenNeeded = true; }
-            var potion = gameObject.potions[potionName];
-            if (!potion) {
-                Scripts.Utils.log("Definice potionu '" + potionName + "' neexistuje.", ColorEnum.red);
-                return;
-            }
-            var emptyBottles = Orion.FindType(gameObject.uncategorized.emptyBottles.graphic, gameObject.uncategorized.emptyBottles.color);
-            var isEmptyBottle = emptyBottles.length > 0;
-            var isPotion = Orion.Count(potion.graphic, potion.color) > 0;
-            var kade = Orion.FindType(potion.kad.graphic, potion.kad.color);
-            var isKad = potion.kad && kade.length || false;
-            if (!isPotion && isKad) {
-                if (!isEmptyBottle) {
-                    Scripts.Utils.log('Nemas prazdne lahve na docepnuti', ColorEnum.red);
-                    return;
-                }
-                Orion.ClearJournal();
-                Orion.WaitTargetObject(emptyBottles[0]);
-                Orion.UseObject(kade[0]);
-                Orion.Wait(responseDelay);
-                if (Orion.InJournal('Pri praci s nadobou nemuzes delat neco')) {
-                    if (!switchWarModeWhenNeeded) {
-                        Scripts.Utils.log('Nemuzes pit, kdyz neco delas', ColorEnum.red);
-                        return;
-                    }
-                    Scripts.Utils.playerPrint('[War mode]', ColorEnum.red);
-                    Orion.WarMode(true);
-                    Orion.Wait(100);
-                    Orion.WaitTargetObject(emptyBottles[0]);
-                    Orion.UseObject(kade[0]);
-                    Orion.Wait(responseDelay);
-                }
-                isPotion = Orion.Count(potion.graphic, potion.color) > 0;
-            }
-            if (isPotion) {
-                Orion.UseType(potion.graphic, potion.color);
-                Orion.Wait(responseDelay);
-                if (Orion.InJournal('You put the empty bottless')) {
-                    Orion.AddDisplayTimer(TimersEnum.drink, 18000, 'RightTop', 'Circle', 'Drink potion', 0, 0, '0x100', 0, 'red');
-                    Scripts.Utils.resetTimer(TimersEnum.drink);
-                    var currentPotions = Orion.Count(potion.graphic, potion.color);
-                    var textColor = currentPotions === 0 ? ColorEnum.red : ColorEnum.green;
-                    Scripts.Utils.playerPrint("[ " + potionName + " " + Orion.Count(potion.graphic, potion.color) + " ]");
-                }
-            }
-            else {
-                Scripts.Utils.playerPrint('Nemas ' + potionName, ColorEnum.red);
-            }
-        };
         Common.bandageSelf = function (pathToNoBandagesWavFile) {
             if (pathToNoBandagesWavFile === void 0) { pathToNoBandagesWavFile = 'C:/critical.wav'; }
             Orion.ClearJournal();
@@ -1297,62 +1317,6 @@ var Scripts;
                 Orion.Print(-1, m + ': ' + count.toString());
             }
             Orion.Print(-1, '*****************');
-        };
-        Common.gmMortar = function (potionName) {
-            if (!isPotionsEnum(potionName)) {
-                return;
-            }
-            var potion = gameObject.potions[potionName];
-            var potionKade = Orion.FindType(potion.kad.graphic, potion.kad.color);
-            var isKad = potion.kad && potionKade.length || false;
-            if (!isKad) {
-                Scripts.Utils.log('Nemas kad s potiony', ColorEnum.red);
-                return;
-            }
-            var isEmptyKad = Orion.FindType(gameObject.uncategorized.emptyKad.graphic, gameObject.uncategorized.emptyKad.color);
-            if (!isEmptyKad) {
-                Scripts.Utils.log('Nemas praznou kad', ColorEnum.red);
-                return;
-            }
-            var emptyBottles = Orion.FindType(gameObject.uncategorized.emptyBottles.graphic, gameObject.uncategorized.emptyBottles.color);
-            var isEmptyBottle = emptyBottles.length > 0;
-            if (!isEmptyKad) {
-                Scripts.Utils.log('Nemas praznou lahvicku', ColorEnum.red);
-                return;
-            }
-            Scripts.Utils.playerPrint("Target gmmortar for making \"" + potionName + "\"");
-            Orion.WaitForAddObject('gmMortar', 60000);
-            var _loop_1 = function () {
-                Orion.ClearJournal();
-                var cilovaKadSerial = potionKade[0];
-                var kade = Orion.FindType(gameObject.uncategorized.emptyKad.graphic);
-                Scripts.Utils.selectMenu('Vyber typ potionu', [potion.gmMortarSelection]);
-                Orion.UseObject('gmMortar');
-                Scripts.Utils.waitWhileSomethingInJournal(['You vylil', 'Musis mit']);
-                if (Orion.InJournal('Musis mit')) {
-                    Scripts.Utils.log('Dosly regy', ColorEnum.red);
-                    return { value: void 0 };
-                }
-                var noveKade = Orion.FindType(gameObject.uncategorized.emptyKad.graphic);
-                var michnutaKadSerial = noveKade.filter(function (i) { return kade.indexOf(i) === -1; })[0];
-                Orion.ClearJournal();
-                Orion.WaitTargetObject(cilovaKadSerial);
-                Orion.UseObject(michnutaKadSerial);
-                Scripts.Utils.waitWhileSomethingInJournal(['Prelil jsi']);
-                Orion.ClearJournal();
-                Orion.WaitTargetType(gameObject.uncategorized.emptyBottles.graphic, gameObject.uncategorized.emptyBottles.color);
-                Orion.UseObject(michnutaKadSerial);
-                Scripts.Utils.waitWhileSomethingInJournal(['You put']);
-                Orion.ClearJournal();
-                Orion.WaitTargetType(potion.graphic, potion.color);
-                Orion.UseObject(cilovaKadSerial);
-                Scripts.Utils.waitWhileSomethingInJournal(['You put']);
-            };
-            while (true) {
-                var state_1 = _loop_1();
-                if (typeof state_1 === "object")
-                    return state_1.value;
-            }
         };
         Common.hideAll = function () {
             Orion.Timer('resendTime') === -1 && Orion.SetTimer('resendTime', 10000);
@@ -1650,8 +1614,7 @@ var Scripts;
             Orion.SetTimer('ReactiveArmorTimer');
             var currentWaypointIndex = 0;
             var lastAttack = undefined;
-            Scripts.Utils.playerPrint('Target your cut weapon');
-            var selection_1 = Orion.WaitForAddObject('cutWeapon', 60000);
+            var selection_1 = Scripts.Loot.addCutWeapon();
             Scripts.Utils.playerPrint('Target your loot bag');
             var selection_2 = Orion.WaitForAddObject('myLootBag', 60000);
             var selection_3 = 1;
@@ -1677,12 +1640,16 @@ var Scripts;
                 Orion.Wait(500);
             }
         };
+        Loot.addCutWeapon = function () {
+            Scripts.Utils.playerPrint('Target your cut weapon');
+            return Orion.WaitForAddObject('cutWeapon', 60000);
+        };
         Loot.lootCorpsesAround = function (cut, weapon) {
             var listOfCorpses = Orion.FindType('0x2006', '-1', 'ground', 'fast', 2, 'red');
             while (listOfCorpses.length) {
                 for (var _i = 0, listOfCorpses_1 = listOfCorpses; _i < listOfCorpses_1.length; _i++) {
                     var id = listOfCorpses_1[_i];
-                    if (cut) {
+                    if (cut && !Orion.FindObject(id).IsHuman()) {
                         Orion.UseObject('cutWeapon');
                         Orion.WaitForTarget(1000);
                         Orion.TargetObject(id);
@@ -1725,7 +1692,7 @@ var Scripts;
                     Scripts.Spells.castUntilSuccess('Cure', TargetEnum.self, 2500);
                 }
                 else if (drinkCure) {
-                    Scripts.Common.drinkPotion('lc');
+                    Scripts.Potions.drinkPotion(PotionsEnum.lc);
                 }
             }
         };
@@ -2208,6 +2175,161 @@ var Scripts;
 })(Scripts || (Scripts = {}));
 var Scripts;
 (function (Scripts) {
+    var Potions = (function () {
+        function Potions() {
+        }
+        Potions.getEmptyBottle = function () {
+            var emptyBottles = Orion.FindType(gameObject.uncategorized.emptyBottles.graphic, gameObject.uncategorized.emptyBottles.color);
+            if (!emptyBottles.length) {
+                Scripts.Utils.log("Nemas prazdne lahve", ColorEnum.red);
+                throw 'Nemas prazdne lahve';
+            }
+            return emptyBottles[0];
+        };
+        Potions.getKadForPotion = function (potion) {
+            var kade = Orion.FindType(potion.kad.graphic, potion.kad.color);
+            if (!kade.length) {
+                Scripts.Utils.log("Nemas kad s potionem", ColorEnum.red);
+                throw 'Nemas kad s potionem';
+            }
+            return kade[0];
+        };
+        Potions.getPotion = function (potion) {
+            var potions = Orion.FindType(potion.graphic, potion.color);
+            if (!potions.length) {
+                return false;
+            }
+            return potions[0];
+        };
+        Potions.getMortar = function () {
+            var mortars = Orion.FindType(gameObject.uncategorized.mortar.graphic, gameObject.uncategorized.mortar.color);
+            if (!mortars.length) {
+                Scripts.Utils.log("Nemas mortar", ColorEnum.red);
+                throw 'Nemas mortar';
+            }
+            return mortars[0];
+        };
+        Potions.drinkPotion = function (potionName, switchWarModeWhenNeeded) {
+            if (switchWarModeWhenNeeded === void 0) { switchWarModeWhenNeeded = true; }
+            if (!isPotionsEnum(potionName)) {
+                return;
+            }
+            var p = gameObject.potions[potionName];
+            var potion = Scripts.Potions.getPotion(p);
+            if (!potion) {
+                var potionKad = Scripts.Potions.getKadForPotion(p);
+                var emptyBottle = Scripts.Potions.getEmptyBottle();
+                Orion.ClearJournal();
+                Orion.WaitTargetObject(emptyBottle);
+                Orion.UseObject(potionKad);
+                Orion.Wait(responseDelay);
+                if (Orion.InJournal('Pri praci s nadobou nemuzes delat neco')) {
+                    if (!switchWarModeWhenNeeded) {
+                        Scripts.Utils.log('Nemuzes pit, kdyz neco delas', ColorEnum.red);
+                        return;
+                    }
+                    Scripts.Utils.playerPrint('[War mode]', ColorEnum.red);
+                    Orion.WarMode(true);
+                    Orion.Wait(100);
+                    Orion.WaitTargetObject(emptyBottle);
+                    Orion.UseObject(potionKad);
+                    Orion.Wait(responseDelay);
+                }
+                potion = Scripts.Potions.getPotion(p);
+                if (!potion) {
+                    Scripts.Utils.playerPrint("!! NEMAS [ " + potionName + " ] !!", ColorEnum.red);
+                    return;
+                }
+            }
+            Orion.UseObject(potion);
+            Orion.Wait(responseDelay);
+            if (Orion.InJournal('You put the empty bottless')) {
+                Orion.AddDisplayTimer(TimersEnum.drink, 18000, 'RightTop', 'Circle', 'Drink potion', 0, 0, '0x100', 0, 'red');
+                Scripts.Utils.resetTimer(TimersEnum.drink);
+                var potionsCount = Orion.Count(p.graphic, p.color);
+                Scripts.Utils.playerPrint("[ " + potionName + " " + potionsCount + " ]", potionsCount === 0 ? ColorEnum.red : ColorEnum.green);
+            }
+        };
+        Potions.gmMortar = function (potionName) {
+            if (!isPotionsEnum(potionName)) {
+                return;
+            }
+            var p = gameObject.potions[potionName];
+            var cilovaKadSerial = Scripts.Potions.getKadForPotion(p);
+            var isEmptyKad = Orion.FindType(gameObject.uncategorized.emptyKad.graphic, gameObject.uncategorized.emptyKad.color);
+            if (!isEmptyKad) {
+                Scripts.Utils.log('Nemas praznou kad', ColorEnum.red);
+                return;
+            }
+            Scripts.Utils.playerPrint("Target gmmortar for making \"" + potionName + "\"");
+            Orion.WaitForAddObject('gmMortar', 60000);
+            var _loop_1 = function () {
+                Orion.ClearJournal();
+                var kadePrevious = Orion.FindType(gameObject.uncategorized.emptyKad.graphic);
+                Scripts.Utils.selectMenu('Vyber typ potionu', [p.gmMortarSelection]);
+                Orion.UseObject('gmMortar');
+                Scripts.Utils.waitWhileSomethingInJournal(['You vylil', 'Musis mit']);
+                if (Orion.InJournal('Musis mit')) {
+                    Scripts.Utils.log('Dosly regy', ColorEnum.red);
+                    return { value: void 0 };
+                }
+                var kadeNew = Orion.FindType(gameObject.uncategorized.emptyKad.graphic);
+                var michnutaKadSerial = kadeNew.filter(function (i) { return kadePrevious.indexOf(i) === -1; })[0];
+                Orion.ClearJournal();
+                Orion.WaitTargetObject(cilovaKadSerial);
+                Orion.UseObject(michnutaKadSerial);
+                Scripts.Utils.waitWhileSomethingInJournal(['Prelil jsi']);
+                Orion.ClearJournal();
+                var emptyBottle = Scripts.Potions.getEmptyBottle();
+                Orion.WaitTargetObject(emptyBottle);
+                Orion.UseObject(michnutaKadSerial);
+                Scripts.Utils.waitWhileSomethingInJournal(['You put']);
+                Orion.ClearJournal();
+                Orion.WaitTargetType(p.graphic, p.color);
+                Orion.UseObject(cilovaKadSerial);
+                Scripts.Utils.waitWhileSomethingInJournal(['You put']);
+            };
+            while (true) {
+                var state_1 = _loop_1();
+                if (typeof state_1 === "object")
+                    return state_1.value;
+            }
+        };
+        Potions.michani = function (potionName) {
+            if (!isPotionsEnum(potionName)) {
+                return;
+            }
+            var p = gameObject.potions[potionName];
+            var mortar = Scripts.Potions.getMortar();
+            while (true) {
+                Orion.ClearJournal();
+                Scripts.Utils.selectMenu('Vyber typ potionu', [p.alchemySelection]);
+                Orion.UseObject(mortar);
+                Scripts.Utils.waitWhileSomethingInJournal(['You completed', 'You toss', 'Nemas dostatecny']);
+                if (Orion.InJournal('Nemas dostatecny')) {
+                    Scripts.Utils.log('Dosly regy', ColorEnum.red);
+                    return;
+                }
+                if (Orion.InJournal('You toss')) {
+                    continue;
+                }
+                Orion.ClearJournal();
+                Orion.UseObject(mortar);
+                Scripts.Utils.waitWhileSomethingInJournal(['You pour']);
+                Orion.ClearJournal();
+                var potion = Scripts.Potions.getPotion(p);
+                var kad = Scripts.Potions.getKadForPotion(p);
+                Orion.WaitTargetObject(potion);
+                Orion.UseObject(kad);
+                Scripts.Utils.waitWhileSomethingInJournal(['You put']);
+            }
+        };
+        return Potions;
+    }());
+    Scripts.Potions = Potions;
+})(Scripts || (Scripts = {}));
+var Scripts;
+(function (Scripts) {
     var Spells = (function () {
         function Spells() {
         }
@@ -2321,7 +2443,7 @@ var Scripts;
                     while (isDrinkTimerSet && Orion.Timer(TimersEnum.drink) < 18000) {
                         Orion.Wait(200);
                     }
-                    Scripts.Common.drinkPotion('tmr');
+                    Scripts.Potions.drinkPotion(PotionsEnum.tmr);
                 }
             }
         };
@@ -2447,7 +2569,7 @@ var Scripts;
     var Targeting = (function () {
         function Targeting() {
         }
-        Targeting.TargetNext = function (reverse) {
+        Targeting.targetNext = function (reverse) {
             if (reverse === void 0) { reverse = false; }
             if (Orion.Timer('targetTimer') === -1) {
                 Orion.SetTimer('targetTimer');
@@ -2529,8 +2651,8 @@ var Scripts;
             if (quantity === void 0) { quantity = 1; }
             if (targetContainerId === void 0) { targetContainerId = 'backpack'; }
             if (refillJustWhenIHaveNothing === void 0) { refillJustWhenIHaveNothing = false; }
-            var serialsInTargetContainer = Orion.FindType(obj.graphic, obj.color, targetContainerId);
-            var serialsInSourceContainer = Orion.FindType(obj.graphic, obj.color, sourceContainerId);
+            var serialsInTargetContainer = Orion.FindType(obj.graphic, obj.color || '0xFFFF', targetContainerId);
+            var serialsInSourceContainer = Orion.FindType(obj.graphic, obj.color || '0xFFFF', sourceContainerId);
             var itemsInTarget = Scripts.Utils.countObjectInContainer(obj, targetContainerId);
             var itemsInSource = Scripts.Utils.countObjectInContainer(obj, sourceContainerId);
             if (itemsInTarget > quantity) {
@@ -2548,7 +2670,7 @@ var Scripts;
             }
         };
         Utils.countObjectInContainer = function (obj, container) {
-            var serials = Orion.FindType(obj.graphic, obj.color, container);
+            var serials = Orion.FindType(obj.graphic, obj.color || '0xFFFF', container);
             return Scripts.Utils.countItemsBySerials(serials);
         };
         Utils.countItemsBySerials = function (itemsSerials) {

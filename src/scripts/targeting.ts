@@ -10,7 +10,7 @@ namespace Scripts {
          * @param reverse if true.. it behaves like TargetPrevious
          * @constructor
          */
-        static TargetNext(reverse = false)
+        static targetNext(reverse = false)
         {
             // initialization
             if (Orion.Timer('targetTimer') === -1) {

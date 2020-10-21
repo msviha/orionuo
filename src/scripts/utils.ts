@@ -26,8 +26,8 @@ namespace Scripts {
             targetContainerId = 'backpack',
             refillJustWhenIHaveNothing = false
         ):number {
-            const serialsInTargetContainer = Orion.FindType(obj.graphic, obj.color, targetContainerId);
-            const serialsInSourceContainer = Orion.FindType(obj.graphic, obj.color, sourceContainerId);
+            const serialsInTargetContainer = Orion.FindType(obj.graphic, obj.color || '0xFFFF', targetContainerId);
+            const serialsInSourceContainer = Orion.FindType(obj.graphic, obj.color || '0xFFFF', sourceContainerId);
             const itemsInTarget = Scripts.Utils.countObjectInContainer(obj, targetContainerId);
             const itemsInSource = Scripts.Utils.countObjectInContainer(obj, sourceContainerId);
 
@@ -47,7 +47,7 @@ namespace Scripts {
         }
 
         static countObjectInContainer(obj:IMyGameObject, container:string):number {
-            const serials = Orion.FindType(obj.graphic, obj.color, container);
+            const serials = Orion.FindType(obj.graphic, obj.color || '0xFFFF', container);
             return Scripts.Utils.countItemsBySerials(serials);
         }
 
