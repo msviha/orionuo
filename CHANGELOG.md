@@ -4,6 +4,7 @@
 ### features
 - added `alchemy` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#alchemy)
 - added `bandageSelf` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#bandageSelf)
+- added `carveBody` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#carveBody)
 - added `fillPotion` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#fillPotion)
 - added `harp` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#harp)
 - added `lute` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#lute)

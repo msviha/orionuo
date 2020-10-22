@@ -16,4 +16,4 @@
 
 •  **drink**:  = "drink"
 
-*Defined in [enums.ts:51](https://github.com/msviha/orionuo/blob/dc53ac6/src/enums.ts#L51)*
+*Defined in [enums.ts:51](https://github.com/msviha/orionuo/blob/597f2ef/src/enums.ts#L51)*

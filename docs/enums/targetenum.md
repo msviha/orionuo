@@ -17,7 +17,7 @@
 
 •  **lastattack**:  = "lastattack"
 
-*Defined in [enums.ts:17](https://github.com/msviha/orionuo/blob/dc53ac6/src/enums.ts#L17)*
+*Defined in [enums.ts:17](https://github.com/msviha/orionuo/blob/597f2ef/src/enums.ts#L17)*
 
 ___
 
@@ -25,4 +25,4 @@ ___
 
 •  **self**:  = "self"
 
-*Defined in [enums.ts:16](https://github.com/msviha/orionuo/blob/dc53ac6/src/enums.ts#L16)*
+*Defined in [enums.ts:16](https://github.com/msviha/orionuo/blob/597f2ef/src/enums.ts#L16)*

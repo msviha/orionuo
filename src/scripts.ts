@@ -70,6 +70,17 @@ function bandageSelf(minimalCountForWarn = 10) {
 }
 
 /**
+ * Hodi do ruky cutWeapon a pripadne rovnou rizne nejblizsi mrtvolku pokud je povolen parametr
+ * @param carveNearestBodyAutomatically {boolean} default je false, pokud se da true tak rizne samo nejblizsi pokud je v dosahu
+ * @example in client `_carveBody`
+ * @example external code `carveBody();`
+ * @example external code `carveBody(true);` rizne samo nejblizsi mrtvolku
+ */
+function carveBody(carveNearestBodyAutomatically = false) {
+    Scripts.Loot.carveBody(carveNearestBodyAutomatically);
+}
+
+/**
  * Kouzli na pozadovany target, pokud je uveden
  * @example external code `cast("Harm", "lastattack");`
  * @example external code `cast("Magic Reflection", "self");`

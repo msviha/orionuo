@@ -85,7 +85,7 @@ var gameObject = {
                 y: 5
             }
         },
-        ngDagger: {
+        nbDagger: {
             graphic: '0x0F51',
             color: '0x0B80',
             bag: {
@@ -1197,6 +1197,10 @@ function bandageSelf(minimalCountForWarn) {
     if (minimalCountForWarn === void 0) { minimalCountForWarn = 10; }
     Scripts.Common.bandageSelf(minimalCountForWarn);
 }
+function carveBody(carveNearestBodyAutomatically) {
+    if (carveNearestBodyAutomatically === void 0) { carveNearestBodyAutomatically = false; }
+    Scripts.Loot.carveBody(carveNearestBodyAutomatically);
+}
 function cast(spell, target) {
     Scripts.Spells.cast(spell, target);
 }
@@ -1998,6 +2002,32 @@ var Scripts;
                     Orion.Wait(delay);
                 }
             }
+        };
+        Loot.carveBody = function (carveNearestBodyAutomatically) {
+            if (carveNearestBodyAutomatically === void 0) { carveNearestBodyAutomatically = false; }
+            var cutWeapon = Orion.FindObject('cutWeapon');
+            if (!cutWeapon) {
+                var nbDagger = gameObject.uncategorized.nbDagger;
+                var nbDaggerSerials = Orion.FindType(nbDagger.graphic, nbDagger.color);
+                if (!nbDaggerSerials.length) {
+                    var selection = Orion.WaitForAddObject('cutWeapon');
+                    Scripts.Utils.playerPrint('target your cutWeapon');
+                    if (selection === 1) {
+                        throw 'e';
+                    }
+                    cutWeapon = Orion.FindObject('cutWeapon');
+                }
+                else {
+                    cutWeapon = Orion.FindObject(nbDaggerSerials[0]);
+                }
+            }
+            if (carveNearestBodyAutomatically) {
+                var body = Orion.FindType('0x2006', '-1', 'ground', 'near', 3);
+                if (body.length) {
+                    Orion.WaitTargetObject(body[0]);
+                }
+            }
+            Orion.UseObject(cutWeapon.Serial());
         };
         return Loot;
     }());

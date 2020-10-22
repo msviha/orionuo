@@ -32,7 +32,7 @@ const gameObject:any = {
                 y: 5
             }
         },
-        ngDagger: {
+        nbDagger: {
             graphic: '0x0F51',
             color:  '0x0B80',
             bag: {

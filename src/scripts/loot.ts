@@ -224,5 +224,35 @@ namespace Scripts {
                 }
             }
         }
+
+        static carveBody(carveNearestBodyAutomatically = false) {
+
+            let cutWeapon = Orion.FindObject('cutWeapon');
+
+            if (!cutWeapon) {
+                const nbDagger = gameObject.uncategorized.nbDagger;
+                const nbDaggerSerials = Orion.FindType(nbDagger.graphic, nbDagger.color);
+                if (!nbDaggerSerials.length) {
+                    const selection = Orion.WaitForAddObject('cutWeapon')
+                    Scripts.Utils.playerPrint('target your cutWeapon');
+                    if (selection === 1) {
+                        throw 'e';
+                    }
+                    cutWeapon = Orion.FindObject('cutWeapon');
+                }
+                else {
+                    cutWeapon = Orion.FindObject(nbDaggerSerials[0]);
+                }
+            }
+
+            if (carveNearestBodyAutomatically) {
+                const body = Orion.FindType('0x2006', '-1', 'ground', 'near', 3);
+                if (body.length) {
+                    Orion.WaitTargetObject(body[0]);
+                }
+            }
+
+            Orion.UseObject(cutWeapon.Serial());
+        }
     }
 }
