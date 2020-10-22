@@ -202,6 +202,15 @@ function kill() {
 }
 
 /**
+ * Cepne a odpali lavabombu - vyhodi target na koho ji chces pouzit
+ * @example in client `_lavaBomb`
+ * @example external code `lavaBomb()`
+ */
+function lavaBomb() {
+    Scripts.Common.lavaBomb();
+}
+
+/**
  * Hodi svetlo z kade, pokud kad neni, tak hodi z hlavy (pokud za to nenapisete false)
  * @param shouldCast {boolean} default je true, takze pokud nemas kad tak zakouzli svetlo
  * @example `_light`
@@ -298,6 +307,15 @@ function summon(creature:string, target?:TargetEnum) {
 }
 
 /**
+ * Zacilis co chces tamnout a po tamnuti hodi do baglu
+ * @example in client `_taming`
+ * @example external code `taming()`
+ */
+function taming() {
+    Scripts.Taming.taming();
+}
+
+/**
  * Targeti zive jednotky okolo tebe. Uchovava list targetu po dobu 2,5 vteriny pro pouziti s `targetPrevious`.
  * Vybrany target ma rovnou status `attackLast` (ale neutocis to na nej, jen mas zaply war) takze je mozne na nej kouzlit
  * @example in client `_targetNext`
@@ -378,4 +396,13 @@ function useKlamak(lvl:number, useAim = false, priorityList?:string[]) {
  */
 function useRR() {
     Scripts.Jewelry.useRR();
+}
+
+/**
+ * Pouzije shrink kad
+ * @example in client `_useShrinkKad`
+ * @example external code `useShrinkKad()`
+ */
+function useShrinkKad() {
+    Scripts.Taming.useShrinkKad();
 }

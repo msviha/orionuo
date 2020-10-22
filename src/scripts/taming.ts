@@ -175,5 +175,87 @@ namespace Scripts {
                 monstersAround = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "live", 22, "gray");
             }
         }
+
+        static useShrinkKad() {
+            const kad = gameObject.potions.shrink.kad;
+            Orion.UseType(kad.graphic, kad.color);
+        }
+
+        static taming() {
+            Orion.Disarm();
+            Orion.Wait(responseDelay);
+            const loadedStaff = gameObject.taming.staffs.tamingShrink;
+            let loadedStaffSerials = Orion.FindType(loadedStaff.graphic, loadedStaff.color);
+            const staff = gameObject.taming.staffs.taming;
+            const staffSerials = Orion.FindType(staff.graphic, staff.color);
+
+            if (!loadedStaffSerials.length && staffSerials.length) {
+                const shrink = gameObject.potions.shrink;
+                const shrinkSerials = Orion.FindType(shrink.graphic, shrink.color);
+                const shrinkKadSerials = Orion.FindType(shrink.kad.graphic, shrink.kad.color);
+                if (shrinkSerials.length) {
+                    Orion.WaitTargetObject(shrinkSerials[0]);
+                }
+                else if (shrinkKadSerials.length) {
+                    Orion.WaitTargetObject(shrinkKadSerials[0]);
+                }
+                Orion.UseObject(staffSerials[0]);
+                Scripts.Utils.waitWhileSomethingInJournal(['Hul nabita']);
+                Orion.Disarm();
+                Orion.Wait(responseDelay);
+            }
+
+            loadedStaffSerials = Orion.FindType(loadedStaff.graphic, loadedStaff.color);
+            if (!loadedStaffSerials) {
+                Scripts.Utils.playerPrint('Nemas potrebne vybaveni na taming', ColorEnum.red);
+                return;
+            }
+
+            Orion.ClearJournal();
+
+            Scripts.Utils.playerPrint('Co chces tamnout ?');
+            const selection = Orion.WaitForAddObject('tamingTarget');
+            if (selection !== 1) {
+                return;
+            }
+
+            let tamnuto = false;
+            while (!tamnuto) {
+                const target = Orion.FindObject('tamingTarget');
+
+                Orion.WaitTargetObject('tamingTarget');
+                Orion.UseObject(loadedStaffSerials[0]);
+
+                Scripts.Utils.waitWhileSomethingInJournal([
+                    'Hul nabita',
+                    'Your taming failed',
+                    'Ochoceni se nezdarilo',
+                    'Too far',
+                    'Jsi prilis vzdalen',
+                    'Jsi moc daleko',
+                    'Not tamable',
+                    'byl tamnut',
+                    'You are not able to tame this animal'
+                ]);
+
+                if (Orion.InJournal('Too far|Jsi prilis vzdalen|Jsi moc daleko')) {
+                    Orion.WalkTo(target.X(), target.Y(), target.Z(), 1);
+                }
+                if (Orion.InJournal('Not tamable|You are not able to tame this animal')) {
+                    Scripts.Utils.playerPrint('Na toto zviratko nemas', ColorEnum.red);
+                    break;
+                }
+                if (Orion.InJournal('byl tamnut')) {
+                    const groundItemsSerials = Orion.FindType('any', 'any', 'ground', 'item', 3);
+                    for (const g of groundItemsSerials) {
+                        Orion.MoveItem(g);
+                    }
+                    tamnuto = true;
+                }
+                Orion.Disarm();
+                Orion.Wait(responseDelay);
+                Orion.ClearJournal();
+            }
+        }
     }
 }

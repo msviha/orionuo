@@ -5,26 +5,6 @@ namespace Scripts {
      */
     export class Wip {
 
-        static lavaBomba() {
-            const bomb = <IPotion>gameObject.potions.lavabomb;
-            const emptyBottles = <IMyGameObject>gameObject.uncategorized.emptyBottles;
-            const bombKad:IMyGameObject = bomb.kad;
-            const emptyBottlesSerials = Orion.FindType(emptyBottles.graphic, emptyBottles.color, 'backpack','item', 3 , '-1', true);
-
-            if (!emptyBottlesSerials.length) {
-                Scripts.Utils.playerPrint('NEMAS PRAZDNE LAHVE', ColorEnum.red);
-                return;
-            }
-
-            // Orion.WarMode(true, false);
-            Orion.WarMode(true);
-
-            Orion.WaitTargetObject(emptyBottlesSerials[0]);
-            Orion.UseType(bombKad.graphic, bombKad.color);
-            Orion.Wait(250);
-            Orion.UseType(bomb.graphic);
-        }
-
         static dropItem(item:IMyGameObject) {
             //todo why the color is backpack
             let serials = Orion.FindType(item.graphic, "backpack")

@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.0.6
+### features
+- added `lavaBomb` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#lavaBomb)
+- added `taming` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#taming)
+- added `useShrinkKad` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#useShrinkKad)
+
 ## 0.0.5
 ### features
 - added `alchemy` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#alchemy)

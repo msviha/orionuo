@@ -43,6 +43,7 @@
 * [hiding](globals.md#hiding)
 * [inscription](globals.md#inscription)
 * [kill](globals.md#kill)
+* [lavaBomb](globals.md#lavabomb)
 * [light](globals.md#light)
 * [lockpicking](globals.md#lockpicking)
 * [loot](globals.md#loot)
@@ -53,6 +54,7 @@
 * [mount](globals.md#mount)
 * [nbRune](globals.md#nbrune)
 * [summon](globals.md#summon)
+* [taming](globals.md#taming)
 * [targetNext](globals.md#targetnext)
 * [targetPrevious](globals.md#targetprevious)
 * [tracking](globals.md#tracking)
@@ -61,6 +63,7 @@
 * [useGGR](globals.md#useggr)
 * [useKlamak](globals.md#useklamak)
 * [useRR](globals.md#userr)
+* [useShrinkKad](globals.md#useshrinkkad)
 
 ### Object literals
 
@@ -72,7 +75,7 @@
 
 • `Const` **responseDelay**: 350 = 350
 
-*Defined in [globals.ts:1](https://github.com/msviha/orionuo/blob/597f2ef/src/globals.ts#L1)*
+*Defined in [globals.ts:1](https://github.com/msviha/orionuo/blob/236ae05/src/globals.ts#L1)*
 
 ## Functions
 
@@ -80,7 +83,7 @@
 
 ▸ **Autostart**(): void
 
-*Defined in [scripts.ts:4](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L4)*
+*Defined in [scripts.ts:4](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L4)*
 
 Zaskrtnete si v Orion Assistantovi Autostart checkbox
 
@@ -92,7 +95,7 @@ ___
 
 ▸ **addCutWeapon**(): void
 
-*Defined in [scripts.ts:37](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L37)*
+*Defined in [scripts.ts:37](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L37)*
 
 Nastavi do Orion assistanta `cutWeapon` List Object (napr. pro script na lootovani, nebo samotne rezani tel)
 
@@ -108,7 +111,7 @@ ___
 
 ▸ **addMount**(): void
 
-*Defined in [scripts.ts:46](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L46)*
+*Defined in [scripts.ts:46](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L46)*
 
 Nastavi do Orion assistanta `myMount` List Object (pro nasedani na jezditko)
 
@@ -124,7 +127,7 @@ ___
 
 ▸ **alchemy**(`potionName`: [PotionsEnum](enums/potionsenum.md)): void
 
-*Defined in [scripts.ts:56](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L56)*
+*Defined in [scripts.ts:56](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L56)*
 
 Micha pres obyc mortar
 
@@ -146,7 +149,7 @@ ___
 
 ▸ **bandageSelf**(`minimalCountForWarn`: number): void
 
-*Defined in [scripts.ts:68](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L68)*
+*Defined in [scripts.ts:68](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L68)*
 
 Da si bandu, pokud dosli tak prehraje zvuk z C:\critical.wav
 Poslednich 10 band hlasi nad hracem
@@ -171,7 +174,7 @@ ___
 
 ▸ **carveBody**(`carveNearestBodyAutomatically`: boolean): void
 
-*Defined in [scripts.ts:79](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L79)*
+*Defined in [scripts.ts:79](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L79)*
 
 Hodi do ruky cutWeapon a pripadne rovnou rizne nejblizsi mrtvolku pokud je povolen parametr
 
@@ -195,7 +198,7 @@ ___
 
 ▸ **cast**(`spell`: string, `target?`: [TargetEnum](enums/targetenum.md)): void
 
-*Defined in [scripts.ts:88](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L88)*
+*Defined in [scripts.ts:88](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L88)*
 
 Kouzli na pozadovany target, pokud je uveden
 
@@ -218,7 +221,7 @@ ___
 
 ▸ **castNecroScroll**(`scroll`: [NecroScrollEnum](enums/necroscrollenum.md), `target?`: [TargetEnum](enums/targetenum.md)): void
 
-*Defined in [scripts.ts:97](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L97)*
+*Defined in [scripts.ts:97](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L97)*
 
 Kouzli svitek z NecroScrollEnum na pozadovany target, pokud je uveden
 
@@ -241,7 +244,7 @@ ___
 
 ▸ **castScroll**(`scroll`: [ScrollEnum](enums/scrollenum.md), `target?`: [TargetEnum](enums/targetenum.md), `backupHeadCast?`: string): void
 
-*Defined in [scripts.ts:106](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L106)*
+*Defined in [scripts.ts:106](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L106)*
 
 Kouzli svitek na pozadovany target, pokud je uveden, pokud neni timer na svitek zakouzli z hlavy backupHeadCast
 
@@ -265,7 +268,7 @@ ___
 
 ▸ **drink**(`potionName`: [PotionsEnum](enums/potionsenum.md), `switchWarModeWhenNeeded`: boolean): void
 
-*Defined in [scripts.ts:117](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L117)*
+*Defined in [scripts.ts:117](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L117)*
 
 Chlasta lahvicky
 
@@ -288,7 +291,7 @@ ___
 
 ▸ **fillPotion**(`potionName`: [PotionsEnum](enums/potionsenum.md), `switchWarModeWhenNeeded`: boolean): void
 
-*Defined in [scripts.ts:128](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L128)*
+*Defined in [scripts.ts:128](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L128)*
 
 Docepne lahvicku z kade
 
@@ -311,7 +314,7 @@ ___
 
 ▸ **gmMortar**(`potionName`: [PotionsEnum](enums/potionsenum.md)): void
 
-*Defined in [scripts.ts:138](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L138)*
+*Defined in [scripts.ts:138](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L138)*
 
 Micha na gm mortaru
 
@@ -333,7 +336,7 @@ ___
 
 ▸ **harp**(`target?`: [TargetEnum](enums/targetenum.md)): void
 
-*Defined in [scripts.ts:150](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L150)*
+*Defined in [scripts.ts:150](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L150)*
 
 Pouzije harfu
 
@@ -359,7 +362,7 @@ ___
 
 ▸ **hideAll**(): void
 
-*Defined in [scripts.ts:171](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L171)*
+*Defined in [scripts.ts:171](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L171)*
 
 Prepina mezi dvema stavy - hiduje hrace v okruhu 15ti policek a dalsi volani dava resync/resend. Nevidim na cudlik protoze mi tam nekdo stoji atd.
 
@@ -375,7 +378,7 @@ ___
 
 ▸ **hiding**(): void
 
-*Defined in [scripts.ts:180](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L180)*
+*Defined in [scripts.ts:180](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L180)*
 
 Hidne hrace
 
@@ -391,7 +394,7 @@ ___
 
 ▸ **inscription**(`circle`: number, `spell`: string, `quantity`: number): void
 
-*Defined in [scripts.ts:191](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L191)*
+*Defined in [scripts.ts:191](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L191)*
 
 pise svitky
 
@@ -413,7 +416,7 @@ ___
 
 ▸ **kill**(): void
 
-*Defined in [scripts.ts:200](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L200)*
+*Defined in [scripts.ts:200](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L200)*
 
 Prejmenuje vsechny summony a posle na lastattack
 
@@ -425,11 +428,27 @@ Prejmenuje vsechny summony a posle na lastattack
 
 ___
 
+### lavaBomb
+
+▸ **lavaBomb**(): void
+
+*Defined in [scripts.ts:209](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L209)*
+
+Cepne a odpali lavabombu - vyhodi target na koho ji chces pouzit
+
+**`example`** in client `_lavaBomb`
+
+**`example`** external code `lavaBomb()`
+
+**Returns:** void
+
+___
+
 ### light
 
 ▸ **light**(`shouldCast`: boolean): void
 
-*Defined in [scripts.ts:211](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L211)*
+*Defined in [scripts.ts:220](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L220)*
 
 Hodi svetlo z kade, pokud kad neni, tak hodi z hlavy (pokud za to nenapisete false)
 
@@ -453,7 +472,7 @@ ___
 
 ▸ **lockpicking**(): void
 
-*Defined in [scripts.ts:221](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L221)*
+*Defined in [scripts.ts:230](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L230)*
 
 Trenuje lockpicking pomoci bedynky a klice (rozbaleny lockpicking training kit)
 
@@ -469,7 +488,7 @@ ___
 
 ▸ **loot**(`cut`: boolean): void
 
-*Defined in [scripts.ts:236](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L236)*
+*Defined in [scripts.ts:245](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L245)*
 
 Lotuje vse (vcetne hracu) v dosahu.
 Vyzaduje nastaveni Objects a Find v Orion assistantovi v zalozce Lists
@@ -498,7 +517,7 @@ ___
 
 ▸ **lootAll**(`delay`: number): void
 
-*Defined in [scripts.ts:249](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L249)*
+*Defined in [scripts.ts:258](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L258)*
 
 Zameri target a premisti z nej vse do backpacku
 
@@ -524,7 +543,7 @@ ___
 
 ▸ **lute**(`target?`: [TargetEnum](enums/targetenum.md)): void
 
-*Defined in [scripts.ts:162](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L162)*
+*Defined in [scripts.ts:162](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L162)*
 
 Pouzije loutnu
 
@@ -550,7 +569,7 @@ ___
 
 ▸ **make**(`count`: number, `objectAsString`: string, `setInputs`: boolean): void
 
-*Defined in [scripts.ts:259](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L259)*
+*Defined in [scripts.ts:268](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L268)*
 
 Vyrabi s craftem
 
@@ -574,7 +593,7 @@ ___
 
 ▸ **manualTarget**(): void
 
-*Defined in [scripts.ts:269](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L269)*
+*Defined in [scripts.ts:278](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L278)*
 
 Zobrazi zamerovac pro zamereni cile, ktery se ulozi pod lastattack
 Cil je tim padem zbarven a jsou vypsany jeho zivoty
@@ -591,7 +610,7 @@ ___
 
 ▸ **mount**(): void
 
-*Defined in [scripts.ts:287](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L287)*
+*Defined in [scripts.ts:296](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L296)*
 
 Naseda a seseda z jezditka. Pokud Vam jezditko umre, nebo mate nasetovane nejake ktere neni v dosahu, zobrazi se zamereni jezditka
 
@@ -607,7 +626,7 @@ ___
 
 ▸ **nbRune**(): void
 
-*Defined in [scripts.ts:278](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L278)*
+*Defined in [scripts.ts:287](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L287)*
 
 Kopne pres NB runu
 
@@ -623,7 +642,7 @@ ___
 
 ▸ **summon**(`creature`: string, `target?`: [TargetEnum](enums/targetenum.md)): void
 
-*Defined in [scripts.ts:296](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L296)*
+*Defined in [scripts.ts:305](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L305)*
 
 Kouzli summona (jmeno je treba zadat tak jak je v nabidce summonu) na pozadovany target, pokud je uveden
 
@@ -642,11 +661,27 @@ Name | Type |
 
 ___
 
+### taming
+
+▸ **taming**(): void
+
+*Defined in [scripts.ts:314](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L314)*
+
+Zacilis co chces tamnout a po tamnuti hodi do baglu
+
+**`example`** in client `_taming`
+
+**`example`** external code `taming()`
+
+**Returns:** void
+
+___
+
 ### targetNext
 
 ▸ **targetNext**(): void
 
-*Defined in [scripts.ts:306](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L306)*
+*Defined in [scripts.ts:324](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L324)*
 
 Targeti zive jednotky okolo tebe. Uchovava list targetu po dobu 2,5 vteriny pro pouziti s `targetPrevious`.
 Vybrany target ma rovnou status `attackLast` (ale neutocis to na nej, jen mas zaply war) takze je mozne na nej kouzlit
@@ -663,7 +698,7 @@ ___
 
 ▸ **targetPrevious**(): void
 
-*Defined in [scripts.ts:316](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L316)*
+*Defined in [scripts.ts:334](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L334)*
 
 Targeti zive jednotky okolo tebe. Uchovava list targetu po dobu 2,5 vteriny pro pouziti s `targetNext`
 Vybrany target ma rovnou status `attackLast` (ale neutocis to na nej, jen mas zaply war) takze je mozne na nej kouzlit
@@ -680,7 +715,7 @@ ___
 
 ▸ **tracking**(`who`: string): void
 
-*Defined in [scripts.ts:328](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L328)*
+*Defined in [scripts.ts:346](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L346)*
 
 Trackuje hrace nebo pozadovanou volbu z menu
 
@@ -706,7 +741,7 @@ ___
 
 ▸ **unlock**(): void
 
-*Defined in [scripts.ts:337](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L337)*
+*Defined in [scripts.ts:355](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L355)*
 
 Lockpickuje zamcenou bednu, dokud ji neotevre (nebo nedojdou locky)
 
@@ -722,7 +757,7 @@ ___
 
 ▸ **use**(`object`: IMyGameObject, `name`: string, `minimalCountForWarn?`: number): void
 
-*Defined in [scripts.ts:348](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L348)*
+*Defined in [scripts.ts:366](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L366)*
 
 Pouzije objekt ktery ma nadefinovany graphic a color a upozorni v pripade nizkeho poctu
 
@@ -744,7 +779,7 @@ ___
 
 ▸ **useGGR**(): void
 
-*Defined in [scripts.ts:357](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L357)*
+*Defined in [scripts.ts:375](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L375)*
 
 Pouzije Great Gold Ring
 
@@ -760,7 +795,7 @@ ___
 
 ▸ **useKlamak**(`lvl`: number, `useAim`: boolean, `priorityList?`: string[]): void
 
-*Defined in [scripts.ts:370](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L370)*
+*Defined in [scripts.ts:388](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L388)*
 
 Vyhodi klamaka
 
@@ -786,7 +821,7 @@ ___
 
 ▸ **useRR**(): void
 
-*Defined in [scripts.ts:379](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts.ts#L379)*
+*Defined in [scripts.ts:397](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L397)*
 
 Pouzije Reflex Ring nebo Great Reflex Ring
 
@@ -796,13 +831,29 @@ Pouzije Reflex Ring nebo Great Reflex Ring
 
 **Returns:** void
 
+___
+
+### useShrinkKad
+
+▸ **useShrinkKad**(): void
+
+*Defined in [scripts.ts:406](https://github.com/msviha/orionuo/blob/236ae05/src/scripts.ts#L406)*
+
+Pouzije shrink kad
+
+**`example`** in client `_useShrinkKad`
+
+**`example`** external code `useShrinkKad()`
+
+**Returns:** void
+
 ## Object literals
 
 ### gameObject
 
 ▪ `Const` **gameObject**: object
 
-*Defined in [globals.ts:2](https://github.com/msviha/orionuo/blob/597f2ef/src/globals.ts#L2)*
+*Defined in [globals.ts:2](https://github.com/msviha/orionuo/blob/236ae05/src/globals.ts#L2)*
 
 #### Properties:
 
@@ -814,11 +865,11 @@ Name | Type | Value |
 `klamak` | object | { lvl1: { chicken: { color: string = "0xFFFF"; graphic: string = "0x20D1" } ; giantRat: { color: string = "0xFFFF"; graphic: string = "0x20D0" } ; rabbit: { color: string = "0x090C"; graphic: string = "0x2125" } ; rat: { color: string = "0xFFFF"; graphic: string = "0x2123" }  } ; lvl2: { boar: { color: string = "0xFFFF"; graphic: string = "0x2101" } ; bullFrog: { color: string = "0xFFFF"; graphic: string = "0x2130" } ; cat: { color: string = "0xFFFF"; graphic: string = "0x211B" } ; dog: { color: string = "0xFFFF"; graphic: string = "0x09A8" } ; goat: { color: string = "0xFFFF"; graphic: string = "0x2108" } ; jackRabbit: { color: string = "0x01BB"; graphic: string = "0x2125" } ; squirrel: { color: string = "0xFFFF"; graphic: string = "0x2D97" } ; wolf: { color: string = "0xFFFF"; graphic: string = "0x20EA" }  } ; lvl3: { blackBear: { color: string = "0xFFFF"; graphic: string = "0x2118" } ; brownBear: { color: string = "0xFFFF"; graphic: string = "0x20CF" } ; bull: { color: string = "0xFFFF"; graphic: string = "0x20EF" } ; cow: { color: string = "0xFFFF"; graphic: string = "0x2103" } ; gorilla: { color: string = "0xFFFF"; graphic: string = "0x20F5" } ; hart: { color: string = "0xFFFF"; graphic: string = "0x20D4" } ; hind: { color: string = "0xFFFF"; graphic: string = "0x20D4" } ; sheep: { color: string = "0xFFFF"; graphic: string = "0x20EB" }  } ; lvl4: { cougar: { color: string = "0xFFFF"; graphic: string = "0x2119" } ; eagle: { color: string = "0xFFFF"; graphic: string = "0x211D" } ; panther: { color: string = "0xFFFF"; graphic: string = "0x2119" } ; timberWolf: { color: string = "0xFFFF"; graphic: string = "0x20EA" }  } ; lvl5: { alligator: { color: string = "0xFFFF"; graphic: string = "0x2131" } ; grizzly: { color: string = "0xFFFF"; graphic: string = "0x211E" } ; leopard: { color: string = "0xFFFF"; graphic: string = "0x2119" } ; polar: { color: string = "0xFFFF"; graphic: string = "0x20E1" } ; snake: { color: string = "0xFFFF"; graphic: string = "0x20FC" }  }  } |
 `mystics` | object | { ball: { color: string = "0x0B9F"; graphic: string = "0x0E73"; name: string = "Ball" } ; beeds: { color: string = "0x0BB5"; graphic: string = "0x108B"; name: string = "Beeds" } ; crystal: { color: string = "0x0044"; graphic: string = "0x0F5A"; name: string = "Crystal" } ; flower: { color: string = "0x005B"; graphic: string = "0x0DC3"; name: string = "Flower" } ; leaf: { color: string = "0x0B9F"; graphic: string = "0x0DBD"; name: string = "Leaf" } ; mushroom: { color: string = "0x00A3"; graphic: string = "0x0D16"; name: string = "Mushroom" } ; plant: { color: string = "0x0899"; graphic: string = "0x0CB0"; name: string = "Stone" } ; stick: { color: string = "0x0481"; graphic: string = "0x1A9D"; name: string = "Stick" } ; stone: { color: string = "0x0B94"; graphic: string = "0x136C"; name: string = "Stone" }  } |
 `necroRegy` | object | { batwings: { graphic: string = "0x0F78"; bag: { x: number = 155; y: number = 180 }  } ; blackmoor: { graphic: string = "0x0F79"; bag: { x: number = 155; y: number = 180 }  } ; bloodspawn: { graphic: string = "0x0F7C"; bag: { x: number = 155; y: number = 180 }  } ; bones: { graphic: string = "0x0F7E"; bag: { x: number = 155; y: number = 180 }  } ; brimstone: { graphic: string = "0x0F7F"; bag: { x: number = 155; y: number = 180 }  } ; daemon\_bones: { graphic: string = "0x0F80"; bag: { x: number = 155; y: number = 180 }  } ; deamon\_blood: { graphic: string = "0x0F7D"; bag: { x: number = 155; y: number = 180 }  } ; dragons\_blood: { graphic: string = "0x0F82"; bag: { x: number = 155; y: number = 180 }  } ; executioners\_cap: { graphic: string = "0x0F83"; bag: { x: number = 155; y: number = 180 }  } ; eyes\_of\_newt: { color: string = "0x0000"; graphic: string = "0x0F87"; bag: { x: number = 155; y: number = 180 }  } ; fertile\_dirt: { graphic: string = "0x0F81"; bag: { x: number = 155; y: number = 180 }  } ; obsidian: { graphic: string = "0x0F89"; bag: { x: number = 155; y: number = 180 }  } ; pumice: { graphic: string = "0x0F8B"; bag: { x: number = 155; y: number = 180 }  } ; serpent\_scales: { graphic: string = "0x0F8E"; bag: { x: number = 155; y: number = 180 }  } ; volcanic\_ash: { graphic: string = "0x0F8F"; bag: { x: number = 155; y: number = 180 }  } ; wyrms\_hearts: { graphic: string = "0x0F91"; bag: { x: number = 155; y: number = 180 }  }  } |
-`potions` | object | { gc: { alchemySelection: string = "Greater Cure"; color: string = "0x0000"; gmMortarSelection: string = "Greater Cure (612 Garlics)"; graphic: string = "0x0F07"; bag: { x: number = 80; y: number = 15 } ; kad: { color: string = "0x0842"; graphic: string = "0x1843" }  } ; gh: { alchemySelection: string = "Greater Heal"; color: string = "0x0000"; gmMortarSelection: string = "Greater Heal (714 Ginsengs)"; graphic: string = "0x0F0C"; bag: { x: number = 25; y: number = 15 } ; kad: { color: string = "0x08A7"; graphic: string = "0x1843" }  } ; gs: { alchemySelection: string = "Greater Strength"; color: string = "0x0000"; gmMortarSelection: string = "Greater Strength (612 Mandrake Roots)"; graphic: string = "0x0F09"; bag: { x: number = 25; y: number = 25 } ; kad: { color: string = "0x0481"; graphic: string = "0x1843" }  } ; invis: { alchemySelection: string = "Invisibility"; color: string = "0x0B77"; graphic: string = "0x0F09"; kad: { color: string = "0x0B77"; graphic: string = "0x1843" }  } ; lavabomb: { alchemySelection: string = "Lava Bomb"; color: string = "0x000E"; gmMortarSelection: string = "Lava Bomb (612 Volcanic Ashes)"; graphic: string = "0x0F0D"; kad: { color: string = "0x000E"; graphic: string = "0x1843" }  } ; lc: { color: string = "0x0000"; graphic: string = "0x0F07"; bag: { x: number = 80; y: number = 15 } ; kad: { color: string = "0x0091"; graphic: string = "0x1843" }  } ; ns: { alchemySelection: string = "Nightsight"; color: string = "0x0000"; graphic: string = "0x0F06"; kad: { color: string = "0x03C4"; graphic: string = "0x1843" }  } ; shrink: { alchemySelection: string = "Shrink"; color: string = "0x045E"; gmMortarSelection: string = "Shrink (306 Batwings)"; graphic: string = "0x0F09"; bag: { x: number = 80; y: number = 25 } ; kad: { color: string = "0x0724"; graphic: string = "0x1843" }  } ; tmr: { alchemySelection: string = "Total Mana Refresh"; color: string = "0x0003"; gmMortarSelection: string = "Total Mana Refresh (612 Eyes of Newt nebo 306 Blue Eyes of Newt)"; graphic: string = "0x0F09"; bag: { x: number = 25; y: number = 5 } ; kad: { color: string = "0x0003"; graphic: string = "0x1843" }  } ; tr: { alchemySelection: string = "Total Refresh"; color: string = "0x0000"; gmMortarSelection: string = "Total Refresh (510 Black Pearls)"; graphic: string = "0x0F0B"; bag: { x: number = 80; y: number = 5 } ; kad: { color: string = "0x014D"; graphic: string = "0x1843" }  }  } |
+`potions` | object | { gc: { alchemySelection: string = "Greater Cure"; color: string = "0x0000"; gmMortarSelection: string = "Greater Cure (612 Garlics)"; graphic: string = "0x0F07"; bag: { x: number = 80; y: number = 15 } ; kad: { color: string = "0x0842"; graphic: string = "0x1843" }  } ; gh: { alchemySelection: string = "Greater Heal"; color: string = "0x0000"; gmMortarSelection: string = "Greater Heal (714 Ginsengs)"; graphic: string = "0x0F0C"; bag: { x: number = 25; y: number = 15 } ; kad: { color: string = "0x08A7"; graphic: string = "0x1843" }  } ; gs: { alchemySelection: string = "Greater Strength"; color: string = "0x0000"; gmMortarSelection: string = "Greater Strength (612 Mandrake Roots)"; graphic: string = "0x0F09"; bag: { x: number = 25; y: number = 25 } ; kad: { color: string = "0x0481"; graphic: string = "0x1843" }  } ; invis: { alchemySelection: string = "Invisibility"; color: string = "0x0B77"; graphic: string = "0x0F09"; kad: { color: string = "0x0B77"; graphic: string = "0x1843" }  } ; lavabomb: { alchemySelection: string = "Lava Bomb"; color: string = "0x000E"; gmMortarSelection: string = "Lava Bomb (612 Volcanic Ashes)"; graphic: string = "0x0F0D"; kad: { color: string = "0x000E"; graphic: string = "0x1843" }  } ; lc: { color: string = "0x0000"; graphic: string = "0x0F07"; bag: { x: number = 80; y: number = 15 } ; kad: { color: string = "0x0091"; graphic: string = "0x1843" }  } ; mr: { alchemySelection: string = "Mana Refresh"; color: string = "0x0005"; graphic: string = "0x0F09"; kad: { color: string = "0x0005"; graphic: string = "0x1843" }  } ; ns: { alchemySelection: string = "Nightsight"; color: string = "0x0000"; graphic: string = "0x0F06"; kad: { color: string = "0x03C4"; graphic: string = "0x1843" }  } ; shrink: { alchemySelection: string = "Shrink"; color: string = "0x045E"; gmMortarSelection: string = "Shrink (306 Batwings)"; graphic: string = "0x0F09"; bag: { x: number = 80; y: number = 25 } ; kad: { color: string = "0x0724"; graphic: string = "0x1843" }  } ; tmr: { alchemySelection: string = "Total Mana Refresh"; color: string = "0x0003"; gmMortarSelection: string = "Total Mana Refresh (612 Eyes of Newt nebo 306 Blue Eyes of Newt)"; graphic: string = "0x0F09"; bag: { x: number = 25; y: number = 5 } ; kad: { color: string = "0x0003"; graphic: string = "0x1843" }  } ; tr: { alchemySelection: string = "Total Refresh"; color: string = "0x0000"; gmMortarSelection: string = "Total Refresh (510 Black Pearls)"; graphic: string = "0x0F0B"; bag: { x: number = 80; y: number = 5 } ; kad: { color: string = "0x014D"; graphic: string = "0x1843" }  }  } |
 `regy` | object | { bm: { graphic: string = "0x0F7B"; bag: { x: number = 50; y: number = 180 }  } ; bp: { graphic: string = "0x0F7A"; bag: { x: number = 61; y: number = 180 }  } ; ga: { graphic: string = "0x0F84"; bag: { x: number = 80; y: number = 180 }  } ; gi: { graphic: string = "0x0F85"; bag: { x: number = 92; y: number = 180 }  } ; mr: { graphic: string = "0x0F86"; bag: { x: number = 20; y: number = 180 }  } ; ns: { graphic: string = "0x0F88"; bag: { x: number = 110; y: number = 180 }  } ; sa: { graphic: string = "0x0F8C"; bag: { x: number = 125; y: number = 180 }  } ; ss: { graphic: string = "0x0F8D"; bag: { x: number = 35; y: number = 180 }  }  } |
 `resources` | object | { boards: { color: string = "0x0000"; graphic: string = "0x1BD7" } ; furs: { color: string = "0x0000"; graphic: string = "0x11FA" } ; ingots: { black: { color: string = "0x0455"; graphic: string = "0x1BEF" } ; blood: { color: string = "0x04C2"; graphic: string = "0x1BEF" } ; bronze: { color: string = "0x06D6"; graphic: string = "0x1BEF" } ; copper: { color: string = "0x0000"; graphic: string = "0x1BE3" } ; gold: { color: string = "0x0000"; graphic: string = "0x1BE9" } ; iron: { color: string = "0x0000"; graphic: string = "0x1BEF" } ; mytheril: { color: string = "0x052D"; graphic: string = "0x1BEF" } ; rose: { color: string = "0x0665"; graphic: string = "0x1BEF" } ; shadow: { color: string = "0x0770"; graphic: string = "0x1BEF" }  } ; logs: { color: string = "0x0000"; graphic: string = "0x1BDD" } ; ore: { anyOre: { graphic: string = "0x19B9" } ; iron: { color: string = "0x0000"; graphic: string = "0x19B9" }  } ; stones: { pieceOfAmber: { color: string = "0x0000"; graphic: string = "0x0F25" } ; starSapphire: { color: string = "0x0000"; graphic: string = "0x0F0F" }  }  } |
 `rings` | object | { ggr: { color: string = "0x0000"; graphic: string = "0x108A"; bag: { x: number = 59; y: number = 35 }  } ; grr: { color: string = "0x0B21"; graphic: string = "0x108A"; bag: { x: number = 53; y: number = 35 }  } ; grr2: { color: string = "0x0B98"; graphic: string = "0x108A"; bag: { x: number = 56; y: number = 35 }  } ; rr: { color: string = "0x0496"; graphic: string = "0x108A"; bag: { x: number = 50; y: number = 35 }  }  } |
 `scrolls` | object | { blank: { color: string = "0x0000"; graphic: string = "0x0E34" } ; necro: { haluze: { color: string = "0x0010"; graphic: string = "0x0E35" } ; kalnox: { color: string = "0x0005"; graphic: string = "0x0E35" } ; vfp: { color: string = "0x0070"; graphic: string = "0x0E35"; minMana: number = 20 }  } ; standard: { bolt: { color: string = "0x0000"; graphic: string = "0x1F56" } ; ef: { color: string = "0x0000"; graphic: string = "0x1F5E" } ; ijs: { color: string = "0x0000"; graphic: string = "0x1F50"; minMana: number = 7; timer: number = 9600 } ; ivm: { color: string = "0x0000"; graphic: string = "0x1F49" } ; kvf: { color: string = "0x0000"; graphic: string = "0x1F5F"; minMana: number = 20; timer: number = 5000 } ; para: { color: string = "0x0000"; graphic: string = "0x1F52" } ; pog: { color: string = "0x0000"; graphic: string = "0x1F4A"; minMana: number = 5; timer: number = 5000 } ; port: { color: string = "0x0000"; graphic: string = "0x1F42" } ; ress: { color: string = "0x0000"; graphic: string = "0x1F67" } ; wos: { color: string = "0x0000"; graphic: string = "0x1F44" }  }  } |
-`taming` | object | { staffs: { taming: { color: string = "0x04B9"; graphic: string = "0x13F4" } ; tamingShrink: { color: string = "0x096D"; graphic: string = "0x13F4" } ; training: { color: string = "0x04B9"; graphic: string = "0x13F4" }  }  } |
+`taming` | object | { staffs: { taming: { color: string = "0x076B"; graphic: string = "0x13F4" } ; tamingShrink: { color: string = "0x096D"; graphic: string = "0x13F4" } ; training: { color: string = "0x04B9"; graphic: string = "0x13F4" }  }  } |
 `tools` | object | { saw: { color: string = "0x0000"; graphic: string = "0x1035" } ; tinkerTools: { color: string = "0x0000"; graphic: string = "0x1EBC" }  } |
 `uncategorized` | object | { anyKey: { graphic: string = "0x1012"; bag: { x: number = 160; y: number = 5 }  } ; bandy: { color: string = "0x0000"; graphic: string = "0x0E21"; bag: { x: number = 123; y: number = 20 }  } ; emptyBottles: { color: string = "0x0000"; graphic: string = "0x0F0E" } ; emptyKad: { color: string = "0x0000"; graphic: string = "0x1843" } ; lockpicks: { color: string = "0x0000"; graphic: string = "0x14FB" } ; mortar: { color: string = "0x0000"; graphic: string = "0x0E9B"; bag: { x: number = 116; y: number = 24 }  } ; nbDagger: { color: string = "0x0B80"; graphic: string = "0x0F51"; bag: { x: number = 150; y: number = 30 }  } ; nbRuna: { color: string = "0x0B1D"; graphic: string = "0x1F14" } ; salat: { color: string = "0x06AB"; graphic: string = "0x09EC" }  } |

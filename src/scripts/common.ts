@@ -152,5 +152,17 @@ namespace Scripts {
                 Scripts.Utils.log(`jeste nemuzes dat znovu resync/resend, pockej jeste ${(10000 - timer)/1000} sekund(y)`)
             }
         }
+
+        static lavaBomb() {
+            const bomb = gameObject.potions.lavabomb;
+            Scripts.Potions.fillPotion(PotionsEnum.lavabomb);
+            const bombSerials = Orion.FindType(bomb.graphic, bomb.color);
+
+            if (!bombSerials.length) {
+                return;
+            }
+
+            Orion.UseObject(bombSerials[0]);
+        }
     }
 }

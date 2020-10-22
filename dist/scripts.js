@@ -533,6 +533,15 @@ var gameObject = {
             gmMortarSelection: 'Total Mana Refresh (612 Eyes of Newt nebo 306 Blue Eyes of Newt)',
             alchemySelection: 'Total Mana Refresh'
         },
+        mr: {
+            graphic: '0x0F09',
+            color: '0x0005',
+            kad: {
+                graphic: '0x1843',
+                color: '0x0005'
+            },
+            alchemySelection: 'Mana Refresh'
+        },
         gh: {
             graphic: '0x0F0C',
             color: '0x0000',
@@ -694,7 +703,7 @@ var gameObject = {
             },
             taming: {
                 graphic: '0x13F4',
-                color: '0x04B9'
+                color: '0x076B'
             },
             tamingShrink: {
                 graphic: '0x13F4',
@@ -1240,6 +1249,9 @@ function inscription(circle, spell, quantity) {
 function kill() {
     Scripts.PetCommander.kill();
 }
+function lavaBomb() {
+    Scripts.Common.lavaBomb();
+}
 function light(shouldCast) {
     if (shouldCast === void 0) { shouldCast = true; }
     shouldCast = parseParam(shouldCast);
@@ -1273,6 +1285,9 @@ function mount() {
 function summon(creature, target) {
     Scripts.Spells.summon(creature, target);
 }
+function taming() {
+    Scripts.Taming.taming();
+}
 function targetNext() {
     Scripts.Targeting.targetNext();
 }
@@ -1299,6 +1314,9 @@ function useKlamak(lvl, useAim, priorityList) {
 }
 function useRR() {
     Scripts.Jewelry.useRR();
+}
+function useShrinkKad() {
+    Scripts.Taming.useShrinkKad();
 }
 function isMyGameObject(val) {
     return val && val.graphic;
@@ -1537,6 +1555,15 @@ var Scripts;
             else {
                 Scripts.Utils.log("jeste nemuzes dat znovu resync/resend, pockej jeste " + (10000 - timer) / 1000 + " sekund(y)");
             }
+        };
+        Common.lavaBomb = function () {
+            var bomb = gameObject.potions.lavabomb;
+            Scripts.Potions.fillPotion(PotionsEnum.lavabomb);
+            var bombSerials = Orion.FindType(bomb.graphic, bomb.color);
+            if (!bombSerials.length) {
+                return;
+            }
+            Orion.UseObject(bombSerials[0]);
         };
         return Common;
     }());
@@ -2854,6 +2881,79 @@ var Scripts;
                 monstersAround = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "live", 22, "gray");
             }
         };
+        Taming.useShrinkKad = function () {
+            var kad = gameObject.potions.shrink.kad;
+            Orion.UseType(kad.graphic, kad.color);
+        };
+        Taming.taming = function () {
+            Orion.Disarm();
+            Orion.Wait(responseDelay);
+            var loadedStaff = gameObject.taming.staffs.tamingShrink;
+            var loadedStaffSerials = Orion.FindType(loadedStaff.graphic, loadedStaff.color);
+            var staff = gameObject.taming.staffs.taming;
+            var staffSerials = Orion.FindType(staff.graphic, staff.color);
+            if (!loadedStaffSerials.length && staffSerials.length) {
+                var shrink = gameObject.potions.shrink;
+                var shrinkSerials = Orion.FindType(shrink.graphic, shrink.color);
+                var shrinkKadSerials = Orion.FindType(shrink.kad.graphic, shrink.kad.color);
+                if (shrinkSerials.length) {
+                    Orion.WaitTargetObject(shrinkSerials[0]);
+                }
+                else if (shrinkKadSerials.length) {
+                    Orion.WaitTargetObject(shrinkKadSerials[0]);
+                }
+                Orion.UseObject(staffSerials[0]);
+                Scripts.Utils.waitWhileSomethingInJournal(['Hul nabita']);
+                Orion.Disarm();
+                Orion.Wait(responseDelay);
+            }
+            loadedStaffSerials = Orion.FindType(loadedStaff.graphic, loadedStaff.color);
+            if (!loadedStaffSerials) {
+                Scripts.Utils.playerPrint('Nemas potrebne vybaveni na taming', ColorEnum.red);
+                return;
+            }
+            Orion.ClearJournal();
+            Scripts.Utils.playerPrint('Co chces tamnout ?');
+            var selection = Orion.WaitForAddObject('tamingTarget');
+            if (selection !== 1) {
+                return;
+            }
+            var tamnuto = false;
+            while (!tamnuto) {
+                var target = Orion.FindObject('tamingTarget');
+                Orion.WaitTargetObject('tamingTarget');
+                Orion.UseObject(loadedStaffSerials[0]);
+                Scripts.Utils.waitWhileSomethingInJournal([
+                    'Hul nabita',
+                    'Your taming failed',
+                    'Ochoceni se nezdarilo',
+                    'Too far',
+                    'Jsi prilis vzdalen',
+                    'Jsi moc daleko',
+                    'Not tamable',
+                    'byl tamnut',
+                    'You are not able to tame this animal'
+                ]);
+                if (Orion.InJournal('Too far|Jsi prilis vzdalen|Jsi moc daleko')) {
+                    Orion.WalkTo(target.X(), target.Y(), target.Z(), 1);
+                }
+                if (Orion.InJournal('Not tamable|You are not able to tame this animal')) {
+                    Scripts.Utils.playerPrint('Na toto zviratko nemas', ColorEnum.red);
+                    break;
+                }
+                if (Orion.InJournal('byl tamnut')) {
+                    var groundItemsSerials = Orion.FindType('any', 'any', 'ground', 'item', 3);
+                    for (var _i = 0, groundItemsSerials_1 = groundItemsSerials; _i < groundItemsSerials_1.length; _i++) {
+                        var g = groundItemsSerials_1[_i];
+                        Orion.MoveItem(g);
+                    }
+                    tamnuto = true;
+                }
+                Orion.Disarm();
+                Orion.Wait(responseDelay);
+                Orion.ClearJournal();
+            }
+        };
         return Taming;
     }());
     Scripts.Taming = Taming;
@@ -3161,21 +3261,6 @@ var Scripts;
     var Wip = (function () {
         function Wip() {
         }
-        Wip.lavaBomba = function () {
-            var bomb = gameObject.potions.lavabomb;
-            var emptyBottles = gameObject.uncategorized.emptyBottles;
-            var bombKad = bomb.kad;
-            var emptyBottlesSerials = Orion.FindType(emptyBottles.graphic, emptyBottles.color, 'backpack', 'item', 3, '-1', true);
-            if (!emptyBottlesSerials.length) {
-                Scripts.Utils.playerPrint('NEMAS PRAZDNE LAHVE', ColorEnum.red);
-                return;
-            }
-            Orion.WarMode(true);
-            Orion.WaitTargetObject(emptyBottlesSerials[0]);
-            Orion.UseType(bombKad.graphic, bombKad.color);
-            Orion.Wait(250);
-            Orion.UseType(bomb.graphic);
-        };
         Wip.dropItem = function (item) {
             var serials = Orion.FindType(item.graphic, "backpack");
             if (!serials.length) {

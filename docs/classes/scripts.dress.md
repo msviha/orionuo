@@ -22,7 +22,7 @@
 
 ▸ `Static`**dressUp**(): void
 
-*Defined in [scripts/dress.ts:64](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts/dress.ts#L64)*
+*Defined in [scripts/dress.ts:64](https://github.com/msviha/orionuo/blob/236ae05/src/scripts/dress.ts#L64)*
 
 Scripts.Dress.dressUp()
 stability beta
@@ -37,7 +37,7 @@ ___
 
 ▸ `Static`**resetStats**(): void
 
-*Defined in [scripts/dress.ts:10](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts/dress.ts#L10)*
+*Defined in [scripts/dress.ts:10](https://github.com/msviha/orionuo/blob/236ae05/src/scripts/dress.ts#L10)*
 
 Scripts.Dress.resetStats()
 stability beta
@@ -52,7 +52,7 @@ ___
 
 ▸ `Static`**setDress**(): void
 
-*Defined in [scripts/dress.ts:36](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts/dress.ts#L36)*
+*Defined in [scripts/dress.ts:36](https://github.com/msviha/orionuo/blob/236ae05/src/scripts/dress.ts#L36)*
 
 Scripts.Dress.setDress()
 stability beta

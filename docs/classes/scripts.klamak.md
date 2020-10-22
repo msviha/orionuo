@@ -21,7 +21,7 @@
 
 ▸ `Static`**next**(): void
 
-*Defined in [scripts/klamak.ts:12](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts/klamak.ts#L12)*
+*Defined in [scripts/klamak.ts:12](https://github.com/msviha/orionuo/blob/236ae05/src/scripts/klamak.ts#L12)*
 
 Scripts.Klamak.next
 stability implementation
@@ -36,7 +36,7 @@ ___
 
 ▸ `Static`**useKlamak**(`lvl`: number, `useAim`: boolean, `priorityList`: string[]): void
 
-*Defined in [scripts/klamak.ts:29](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts/klamak.ts#L29)*
+*Defined in [scripts/klamak.ts:29](https://github.com/msviha/orionuo/blob/236ae05/src/scripts/klamak.ts#L29)*
 
 #### Parameters:
 

@@ -20,9 +20,11 @@ Je to potreba jeste poupravit a dodelat.. (portovani pres runy atd)
 ### Methods
 
 * [dressRobeOfDruids](scripts.taming.md#dressrobeofdruids)
+* [taming](scripts.taming.md#taming)
 * [trainOnAnimal](scripts.taming.md#trainonanimal)
 * [trainOnAnimalsAround](scripts.taming.md#trainonanimalsaround)
 * [undressRobe](scripts.taming.md#undressrobe)
+* [useShrinkKad](scripts.taming.md#useshrinkkad)
 * [useTrainingTamingStaff](scripts.taming.md#usetrainingtamingstaff)
 * [waitOnTaming](scripts.taming.md#waitontaming)
 
@@ -32,9 +34,19 @@ Je to potreba jeste poupravit a dodelat.. (portovani pres runy atd)
 
 ▸ `Static`**dressRobeOfDruids**(): boolean \| undefined
 
-*Defined in [scripts/taming.ts:78](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts/taming.ts#L78)*
+*Defined in [scripts/taming.ts:78](https://github.com/msviha/orionuo/blob/236ae05/src/scripts/taming.ts#L78)*
 
 **Returns:** boolean \| undefined
+
+___
+
+### taming
+
+▸ `Static`**taming**(): void
+
+*Defined in [scripts/taming.ts:184](https://github.com/msviha/orionuo/blob/236ae05/src/scripts/taming.ts#L184)*
+
+**Returns:** void
 
 ___
 
@@ -42,7 +54,7 @@ ___
 
 ▸ `Static`**trainOnAnimal**(`animalSerial`: string): boolean \| undefined
 
-*Defined in [scripts/taming.ts:95](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts/taming.ts#L95)*
+*Defined in [scripts/taming.ts:95](https://github.com/msviha/orionuo/blob/236ae05/src/scripts/taming.ts#L95)*
 
 #### Parameters:
 
@@ -58,7 +70,7 @@ ___
 
 ▸ `Static`**trainOnAnimalsAround**(): void
 
-*Defined in [scripts/taming.ts:165](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts/taming.ts#L165)*
+*Defined in [scripts/taming.ts:165](https://github.com/msviha/orionuo/blob/236ae05/src/scripts/taming.ts#L165)*
 
 **Returns:** void
 
@@ -68,7 +80,17 @@ ___
 
 ▸ `Static`**undressRobe**(): void
 
-*Defined in [scripts/taming.ts:90](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts/taming.ts#L90)*
+*Defined in [scripts/taming.ts:90](https://github.com/msviha/orionuo/blob/236ae05/src/scripts/taming.ts#L90)*
+
+**Returns:** void
+
+___
+
+### useShrinkKad
+
+▸ `Static`**useShrinkKad**(): void
+
+*Defined in [scripts/taming.ts:179](https://github.com/msviha/orionuo/blob/236ae05/src/scripts/taming.ts#L179)*
 
 **Returns:** void
 
@@ -78,7 +100,7 @@ ___
 
 ▸ `Static`**useTrainingTamingStaff**(`targetSerial`: string): boolean
 
-*Defined in [scripts/taming.ts:16](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts/taming.ts#L16)*
+*Defined in [scripts/taming.ts:16](https://github.com/msviha/orionuo/blob/236ae05/src/scripts/taming.ts#L16)*
 
 Scripts.Taming.useTrainingTamingStaff
 returns false when you dont have staff or shrinks
@@ -97,6 +119,6 @@ ___
 
 ▸ `Static`**waitOnTaming**(): void
 
-*Defined in [scripts/taming.ts:63](https://github.com/msviha/orionuo/blob/597f2ef/src/scripts/taming.ts#L63)*
+*Defined in [scripts/taming.ts:63](https://github.com/msviha/orionuo/blob/236ae05/src/scripts/taming.ts#L63)*
 
 **Returns:** void

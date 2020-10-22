@@ -480,6 +480,15 @@ const gameObject:any = {
             gmMortarSelection: 'Total Mana Refresh (612 Eyes of Newt nebo 306 Blue Eyes of Newt)',
             alchemySelection: 'Total Mana Refresh'
         },
+        mr: {
+            graphic: '0x0F09',
+            color: '0x0005',
+            kad: {
+                graphic: '0x1843',
+                color: '0x0005'
+            },
+            alchemySelection: 'Mana Refresh'
+        },
         gh: {
             graphic: '0x0F0C',
             color: '0x0000',
@@ -641,7 +650,7 @@ const gameObject:any = {
             },
             taming: {
                 graphic: '0x13F4',
-                color: '0x04B9'
+                color: '0x076B'
             },
             tamingShrink: {
                 graphic: '0x13F4',
