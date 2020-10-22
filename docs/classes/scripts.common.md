@@ -25,9 +25,9 @@ Obsahuje zakladni scripty
 
 ### bandageSelf
 
-▸ `Static`**bandageSelf**(`pathToNoBandagesWavFile`: string): void
+▸ `Static`**bandageSelf**(`minimalCountToWarn`: number, `pathToNoBandagesWavFile`: string): void
 
-*Defined in [scripts/common.ts:83](https://github.com/msviha/orionuo/blob/7437f54/src/scripts/common.ts#L83)*
+*Defined in [scripts/common.ts:83](https://github.com/msviha/orionuo/blob/dc53ac6/src/scripts/common.ts#L83)*
 
 Scripts.Common.bandageSelf
 stability beta
@@ -38,6 +38,7 @@ hodi si bandu, pripadne vypise ze nema a prehraje wav soubor
 
 Name | Type | Default value |
 ------ | ------ | ------ |
+`minimalCountToWarn` | number | 10 |
 `pathToNoBandagesWavFile` | string | "C:/critical.wav" |
 
 **Returns:** void
@@ -48,7 +49,7 @@ ___
 
 ▸ `Static`**hideAll**(): void
 
-*Defined in [scripts/common.ts:124](https://github.com/msviha/orionuo/blob/7437f54/src/scripts/common.ts#L124)*
+*Defined in [scripts/common.ts:133](https://github.com/msviha/orionuo/blob/dc53ac6/src/scripts/common.ts#L133)*
 
 **Returns:** void
 
@@ -58,7 +59,7 @@ ___
 
 ▸ `Static`**hiding**(): void
 
-*Defined in [scripts/common.ts:51](https://github.com/msviha/orionuo/blob/7437f54/src/scripts/common.ts#L51)*
+*Defined in [scripts/common.ts:51](https://github.com/msviha/orionuo/blob/dc53ac6/src/scripts/common.ts#L51)*
 
 Scripts.Common.hiding
 stability beta
@@ -73,7 +74,7 @@ ___
 
 ▸ `Static`**mysticCounter**(): void
 
-*Defined in [scripts/common.ts:96](https://github.com/msviha/orionuo/blob/7437f54/src/scripts/common.ts#L96)*
+*Defined in [scripts/common.ts:105](https://github.com/msviha/orionuo/blob/dc53ac6/src/scripts/common.ts#L105)*
 
 **Returns:** void
 
@@ -83,7 +84,7 @@ ___
 
 ▸ `Static`**shrinkKad**(): void
 
-*Defined in [scripts/common.ts:34](https://github.com/msviha/orionuo/blob/7437f54/src/scripts/common.ts#L34)*
+*Defined in [scripts/common.ts:34](https://github.com/msviha/orionuo/blob/dc53ac6/src/scripts/common.ts#L34)*
 
 Scripts.Common.shrinkKad
 stability beta
@@ -98,7 +99,7 @@ ___
 
 ▸ `Static`**svetlo**(`shouldCast`: boolean): void
 
-*Defined in [scripts/common.ts:16](https://github.com/msviha/orionuo/blob/7437f54/src/scripts/common.ts#L16)*
+*Defined in [scripts/common.ts:16](https://github.com/msviha/orionuo/blob/dc53ac6/src/scripts/common.ts#L16)*
 
 Scripts.Common.svetlo
 stability released

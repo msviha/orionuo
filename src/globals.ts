@@ -580,6 +580,15 @@ const gameObject:any = {
             },
             gmMortarSelection: 'Lava Bomb (612 Volcanic Ashes)',
             alchemySelection: 'Lava Bomb'
+        },
+        invis: {
+            graphic: '0x0F09',
+            color: '0x0B77',
+            kad: {
+                graphic: '0x1843',
+                color: '0x0B77'
+            },
+            alchemySelection: 'Invisibility'
         }
     },
     books: {
@@ -720,6 +729,10 @@ const gameObject:any = {
             },
             ivm: {
                 graphic: '0x1F49',
+                color: '0x0000'
+            },
+            ress: {
+                graphic: '0x1F67',
                 color: '0x0000'
             }
         },
@@ -912,7 +925,7 @@ const gameObject:any = {
             }
         }
     },
-    mystics:{
+    mystics: {
         flower: {
             name: 'Flower',
             graphic: '0x0DC3',
@@ -957,6 +970,140 @@ const gameObject:any = {
             name: 'Crystal',
             graphic: '0x0F5A',
             color: '0x0044'
+        }
+    },
+    fish: {
+        modra: {
+            graphic: '0x09CD',
+            color: '0x084C'
+        }
+    },
+    klamak: {
+        lvl1: {
+            giantRat: {
+                graphic: '0x20D0',
+                color: '0xFFFF'
+            },
+            rat: {
+                graphic: '0x2123',
+                color: '0xFFFF'
+            },
+            chicken: {
+                graphic: '0x20D1',
+                color: '0xFFFF'
+            },
+            rabbit: {
+                graphic: '0x2125',
+                color: '0x090C'
+            }
+        },
+        lvl2: {
+            squirrel: {
+                graphic: '0x2D97',
+                color: '0xFFFF'
+            },
+            cat: {
+                graphic: '0x211B',
+                color: '0xFFFF'
+            },
+            jackRabbit: {
+                graphic: '0x2125',
+                color: '0x01BB'
+            },
+            wolf: {
+                graphic: '0x20EA',
+                color: '0xFFFF'
+            },
+            goat: {
+                graphic: '0x2108',
+                color: '0xFFFF'
+            },
+            dog: {
+                graphic: '0x09A8',
+                color: '0xFFFF'
+            },
+            boar: {
+                graphic: '0x2101',
+                color: '0xFFFF'
+            },
+            bullFrog: {
+                graphic: '0x2130',
+                color: '0xFFFF'
+            }
+        },
+        lvl3: {
+            blackBear: {
+                graphic: '0x2118',
+                color: '0xFFFF'
+            },
+            bull: {
+                graphic: '0x20EF',
+                color: '0xFFFF'
+            },
+            hind: {
+                graphic: '0x20D4',
+                color: '0xFFFF'
+            },
+            hart: {
+                graphic: '0x20D4',
+                color: '0xFFFF'
+            },
+            gorilla: {
+                graphic: '0x20F5',
+                color: '0xFFFF'
+            },
+            sheep: {
+                graphic: '0x20EB',
+                color: '0xFFFF'
+            },
+            cow: {
+                graphic: '0x2103',
+                color: '0xFFFF'
+            },
+            brownBear: {
+                graphic: '0x20CF',
+                color: '0xFFFF'
+            }
+        },
+        lvl4: {
+            panther: {
+                graphic: '0x2119',
+                color: '0xFFFF'
+            },
+            cougar: {
+                graphic: '0x2119',
+                color: '0xFFFF'
+            },
+            eagle: {
+                graphic: '0x211D',
+                color: '0xFFFF'
+            },
+            timberWolf: {
+                graphic: '0x20EA',
+                color: '0xFFFF'
+            }
+        },
+        lvl5: {
+            leopard: {
+                graphic: '0x2119',
+                color: '0xFFFF'
+            },
+            polar: {
+                graphic: '0x20E1',
+                color: '0xFFFF'
+            },
+            grizzly: {
+                graphic: '0x211E',
+                color: '0xFFFF'
+            },
+            snake: {
+                graphic: '0x20FC',
+                color: '0xFFFF'
+            },
+            alligator: {
+                graphic: '0x2131',
+                color: '0xFFFF'
+            }
         }
     }
 };

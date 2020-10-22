@@ -10,8 +10,7 @@ namespace Scripts {
          * @param reverse if true.. it behaves like TargetPrevious
          * @constructor
          */
-        static targetNext(reverse = false)
-        {
+        static targetNext(reverse = false) {
             // initialization
             if (Orion.Timer('targetTimer') === -1) {
                 Orion.SetTimer('targetTimer');
@@ -68,17 +67,39 @@ namespace Scripts {
             const enemySerial = store[currentIndex].serial;
             const enemy = Orion.FindObject(enemySerial);
             if (enemy) {
-                Scripts.Utils.playerPrint(`[${enemy.Name() || 'target'}]: ${enemy.Hits()}/${enemy.MaxHits()}`);
-                Scripts.Utils.printColoredHpBar(enemySerial, enemy.Hits() / enemy.MaxHits() * 100);
-                Scripts.Utils.updateCurrentStatusBar(enemySerial);
-                Orion.Attack(enemySerial);
-                Orion.WarMode(false);
-                Orion.WarMode(true);
+                Scripts.Targeting.highlightEnemy(enemySerial, enemy);
             }
             else {
                 const enemyNameFromStore = store[currentIndex].name;
                 Scripts.Utils.playerPrint(`[${enemyNameFromStore}] out of distance`, ColorEnum.red);
             }
+        }
+
+        static manualTarget() {
+            const selection = Orion.WaitForAddObject('manualTargetEnemy');
+            Scripts.Utils.waitWhileTargeting();
+
+            if (selection !== 1) {
+                return;
+            }
+
+            const enemy = Orion.FindObject('manualTargetEnemy');
+            if (enemy && enemy.Mobile() && !enemy.Dead()) {
+                Scripts.Targeting.highlightEnemy('manualTargetEnemy', enemy);
+            }
+        }
+
+        static highlightEnemy(enemySerial:string, enemy:GameObject) {
+            const notoColor = Scripts.Wip.getColorByNotoriety(enemy.Notoriety());
+
+            Scripts.Utils.playerPrint(`[${enemy.Name() || 'target'}]: ${enemy.Hits()}/${enemy.MaxHits()}`, notoColor);
+            Orion.CharPrint(enemySerial, notoColor, `[${enemy.Name() || 'target'}]: ${enemy.Hits()}/${enemy.MaxHits()}`);
+            Scripts.Utils.printColoredHpBar(enemySerial, enemy.Hits() / enemy.MaxHits() * 100);
+            Scripts.Utils.updateCurrentStatusBar(enemySerial);
+
+            Orion.Attack(enemySerial);
+            Orion.WarMode(false);
+            Orion.WarMode(true);
         }
     }
 }

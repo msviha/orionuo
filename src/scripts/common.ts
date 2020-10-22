@@ -80,17 +80,26 @@ namespace Scripts {
          *
          * hodi si bandu, pripadne vypise ze nema a prehraje wav soubor
          */
-        static bandageSelf(pathToNoBandagesWavFile = 'C:/critical.wav') {
+        static bandageSelf(minimalCountToWarn = 10, pathToNoBandagesWavFile = 'C:/critical.wav') {
+            let bandagesSerials = Orion.FindType(gameObject.uncategorized.bandy.graphic, gameObject.uncategorized.bandy.color);
+            let count = Scripts.Utils.countItemsBySerials(bandagesSerials);
+            if (!count) {
+                Orion.PlayWav(pathToNoBandagesWavFile);
+                Scripts.Utils.playerPrint('!! NEMAS BANDY !!', ColorEnum.red);
+                return;
+            }
+
             Orion.ClearJournal();
             Orion.BandageSelf();
             while (!Orion.InJournal('You put') && !Orion.InJournal('You apply') && !Orion.InJournal('Chces vytvorit')) {
                 Orion.Wait(200);
             }
+            count--;
 
-            const bandages = Orion.FindType(gameObject.uncategorized.bandy.graphic, gameObject.uncategorized.bandy.color);
-            if (!bandages.length) {
-                Orion.PlayWav(pathToNoBandagesWavFile);
+            if (count <= minimalCountToWarn) {
+                Scripts.Utils.playerPrint(`posledni${count > 4 ? 'ch' : ''} ${count} band${count > 4 ? '' : count > 1 ? 'y' : 'a'}`, ColorEnum.red);
             }
+
         }
 
         static mysticCounter() {

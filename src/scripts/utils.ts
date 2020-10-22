@@ -46,7 +46,7 @@ namespace Scripts {
             }
         }
 
-        static countObjectInContainer(obj:IMyGameObject, container:string):number {
+        static countObjectInContainer(obj:IMyGameObject, container = 'backpack'):number {
             const serials = Orion.FindType(obj.graphic, obj.color || '0xFFFF', container);
             return Scripts.Utils.countItemsBySerials(serials);
         }
@@ -225,6 +225,19 @@ namespace Scripts {
             if (diff !== 0 || force) {
                 diff !== 0 && Orion.PrintFast(serial, diff > 0 ? ColorEnum.green : ColorEnum.red, 0, `${diff > 0 ? '+' : ''}${diff.toString()}`);
                 Orion.PrintFast(serial, Scripts.Utils.determineHpColor(hp / max * 100), 0, `[${hp}/${max}]`);
+            }
+        }
+
+        static use(val:IMyGameObject, name = '', minimalCountForWarn?:number) {
+            const serials = Orion.FindType(val.graphic,val.color)
+            let count = Scripts.Utils.countItemsBySerials(serials);
+            if (count) {
+                Orion.UseObject(serials[0]);
+                count--;
+            }
+
+            if ((minimalCountForWarn !== undefined && count <= minimalCountForWarn) || (minimalCountForWarn === undefined && !count)) {
+                Scripts.Utils.playerPrint(`[ ${name} ${count} ]`, ColorEnum.red);
             }
         }
     }

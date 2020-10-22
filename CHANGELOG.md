@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## 0.0.5
+### features
+- added `alchemy` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#alchemy)
+- added `bandageSelf` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#bandageSelf)
+- added `fillPotion` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#fillPotion)
+- added `harp` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#harp)
+- added `lute` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#lute)
+- added `manualTarget` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#manualTarget)
+- added `nbRune` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#nbRune)
+- added `tracking` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#tracking)
+- added `use` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#use)
+- added `useGGR` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#useGGR)
+- added `useKlamak` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#useKlamak)
+- added `useRR` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#useRR)
+
 ## 0.0.4
 ### breaking changes
 - `main.ts` is sliced to several files.

@@ -50,28 +50,8 @@ namespace Scripts {
             let potion = Scripts.Potions.getPotion(p);
 
             if (!potion) {
-                //docepnuti
-                const potionKad = Scripts.Potions.getKadForPotion(p);
-                const emptyBottle = Scripts.Potions.getEmptyBottle();
-
-                Orion.ClearJournal();
-                Orion.WaitTargetObject(emptyBottle);
-                Orion.UseObject(potionKad);
-                Orion.Wait(responseDelay);
-
-                if (Orion.InJournal('Pri praci s nadobou nemuzes delat neco')) {
-                    if (!switchWarModeWhenNeeded) {
-                        Scripts.Utils.log('Nemuzes pit, kdyz neco delas', ColorEnum.red);
-                        return;
-                    }
-                    Scripts.Utils.playerPrint('[War mode]', ColorEnum.red);
-                    Orion.WarMode(true);
-                    Orion.Wait(100);
-                    Orion.WaitTargetObject(emptyBottle);
-                    Orion.UseObject(potionKad);
-                    Orion.Wait(responseDelay);
-                }
-
+                // docepnuti
+                Scripts.Potions.fillPotion(potionName, switchWarModeWhenNeeded);
                 potion = Scripts.Potions.getPotion(p);
                 if (!potion) {
                     Scripts.Utils.playerPrint(`!! NEMAS [ ${potionName} ] !!`, ColorEnum.red);
@@ -176,6 +156,33 @@ namespace Scripts {
                 Orion.WaitTargetObject(potion);
                 Orion.UseObject(kad);
                 Scripts.Utils.waitWhileSomethingInJournal(['You put']);
+            }
+        }
+
+        static fillPotion(potionName:PotionsEnum, switchWarModeWhenNeeded = true) {
+            if (!isPotionsEnum(potionName)) {
+                return;
+            }
+            const p = gameObject.potions[potionName];
+            const potionKad = Scripts.Potions.getKadForPotion(p);
+            const emptyBottle = Scripts.Potions.getEmptyBottle();
+
+            Orion.ClearJournal();
+            Orion.WaitTargetObject(emptyBottle);
+            Orion.UseObject(potionKad);
+            Orion.Wait(responseDelay);
+
+            if (Orion.InJournal('Pri praci s nadobou nemuzes delat neco')) {
+                if (!switchWarModeWhenNeeded) {
+                    Scripts.Utils.log('Nemuzes pit, kdyz neco delas', ColorEnum.red);
+                    return;
+                }
+                Scripts.Utils.playerPrint('[War mode]', ColorEnum.red);
+                Orion.WarMode(true);
+                Orion.Wait(100);
+                Orion.WaitTargetObject(emptyBottle);
+                Orion.UseObject(potionKad);
+                Orion.Wait(responseDelay);
             }
         }
 

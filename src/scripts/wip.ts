@@ -35,6 +35,51 @@ namespace Scripts {
             Orion.Drop(serials[0]);
         }
 
+        static useGGR() {
+            Orion.UseType(0x108A, 0x0000);
+            let ggrSerial = Orion.FindType(0x108A, 0x0000);
+            Orion.Wait(50);
+            Orion.MoveItem(ggrSerial[0], 0, 'backpack', 50, 50);
+        }
+
+        static harfa(target?:TargetEnum|string) {
+            if (!target) {
+                const selection = Orion.WaitForAddObject('musicTarget', 60000);
+                Orion.Print('-1', 'Komu chces zahrat ?');
+                if (selection !== 1) {
+                    return;
+                }
+                target = 'musicTarget';
+            }
+            let Harfa = Orion.FindType(0x0EB2);
+            Orion.WarMode(true);
+            if (Harfa.length > 0) {
+                Orion.WaitTargetObject(target);
+                Orion.UseObject(Harfa[0]);
+            } else {
+                Orion.Print(-1, 'Nemas  Harfu');
+            }
+        }
+
+        static lutna(target?:TargetEnum|string) {
+            if (!target) {
+                const selection = Orion.WaitForAddObject('musicTarget', 60000);
+                Orion.Print('-1', 'Komu chces zahrat ?');
+                if (selection !== 1) {
+                    return;
+                }
+                target = 'musicTarget';
+            }
+            let Type = Orion.FindType(0x0EB3);
+            Orion.WarMode(true);
+            if (Type.length > 0) {
+                Orion.WaitTargetObject(target);
+                Orion.UseObject(Type[0]);
+            } else {
+                Orion.Print(-1, 'Nemas  Lute');
+            }
+        }
+
         static Tracking(who = 'Players') {
             Orion.CancelWaitMenu();
             Orion.WaitMenu('Tracking', who);

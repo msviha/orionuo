@@ -633,6 +633,15 @@ var gameObject = {
             },
             gmMortarSelection: 'Lava Bomb (612 Volcanic Ashes)',
             alchemySelection: 'Lava Bomb'
+        },
+        invis: {
+            graphic: '0x0F09',
+            color: '0x0B77',
+            kad: {
+                graphic: '0x1843',
+                color: '0x0B77'
+            },
+            alchemySelection: 'Invisibility'
         }
     },
     books: {
@@ -773,6 +782,10 @@ var gameObject = {
             },
             ivm: {
                 graphic: '0x1F49',
+                color: '0x0000'
+            },
+            ress: {
+                graphic: '0x1F67',
                 color: '0x0000'
             }
         },
@@ -1011,6 +1024,140 @@ var gameObject = {
             graphic: '0x0F5A',
             color: '0x0044'
         }
+    },
+    fish: {
+        modra: {
+            graphic: '0x09CD',
+            color: '0x084C'
+        }
+    },
+    klamak: {
+        lvl1: {
+            giantRat: {
+                graphic: '0x20D0',
+                color: '0xFFFF'
+            },
+            rat: {
+                graphic: '0x2123',
+                color: '0xFFFF'
+            },
+            chicken: {
+                graphic: '0x20D1',
+                color: '0xFFFF'
+            },
+            rabbit: {
+                graphic: '0x2125',
+                color: '0x090C'
+            }
+        },
+        lvl2: {
+            squirrel: {
+                graphic: '0x2D97',
+                color: '0xFFFF'
+            },
+            cat: {
+                graphic: '0x211B',
+                color: '0xFFFF'
+            },
+            jackRabbit: {
+                graphic: '0x2125',
+                color: '0x01BB'
+            },
+            wolf: {
+                graphic: '0x20EA',
+                color: '0xFFFF'
+            },
+            goat: {
+                graphic: '0x2108',
+                color: '0xFFFF'
+            },
+            dog: {
+                graphic: '0x09A8',
+                color: '0xFFFF'
+            },
+            boar: {
+                graphic: '0x2101',
+                color: '0xFFFF'
+            },
+            bullFrog: {
+                graphic: '0x2130',
+                color: '0xFFFF'
+            }
+        },
+        lvl3: {
+            blackBear: {
+                graphic: '0x2118',
+                color: '0xFFFF'
+            },
+            bull: {
+                graphic: '0x20EF',
+                color: '0xFFFF'
+            },
+            hind: {
+                graphic: '0x20D4',
+                color: '0xFFFF'
+            },
+            hart: {
+                graphic: '0x20D4',
+                color: '0xFFFF'
+            },
+            gorilla: {
+                graphic: '0x20F5',
+                color: '0xFFFF'
+            },
+            sheep: {
+                graphic: '0x20EB',
+                color: '0xFFFF'
+            },
+            cow: {
+                graphic: '0x2103',
+                color: '0xFFFF'
+            },
+            brownBear: {
+                graphic: '0x20CF',
+                color: '0xFFFF'
+            }
+        },
+        lvl4: {
+            panther: {
+                graphic: '0x2119',
+                color: '0xFFFF'
+            },
+            cougar: {
+                graphic: '0x2119',
+                color: '0xFFFF'
+            },
+            eagle: {
+                graphic: '0x211D',
+                color: '0xFFFF'
+            },
+            timberWolf: {
+                graphic: '0x20EA',
+                color: '0xFFFF'
+            }
+        },
+        lvl5: {
+            leopard: {
+                graphic: '0x2119',
+                color: '0xFFFF'
+            },
+            polar: {
+                graphic: '0x20E1',
+                color: '0xFFFF'
+            },
+            grizzly: {
+                graphic: '0x211E',
+                color: '0xFFFF'
+            },
+            snake: {
+                graphic: '0x20FC',
+                color: '0xFFFF'
+            },
+            alligator: {
+                graphic: '0x2131',
+                color: '0xFFFF'
+            }
+        }
     }
 };
 function Autostart() {
@@ -1043,6 +1190,13 @@ function addCutWeapon() {
 function addMount() {
     Scripts.Mount.addMount();
 }
+function alchemy(potionName) {
+    Scripts.Potions.alchemy(potionName);
+}
+function bandageSelf(minimalCountForWarn) {
+    if (minimalCountForWarn === void 0) { minimalCountForWarn = 10; }
+    Scripts.Common.bandageSelf(minimalCountForWarn);
+}
 function cast(spell, target) {
     Scripts.Spells.cast(spell, target);
 }
@@ -1052,11 +1206,22 @@ function castNecroScroll(scroll, target) {
 function castScroll(scroll, target, backupHeadCast) {
     Scripts.Spells.castScroll(scroll, target, backupHeadCast);
 }
-function drink(potionName) {
-    Scripts.Potions.drinkPotion(potionName);
+function drink(potionName, switchWarModeWhenNeeded) {
+    if (switchWarModeWhenNeeded === void 0) { switchWarModeWhenNeeded = true; }
+    Scripts.Potions.drinkPotion(potionName, switchWarModeWhenNeeded);
+}
+function fillPotion(potionName, switchWarModeWhenNeeded) {
+    if (switchWarModeWhenNeeded === void 0) { switchWarModeWhenNeeded = true; }
+    Scripts.Potions.fillPotion(potionName, switchWarModeWhenNeeded);
 }
 function gmMortar(potionName) {
     Scripts.Potions.gmMortar(potionName);
+}
+function harp(target) {
+    Scripts.Wip.harfa(target);
+}
+function lute(target) {
+    Scripts.Wip.lutna(target);
 }
 function hideAll() {
     Scripts.Common.hideAll();
@@ -1092,8 +1257,11 @@ function make(count, objectAsString, setInputs) {
     if (setInputs === void 0) { setInputs = true; }
     Scripts.Crafting.make(count, objectAsString, setInputs);
 }
-function alchemy(potionName) {
-    Scripts.Potions.alchemy(potionName);
+function manualTarget() {
+    Scripts.Targeting.manualTarget();
+}
+function nbRune() {
+    Scripts.Wip.Nbruna();
 }
 function mount() {
     Scripts.Mount.mountAndDismount();
@@ -1107,8 +1275,26 @@ function targetNext() {
 function targetPrevious() {
     Scripts.Targeting.targetNext(true);
 }
+function tracking(who) {
+    if (who === void 0) { who = 'Players'; }
+    Scripts.Wip.Tracking(who);
+}
 function unlock() {
     Scripts.Lockpicking.unlock();
+}
+function use(object, name, minimalCountForWarn) {
+    if (name === void 0) { name = ''; }
+    Scripts.Utils.use(object, name, minimalCountForWarn);
+}
+function useGGR() {
+    Scripts.Wip.useGGR();
+}
+function useKlamak(lvl, useAim, priorityList) {
+    if (useAim === void 0) { useAim = false; }
+    Scripts.Klamak.useKlamak(lvl, useAim, priorityList);
+}
+function useRR() {
+    Scripts.Jewelry.useRR();
 }
 function isMyGameObject(val) {
     return val && val.graphic;
@@ -1279,16 +1465,24 @@ var Scripts;
                 Orion.CharPrint(Player.Serial(), ColorEnum.red, '[ FAILED ]');
             }
         };
-        Common.bandageSelf = function (pathToNoBandagesWavFile) {
+        Common.bandageSelf = function (minimalCountToWarn, pathToNoBandagesWavFile) {
+            if (minimalCountToWarn === void 0) { minimalCountToWarn = 10; }
             if (pathToNoBandagesWavFile === void 0) { pathToNoBandagesWavFile = 'C:/critical.wav'; }
+            var bandagesSerials = Orion.FindType(gameObject.uncategorized.bandy.graphic, gameObject.uncategorized.bandy.color);
+            var count = Scripts.Utils.countItemsBySerials(bandagesSerials);
+            if (!count) {
+                Orion.PlayWav(pathToNoBandagesWavFile);
+                Scripts.Utils.playerPrint('!! NEMAS BANDY !!', ColorEnum.red);
+                return;
+            }
             Orion.ClearJournal();
             Orion.BandageSelf();
             while (!Orion.InJournal('You put') && !Orion.InJournal('You apply') && !Orion.InJournal('Chces vytvorit')) {
                 Orion.Wait(200);
             }
-            var bandages = Orion.FindType(gameObject.uncategorized.bandy.graphic, gameObject.uncategorized.bandy.color);
-            if (!bandages.length) {
-                Orion.PlayWav(pathToNoBandagesWavFile);
+            count--;
+            if (count <= minimalCountToWarn) {
+                Scripts.Utils.playerPrint("posledni" + (count > 4 ? 'ch' : '') + " " + count + " band" + (count > 4 ? '' : count > 1 ? 'y' : 'a'), ColorEnum.red);
             }
         };
         Common.mysticCounter = function () {
@@ -1527,6 +1721,68 @@ var Scripts;
             }
             var nextList = Orion.GetGlobal('klamak');
             Scripts.Utils.playerPrint(nextList);
+        };
+        Klamak.useKlamak = function (lvl, useAim, priorityList) {
+            if (useAim === void 0) { useAim = false; }
+            if (priorityList === void 0) { priorityList = []; }
+            var level = gameObject.klamak['lvl' + lvl];
+            var findSerial = '';
+            for (var _i = 0, priorityList_1 = priorityList; _i < priorityList_1.length; _i++) {
+                var klamakName = priorityList_1[_i];
+                for (var itemName in level) {
+                    if (klamakName === itemName) {
+                        var klamak = level[itemName];
+                        var klamakSerials = Orion.FindType(klamak.graphic, klamak.color);
+                        if (klamakSerials) {
+                            findSerial = klamakSerials[0];
+                            break;
+                        }
+                    }
+                }
+                if (findSerial !== '') {
+                    break;
+                }
+            }
+            if (findSerial === '') {
+                for (var itemName in level) {
+                    if (priorityList.indexOf(itemName) > -1) {
+                        continue;
+                    }
+                    var klamak = level[itemName];
+                    var klamakSerials = Orion.FindType(klamak.graphic, klamak.color);
+                    if (klamakSerials.length) {
+                        findSerial = klamakSerials[0];
+                        break;
+                    }
+                }
+            }
+            if (findSerial === '') {
+                Scripts.Utils.playerPrint("[ nemas pety ]", ColorEnum.red);
+                return;
+            }
+            if (useAim) {
+                var selection = Orion.WaitForAddObject('klamakTarget');
+                if (selection === 0) {
+                    return;
+                }
+                var target = {};
+                if (selection === 1) {
+                    var targetGameObject = Orion.FindObject('klamakTarget');
+                    target.x = targetGameObject.X();
+                    target.y = targetGameObject.Y();
+                    target.z = targetGameObject.Z();
+                }
+                else {
+                    target.x = SelectedTile.X();
+                    target.y = SelectedTile.Y();
+                    target.z = SelectedTile.Z();
+                }
+                Orion.MoveItem(findSerial, 1, "ground", target.x, target.y, target.z);
+                Orion.Wait(responseDelay);
+            }
+            Orion.WarMode(true);
+            Orion.Wait(100);
+            Orion.UseObject(findSerial);
         };
         return Klamak;
     }());
@@ -2217,24 +2473,7 @@ var Scripts;
             var p = gameObject.potions[potionName];
             var potion = Scripts.Potions.getPotion(p);
             if (!potion) {
-                var potionKad = Scripts.Potions.getKadForPotion(p);
-                var emptyBottle = Scripts.Potions.getEmptyBottle();
-                Orion.ClearJournal();
-                Orion.WaitTargetObject(emptyBottle);
-                Orion.UseObject(potionKad);
-                Orion.Wait(responseDelay);
-                if (Orion.InJournal('Pri praci s nadobou nemuzes delat neco')) {
-                    if (!switchWarModeWhenNeeded) {
-                        Scripts.Utils.log('Nemuzes pit, kdyz neco delas', ColorEnum.red);
-                        return;
-                    }
-                    Scripts.Utils.playerPrint('[War mode]', ColorEnum.red);
-                    Orion.WarMode(true);
-                    Orion.Wait(100);
-                    Orion.WaitTargetObject(emptyBottle);
-                    Orion.UseObject(potionKad);
-                    Orion.Wait(responseDelay);
-                }
+                Scripts.Potions.fillPotion(potionName, switchWarModeWhenNeeded);
                 potion = Scripts.Potions.getPotion(p);
                 if (!potion) {
                     Scripts.Utils.playerPrint("!! NEMAS [ " + potionName + " ] !!", ColorEnum.red);
@@ -2322,6 +2561,31 @@ var Scripts;
                 Orion.WaitTargetObject(potion);
                 Orion.UseObject(kad);
                 Scripts.Utils.waitWhileSomethingInJournal(['You put']);
+            }
+        };
+        Potions.fillPotion = function (potionName, switchWarModeWhenNeeded) {
+            if (switchWarModeWhenNeeded === void 0) { switchWarModeWhenNeeded = true; }
+            if (!isPotionsEnum(potionName)) {
+                return;
+            }
+            var p = gameObject.potions[potionName];
+            var potionKad = Scripts.Potions.getKadForPotion(p);
+            var emptyBottle = Scripts.Potions.getEmptyBottle();
+            Orion.ClearJournal();
+            Orion.WaitTargetObject(emptyBottle);
+            Orion.UseObject(potionKad);
+            Orion.Wait(responseDelay);
+            if (Orion.InJournal('Pri praci s nadobou nemuzes delat neco')) {
+                if (!switchWarModeWhenNeeded) {
+                    Scripts.Utils.log('Nemuzes pit, kdyz neco delas', ColorEnum.red);
+                    return;
+                }
+                Scripts.Utils.playerPrint('[War mode]', ColorEnum.red);
+                Orion.WarMode(true);
+                Orion.Wait(100);
+                Orion.WaitTargetObject(emptyBottle);
+                Orion.UseObject(potionKad);
+                Orion.Wait(responseDelay);
             }
         };
         return Potions;
@@ -2613,17 +2877,33 @@ var Scripts;
             var enemySerial = store[currentIndex].serial;
             var enemy = Orion.FindObject(enemySerial);
             if (enemy) {
-                Scripts.Utils.playerPrint("[" + (enemy.Name() || 'target') + "]: " + enemy.Hits() + "/" + enemy.MaxHits());
-                Scripts.Utils.printColoredHpBar(enemySerial, enemy.Hits() / enemy.MaxHits() * 100);
-                Scripts.Utils.updateCurrentStatusBar(enemySerial);
-                Orion.Attack(enemySerial);
-                Orion.WarMode(false);
-                Orion.WarMode(true);
+                Scripts.Targeting.highlightEnemy(enemySerial, enemy);
             }
             else {
                 var enemyNameFromStore = store[currentIndex].name;
                 Scripts.Utils.playerPrint("[" + enemyNameFromStore + "] out of distance", ColorEnum.red);
             }
+        };
+        Targeting.manualTarget = function () {
+            var selection = Orion.WaitForAddObject('manualTargetEnemy');
+            Scripts.Utils.waitWhileTargeting();
+            if (selection !== 1) {
+                return;
+            }
+            var enemy = Orion.FindObject('manualTargetEnemy');
+            if (enemy && enemy.Mobile() && !enemy.Dead()) {
+                Scripts.Targeting.highlightEnemy('manualTargetEnemy', enemy);
+            }
+        };
+        Targeting.highlightEnemy = function (enemySerial, enemy) {
+            var notoColor = Scripts.Wip.getColorByNotoriety(enemy.Notoriety());
+            Scripts.Utils.playerPrint("[" + (enemy.Name() || 'target') + "]: " + enemy.Hits() + "/" + enemy.MaxHits(), notoColor);
+            Orion.CharPrint(enemySerial, notoColor, "[" + (enemy.Name() || 'target') + "]: " + enemy.Hits() + "/" + enemy.MaxHits());
+            Scripts.Utils.printColoredHpBar(enemySerial, enemy.Hits() / enemy.MaxHits() * 100);
+            Scripts.Utils.updateCurrentStatusBar(enemySerial);
+            Orion.Attack(enemySerial);
+            Orion.WarMode(false);
+            Orion.WarMode(true);
         };
         return Targeting;
     }());
@@ -2670,6 +2950,7 @@ var Scripts;
             }
         };
         Utils.countObjectInContainer = function (obj, container) {
+            if (container === void 0) { container = 'backpack'; }
             var serials = Orion.FindType(obj.graphic, obj.color || '0xFFFF', container);
             return Scripts.Utils.countItemsBySerials(serials);
         };
@@ -2825,6 +3106,18 @@ var Scripts;
                 Orion.PrintFast(serial, Scripts.Utils.determineHpColor(hp / max * 100), 0, "[" + hp + "/" + max + "]");
             }
         };
+        Utils.use = function (val, name, minimalCountForWarn) {
+            if (name === void 0) { name = ''; }
+            var serials = Orion.FindType(val.graphic, val.color);
+            var count = Scripts.Utils.countItemsBySerials(serials);
+            if (count) {
+                Orion.UseObject(serials[0]);
+                count--;
+            }
+            if ((minimalCountForWarn !== undefined && count <= minimalCountForWarn) || (minimalCountForWarn === undefined && !count)) {
+                Scripts.Utils.playerPrint("[ " + name + " " + count + " ]", ColorEnum.red);
+            }
+        };
         return Utils;
     }());
     Scripts.Utils = Utils;
@@ -2855,6 +3148,50 @@ var Scripts;
                 Scripts.Utils.playerPrint('NEMAS ITEM NA DROPNUTI');
             }
             Orion.Drop(serials[0]);
+        };
+        Wip.useGGR = function () {
+            Orion.UseType(0x108A, 0x0000);
+            var ggrSerial = Orion.FindType(0x108A, 0x0000);
+            Orion.Wait(50);
+            Orion.MoveItem(ggrSerial[0], 0, 'backpack', 50, 50);
+        };
+        Wip.harfa = function (target) {
+            if (!target) {
+                var selection = Orion.WaitForAddObject('musicTarget', 60000);
+                Orion.Print('-1', 'Komu chces zahrat ?');
+                if (selection !== 1) {
+                    return;
+                }
+                target = 'musicTarget';
+            }
+            var Harfa = Orion.FindType(0x0EB2);
+            Orion.WarMode(true);
+            if (Harfa.length > 0) {
+                Orion.WaitTargetObject(target);
+                Orion.UseObject(Harfa[0]);
+            }
+            else {
+                Orion.Print(-1, 'Nemas  Harfu');
+            }
+        };
+        Wip.lutna = function (target) {
+            if (!target) {
+                var selection = Orion.WaitForAddObject('musicTarget', 60000);
+                Orion.Print('-1', 'Komu chces zahrat ?');
+                if (selection !== 1) {
+                    return;
+                }
+                target = 'musicTarget';
+            }
+            var Type = Orion.FindType(0x0EB3);
+            Orion.WarMode(true);
+            if (Type.length > 0) {
+                Orion.WaitTargetObject(target);
+                Orion.UseObject(Type[0]);
+            }
+            else {
+                Orion.Print(-1, 'Nemas  Lute');
+            }
         };
         Wip.Tracking = function (who) {
             if (who === void 0) { who = 'Players'; }

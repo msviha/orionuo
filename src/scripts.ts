@@ -48,6 +48,28 @@ function addMount() {
 }
 
 /**
+ * Micha pres obyc mortar
+ * @param potionName zkratka potionu
+ * @example in client `_alchemy tmr`
+ * @example external code `alchemy('tmr');`
+ */
+function alchemy(potionName:PotionsEnum) {
+    Scripts.Potions.alchemy(potionName);
+}
+
+/**
+ * Da si bandu, pokud dosli tak prehraje zvuk z C:\critical.wav
+ * Poslednich 10 band hlasi nad hracem
+ * @param minimalCountForWarn zobrazi varovani pokud budes mit tento pocet band (a mene)
+ * @example in client `_bandageSelf`
+ * @example external code `bandageSelf();`
+ * @example external code `bandageSelf(10);`
+ */
+function bandageSelf(minimalCountForWarn = 10) {
+    Scripts.Common.bandageSelf(minimalCountForWarn);
+}
+
+/**
  * Kouzli na pozadovany target, pokud je uveden
  * @example external code `cast("Harm", "lastattack");`
  * @example external code `cast("Magic Reflection", "self");`
@@ -77,11 +99,23 @@ function castScroll(scroll:ScrollEnum, target?:TargetEnum, backupHeadCast?:strin
 /**
  * Chlasta lahvicky
  * @param potionName zkratka potionu
+ * @param switchWarModeWhenNeeded date li 'false' pak neprepina war pokud nejde cepovat, tak necepne
  * @example in client `_drink tmr`
  * @example external code `drink('tmr');`
  */
-function drink(potionName:PotionsEnum) {
-    Scripts.Potions.drinkPotion(potionName);
+function drink(potionName:PotionsEnum, switchWarModeWhenNeeded = true) {
+    Scripts.Potions.drinkPotion(potionName, switchWarModeWhenNeeded);
+}
+
+/**
+ * Docepne lahvicku z kade
+ * @param potionName zkratka potionu
+ * @param switchWarModeWhenNeeded date li 'false' pak neprepina war pokud nejde cepovat, tak necepne
+ * @example in client `_fillPotion tmr`
+ * @example external code `fillPotion('tmr');`
+ */
+function fillPotion(potionName:PotionsEnum, switchWarModeWhenNeeded = true) {
+    Scripts.Potions.fillPotion(potionName, switchWarModeWhenNeeded);
 }
 
 /**
@@ -92,6 +126,30 @@ function drink(potionName:PotionsEnum) {
  */
 function gmMortar(potionName:PotionsEnum) {
     Scripts.Potions.gmMortar(potionName);
+}
+
+/**
+ * Pouzije harfu
+ * @param target na koho chces zahrat ? pokud nevyplnis tak hodi kurzor
+ * @example in client `_harp`
+ * @example in client `_harp self`
+ * @example external code `harp()`
+ * @example external code `harp('self');`
+ */
+function harp(target?:TargetEnum) {
+    Scripts.Wip.harfa(target);
+}
+
+/**
+ * Pouzije loutnu
+ * @param target na koho chces zahrat ? pokud nevyplnis tak hodi kurzor
+ * @example in client `_lute`
+ * @example in client `_lute self`
+ * @example external code `lute()`
+ * @example external code `lute('self');`
+ */
+function lute(target?:TargetEnum) {
+    Scripts.Wip.lutna(target);
 }
 
 /**
@@ -192,13 +250,22 @@ function make(count:number, objectAsString:string, setInputs = true) {
 }
 
 /**
- * Micha pres obyc mortar
- * @param potionName zkratka potionu
- * @example in client `_alchemy tmr`
- * @example external code `alchemy('tmr');`
+ * Zobrazi zamerovac pro zamereni cile, ktery se ulozi pod lastattack
+ * Cil je tim padem zbarven a jsou vypsany jeho zivoty
+ * @example in client `_manualTarget`
+ * @example external code `manualTarget()`
  */
-function alchemy(potionName:PotionsEnum) {
-    Scripts.Potions.alchemy(potionName);
+function manualTarget() {
+    Scripts.Targeting.manualTarget();
+}
+
+/**
+ * Kopne pres NB runu
+ * @example in client `_nbRune`
+ * @example external code `nbRune()`
+ */
+function nbRune() {
+    Scripts.Wip.Nbruna();
 }
 
 /**
@@ -240,10 +307,64 @@ function targetPrevious() {
 }
 
 /**
+ * Trackuje hrace nebo pozadovanou volbu z menu
+ * @param who - volba z menu
+ * @example in client `_tracking` trackuje hrace
+ * @example in client `_tracking Animals` trackuje zvirata
+ * @example external code `tracking()` trackuje hrace
+ * @example external code `tracking('Animals');` trackuje zvirata
+ */
+function tracking(who = 'Players') {
+    Scripts.Wip.Tracking(who);
+}
+
+/**
  * Lockpickuje zamcenou bednu, dokud ji neotevre (nebo nedojdou locky)
  * @example in client `_unlock`
  * @example external code `unlock();`
  */
 function unlock() {
     Scripts.Lockpicking.unlock();
+}
+
+/**
+ * Pouzije objekt ktery ma nadefinovany graphic a color a upozorni v pripade nizkeho poctu
+ * @param object {IMyGameObject} musi mit graphic a color
+ * @param name {string} pouziva se pro vypisovani poctu abys vedel co ti dochazi
+ * @param minimalCountForWarn zobrazi varovani pokud budes mit tento pocet band (a mene)
+ * @example external code `use(gameObject.ryba.modra, 'modra ryba', 3)
+ */
+function use(object:IMyGameObject, name = '', minimalCountForWarn?:number) {
+    Scripts.Utils.use(object, name, minimalCountForWarn);
+}
+
+/**
+ * Pouzije Great Gold Ring
+ * @example in client `_useGGR`
+ * @example external code `useGGR()`
+ */
+function useGGR() {
+    Scripts.Wip.useGGR();
+}
+
+/**
+ * Vyhodi klamaka
+ * @param lvl {number} pozadovany level klamaka
+ * @param useAim {boolean} pokud chcete zamerovat misto kam ho vyhodit
+ * @param priorityList {string[]} pokud chcete prioritizovat ktere klamaky to ma nejdrive v baglu hledat
+ * @example external code `useKlamak(1)` vyhodi klamaka level 1
+ * @example external code `useKlamak(1, true)` zobrazi zamerovatko a pak vyhodi klamaka level 1 na target
+ * @example external code `useKlamak(3, false, ['Bull', 'Cow'])`vyhodi pod vas Bulla, pokud ho nemate, tak Kravu a pokud ani tu nemate tak zkusi vyhodit jiny lvl 3 klamak
+ */
+function useKlamak(lvl:number, useAim = false, priorityList?:string[]) {
+    Scripts.Klamak.useKlamak(lvl, useAim, priorityList)
+}
+
+/**
+ * Pouzije Reflex Ring nebo Great Reflex Ring
+ * @example in client `_useRR`
+ * @example external code `useRR()`
+ */
+function useRR() {
+    Scripts.Jewelry.useRR();
 }

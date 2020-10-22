@@ -15,15 +15,44 @@ scripty na pvp a targetovani
 
 ### Methods
 
+* [highlightEnemy](scripts.targeting.md#highlightenemy)
+* [manualTarget](scripts.targeting.md#manualtarget)
 * [targetNext](scripts.targeting.md#targetnext)
 
 ## Methods
+
+### highlightEnemy
+
+▸ `Static`**highlightEnemy**(`enemySerial`: string, `enemy`: GameObject): void
+
+*Defined in [scripts/targeting.ts:92](https://github.com/msviha/orionuo/blob/dc53ac6/src/scripts/targeting.ts#L92)*
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`enemySerial` | string |
+`enemy` | GameObject |
+
+**Returns:** void
+
+___
+
+### manualTarget
+
+▸ `Static`**manualTarget**(): void
+
+*Defined in [scripts/targeting.ts:78](https://github.com/msviha/orionuo/blob/dc53ac6/src/scripts/targeting.ts#L78)*
+
+**Returns:** void
+
+___
 
 ### targetNext
 
 ▸ `Static`**targetNext**(`reverse`: boolean): void
 
-*Defined in [scripts/targeting.ts:13](https://github.com/msviha/orionuo/blob/7437f54/src/scripts/targeting.ts#L13)*
+*Defined in [scripts/targeting.ts:13](https://github.com/msviha/orionuo/blob/dc53ac6/src/scripts/targeting.ts#L13)*
 
 #### Parameters:
 

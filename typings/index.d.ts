@@ -28,6 +28,7 @@ declare global {
 	const Orion: OrionStatic;
 	const TextWindow: TextWindow;
 	const Player: PlayerCharacter;
+	const SelectedTile: SelectedTile;
 }
 
 interface OrionStatic extends

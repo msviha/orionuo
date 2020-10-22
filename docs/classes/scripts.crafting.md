@@ -30,7 +30,7 @@ example - Scripts.Crafting.Make(o.crafting.tinkering.wires.copper, 5)
 
 ▸ `Static`**make**(`count`: number, `objectAsString`: string, `setInputs`: boolean): void
 
-*Defined in [scripts/crafting.ts:56](https://github.com/msviha/orionuo/blob/7437f54/src/scripts/crafting.ts#L56)*
+*Defined in [scripts/crafting.ts:56](https://github.com/msviha/orionuo/blob/dc53ac6/src/scripts/crafting.ts#L56)*
 
 Main function for crafting
 
@@ -50,7 +50,7 @@ ___
 
 ▸ `Static`**makeProgress**(): boolean
 
-*Defined in [scripts/crafting.ts:29](https://github.com/msviha/orionuo/blob/7437f54/src/scripts/crafting.ts#L29)*
+*Defined in [scripts/crafting.ts:29](https://github.com/msviha/orionuo/blob/dc53ac6/src/scripts/crafting.ts#L29)*
 
 Waits for the journal message with the crafting status
 
@@ -64,7 +64,7 @@ ___
 
 ▸ `Static`**refOrMake**(`count`: number, `resourcePath`: string): void
 
-*Defined in [scripts/crafting.ts:40](https://github.com/msviha/orionuo/blob/7437f54/src/scripts/crafting.ts#L40)*
+*Defined in [scripts/crafting.ts:40](https://github.com/msviha/orionuo/blob/dc53ac6/src/scripts/crafting.ts#L40)*
 
 Refills the resources for crafting, or creates them, if they are not present
 
@@ -83,7 +83,7 @@ ___
 
 ▸ `Static`**setInputs**(`itemName`: string): void
 
-*Defined in [scripts/crafting.ts:17](https://github.com/msviha/orionuo/blob/7437f54/src/scripts/crafting.ts#L17)*
+*Defined in [scripts/crafting.ts:17](https://github.com/msviha/orionuo/blob/dc53ac6/src/scripts/crafting.ts#L17)*
 
 Creates globals for setting the containers with resources and the finished items
 
