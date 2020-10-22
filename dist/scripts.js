@@ -2904,6 +2904,10 @@ var Scripts;
                 Orion.SetGlobal('currentTarget', store[currentIndex]);
             }
             Orion.IgnoreReset();
+            if (!store[currentIndex]) {
+                Scripts.Utils.playerPrint("NO TARGET", ColorEnum.green);
+                return;
+            }
             var enemySerial = store[currentIndex].serial;
             var enemy = Orion.FindObject(enemySerial);
             if (enemy) {

@@ -64,6 +64,10 @@ namespace Scripts {
             }
 
             Orion.IgnoreReset();
+            if (!store[currentIndex]) {
+                Scripts.Utils.playerPrint(`NO TARGET`, ColorEnum.green);
+                return;
+            }
             const enemySerial = store[currentIndex].serial;
             const enemy = Orion.FindObject(enemySerial);
             if (enemy) {
