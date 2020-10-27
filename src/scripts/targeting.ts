@@ -5,12 +5,46 @@ namespace Scripts {
      * scripty na pvp a targetovani
      */
     export class Targeting {
+        static addFriend():string {
+            Scripts.Utils.playerPrint('Add friend');
+            const selection = Orion.WaitForAddObject('lastAddedFriend', 60000);
+            if (selection !== 1) {
+                throw 'e';
+            }
+
+            const friend = Orion.FindObject('lastAddedFriend');
+            Orion.AddFriend(friend.Name(), friend.Serial());
+            return friend.Serial();
+        }
+
+        static addEnemy():string {
+            Scripts.Utils.playerPrint('Add enemy');
+            const selection = Orion.WaitForAddObject('lastAddedEnemy', 60000);
+            if (selection !== 1) {
+                throw 'e';
+            }
+
+            const enemy = Orion.FindObject('lastAddedEnemy');
+            Orion.AddFriend(enemy.Name(), enemy.Serial());
+            return enemy.Serial();
+        }
+
+        static resetFriends() {
+            Orion.ClearFriendList();
+            while (Scripts.Targeting.addFriend()) {}
+        }
+
+        static resetEnemies() {
+            Orion.ClearEnemyList();
+            while (Scripts.Targeting.addEnemy()) {}
+        }
+
         /**
          *
          * @param reverse if true.. it behaves like TargetPrevious
          * @constructor
          */
-        static targetNext(reverse = false) {
+        static targetNext(reverse = false, timeToStorePreviousTargets = 2500, additionalFlags:string[] = [], notoriety:string[] = []) {
             // initialization
             if (Orion.Timer('targetTimer') === -1) {
                 Orion.SetTimer('targetTimer');
@@ -18,7 +52,7 @@ namespace Scripts {
             }
 
             // 2,5 sec time for store the targets when targeting on next/previous
-            Orion.Timer('targetTimer') > 2500 && Orion.SetGlobal('targetStore', '[]');
+            Orion.Timer('targetTimer') > timeToStorePreviousTargets && Orion.SetGlobal('targetStore', '[]');
             Scripts.Utils.resetTimer('targetTimer');
 
             const storeAsString = Orion.GetGlobal('targetStore');
@@ -43,7 +77,9 @@ namespace Scripts {
             }
             // find new target and store it
             else {
-                const nearestNewTarget = Orion.FindType("any", "any", "ground", "near|mobile|live|ignoreself", 15);
+                const flags = ['near', 'mobile', 'live', 'ignoreself'].concat(additionalFlags).join('|');
+                const noto = notoriety.join('|') || undefined;
+                const nearestNewTarget = Orion.FindType("any", "any", "ground", flags, 15, noto);
                 const isSomeNewTargetAround = !!nearestNewTarget?.length;
                 if (isSomeNewTargetAround) {
                     // push new target to store

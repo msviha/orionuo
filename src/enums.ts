@@ -29,6 +29,35 @@ enum ScrollEnum {
     ivm = 'ivm'
 }
 
+enum FlagsEnum {
+    fast = 'fast',
+    near = 'near',
+    mobile = 'mobile',
+    item = 'item',
+    human = 'human',
+    nothuman = 'nothuman',
+    live = 'live',
+    dead = 'dead',
+    injured = 'injured',
+    next = 'next',
+    ignorefriends = 'ignorefriends',
+    ignoreenemies = 'ignoreenemies',
+    ignoreself = 'ignoreself',
+    inlos = 'inlos',
+    nearmouse = 'nearmouse',
+    recurse = 'recurse'
+}
+
+enum NotorietyEnum {
+    blue = 'blue',
+    green = 'green',
+    gray = 'gray',
+    criminal = 'criminal',
+    orange = 'orange',
+    red = 'red',
+    yellow = 'yellow'
+}
+
 enum PotionsEnum {
     tmr = 'tmr',
     gh = 'gh',

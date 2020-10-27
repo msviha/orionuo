@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## 0.0.7
+### features
+- pridana `friend` [funkce]
+- pridana `enemy` [funkce]
+- pridana `resetFriends` [funkce]
+- pridana `resetEmemies` [funkce]
+
+### enhancements
+- `use` nyni podporuje pole hernich objektu `IMyGameObject|IMyGameObject[]` - duvodem jsou napriklad odlisne grafiky pro krvave bandy, takze jejich pouziti je nyni mozne napriklad takto: `use([gameObject.uncategorized.krvavaBanda1, gameObject.uncategorized.krvavaBanda2], 'krvave bandy', 200)`
+- `targetNext` a `targetPrevious` prijimaji pole `FlagEnum` a pole `NotorietyEnum` pro lepsi filtrovani targetu viz  [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#targetNext)
+### fixes
+- pridan timer na para svitek. Opraven blokujici timer u svitku, tak aby neblokoval pouziti svitku (timery jsou nyni jen informativni)
+- `carveBody` nyni dokonci rezani tela, pokud je volan poprve a setuje se `cutWeapon`
+
 ## 0.0.6
 ### features
 - added `lavaBomb` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#lavaBomb)

@@ -19,7 +19,7 @@
 
 •  **East**:  = 2
 
-*Defined in [enums.ts:4](https://github.com/msviha/orionuo/blob/236ae05/src/enums.ts#L4)*
+*Defined in [enums.ts:4](https://github.com/msviha/orionuo/blob/9e2b913/src/enums.ts#L4)*
 
 ___
 
@@ -27,7 +27,7 @@ ___
 
 •  **North**:  = 0
 
-*Defined in [enums.ts:3](https://github.com/msviha/orionuo/blob/236ae05/src/enums.ts#L3)*
+*Defined in [enums.ts:3](https://github.com/msviha/orionuo/blob/9e2b913/src/enums.ts#L3)*
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 •  **South**:  = 4
 
-*Defined in [enums.ts:5](https://github.com/msviha/orionuo/blob/236ae05/src/enums.ts#L5)*
+*Defined in [enums.ts:5](https://github.com/msviha/orionuo/blob/9e2b913/src/enums.ts#L5)*
 
 ___
 
@@ -43,4 +43,4 @@ ___
 
 •  **West**:  = 6
 
-*Defined in [enums.ts:2](https://github.com/msviha/orionuo/blob/236ae05/src/enums.ts#L2)*
+*Defined in [enums.ts:2](https://github.com/msviha/orionuo/blob/9e2b913/src/enums.ts#L2)*

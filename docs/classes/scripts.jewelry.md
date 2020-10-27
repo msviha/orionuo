@@ -22,7 +22,7 @@ Obsahuje zakladni scripty
 
 ▸ `Static`**useRR**(): void
 
-*Defined in [scripts/jewelry.ts:14](https://github.com/msviha/orionuo/blob/236ae05/src/scripts/jewelry.ts#L14)*
+*Defined in [scripts/jewelry.ts:14](https://github.com/msviha/orionuo/blob/9e2b913/src/scripts/jewelry.ts#L14)*
 
 Scripts.Common.shrinkKad
 stability beta

@@ -86,9 +86,9 @@ namespace Scripts {
         static waitWhileSomethingInJournal(messages:string[], wait?:number) {
             let keepWait = true;
             while (!Orion.InJournal(messages.join('|')) && keepWait) {
-                Orion.Wait(200);
+                Orion.Wait(50);
                 if (wait) {
-                    wait -= 200;
+                    wait -= 50;
                     keepWait = wait > 0;
                 }
             }
@@ -228,16 +228,25 @@ namespace Scripts {
             }
         }
 
-        static use(val:IMyGameObject, name = '', minimalCountForWarn?:number) {
-            const serials = Orion.FindType(val.graphic,val.color)
-            let count = Scripts.Utils.countItemsBySerials(serials);
-            if (count) {
-                Orion.UseObject(serials[0]);
-                count--;
+        static use(val:IMyGameObject|IMyGameObject[], name = '', minimalCountForWarn?:number) {
+            if (isMyGameObject(val)) {
+                val = [val];
             }
 
+            const serials = [];
+            for (const o of val) {
+                // Orion is not able to do properly .concat on arrays
+                const oSerials = Orion.FindType(o.graphic, o.color);
+                for (const s of oSerials) {
+                    serials.push(s);
+                }
+            }
+            let count = Scripts.Utils.countItemsBySerials(serials);
             if ((minimalCountForWarn !== undefined && count <= minimalCountForWarn) || (minimalCountForWarn === undefined && !count)) {
                 Scripts.Utils.playerPrint(`[ ${name} ${count} ]`, ColorEnum.red);
+            }
+            if (count) {
+                Orion.UseObject(serials[0]);
             }
         }
     }

@@ -48,29 +48,29 @@ namespace Scripts {
                 return;
             }
 
-            const lastTimerLimit = parseInt(Orion.GetGlobal('lastScrollTimerLimit'), 10);
-            const nextTimer = s.timer;
-            const timer = Orion.Timer('scrollTimer');
-            const noTimer = timer !== -1 && timer < lastTimerLimit;
-            const noScrolls = Orion.Count(s.graphic) < 1;
-            if (noTimer || noScrolls) {
-                const message = noTimer ? 'TIMER' : 'NEMAS SVITKY';
-                if (backupHeadCast) {
-                    Scripts.Utils.playerPrint(message + ' - backup cast', ColorEnum.orange);
-                    Scripts.Spells.cast(backupHeadCast, target);
-                }
-                else {
-                    Scripts.Utils.playerPrint(message, ColorEnum.red)
-                }
+            if (Orion.Count(s.graphic) < 1) {
+                const reason = 'NEMAS SVITKY';
+                backupHeadCast ? Scripts.Spells.backupHeadCast(reason, backupHeadCast, target) : Scripts.Utils.playerPrint(reason, ColorEnum.red);
                 return;
             }
 
+            Orion.ClearJournal();
             Scripts.Utils.waitTarget(target);
             Orion.UseType(s.graphic, s.color);
+            Scripts.Utils.waitWhileSomethingInJournal(['Select Target', 'You can\'t cast']);
 
-            Orion.AddDisplayTimer('scroll', nextTimer, 'AboveChar', 'bar', '', 0, 75, '0x100', 1, 'yellow');
-            Scripts.Utils.resetTimer('scrollTimer');
-            Orion.SetGlobal('lastScrollTimerLimit', s.timer);
+            if (Orion.InJournal('Select Target')) {
+                Orion.AddDisplayTimer('scroll', s.timer, 'AboveChar', 'bar', '', 0, 75, '0x100', 1, 'yellow');
+            }
+            else {
+                const reason = 'TIMER';
+                backupHeadCast ? Scripts.Spells.backupHeadCast(reason, backupHeadCast, target) : Scripts.Utils.playerPrint(reason, ColorEnum.red);
+            }
+        }
+
+        static backupHeadCast(reason:string, spell:string, target?:TargetEnum) {
+            Scripts.Utils.playerPrint(reason + ' - backup cast', ColorEnum.orange);
+            Scripts.Spells.cast(spell, target);
         }
 
         /**

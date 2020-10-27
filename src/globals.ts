@@ -17,6 +17,14 @@ const gameObject:any = {
                 y: 20
             }
         },
+        krvavaBanda1: {
+            graphic: '0x0E22',
+            color: '0x0000'
+        },
+        krvavaBanda2: {
+            graphic: '0x0E20',
+            color: '0x0000'
+        },
         salat: {
             graphic: '0x09EC',
             color: '0x06AB'
@@ -711,7 +719,7 @@ const gameObject:any = {
             pog: {
                 graphic: '0x1F4A',
                 color: '0x0000',
-                timer: 5000,
+                timer: 4000,
                 minMana: 5
             },
             ijs: {
@@ -730,7 +738,9 @@ const gameObject:any = {
             },
             para: {
                 graphic: '0x1F52',
-                color: '0x0000'
+                color: '0x0000',
+                timer: 4000,
+                minMana: 7
             },
             wos: {
                 graphic: '0x1F44',
@@ -1115,4 +1125,14 @@ const gameObject:any = {
             }
         }
     }
+};
+
+const trackingFilter:any = {
+    // graphic co ti to bude trackovat
+    // jmena ktera chces odfiltrovat dej do zavorky a oddel carkou
+    "0x2106": [], // chlap
+    "0x2107": [], // zenska
+    "0x20F9": ['Imp'], // malej vamp
+    "0x20D9": ['Gargoyle'], // velkej vamp
+    "0x2100": [] // ghost
 };

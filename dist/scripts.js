@@ -29,6 +29,35 @@ var ScrollEnum;
     ScrollEnum["wos"] = "wos";
     ScrollEnum["ivm"] = "ivm";
 })(ScrollEnum || (ScrollEnum = {}));
+var FlagsEnum;
+(function (FlagsEnum) {
+    FlagsEnum["fast"] = "fast";
+    FlagsEnum["near"] = "near";
+    FlagsEnum["mobile"] = "mobile";
+    FlagsEnum["item"] = "item";
+    FlagsEnum["human"] = "human";
+    FlagsEnum["nothuman"] = "nothuman";
+    FlagsEnum["live"] = "live";
+    FlagsEnum["dead"] = "dead";
+    FlagsEnum["injured"] = "injured";
+    FlagsEnum["next"] = "next";
+    FlagsEnum["ignorefriends"] = "ignorefriends";
+    FlagsEnum["ignoreenemies"] = "ignoreenemies";
+    FlagsEnum["ignoreself"] = "ignoreself";
+    FlagsEnum["inlos"] = "inlos";
+    FlagsEnum["nearmouse"] = "nearmouse";
+    FlagsEnum["recurse"] = "recurse";
+})(FlagsEnum || (FlagsEnum = {}));
+var NotorietyEnum;
+(function (NotorietyEnum) {
+    NotorietyEnum["blue"] = "blue";
+    NotorietyEnum["green"] = "green";
+    NotorietyEnum["gray"] = "gray";
+    NotorietyEnum["criminal"] = "criminal";
+    NotorietyEnum["orange"] = "orange";
+    NotorietyEnum["red"] = "red";
+    NotorietyEnum["yellow"] = "yellow";
+})(NotorietyEnum || (NotorietyEnum = {}));
 var PotionsEnum;
 (function (PotionsEnum) {
     PotionsEnum["tmr"] = "tmr";
@@ -69,6 +98,14 @@ var gameObject = {
                 x: 123,
                 y: 20
             }
+        },
+        krvavaBanda1: {
+            graphic: '0x0E22',
+            color: '0x0000'
+        },
+        krvavaBanda2: {
+            graphic: '0x0E20',
+            color: '0x0000'
         },
         salat: {
             graphic: '0x09EC',
@@ -764,7 +801,7 @@ var gameObject = {
             pog: {
                 graphic: '0x1F4A',
                 color: '0x0000',
-                timer: 5000,
+                timer: 4000,
                 minMana: 5
             },
             ijs: {
@@ -783,7 +820,9 @@ var gameObject = {
             },
             para: {
                 graphic: '0x1F52',
-                color: '0x0000'
+                color: '0x0000',
+                timer: 4000,
+                minMana: 7
             },
             wos: {
                 graphic: '0x1F44',
@@ -1169,6 +1208,13 @@ var gameObject = {
         }
     }
 };
+var trackingFilter = {
+    "0x2106": [],
+    "0x2107": [],
+    "0x20F9": ['Imp'],
+    "0x20D9": ['Gargoyle'],
+    "0x2100": []
+};
 function Autostart() {
     var previousLastAttackSerial;
     var previousLastAttackHp;
@@ -1223,9 +1269,15 @@ function drink(potionName, switchWarModeWhenNeeded) {
     if (switchWarModeWhenNeeded === void 0) { switchWarModeWhenNeeded = true; }
     Scripts.Potions.drinkPotion(potionName, switchWarModeWhenNeeded);
 }
+function enemy() {
+    Scripts.Targeting.addEnemy();
+}
 function fillPotion(potionName, switchWarModeWhenNeeded) {
     if (switchWarModeWhenNeeded === void 0) { switchWarModeWhenNeeded = true; }
     Scripts.Potions.fillPotion(potionName, switchWarModeWhenNeeded);
+}
+function friend() {
+    Scripts.Targeting.addFriend();
 }
 function gmMortar(potionName) {
     Scripts.Potions.gmMortar(potionName);
@@ -1282,17 +1334,25 @@ function nbRune() {
 function mount() {
     Scripts.Mount.mountAndDismount();
 }
+function resetEnemies() {
+    Scripts.Targeting.resetEnemies();
+}
+function resetFriends() {
+    Scripts.Targeting.resetFriends();
+}
 function summon(creature, target) {
     Scripts.Spells.summon(creature, target);
 }
 function taming() {
     Scripts.Taming.taming();
 }
-function targetNext() {
-    Scripts.Targeting.targetNext();
+function targetNext(timeToStorePreviousTargets, additionalFlags, notoriety) {
+    if (timeToStorePreviousTargets === void 0) { timeToStorePreviousTargets = 2500; }
+    Scripts.Targeting.targetNext(false, timeToStorePreviousTargets, additionalFlags, notoriety);
 }
-function targetPrevious() {
-    Scripts.Targeting.targetNext(true);
+function targetPrevious(timeToStorePreviousTargets, additionalFlags, notoriety) {
+    if (timeToStorePreviousTargets === void 0) { timeToStorePreviousTargets = 2500; }
+    Scripts.Targeting.targetNext(true, timeToStorePreviousTargets, additionalFlags, notoriety);
 }
 function tracking(who) {
     if (who === void 0) { who = 'Players'; }
@@ -1564,6 +1624,29 @@ var Scripts;
                 return;
             }
             Orion.UseObject(bombSerials[0]);
+        };
+        Common.trackingPvp = function () {
+            Orion.WarMode(true);
+            Orion.CancelWaitMenu();
+            Orion.CloseMenu('all');
+            Orion.WaitMenu('Tracking', 'Anything that moves');
+            Orion.UseSkill('Tracking');
+            Orion.ClearJournal();
+            while (!(Orion.MenuCount() || Orion.InJournal('no signs'))) {
+                Orion.Wait(50);
+            }
+            var menu = Orion.GetMenu('0');
+            var shouldCloseMenu = true;
+            for (var i = 0; i < menu.ItemsCount(); i++) {
+                var graphic = menu.ItemGraphic(i);
+                var name_1 = menu.ItemName(i);
+                var list = trackingFilter[graphic];
+                if (list && list.indexOf(name_1) === -1) {
+                    shouldCloseMenu = false;
+                    Scripts.Utils.playerPrint("[tracking]: " + name_1);
+                }
+            }
+            shouldCloseMenu && menu.Close();
         };
         return Common;
     }());
@@ -2039,7 +2122,7 @@ var Scripts;
                 if (!nbDaggerSerials.length) {
                     var selection = Orion.WaitForAddObject('cutWeapon');
                     Scripts.Utils.playerPrint('target your cutWeapon');
-                    if (selection === 1) {
+                    if (selection !== 1) {
                         throw 'e';
                     }
                     cutWeapon = Orion.FindObject('cutWeapon');
@@ -2453,26 +2536,26 @@ var Scripts;
                 var monsterSerial = monstersAlive[0];
                 var isMyMonster = Orion.FindObject(monsterSerial).CanChangeName();
                 if (isMyMonster) {
-                    var name_1 = '';
+                    var name_2 = '';
                     var isAlreadyRenamed = false;
                     for (var _i = 0, globalMyMonsters_1 = globalMyMonsters; _i < globalMyMonsters_1.length; _i++) {
                         var m = globalMyMonsters_1[_i];
                         isAlreadyRenamed = m.serial === monsterSerial;
                         if (isAlreadyRenamed) {
-                            name_1 = m.name;
+                            name_2 = m.name;
                             break;
                         }
                     }
                     if (!isAlreadyRenamed) {
                         var random = Math.floor(Math.random() * (namesPool.length));
-                        name_1 = namesPool[random];
-                        Orion.RenameMount(monsterSerial, name_1);
+                        name_2 = namesPool[random];
+                        Orion.RenameMount(monsterSerial, name_2);
                         Orion.Wait(50);
                         namesPool.splice(random, 1);
                     }
-                    myMonsters.push({ serial: monsterSerial, name: name_1 });
+                    myMonsters.push({ serial: monsterSerial, name: name_2 });
                     Orion.WaitTargetObject(Orion.ClientLastAttack());
-                    Orion.Say(name_1 + " kill");
+                    Orion.Say(name_2 + " kill");
                     Orion.WaitForTarget(1000);
                     Scripts.Utils.waitWhileTargeting();
                 }
@@ -2669,27 +2752,26 @@ var Scripts;
                 Scripts.Utils.playerPrint('!! MANA !!', ColorEnum.red);
                 return;
             }
-            var lastTimerLimit = parseInt(Orion.GetGlobal('lastScrollTimerLimit'), 10);
-            var nextTimer = s.timer;
-            var timer = Orion.Timer('scrollTimer');
-            var noTimer = timer !== -1 && timer < lastTimerLimit;
-            var noScrolls = Orion.Count(s.graphic) < 1;
-            if (noTimer || noScrolls) {
-                var message = noTimer ? 'TIMER' : 'NEMAS SVITKY';
-                if (backupHeadCast) {
-                    Scripts.Utils.playerPrint(message + ' - backup cast', ColorEnum.orange);
-                    Scripts.Spells.cast(backupHeadCast, target);
-                }
-                else {
-                    Scripts.Utils.playerPrint(message, ColorEnum.red);
-                }
+            if (Orion.Count(s.graphic) < 1) {
+                var reason = 'NEMAS SVITKY';
+                backupHeadCast ? Scripts.Spells.backupHeadCast(reason, backupHeadCast, target) : Scripts.Utils.playerPrint(reason, ColorEnum.red);
                 return;
             }
+            Orion.ClearJournal();
             Scripts.Utils.waitTarget(target);
             Orion.UseType(s.graphic, s.color);
-            Orion.AddDisplayTimer('scroll', nextTimer, 'AboveChar', 'bar', '', 0, 75, '0x100', 1, 'yellow');
-            Scripts.Utils.resetTimer('scrollTimer');
-            Orion.SetGlobal('lastScrollTimerLimit', s.timer);
+            Scripts.Utils.waitWhileSomethingInJournal(['Select Target', 'You can\'t cast']);
+            if (Orion.InJournal('Select Target')) {
+                Orion.AddDisplayTimer('scroll', s.timer, 'AboveChar', 'bar', '', 0, 75, '0x100', 1, 'yellow');
+            }
+            else {
+                var reason = 'TIMER';
+                backupHeadCast ? Scripts.Spells.backupHeadCast(reason, backupHeadCast, target) : Scripts.Utils.playerPrint(reason, ColorEnum.red);
+            }
+        };
+        Spells.backupHeadCast = function (reason, spell, target) {
+            Scripts.Utils.playerPrint(reason + ' - backup cast', ColorEnum.orange);
+            Scripts.Spells.cast(spell, target);
         };
         Spells.castNecroScroll = function (scroll, target) {
             var s = gameObject.scrolls['necro'][scroll];
@@ -2963,13 +3045,44 @@ var Scripts;
     var Targeting = (function () {
         function Targeting() {
         }
-        Targeting.targetNext = function (reverse) {
+        Targeting.addFriend = function () {
+            Scripts.Utils.playerPrint('Add friend');
+            var selection = Orion.WaitForAddObject('lastAddedFriend', 60000);
+            if (selection !== 1) {
+                throw 'e';
+            }
+            var friend = Orion.FindObject('lastAddedFriend');
+            Orion.AddFriend(friend.Name(), friend.Serial());
+            return friend.Serial();
+        };
+        Targeting.addEnemy = function () {
+            Scripts.Utils.playerPrint('Add enemy');
+            var selection = Orion.WaitForAddObject('lastAddedEnemy', 60000);
+            if (selection !== 1) {
+                throw 'e';
+            }
+            var enemy = Orion.FindObject('lastAddedEnemy');
+            Orion.AddFriend(enemy.Name(), enemy.Serial());
+            return enemy.Serial();
+        };
+        Targeting.resetFriends = function () {
+            Orion.ClearFriendList();
+            while (Scripts.Targeting.addFriend()) { }
+        };
+        Targeting.resetEnemies = function () {
+            Orion.ClearEnemyList();
+            while (Scripts.Targeting.addEnemy()) { }
+        };
+        Targeting.targetNext = function (reverse, timeToStorePreviousTargets, additionalFlags, notoriety) {
             if (reverse === void 0) { reverse = false; }
+            if (timeToStorePreviousTargets === void 0) { timeToStorePreviousTargets = 2500; }
+            if (additionalFlags === void 0) { additionalFlags = []; }
+            if (notoriety === void 0) { notoriety = []; }
             if (Orion.Timer('targetTimer') === -1) {
                 Orion.SetTimer('targetTimer');
                 Orion.SetGlobal('targetStore', '[]');
             }
-            Orion.Timer('targetTimer') > 2500 && Orion.SetGlobal('targetStore', '[]');
+            Orion.Timer('targetTimer') > timeToStorePreviousTargets && Orion.SetGlobal('targetStore', '[]');
             Scripts.Utils.resetTimer('targetTimer');
             var storeAsString = Orion.GetGlobal('targetStore');
             var store = JSON.parse(storeAsString);
@@ -2985,7 +3098,9 @@ var Scripts;
                 Orion.SetGlobal('currentTarget', store[currentIndex]);
             }
             else {
-                var nearestNewTarget = Orion.FindType("any", "any", "ground", "near|mobile|live|ignoreself", 15);
+                var flags = ['near', 'mobile', 'live', 'ignoreself'].concat(additionalFlags).join('|');
+                var noto = notoriety.join('|') || undefined;
+                var nearestNewTarget = Orion.FindType("any", "any", "ground", flags, 15, noto);
                 var isSomeNewTargetAround = !!(nearestNewTarget === null || nearestNewTarget === void 0 ? void 0 : nearestNewTarget.length);
                 if (isSomeNewTargetAround) {
                     currentIndex = reverse ? 0 : store.length;
@@ -3122,9 +3237,9 @@ var Scripts;
         Utils.waitWhileSomethingInJournal = function (messages, wait) {
             var keepWait = true;
             while (!Orion.InJournal(messages.join('|')) && keepWait) {
-                Orion.Wait(200);
+                Orion.Wait(50);
                 if (wait) {
-                    wait -= 200;
+                    wait -= 50;
                     keepWait = wait > 0;
                 }
             }
@@ -3242,14 +3357,24 @@ var Scripts;
         };
         Utils.use = function (val, name, minimalCountForWarn) {
             if (name === void 0) { name = ''; }
-            var serials = Orion.FindType(val.graphic, val.color);
-            var count = Scripts.Utils.countItemsBySerials(serials);
-            if (count) {
-                Orion.UseObject(serials[0]);
-                count--;
+            if (isMyGameObject(val)) {
+                val = [val];
             }
+            var serials = [];
+            for (var _i = 0, val_1 = val; _i < val_1.length; _i++) {
+                var o = val_1[_i];
+                var oSerials = Orion.FindType(o.graphic, o.color);
+                for (var _a = 0, oSerials_1 = oSerials; _a < oSerials_1.length; _a++) {
+                    var s = oSerials_1[_a];
+                    serials.push(s);
+                }
+            }
+            var count = Scripts.Utils.countItemsBySerials(serials);
             if ((minimalCountForWarn !== undefined && count <= minimalCountForWarn) || (minimalCountForWarn === undefined && !count)) {
                 Scripts.Utils.playerPrint("[ " + name + " " + count + " ]", ColorEnum.red);
+            }
+            if (count) {
+                Orion.UseObject(serials[0]);
             }
         };
         return Utils;

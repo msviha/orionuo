@@ -119,6 +119,15 @@ function drink(potionName:PotionsEnum, switchWarModeWhenNeeded = true) {
 }
 
 /**
+ * Prida enemy do enemylistu (dobre pouziti s targetNext)
+ * @example in client `_enemy`
+ * @example external code `enemy()`
+ */
+function enemy() {
+    Scripts.Targeting.addEnemy();
+}
+
+/**
  * Docepne lahvicku z kade
  * @param potionName zkratka potionu
  * @param switchWarModeWhenNeeded date li 'false' pak neprepina war pokud nejde cepovat, tak necepne
@@ -127,6 +136,15 @@ function drink(potionName:PotionsEnum, switchWarModeWhenNeeded = true) {
  */
 function fillPotion(potionName:PotionsEnum, switchWarModeWhenNeeded = true) {
     Scripts.Potions.fillPotion(potionName, switchWarModeWhenNeeded);
+}
+
+/**
+ * Prida frienda do friendlistu (dobre pouziti s targetNext)
+ * @example in client `_friend`
+ * @example external code `friend()`
+ */
+function friend() {
+    Scripts.Targeting.addFriend();
 }
 
 /**
@@ -298,6 +316,24 @@ function mount() {
 }
 
 /**
+ * Resetuje cely enemylistu a ocekava naklikani noveho
+ * @example in client `_resetEnemies`
+ * @example external code `resetEnemies()`
+ */
+function resetEnemies() {
+    Scripts.Targeting.resetEnemies();
+}
+
+/**
+ * Resetuje cely friendlist a ocekava naklikani noveho
+ * @example in client `_resetFriends`
+ * @example external code `resetFriends()`
+ */
+function resetFriends() {
+    Scripts.Targeting.resetFriends();
+}
+
+/**
  * Kouzli summona (jmeno je treba zadat tak jak je v nabidce summonu) na pozadovany target, pokud je uveden
  * @example external code `summon("Horse", "self");`
  * @example external code `summon("Giant Viper");`
@@ -318,21 +354,29 @@ function taming() {
 /**
  * Targeti zive jednotky okolo tebe. Uchovava list targetu po dobu 2,5 vteriny pro pouziti s `targetPrevious`.
  * Vybrany target ma rovnou status `attackLast` (ale neutocis to na nej, jen mas zaply war) takze je mozne na nej kouzlit
- * @example in client `_targetNext`
+ * @param timeToStorePreviousTargets {number} cas pro uchovavani predchozich targetu v pameti
+ * @param additionalFlags {FlagsEnum[]} pole flagu pro vyhledavani targetu ktere se spoji s defaultnim polem `['near', 'mobile', 'live', 'ignoreself']`
+ * @param notoriety {NotorietyEnum[]} pole notoriety pro specifikaci targetu
  * @example external code `targetNext();`
+ * @example external code `targetNext(1000, [FlagsEnum.ignorefriends]);`
+ * @example external code `targetNext(1000, undefined, [NotorietyEnum.orange, NotorietyEnum.red, NotorietyEnum.criminal]);`
  */
-function targetNext() {
-    Scripts.Targeting.targetNext();
+function targetNext(timeToStorePreviousTargets = 2500, additionalFlags?:FlagsEnum[], notoriety?:NotorietyEnum[]) {
+    Scripts.Targeting.targetNext(false, timeToStorePreviousTargets, additionalFlags, notoriety);
 }
 
 /**
  * Targeti zive jednotky okolo tebe. Uchovava list targetu po dobu 2,5 vteriny pro pouziti s `targetNext`
  * Vybrany target ma rovnou status `attackLast` (ale neutocis to na nej, jen mas zaply war) takze je mozne na nej kouzlit
- * @example in client `_targetPrevious`
+ * @param timeToStorePreviousTargets {number} cas pro uchovavani predchozich targetu v pameti
+ * @param additionalFlags {FlagsEnum[]} pole flagu pro vyhledavani targetu ktere se spoji s defaultnim polem `['near', 'mobile', 'live', 'ignoreself']`
+ * @param notoriety {NotorietyEnum[]} pole notoriety pro specifikaci targetu
  * @example external code `targetPrevious();`
+ * @example external code `targetPrevious(1000, [FlagsEnum.ignorefriends]);`
+ * @example external code `targetPrevious(1000, undefined, [NotorietyEnum.orange, NotorietyEnum.red, NotorietyEnum.criminal]);`
  */
-function targetPrevious() {
-    Scripts.Targeting.targetNext(true);
+function targetPrevious(timeToStorePreviousTargets = 2500, additionalFlags?:string[], notoriety?:string[]) {
+    Scripts.Targeting.targetNext(true, timeToStorePreviousTargets, additionalFlags, notoriety);
 }
 
 /**
@@ -358,12 +402,13 @@ function unlock() {
 
 /**
  * Pouzije objekt ktery ma nadefinovany graphic a color a upozorni v pripade nizkeho poctu
- * @param object {IMyGameObject} musi mit graphic a color
+ * @param object {IMyGameObject|IMyGameObject[]} musi mit graphic a color
  * @param name {string} pouziva se pro vypisovani poctu abys vedel co ti dochazi
  * @param minimalCountForWarn zobrazi varovani pokud budes mit tento pocet band (a mene)
- * @example external code `use(gameObject.ryba.modra, 'modra ryba', 3)
+ * @example external code `use(gameObject.ryba.modra, 'modra ryba', 3)`
+ * @example external code `use([gameObject.uncategorized.krvavaBanda1, gameObject.uncategorized.krvavaBanda2], 'krvave bandy', 200)`
  */
-function use(object:IMyGameObject, name = '', minimalCountForWarn?:number) {
+function use(object:IMyGameObject|IMyGameObject[], name = '', minimalCountForWarn?:number) {
     Scripts.Utils.use(object, name, minimalCountForWarn);
 }
 

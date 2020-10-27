@@ -164,5 +164,31 @@ namespace Scripts {
 
             Orion.UseObject(bombSerials[0]);
         }
+
+        static trackingPvp() {
+            Orion.WarMode(true);
+            Orion.CancelWaitMenu();
+            Orion.CloseMenu('all');
+            Orion.WaitMenu('Tracking', 'Anything that moves');
+            Orion.UseSkill('Tracking');
+            Orion.ClearJournal();
+            while(!(Orion.MenuCount() || Orion.InJournal('no signs'))) {
+                Orion.Wait(50);
+            }
+
+            const menu = Orion.GetMenu('0');
+            let shouldCloseMenu = true;
+            for (let i = 0; i < menu.ItemsCount(); i++) {
+                const graphic = menu.ItemGraphic(i);
+                const name = menu.ItemName(i);
+
+                const list = trackingFilter[graphic];
+                if (list && list.indexOf(name) === -1) {
+                    shouldCloseMenu = false;
+                    Scripts.Utils.playerPrint(`[tracking]: ${name}`);
+                }
+            }
+            shouldCloseMenu && menu.Close();
+        }
     }
 }

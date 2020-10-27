@@ -235,7 +235,7 @@ namespace Scripts {
                 if (!nbDaggerSerials.length) {
                     const selection = Orion.WaitForAddObject('cutWeapon')
                     Scripts.Utils.playerPrint('target your cutWeapon');
-                    if (selection === 1) {
+                    if (selection !== 1) {
                         throw 'e';
                     }
                     cutWeapon = Orion.FindObject('cutWeapon');
