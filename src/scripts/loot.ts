@@ -236,6 +236,7 @@ namespace Scripts {
                     const selection = Orion.WaitForAddObject('cutWeapon')
                     Scripts.Utils.playerPrint('target your cutWeapon');
                     if (selection !== 1) {
+                        Orion.RemoveObject('cutWeapon');
                         throw 'e';
                     }
                     cutWeapon = Orion.FindObject('cutWeapon');

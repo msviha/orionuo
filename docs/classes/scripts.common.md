@@ -29,7 +29,7 @@ Obsahuje zakladni scripty
 
 ▸ `Static`**bandageSelf**(`minimalCountToWarn`: number, `pathToNoBandagesWavFile`: string): void
 
-*Defined in [scripts/common.ts:83](https://github.com/msviha/orionuo/blob/9e2b913/src/scripts/common.ts#L83)*
+*Defined in [scripts/common.ts:83](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/common.ts#L83)*
 
 Scripts.Common.bandageSelf
 stability beta
@@ -51,7 +51,7 @@ ___
 
 ▸ `Static`**hideAll**(): void
 
-*Defined in [scripts/common.ts:133](https://github.com/msviha/orionuo/blob/9e2b913/src/scripts/common.ts#L133)*
+*Defined in [scripts/common.ts:133](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/common.ts#L133)*
 
 **Returns:** void
 
@@ -61,7 +61,7 @@ ___
 
 ▸ `Static`**hiding**(): void
 
-*Defined in [scripts/common.ts:51](https://github.com/msviha/orionuo/blob/9e2b913/src/scripts/common.ts#L51)*
+*Defined in [scripts/common.ts:51](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/common.ts#L51)*
 
 Scripts.Common.hiding
 stability beta
@@ -76,7 +76,7 @@ ___
 
 ▸ `Static`**lavaBomb**(): void
 
-*Defined in [scripts/common.ts:156](https://github.com/msviha/orionuo/blob/9e2b913/src/scripts/common.ts#L156)*
+*Defined in [scripts/common.ts:156](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/common.ts#L156)*
 
 **Returns:** void
 
@@ -86,7 +86,7 @@ ___
 
 ▸ `Static`**mysticCounter**(): void
 
-*Defined in [scripts/common.ts:105](https://github.com/msviha/orionuo/blob/9e2b913/src/scripts/common.ts#L105)*
+*Defined in [scripts/common.ts:105](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/common.ts#L105)*
 
 **Returns:** void
 
@@ -96,7 +96,7 @@ ___
 
 ▸ `Static`**shrinkKad**(): void
 
-*Defined in [scripts/common.ts:34](https://github.com/msviha/orionuo/blob/9e2b913/src/scripts/common.ts#L34)*
+*Defined in [scripts/common.ts:34](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/common.ts#L34)*
 
 Scripts.Common.shrinkKad
 stability beta
@@ -111,7 +111,7 @@ ___
 
 ▸ `Static`**svetlo**(`shouldCast`: boolean): void
 
-*Defined in [scripts/common.ts:16](https://github.com/msviha/orionuo/blob/9e2b913/src/scripts/common.ts#L16)*
+*Defined in [scripts/common.ts:16](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/common.ts#L16)*
 
 Scripts.Common.svetlo
 stability released
@@ -134,6 +134,6 @@ ___
 
 ▸ `Static`**trackingPvp**(): void
 
-*Defined in [scripts/common.ts:168](https://github.com/msviha/orionuo/blob/9e2b913/src/scripts/common.ts#L168)*
+*Defined in [scripts/common.ts:168](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/common.ts#L168)*
 
 **Returns:** void

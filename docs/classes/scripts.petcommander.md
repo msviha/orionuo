@@ -20,7 +20,7 @@
 
 ▸ `Static`**kill**(): void
 
-*Defined in [scripts/pet-commander.ts:9](https://github.com/msviha/orionuo/blob/9e2b913/src/scripts/pet-commander.ts#L9)*
+*Defined in [scripts/pet-commander.ts:9](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/pet-commander.ts#L9)*
 
 Scripts.PetCommander.kill
 stability beta

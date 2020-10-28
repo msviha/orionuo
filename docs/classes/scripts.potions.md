@@ -27,7 +27,7 @@
 
 ▸ `Static`**alchemy**(`potionName`: [PotionsEnum](../enums/potionsenum.md)): void
 
-*Defined in [scripts/potions.ts:124](https://github.com/msviha/orionuo/blob/9e2b913/src/scripts/potions.ts#L124)*
+*Defined in [scripts/potions.ts:124](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/potions.ts#L124)*
 
 #### Parameters:
 
@@ -43,7 +43,7 @@ ___
 
 ▸ `Static`**drinkPotion**(`potionName`: [PotionsEnum](../enums/potionsenum.md), `switchWarModeWhenNeeded`: boolean): void
 
-*Defined in [scripts/potions.ts:44](https://github.com/msviha/orionuo/blob/9e2b913/src/scripts/potions.ts#L44)*
+*Defined in [scripts/potions.ts:44](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/potions.ts#L44)*
 
 #### Parameters:
 
@@ -60,7 +60,7 @@ ___
 
 ▸ `Static`**fillPotion**(`potionName`: [PotionsEnum](../enums/potionsenum.md), `switchWarModeWhenNeeded`: boolean): void
 
-*Defined in [scripts/potions.ts:162](https://github.com/msviha/orionuo/blob/9e2b913/src/scripts/potions.ts#L162)*
+*Defined in [scripts/potions.ts:162](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/potions.ts#L162)*
 
 #### Parameters:
 
@@ -77,7 +77,7 @@ ___
 
 ▸ `Static`**getEmptyBottle**(): string
 
-*Defined in [scripts/potions.ts:5](https://github.com/msviha/orionuo/blob/9e2b913/src/scripts/potions.ts#L5)*
+*Defined in [scripts/potions.ts:5](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/potions.ts#L5)*
 
 **Returns:** string
 
@@ -87,7 +87,7 @@ ___
 
 ▸ `Static`**getKadForPotion**(`potion`: IPotion): string
 
-*Defined in [scripts/potions.ts:14](https://github.com/msviha/orionuo/blob/9e2b913/src/scripts/potions.ts#L14)*
+*Defined in [scripts/potions.ts:14](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/potions.ts#L14)*
 
 #### Parameters:
 
@@ -103,7 +103,7 @@ ___
 
 ▸ `Static`**getMortar**(): string
 
-*Defined in [scripts/potions.ts:31](https://github.com/msviha/orionuo/blob/9e2b913/src/scripts/potions.ts#L31)*
+*Defined in [scripts/potions.ts:31](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/potions.ts#L31)*
 
 **Returns:** string
 
@@ -113,7 +113,7 @@ ___
 
 ▸ `Static`**getPotion**(`potion`: IPotion): string \| false
 
-*Defined in [scripts/potions.ts:23](https://github.com/msviha/orionuo/blob/9e2b913/src/scripts/potions.ts#L23)*
+*Defined in [scripts/potions.ts:23](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/potions.ts#L23)*
 
 #### Parameters:
 
@@ -129,7 +129,7 @@ ___
 
 ▸ `Static`**gmMortar**(`potionName`: [PotionsEnum](../enums/potionsenum.md)): void
 
-*Defined in [scripts/potions.ts:73](https://github.com/msviha/orionuo/blob/9e2b913/src/scripts/potions.ts#L73)*
+*Defined in [scripts/potions.ts:73](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/potions.ts#L73)*
 
 #### Parameters:
 
