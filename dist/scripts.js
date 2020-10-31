@@ -231,9 +231,9 @@ var gameObject = {
                     graphic: '0x1BD7',
                     color: '0x0000',
                     make: {
-                        tool: 'o.tools.saw',
+                        tool: 'gameObject.tools.saw',
                         refill: {
-                            resources: [{ item: 'o.resources.logs', count: 2 }]
+                            resources: [{ item: 'gameObject.resources.logs', count: 2 }]
                         },
                         menu: {
                             name: 'Carpentry',
@@ -246,10 +246,10 @@ var gameObject = {
                     graphic: '0x185E',
                     color: '0x07E0',
                     make: {
-                        tool: 'o.tools.saw',
+                        tool: 'gameObject.tools.saw',
                         refill: {
-                            resources: [{ item: 'o.resources.logs', count: 2 }],
-                            crafting: [{ item: 'o.crafting.tinkering.containers.kadNaPotiony', count: 20 }]
+                            resources: [{ item: 'gameObject.resources.logs', count: 2 }],
+                            crafting: [{ item: 'gameObject.crafting.tinkering.containers.kadNaPotiony', count: 20 }]
                         },
                         menu: {
                             name: 'Carpentry',
@@ -263,10 +263,10 @@ var gameObject = {
                     graphic: '0x1DB8',
                     color: '0x0000',
                     make: {
-                        tool: 'o.tools.saw',
+                        tool: 'gameObject.tools.saw',
                         refill: {
-                            resources: [{ item: 'o.resources.logs', count: 1 }],
-                            crafting: [{ item: 'o.crafting.carpentry.miscellaneous.boards', count: 2 }]
+                            resources: [{ item: 'gameObject.resources.logs', count: 1 }],
+                            crafting: [{ item: 'gameObject.crafting.carpentry.miscellaneous.boards', count: 2 }]
                         },
                         menu: {
                             name: 'Carpentry',
@@ -278,9 +278,9 @@ var gameObject = {
                     graphic: '0x1EB1',
                     color: '0x0000',
                     make: {
-                        tool: 'o.tools.saw',
+                        tool: 'gameObject.tools.saw',
                         refill: {
-                            resources: [{ item: 'o.resources.logs', count: 3 }]
+                            resources: [{ item: 'gameObject.resources.logs', count: 3 }]
                         },
                         menu: {
                             name: 'Carpentry',
@@ -292,12 +292,12 @@ var gameObject = {
                     graphic: '0x0E7F',
                     color: '0x0909',
                     make: {
-                        tool: 'o.tools.saw',
+                        tool: 'gameObject.tools.saw',
                         refill: {
-                            resources: [{ item: 'o.resources.logs', count: 1 }],
+                            resources: [{ item: 'gameObject.resources.logs', count: 1 }],
                             crafting: [
-                                { item: 'o.crafting.carpentry.containersAndParts.barrelLid', count: 2 },
-                                { item: 'o.crafting.carpentry.containersAndParts.barrelStaves', count: 2 }
+                                { item: 'gameObject.crafting.carpentry.containersAndParts.barrelLid', count: 2 },
+                                { item: 'gameObject.crafting.carpentry.containersAndParts.barrelStaves', count: 2 }
                             ]
                         },
                         menu: {
@@ -314,9 +314,9 @@ var gameObject = {
                     graphic: '0x105D',
                     color: '0x0000',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
-                            resources: [{ item: 'o.resources.ingots.iron', count: 1 }]
+                            resources: [{ item: 'gameObject.resources.ingots.iron', count: 1 }]
                         },
                         menu: {
                             name: 'Tinkering',
@@ -330,11 +330,11 @@ var gameObject = {
                     graphic: '0x1879',
                     color: '0x0000',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                { item: 'o.resources.ingots.copper', count: 2 },
-                                { item: 'o.resources.ingots.iron', count: 2 }
+                                { item: 'gameObject.resources.ingots.copper', count: 2 },
+                                { item: 'gameObject.resources.ingots.iron', count: 2 }
                             ]
                         },
                         menu: {
@@ -347,11 +347,11 @@ var gameObject = {
                     graphic: '0x1876',
                     color: '0x0665',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                { item: 'o.resources.ingots.rose', count: 2 },
-                                { item: 'o.resources.ingots.iron', count: 2 }
+                                { item: 'gameObject.resources.ingots.rose', count: 2 },
+                                { item: 'gameObject.resources.ingots.iron', count: 2 }
                             ]
                         },
                         menu: {
@@ -364,11 +364,11 @@ var gameObject = {
                     graphic: '0x1876',
                     color: '0x0770',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                { item: 'o.resources.ingots.shadow', count: 2 },
-                                { item: 'o.resources.ingots.iron', count: 2 }
+                                { item: 'gameObject.resources.ingots.shadow', count: 2 },
+                                { item: 'gameObject.resources.ingots.iron', count: 2 }
                             ]
                         },
                         menu: {
@@ -381,11 +381,11 @@ var gameObject = {
                     graphic: '0x1876',
                     color: '0x04C2',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                { item: 'o.resources.ingots.blood', count: 2 },
-                                { item: 'o.resources.ingots.iron', count: 2 }
+                                { item: 'gameObject.resources.ingots.blood', count: 2 },
+                                { item: 'gameObject.resources.ingots.iron', count: 2 }
                             ]
                         },
                         menu: {
@@ -398,11 +398,11 @@ var gameObject = {
                     graphic: '0x1876',
                     color: '0x0455',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                { item: 'o.resources.ingots.black', count: 2 },
-                                { item: 'o.resources.ingots.iron', count: 2 }
+                                { item: 'gameObject.resources.ingots.black', count: 2 },
+                                { item: 'gameObject.resources.ingots.iron', count: 2 }
                             ]
                         },
                         menu: {
@@ -415,11 +415,11 @@ var gameObject = {
                     graphic: '0x1876',
                     color: '0x052D',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                { item: 'o.resources.ingots.mytheril', count: 2 },
-                                { item: 'o.resources.ingots.iron', count: 2 }
+                                { item: 'gameObject.resources.ingots.mytheril', count: 2 },
+                                { item: 'gameObject.resources.ingots.iron', count: 2 }
                             ]
                         },
                         menu: {
@@ -434,11 +434,11 @@ var gameObject = {
                     graphic: '0x0F0E',
                     color: '0x0000',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                { item: 'o.resources.logs', count: 2 },
-                                { item: 'o.resources.ore.anyOre', count: 5 }
+                                { item: 'gameObject.resources.logs', count: 2 },
+                                { item: 'gameObject.resources.ore.anyOre', count: 5 }
                             ]
                         },
                         menu: {
@@ -451,16 +451,16 @@ var gameObject = {
                     graphic: '0x1843',
                     color: '0x0000',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                { item: 'o.resources.logs', count: 2 },
-                                { item: 'o.resources.ore.iron', count: 2 },
-                                { item: 'o.resources.ingots.bronze', count: 1 },
-                                { item: 'o.resources.ingots.iron', count: 1 }
+                                { item: 'gameObject.resources.logs', count: 2 },
+                                { item: 'gameObject.resources.ore.iron', count: 2 },
+                                { item: 'gameObject.resources.ingots.bronze', count: 1 },
+                                { item: 'gameObject.resources.ingots.iron', count: 1 }
                             ],
                             crafting: [
-                                { item: 'o.crafting.carpentry.containersAndParts.formaNaLahve', count: 1 }
+                                { item: 'gameObject.crafting.carpentry.containersAndParts.formaNaLahve', count: 1 }
                             ]
                         },
                         menu: {
@@ -473,12 +473,12 @@ var gameObject = {
                     graphic: '0x0E80',
                     color: '0x0000',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                { item: 'o.resources.logs', count: 5 },
-                                { item: 'o.resources.ingots.gold', count: 5 },
-                                { item: 'o.resources.ingots.iron', count: 1 }
+                                { item: 'gameObject.resources.logs', count: 5 },
+                                { item: 'gameObject.resources.ingots.gold', count: 5 },
+                                { item: 'gameObject.resources.ingots.iron', count: 1 }
                             ]
                         },
                         menu: {
@@ -491,14 +491,14 @@ var gameObject = {
                     graphic: '0x09A8',
                     color: '0x051E',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                { item: 'o.resources.logs', count: 5 },
-                                { item: 'o.resources.furs', count: 5 }
+                                { item: 'gameObject.resources.logs', count: 5 },
+                                { item: 'gameObject.resources.furs', count: 5 }
                             ],
                             crafting: [
-                                { item: 'o.crafting.tinkering.containers.goldenBox', count: 1 }
+                                { item: 'gameObject.crafting.tinkering.containers.goldenBox', count: 1 }
                             ]
                         },
                         menu: {
@@ -511,14 +511,14 @@ var gameObject = {
                     graphic: '0x09A8',
                     color: '0x0000',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                { item: 'o.resources.logs', count: 5 },
-                                { item: 'o.resources.furs', count: 5 }
+                                { item: 'gameObject.resources.logs', count: 5 },
+                                { item: 'gameObject.resources.furs', count: 5 }
                             ],
                             crafting: [
-                                { item: 'o.crafting.tinkering.containers.animalBox', count: 1 }
+                                { item: 'gameObject.crafting.tinkering.containers.animalBox', count: 1 }
                             ]
                         },
                         menu: {
@@ -533,17 +533,17 @@ var gameObject = {
                     graphic: '0x0E2D',
                     color: '0x0B86',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                { item: 'o.resources.ingots.gold', count: 1 },
-                                { item: 'o.resources.ingots.iron', count: 1 },
-                                { item: 'o.resources.stones.pieceOfAmber', count: 1 },
-                                { item: 'o.resources.stones.starSapphire', count: 3 }
+                                { item: 'gameObject.resources.ingots.gold', count: 1 },
+                                { item: 'gameObject.resources.ingots.iron', count: 1 },
+                                { item: 'gameObject.resources.stones.pieceOfAmber', count: 1 },
+                                { item: 'gameObject.resources.stones.starSapphire', count: 3 }
                             ],
                             crafting: [
-                                { item: 'o.crafting.tinkering.parts.springs', count: 2 },
-                                { item: 'o.crafting.tinkering.wires.copper', count: 5 }
+                                { item: 'gameObject.crafting.tinkering.parts.springs', count: 2 },
+                                { item: 'gameObject.crafting.tinkering.wires.copper', count: 5 }
                             ]
                         },
                         menu: {
@@ -1265,6 +1265,12 @@ function castNecroScroll(scroll, target) {
 function castScroll(scroll, target, backupHeadCast) {
     Scripts.Spells.castScroll(scroll, target, backupHeadCast);
 }
+function craftNext() {
+    Scripts.Crafting.listMakeMenu();
+}
+function craftSelect() {
+    Scripts.Crafting.confirmMakeMenu();
+}
 function drink(potionName, switchWarModeWhenNeeded) {
     if (switchWarModeWhenNeeded === void 0) { switchWarModeWhenNeeded = true; }
     Scripts.Potions.drinkPotion(potionName, switchWarModeWhenNeeded);
@@ -1658,10 +1664,10 @@ var Scripts;
         function Crafting() {
         }
         Crafting.setInputs = function (itemName) {
-            Scripts.Utils.playerPrint("Target container with resources for making \"" + itemName + "\"");
+            Scripts.Utils.playerPrint("Kde je container se surovinami ?");
             Orion.WaitForAddObject('resourcesContainer', 60000);
             Orion.UseObject('resourcesContainer');
-            Scripts.Utils.playerPrint("Target your container where to put finished \"" + itemName + "\"");
+            Scripts.Utils.playerPrint("Kam hazet hotove vyrobky ?");
             Orion.WaitForAddObject('outputContainer', 60000);
         };
         Crafting.makeProgress = function () {
@@ -1722,6 +1728,87 @@ var Scripts;
                     Orion.Wait(responseDelay);
                 }
                 Scripts.Utils.log("vyrobeno " + finishedCount + " / " + ++totalTries);
+            }
+        };
+        Crafting.makeFromSelection = function () {
+            var _a;
+            var pathAsString = Shared.GetVar('currentListMakeItemPath');
+            if (!pathAsString) {
+                return;
+            }
+            Scripts.Utils.playerPrint("" + pathAsString, ColorEnum.red);
+            Scripts.Utils.playerPrint('Kolik chces vyrobit ?');
+            Orion.ClearJournal();
+            while (!Orion.InJournal('', 'my')) {
+                Orion.Wait(500);
+            }
+            var text = (_a = Orion.InJournal('', 'my')) === null || _a === void 0 ? void 0 : _a.Text();
+            if (!text) {
+                return;
+            }
+            var count = parseInt(text.replace(Player.Name() + ':', ''), 10);
+            Orion.Print(-1, typeof count);
+            Orion.Print(-1, count.toString());
+            Scripts.Crafting.make(count, pathAsString);
+        };
+        Crafting.listMakeMenu = function () {
+            var timer = Orion.Timer('listMakeMenuTimer');
+            var highlightIndex;
+            var list;
+            if (timer === -1 || timer > 3000) {
+                Shared.AddVar('currentListMakeItemPath', 'gameObject.crafting');
+                highlightIndex = undefined;
+                list = [];
+                for (var item in gameObject.crafting) {
+                    list.push(item);
+                }
+                Shared.AddArray('listMakeMenu', list);
+            }
+            else {
+                highlightIndex = Shared.GetVar('highlightIndex');
+                list = Shared.GetArray('listMakeMenu');
+            }
+            Scripts.Utils.resetTimer('listMakeMenuTimer');
+            if (list.length < 5) {
+                highlightIndex = highlightIndex === undefined || highlightIndex + 1 === list.length ? 0 : highlightIndex + 1;
+            }
+            else {
+                highlightIndex = 2;
+                var temp = list.shift();
+                list.push(temp);
+                Shared.AddArray('listMakeMenu', list);
+            }
+            Shared.AddVar('highlightIndex', highlightIndex);
+            var i = 0;
+            for (i; i < list.length && i < 5; i++) {
+                Scripts.Utils.playerPrint(list[i], i === highlightIndex ? ColorEnum.red : ColorEnum.none);
+            }
+            for (i; i < 5; i++) {
+                Scripts.Utils.playerPrint('');
+            }
+        };
+        Crafting.confirmMakeMenu = function () {
+            var _a;
+            if (typeof Shared.GetVar('highlightIndex') !== 'number' || !((_a = Shared.GetArray('listMakeMenu')) === null || _a === void 0 ? void 0 : _a.length)) {
+                return;
+            }
+            var currentItemAsString = Shared.GetVar('currentListMakeItemPath', 'gameObject.crafting');
+            var currentItem = Scripts.Utils.parseObject(currentItemAsString);
+            var highlightIndex = Shared.GetVar('highlightIndex');
+            var list = Shared.GetArray('listMakeMenu');
+            var newItem = currentItem[list[highlightIndex]];
+            Shared.AddVar('currentListMakeItemPath', currentItemAsString + '.' + list[highlightIndex]);
+            if (!newItem.make) {
+                var newList = [];
+                for (var item in newItem) {
+                    newList.push(item);
+                }
+                Shared.AddArray('listMakeMenu', newList);
+                Shared.AddVar('highlightIndex', undefined);
+                Scripts.Crafting.listMakeMenu();
+            }
+            else {
+                Scripts.Crafting.makeFromSelection();
             }
         };
         return Crafting;

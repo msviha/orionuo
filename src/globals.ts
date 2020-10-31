@@ -149,9 +149,9 @@ const gameObject:any = {
                     graphic: '0x1BD7',
                     color: '0x0000',
                     make: {
-                        tool: 'o.tools.saw',
+                        tool: 'gameObject.tools.saw',
                         refill: {
-                            resources: [{item: 'o.resources.logs', count: 2}]
+                            resources: [{item: 'gameObject.resources.logs', count: 2}]
                         },
                         menu: {
                             name: 'Carpentry',
@@ -164,10 +164,10 @@ const gameObject:any = {
                     graphic: '0x185E',
                     color: '0x07E0',
                     make: {
-                        tool: 'o.tools.saw',
+                        tool: 'gameObject.tools.saw',
                         refill: {
-                            resources: [{item: 'o.resources.logs', count: 2}],
-                            crafting: [{item: 'o.crafting.tinkering.containers.kadNaPotiony', count: 20}]
+                            resources: [{item: 'gameObject.resources.logs', count: 2}],
+                            crafting: [{item: 'gameObject.crafting.tinkering.containers.kadNaPotiony', count: 20}]
                         },
                         menu: {
                             name: 'Carpentry',
@@ -181,10 +181,10 @@ const gameObject:any = {
                     graphic: '0x1DB8',
                     color: '0x0000',
                     make: {
-                        tool: 'o.tools.saw',
+                        tool: 'gameObject.tools.saw',
                         refill: {
-                            resources: [{item: 'o.resources.logs', count: 1}],
-                            crafting: [{item: 'o.crafting.carpentry.miscellaneous.boards', count: 2}]
+                            resources: [{item: 'gameObject.resources.logs', count: 1}],
+                            crafting: [{item: 'gameObject.crafting.carpentry.miscellaneous.boards', count: 2}]
                         },
                         menu: {
                             name: 'Carpentry',
@@ -196,9 +196,9 @@ const gameObject:any = {
                     graphic: '0x1EB1',
                     color: '0x0000',
                     make: {
-                        tool: 'o.tools.saw',
+                        tool: 'gameObject.tools.saw',
                         refill: {
-                            resources: [{item: 'o.resources.logs', count: 3}],
+                            resources: [{item: 'gameObject.resources.logs', count: 3}],
                         },
                         menu: {
                             name: 'Carpentry',
@@ -210,12 +210,12 @@ const gameObject:any = {
                     graphic: '0x0E7F',
                     color: '0x0909',
                     make: {
-                        tool: 'o.tools.saw',
+                        tool: 'gameObject.tools.saw',
                         refill: {
-                            resources: [{item: 'o.resources.logs', count: 1}],
+                            resources: [{item: 'gameObject.resources.logs', count: 1}],
                             crafting: [
-                                {item: 'o.crafting.carpentry.containersAndParts.barrelLid', count: 2},
-                                {item: 'o.crafting.carpentry.containersAndParts.barrelStaves', count: 2}
+                                {item: 'gameObject.crafting.carpentry.containersAndParts.barrelLid', count: 2},
+                                {item: 'gameObject.crafting.carpentry.containersAndParts.barrelStaves', count: 2}
                             ]
                         },
                         menu: {
@@ -232,9 +232,9 @@ const gameObject:any = {
                     graphic: '0x105D',
                     color: '0x0000',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
-                            resources: [{item: 'o.resources.ingots.iron', count: 1}]
+                            resources: [{item: 'gameObject.resources.ingots.iron', count: 1}]
                         },
                         menu: {
                             name: 'Tinkering',
@@ -248,11 +248,11 @@ const gameObject:any = {
                     graphic: '0x1879',
                     color: '0x0000',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                {item: 'o.resources.ingots.copper', count: 2}, // 1 is enough but this is safe for the picking
-                                {item: 'o.resources.ingots.iron', count: 2}
+                                {item: 'gameObject.resources.ingots.copper', count: 2}, // 1 is enough but this is safe for the picking
+                                {item: 'gameObject.resources.ingots.iron', count: 2}
                             ]
                         },
                         menu: {
@@ -265,11 +265,11 @@ const gameObject:any = {
                     graphic: '0x1876',
                     color: '0x0665',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                {item: 'o.resources.ingots.rose', count: 2}, // 1 is enough but this is safe for the picking
-                                {item: 'o.resources.ingots.iron', count: 2}
+                                {item: 'gameObject.resources.ingots.rose', count: 2}, // 1 is enough but this is safe for the picking
+                                {item: 'gameObject.resources.ingots.iron', count: 2}
                             ]
                         },
                         menu: {
@@ -282,11 +282,11 @@ const gameObject:any = {
                     graphic: '0x1876',
                     color: '0x0770',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                {item: 'o.resources.ingots.shadow', count: 2}, // 1 is enough but this is safe for the picking
-                                {item: 'o.resources.ingots.iron', count: 2}
+                                {item: 'gameObject.resources.ingots.shadow', count: 2}, // 1 is enough but this is safe for the picking
+                                {item: 'gameObject.resources.ingots.iron', count: 2}
                             ]
                         },
                         menu: {
@@ -299,11 +299,11 @@ const gameObject:any = {
                     graphic: '0x1876',
                     color: '0x04C2',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                {item: 'o.resources.ingots.blood', count: 2}, // 1 is enough but this is safe for the picking
-                                {item: 'o.resources.ingots.iron', count: 2}
+                                {item: 'gameObject.resources.ingots.blood', count: 2}, // 1 is enough but this is safe for the picking
+                                {item: 'gameObject.resources.ingots.iron', count: 2}
                             ]
                         },
                         menu: {
@@ -316,11 +316,11 @@ const gameObject:any = {
                     graphic: '0x1876',
                     color: '0x0455',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                {item: 'o.resources.ingots.black', count: 2}, // 1 is enough but this is safe for the picking
-                                {item: 'o.resources.ingots.iron', count: 2}
+                                {item: 'gameObject.resources.ingots.black', count: 2}, // 1 is enough but this is safe for the picking
+                                {item: 'gameObject.resources.ingots.iron', count: 2}
                             ]
                         },
                         menu: {
@@ -333,11 +333,11 @@ const gameObject:any = {
                     graphic: '0x1876',
                     color: '0x052D',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                {item: 'o.resources.ingots.mytheril', count: 2}, // 1 is enough but this is safe for the picking
-                                {item: 'o.resources.ingots.iron', count: 2}
+                                {item: 'gameObject.resources.ingots.mytheril', count: 2}, // 1 is enough but this is safe for the picking
+                                {item: 'gameObject.resources.ingots.iron', count: 2}
                             ]
                         },
                         menu: {
@@ -352,11 +352,11 @@ const gameObject:any = {
                     graphic: '0x0F0E',
                     color: '0x0000',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                {item: 'o.resources.logs', count: 2},
-                                {item: 'o.resources.ore.anyOre', count: 5}
+                                {item: 'gameObject.resources.logs', count: 2},
+                                {item: 'gameObject.resources.ore.anyOre', count: 5}
                             ]
                         },
                         menu: {
@@ -369,16 +369,16 @@ const gameObject:any = {
                     graphic: '0x1843',
                     color: '0x0000',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                {item: 'o.resources.logs', count: 2},
-                                {item: 'o.resources.ore.iron', count: 2},
-                                {item: 'o.resources.ingots.bronze', count: 1},
-                                {item: 'o.resources.ingots.iron', count: 1}
+                                {item: 'gameObject.resources.logs', count: 2},
+                                {item: 'gameObject.resources.ore.iron', count: 2},
+                                {item: 'gameObject.resources.ingots.bronze', count: 1},
+                                {item: 'gameObject.resources.ingots.iron', count: 1}
                             ],
                             crafting: [
-                                {item: 'o.crafting.carpentry.containersAndParts.formaNaLahve', count: 1}
+                                {item: 'gameObject.crafting.carpentry.containersAndParts.formaNaLahve', count: 1}
                             ]
                         },
                         menu: {
@@ -391,12 +391,12 @@ const gameObject:any = {
                     graphic: '0x0E80',
                     color: '0x0000',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                {item: 'o.resources.logs', count: 5},
-                                {item: 'o.resources.ingots.gold', count: 5},
-                                {item: 'o.resources.ingots.iron', count: 1}
+                                {item: 'gameObject.resources.logs', count: 5},
+                                {item: 'gameObject.resources.ingots.gold', count: 5},
+                                {item: 'gameObject.resources.ingots.iron', count: 1}
                             ]
                         },
                         menu: {
@@ -409,14 +409,14 @@ const gameObject:any = {
                     graphic: '0x09A8',
                     color: '0x051E',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                {item: 'o.resources.logs', count: 5},
-                                {item: 'o.resources.furs', count: 5}
+                                {item: 'gameObject.resources.logs', count: 5},
+                                {item: 'gameObject.resources.furs', count: 5}
                             ],
                             crafting: [
-                                {item: 'o.crafting.tinkering.containers.goldenBox', count: 1}
+                                {item: 'gameObject.crafting.tinkering.containers.goldenBox', count: 1}
                             ]
                         },
                         menu: {
@@ -429,14 +429,14 @@ const gameObject:any = {
                     graphic: '0x09A8',
                     color: '0x0000',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                {item: 'o.resources.logs', count: 5},
-                                {item: 'o.resources.furs', count: 5}
+                                {item: 'gameObject.resources.logs', count: 5},
+                                {item: 'gameObject.resources.furs', count: 5}
                             ],
                             crafting: [
-                                {item: 'o.crafting.tinkering.containers.animalBox', count: 1}
+                                {item: 'gameObject.crafting.tinkering.containers.animalBox', count: 1}
                             ]
                         },
                         menu: {
@@ -451,17 +451,17 @@ const gameObject:any = {
                     graphic: '0x0E2D',
                     color: '0x0B86',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                {item: 'o.resources.ingots.gold', count: 1},
-                                {item: 'o.resources.ingots.iron', count: 1},
-                                {item: 'o.resources.stones.pieceOfAmber', count: 1},
-                                {item: 'o.resources.stones.starSapphire', count: 3}
+                                {item: 'gameObject.resources.ingots.gold', count: 1},
+                                {item: 'gameObject.resources.ingots.iron', count: 1},
+                                {item: 'gameObject.resources.stones.pieceOfAmber', count: 1},
+                                {item: 'gameObject.resources.stones.starSapphire', count: 3}
                             ],
                             crafting: [
-                                {item: 'o.crafting.tinkering.parts.springs', count: 2},
-                                {item: 'o.crafting.tinkering.wires.copper', count: 5}
+                                {item: 'gameObject.crafting.tinkering.parts.springs', count: 2},
+                                {item: 'gameObject.crafting.tinkering.wires.copper', count: 5}
                             ]
                         },
                         menu: {

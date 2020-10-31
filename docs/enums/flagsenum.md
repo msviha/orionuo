@@ -31,7 +31,7 @@
 
 •  **dead**:  = "dead"
 
-*Defined in [enums.ts:40](https://github.com/msviha/orionuo/blob/4924a24/src/enums.ts#L40)*
+*Defined in [enums.ts:40](https://github.com/msviha/orionuo/blob/7b19bbe/src/enums.ts#L40)*
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 •  **fast**:  = "fast"
 
-*Defined in [enums.ts:33](https://github.com/msviha/orionuo/blob/4924a24/src/enums.ts#L33)*
+*Defined in [enums.ts:33](https://github.com/msviha/orionuo/blob/7b19bbe/src/enums.ts#L33)*
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 •  **human**:  = "human"
 
-*Defined in [enums.ts:37](https://github.com/msviha/orionuo/blob/4924a24/src/enums.ts#L37)*
+*Defined in [enums.ts:37](https://github.com/msviha/orionuo/blob/7b19bbe/src/enums.ts#L37)*
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 •  **ignoreenemies**:  = "ignoreenemies"
 
-*Defined in [enums.ts:44](https://github.com/msviha/orionuo/blob/4924a24/src/enums.ts#L44)*
+*Defined in [enums.ts:44](https://github.com/msviha/orionuo/blob/7b19bbe/src/enums.ts#L44)*
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 •  **ignorefriends**:  = "ignorefriends"
 
-*Defined in [enums.ts:43](https://github.com/msviha/orionuo/blob/4924a24/src/enums.ts#L43)*
+*Defined in [enums.ts:43](https://github.com/msviha/orionuo/blob/7b19bbe/src/enums.ts#L43)*
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 •  **ignoreself**:  = "ignoreself"
 
-*Defined in [enums.ts:45](https://github.com/msviha/orionuo/blob/4924a24/src/enums.ts#L45)*
+*Defined in [enums.ts:45](https://github.com/msviha/orionuo/blob/7b19bbe/src/enums.ts#L45)*
 
 ___
 
@@ -79,7 +79,7 @@ ___
 
 •  **injured**:  = "injured"
 
-*Defined in [enums.ts:41](https://github.com/msviha/orionuo/blob/4924a24/src/enums.ts#L41)*
+*Defined in [enums.ts:41](https://github.com/msviha/orionuo/blob/7b19bbe/src/enums.ts#L41)*
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 •  **inlos**:  = "inlos"
 
-*Defined in [enums.ts:46](https://github.com/msviha/orionuo/blob/4924a24/src/enums.ts#L46)*
+*Defined in [enums.ts:46](https://github.com/msviha/orionuo/blob/7b19bbe/src/enums.ts#L46)*
 
 ___
 
@@ -95,7 +95,7 @@ ___
 
 •  **item**:  = "item"
 
-*Defined in [enums.ts:36](https://github.com/msviha/orionuo/blob/4924a24/src/enums.ts#L36)*
+*Defined in [enums.ts:36](https://github.com/msviha/orionuo/blob/7b19bbe/src/enums.ts#L36)*
 
 ___
 
@@ -103,7 +103,7 @@ ___
 
 •  **live**:  = "live"
 
-*Defined in [enums.ts:39](https://github.com/msviha/orionuo/blob/4924a24/src/enums.ts#L39)*
+*Defined in [enums.ts:39](https://github.com/msviha/orionuo/blob/7b19bbe/src/enums.ts#L39)*
 
 ___
 
@@ -111,7 +111,7 @@ ___
 
 •  **mobile**:  = "mobile"
 
-*Defined in [enums.ts:35](https://github.com/msviha/orionuo/blob/4924a24/src/enums.ts#L35)*
+*Defined in [enums.ts:35](https://github.com/msviha/orionuo/blob/7b19bbe/src/enums.ts#L35)*
 
 ___
 
@@ -119,7 +119,7 @@ ___
 
 •  **near**:  = "near"
 
-*Defined in [enums.ts:34](https://github.com/msviha/orionuo/blob/4924a24/src/enums.ts#L34)*
+*Defined in [enums.ts:34](https://github.com/msviha/orionuo/blob/7b19bbe/src/enums.ts#L34)*
 
 ___
 
@@ -127,7 +127,7 @@ ___
 
 •  **nearmouse**:  = "nearmouse"
 
-*Defined in [enums.ts:47](https://github.com/msviha/orionuo/blob/4924a24/src/enums.ts#L47)*
+*Defined in [enums.ts:47](https://github.com/msviha/orionuo/blob/7b19bbe/src/enums.ts#L47)*
 
 ___
 
@@ -135,7 +135,7 @@ ___
 
 •  **next**:  = "next"
 
-*Defined in [enums.ts:42](https://github.com/msviha/orionuo/blob/4924a24/src/enums.ts#L42)*
+*Defined in [enums.ts:42](https://github.com/msviha/orionuo/blob/7b19bbe/src/enums.ts#L42)*
 
 ___
 
@@ -143,7 +143,7 @@ ___
 
 •  **nothuman**:  = "nothuman"
 
-*Defined in [enums.ts:38](https://github.com/msviha/orionuo/blob/4924a24/src/enums.ts#L38)*
+*Defined in [enums.ts:38](https://github.com/msviha/orionuo/blob/7b19bbe/src/enums.ts#L38)*
 
 ___
 
@@ -151,4 +151,4 @@ ___
 
 •  **recurse**:  = "recurse"
 
-*Defined in [enums.ts:48](https://github.com/msviha/orionuo/blob/4924a24/src/enums.ts#L48)*
+*Defined in [enums.ts:48](https://github.com/msviha/orionuo/blob/7b19bbe/src/enums.ts#L48)*

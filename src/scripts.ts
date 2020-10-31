@@ -108,6 +108,22 @@ function castScroll(scroll:ScrollEnum, target?:TargetEnum, backupHeadCast?:strin
 }
 
 /**
+ * Zobrazi/prepina nabidku na crafteni
+ * @example external code `craftNext();`
+ */
+function craftNext() {
+    Scripts.Crafting.listMakeMenu();
+}
+
+/**
+ * Vybira z nabidky na crafteni
+ * @example external code `craftSelect();`
+ */
+function craftSelect() {
+    Scripts.Crafting.confirmMakeMenu();
+}
+
+/**
  * Chlasta lahvicky
  * @param potionName zkratka potionu
  * @param switchWarModeWhenNeeded date li 'false' pak neprepina war pokud nejde cepovat, tak necepne

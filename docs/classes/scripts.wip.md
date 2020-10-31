@@ -35,7 +35,7 @@ Work in progress - nutno zjistit co funguje, pripadne upravit
 
 ▸ `Static`**Afk**(): void
 
-*Defined in [scripts/wip.ts:157](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/wip.ts#L157)*
+*Defined in [scripts/wip.ts:157](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/wip.ts#L157)*
 
 **Returns:** void
 
@@ -45,7 +45,7 @@ ___
 
 ▸ `Static`**AttackLastTarget**(): void
 
-*Defined in [scripts/wip.ts:69](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/wip.ts#L69)*
+*Defined in [scripts/wip.ts:69](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/wip.ts#L69)*
 
 **Returns:** void
 
@@ -55,7 +55,7 @@ ___
 
 ▸ `Static`**BarPuller**(): void
 
-*Defined in [scripts/wip.ts:80](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/wip.ts#L80)*
+*Defined in [scripts/wip.ts:80](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/wip.ts#L80)*
 
 **Returns:** void
 
@@ -65,7 +65,7 @@ ___
 
 ▸ `Static`**BarPuller_PvP**(): void
 
-*Defined in [scripts/wip.ts:92](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/wip.ts#L92)*
+*Defined in [scripts/wip.ts:92](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/wip.ts#L92)*
 
 **Returns:** void
 
@@ -75,7 +75,7 @@ ___
 
 ▸ `Static`**EnsureWarMode**(): void
 
-*Defined in [scripts/wip.ts:112](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/wip.ts#L112)*
+*Defined in [scripts/wip.ts:112](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/wip.ts#L112)*
 
 **Returns:** void
 
@@ -85,7 +85,7 @@ ___
 
 ▸ `Static`**MassMove**(): void
 
-*Defined in [scripts/wip.ts:167](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/wip.ts#L167)*
+*Defined in [scripts/wip.ts:167](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/wip.ts#L167)*
 
 **Returns:** void
 
@@ -95,7 +95,7 @@ ___
 
 ▸ `Static`**Nbruna**(): void
 
-*Defined in [scripts/wip.ts:139](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/wip.ts#L139)*
+*Defined in [scripts/wip.ts:139](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/wip.ts#L139)*
 
 **Returns:** void
 
@@ -105,7 +105,7 @@ ___
 
 ▸ `Static`**Tracking**(`who`: string): void
 
-*Defined in [scripts/wip.ts:63](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/wip.ts#L63)*
+*Defined in [scripts/wip.ts:63](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/wip.ts#L63)*
 
 #### Parameters:
 
@@ -121,7 +121,7 @@ ___
 
 ▸ `Static`**Travel**(): void
 
-*Defined in [scripts/wip.ts:119](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/wip.ts#L119)*
+*Defined in [scripts/wip.ts:119](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/wip.ts#L119)*
 
 **Returns:** void
 
@@ -131,7 +131,7 @@ ___
 
 ▸ `Static`**dropItem**(`item`: IMyGameObject): void
 
-*Defined in [scripts/wip.ts:8](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/wip.ts#L8)*
+*Defined in [scripts/wip.ts:8](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/wip.ts#L8)*
 
 #### Parameters:
 
@@ -147,7 +147,7 @@ ___
 
 ▸ `Static`**getColorByNotoriety**(`notoriety?`: number): number
 
-*Defined in [scripts/wip.ts:197](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/wip.ts#L197)*
+*Defined in [scripts/wip.ts:197](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/wip.ts#L197)*
 
 #### Parameters:
 
@@ -163,7 +163,7 @@ ___
 
 ▸ `Static`**harfa**(`target?`: [TargetEnum](../enums/targetenum.md) \| string): void
 
-*Defined in [scripts/wip.ts:25](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/wip.ts#L25)*
+*Defined in [scripts/wip.ts:25](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/wip.ts#L25)*
 
 #### Parameters:
 
@@ -179,7 +179,7 @@ ___
 
 ▸ `Static`**lutna**(`target?`: [TargetEnum](../enums/targetenum.md) \| string): void
 
-*Defined in [scripts/wip.ts:44](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/wip.ts#L44)*
+*Defined in [scripts/wip.ts:44](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/wip.ts#L44)*
 
 #### Parameters:
 
@@ -195,6 +195,6 @@ ___
 
 ▸ `Static`**useGGR**(): void
 
-*Defined in [scripts/wip.ts:18](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/wip.ts#L18)*
+*Defined in [scripts/wip.ts:18](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/wip.ts#L18)*
 
 **Returns:** void

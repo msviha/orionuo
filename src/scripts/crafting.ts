@@ -15,10 +15,10 @@ namespace Scripts {
          * @param itemName name of the item which will be crafted
          */
         static setInputs(itemName:string) {
-            Scripts.Utils.playerPrint(`Target container with resources for making "${itemName}"`);
+            Scripts.Utils.playerPrint(`Kde je container se surovinami ?`);
             Orion.WaitForAddObject('resourcesContainer', 60000);
             Orion.UseObject('resourcesContainer');
-            Scripts.Utils.playerPrint(`Target your container where to put finished "${itemName}"`);
+            Scripts.Utils.playerPrint(`Kam hazet hotove vyrobky ?`);
             Orion.WaitForAddObject('outputContainer', 60000);
         }
 
@@ -98,5 +98,93 @@ namespace Scripts {
             }
         }
 
+        static makeFromSelection() {
+            const pathAsString = Shared.GetVar('currentListMakeItemPath');
+            if (!pathAsString) {
+                return;
+            }
+            Scripts.Utils.playerPrint(`${pathAsString}`, ColorEnum.red);
+            Scripts.Utils.playerPrint('Kolik chces vyrobit ?');
+            Orion.ClearJournal();
+            while (!Orion.InJournal('','my')) {
+                Orion.Wait(500);
+            }
+            const text = Orion.InJournal('', 'my')?.Text();
+            if (!text) {
+                return;
+            }
+            const count = parseInt(text.replace(Player.Name() + ':', ''), 10);
+            Orion.Print(-1, typeof count);
+            Orion.Print(-1, count.toString());
+            Scripts.Crafting.make(count, pathAsString);
+        }
+
+        static listMakeMenu() {
+            const timer = Orion.Timer('listMakeMenuTimer');
+
+            let highlightIndex:number|undefined;
+            let list:any[];
+
+            if (timer === -1 || timer > 3000) {
+                Shared.AddVar('currentListMakeItemPath', 'gameObject.crafting')
+                highlightIndex = undefined;
+                list = [];
+                for (const item in gameObject.crafting) {
+                    list.push(item);
+                }
+                Shared.AddArray('listMakeMenu', list);
+            }
+            else {
+                highlightIndex = Shared.GetVar('highlightIndex');
+                list = Shared.GetArray('listMakeMenu');
+            }
+
+            Scripts.Utils.resetTimer('listMakeMenuTimer');
+
+            if (list.length < 5) {
+                highlightIndex = highlightIndex === undefined || highlightIndex + 1 === list.length ? 0 : highlightIndex + 1;
+            }
+            else {
+                highlightIndex = 2;
+                const temp = list.shift();
+                list.push(temp);
+                Shared.AddArray('listMakeMenu', list);
+            }
+
+            Shared.AddVar('highlightIndex', highlightIndex);
+            let i = 0;
+            for (i; i < list.length && i < 5; i++) {
+                Scripts.Utils.playerPrint(list[i], i === highlightIndex ? ColorEnum.red : ColorEnum.none);
+            }
+            for (i; i < 5; i++) {
+                Scripts.Utils.playerPrint('');
+            }
+        }
+
+        static confirmMakeMenu() {
+            if (typeof Shared.GetVar('highlightIndex') !== 'number' || !Shared.GetArray('listMakeMenu')?.length) {
+                return;
+            }
+
+            const currentItemAsString = Shared.GetVar('currentListMakeItemPath', 'gameObject.crafting');
+            const currentItem = Scripts.Utils.parseObject(currentItemAsString);
+            const highlightIndex = Shared.GetVar('highlightIndex');
+            const list = Shared.GetArray('listMakeMenu');
+            const newItem = currentItem[list[highlightIndex]];
+
+            Shared.AddVar('currentListMakeItemPath', currentItemAsString + '.' + list[highlightIndex]);
+            if (!newItem.make) {
+                const newList = [];
+                for (const item in newItem) {
+                    newList.push(item);
+                }
+                Shared.AddArray('listMakeMenu', newList);
+                Shared.AddVar('highlightIndex', undefined);
+                Scripts.Crafting.listMakeMenu();
+            }
+            else {
+                Scripts.Crafting.makeFromSelection();
+            }
+        }
     }
 }
