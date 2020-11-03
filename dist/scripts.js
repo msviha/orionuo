@@ -1757,8 +1757,8 @@ var Scripts;
             if (setInputs === void 0) { setInputs = true; }
             Orion.ClearJournal();
             var itemObject = Scripts.Utils.parseObject(objectAsString);
+            var itemName = objectAsString.replace(/[^.]*\.[^.]*\./, '');
             if (!itemObject.make) {
-                var itemName = objectAsString.replace(/[^.]*\.[^.]*\./, '');
                 Scripts.Utils.log(itemName + " nelze vyrobit", ColorEnum.red);
                 throw itemName + " nelze vyrobit";
             }
@@ -1792,11 +1792,8 @@ var Scripts;
                 if (success) {
                     count -= itemObject.make.outputCount || 1;
                     finishedCount++;
-                    var item = Orion.FindType(itemObject.graphic, itemObject.color)[0];
-                    Orion.MoveItem(item, 1, setInputs ? 'outputContainer' : 'resourcesContainer');
-                    Orion.Wait(responseDelay);
                 }
-                Scripts.Utils.log("vyrobeno " + finishedCount + " / " + ++totalTries);
+                Scripts.Utils.log("vyrobeno " + itemName + " - " + finishedCount + " / " + ++totalTries);
             }
         };
         Crafting.countMaterialForOneItem = function (objectAsString, callStack, count, crafting) {

@@ -99,9 +99,6 @@ namespace Scripts {
                 if (success) {
                     count -= itemObject.make.outputCount || 1;
                     finishedCount++;
-                    const item = Orion.FindType(itemObject.graphic, itemObject.color)[0];
-                    Orion.MoveItem(item, 1, setInputs ? 'outputContainer' : 'resourcesContainer');
-                    Orion.Wait(responseDelay);
                 }
                 Scripts.Utils.log(`vyrobeno ${itemName} - ${finishedCount} / ${++totalTries}`);
             }
