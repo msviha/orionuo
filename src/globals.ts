@@ -139,6 +139,18 @@ const gameObject:any = {
             starSapphire: {
                 graphic: '0x0F0F',
                 color: '0x0000'
+            },
+            amethyst: {
+                graphic: '0x0F16',
+                color: '0x0000'
+            },
+            citrines: {
+                graphic: '0x0F15',
+                color: '0x0000'
+            },
+            diamonds: {
+                graphic: '0x0F26',
+                color: '0x0000'
             }
         }
     },
@@ -251,8 +263,8 @@ const gameObject:any = {
                         tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                {item: 'gameObject.resources.ingots.copper', count: 2}, // 1 is enough but this is safe for the picking
-                                {item: 'gameObject.resources.ingots.iron', count: 2}
+                                {item: 'gameObject.resources.ingots.copper', count: 1},
+                                {item: 'gameObject.resources.ingots.iron', count: 1}
                             ]
                         },
                         menu: {
@@ -268,8 +280,8 @@ const gameObject:any = {
                         tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                {item: 'gameObject.resources.ingots.rose', count: 2}, // 1 is enough but this is safe for the picking
-                                {item: 'gameObject.resources.ingots.iron', count: 2}
+                                {item: 'gameObject.resources.ingots.rose', count: 1},
+                                {item: 'gameObject.resources.ingots.iron', count: 1}
                             ]
                         },
                         menu: {
@@ -285,8 +297,8 @@ const gameObject:any = {
                         tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                {item: 'gameObject.resources.ingots.shadow', count: 2}, // 1 is enough but this is safe for the picking
-                                {item: 'gameObject.resources.ingots.iron', count: 2}
+                                {item: 'gameObject.resources.ingots.shadow', count: 1},
+                                {item: 'gameObject.resources.ingots.iron', count: 1}
                             ]
                         },
                         menu: {
@@ -302,8 +314,8 @@ const gameObject:any = {
                         tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                {item: 'gameObject.resources.ingots.blood', count: 2}, // 1 is enough but this is safe for the picking
-                                {item: 'gameObject.resources.ingots.iron', count: 2}
+                                {item: 'gameObject.resources.ingots.blood', count: 1},
+                                {item: 'gameObject.resources.ingots.iron', count: 1}
                             ]
                         },
                         menu: {
@@ -319,8 +331,8 @@ const gameObject:any = {
                         tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                {item: 'gameObject.resources.ingots.black', count: 2}, // 1 is enough but this is safe for the picking
-                                {item: 'gameObject.resources.ingots.iron', count: 2}
+                                {item: 'gameObject.resources.ingots.black', count: 1},
+                                {item: 'gameObject.resources.ingots.iron', count: 1}
                             ]
                         },
                         menu: {
@@ -336,8 +348,8 @@ const gameObject:any = {
                         tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                {item: 'gameObject.resources.ingots.mytheril', count: 2}, // 1 is enough but this is safe for the picking
-                                {item: 'gameObject.resources.ingots.iron', count: 2}
+                                {item: 'gameObject.resources.ingots.mytheril', count: 1},
+                                {item: 'gameObject.resources.ingots.iron', count: 1}
                             ]
                         },
                         menu: {
@@ -355,7 +367,7 @@ const gameObject:any = {
                         tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                {item: 'gameObject.resources.logs', count: 2},
+                                {item: 'gameObject.resources.logs', count: 1},
                                 {item: 'gameObject.resources.ore.anyOre', count: 5}
                             ]
                         },
@@ -372,8 +384,8 @@ const gameObject:any = {
                         tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                {item: 'gameObject.resources.logs', count: 2},
-                                {item: 'gameObject.resources.ore.iron', count: 2},
+                                {item: 'gameObject.resources.logs', count: 1},
+                                {item: 'gameObject.resources.ore.iron', count: 1},
                                 {item: 'gameObject.resources.ingots.bronze', count: 1},
                                 {item: 'gameObject.resources.ingots.iron', count: 1}
                             ],
@@ -467,6 +479,57 @@ const gameObject:any = {
                         menu: {
                             name: 'Tinkering',
                             selections: ['Special Items', 'Magic Ball (10 charges)']
+                        }
+                    }
+                },
+                rechargeCrystal1: {
+                    graphic: '0x1F1C',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                {item: 'gameObject.resources.ingots.gold', count: 2},
+                                {item: 'gameObject.resources.stones.amethyst', count: 2}
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Special Items', 'Recharge Crystal +1']
+                        }
+                    }
+                },
+                rechargeCrystal3: {
+                    graphic: '0x1F1C',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                {item: 'gameObject.resources.ingots.gold', count: 3},
+                                {item: 'gameObject.resources.stones.citrines', count: 3}
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Special Items', 'Recharge Crystal +3']
+                        }
+                    }
+                },
+                rechargeCrystal5: {
+                    graphic: '0x1F1C',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                {item: 'gameObject.resources.ingots.gold', count: 5},
+                                {item: 'gameObject.resources.stones.diamonds', count: 5}
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Special Items', 'Recharge Crystal +5']
                         }
                     }
                 }

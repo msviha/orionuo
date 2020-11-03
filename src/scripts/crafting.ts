@@ -39,11 +39,18 @@ namespace Scripts {
          */
         static refOrMake(count:number, resourcePath:string) {
             const res = Scripts.Utils.parseObject(resourcePath);
-            const missingCount = Scripts.Utils.refill(res, 'resourcesContainer', count, 'backpack');
-            if (missingCount) {
+            const itemName = resourcePath.replace(/[^.]*\.[^.]*\./, '');
+
+            let missingCount = Scripts.Utils.refill(res, 'resourcesContainer', count, 'backpack', false, itemName);
+            if (missingCount && res.make) {
                 Scripts.Crafting.make(missingCount, resourcePath, false);
                 Orion.Wait(responseDelay);
-                Scripts.Utils.refill(res, 'resourcesContainer', count, 'backpack');
+                missingCount = Scripts.Utils.refill(res, 'resourcesContainer', missingCount, 'backpack', false, itemName);
+            }
+
+            if (missingCount) {
+                Scripts.Utils.log(`nemas dostatek ${itemName}`, ColorEnum.red);
+                throw `nemas dostatek ${itemName}`;
             }
         }
 
@@ -56,9 +63,11 @@ namespace Scripts {
         static make(count:number, objectAsString:string, setInputs = true) {
             Orion.ClearJournal();
             const itemObject = Scripts.Utils.parseObject(objectAsString);
+            const itemName = objectAsString.replace(/[^.]*\.[^.]*\./, '');
+
             if (!itemObject.make) {
-                Scripts.Utils.log(`cant make/refill ${objectAsString}`, ColorEnum.red);
-                throw `cant make/refill ${objectAsString}`;
+                Scripts.Utils.log(`${itemName} nelze vyrobit`, ColorEnum.red);
+                throw `${itemName} nelze vyrobit`;
             }
             if (!isMakeProps(itemObject.make)) {
                 throw `!isMakeProps`;
@@ -94,7 +103,41 @@ namespace Scripts {
                     Orion.MoveItem(item, 1, setInputs ? 'outputContainer' : 'resourcesContainer');
                     Orion.Wait(responseDelay);
                 }
-                Scripts.Utils.log(`vyrobeno ${finishedCount} / ${++totalTries}`);
+                Scripts.Utils.log(`vyrobeno ${itemName} - ${finishedCount} / ${++totalTries}`);
+            }
+        }
+
+        static countMaterialForOneItem(objectAsString:string, callStack = 0, count = 1, crafting = true) {
+            const itemObject = Scripts.Utils.parseObject(objectAsString);
+
+            if (!itemObject.make) {
+                return;
+            }
+            const currentItemName = objectAsString.replace(/[^.]*\.[^.]*\./, '');
+
+            const tab = '   ';
+            let space = '';
+            for (let i = 0; i < callStack; i++) {
+                space += tab;
+            }
+
+            if (crafting) {
+                Orion.Print(ColorEnum.red, `${space}Na vyrobu ${count}x ${currentItemName} budes potrebovat:`);
+            }
+
+            if (itemObject.make.refill?.crafting) {
+                for (const ref of itemObject.make.refill?.crafting) {
+                    const refItemName = ref.item.replace(/[^.]*\.[^.]*\./, '');
+                    Orion.Print(ColorEnum.none, `${space}${ref.count * count}x ${refItemName}`);
+                    Scripts.Crafting.countMaterialForOneItem(ref.item, callStack + 1, ref.count * count, true);
+                }
+            }
+            if (itemObject.make.refill?.resources) {
+                for (const ref of itemObject.make.refill?.resources) {
+                    const refItemName = ref.item.replace(/[^.]*\.[^.]*\./, '');
+                    Orion.Print(ColorEnum.none, `${space}${ref.count * count}x ${refItemName}`);
+                    Scripts.Crafting.countMaterialForOneItem(ref.item, callStack + 1, ref.count * count, false);
+                }
             }
         }
 
@@ -103,6 +146,7 @@ namespace Scripts {
             if (!pathAsString) {
                 return;
             }
+            Scripts.Crafting.countMaterialForOneItem(pathAsString);
             Scripts.Utils.playerPrint(`${pathAsString}`, ColorEnum.red);
             Scripts.Utils.playerPrint('Kolik chces vyrobit ?');
             Orion.ClearJournal();
