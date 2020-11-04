@@ -6,7 +6,6 @@
 - pridana `drum` [funkce](https://github.com/msviha/orionuo/blob/master/docs/globals.md#drum)
 - pridana `poisonTrain` [funkce](https://github.com/msviha/orionuo/blob/master/docs/globals.md#poisonTrain)
 - pridana `webDestroyer` [funkce](https://github.com/msviha/orionuo/blob/master/docs/globals.md#webDestroyer)
-- pridana `webDestroyer` [funkce](https://github.com/msviha/orionuo/blob/master/docs/globals.md#webDestroyer)
 
 - funkce pro krafteni ktere je nutne pouzivat spolu (na dvou klavesach)
     - pridana `craftNext` [funkce](https://github.com/msviha/orionuo/blob/master/docs/globals.md#craftNext)
