@@ -29,6 +29,7 @@ declare global {
 	const TextWindow: TextWindow;
 	const Player: PlayerCharacter;
 	const SelectedTile: SelectedTile;
+	const Shared: Shared;
 }
 
 interface OrionStatic extends

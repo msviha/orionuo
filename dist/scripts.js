@@ -141,12 +141,24 @@ var gameObject = {
         lockpicks: {
             graphic: '0x14FB',
             color: '0x0000'
+        },
+        apprenticesPoisoningKit: {
+            graphic: '0x1837',
+            color: '0x0000'
         }
     },
     tools: {
         saw: {
             graphic: '0x1035',
             color: '0x0000'
+        },
+        sewingKit: {
+            graphic: '0x0F9D',
+            color: '0x0000'
+        },
+        silverHammer: {
+            graphic: '0x13E3',
+            color: '0x0B87'
         },
         tinkerTools: {
             graphic: '0x1EBC',
@@ -156,6 +168,10 @@ var gameObject = {
     resources: {
         logs: {
             graphic: '0x1BDD',
+            color: '0x0000'
+        },
+        cloth: {
+            graphic: '0x175D',
             color: '0x0000'
         },
         furs: {
@@ -188,6 +204,10 @@ var gameObject = {
                 graphic: '0x1BEF',
                 color: '0x06D6'
             },
+            silver: {
+                graphic: '0x1BF5',
+                color: '0x0000'
+            },
             gold: {
                 graphic: '0x1BE9',
                 color: '0x0000'
@@ -199,6 +219,14 @@ var gameObject = {
             shadow: {
                 graphic: '0x1BEF',
                 color: '0x0770'
+            },
+            verite: {
+                graphic: '0x1BEF',
+                color: '0x07D1'
+            },
+            valorite: {
+                graphic: '0x1BEF',
+                color: '0x0515'
             },
             blood: {
                 graphic: '0x1BEF',
@@ -218,8 +246,36 @@ var gameObject = {
                 graphic: '0x0F25',
                 color: '0x0000'
             },
+            diamonds: {
+                graphic: '0x0F26',
+                color: '0x0000'
+            },
+            tourmalines: {
+                graphic: '0x0F18',
+                color: '0x0000'
+            },
+            amethyst: {
+                graphic: '0x0F16',
+                color: '0x0000'
+            },
+            rubies: {
+                graphic: '0x0F13',
+                color: '0x0000'
+            },
+            citrines: {
+                graphic: '0x0F15',
+                color: '0x0000'
+            },
+            emeralds: {
+                graphic: '0x0F10',
+                color: '0x0000'
+            },
             starSapphire: {
                 graphic: '0x0F0F',
+                color: '0x0000'
+            },
+            sapphires: {
+                graphic: '0x0F11',
                 color: '0x0000'
             }
         }
@@ -231,9 +287,9 @@ var gameObject = {
                     graphic: '0x1BD7',
                     color: '0x0000',
                     make: {
-                        tool: 'o.tools.saw',
+                        tool: 'gameObject.tools.saw',
                         refill: {
-                            resources: [{ item: 'o.resources.logs', count: 2 }]
+                            resources: [{ item: 'gameObject.resources.logs', count: 2 }]
                         },
                         menu: {
                             name: 'Carpentry',
@@ -246,10 +302,10 @@ var gameObject = {
                     graphic: '0x185E',
                     color: '0x07E0',
                     make: {
-                        tool: 'o.tools.saw',
+                        tool: 'gameObject.tools.saw',
                         refill: {
-                            resources: [{ item: 'o.resources.logs', count: 2 }],
-                            crafting: [{ item: 'o.crafting.tinkering.containers.kadNaPotiony', count: 20 }]
+                            resources: [{ item: 'gameObject.resources.logs', count: 2 }],
+                            crafting: [{ item: 'gameObject.crafting.tinkering.containers.kadNaPotiony', count: 20 }]
                         },
                         menu: {
                             name: 'Carpentry',
@@ -263,10 +319,10 @@ var gameObject = {
                     graphic: '0x1DB8',
                     color: '0x0000',
                     make: {
-                        tool: 'o.tools.saw',
+                        tool: 'gameObject.tools.saw',
                         refill: {
-                            resources: [{ item: 'o.resources.logs', count: 1 }],
-                            crafting: [{ item: 'o.crafting.carpentry.miscellaneous.boards', count: 2 }]
+                            resources: [{ item: 'gameObject.resources.logs', count: 1 }],
+                            crafting: [{ item: 'gameObject.crafting.carpentry.miscellaneous.boards', count: 2 }]
                         },
                         menu: {
                             name: 'Carpentry',
@@ -278,9 +334,9 @@ var gameObject = {
                     graphic: '0x1EB1',
                     color: '0x0000',
                     make: {
-                        tool: 'o.tools.saw',
+                        tool: 'gameObject.tools.saw',
                         refill: {
-                            resources: [{ item: 'o.resources.logs', count: 3 }]
+                            resources: [{ item: 'gameObject.resources.logs', count: 3 }]
                         },
                         menu: {
                             name: 'Carpentry',
@@ -292,12 +348,12 @@ var gameObject = {
                     graphic: '0x0E7F',
                     color: '0x0909',
                     make: {
-                        tool: 'o.tools.saw',
+                        tool: 'gameObject.tools.saw',
                         refill: {
-                            resources: [{ item: 'o.resources.logs', count: 1 }],
+                            resources: [{ item: 'gameObject.resources.logs', count: 1 }],
                             crafting: [
-                                { item: 'o.crafting.carpentry.containersAndParts.barrelLid', count: 2 },
-                                { item: 'o.crafting.carpentry.containersAndParts.barrelStaves', count: 2 }
+                                { item: 'gameObject.crafting.carpentry.containersAndParts.barrelLid', count: 2 },
+                                { item: 'gameObject.crafting.carpentry.containersAndParts.barrelStaves', count: 2 }
                             ]
                         },
                         menu: {
@@ -310,17 +366,78 @@ var gameObject = {
         },
         tinkering: {
             parts: {
+                nails: {
+                    graphic: '0x102E',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [{ item: 'gameObject.resources.ingots.iron', count: 1 }]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Parts', 'Nails']
+                        }
+                    }
+                },
+                barrelHoops: {
+                    graphic: '0x10E1',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.copper', count: 1 },
+                                { item: 'gameObject.resources.ingots.iron', count: 1 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Parts', 'Barrel Hoops']
+                        }
+                    }
+                },
+                hinge: {
+                    graphic: '0x1055',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.iron', count: 1 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Parts', 'Hinge']
+                        }
+                    }
+                },
                 springs: {
                     graphic: '0x105D',
                     color: '0x0000',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
-                            resources: [{ item: 'o.resources.ingots.iron', count: 1 }]
+                            resources: [{ item: 'gameObject.resources.ingots.iron', count: 1 }]
                         },
                         menu: {
                             name: 'Tinkering',
                             selections: ['Parts', 'Springs']
+                        }
+                    }
+                },
+                gears: {
+                    graphic: '0x1053',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [{ item: 'gameObject.resources.ingots.iron', count: 1 }]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Parts', 'Gears']
                         }
                     }
                 }
@@ -330,11 +447,11 @@ var gameObject = {
                     graphic: '0x1879',
                     color: '0x0000',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                { item: 'o.resources.ingots.copper', count: 2 },
-                                { item: 'o.resources.ingots.iron', count: 2 }
+                                { item: 'gameObject.resources.ingots.copper', count: 2 },
+                                { item: 'gameObject.resources.ingots.iron', count: 2 }
                             ]
                         },
                         menu: {
@@ -347,11 +464,11 @@ var gameObject = {
                     graphic: '0x1876',
                     color: '0x0665',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                { item: 'o.resources.ingots.rose', count: 2 },
-                                { item: 'o.resources.ingots.iron', count: 2 }
+                                { item: 'gameObject.resources.ingots.rose', count: 2 },
+                                { item: 'gameObject.resources.ingots.iron', count: 2 }
                             ]
                         },
                         menu: {
@@ -360,15 +477,49 @@ var gameObject = {
                         }
                     }
                 },
+                silver: {
+                    graphic: '0x1877',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.silver', count: 2 },
+                                { item: 'gameObject.resources.ingots.iron', count: 2 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Wires', 'Silver Wire']
+                        }
+                    }
+                },
+                gold: {
+                    graphic: '0x1878',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.gold', count: 2 },
+                                { item: 'gameObject.resources.ingots.iron', count: 2 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Wires', 'Gold Wire']
+                        }
+                    }
+                },
                 shadow: {
                     graphic: '0x1876',
                     color: '0x0770',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                { item: 'o.resources.ingots.shadow', count: 2 },
-                                { item: 'o.resources.ingots.iron', count: 2 }
+                                { item: 'gameObject.resources.ingots.shadow', count: 2 },
+                                { item: 'gameObject.resources.ingots.iron', count: 2 }
                             ]
                         },
                         menu: {
@@ -381,11 +532,11 @@ var gameObject = {
                     graphic: '0x1876',
                     color: '0x04C2',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                { item: 'o.resources.ingots.blood', count: 2 },
-                                { item: 'o.resources.ingots.iron', count: 2 }
+                                { item: 'gameObject.resources.ingots.blood', count: 2 },
+                                { item: 'gameObject.resources.ingots.iron', count: 2 }
                             ]
                         },
                         menu: {
@@ -398,11 +549,11 @@ var gameObject = {
                     graphic: '0x1876',
                     color: '0x0455',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                { item: 'o.resources.ingots.black', count: 2 },
-                                { item: 'o.resources.ingots.iron', count: 2 }
+                                { item: 'gameObject.resources.ingots.black', count: 2 },
+                                { item: 'gameObject.resources.ingots.iron', count: 2 }
                             ]
                         },
                         menu: {
@@ -415,11 +566,11 @@ var gameObject = {
                     graphic: '0x1876',
                     color: '0x052D',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                { item: 'o.resources.ingots.mytheril', count: 2 },
-                                { item: 'o.resources.ingots.iron', count: 2 }
+                                { item: 'gameObject.resources.ingots.mytheril', count: 2 },
+                                { item: 'gameObject.resources.ingots.iron', count: 2 }
                             ]
                         },
                         menu: {
@@ -434,11 +585,11 @@ var gameObject = {
                     graphic: '0x0F0E',
                     color: '0x0000',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                { item: 'o.resources.logs', count: 2 },
-                                { item: 'o.resources.ore.anyOre', count: 5 }
+                                { item: 'gameObject.resources.logs', count: 2 },
+                                { item: 'gameObject.resources.ore.anyOre', count: 5 }
                             ]
                         },
                         menu: {
@@ -451,16 +602,16 @@ var gameObject = {
                     graphic: '0x1843',
                     color: '0x0000',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                { item: 'o.resources.logs', count: 2 },
-                                { item: 'o.resources.ore.iron', count: 2 },
-                                { item: 'o.resources.ingots.bronze', count: 1 },
-                                { item: 'o.resources.ingots.iron', count: 1 }
+                                { item: 'gameObject.resources.logs', count: 2 },
+                                { item: 'gameObject.resources.ore.iron', count: 2 },
+                                { item: 'gameObject.resources.ingots.bronze', count: 1 },
+                                { item: 'gameObject.resources.ingots.iron', count: 1 }
                             ],
                             crafting: [
-                                { item: 'o.crafting.carpentry.containersAndParts.formaNaLahve', count: 1 }
+                                { item: 'gameObject.crafting.carpentry.containersAndParts.formaNaLahve', count: 1 }
                             ]
                         },
                         menu: {
@@ -469,16 +620,50 @@ var gameObject = {
                         }
                     }
                 },
-                goldenBox: {
+                metalchest: {
+                    graphic: '0x09AB',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.logs', count: 2 },
+                                { item: 'gameObject.resources.ingots.shadow', count: 20 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Containers', 'Metal Chest']
+                        }
+                    }
+                },
+                goldChest: {
+                    graphic: '0x0E40',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.logs', count: 2 },
+                                { item: 'gameObject.resources.ingots.gold', count: 5 },
+                                { item: 'gameObject.resources.ingots.iron', count: 15 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Containers', 'Gold Chest']
+                        }
+                    }
+                },
+                goldenBoxW: {
                     graphic: '0x0E80',
                     color: '0x0000',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                { item: 'o.resources.logs', count: 5 },
-                                { item: 'o.resources.ingots.gold', count: 5 },
-                                { item: 'o.resources.ingots.iron', count: 1 }
+                                { item: 'gameObject.resources.logs', count: 5 },
+                                { item: 'gameObject.resources.ingots.gold', count: 5 }
                             ]
                         },
                         menu: {
@@ -487,18 +672,35 @@ var gameObject = {
                         }
                     }
                 },
+                goldenBoxN: {
+                    graphic: '0x09A8',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.logs', count: 5 },
+                                { item: 'gameObject.resources.ingots.gold', count: 5 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Containers', 'Golden Box (N)']
+                        }
+                    }
+                },
                 animalBox: {
                     graphic: '0x09A8',
                     color: '0x051E',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                { item: 'o.resources.logs', count: 5 },
-                                { item: 'o.resources.furs', count: 5 }
+                                { item: 'gameObject.resources.logs', count: 5 },
+                                { item: 'gameObject.resources.furs', count: 5 }
                             ],
                             crafting: [
-                                { item: 'o.crafting.tinkering.containers.goldenBox', count: 1 }
+                                { item: 'gameObject.crafting.tinkering.containers.goldenBoxW', count: 1 }
                             ]
                         },
                         menu: {
@@ -507,18 +709,120 @@ var gameObject = {
                         }
                     }
                 },
+                secureChestN: {
+                    graphic: '0x14F0',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.logs', count: 2 },
+                                { item: 'gameObject.resources.ingots.gold', count: 5 },
+                                { item: 'gameObject.resources.ingots.iron', count: 15 },
+                                { item: 'gameObject.resources.stones.diamonds', count: 2 },
+                                { item: 'gameObject.resources.stones.tourmalines', count: 2 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Containers', 'Secure Chest (N)']
+                        }
+                    }
+                },
+                secureChestW: {
+                    graphic: '0x14F0',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.logs', count: 2 },
+                                { item: 'gameObject.resources.ingots.gold', count: 5 },
+                                { item: 'gameObject.resources.ingots.iron', count: 15 },
+                                { item: 'gameObject.resources.stones.diamonds', count: 2 },
+                                { item: 'gameObject.resources.stones.tourmalines', count: 2 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Containers', 'Secure Chest (W)']
+                        }
+                    }
+                },
+                doubleSecureChestN: {
+                    graphic: '0x14F0',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.logs', count: 2 },
+                                { item: 'gameObject.resources.ingots.gold', count: 5 },
+                                { item: 'gameObject.resources.ingots.iron', count: 15 },
+                                { item: 'gameObject.resources.stones.diamonds', count: 2 },
+                                { item: 'gameObject.resources.stones.rubies', count: 4 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Containers', 'Double Secure Chest']
+                        }
+                    }
+                },
+                doubleSecureChestW: {
+                    graphic: '0x14F0',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.logs', count: 2 },
+                                { item: 'gameObject.resources.ingots.gold', count: 5 },
+                                { item: 'gameObject.resources.ingots.iron', count: 15 },
+                                { item: 'gameObject.resources.stones.diamonds', count: 2 },
+                                { item: 'gameObject.resources.stones.rubies', count: 4 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Containers', 'Double Secure Chest']
+                        }
+                    }
+                },
+                guildSecureChestW: {
+                    graphic: '0x14F0',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.logs', count: 5 },
+                                { item: 'gameObject.resources.ingots.gold', count: 5 },
+                                { item: 'gameObject.resources.ingots.copper', count: 10 },
+                                { item: 'gameObject.resources.ingots.iron', count: 15 },
+                                { item: 'gameObject.resources.ingots.mytheril', count: 1 },
+                                { item: 'gameObject.resources.stones.diamonds', count: 1 },
+                                { item: 'gameObject.resources.stones.citrines', count: 2 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Containers', 'Guild Secure Chest']
+                        }
+                    }
+                },
                 univerzalAnimalBox: {
                     graphic: '0x09A8',
                     color: '0x0000',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                { item: 'o.resources.logs', count: 5 },
-                                { item: 'o.resources.furs', count: 5 }
+                                { item: 'gameObject.resources.logs', count: 5 },
+                                { item: 'gameObject.resources.furs', count: 5 }
                             ],
                             crafting: [
-                                { item: 'o.crafting.tinkering.containers.animalBox', count: 1 }
+                                { item: 'gameObject.crafting.tinkering.containers.animalBox', count: 1 }
                             ]
                         },
                         menu: {
@@ -528,27 +832,99 @@ var gameObject = {
                     }
                 }
             },
+            tools: {
+                apprenticesPoisoningKit: {
+                    graphic: '0x1837',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.mytheril', count: 5 },
+                                { item: 'gameObject.resources.stones.citrines', count: 5 },
+                                { item: 'gameObject.resources.stones.diamonds', count: 5 },
+                                { item: 'gameObject.resources.stones.sapphires', count: 5 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Tools', 'Apprentice\'s Poisoning Kit (trenink)']
+                        }
+                    }
+                }
+            },
             specialItems: {
                 magicBall: {
                     graphic: '0x0E2D',
                     color: '0x0B86',
                     make: {
-                        tool: 'o.tools.tinkerTools',
+                        tool: 'gameObject.tools.tinkerTools',
                         refill: {
                             resources: [
-                                { item: 'o.resources.ingots.gold', count: 1 },
-                                { item: 'o.resources.ingots.iron', count: 1 },
-                                { item: 'o.resources.stones.pieceOfAmber', count: 1 },
-                                { item: 'o.resources.stones.starSapphire', count: 3 }
+                                { item: 'gameObject.resources.ingots.gold', count: 1 },
+                                { item: 'gameObject.resources.ingots.iron', count: 1 },
+                                { item: 'gameObject.resources.stones.pieceOfAmber', count: 1 },
+                                { item: 'gameObject.resources.stones.starSapphire', count: 3 }
                             ],
                             crafting: [
-                                { item: 'o.crafting.tinkering.parts.springs', count: 2 },
-                                { item: 'o.crafting.tinkering.wires.copper', count: 5 }
+                                { item: 'gameObject.crafting.tinkering.parts.springs', count: 2 },
+                                { item: 'gameObject.crafting.tinkering.wires.copper', count: 5 }
                             ]
                         },
                         menu: {
                             name: 'Tinkering',
                             selections: ['Special Items', 'Magic Ball (10 charges)']
+                        }
+                    }
+                },
+                rechargeCrystal1: {
+                    graphic: '0x1F1C',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.gold', count: 2 },
+                                { item: 'gameObject.resources.stones.amethyst', count: 2 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Special Items', 'Recharge Crystal +1']
+                        }
+                    }
+                },
+                rechargeCrystal3: {
+                    graphic: '0x1F1C',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.gold', count: 3 },
+                                { item: 'gameObject.resources.stones.citrines', count: 3 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Special Items', 'Recharge Crystal +3']
+                        }
+                    }
+                },
+                rechargeCrystal5: {
+                    graphic: '0x1F1C',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.gold', count: 5 },
+                                { item: 'gameObject.resources.stones.diamonds', count: 5 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Special Items', 'Recharge Crystal +5']
                         }
                     }
                 }
@@ -578,6 +954,14 @@ var gameObject = {
                 color: '0x0005'
             },
             alchemySelection: 'Mana Refresh'
+        },
+        gb: {
+            graphic: '0x0F0C',
+            color: '0x0025',
+            kad: {
+                graphic: '0x1843',
+                color: '0x0025'
+            }
         },
         gh: {
             graphic: '0x0F0C',
@@ -746,6 +1130,20 @@ var gameObject = {
                 graphic: '0x13F4',
                 color: '0x096D'
             }
+        }
+    },
+    music: {
+        harp: {
+            graphic: '0x0EB2',
+            color: '0x0000'
+        },
+        lute: {
+            graphic: '0x0EB3',
+            color: '0x0000'
+        },
+        drum: {
+            graphic: '0x0E9C',
+            color: '0x0000'
         }
     },
     rings: {
@@ -1209,11 +1607,11 @@ var gameObject = {
     }
 };
 var trackingFilter = {
-    "0x2106": [],
-    "0x2107": [],
-    "0x20F9": ['Imp'],
-    "0x20D9": ['Gargoyle'],
-    "0x2100": []
+    '0x2106': [],
+    '0x2107': [],
+    '0x20F9': ['Imp'],
+    '0x20D9': ['Gargoyle'],
+    '0x2100': []
 };
 function Autostart() {
     var previousLastAttackSerial;
@@ -1265,9 +1663,21 @@ function castNecroScroll(scroll, target) {
 function castScroll(scroll, target, backupHeadCast) {
     Scripts.Spells.castScroll(scroll, target, backupHeadCast);
 }
+function cleanObjectInBag(object, objectName) {
+    Scripts.Clean.cleanObjectInBag(object, objectName);
+}
+function craftNext() {
+    Scripts.Crafting.listMakeMenu();
+}
+function craftSelect() {
+    Scripts.Crafting.confirmMakeMenu();
+}
 function drink(potionName, switchWarModeWhenNeeded) {
     if (switchWarModeWhenNeeded === void 0) { switchWarModeWhenNeeded = true; }
     Scripts.Potions.drinkPotion(potionName, switchWarModeWhenNeeded);
+}
+function drum(target) {
+    Scripts.Music.drum(target);
 }
 function enemy() {
     Scripts.Targeting.addEnemy();
@@ -1283,10 +1693,7 @@ function gmMortar(potionName) {
     Scripts.Potions.gmMortar(potionName);
 }
 function harp(target) {
-    Scripts.Wip.harfa(target);
-}
-function lute(target) {
-    Scripts.Wip.lutna(target);
+    Scripts.Music.harp(target);
 }
 function hideAll() {
     Scripts.Common.hideAll();
@@ -1321,6 +1728,9 @@ function lootAll(delay) {
     if (delay === void 0) { delay = responseDelay; }
     Scripts.Loot.lootAllFrom(delay);
 }
+function lute(target) {
+    Scripts.Music.lute(target);
+}
 function make(count, objectAsString, setInputs) {
     if (setInputs === void 0) { setInputs = true; }
     Scripts.Crafting.make(count, objectAsString, setInputs);
@@ -1333,6 +1743,10 @@ function nbRune() {
 }
 function mount() {
     Scripts.Mount.mountAndDismount();
+}
+function poisonTrain(keepRunning) {
+    if (keepRunning === void 0) { keepRunning = false; }
+    Scripts.Common.poisonTrain(keepRunning);
 }
 function resetEnemies() {
     Scripts.Targeting.resetEnemies();
@@ -1366,7 +1780,7 @@ function use(object, name, minimalCountForWarn) {
     Scripts.Utils.use(object, name, minimalCountForWarn);
 }
 function useGGR() {
-    Scripts.Wip.useGGR();
+    Scripts.Jewelry.useGGR();
 }
 function useKlamak(lvl, useAim, priorityList) {
     if (useAim === void 0) { useAim = false; }
@@ -1377,6 +1791,9 @@ function useRR() {
 }
 function useShrinkKad() {
     Scripts.Taming.useShrinkKad();
+}
+function webDestroyer() {
+    Scripts.Common.webDestroyer();
 }
 function isMyGameObject(val) {
     return val && val.graphic;
@@ -1648,6 +2065,51 @@ var Scripts;
             }
             shouldCloseMenu && menu.Close();
         };
+        Common.webDestroyer = function () {
+            var webs = Orion.FindType('0x0EE3|0x0EE4|0x0EE5|0x0EE6', '0x0000', 'ground', 'item', 1);
+            Orion.Print(-1, JSON.stringify(webs));
+            for (var _i = 0, webs_1 = webs; _i < webs_1.length; _i++) {
+                var web = webs_1[_i];
+                Orion.UseObject(web);
+                Orion.Wait(100);
+            }
+        };
+        Common.poisonTrain = function (keepRunning) {
+            if (keepRunning === void 0) { keepRunning = false; }
+            var kitDef = gameObject.uncategorized.apprenticesPoisoningKit;
+            var kits = Orion.FindType(kitDef.graphic, kitDef.color);
+            if (!kits.length) {
+                Scripts.Utils.playerPrint('nemas poison kit na treneni', ColorEnum.red);
+                return;
+            }
+            var kitSerial = kits[0];
+            var run = true;
+            while (run) {
+                if (Orion.InJournal('Kdyz se snazis')) {
+                    Orion.WarMode(true);
+                    Orion.ClearJournal();
+                    Orion.Wait(responseDelay);
+                }
+                var targets = Orion.FindType('any', 'any', 'ground', 'fast|nothuman|live|mobile', 1);
+                if (!targets.length) {
+                    Orion.Wait(responseDelay);
+                    continue;
+                }
+                var target = targets[0];
+                Orion.WaitTargetObject(target);
+                Orion.UseObject(kitSerial);
+                Orion.Wait(responseDelay);
+                Orion.Ignore(target);
+                if (!keepRunning) {
+                    Orion.Wait(1500);
+                    Orion.IgnoreReset();
+                    run = false;
+                }
+                else {
+                    Orion.Wait(responseDelay);
+                }
+            }
+        };
         return Common;
     }());
     Scripts.Common = Common;
@@ -1658,10 +2120,10 @@ var Scripts;
         function Crafting() {
         }
         Crafting.setInputs = function (itemName) {
-            Scripts.Utils.playerPrint("Target container with resources for making \"" + itemName + "\"");
+            Scripts.Utils.playerPrint("Kde je container se surovinami ?");
             Orion.WaitForAddObject('resourcesContainer', 60000);
             Orion.UseObject('resourcesContainer');
-            Scripts.Utils.playerPrint("Target your container where to put finished \"" + itemName + "\"");
+            Scripts.Utils.playerPrint("Kam hazet hotove vyrobky ?");
             Orion.WaitForAddObject('outputContainer', 60000);
         };
         Crafting.makeProgress = function () {
@@ -1671,11 +2133,16 @@ var Scripts;
         };
         Crafting.refOrMake = function (count, resourcePath) {
             var res = Scripts.Utils.parseObject(resourcePath);
-            var missingCount = Scripts.Utils.refill(res, 'resourcesContainer', count, 'backpack');
-            if (missingCount) {
+            var itemName = resourcePath.replace(/[^.]*\.[^.]*\./, '');
+            var missingCount = Scripts.Utils.refill(res, 'resourcesContainer', count, 'backpack', false, itemName);
+            if (missingCount && res.make) {
                 Scripts.Crafting.make(missingCount, resourcePath, false);
                 Orion.Wait(responseDelay);
-                Scripts.Utils.refill(res, 'resourcesContainer', count, 'backpack');
+                missingCount = Scripts.Utils.refill(res, 'resourcesContainer', missingCount, 'backpack', false, itemName);
+            }
+            if (missingCount) {
+                Scripts.Utils.log("nemas dostatek " + itemName, ColorEnum.red);
+                throw "nemas dostatek " + itemName;
             }
         };
         Crafting.make = function (count, objectAsString, setInputs) {
@@ -1683,9 +2150,10 @@ var Scripts;
             if (setInputs === void 0) { setInputs = true; }
             Orion.ClearJournal();
             var itemObject = Scripts.Utils.parseObject(objectAsString);
+            var itemName = objectAsString.replace(/[^.]*\.[^.]*\./, '');
             if (!itemObject.make) {
-                Scripts.Utils.log("cant make/refill " + objectAsString, ColorEnum.red);
-                throw "cant make/refill " + objectAsString;
+                Scripts.Utils.log(itemName + " nelze vyrobit", ColorEnum.red);
+                throw itemName + " nelze vyrobit";
             }
             if (!isMakeProps(itemObject.make)) {
                 throw "!isMakeProps";
@@ -1717,11 +2185,125 @@ var Scripts;
                 if (success) {
                     count -= itemObject.make.outputCount || 1;
                     finishedCount++;
-                    var item = Orion.FindType(itemObject.graphic, itemObject.color)[0];
-                    Orion.MoveItem(item, 1, setInputs ? 'outputContainer' : 'resourcesContainer');
-                    Orion.Wait(responseDelay);
                 }
-                Scripts.Utils.log("vyrobeno " + finishedCount + " / " + ++totalTries);
+                Scripts.Utils.log("vyrobeno " + itemName + " - " + finishedCount + " / " + ++totalTries);
+            }
+        };
+        Crafting.countMaterialForOneItem = function (objectAsString, callStack, count, crafting) {
+            var _a, _b, _c, _d;
+            if (callStack === void 0) { callStack = 0; }
+            if (count === void 0) { count = 1; }
+            if (crafting === void 0) { crafting = true; }
+            var itemObject = Scripts.Utils.parseObject(objectAsString);
+            if (!itemObject.make) {
+                return;
+            }
+            var currentItemName = objectAsString.replace(/[^.]*\.[^.]*\./, '');
+            var tab = '   ';
+            var space = '';
+            for (var i = 0; i < callStack; i++) {
+                space += tab;
+            }
+            if (crafting) {
+                Orion.Print(ColorEnum.red, space + "Na vyrobu " + count + "x " + currentItemName + " budes potrebovat:");
+            }
+            if ((_a = itemObject.make.refill) === null || _a === void 0 ? void 0 : _a.crafting) {
+                for (var _i = 0, _e = (_b = itemObject.make.refill) === null || _b === void 0 ? void 0 : _b.crafting; _i < _e.length; _i++) {
+                    var ref = _e[_i];
+                    var refItemName = ref.item.replace(/[^.]*\.[^.]*\./, '');
+                    Orion.Print(ColorEnum.none, "" + space + ref.count * count + "x " + refItemName);
+                    Scripts.Crafting.countMaterialForOneItem(ref.item, callStack + 1, ref.count * count, true);
+                }
+            }
+            if ((_c = itemObject.make.refill) === null || _c === void 0 ? void 0 : _c.resources) {
+                for (var _f = 0, _g = (_d = itemObject.make.refill) === null || _d === void 0 ? void 0 : _d.resources; _f < _g.length; _f++) {
+                    var ref = _g[_f];
+                    var refItemName = ref.item.replace(/[^.]*\.[^.]*\./, '');
+                    Orion.Print(ColorEnum.none, "" + space + ref.count * count + "x " + refItemName);
+                    Scripts.Crafting.countMaterialForOneItem(ref.item, callStack + 1, ref.count * count, false);
+                }
+            }
+        };
+        Crafting.makeFromSelection = function () {
+            var _a;
+            var pathAsString = Shared.GetVar('currentListMakeItemPath');
+            if (!pathAsString) {
+                return;
+            }
+            Scripts.Crafting.countMaterialForOneItem(pathAsString);
+            Scripts.Utils.playerPrint("" + pathAsString, ColorEnum.red);
+            Scripts.Utils.playerPrint('Kolik chces vyrobit ?');
+            Orion.ClearJournal();
+            while (!Orion.InJournal('', 'my')) {
+                Orion.Wait(500);
+            }
+            var text = (_a = Orion.InJournal('', 'my')) === null || _a === void 0 ? void 0 : _a.Text();
+            if (!text) {
+                return;
+            }
+            var count = parseInt(text.replace(Player.Name() + ':', ''), 10);
+            Orion.Print(-1, typeof count);
+            Orion.Print(-1, count.toString());
+            Scripts.Crafting.make(count, pathAsString);
+        };
+        Crafting.listMakeMenu = function () {
+            var timer = Orion.Timer('listMakeMenuTimer');
+            var highlightIndex;
+            var list;
+            if (timer === -1 || timer > 3000) {
+                Shared.AddVar('currentListMakeItemPath', 'gameObject.crafting');
+                highlightIndex = undefined;
+                list = [];
+                for (var item in gameObject.crafting) {
+                    list.push(item);
+                }
+                Shared.AddArray('listMakeMenu', list);
+            }
+            else {
+                highlightIndex = Shared.GetVar('highlightIndex');
+                list = Shared.GetArray('listMakeMenu');
+            }
+            Scripts.Utils.resetTimer('listMakeMenuTimer');
+            if (list.length < 5) {
+                highlightIndex = highlightIndex === undefined || highlightIndex + 1 === list.length ? 0 : highlightIndex + 1;
+            }
+            else {
+                highlightIndex = 2;
+                var temp = list.shift();
+                list.push(temp);
+                Shared.AddArray('listMakeMenu', list);
+            }
+            Shared.AddVar('highlightIndex', highlightIndex);
+            var i = 0;
+            for (i; i < list.length && i < 5; i++) {
+                Scripts.Utils.playerPrint(list[i], i === highlightIndex ? ColorEnum.red : ColorEnum.none);
+            }
+            for (i; i < 5; i++) {
+                Scripts.Utils.playerPrint('');
+            }
+        };
+        Crafting.confirmMakeMenu = function () {
+            var _a;
+            if (typeof Shared.GetVar('highlightIndex') !== 'number' || !((_a = Shared.GetArray('listMakeMenu')) === null || _a === void 0 ? void 0 : _a.length)) {
+                return;
+            }
+            var currentItemAsString = Shared.GetVar('currentListMakeItemPath', 'gameObject.crafting');
+            var currentItem = Scripts.Utils.parseObject(currentItemAsString);
+            var highlightIndex = Shared.GetVar('highlightIndex');
+            var list = Shared.GetArray('listMakeMenu');
+            var newItem = currentItem[list[highlightIndex]];
+            Shared.AddVar('currentListMakeItemPath', currentItemAsString + '.' + list[highlightIndex]);
+            if (!newItem.make) {
+                var newList = [];
+                for (var item in newItem) {
+                    newList.push(item);
+                }
+                Shared.AddArray('listMakeMenu', newList);
+                Shared.AddVar('highlightIndex', undefined);
+                Scripts.Crafting.listMakeMenu();
+            }
+            else {
+                Scripts.Crafting.makeFromSelection();
             }
         };
         return Crafting;
@@ -1800,6 +2382,10 @@ var Scripts;
             var grrSerials = Orion.FindType(grr.graphic, grr.color);
             var grr2Serials = Orion.FindType(grr2.graphic, grr2.color);
             var rings = __spreadArrays(rrSerials, grrSerials, grr2Serials);
+            if (!rings.length) {
+                Scripts.Utils.playerPrint("Nemas Reflex ringy", ColorEnum.red);
+                return;
+            }
             Orion.ClearJournal();
             for (var _i = 0, rings_1 = rings; _i < rings_1.length; _i++) {
                 var ring = rings_1[_i];
@@ -1812,6 +2398,18 @@ var Scripts;
                     break;
                 }
             }
+        };
+        Jewelry.useGGR = function () {
+            var ggrObj = gameObject.rings.ggr;
+            var ggrSerials = Orion.FindType(ggrObj.graphic, ggrObj.color);
+            if (!ggrSerials.length) {
+                Scripts.Utils.playerPrint("Nemas Great Gold ringy", ColorEnum.red);
+                return;
+            }
+            var ggrSerial = ggrSerials[0];
+            Orion.UseObject(ggrSerial);
+            Orion.Wait(50);
+            Orion.MoveItem(ggrSerial, 0, 'backpack', ggrObj.bag.x, ggrObj.bag.y);
         };
         return Jewelry;
     }());
@@ -2507,6 +3105,38 @@ var Scripts;
 })(Scripts || (Scripts = {}));
 var Scripts;
 (function (Scripts) {
+    var Music = (function () {
+        function Music() {
+        }
+        Music.harp = function (targetAlias) {
+            Scripts.Music.useMusicInstrument(gameObject.music.harp, "Nemas Harfu", targetAlias);
+        };
+        Music.lute = function (targetAlias) {
+            Scripts.Music.useMusicInstrument(gameObject.music.lute, "Nemas Loutnu", targetAlias);
+        };
+        Music.drum = function (targetAlias) {
+            Scripts.Music.useMusicInstrument(gameObject.music.drum, "Nemas Buben", targetAlias);
+        };
+        Music.useMusicInstrument = function (instrument, missingMessage, targetAlias) {
+            if (!targetAlias) {
+                targetAlias = 'musicTarget';
+                Scripts.Utils.setTargetAlias(targetAlias, 'Komu chces zahrat ?');
+            }
+            var instrumentSerials = Orion.FindType(instrument.graphic, instrument.color);
+            Orion.WarMode(true);
+            if (!instrumentSerials.length) {
+                Scripts.Utils.playerPrint(missingMessage, ColorEnum.red);
+                return;
+            }
+            Orion.WaitTargetObject(targetAlias);
+            Orion.UseObject(instrumentSerials[0]);
+        };
+        return Music;
+    }());
+    Scripts.Music = Music;
+})(Scripts || (Scripts = {}));
+var Scripts;
+(function (Scripts) {
     var PetCommander = (function () {
         function PetCommander() {
         }
@@ -2817,8 +3447,9 @@ var Scripts;
             var selection_2 = Orion.WaitForAddObject('scrollsContainer', 60000);
             Scripts.Utils.playerPrint("Target finished [" + spell + "] scroll");
             var selection_3 = Orion.WaitForAddObject('finishedScroll', 60000);
-            if (1 === selection_1 && 1 === selection_2 && 1 === selection_3) {
+            if (1 !== selection_1 || 1 !== selection_2 || 1 !== selection_3) {
                 Scripts.Utils.log('All selections must be game objects', ColorEnum.red);
+                return;
             }
             var finishedScroll = {
                 graphic: Orion.FindObject('finishedScroll').Graphic(),
@@ -3177,7 +3808,7 @@ var Scripts;
             s.splice(0, 1);
             Scripts.Utils.selectMenu(menuToSelect, s, false);
         };
-        Utils.refill = function (obj, sourceContainerId, quantity, targetContainerId, refillJustWhenIHaveNothing) {
+        Utils.refill = function (obj, sourceContainerId, quantity, targetContainerId, refillJustWhenIHaveNothing, itemName) {
             if (quantity === void 0) { quantity = 1; }
             if (targetContainerId === void 0) { targetContainerId = 'backpack'; }
             if (refillJustWhenIHaveNothing === void 0) { refillJustWhenIHaveNothing = false; }
@@ -3193,7 +3824,7 @@ var Scripts;
                     return 0;
                 }
                 if (!itemsInSource) {
-                    Scripts.Utils.log('Nothing to refill', ColorEnum.red);
+                    Scripts.Utils.log("Nemas dostatek " + (itemName ? itemName : obj.graphic) + " pro doplneni", ColorEnum.orange);
                     return quantity;
                 }
                 return Scripts.Utils.moveItems(serialsInSourceContainer, targetContainerId, quantity - itemsInTarget);
@@ -3225,7 +3856,12 @@ var Scripts;
                     needToMove -= itemCount;
                 }
                 else {
+                    Orion.ClearJournal();
                     Orion.MoveItem(item, quantity, targetContainerId);
+                    Orion.Wait(responseDelay);
+                    if (quantity === 1 && Orion.InJournal('too heavy')) {
+                        Orion.MoveItem(item, 2, targetContainerId);
+                    }
                     needToMove = 0;
                 }
                 Orion.Wait(responseDelay);
@@ -3378,6 +4014,14 @@ var Scripts;
                 Orion.UseObject(serials[0]);
             }
         };
+        Utils.setTargetAlias = function (targetAliasToSet, message) {
+            if (message === void 0) { message = 'nastav target'; }
+            var selection = Orion.WaitForAddObject(targetAliasToSet, 60000);
+            Orion.Print('-1', message);
+            if (selection !== 1) {
+                throw 'bad target';
+            }
+        };
         return Utils;
     }());
     Scripts.Utils = Utils;
@@ -3394,96 +4038,11 @@ var Scripts;
             }
             Orion.Drop(serials[0]);
         };
-        Wip.useGGR = function () {
-            Orion.UseType(0x108A, 0x0000);
-            var ggrSerial = Orion.FindType(0x108A, 0x0000);
-            Orion.Wait(50);
-            Orion.MoveItem(ggrSerial[0], 0, 'backpack', 50, 50);
-        };
-        Wip.harfa = function (target) {
-            if (!target) {
-                var selection = Orion.WaitForAddObject('musicTarget', 60000);
-                Orion.Print('-1', 'Komu chces zahrat ?');
-                if (selection !== 1) {
-                    return;
-                }
-                target = 'musicTarget';
-            }
-            var Harfa = Orion.FindType(0x0EB2);
-            Orion.WarMode(true);
-            if (Harfa.length > 0) {
-                Orion.WaitTargetObject(target);
-                Orion.UseObject(Harfa[0]);
-            }
-            else {
-                Orion.Print(-1, 'Nemas  Harfu');
-            }
-        };
-        Wip.lutna = function (target) {
-            if (!target) {
-                var selection = Orion.WaitForAddObject('musicTarget', 60000);
-                Orion.Print('-1', 'Komu chces zahrat ?');
-                if (selection !== 1) {
-                    return;
-                }
-                target = 'musicTarget';
-            }
-            var Type = Orion.FindType(0x0EB3);
-            Orion.WarMode(true);
-            if (Type.length > 0) {
-                Orion.WaitTargetObject(target);
-                Orion.UseObject(Type[0]);
-            }
-            else {
-                Orion.Print(-1, 'Nemas  Lute');
-            }
-        };
         Wip.Tracking = function (who) {
             if (who === void 0) { who = 'Players'; }
             Orion.CancelWaitMenu();
             Orion.WaitMenu('Tracking', who);
             Orion.UseSkill('Tracking');
-        };
-        Wip.AttackLastTarget = function () {
-            var serial = Orion.GetGlobal('target');
-            if (!serial.length)
-                return;
-            var enemy = Orion.FindObject(serial);
-            if (enemy) {
-                var notoColor = Scripts.Wip.getColorByNotoriety(enemy.Notoriety());
-                Orion.CharPrint('self', notoColor, enemy.Name() + ' [' + enemy.Hits() + '/' + enemy.MaxHits() + ']');
-            }
-            Orion.Attack(serial);
-        };
-        Wip.BarPuller = function () {
-            Orion.Ignore('self', true);
-            var serial = Orion.FindType('0xFFFF', '0xFFFF', 'ground', 'mobile|human ', '20', 'blue|orange|red|gray|criminal');
-            for (var i = 0; i < serial.length; ++i) {
-                if (i >= 10)
-                    break;
-                Orion.ShowStatusbar(serial[i], 1420, 280 + (40 * i));
-                Orion.Wait(50);
-            }
-            Orion.Ignore('self', false);
-        };
-        Wip.BarPuller_PvP = function () {
-            var noto = Player.Notoriety();
-            Orion.Ignore('self', true);
-            var serial;
-            if (noto) {
-                serial = Orion.FindType('0xFFFF', '0xFFFF', 'ground', 'mobile|ignorefriends|human ', '20', 'blue|orange|red|gray|criminal');
-            }
-            else {
-                serial = Orion.FindType('0xFFFF', '0xFFFF', 'ground', 'mobile|ignorefriends|human ', '20', 'orange|red|gray|criminal');
-            }
-            for (var i = 0; i < serial.length; ++i) {
-                if (i >= 10)
-                    break;
-                Orion.ShowStatusbar(serial[i], 1185, 680 - (60 * i));
-                Orion.Print(serial[i], ColorEnum.none);
-                Orion.Wait(100);
-            }
-            Orion.Ignore('self', false);
         };
         Wip.EnsureWarMode = function () {
             var wm = Player.WarMode();
@@ -3492,7 +4051,7 @@ var Scripts;
             }
         };
         Wip.Travel = function () {
-            var travel = gameObject.books.travel;
+            var travel = gameObject.books.travelBook;
             var travelSerials = Orion.FindType(travel.graphic, travel.color);
             if (!travelSerials.length) {
                 Scripts.Utils.log('NEMAS TRAVEL BOOK', ColorEnum.red);
@@ -3510,7 +4069,7 @@ var Scripts;
             }
         };
         Wip.Nbruna = function () {
-            var nbRuna = gameObject.nonCategorized.nbRuna;
+            var nbRuna = gameObject.uncategorized.nbRuna;
             var nbRunesSerials = Orion.FindType(nbRuna.graphic, nbRuna.color);
             if (!nbRunesSerials.length) {
                 Scripts.Utils.log('NEMAS NB RUNU', ColorEnum.red);

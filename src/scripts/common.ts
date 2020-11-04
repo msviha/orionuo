@@ -190,5 +190,55 @@ namespace Scripts {
             }
             shouldCloseMenu && menu.Close();
         }
+
+        static webDestroyer() {
+            const webs = Orion.FindType('0x0EE3|0x0EE4|0x0EE5|0x0EE6', '0x0000', 'ground', 'item', 1);
+            Orion.Print(-1, JSON.stringify(webs));
+            for (const web of webs) {
+                Orion.UseObject(web);
+                Orion.Wait(100);
+            }
+        }
+
+        static poisonTrain(keepRunning = false) {
+            const kitDef = gameObject.uncategorized.apprenticesPoisoningKit;
+            const kits = Orion.FindType(kitDef.graphic, kitDef.color);
+            if (!kits.length) {
+                Scripts.Utils.playerPrint('nemas poison kit na treneni', ColorEnum.red);
+                return;
+            }
+
+            const kitSerial = kits[0];
+
+            let run = true;
+            while (run) {
+                if (Orion.InJournal('Kdyz se snazis')) {
+                    Orion.WarMode(true);
+                    Orion.ClearJournal();
+                    Orion.Wait(responseDelay);
+                }
+                const targets = Orion.FindType('any', 'any', 'ground', 'fast|nothuman|live|mobile', 1);
+
+                if (!targets.length) {
+                    Orion.Wait(responseDelay);
+                    continue;
+                }
+
+                const target = targets[0];
+                Orion.WaitTargetObject(target);
+                Orion.UseObject(kitSerial);
+                Orion.Wait(responseDelay);
+                Orion.Ignore(target)
+
+                if (!keepRunning) {
+                    Orion.Wait(1500);
+                    Orion.IgnoreReset();
+                    run = false;
+                }
+                else {
+                    Orion.Wait(responseDelay);
+                }
+            }
+        }
     }
 }

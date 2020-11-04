@@ -15,98 +15,10 @@ namespace Scripts {
             Orion.Drop(serials[0]);
         }
 
-        static useGGR() {
-            Orion.UseType(0x108A, 0x0000);
-            let ggrSerial = Orion.FindType(0x108A, 0x0000);
-            Orion.Wait(50);
-            Orion.MoveItem(ggrSerial[0], 0, 'backpack', 50, 50);
-        }
-
-        static harfa(target?:TargetEnum|string) {
-            if (!target) {
-                const selection = Orion.WaitForAddObject('musicTarget', 60000);
-                Orion.Print('-1', 'Komu chces zahrat ?');
-                if (selection !== 1) {
-                    return;
-                }
-                target = 'musicTarget';
-            }
-            let Harfa = Orion.FindType(0x0EB2);
-            Orion.WarMode(true);
-            if (Harfa.length > 0) {
-                Orion.WaitTargetObject(target);
-                Orion.UseObject(Harfa[0]);
-            } else {
-                Orion.Print(-1, 'Nemas  Harfu');
-            }
-        }
-
-        static lutna(target?:TargetEnum|string) {
-            if (!target) {
-                const selection = Orion.WaitForAddObject('musicTarget', 60000);
-                Orion.Print('-1', 'Komu chces zahrat ?');
-                if (selection !== 1) {
-                    return;
-                }
-                target = 'musicTarget';
-            }
-            let Type = Orion.FindType(0x0EB3);
-            Orion.WarMode(true);
-            if (Type.length > 0) {
-                Orion.WaitTargetObject(target);
-                Orion.UseObject(Type[0]);
-            } else {
-                Orion.Print(-1, 'Nemas  Lute');
-            }
-        }
-
         static Tracking(who = 'Players') {
             Orion.CancelWaitMenu();
             Orion.WaitMenu('Tracking', who);
             Orion.UseSkill('Tracking');
-        }
-
-        static AttackLastTarget() {
-            let serial = Orion.GetGlobal('target');
-            if (!serial.length) return;
-            let enemy = Orion.FindObject(serial);
-            if (enemy) {
-                let notoColor = Scripts.Wip.getColorByNotoriety(enemy.Notoriety());
-                Orion.CharPrint('self', notoColor, enemy.Name() + ' [' + enemy.Hits() + '/' + enemy.MaxHits() + ']');
-            }
-            Orion.Attack(serial);
-        }
-
-        static BarPuller() {
-            Orion.Ignore('self', true);
-            let serial = Orion.FindType('0xFFFF', '0xFFFF', 'ground', 'mobile|human ', '20', 'blue|orange|red|gray|criminal');
-
-            for (let i = 0; i < serial.length; ++i) {
-                if (i >= 10) break;
-                Orion.ShowStatusbar(serial[i], 1420, 280 + (40 * i));
-                Orion.Wait(50);
-            }
-            Orion.Ignore('self', false);
-        }
-
-        static BarPuller_PvP() {
-            let noto = Player.Notoriety();
-            Orion.Ignore('self', true);
-            let serial:string[];
-            if (noto) {
-                serial = Orion.FindType('0xFFFF', '0xFFFF', 'ground', 'mobile|ignorefriends|human ', '20', 'blue|orange|red|gray|criminal');
-            }
-            else {
-                serial = Orion.FindType('0xFFFF', '0xFFFF', 'ground', 'mobile|ignorefriends|human ', '20', 'orange|red|gray|criminal');
-            }
-
-            for (let i = 0; i < serial.length; ++i) {
-                if (i >= 10) break;
-                Orion.ShowStatusbar(serial[i], 1185, 680 - (60 * i));
-                Orion.Print(serial[i], ColorEnum.none);
-                Orion.Wait(100);
-            }
-            Orion.Ignore('self', false);
         }
 
         static EnsureWarMode() {
@@ -117,7 +29,7 @@ namespace Scripts {
         }
 
         static Travel() {
-            const travel = <IMyGameObject>gameObject.books.travel;
+            const travel = <IMyGameObject>gameObject.books.travelBook;
             const travelSerials = Orion.FindType(travel.graphic, travel.color);
             if (!travelSerials.length) {
                 Scripts.Utils.log('NEMAS TRAVEL BOOK', ColorEnum.red);
@@ -137,7 +49,7 @@ namespace Scripts {
         }
 
         static Nbruna() {
-            const nbRuna = <IMyGameObject>gameObject.nonCategorized.nbRuna;
+            const nbRuna = <IMyGameObject>gameObject.uncategorized.nbRuna;
             const nbRunesSerials = Orion.FindType(nbRuna.graphic, nbRuna.color);
             if (!nbRunesSerials.length) {
                 Scripts.Utils.log('NEMAS NB RUNU', ColorEnum.red);

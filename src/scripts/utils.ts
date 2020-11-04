@@ -24,7 +24,8 @@ namespace Scripts {
             sourceContainerId:string,
             quantity = 1,
             targetContainerId = 'backpack',
-            refillJustWhenIHaveNothing = false
+            refillJustWhenIHaveNothing = false,
+            itemName?:string
         ):number {
             const serialsInTargetContainer = Orion.FindType(obj.graphic, obj.color || '0xFFFF', targetContainerId);
             const serialsInSourceContainer = Orion.FindType(obj.graphic, obj.color || '0xFFFF', sourceContainerId);
@@ -39,7 +40,7 @@ namespace Scripts {
                     return 0;
                 }
                 if (!itemsInSource) {
-                    Scripts.Utils.log('Nothing to refill', ColorEnum.red);
+                    Scripts.Utils.log(`Nemas dostatek ${itemName ? itemName : obj.graphic} pro doplneni`, ColorEnum.orange);
                     return quantity;
                 }
                 return Scripts.Utils.moveItems(serialsInSourceContainer, targetContainerId, quantity - itemsInTarget);
@@ -72,7 +73,12 @@ namespace Scripts {
                     needToMove -= itemCount;
                 }
                 else {
+                    Orion.ClearJournal();
                     Orion.MoveItem(item, quantity, targetContainerId);
+                    Orion.Wait(responseDelay);
+                    if (quantity === 1 && Orion.InJournal('too heavy')) {
+                        Orion.MoveItem(item, 2, targetContainerId);
+                    }
                     needToMove = 0;
                 }
                 Orion.Wait(responseDelay);
@@ -247,6 +253,14 @@ namespace Scripts {
             }
             if (count) {
                 Orion.UseObject(serials[0]);
+            }
+        }
+
+        static setTargetAlias(targetAliasToSet:string, message = 'nastav target') {
+            const selection = Orion.WaitForAddObject(targetAliasToSet, 60000);
+            Orion.Print('-1', message);
+            if (selection !== 1) {
+                throw 'bad target'
             }
         }
     }

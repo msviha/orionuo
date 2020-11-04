@@ -29,7 +29,7 @@ scripty na pvp a targetovani
 
 ▸ `Static`**addEnemy**(): string
 
-*Defined in [scripts/targeting.ts:20](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/targeting.ts#L20)*
+*Defined in [scripts/targeting.ts:20](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/targeting.ts#L20)*
 
 **Returns:** string
 
@@ -39,7 +39,7 @@ ___
 
 ▸ `Static`**addFriend**(): string
 
-*Defined in [scripts/targeting.ts:8](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/targeting.ts#L8)*
+*Defined in [scripts/targeting.ts:8](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/targeting.ts#L8)*
 
 **Returns:** string
 
@@ -49,7 +49,7 @@ ___
 
 ▸ `Static`**highlightEnemy**(`enemySerial`: string, `enemy`: GameObject): void
 
-*Defined in [scripts/targeting.ts:132](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/targeting.ts#L132)*
+*Defined in [scripts/targeting.ts:132](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/targeting.ts#L132)*
 
 #### Parameters:
 
@@ -66,7 +66,7 @@ ___
 
 ▸ `Static`**manualTarget**(): void
 
-*Defined in [scripts/targeting.ts:118](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/targeting.ts#L118)*
+*Defined in [scripts/targeting.ts:118](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/targeting.ts#L118)*
 
 **Returns:** void
 
@@ -76,7 +76,7 @@ ___
 
 ▸ `Static`**resetEnemies**(): void
 
-*Defined in [scripts/targeting.ts:37](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/targeting.ts#L37)*
+*Defined in [scripts/targeting.ts:37](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/targeting.ts#L37)*
 
 **Returns:** void
 
@@ -86,7 +86,7 @@ ___
 
 ▸ `Static`**resetFriends**(): void
 
-*Defined in [scripts/targeting.ts:32](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/targeting.ts#L32)*
+*Defined in [scripts/targeting.ts:32](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/targeting.ts#L32)*
 
 **Returns:** void
 
@@ -96,7 +96,7 @@ ___
 
 ▸ `Static`**targetNext**(`reverse`: boolean, `timeToStorePreviousTargets`: number, `additionalFlags`: string[], `notoriety`: string[]): void
 
-*Defined in [scripts/targeting.ts:47](https://github.com/msviha/orionuo/blob/4924a24/src/scripts/targeting.ts#L47)*
+*Defined in [scripts/targeting.ts:47](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/targeting.ts#L47)*
 
 #### Parameters:
 
