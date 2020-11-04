@@ -18,6 +18,7 @@
 * [Loot](../classes/scripts.loot.md)
 * [Mining](../classes/scripts.mining.md)
 * [Mount](../classes/scripts.mount.md)
+* [Music](../classes/scripts.music.md)
 * [PetCommander](../classes/scripts.petcommander.md)
 * [Potions](../classes/scripts.potions.md)
 * [Spells](../classes/scripts.spells.md)

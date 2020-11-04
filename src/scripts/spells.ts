@@ -147,8 +147,9 @@ namespace Scripts {
             const selection_3 = Orion.WaitForAddObject('finishedScroll', 60000);
 
             // check the proper selection (game objects)
-            if (1 === selection_1 && 1 === selection_2 && 1 === selection_3) {
+            if (1 !== selection_1 || 1 !== selection_2 || 1 !== selection_3) {
                 Scripts.Utils.log('All selections must be game objects', ColorEnum.red);
+                return;
             }
 
             const finishedScroll = {

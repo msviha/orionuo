@@ -255,5 +255,13 @@ namespace Scripts {
                 Orion.UseObject(serials[0]);
             }
         }
+
+        static setTargetAlias(targetAliasToSet:string, message = 'nastav target') {
+            const selection = Orion.WaitForAddObject(targetAliasToSet, 60000);
+            Orion.Print('-1', message);
+            if (selection !== 1) {
+                throw 'bad target'
+            }
+        }
     }
 }

@@ -14,19 +14,29 @@ Obsahuje zakladni scripty
 
 ### Methods
 
+* [useGGR](scripts.jewelry.md#useggr)
 * [useRR](scripts.jewelry.md#userr)
 
 ## Methods
+
+### useGGR
+
+▸ `Static`**useGGR**(): void
+
+*Defined in [scripts/jewelry.ts:41](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/jewelry.ts#L41)*
+
+Pouzije Great Gold Ring
+
+**Returns:** void
+
+___
 
 ### useRR
 
 ▸ `Static`**useRR**(): void
 
-*Defined in [scripts/jewelry.ts:14](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/jewelry.ts#L14)*
+*Defined in [scripts/jewelry.ts:11](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/jewelry.ts#L11)*
 
-Scripts.Common.shrinkKad
-stability beta
-
-Pouzije shrink kad
+Pouzije Reflex Ring nebo Great Reflex Ring
 
 **Returns:** void

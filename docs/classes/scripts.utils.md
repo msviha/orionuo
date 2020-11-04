@@ -30,6 +30,7 @@ Obsahuje pouze pomocne funkce pro ostatni scripty
 * [refill](scripts.utils.md#refill)
 * [resetTimer](scripts.utils.md#resettimer)
 * [selectMenu](scripts.utils.md#selectmenu)
+* [setTargetAlias](scripts.utils.md#settargetalias)
 * [updateCurrentStatusBar](scripts.utils.md#updatecurrentstatusbar)
 * [use](scripts.utils.md#use)
 * [waitTarget](scripts.utils.md#waittarget)
@@ -43,7 +44,7 @@ Obsahuje pouze pomocne funkce pro ostatni scripty
 
 ▸ `Static`**countItemsBySerials**(`itemsSerials`: string[]): number
 
-*Defined in [scripts/utils.ts:54](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/utils.ts#L54)*
+*Defined in [scripts/utils.ts:55](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/utils.ts#L55)*
 
 #### Parameters:
 
@@ -59,7 +60,7 @@ ___
 
 ▸ `Static`**countObjectInContainer**(`obj`: IMyGameObject, `container`: string): number
 
-*Defined in [scripts/utils.ts:49](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/utils.ts#L49)*
+*Defined in [scripts/utils.ts:50](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/utils.ts#L50)*
 
 #### Parameters:
 
@@ -76,7 +77,7 @@ ___
 
 ▸ `Static`**determineHpColor**(`percent`: number): [ColorEnum](../enums/colorenum.md)
 
-*Defined in [scripts/utils.ts:199](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/utils.ts#L199)*
+*Defined in [scripts/utils.ts:205](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/utils.ts#L205)*
 
 #### Parameters:
 
@@ -92,7 +93,7 @@ ___
 
 ▸ `Static`**findMyDefinitionForGameObject**(`gameObject`: GameObject, `obj?`: any): IMyGameObject \| undefined
 
-*Defined in [scripts/utils.ts:153](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/utils.ts#L153)*
+*Defined in [scripts/utils.ts:159](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/utils.ts#L159)*
 
 #### Parameters:
 
@@ -109,7 +110,7 @@ ___
 
 ▸ `Static`**getLivingObjectInDistance**(`objectSerial`: string): GameObject \| null
 
-*Defined in [scripts/utils.ts:215](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/utils.ts#L215)*
+*Defined in [scripts/utils.ts:221](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/utils.ts#L221)*
 
 #### Parameters:
 
@@ -125,7 +126,7 @@ ___
 
 ▸ `Static`**getSerialsFromMyGameObject**(`type`: IMyGameObject): string[]
 
-*Defined in [scripts/utils.ts:144](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/utils.ts#L144)*
+*Defined in [scripts/utils.ts:150](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/utils.ts#L150)*
 
 #### Parameters:
 
@@ -141,7 +142,7 @@ ___
 
 ▸ `Static`**log**(`message`: string, `color`: [ColorEnum](../enums/colorenum.md)): void
 
-*Defined in [scripts/utils.ts:104](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/utils.ts#L104)*
+*Defined in [scripts/utils.ts:110](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/utils.ts#L110)*
 
 #### Parameters:
 
@@ -158,7 +159,7 @@ ___
 
 ▸ `Static`**moveItems**(`itemsSerials`: string[], `targetContainerId`: string, `quantity`: number): number
 
-*Defined in [scripts/utils.ts:63](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/utils.ts#L63)*
+*Defined in [scripts/utils.ts:64](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/utils.ts#L64)*
 
 #### Parameters:
 
@@ -176,7 +177,7 @@ ___
 
 ▸ `Static`**movePlayerToDirection**(`direction`: [DirectionEnum](../enums/directionenum.md)): boolean
 
-*Defined in [scripts/utils.ts:132](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/utils.ts#L132)*
+*Defined in [scripts/utils.ts:138](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/utils.ts#L138)*
 
 #### Parameters:
 
@@ -192,7 +193,7 @@ ___
 
 ▸ `Static`**parseObject**(`objectAsString`: string): IMyGameObject
 
-*Defined in [scripts/utils.ts:182](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/utils.ts#L182)*
+*Defined in [scripts/utils.ts:188](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/utils.ts#L188)*
 
 parses the given string into object which is in the global object 'o'
 
@@ -212,7 +213,7 @@ ___
 
 ▸ `Static`**playerPrint**(`message`: string, `color`: [ColorEnum](../enums/colorenum.md) \| number): void
 
-*Defined in [scripts/utils.ts:108](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/utils.ts#L108)*
+*Defined in [scripts/utils.ts:114](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/utils.ts#L114)*
 
 #### Parameters:
 
@@ -229,7 +230,7 @@ ___
 
 ▸ `Static`**printColoredHpBar**(`target`: string, `percent`: number): void
 
-*Defined in [scripts/utils.ts:204](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/utils.ts#L204)*
+*Defined in [scripts/utils.ts:210](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/utils.ts#L210)*
 
 #### Parameters:
 
@@ -246,7 +247,7 @@ ___
 
 ▸ `Static`**printDamage**(`serial`: string, `previousHp`: number, `force`: boolean): void
 
-*Defined in [scripts/utils.ts:220](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/utils.ts#L220)*
+*Defined in [scripts/utils.ts:226](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/utils.ts#L226)*
 
 #### Parameters:
 
@@ -262,9 +263,9 @@ ___
 
 ### refill
 
-▸ `Static`**refill**(`obj`: IMyGameObject, `sourceContainerId`: string, `quantity`: number, `targetContainerId`: string, `refillJustWhenIHaveNothing`: boolean): number
+▸ `Static`**refill**(`obj`: IMyGameObject, `sourceContainerId`: string, `quantity`: number, `targetContainerId`: string, `refillJustWhenIHaveNothing`: boolean, `itemName?`: string): number
 
-*Defined in [scripts/utils.ts:22](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/utils.ts#L22)*
+*Defined in [scripts/utils.ts:22](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/utils.ts#L22)*
 
 #### Parameters:
 
@@ -275,6 +276,7 @@ Name | Type | Default value |
 `quantity` | number | 1 |
 `targetContainerId` | string | "backpack" |
 `refillJustWhenIHaveNothing` | boolean | false |
+`itemName?` | string | - |
 
 **Returns:** number
 
@@ -284,7 +286,7 @@ ___
 
 ▸ `Static`**resetTimer**(`timer`: string): void
 
-*Defined in [scripts/utils.ts:121](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/utils.ts#L121)*
+*Defined in [scripts/utils.ts:127](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/utils.ts#L127)*
 
 #### Parameters:
 
@@ -300,7 +302,7 @@ ___
 
 ▸ `Static`**selectMenu**(`menuName`: string, `selections`: string[], `firstCall`: boolean): void
 
-*Defined in [scripts/utils.ts:8](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/utils.ts#L8)*
+*Defined in [scripts/utils.ts:8](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/utils.ts#L8)*
 
 #### Parameters:
 
@@ -314,11 +316,28 @@ Name | Type | Default value |
 
 ___
 
+### setTargetAlias
+
+▸ `Static`**setTargetAlias**(`targetAliasToSet`: string, `message`: string): void
+
+*Defined in [scripts/utils.ts:259](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/utils.ts#L259)*
+
+#### Parameters:
+
+Name | Type | Default value |
+------ | ------ | ------ |
+`targetAliasToSet` | string | - |
+`message` | string | "nastav target" |
+
+**Returns:** void
+
+___
+
 ### updateCurrentStatusBar
 
 ▸ `Static`**updateCurrentStatusBar**(`newSerial`: string): void
 
-*Defined in [scripts/utils.ts:192](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/utils.ts#L192)*
+*Defined in [scripts/utils.ts:198](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/utils.ts#L198)*
 
 #### Parameters:
 
@@ -334,7 +353,7 @@ ___
 
 ▸ `Static`**use**(`val`: IMyGameObject \| IMyGameObject[], `name`: string, `minimalCountForWarn?`: number): void
 
-*Defined in [scripts/utils.ts:231](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/utils.ts#L231)*
+*Defined in [scripts/utils.ts:237](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/utils.ts#L237)*
 
 #### Parameters:
 
@@ -352,7 +371,7 @@ ___
 
 ▸ `Static`**waitTarget**(`target?`: [TargetEnum](../enums/targetenum.md)): void
 
-*Defined in [scripts/utils.ts:112](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/utils.ts#L112)*
+*Defined in [scripts/utils.ts:118](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/utils.ts#L118)*
 
 #### Parameters:
 
@@ -368,7 +387,7 @@ ___
 
 ▸ `Static`**waitWhileSomethingInJournal**(`messages`: string[], `wait?`: number): void
 
-*Defined in [scripts/utils.ts:86](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/utils.ts#L86)*
+*Defined in [scripts/utils.ts:92](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/utils.ts#L92)*
 
 #### Parameters:
 
@@ -385,7 +404,7 @@ ___
 
 ▸ `Static`**waitWhileTargeting**(): void
 
-*Defined in [scripts/utils.ts:126](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/utils.ts#L126)*
+*Defined in [scripts/utils.ts:132](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/utils.ts#L132)*
 
 **Returns:** void
 
@@ -395,6 +414,6 @@ ___
 
 ▸ `Static`**worldSaveCheckWait**(): void
 
-*Defined in [scripts/utils.ts:97](https://github.com/msviha/orionuo/blob/7b19bbe/src/scripts/utils.ts#L97)*
+*Defined in [scripts/utils.ts:103](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/utils.ts#L103)*
 
 **Returns:** void

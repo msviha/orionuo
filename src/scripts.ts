@@ -108,6 +108,19 @@ function castScroll(scroll:ScrollEnum, target?:TargetEnum, backupHeadCast?:strin
 }
 
 /**
+ * Uklizi bagl !! Pozor pokud davate souradnice, nad/pod bagl tak je treba mit v Clientovi nastavene "Dont fix item positions in container" !!
+ * @param object objekt ktery chcete uklidit nebo cestu k itemu skrze [gameObject](./globals.md#gameObject)
+ * @param objectName nazev pro vypisovani behem uklidu
+ * @example external code `Scripts.Clean.cleanObjectInBag(gameObject.potions, 'potions');`
+ * @example external code `Scripts.Clean.cleanObjectInBag(gameObject.regy, 'regy');`
+ * @example external code - pokud si to budete definovat sami `Scripts.Clean.cleanObjectInBag({graphic: '0x0E9C', color: '0x0000', bag: {x: 20, y: 50}}, 'buben');`
+ * takto je mozne si na jeden hotkey dat tuto funkci vicekrat pod sebe, aby to na zmacknuti uklidilo vice veci
+ */
+function cleanObjectInBag(object:any, objectName?:string) {
+    Scripts.Clean.cleanObjectInBag(object, objectName);
+}
+
+/**
  * Zobrazi/prepina nabidku na crafteni
  * @example external code `craftNext();`
  */
@@ -132,6 +145,18 @@ function craftSelect() {
  */
 function drink(potionName:PotionsEnum, switchWarModeWhenNeeded = true) {
     Scripts.Potions.drinkPotion(potionName, switchWarModeWhenNeeded);
+}
+
+/**
+ * Pouzije buben na protekci
+ * @param target na koho chces zahrat ? pokud nevyplnis tak hodi kurzor
+ * @example in client `_drum`
+ * @example in client `_drum self`
+ * @example external code `drum()`
+ * @example external code `drum('self');`
+ */
+function drum(target?:TargetEnum) {
+    Scripts.Music.drum(target);
 }
 
 /**
@@ -182,19 +207,7 @@ function gmMortar(potionName:PotionsEnum) {
  * @example external code `harp('self');`
  */
 function harp(target?:TargetEnum) {
-    Scripts.Wip.harfa(target);
-}
-
-/**
- * Pouzije loutnu
- * @param target na koho chces zahrat ? pokud nevyplnis tak hodi kurzor
- * @example in client `_lute`
- * @example in client `_lute self`
- * @example external code `lute()`
- * @example external code `lute('self');`
- */
-function lute(target?:TargetEnum) {
-    Scripts.Wip.lutna(target);
+    Scripts.Music.harp(target);
 }
 
 /**
@@ -294,6 +307,18 @@ function lootAll(delay = responseDelay) {
 }
 
 /**
+ * Pouzije loutnu
+ * @param target na koho chces zahrat ? pokud nevyplnis tak hodi kurzor
+ * @example in client `_lute`
+ * @example in client `_lute self`
+ * @example external code `lute()`
+ * @example external code `lute('self');`
+ */
+function lute(target?:TargetEnum) {
+    Scripts.Music.lute(target);
+}
+
+/**
  * Vyrabi s craftem
  * @param objectAsString zde je potreba nadefinovat cestu k itemu skrze [gameObject](./globals.md#gameObject)
  * @example external code `make(100, 'gameObject.crafting.carpentry.miscellaneous.krabiceKadi');`
@@ -329,6 +354,16 @@ function nbRune() {
  */
 function mount() {
     Scripts.Mount.mountAndDismount();
+}
+
+/**
+ * Poisne trenink kitem nejblizsim enemy monstrum jakmile k nejakemu dobehnes (netreni na tech co maji human grafiku);
+ * @param keepRunning pokud date true, tak vam to po jednom spusteni pobezi stale na pozadi a bude poisnovat kdyz okolo neceho probehnete
+ * @example external code `poisonTrain()` ceka az se priblizis k monstru a pak jednorazove poisne a skonci
+ * @example external code `poisonTrain(true)` nekonecny cyklus kdy staci jen behat okolo monster a poisnis to
+ */
+function poisonTrain(keepRunning = false) {
+    Scripts.Common.poisonTrain(keepRunning);
 }
 
 /**
@@ -434,7 +469,7 @@ function use(object:IMyGameObject|IMyGameObject[], name = '', minimalCountForWar
  * @example external code `useGGR()`
  */
 function useGGR() {
-    Scripts.Wip.useGGR();
+    Scripts.Jewelry.useGGR();
 }
 
 /**
@@ -466,4 +501,12 @@ function useRR() {
  */
 function useShrinkKad() {
     Scripts.Taming.useShrinkKad();
+}
+
+/**
+ * Znici vsechny pavucinky okolo hrace
+ * @example external code `webDestroyer()`
+ */
+function webDestroyer() {
+    Scripts.Common.webDestroyer();
 }

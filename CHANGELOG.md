@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## 0.0.8
+### features
+- pridana `cleanObjectInBag` [funkce](https://github.com/msviha/orionuo/blob/master/docs/globals.md#cleanObjectInBag)
+- pridana `drum` [funkce](https://github.com/msviha/orionuo/blob/master/docs/globals.md#drum)
+- pridana `poisonTrain` [funkce](https://github.com/msviha/orionuo/blob/master/docs/globals.md#poisonTrain)
+- pridana `webDestroyer` [funkce](https://github.com/msviha/orionuo/blob/master/docs/globals.md#webDestroyer)
+- pridana `webDestroyer` [funkce](https://github.com/msviha/orionuo/blob/master/docs/globals.md#webDestroyer)
+
+- funkce pro krafteni ktere je nutne pouzivat spolu (na dvou klavesach)
+    - pridana `craftNext` [funkce](https://github.com/msviha/orionuo/blob/master/docs/globals.md#craftNext)
+    - pridana `craftSelect` [funkce](https://github.com/msviha/orionuo/blob/master/docs/globals.md#craftSelect)
+
+### enhancements
+- `gameObject` obsahuje nyni opet o trochu vice itemu a vyrobku (dekuji hraci Divine za prispevek do crafting objektu)
+
+### fixes
+- `nbRune` opraven error ve scriptu
+
 ## 0.0.7
 ### features
 - pridana `friend` [funkce]
