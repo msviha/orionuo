@@ -29,7 +29,7 @@ namespace Scripts {
         }
 
         static Travel() {
-            const travel = <IMyGameObject>gameObject.books.travel;
+            const travel = <IMyGameObject>gameObject.books.travelBook;
             const travelSerials = Orion.FindType(travel.graphic, travel.color);
             if (!travelSerials.length) {
                 Scripts.Utils.log('NEMAS TRAVEL BOOK', ColorEnum.red);
@@ -49,7 +49,7 @@ namespace Scripts {
         }
 
         static Nbruna() {
-            const nbRuna = <IMyGameObject>gameObject.nonCategorized.nbRuna;
+            const nbRuna = <IMyGameObject>gameObject.uncategorized.nbRuna;
             const nbRunesSerials = Orion.FindType(nbRuna.graphic, nbRuna.color);
             if (!nbRunesSerials.length) {
                 Scripts.Utils.log('NEMAS NB RUNU', ColorEnum.red);
