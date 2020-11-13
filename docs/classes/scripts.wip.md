@@ -17,9 +17,7 @@ Work in progress - nutno zjistit co funguje, pripadne upravit
 * [Afk](scripts.wip.md#afk)
 * [EnsureWarMode](scripts.wip.md#ensurewarmode)
 * [MassMove](scripts.wip.md#massmove)
-* [Nbruna](scripts.wip.md#nbruna)
 * [Tracking](scripts.wip.md#tracking)
-* [Travel](scripts.wip.md#travel)
 * [dropItem](scripts.wip.md#dropitem)
 * [getColorByNotoriety](scripts.wip.md#getcolorbynotoriety)
 
@@ -29,7 +27,7 @@ Work in progress - nutno zjistit co funguje, pripadne upravit
 
 ▸ `Static`**Afk**(): void
 
-*Defined in [scripts/wip.ts:69](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/wip.ts#L69)*
+*Defined in [scripts/wip.ts:31](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/wip.ts#L31)*
 
 **Returns:** void
 
@@ -39,7 +37,7 @@ ___
 
 ▸ `Static`**EnsureWarMode**(): void
 
-*Defined in [scripts/wip.ts:24](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/wip.ts#L24)*
+*Defined in [scripts/wip.ts:24](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/wip.ts#L24)*
 
 **Returns:** void
 
@@ -49,17 +47,7 @@ ___
 
 ▸ `Static`**MassMove**(): void
 
-*Defined in [scripts/wip.ts:79](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/wip.ts#L79)*
-
-**Returns:** void
-
-___
-
-### Nbruna
-
-▸ `Static`**Nbruna**(): void
-
-*Defined in [scripts/wip.ts:51](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/wip.ts#L51)*
+*Defined in [scripts/wip.ts:41](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/wip.ts#L41)*
 
 **Returns:** void
 
@@ -69,7 +57,7 @@ ___
 
 ▸ `Static`**Tracking**(`who`: string): void
 
-*Defined in [scripts/wip.ts:18](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/wip.ts#L18)*
+*Defined in [scripts/wip.ts:18](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/wip.ts#L18)*
 
 #### Parameters:
 
@@ -81,21 +69,11 @@ Name | Type | Default value |
 
 ___
 
-### Travel
-
-▸ `Static`**Travel**(): void
-
-*Defined in [scripts/wip.ts:31](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/wip.ts#L31)*
-
-**Returns:** void
-
-___
-
 ### dropItem
 
 ▸ `Static`**dropItem**(`item`: IMyGameObject): void
 
-*Defined in [scripts/wip.ts:8](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/wip.ts#L8)*
+*Defined in [scripts/wip.ts:8](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/wip.ts#L8)*
 
 #### Parameters:
 
@@ -111,7 +89,7 @@ ___
 
 ▸ `Static`**getColorByNotoriety**(`notoriety?`: number): number
 
-*Defined in [scripts/wip.ts:109](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/wip.ts#L109)*
+*Defined in [scripts/wip.ts:71](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/wip.ts#L71)*
 
 #### Parameters:
 

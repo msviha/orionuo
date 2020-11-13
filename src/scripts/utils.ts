@@ -18,6 +18,33 @@ namespace Scripts {
             Scripts.Utils.selectMenu(menuToSelect, s, false);
         }
 
+        static useAndSelect(serial:string, selections:ISelect[], use = true) {
+            use && Orion.UseObject(serial);
+            const selectionsDupe = [...selections];
+            const selection = selectionsDupe.shift();
+            if (selection.type === SelectionTypeEnum.gump) {
+                const s = <number>selection.selection;
+                if (!Orion.WaitForGump(2000)) {
+                    return;
+                }
+                Orion.GetLastGump()?.Select(Orion.CreateGumpHook(s));
+            }
+            else if (selection.type === SelectionTypeEnum.menu) {
+                const s = <IMenuSelection>selection.selection;
+                if (!Orion.WaitForMenu(2000)) {
+                    return;
+                }
+                const lastMenu = Orion.GetMenu('last');
+                if (lastMenu.Name().indexOf(s.name) === 0) {
+                    lastMenu.Select(s.selection);
+                }
+            }
+
+            if (selectionsDupe.length) {
+                Scripts.Utils.useAndSelect(serial, selectionsDupe, false);
+            }
+        }
+
         // return missing quantity
         static refill(
             obj:IMyGameObject,
@@ -115,12 +142,15 @@ namespace Scripts {
             Orion.CharPrint(Player.Serial(), color, message);
         }
 
-        static waitTarget(target?:TargetEnum) {
+        static waitTarget(target?:TargetEnum|string) {
             if (target === TargetEnum.lastattack) {
                 Orion.WaitTargetObject(Orion.ClientLastAttack());
             }
             else if (target === TargetEnum.self) {
                 Orion.WaitTargetObject(Player.Serial());
+            }
+            else if (target !== undefined) {
+                Orion.WaitTargetObject(target);
             }
         }
 
@@ -234,7 +264,7 @@ namespace Scripts {
             }
         }
 
-        static use(val:IMyGameObject|IMyGameObject[], name = '', minimalCountForWarn?:number) {
+        static use(val:IMyGameObject|IMyGameObject[], name = '', minimalCountForWarn?:number, warnWavPath?:string) {
             if (isMyGameObject(val)) {
                 val = [val];
             }
@@ -247,7 +277,31 @@ namespace Scripts {
                     serials.push(s);
                 }
             }
+
+            // possible hallucinations
+            if (!serials.length) {
+                for (const o of val) {
+                    if (!o.name) {
+                        continue;
+                    }
+
+                    const oSerials = Orion.FindType(o.graphic);
+                    for (const s of oSerials) {
+                        Orion.Click(s);
+                        Orion.Wait(100);
+                        if (Orion.FindObject(s).Name().indexOf(o.name) === 0) {
+                            serials.push(s);
+                        }
+                    }
+                }
+            }
+
             let count = Scripts.Utils.countItemsBySerials(serials);
+            if (!count && warnWavPath) {
+                Orion.PlayWav(warnWavPath);
+                Scripts.Utils.playerPrint(`!! NEMAS ${name} !!`, ColorEnum.red);
+                return;
+            }
             if ((minimalCountForWarn !== undefined && count <= minimalCountForWarn) || (minimalCountForWarn === undefined && !count)) {
                 Scripts.Utils.playerPrint(`[ ${name} ${count} ]`, ColorEnum.red);
             }
@@ -263,5 +317,46 @@ namespace Scripts {
                 throw 'bad target'
             }
         }
+
+        static findFirstType(myGameObject:IMyGameObject, layer?:number):string|undefined {
+            let graphic = myGameObject.graphic;
+            let color = myGameObject.color;
+            let name = myGameObject.name;
+            let serials = Orion.FindType(graphic, color);
+
+            if (serials.length) {
+                return serials[0];
+            }
+
+            if (layer !== undefined) {
+                const l = Orion.ObjAtLayer(layer);
+                if (l && l.Graphic() === graphic && l.Color() === color) {
+                    return l.Serial();
+                }
+            }
+
+            if (!name) {
+                return;
+            }
+
+            serials = Orion.FindType(graphic);
+            for (const s of serials) {
+                Orion.Click(s);
+                Orion.Wait(100);
+                if (Orion.FindObject(s).Name().indexOf(name) === 0) {
+                    return s;
+                }
+            }
+
+            if (layer !== undefined) {
+                let l = Orion.ObjAtLayer(layer);
+                Orion.Click(l.Serial());
+                Orion.Wait(100);
+                if (l && l.Graphic() === graphic && l.Name() === name) {
+                    return l.Serial();
+                }
+            }
+        }
+
     }
 }

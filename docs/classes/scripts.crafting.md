@@ -34,7 +34,7 @@ example - Scripts.Crafting.Make(o.crafting.tinkering.wires.copper, 5)
 
 ▸ `Static`**confirmMakeMenu**(): void
 
-*Defined in [scripts/crafting.ts:205](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/crafting.ts#L205)*
+*Defined in [scripts/crafting.ts:205](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/crafting.ts#L205)*
 
 **Returns:** void
 
@@ -44,7 +44,7 @@ ___
 
 ▸ `Static`**countMaterialForOneItem**(`objectAsString`: string, `callStack`: number, `count`: number, `crafting`: boolean): void
 
-*Defined in [scripts/crafting.ts:107](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/crafting.ts#L107)*
+*Defined in [scripts/crafting.ts:107](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/crafting.ts#L107)*
 
 #### Parameters:
 
@@ -63,7 +63,7 @@ ___
 
 ▸ `Static`**listMakeMenu**(): void
 
-*Defined in [scripts/crafting.ts:163](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/crafting.ts#L163)*
+*Defined in [scripts/crafting.ts:163](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/crafting.ts#L163)*
 
 **Returns:** void
 
@@ -73,7 +73,7 @@ ___
 
 ▸ `Static`**make**(`count`: number, `objectAsString`: string, `setInputs`: boolean): void
 
-*Defined in [scripts/crafting.ts:63](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/crafting.ts#L63)*
+*Defined in [scripts/crafting.ts:63](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/crafting.ts#L63)*
 
 Main function for crafting
 
@@ -93,7 +93,7 @@ ___
 
 ▸ `Static`**makeFromSelection**(): void
 
-*Defined in [scripts/crafting.ts:141](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/crafting.ts#L141)*
+*Defined in [scripts/crafting.ts:141](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/crafting.ts#L141)*
 
 **Returns:** void
 
@@ -103,7 +103,7 @@ ___
 
 ▸ `Static`**makeProgress**(): boolean
 
-*Defined in [scripts/crafting.ts:29](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/crafting.ts#L29)*
+*Defined in [scripts/crafting.ts:29](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/crafting.ts#L29)*
 
 Waits for the journal message with the crafting status
 
@@ -117,7 +117,7 @@ ___
 
 ▸ `Static`**refOrMake**(`count`: number, `resourcePath`: string): void
 
-*Defined in [scripts/crafting.ts:40](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/crafting.ts#L40)*
+*Defined in [scripts/crafting.ts:40](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/crafting.ts#L40)*
 
 Refills the resources for crafting, or creates them, if they are not present
 
@@ -136,7 +136,7 @@ ___
 
 ▸ `Static`**setInputs**(`itemName`: string): void
 
-*Defined in [scripts/crafting.ts:17](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/crafting.ts#L17)*
+*Defined in [scripts/crafting.ts:17](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/crafting.ts#L17)*
 
 Creates globals for setting the containers with resources and the finished items
 

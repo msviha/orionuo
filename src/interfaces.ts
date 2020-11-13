@@ -3,6 +3,7 @@ interface IMyGameObject {
     color?:string,
     bag?:IBagDestination,
     make?:IMakeProps;
+    name?:string;
 }
 
 interface IPotion extends IMyGameObject {
@@ -38,4 +39,14 @@ interface IMenuWithSelections {
 interface ICoordinates {
     x:number,
     y:number
+}
+
+interface ISelect {
+    type:SelectionTypeEnum,
+    selection:number|IMenuSelection
+}
+
+interface IMenuSelection {
+    name:string,
+    selection:string
 }

@@ -8,6 +8,7 @@
 
 ### Classes
 
+* [Auto](../classes/scripts.auto.md)
 * [Clean](../classes/scripts.clean.md)
 * [Common](../classes/scripts.common.md)
 * [Crafting](../classes/scripts.crafting.md)
@@ -20,6 +21,7 @@
 * [Mount](../classes/scripts.mount.md)
 * [Music](../classes/scripts.music.md)
 * [PetCommander](../classes/scripts.petcommander.md)
+* [Port](../classes/scripts.port.md)
 * [Potions](../classes/scripts.potions.md)
 * [Spells](../classes/scripts.spells.md)
 * [Taming](../classes/scripts.taming.md)

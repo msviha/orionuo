@@ -19,7 +19,7 @@
 
 •  **green**:  = "0x0044"
 
-*Defined in [enums.ts:11](https://github.com/msviha/orionuo/blob/48715bb/src/enums.ts#L11)*
+*Defined in [enums.ts:11](https://github.com/msviha/orionuo/blob/2ad0399/src/enums.ts#L11)*
 
 ___
 
@@ -27,7 +27,7 @@ ___
 
 •  **none**:  = "0xffff"
 
-*Defined in [enums.ts:9](https://github.com/msviha/orionuo/blob/48715bb/src/enums.ts#L9)*
+*Defined in [enums.ts:9](https://github.com/msviha/orionuo/blob/2ad0399/src/enums.ts#L9)*
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 •  **orange**:  = "0x002c"
 
-*Defined in [enums.ts:12](https://github.com/msviha/orionuo/blob/48715bb/src/enums.ts#L12)*
+*Defined in [enums.ts:12](https://github.com/msviha/orionuo/blob/2ad0399/src/enums.ts#L12)*
 
 ___
 
@@ -43,4 +43,4 @@ ___
 
 •  **red**:  = "0x0021"
 
-*Defined in [enums.ts:10](https://github.com/msviha/orionuo/blob/48715bb/src/enums.ts#L10)*
+*Defined in [enums.ts:10](https://github.com/msviha/orionuo/blob/2ad0399/src/enums.ts#L10)*

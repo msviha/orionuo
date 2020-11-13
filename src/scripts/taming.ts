@@ -14,53 +14,24 @@ namespace Scripts {
          * returns false when you dont have staff or shrinks
          */
         static useTrainingTamingStaff(targetSerial:string):boolean {
-            Orion.Disarm();
-            Orion.Wait(500);
-            let staff = Orion.FindType(gameObject.taming.staffs.training.graphic, gameObject.taming.staffs.training.color);
-            if (!staff.length) {
+            let staff = Scripts.Utils.findFirstType(gameObject.taming.staffs.training, 2);
+            if (!staff) {
                 Scripts.Utils.log('missing training taming staff', ColorEnum.red);
                 return false;
             }
 
             Orion.WaitTargetObject(targetSerial);
-            Orion.UseObject(staff[0]);
+            Orion.UseObject(staff);
             while (!Orion.InJournal('What do you want to use this on')) {
                 Orion.Wait(500);
                 Orion.WaitTargetObject(targetSerial);
-                Orion.UseObject(staff[0]);
+                Orion.UseObject(staff);
             }
             return true;
         }
 
-        /*// returns false when you dont have staff or shrinks
-        static useTamingStaff(targetSerial:string):boolean {
-            Orion.Disarm();
-            // first try to find taming staff loaded with shrink
-            let staff = Orion.FindType(o.taming.staffs.tamingShrink.graphic, o.taming.staffs.tamingShrink.color);
-
-            // in case there is not any, lets find empty staff and load it
-            if (!staff.length) {
-                staff = Orion.FindType(o.taming.staffs.taming.graphic, o.taming.staffs.taming.color);
-
-                const shrinkKad = Orion.FindType(o.potions.shrink.kad.graphic, o.potions.shrink.kad.color);
-                if (shrinkKad.length && staff.length) {
-                    Orion.WaitTargetObject(staff[0]);
-                    Orion.UseObject(shrinkKad[0])
-                    // we ensure there is loaded staff
-                    staff = Orion.FindType(o.taming.staffs.tamingShrink.graphic, o.taming.staffs.tamingShrink.color);
-                }
-                else {
-                    Scripts.Utils.log('missing staff or shrink kad', ColorEnum.red);
-                    return false;
-                }
-            }
-
-            Orion.WaitTargetObject(targetSerial);
-            Orion.UseObject(staff[0]);
-            return true;
-        }*/
-
-        static waitOnTaming() {
+        static waitOnTaming(animalSerial:string) {
+            const animal = Orion.FindObject(animalSerial);
             while (!(
                 Orion.InJournal('Your taming failed') ||
                 Orion.InJournal('Ochoceni se nezdarilo') ||
@@ -71,6 +42,7 @@ namespace Scripts {
                 Orion.InJournal('You are not able to tame this animal')
             )) {
                 Orion.Wait(500);
+                Orion.WalkTo(animal.X(), animal.Y(), animal.Z(), 1);
             }
         }
 
@@ -92,13 +64,13 @@ namespace Scripts {
             Orion.Wait(1000);
         }
 
-        static trainOnAnimal(animalSerial:string):boolean|undefined {
+        static trainOnAnimal(animalSerial:string, ranger = true):boolean|undefined {
             Scripts.Utils.log('train on animal serial ' + animalSerial);
             let animal = Orion.FindObject(animalSerial);
             Orion.SetGlobal('tamingCounter', (parseInt(Orion.GetGlobal('tamingCounter'), 10) + 1).toString(10))
 
             if (parseInt(Orion.GetGlobal('tamingCounter'), 10) > 33) {
-                Scripts.Taming.dressRobeOfDruids();
+                ranger && Scripts.Taming.dressRobeOfDruids();
             }
 
             Orion.ClearJournal();
@@ -107,36 +79,21 @@ namespace Scripts {
                 return;
             }
 
-            Scripts.Taming.waitOnTaming();
-
-            if (Orion.InJournal('You are not able to tame this animal')) {
-                // in case of already dressed robe it just leave that animal
-                if (Scripts.Taming.dressRobeOfDruids()) {
-                    Scripts.Taming.trainOnAnimal(animalSerial);
-                }
-                return;
-            }
+            Scripts.Taming.waitOnTaming(animalSerial);
 
             if (
+                Orion.InJournal('You are not able to tame this animal') ||
                 Orion.InJournal('Cannot learn anything more') ||
                 Orion.InJournal('Not tamable')
             ) {
-                Orion.Disarm();
-                Orion.Wait(500);
-                Scripts.Taming.undressRobe();
-                Scripts.Utils.log('kill animal serial ' + animalSerial);
-                // Orion.WaitTargetObject(animalSerial);
-                Orion.CancelWaitTarget();
-                Orion.UseObject('0x40337EE9'); // training kryss
-                // Orion.EquipT('0x1400');
-
-                while (animal && !animal.Dead()) {
-                    Orion.Wait(500);
-                    Orion.WalkTo(animal.X(), animal.Y(), animal.Z(), 0);
-                    Orion.Attack(animalSerial);
-                    Orion.Wait(2000);
-                    animal = Orion.FindObject(animalSerial);
+                if (ranger && Scripts.Taming.dressRobeOfDruids()) {
+                    Scripts.Taming.trainOnAnimal(animalSerial, ranger);
+                    return;
                 }
+                ranger && Scripts.Taming.undressRobe();
+                Scripts.Utils.log('kill animal serial ' + animalSerial);
+                Orion.Equip('fightWeapon');
+                Scripts.Auto.killObject(animalSerial);
                 return;
             }
 
@@ -144,35 +101,39 @@ namespace Scripts {
                 Orion.InJournal('Your taming failed') ||
                 Orion.InJournal('Ochoceni se nezdarilo')
             ) {
-                Scripts.Taming.trainOnAnimal(animalSerial);
+                Scripts.Taming.trainOnAnimal(animalSerial, ranger);
                 return;
             }
 
             if (Orion.InJournal('Too far')) {
                 Orion.Wait(500);
-                Orion.WalkTo(animal.X(), animal.Y(), animal.Z(), 0);
+                Orion.WalkTo(animal.X(), animal.Y(), animal.Z(), 1);
                 Orion.Wait(2000);
-                Scripts.Taming.trainOnAnimal(animalSerial);
+                Scripts.Taming.trainOnAnimal(animalSerial, ranger);
                 return;
             }
 
             if (Orion.InJournal('byl tamnut')) {
-                Scripts.Taming.undressRobe();
+                ranger && Scripts.Taming.undressRobe();
                 return true;
             }
         }
 
-        static trainOnAnimalsAround() {
+        static trainOnAnimalsAround(ranger = true) {
+            if (!Orion.FindObject('fightWeapon')) {
+                Scripts.Utils.playerPrint('Target your weapon');
+                Orion.WaitForAddObject('fightWeapon', 60000);
+            }
             Orion.IgnoreReset();
             Orion.ClearJournal();
-            Scripts.Taming.undressRobe();
-            let monstersAround = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "live", 22, "gray");
+            ranger && Scripts.Taming.undressRobe();
+            let monstersAround = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "nothuman|live|near", 22, "gray");
 
             while (monstersAround.length) {
                 Orion.Ignore(monstersAround[0]);
                 Orion.SetGlobal('tamingCounter', '0');
-                Scripts.Taming.trainOnAnimal(monstersAround[0]);
-                monstersAround = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "live", 22, "gray");
+                Scripts.Taming.trainOnAnimal(monstersAround[0], ranger);
+                monstersAround = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "nothuman|live|near", 22, "gray");
             }
         }
 
@@ -182,14 +143,12 @@ namespace Scripts {
         }
 
         static taming() {
-            Orion.Disarm();
-            Orion.Wait(responseDelay);
             const loadedStaff = gameObject.taming.staffs.tamingShrink;
-            let loadedStaffSerials = Orion.FindType(loadedStaff.graphic, loadedStaff.color);
+            let loadedStaffSerial = Scripts.Utils.findFirstType(loadedStaff, 2);
             const staff = gameObject.taming.staffs.taming;
-            const staffSerials = Orion.FindType(staff.graphic, staff.color);
+            const staffSerial = Scripts.Utils.findFirstType(staff, 2);
 
-            if (!loadedStaffSerials.length && staffSerials.length) {
+            if (!loadedStaffSerial && staffSerial) {
                 const shrink = gameObject.potions.shrink;
                 const shrinkSerials = Orion.FindType(shrink.graphic, shrink.color);
                 const shrinkKadSerials = Orion.FindType(shrink.kad.graphic, shrink.kad.color);
@@ -199,14 +158,13 @@ namespace Scripts {
                 else if (shrinkKadSerials.length) {
                     Orion.WaitTargetObject(shrinkKadSerials[0]);
                 }
-                Orion.UseObject(staffSerials[0]);
+                Orion.UseObject(staffSerial);
                 Scripts.Utils.waitWhileSomethingInJournal(['Hul nabita']);
-                Orion.Disarm();
                 Orion.Wait(responseDelay);
             }
 
-            loadedStaffSerials = Orion.FindType(loadedStaff.graphic, loadedStaff.color);
-            if (!loadedStaffSerials) {
+            loadedStaffSerial = Scripts.Utils.findFirstType(loadedStaff, 2);
+            if (!loadedStaffSerial) {
                 Scripts.Utils.playerPrint('Nemas potrebne vybaveni na taming', ColorEnum.red);
                 return;
             }
@@ -224,7 +182,7 @@ namespace Scripts {
                 const target = Orion.FindObject('tamingTarget');
 
                 Orion.WaitTargetObject('tamingTarget');
-                Orion.UseObject(loadedStaffSerials[0]);
+                Orion.UseObject(loadedStaffSerial);
 
                 Scripts.Utils.waitWhileSomethingInJournal([
                     'Hul nabita',
@@ -252,8 +210,6 @@ namespace Scripts {
                     }
                     tamnuto = true;
                 }
-                Orion.Disarm();
-                Orion.Wait(responseDelay);
                 Orion.ClearJournal();
             }
         }

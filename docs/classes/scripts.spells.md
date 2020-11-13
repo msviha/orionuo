@@ -24,9 +24,9 @@
 
 ### backupHeadCast
 
-▸ `Static`**backupHeadCast**(`reason`: string, `spell`: string, `target?`: [TargetEnum](../enums/targetenum.md)): void
+▸ `Static`**backupHeadCast**(`reason`: string, `spell`: string, `target?`: [TargetEnum](../enums/targetenum.md) \| string): void
 
-*Defined in [scripts/spells.ts:71](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/spells.ts#L71)*
+*Defined in [scripts/spells.ts:71](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/spells.ts#L71)*
 
 #### Parameters:
 
@@ -34,7 +34,7 @@ Name | Type |
 ------ | ------ |
 `reason` | string |
 `spell` | string |
-`target?` | [TargetEnum](../enums/targetenum.md) |
+`target?` | [TargetEnum](../enums/targetenum.md) \| string |
 
 **Returns:** void
 
@@ -42,9 +42,9 @@ ___
 
 ### cast
 
-▸ `Static`**cast**(`spell`: string, `target?`: [TargetEnum](../enums/targetenum.md)): void
+▸ `Static`**cast**(`spell`: string, `target?`: [TargetEnum](../enums/targetenum.md) \| string): void
 
-*Defined in [scripts/spells.ts:11](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/spells.ts#L11)*
+*Defined in [scripts/spells.ts:11](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/spells.ts#L11)*
 
 Scripts.Spells.cast
 stability released
@@ -54,7 +54,7 @@ stability released
 Name | Type | Description |
 ------ | ------ | ------ |
 `spell` | string | nazev kouzla |
-`target?` | [TargetEnum](../enums/targetenum.md) | na koho ma kouzlit  |
+`target?` | [TargetEnum](../enums/targetenum.md) \| string | na koho ma kouzlit  |
 
 **Returns:** void
 
@@ -62,9 +62,9 @@ ___
 
 ### castNecroScroll
 
-▸ `Static`**castNecroScroll**(`scroll`: [NecroScrollEnum](../enums/necroscrollenum.md), `target?`: [TargetEnum](../enums/targetenum.md)): void
+▸ `Static`**castNecroScroll**(`scroll`: [NecroScrollEnum](../enums/necroscrollenum.md), `target?`: [TargetEnum](../enums/targetenum.md) \| string): void
 
-*Defined in [scripts/spells.ts:81](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/spells.ts#L81)*
+*Defined in [scripts/spells.ts:81](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/spells.ts#L81)*
 
 CastScroll(NecroScrollEnum.vfp, TargetEnum.lastattack)
 CastScroll('vfp', 'lastattack')
@@ -75,7 +75,7 @@ CastScroll('kalnox')
 Name | Type |
 ------ | ------ |
 `scroll` | [NecroScrollEnum](../enums/necroscrollenum.md) |
-`target?` | [TargetEnum](../enums/targetenum.md) |
+`target?` | [TargetEnum](../enums/targetenum.md) \| string |
 
 **Returns:** void
 
@@ -83,9 +83,9 @@ ___
 
 ### castScroll
 
-▸ `Static`**castScroll**(`scroll`: [ScrollEnum](../enums/scrollenum.md), `target?`: [TargetEnum](../enums/targetenum.md), `backupHeadCast?`: string): void
+▸ `Static`**castScroll**(`scroll`: [ScrollEnum](../enums/scrollenum.md), `target?`: [TargetEnum](../enums/targetenum.md) \| string, `backupHeadCast?`: string): void
 
-*Defined in [scripts/spells.ts:39](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/spells.ts#L39)*
+*Defined in [scripts/spells.ts:39](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/spells.ts#L39)*
 
 Scripts.Spells.CastScroll
 stability beta
@@ -103,7 +103,7 @@ CastScroll('port')
 Name | Type |
 ------ | ------ |
 `scroll` | [ScrollEnum](../enums/scrollenum.md) |
-`target?` | [TargetEnum](../enums/targetenum.md) |
+`target?` | [TargetEnum](../enums/targetenum.md) \| string |
 `backupHeadCast?` | string |
 
 **Returns:** void
@@ -114,7 +114,7 @@ ___
 
 ▸ `Static`**castUntilSuccess**(`spell`: string, `target`: [TargetEnum](../enums/targetenum.md), `castTime`: number): void
 
-*Defined in [scripts/spells.ts:120](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/spells.ts#L120)*
+*Defined in [scripts/spells.ts:117](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/spells.ts#L117)*
 
 Scripts.Spells.castUntilSuccess
 stability beta
@@ -137,7 +137,7 @@ ___
 
 ▸ `Static`**inscription**(`circle`: number, `spell`: string, `quantity`: number): void
 
-*Defined in [scripts/spells.ts:137](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/spells.ts#L137)*
+*Defined in [scripts/spells.ts:134](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/spells.ts#L134)*
 
 Scripts.Spells.inscription
 stability beta
@@ -160,7 +160,7 @@ ___
 
 ▸ `Static`**summon**(`creature`: string, `target?`: [TargetEnum](../enums/targetenum.md)): void
 
-*Defined in [scripts/spells.ts:21](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/spells.ts#L21)*
+*Defined in [scripts/spells.ts:21](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/spells.ts#L21)*
 
 Scripts.Spells.summon
 

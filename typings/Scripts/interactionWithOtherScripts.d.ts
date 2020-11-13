@@ -19,7 +19,7 @@ export default interface InteractionWithOtherScripts {
 	 * @param unknownProperty_b
 	 * @param timerColor lowwercase string red, black etc.
 	 */
-	AddDisplayTimer(id:string, timer:number, position:string, type:string, text:string, xFromPosition:number, yFromPosition:number, textColor:string|number, unknownProperty_b:any, timerColor:string)
+	AddDisplayTimer(id:string, timer:number, position:string, type:string, text:string, xFromPosition:number, yFromPosition:number, textColor:string|number, font?:number, backgroundColor?:string)
 
 	/**
 	* int Orion.Now();
@@ -40,7 +40,7 @@ export default interface InteractionWithOtherScripts {
 	* @param oneScriptRunning - Check for a running instance of the function with the same name and prevent re-execution.
 	* @param argumentsList - List of function parameters.
 	*/
-	Exec(functionName: string, oneScriptRunning?: boolean, argumentsList?: string): void;
+	Exec(functionName: string, oneScriptRunning?: boolean, argumentsList?: string[]): void;
 
 	/**
 	* void Orion.Terminate('functionName', ['functionsSave']);

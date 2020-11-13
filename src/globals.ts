@@ -2,6 +2,7 @@ const responseDelay = 350;
 const gameObject:any = {
     uncategorized: {
         emptyBottles: {
+            name: 'empty bottles',
             graphic: '0x0F0E',
             color: '0x0000'
         },
@@ -10,6 +11,7 @@ const gameObject:any = {
             color: '0x0000'
         },
         bandy: {
+            name: 'clean bandages',
             graphic: '0x0E21',
             color: '0x0000',
             bag: {
@@ -18,14 +20,17 @@ const gameObject:any = {
             }
         },
         krvavaBanda1: {
+            name: 'bloody bandages',
             graphic: '0x0E22',
             color: '0x0000'
         },
         krvavaBanda2: {
+            name: 'bloody bandages',
             graphic: '0x0E20',
             color: '0x0000'
         },
         salat: {
+            name: 'Ginseng Salad',
             graphic: '0x09EC',
             color: '0x06AB'
         },
@@ -99,6 +104,15 @@ const gameObject:any = {
         ore: {
             anyOre: {
                 graphic: '0x19B9'
+            },
+            one: {
+                graphic: '0x19B7'
+            },
+            two: {
+                graphic: '0x19BA'
+            },
+            three: {
+                graphic: '0x19B8'
             },
             iron: {
                 graphic: '0x19B9',
@@ -851,6 +865,7 @@ const gameObject:any = {
     },
     potions: {
         tmr: {
+            name: 'Total Mana Refresh Potion',
             graphic: '0x0F09',
             color: '0x0003',
             bag: {
@@ -858,6 +873,7 @@ const gameObject:any = {
                 y: 5
             },
             kad: {
+                name: 'Nadoba s Total Mana Refresh',
                 graphic: '0x1843',
                 color: '0x0003'
             },
@@ -865,23 +881,28 @@ const gameObject:any = {
             alchemySelection: 'Total Mana Refresh'
         },
         mr: {
+            name: 'Mana Refresh Potion',
             graphic: '0x0F09',
             color: '0x0005',
             kad: {
+                name: 'Nadoba s Mana Refresh',
                 graphic: '0x1843',
                 color: '0x0005'
             },
             alchemySelection: 'Mana Refresh'
         },
         gb: {
+            name: 'Greater Blood potion',
             graphic: '0x0F0C',
             color: '0x0025',
             kad: {
+                name: 'Nadoba s Greater Blood',
                 graphic: '0x1843',
                 color: '0x0025'
             }
         },
         gh: {
+            name: 'Greater Heal Potion',
             graphic: '0x0F0C',
             color: '0x0000',
             bag: {
@@ -889,6 +910,7 @@ const gameObject:any = {
                 y: 15
             },
             kad: {
+                name: 'Nadoba s Greater Heal',
                 graphic: '0x1843',
                 color: '0x08A7'
             },
@@ -896,6 +918,7 @@ const gameObject:any = {
             alchemySelection: 'Greater Heal'
         },
         gs: {
+            name: 'Greater Strength Potion',
             graphic: '0x0F09',
             color: '0x0000',
             bag: {
@@ -903,6 +926,7 @@ const gameObject:any = {
                 y: 25
             },
             kad: {
+                name: 'Nadoba s Greater Strength',
                 graphic: '0x1843',
                 color: '0x0481'
             },
@@ -910,6 +934,7 @@ const gameObject:any = {
             alchemySelection: 'Greater Strength'
         },
         tr: {
+            name: 'Total Refresh potion',
             graphic: '0x0F0B',
             color: '0x0000',
             bag: {
@@ -917,6 +942,7 @@ const gameObject:any = {
                 y: 5
             },
             kad: {
+                name: 'Nadoba s Total Refresh',
                 graphic: '0x1843',
                 color: '0x014D'
             },
@@ -924,6 +950,7 @@ const gameObject:any = {
             alchemySelection: 'Total Refresh'
         },
         gc: {
+            name: 'Greater Cure Potion',
             graphic: '0x0F07',
             color: '0x0000',
             bag: {
@@ -931,6 +958,7 @@ const gameObject:any = {
                 y: 15
             },
             kad: {
+                name: 'Nadoba s Greater Cure',
                 graphic: '0x1843',
                 color: '0x0842'
             },
@@ -950,15 +978,18 @@ const gameObject:any = {
             }
         },
         ns: {
+            name: 'Nightsight Potion',
             graphic: '0x0F06',
             color: '0x0000',
             kad: {
+                name: 'Nadoba s Nightsight',
                 graphic: '0x1843',
                 color: '0x03C4'
             },
             alchemySelection: 'Nightsight'
         },
         shrink: {
+            name: 'Shrink',
             graphic: '0x0F09',
             color: '0x045E',
             bag: {
@@ -966,6 +997,7 @@ const gameObject:any = {
                 y: 25
             },
             kad: {
+                name: 'Nadoba s Shrink',
                 graphic: '0x1843',
                 color: '0x0724'
             },
@@ -973,9 +1005,11 @@ const gameObject:any = {
             alchemySelection: 'Shrink'
         },
         lavabomb: {
+            name: 'Lava Bomb',
             graphic: '0x0F0D',
             color: '0x000E',
             kad: {
+                name: 'Nadoba s Lava Bomb',
                 graphic: '0x1843',
                 color: '0x000E'
             },
@@ -1030,6 +1064,14 @@ const gameObject:any = {
             color: '0x08A5',
             bag: {
                 x: 112,
+                y: 5
+            }
+        },
+        cestovniKniha: {
+            graphic: '0x22C5',
+            color: '0x0000',
+            bag: {
+                x: 117,
                 y: 5
             }
         }
@@ -1155,6 +1197,7 @@ const gameObject:any = {
         },
         necro: {
             vfp: {
+                name: 'Fire Bolt scroll',
                 graphic: '0x0E35',
                 color: '0x0070',
                 minMana: 20
@@ -1164,6 +1207,7 @@ const gameObject:any = {
                 color: '0x0010'
             },
             kalnox: {
+                name: 'Summon Undead scroll',
                 graphic: '0x0E35',
                 color: '0x0005'
             }
@@ -1397,6 +1441,10 @@ const gameObject:any = {
     },
     klamak: {
         lvl1: {
+            bird: {
+                graphic: '0x20EE',
+                color: '0xFFFF'
+            },
             giantRat: {
                 graphic: '0x20D0',
                 color: '0xFFFF'

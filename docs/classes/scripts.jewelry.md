@@ -23,7 +23,7 @@ Obsahuje zakladni scripty
 
 ▸ `Static`**useGGR**(): void
 
-*Defined in [scripts/jewelry.ts:41](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/jewelry.ts#L41)*
+*Defined in [scripts/jewelry.ts:41](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/jewelry.ts#L41)*
 
 Pouzije Great Gold Ring
 
@@ -35,7 +35,7 @@ ___
 
 ▸ `Static`**useRR**(): void
 
-*Defined in [scripts/jewelry.ts:11](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/jewelry.ts#L11)*
+*Defined in [scripts/jewelry.ts:11](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/jewelry.ts#L11)*
 
 Pouzije Reflex Ring nebo Great Reflex Ring
 

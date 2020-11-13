@@ -1,5 +1,32 @@
 # CHANGELOG
 
+## 0.0.9
+### features
+- `drink('gs')` zobrazuje timer a informuje o konci GS
+- `equip` [funkce](https://github.com/msviha/orionuo/blob/master/docs/globals.md#equip)
+- `saveEquip` [funkce](https://github.com/msviha/orionuo/blob/master/docs/globals.md#saveequip)
+- `resetStats` [funkce](https://github.com/msviha/orionuo/blob/master/docs/globals.md#resetstats)
+- `cestovniKniha` [funkce](https://github.com/msviha/orionuo/blob/master/docs/globals.md#cestovnikniha)
+- `tamingTrain` [funkce](https://github.com/msviha/orionuo/blob/master/docs/globals.md#tamingTrain)
+- `travelBook` [funkce](https://github.com/msviha/orionuo/blob/master/docs/globals.md#travelbook)
+
+### enhancements
+- `TargetEnum` rozsiren o `laststatus` - odstraneno podminene pouzivani TargetEnum z nekterych funkci (napr. `castScroll`) takze je mozne kouzlit klidne na ten `laststatus` nebo primo nejaky serial nebo jiny ulozeny alias
+- zobrazeni verze po pripojeni do hry
+- ulozeni equipu po pripojeni do hry
+- vliv halucinaci nyni neprekazi bandeni, zrani band, salatu, kouzleni ze svitku (i necro), chlastani a cepovani napoju
+- `drink` presunuti timeru (vlevo nahore), dale je mozne vypnout timery pomoci parametru funkce
+- `drink` presunuti timeru (vlevo nahore), dale je mozne vypnout timery pomoci parametru funkce
+- `targetNext` a `targetPrevious` si defaultne drzi targety v pameti jen 1,5sec (puvodne 2,5sec)
+
+### fixes
+- pridan bird do `gameObject.klamak.lvl1`
+- `drink('gb')` pridan Greater Blood do `PotionsEnum` takze je mozne chlastat GB
+- `bandageSelf` opraveno pouziti s halucinacemi
+- `drink` pridana pauza aby se nestavalo ze se nezobrazi timer
+- `hiding` upraven beh a zobrazeni hlasek pri interuption od monstra / opakovanem volani
+- `use` opraveno pouziti s halucinacemi (bude fungovat jen na objekty ktere pro to maji zatim podporu, pokud budete potrebovat nejaky pridat, tak mne kontaktujte)
+
 ## 0.0.8
 ### features
 - pridana `cleanObjectInBag` [funkce](https://github.com/msviha/orionuo/blob/master/docs/globals.md#cleanObjectInBag)

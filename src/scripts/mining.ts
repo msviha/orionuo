@@ -22,6 +22,36 @@ namespace Scripts {
 
         }
 
+        static miningPort() {
+            Scripts.Mining.mining();
+            Scripts.Mining.portAndMoveToTreasure();
+        }
+
+        static portAndMoveToTreasure() {
+            Orion.ClearJournal();
+            Scripts.Port.nbRune();
+            Scripts.Utils.waitWhileSomethingInJournal(['been teleported']);
+            const container = Orion.FindObject('miningTreasure');
+            Orion.WalkTo(container.X(), container.Y(), container.Z(), 1);
+            Orion.Wait(4000);
+            for (const ing in gameObject.resources.ingots) {
+                const ingotGraphic = gameObject.resources.ingots[ing].graphic;
+                const ingSerials = Orion.FindType(ingotGraphic);
+                for (const s of ingSerials) {
+                    Orion.MoveItem(s, undefined, 'miningTreasure');
+                    Orion.Wait(responseDelay);
+                }
+            }
+            for (const ore in gameObject.resources.ore) {
+                const oreGraphic = gameObject.resources.ore[ore].graphic;
+                const oreSerials = Orion.FindType(oreGraphic);
+                for (const s of oreSerials) {
+                    Orion.MoveItem(s, undefined, 'miningTreasure');
+                    Orion.Wait(responseDelay);
+                }
+            }
+        }
+
         static saveCurrentPositionToArray(arr:ICoordinates[]) {
             arr.push({x: Player.X(), y:Player.Y()});
         }
@@ -178,7 +208,7 @@ namespace Scripts {
                     let drop = false;
                     for (const ore of unwantedOre) {
                         if (!Orion.InJournal(ore.message)) {
-                            continue
+                            continue;
                         }
                         keepMine = false;
                         for (const oreGraphic of ores) {
@@ -197,6 +227,22 @@ namespace Scripts {
                         }
                     }
 
+                    if (!drop && Orion.InJournal('is too heavy')) {
+                        Scripts.Port.travelBook(PortBookOptionsEnum.mark);
+                        Orion.Wait(1000);
+                        Scripts.Mining.portAndMoveToTreasure();
+                        Orion.ClearJournal();
+                        Orion.Wait(1000);
+                        Scripts.Port.travelBook(PortBookOptionsEnum.kop);
+                        Scripts.Utils.waitWhileSomethingInJournal(['been teleported']);
+                        Orion.Wait(1000);
+                        let oreToPick = Orion.FindType("0x19B7|0x19BA|0x19B8|0x19B9", "-1", "ground", "item", 0);
+                        for (const ore of oreToPick) {
+                            Orion.MoveItem(ore);
+                        }
+                        Orion.Wait(1000);
+                    }
+
                     // smelt in near forge
                     const forges = Orion.FindType('0x0FB1', '0x0000', 'ground','item', 3 , '-1', true);
                     if (forges.length) {
@@ -208,7 +254,8 @@ namespace Scripts {
                             }
                             for (const serial of serials) {
                                 Orion.UseObject(forges[0]);
-                                if (Orion.InJournal('reach that')) {
+                                Orion.Wait(responseDelay);
+                                if (Orion.InJournal('reach that|far')) {
                                     Orion.CancelTarget();
                                     break;
                                 }

@@ -53,6 +53,10 @@ namespace Scripts {
             Orion.Print(ColorEnum.none, 'Start Hiding');
             Orion.UseSkill('Hiding');
             Orion.Wait(100);
+            if (Orion.InJournal('You must wait')) {
+                return;
+            }
+            Scripts.Utils.resetTimer(TimersEnum.hiding);
 
             while(Orion.InJournal('preoccupied')) {
                 Orion.ClearJournal();
@@ -62,16 +66,8 @@ namespace Scripts {
                 Orion.UseSkill('Hiding');
             }
 
-            const timeToHide = 2000;
-            Orion.AddDisplayTimer('hiding', 2000, 'AboveChar', 'bar', "Hiding", 0, 100, '0x100', 0, 'red');
-            Orion.Wait(timeToHide);
-
-            if (Orion.InJournal('You have hidden yourself well')) {
-                Orion.CharPrint(Player.Serial(), ColorEnum.green, '[ Hidden ]');
-            }
-            if (Orion.InJournal('t seem to hide here')) {
-                Orion.CharPrint(Player.Serial(), ColorEnum.red, '[ FAILED ]');
-            }
+            Orion.AddDisplayTimer(TimersEnum.hiding, 2000, 'AboveChar', 'bar', "Hiding", 0, 100, '0x100', 0, 'red');
+            Orion.Exec('displayHidingInfo', true);
         }
 
         /**
@@ -81,7 +77,7 @@ namespace Scripts {
          * hodi si bandu, pripadne vypise ze nema a prehraje wav soubor
          */
         static bandageSelf(minimalCountToWarn = 10, pathToNoBandagesWavFile = 'C:/critical.wav') {
-            let bandagesSerials = Orion.FindType(gameObject.uncategorized.bandy.graphic, gameObject.uncategorized.bandy.color);
+            let bandagesSerials = Orion.FindType(gameObject.uncategorized.bandy.graphic);
             let count = Scripts.Utils.countItemsBySerials(bandagesSerials);
             if (!count) {
                 Orion.PlayWav(pathToNoBandagesWavFile);

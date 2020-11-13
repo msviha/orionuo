@@ -111,7 +111,7 @@
 	* GameObject Orion.ObjAtLayer('layerName', ['serial'=self]);
 	* Result: an object of type GameObject in the specified layer of the object 'serial' or null.
 	*/
-	ObjAtLayer(layerName: string, serial?: string): GameObject;
+	ObjAtLayer(layer: string|number, serial?: string): GameObject;
 
 	/**
 	* String Orion.FindFriend(['flags'=fast], ['distance'=searchObjectsDistance]);

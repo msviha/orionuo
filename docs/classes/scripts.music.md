@@ -25,7 +25,7 @@ Obsahuje zakladni scripty
 
 ▸ `Static`**drum**(`targetAlias?`: [TargetEnum](../enums/targetenum.md) \| string): void
 
-*Defined in [scripts/music.ts:16](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/music.ts#L16)*
+*Defined in [scripts/music.ts:16](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/music.ts#L16)*
 
 #### Parameters:
 
@@ -41,7 +41,7 @@ ___
 
 ▸ `Static`**harp**(`targetAlias?`: [TargetEnum](../enums/targetenum.md) \| string): void
 
-*Defined in [scripts/music.ts:8](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/music.ts#L8)*
+*Defined in [scripts/music.ts:8](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/music.ts#L8)*
 
 #### Parameters:
 
@@ -57,7 +57,7 @@ ___
 
 ▸ `Static`**lute**(`targetAlias?`: [TargetEnum](../enums/targetenum.md) \| string): void
 
-*Defined in [scripts/music.ts:12](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/music.ts#L12)*
+*Defined in [scripts/music.ts:12](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/music.ts#L12)*
 
 #### Parameters:
 
@@ -73,7 +73,7 @@ ___
 
 ▸ `Static`**useMusicInstrument**(`instrument`: IMyGameObject, `missingMessage`: string, `targetAlias?`: [TargetEnum](../enums/targetenum.md) \| string): void
 
-*Defined in [scripts/music.ts:20](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/music.ts#L20)*
+*Defined in [scripts/music.ts:20](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/music.ts#L20)*
 
 #### Parameters:
 

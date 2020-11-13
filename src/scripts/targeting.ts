@@ -44,7 +44,7 @@ namespace Scripts {
          * @param reverse if true.. it behaves like TargetPrevious
          * @constructor
          */
-        static targetNext(reverse = false, timeToStorePreviousTargets = 2500, additionalFlags:string[] = [], notoriety:string[] = []) {
+        static targetNext(reverse = false, timeToStorePreviousTargets = 1500, additionalFlags:string[] = [], notoriety:string[] = []) {
             // initialization
             if (Orion.Timer('targetTimer') === -1) {
                 Orion.SetTimer('targetTimer');

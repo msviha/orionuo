@@ -1,11 +1,21 @@
+function version() {
+    Orion.Print(-1, '+-------------');
+    Orion.Print(-1, 'msviha/orionuo');
+    Orion.Print(-1, 'version 0.0.9');
+    Orion.Print(-1, '-------------+');
+}
+
 /**
  * Zaskrtnete si v Orion Assistantovi Autostart checkbox
  */
 function Autostart() {
+    version();
     let previousLastAttackSerial:string;
     let previousLastAttackHp:number;
     let previousPlayerHp:number;
     let updateRate = 500;
+
+    Scripts.Dress.saveEquip();
 
     while (true) {
         Scripts.Utils.printDamage(Player.Serial(), previousPlayerHp);
@@ -108,6 +118,18 @@ function castScroll(scroll:ScrollEnum, target?:TargetEnum, backupHeadCast?:strin
 }
 
 /**
+ * Pouzije cestovni knihu s pozadovanou volbou
+ * @param selection {PortBookOptionsEnum} volba z knizky
+ * @example in client `_cestovniKniha` kopne na vlastni misto
+ * @example in client `_cestovniKniha mark` markne vlastni misto
+ * @example external code `cestovniKniha()` kopne na vlastni misto
+ * @example external code `cestovniKniha(PortBookOptionsEnum.mark);` markne vlastni misto
+ */
+function cestovniKniha(selection = PortBookOptionsEnum.kop) {
+    Scripts.Port.cestovniKniha(selection)
+}
+
+/**
  * Uklizi bagl !! Pozor pokud davate souradnice, nad/pod bagl tak je treba mit v Clientovi nastavene "Dont fix item positions in container" !!
  * @param object objekt ktery chcete uklidit nebo cestu k itemu skrze [gameObject](./globals.md#gameObject)
  * @param objectName nazev pro vypisovani behem uklidu
@@ -143,8 +165,8 @@ function craftSelect() {
  * @example in client `_drink tmr`
  * @example external code `drink('tmr');`
  */
-function drink(potionName:PotionsEnum, switchWarModeWhenNeeded = true) {
-    Scripts.Potions.drinkPotion(potionName, switchWarModeWhenNeeded);
+function drink(potionName:PotionsEnum, switchWarModeWhenNeeded = true, displayTimers = true) {
+    Scripts.Potions.drinkPotion(potionName, switchWarModeWhenNeeded, displayTimers);
 }
 
 /**
@@ -166,6 +188,15 @@ function drum(target?:TargetEnum) {
  */
 function enemy() {
     Scripts.Targeting.addEnemy();
+}
+
+/**
+ * Oblikne si equip ktery je ulozeny v pameti (automaticky se vam uklada po loginu, nebo pouzitim funkce saveEquip())
+ * @example in client `_equip`
+ * @example external code `equip()`
+ */
+function equip() {
+    Scripts.Dress.equip();
 }
 
 /**
@@ -344,7 +375,7 @@ function manualTarget() {
  * @example external code `nbRune()`
  */
 function nbRune() {
-    Scripts.Wip.Nbruna();
+    Scripts.Port.nbRune();
 }
 
 /**
@@ -385,6 +416,24 @@ function resetFriends() {
 }
 
 /**
+ * Resetuje staty pomoci Travel Book
+ * @example in client `_resetStats`
+ * @example external code `resetStats()`
+ */
+function resetStats() {
+    Scripts.Dress.resetStats();
+}
+
+/**
+ * Ulozi si do pameti equip co mate zrovna na sobe - vhodne v kombinaci s funkci equip() (napriklad po dmg od chameleon birda)
+ * @example in client `_saveEquip`
+ * @example external code `saveEquip()`
+ */
+function saveEquip() {
+    Scripts.Dress.saveEquip();
+}
+
+/**
  * Kouzli summona (jmeno je treba zadat tak jak je v nabidce summonu) na pozadovany target, pokud je uveden
  * @example external code `summon("Horse", "self");`
  * @example external code `summon("Giant Viper");`
@@ -403,6 +452,16 @@ function taming() {
 }
 
 /**
+ * Treni taming na celem stadu v tvem okoli, co netamne, zabije
+ * @example in client `_tamingTrain`
+ * @example external code `tamingTrain()`
+ * @example external code `tamingTrain(false)` - pokud trenujes s postavou co nemuze/nema druidku
+ */
+function tamingTrain(robeOfDruids = true) {
+    Scripts.Taming.trainOnAnimalsAround(robeOfDruids);
+}
+
+/**
  * Targeti zive jednotky okolo tebe. Uchovava list targetu po dobu 2,5 vteriny pro pouziti s `targetPrevious`.
  * Vybrany target ma rovnou status `attackLast` (ale neutocis to na nej, jen mas zaply war) takze je mozne na nej kouzlit
  * @param timeToStorePreviousTargets {number} cas pro uchovavani predchozich targetu v pameti
@@ -412,7 +471,7 @@ function taming() {
  * @example external code `targetNext(1000, [FlagsEnum.ignorefriends]);`
  * @example external code `targetNext(1000, undefined, [NotorietyEnum.orange, NotorietyEnum.red, NotorietyEnum.criminal]);`
  */
-function targetNext(timeToStorePreviousTargets = 2500, additionalFlags?:FlagsEnum[], notoriety?:NotorietyEnum[]) {
+function targetNext(timeToStorePreviousTargets = 1500, additionalFlags?:FlagsEnum[], notoriety?:NotorietyEnum[]) {
     Scripts.Targeting.targetNext(false, timeToStorePreviousTargets, additionalFlags, notoriety);
 }
 
@@ -426,7 +485,7 @@ function targetNext(timeToStorePreviousTargets = 2500, additionalFlags?:FlagsEnu
  * @example external code `targetPrevious(1000, [FlagsEnum.ignorefriends]);`
  * @example external code `targetPrevious(1000, undefined, [NotorietyEnum.orange, NotorietyEnum.red, NotorietyEnum.criminal]);`
  */
-function targetPrevious(timeToStorePreviousTargets = 2500, additionalFlags?:string[], notoriety?:string[]) {
+function targetPrevious(timeToStorePreviousTargets = 1500, additionalFlags?:string[], notoriety?:string[]) {
     Scripts.Targeting.targetNext(true, timeToStorePreviousTargets, additionalFlags, notoriety);
 }
 
@@ -440,6 +499,18 @@ function targetPrevious(timeToStorePreviousTargets = 2500, additionalFlags?:stri
  */
 function tracking(who = 'Players') {
     Scripts.Wip.Tracking(who);
+}
+
+/**
+ * Pouzije travel book s pozadovanou volbou
+ * @param selection {PortBookOptionsEnum} volba z knizky
+ * @example in client `_travelBook` kopne na vlastni misto
+ * @example in client `_travelBook mark` markne vlastni misto
+ * @example external code `travelBook()` kopne na vlastni misto
+ * @example external code `travelBook(PortBookOptionsEnum.mark);` markne vlastni misto
+ */
+function travelBook(selection = PortBookOptionsEnum.kop) {
+    Scripts.Port.travelBook(selection)
 }
 
 /**

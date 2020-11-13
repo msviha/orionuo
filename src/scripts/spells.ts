@@ -8,7 +8,7 @@ namespace Scripts {
          * @param spell nazev kouzla
          * @param target na koho ma kouzlit
          */
-        static cast(spell:string, target?:TargetEnum) {
+        static cast(spell:string, target?:TargetEnum|string) {
             Scripts.Utils.waitTarget(target);
             Orion.Cast(spell);
         }
@@ -38,7 +38,7 @@ namespace Scripts {
          */
         static castScroll(
             scroll:ScrollEnum,
-            target?:TargetEnum,
+            target?:TargetEnum|string,
             backupHeadCast?:string
         ) {
             const s = gameObject.scrolls['standard'][scroll];
@@ -56,11 +56,11 @@ namespace Scripts {
 
             Orion.ClearJournal();
             Scripts.Utils.waitTarget(target);
-            Orion.UseType(s.graphic, s.color);
+            Orion.UseType(s.graphic);
             Scripts.Utils.waitWhileSomethingInJournal(['Select Target', 'You can\'t cast']);
 
             if (Orion.InJournal('Select Target')) {
-                Orion.AddDisplayTimer('scroll', s.timer, 'AboveChar', 'bar', '', 0, 75, '0x100', 1, 'yellow');
+                s.timer && Orion.AddDisplayTimer('scroll', s.timer, 'AboveChar', 'bar', '', 0, 75, '0x100', 1, 'yellow');
             }
             else {
                 const reason = 'TIMER';
@@ -68,7 +68,7 @@ namespace Scripts {
             }
         }
 
-        static backupHeadCast(reason:string, spell:string, target?:TargetEnum) {
+        static backupHeadCast(reason:string, spell:string, target?:TargetEnum|string) {
             Scripts.Utils.playerPrint(reason + ' - backup cast', ColorEnum.orange);
             Scripts.Spells.cast(spell, target);
         }
@@ -80,7 +80,7 @@ namespace Scripts {
          */
         static castNecroScroll(
             scroll:NecroScrollEnum,
-            target?:TargetEnum
+            target?:TargetEnum|string
         ) {
             const s = gameObject.scrolls['necro'][scroll];
 
@@ -89,26 +89,23 @@ namespace Scripts {
                 return;
             }
 
-            if (Orion.Count(s.graphic, s.color) < 1) {
+            const scrollSerial = Scripts.Utils.findFirstType(s);
+            if (!scrollSerial) {
                 Scripts.Utils.playerPrint("NEMAS SVITKY " + scroll, ColorEnum.red);
                 return;
             }
 
-            const lastTimerLimit = parseInt(Orion.GetGlobal('lastNecroScrollTimerLimit'), 10);
-            const nextTimer = s.timer;
-            const timer = Orion.Timer('necroScrollTimer');
-            const cantCast = timer !== -1 && timer < lastTimerLimit;
-            if (cantCast) {
-                Scripts.Utils.playerPrint('TIMER na svitky', ColorEnum.red);
-                return;
-            }
-
+            Orion.ClearJournal();
             Scripts.Utils.waitTarget(target);
-            Orion.UseType(s.graphic, s.color);
+            Orion.UseObject(scrollSerial);
+            Scripts.Utils.waitWhileSomethingInJournal(['Select Target', 'You can\'t cast']);
 
-            // Orion.AddDisplayTimer('necroScroll', nextTimer, 'AboveChar', 'bar', "", 0, 80, '0x100', 0, 'black');
-            Scripts.Utils.resetTimer('necroScrollTimer');
-            Orion.SetGlobal('lastNecroScrollTimerLimit', s.timer);
+            if (Orion.InJournal('Select Target')) {
+                s.timer && Orion.AddDisplayTimer('scroll', s.timer, 'AboveChar', 'bar', '', 0, 75, '0x100', 1, 'yellow');
+            }
+            else {
+                Scripts.Utils.playerPrint('TIMER', ColorEnum.red);
+            }
         }
 
         /**
@@ -181,7 +178,7 @@ namespace Scripts {
                 totalTries++;
                 Scripts.Utils.log(`napsano ${finishedCount} / ${totalTries}`)
 
-                if (Player.Mana() + 60 < Player.Int()) {
+                if (Player.Mana() + 70 < Player.Int()) {
                     const isDrinkTimerSet = Orion.Timer(TimersEnum.drink) !== -1;
                     while (isDrinkTimerSet && Orion.Timer(TimersEnum.drink) < 18000) {
                         Orion.Wait(200);

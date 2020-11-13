@@ -12,24 +12,36 @@
 
 ### Methods
 
-* [dressUp](scripts.dress.md#dressup)
+* [equip](scripts.dress.md#equip)
+* [getSerialsFromCurrentEquip](scripts.dress.md#getserialsfromcurrentequip)
 * [resetStats](scripts.dress.md#resetstats)
-* [setDress](scripts.dress.md#setdress)
+* [saveEquip](scripts.dress.md#saveequip)
 
 ## Methods
 
-### dressUp
+### equip
 
-▸ `Static`**dressUp**(): void
+▸ `Static`**equip**(`eq?`: Array\<string \| undefined>): void
 
-*Defined in [scripts/dress.ts:64](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/dress.ts#L64)*
+*Defined in [scripts/dress.ts:65](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/dress.ts#L65)*
 
-Scripts.Dress.dressUp()
-stability beta
+#### Parameters:
 
-oblekna si veci, ktere jsou ulozeny pomoci scriptu setDress
+Name | Type |
+------ | ------ |
+`eq?` | Array\<string \| undefined> |
 
 **Returns:** void
+
+___
+
+### getSerialsFromCurrentEquip
+
+▸ `Static`**getSerialsFromCurrentEquip**(): Array\<string \| undefined>
+
+*Defined in [scripts/dress.ts:35](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/dress.ts#L35)*
+
+**Returns:** Array\<string \| undefined>
 
 ___
 
@@ -37,7 +49,7 @@ ___
 
 ▸ `Static`**resetStats**(): void
 
-*Defined in [scripts/dress.ts:10](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/dress.ts#L10)*
+*Defined in [scripts/dress.ts:10](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/dress.ts#L10)*
 
 Scripts.Dress.resetStats()
 stability beta
@@ -48,16 +60,10 @@ resetuje staty pomoci travel booku
 
 ___
 
-### setDress
+### saveEquip
 
-▸ `Static`**setDress**(): void
+▸ `Static`**saveEquip**(): void
 
-*Defined in [scripts/dress.ts:36](https://github.com/msviha/orionuo/blob/48715bb/src/scripts/dress.ts#L36)*
-
-Scripts.Dress.setDress()
-stability beta
-
-nastavi si seznam veci pro oblekani - viz. script dressUp
-seznam se ukonci napsanim "stopdress" do hry
+*Defined in [scripts/dress.ts:59](https://github.com/msviha/orionuo/blob/2ad0399/src/scripts/dress.ts#L59)*
 
 **Returns:** void

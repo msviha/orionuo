@@ -196,19 +196,7 @@ namespace Scripts {
                 return;
             }
             const serialToAttack = enemySerialsAround[0];
-            Orion.Attack(serialToAttack);
-            Orion.Wait(6000); // due to unknown extended msg when attacking new creature which just spawns
-
-            let enemy = Orion.FindObject(serialToAttack);
-            if (enemy) {
-                Scripts.Utils.log('WalkTo');
-                while (enemy && !enemy.Dead()) {
-                    Orion.WalkTo(enemy.X(), enemy.Y(), enemy.Z(), 1);
-                    Orion.Wait(2000);
-                    enemy = Orion.FindObject(serialToAttack);
-                }
-                Scripts.Utils.log('end');
-            }
+            Scripts.Auto.killObject(serialToAttack);
         }
 
         static lootAllFrom(delay = responseDelay) {

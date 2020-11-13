@@ -14,7 +14,8 @@ enum ColorEnum {
 
 enum TargetEnum {
     self = 'self',
-    lastattack = 'lastattack'
+    lastattack = 'lastattack',
+    laststatus = 'laststatus'
 }
 
 enum ScrollEnum {
@@ -62,6 +63,7 @@ enum PotionsEnum {
     tmr = 'tmr',
     gh = 'gh',
     gs = 'gs',
+    gb = 'gb',
     tr = 'tr',
     gc = 'gc',
     lc = 'lc',
@@ -77,5 +79,18 @@ enum NecroScrollEnum {
 }
 
 enum TimersEnum {
-    drink = 'drink'
+    drink = 'drink',
+    gs = 'gs',
+    hiding = 'hiding'
+}
+
+enum PortBookOptionsEnum {
+    opravaStats = 'opravaStats',
+    mark = 'mark',
+    kop = 'kop'
+}
+
+enum SelectionTypeEnum {
+    gump = 'gump',
+    menu = 'menu'
 }

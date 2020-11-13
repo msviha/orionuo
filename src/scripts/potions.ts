@@ -3,29 +3,21 @@ namespace Scripts {
     export class Potions {
 
         static getEmptyBottle():string {
-            const emptyBottles = Orion.FindType(gameObject.uncategorized.emptyBottles.graphic, gameObject.uncategorized.emptyBottles.color);
-            if (!emptyBottles.length) {
+            const emptyBottles = Scripts.Utils.findFirstType(gameObject.uncategorized.emptyBottles);
+            if (!emptyBottles) {
                 Scripts.Utils.log(`Nemas prazdne lahve`, ColorEnum.red);
                 throw 'Nemas prazdne lahve';
             }
-            return emptyBottles[0];
+            return emptyBottles;
         }
 
         static getKadForPotion(potion:IPotion):string {
-            const kade = Orion.FindType(potion.kad.graphic, potion.kad.color);
-            if (!kade.length) {
+            const kad = Scripts.Utils.findFirstType(potion.kad);
+            if (!kad) {
                 Scripts.Utils.log(`Nemas kad s potionem`, ColorEnum.red);
                 throw 'Nemas kad s potionem';
             }
-            return kade[0];
-        }
-
-        static getPotion(potion:IPotion):string|false {
-            const potions = Orion.FindType(potion.graphic, potion.color);
-            if (!potions.length) {
-                return false;
-            }
-            return potions[0];
+            return kad;
         }
 
         static getMortar():string {
@@ -41,18 +33,18 @@ namespace Scripts {
          * @param potionName nazev potionu, ktery je definovan jako klic v objectu o.potions
          * @param switchWarModeWhenNeeded prepne war, pokud je potreba docepnout
          */
-        static drinkPotion(potionName:PotionsEnum, switchWarModeWhenNeeded = true) {
+        static drinkPotion(potionName:PotionsEnum, switchWarModeWhenNeeded = true, displayTimers = true, displayInfo = true) {
             if (!isPotionsEnum(potionName)) {
                 return;
             }
 
             const p = gameObject.potions[potionName];
-            let potion = Scripts.Potions.getPotion(p);
+            let potion = Scripts.Utils.findFirstType(p);
 
             if (!potion) {
                 // docepnuti
                 Scripts.Potions.fillPotion(potionName, switchWarModeWhenNeeded);
-                potion = Scripts.Potions.getPotion(p);
+                potion = Scripts.Utils.findFirstType(p);
                 if (!potion) {
                     Scripts.Utils.playerPrint(`!! NEMAS [ ${potionName} ] !!`, ColorEnum.red);
                     return
@@ -60,13 +52,23 @@ namespace Scripts {
             }
 
             // vypiti
+            Orion.ClearJournal();
+            Orion.Wait(50);
             Orion.UseObject(potion);
             Orion.Wait(responseDelay);
             if (Orion.InJournal('You put the empty bottless')) {
-                Orion.AddDisplayTimer(TimersEnum.drink, 18000, 'RightTop', 'Circle', 'Drink potion', 0, 0, '0x100', 0, 'red');
+                const drinkTimer = 17500;
+                const gsTimer = 130000;
+
+                displayTimers && Orion.AddDisplayTimer(TimersEnum.drink, drinkTimer, 'LeftTop', 'Line|Bar', 'Drink', 0, 0, '0x88B', 0, '0x88B');
                 Scripts.Utils.resetTimer(TimersEnum.drink);
                 const potionsCount = Orion.Count(p.graphic, p.color);
                 Scripts.Utils.playerPrint(`[ ${potionName} ${potionsCount} ]`, potionsCount === 0 ? ColorEnum.red : ColorEnum.green);
+                if (potionName === PotionsEnum.gs) {
+                    displayTimers && Orion.AddDisplayTimer(TimersEnum.gs, gsTimer, 'LeftTop', 'Line|Bar', 'GS', 0, 55, '0x88B', 0, '0x88B');
+                    Scripts.Utils.resetTimer(TimersEnum.gs);
+                }
+                displayInfo && Orion.Exec('displayDrinkInfo', false, [potionName.toString()]);
             }
         }
 
@@ -151,7 +153,7 @@ namespace Scripts {
                 Scripts.Utils.waitWhileSomethingInJournal(['You pour']);
 
                 Orion.ClearJournal();
-                const potion = <string>Scripts.Potions.getPotion(p);
+                const potion = Scripts.Utils.findFirstType(p);
                 const kad = Scripts.Potions.getKadForPotion(p);
                 Orion.WaitTargetObject(potion);
                 Orion.UseObject(kad);

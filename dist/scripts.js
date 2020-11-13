@@ -16,6 +16,7 @@ var TargetEnum;
 (function (TargetEnum) {
     TargetEnum["self"] = "self";
     TargetEnum["lastattack"] = "lastattack";
+    TargetEnum["laststatus"] = "laststatus";
 })(TargetEnum || (TargetEnum = {}));
 var ScrollEnum;
 (function (ScrollEnum) {
@@ -63,6 +64,7 @@ var PotionsEnum;
     PotionsEnum["tmr"] = "tmr";
     PotionsEnum["gh"] = "gh";
     PotionsEnum["gs"] = "gs";
+    PotionsEnum["gb"] = "gb";
     PotionsEnum["tr"] = "tr";
     PotionsEnum["gc"] = "gc";
     PotionsEnum["lc"] = "lc";
@@ -79,11 +81,25 @@ var NecroScrollEnum;
 var TimersEnum;
 (function (TimersEnum) {
     TimersEnum["drink"] = "drink";
+    TimersEnum["gs"] = "gs";
+    TimersEnum["hiding"] = "hiding";
 })(TimersEnum || (TimersEnum = {}));
+var PortBookOptionsEnum;
+(function (PortBookOptionsEnum) {
+    PortBookOptionsEnum["opravaStats"] = "opravaStats";
+    PortBookOptionsEnum["mark"] = "mark";
+    PortBookOptionsEnum["kop"] = "kop";
+})(PortBookOptionsEnum || (PortBookOptionsEnum = {}));
+var SelectionTypeEnum;
+(function (SelectionTypeEnum) {
+    SelectionTypeEnum["gump"] = "gump";
+    SelectionTypeEnum["menu"] = "menu";
+})(SelectionTypeEnum || (SelectionTypeEnum = {}));
 var responseDelay = 350;
 var gameObject = {
     uncategorized: {
         emptyBottles: {
+            name: 'empty bottles',
             graphic: '0x0F0E',
             color: '0x0000'
         },
@@ -92,6 +108,7 @@ var gameObject = {
             color: '0x0000'
         },
         bandy: {
+            name: 'clean bandages',
             graphic: '0x0E21',
             color: '0x0000',
             bag: {
@@ -100,14 +117,17 @@ var gameObject = {
             }
         },
         krvavaBanda1: {
+            name: 'bloody bandages',
             graphic: '0x0E22',
             color: '0x0000'
         },
         krvavaBanda2: {
+            name: 'bloody bandages',
             graphic: '0x0E20',
             color: '0x0000'
         },
         salat: {
+            name: 'Ginseng Salad',
             graphic: '0x09EC',
             color: '0x06AB'
         },
@@ -181,6 +201,15 @@ var gameObject = {
         ore: {
             anyOre: {
                 graphic: '0x19B9'
+            },
+            one: {
+                graphic: '0x19B7'
+            },
+            two: {
+                graphic: '0x19BA'
+            },
+            three: {
+                graphic: '0x19B8'
             },
             iron: {
                 graphic: '0x19B9',
@@ -933,6 +962,7 @@ var gameObject = {
     },
     potions: {
         tmr: {
+            name: 'Total Mana Refresh Potion',
             graphic: '0x0F09',
             color: '0x0003',
             bag: {
@@ -940,6 +970,7 @@ var gameObject = {
                 y: 5
             },
             kad: {
+                name: 'Nadoba s Total Mana Refresh',
                 graphic: '0x1843',
                 color: '0x0003'
             },
@@ -947,23 +978,28 @@ var gameObject = {
             alchemySelection: 'Total Mana Refresh'
         },
         mr: {
+            name: 'Mana Refresh Potion',
             graphic: '0x0F09',
             color: '0x0005',
             kad: {
+                name: 'Nadoba s Mana Refresh',
                 graphic: '0x1843',
                 color: '0x0005'
             },
             alchemySelection: 'Mana Refresh'
         },
         gb: {
+            name: 'Greater Blood potion',
             graphic: '0x0F0C',
             color: '0x0025',
             kad: {
+                name: 'Nadoba s Greater Blood',
                 graphic: '0x1843',
                 color: '0x0025'
             }
         },
         gh: {
+            name: 'Greater Heal Potion',
             graphic: '0x0F0C',
             color: '0x0000',
             bag: {
@@ -971,6 +1007,7 @@ var gameObject = {
                 y: 15
             },
             kad: {
+                name: 'Nadoba s Greater Heal',
                 graphic: '0x1843',
                 color: '0x08A7'
             },
@@ -978,6 +1015,7 @@ var gameObject = {
             alchemySelection: 'Greater Heal'
         },
         gs: {
+            name: 'Greater Strength Potion',
             graphic: '0x0F09',
             color: '0x0000',
             bag: {
@@ -985,6 +1023,7 @@ var gameObject = {
                 y: 25
             },
             kad: {
+                name: 'Nadoba s Greater Strength',
                 graphic: '0x1843',
                 color: '0x0481'
             },
@@ -992,6 +1031,7 @@ var gameObject = {
             alchemySelection: 'Greater Strength'
         },
         tr: {
+            name: 'Total Refresh potion',
             graphic: '0x0F0B',
             color: '0x0000',
             bag: {
@@ -999,6 +1039,7 @@ var gameObject = {
                 y: 5
             },
             kad: {
+                name: 'Nadoba s Total Refresh',
                 graphic: '0x1843',
                 color: '0x014D'
             },
@@ -1006,6 +1047,7 @@ var gameObject = {
             alchemySelection: 'Total Refresh'
         },
         gc: {
+            name: 'Greater Cure Potion',
             graphic: '0x0F07',
             color: '0x0000',
             bag: {
@@ -1013,6 +1055,7 @@ var gameObject = {
                 y: 15
             },
             kad: {
+                name: 'Nadoba s Greater Cure',
                 graphic: '0x1843',
                 color: '0x0842'
             },
@@ -1032,15 +1075,18 @@ var gameObject = {
             }
         },
         ns: {
+            name: 'Nightsight Potion',
             graphic: '0x0F06',
             color: '0x0000',
             kad: {
+                name: 'Nadoba s Nightsight',
                 graphic: '0x1843',
                 color: '0x03C4'
             },
             alchemySelection: 'Nightsight'
         },
         shrink: {
+            name: 'Shrink',
             graphic: '0x0F09',
             color: '0x045E',
             bag: {
@@ -1048,6 +1094,7 @@ var gameObject = {
                 y: 25
             },
             kad: {
+                name: 'Nadoba s Shrink',
                 graphic: '0x1843',
                 color: '0x0724'
             },
@@ -1055,9 +1102,11 @@ var gameObject = {
             alchemySelection: 'Shrink'
         },
         lavabomb: {
+            name: 'Lava Bomb',
             graphic: '0x0F0D',
             color: '0x000E',
             kad: {
+                name: 'Nadoba s Lava Bomb',
                 graphic: '0x1843',
                 color: '0x000E'
             },
@@ -1112,6 +1161,14 @@ var gameObject = {
             color: '0x08A5',
             bag: {
                 x: 112,
+                y: 5
+            }
+        },
+        cestovniKniha: {
+            graphic: '0x22C5',
+            color: '0x0000',
+            bag: {
+                x: 117,
                 y: 5
             }
         }
@@ -1237,6 +1294,7 @@ var gameObject = {
         },
         necro: {
             vfp: {
+                name: 'Fire Bolt scroll',
                 graphic: '0x0E35',
                 color: '0x0070',
                 minMana: 20
@@ -1246,6 +1304,7 @@ var gameObject = {
                 color: '0x0010'
             },
             kalnox: {
+                name: 'Summon Undead scroll',
                 graphic: '0x0E35',
                 color: '0x0005'
             }
@@ -1479,6 +1538,10 @@ var gameObject = {
     },
     klamak: {
         lvl1: {
+            bird: {
+                graphic: '0x20EE',
+                color: '0xFFFF'
+            },
             giantRat: {
                 graphic: '0x20D0',
                 color: '0xFFFF'
@@ -1613,11 +1676,55 @@ var trackingFilter = {
     '0x20D9': ['Gargoyle'],
     '0x2100': []
 };
+function displayDrinkInfo(potionName) {
+    var drinkTimer = 17500;
+    var gsTimer = 130000;
+    var time = 1000;
+    Orion.Wait(time);
+    while (Orion.Timer(TimersEnum.drink) >= 1000) {
+        if (time >= drinkTimer) {
+            Scripts.Utils.playerPrint("[ MUZES PIT ]", ColorEnum.green);
+            break;
+        }
+        var addTime = 250;
+        Orion.Wait(addTime);
+        time += addTime;
+    }
+    if (potionName === PotionsEnum.gs) {
+        while (Orion.Timer(TimersEnum.gs) >= 1000) {
+            if (time >= gsTimer) {
+                Scripts.Utils.playerPrint("[ konci GS ]", ColorEnum.orange);
+                break;
+            }
+            var addTime = 250;
+            Orion.Wait(addTime);
+            time += addTime;
+        }
+    }
+}
+function displayHidingInfo() {
+    Orion.ClearJournal();
+    Scripts.Utils.waitWhileSomethingInJournal(['You have hidden yourself well', 't seem to hide here']);
+    if (Orion.InJournal('You have hidden yourself well')) {
+        Orion.CharPrint(Player.Serial(), ColorEnum.green, '[ Hidden ]');
+    }
+    if (Orion.InJournal('t seem to hide here')) {
+        Orion.CharPrint(Player.Serial(), ColorEnum.red, '[ FAILED ]');
+    }
+}
+function version() {
+    Orion.Print(-1, '+-------------');
+    Orion.Print(-1, 'msviha/orionuo');
+    Orion.Print(-1, 'version 0.0.9');
+    Orion.Print(-1, '-------------+');
+}
 function Autostart() {
+    version();
     var previousLastAttackSerial;
     var previousLastAttackHp;
     var previousPlayerHp;
     var updateRate = 500;
+    Scripts.Dress.saveEquip();
     while (true) {
         Scripts.Utils.printDamage(Player.Serial(), previousPlayerHp);
         previousPlayerHp = Player.Hits();
@@ -1663,6 +1770,10 @@ function castNecroScroll(scroll, target) {
 function castScroll(scroll, target, backupHeadCast) {
     Scripts.Spells.castScroll(scroll, target, backupHeadCast);
 }
+function cestovniKniha(selection) {
+    if (selection === void 0) { selection = PortBookOptionsEnum.kop; }
+    Scripts.Port.cestovniKniha(selection);
+}
 function cleanObjectInBag(object, objectName) {
     Scripts.Clean.cleanObjectInBag(object, objectName);
 }
@@ -1672,15 +1783,19 @@ function craftNext() {
 function craftSelect() {
     Scripts.Crafting.confirmMakeMenu();
 }
-function drink(potionName, switchWarModeWhenNeeded) {
+function drink(potionName, switchWarModeWhenNeeded, displayTimers) {
     if (switchWarModeWhenNeeded === void 0) { switchWarModeWhenNeeded = true; }
-    Scripts.Potions.drinkPotion(potionName, switchWarModeWhenNeeded);
+    if (displayTimers === void 0) { displayTimers = true; }
+    Scripts.Potions.drinkPotion(potionName, switchWarModeWhenNeeded, displayTimers);
 }
 function drum(target) {
     Scripts.Music.drum(target);
 }
 function enemy() {
     Scripts.Targeting.addEnemy();
+}
+function equip() {
+    Scripts.Dress.equip();
 }
 function fillPotion(potionName, switchWarModeWhenNeeded) {
     if (switchWarModeWhenNeeded === void 0) { switchWarModeWhenNeeded = true; }
@@ -1739,7 +1854,7 @@ function manualTarget() {
     Scripts.Targeting.manualTarget();
 }
 function nbRune() {
-    Scripts.Wip.Nbruna();
+    Scripts.Port.nbRune();
 }
 function mount() {
     Scripts.Mount.mountAndDismount();
@@ -1754,23 +1869,37 @@ function resetEnemies() {
 function resetFriends() {
     Scripts.Targeting.resetFriends();
 }
+function resetStats() {
+    Scripts.Dress.resetStats();
+}
+function saveEquip() {
+    Scripts.Dress.saveEquip();
+}
 function summon(creature, target) {
     Scripts.Spells.summon(creature, target);
 }
 function taming() {
     Scripts.Taming.taming();
 }
+function tamingTrain(robeOfDruids) {
+    if (robeOfDruids === void 0) { robeOfDruids = true; }
+    Scripts.Taming.trainOnAnimalsAround(robeOfDruids);
+}
 function targetNext(timeToStorePreviousTargets, additionalFlags, notoriety) {
-    if (timeToStorePreviousTargets === void 0) { timeToStorePreviousTargets = 2500; }
+    if (timeToStorePreviousTargets === void 0) { timeToStorePreviousTargets = 1500; }
     Scripts.Targeting.targetNext(false, timeToStorePreviousTargets, additionalFlags, notoriety);
 }
 function targetPrevious(timeToStorePreviousTargets, additionalFlags, notoriety) {
-    if (timeToStorePreviousTargets === void 0) { timeToStorePreviousTargets = 2500; }
+    if (timeToStorePreviousTargets === void 0) { timeToStorePreviousTargets = 1500; }
     Scripts.Targeting.targetNext(true, timeToStorePreviousTargets, additionalFlags, notoriety);
 }
 function tracking(who) {
     if (who === void 0) { who = 'Players'; }
     Scripts.Wip.Tracking(who);
+}
+function travelBook(selection) {
+    if (selection === void 0) { selection = PortBookOptionsEnum.kop; }
+    Scripts.Port.travelBook(selection);
 }
 function unlock() {
     Scripts.Lockpicking.unlock();
@@ -1852,6 +1981,27 @@ function parseParam(param) {
     }
     return param;
 }
+var Scripts;
+(function (Scripts) {
+    var Auto = (function () {
+        function Auto() {
+        }
+        Auto.killObject = function (serialToKill) {
+            Orion.Attack(serialToKill);
+            Orion.Wait(6000);
+            var enemy = Orion.FindObject(serialToKill);
+            if (enemy) {
+                while (enemy && !enemy.Dead()) {
+                    Orion.WalkTo(enemy.X(), enemy.Y(), enemy.Z(), 1);
+                    Orion.Wait(2000);
+                    enemy = Orion.FindObject(serialToKill);
+                }
+            }
+        };
+        return Auto;
+    }());
+    Scripts.Auto = Auto;
+})(Scripts || (Scripts = {}));
 var Scripts;
 (function (Scripts) {
     var Clean = (function () {
@@ -1947,6 +2097,10 @@ var Scripts;
             Orion.Print(ColorEnum.none, 'Start Hiding');
             Orion.UseSkill('Hiding');
             Orion.Wait(100);
+            if (Orion.InJournal('You must wait')) {
+                return;
+            }
+            Scripts.Utils.resetTimer(TimersEnum.hiding);
             while (Orion.InJournal('preoccupied')) {
                 Orion.ClearJournal();
                 Orion.WarMode(true);
@@ -1954,20 +2108,13 @@ var Scripts;
                 Orion.Print(ColorEnum.none, 'preoccupied - trying to hide again');
                 Orion.UseSkill('Hiding');
             }
-            var timeToHide = 2000;
-            Orion.AddDisplayTimer('hiding', 2000, 'AboveChar', 'bar', "Hiding", 0, 100, '0x100', 0, 'red');
-            Orion.Wait(timeToHide);
-            if (Orion.InJournal('You have hidden yourself well')) {
-                Orion.CharPrint(Player.Serial(), ColorEnum.green, '[ Hidden ]');
-            }
-            if (Orion.InJournal('t seem to hide here')) {
-                Orion.CharPrint(Player.Serial(), ColorEnum.red, '[ FAILED ]');
-            }
+            Orion.AddDisplayTimer(TimersEnum.hiding, 2000, 'AboveChar', 'bar', "Hiding", 0, 100, '0x100', 0, 'red');
+            Orion.Exec('displayHidingInfo', true);
         };
         Common.bandageSelf = function (minimalCountToWarn, pathToNoBandagesWavFile) {
             if (minimalCountToWarn === void 0) { minimalCountToWarn = 10; }
             if (pathToNoBandagesWavFile === void 0) { pathToNoBandagesWavFile = 'C:/critical.wav'; }
-            var bandagesSerials = Orion.FindType(gameObject.uncategorized.bandy.graphic, gameObject.uncategorized.bandy.color);
+            var bandagesSerials = Orion.FindType(gameObject.uncategorized.bandy.graphic);
             var count = Scripts.Utils.countItemsBySerials(bandagesSerials);
             if (!count) {
                 Orion.PlayWav(pathToNoBandagesWavFile);
@@ -2316,46 +2463,60 @@ var Scripts;
         function Dress() {
         }
         Dress.resetStats = function () {
-            var _a;
+            var currentEquip = Scripts.Dress.getSerialsFromCurrentEquip();
             var tbObj = gameObject.books.travelBook;
-            var travelBooks = Orion.FindType(tbObj.graphic, tbObj.color);
-            if (!travelBooks.length) {
-                Scripts.Utils.log('NEMAS TRAVEL BOOK', ColorEnum.red);
+            var travelBook = Scripts.Utils.findFirstType(tbObj);
+            var cestovniObj = gameObject.books.cestovniKniha;
+            var cestovniBook = Scripts.Utils.findFirstType(cestovniObj);
+            if (!travelBook && !cestovniBook) {
+                Scripts.Utils.log('NEMAS TRAVEL BOOK NEBO CESTOVNI KNIHU', ColorEnum.red);
                 return;
             }
-            Orion.UseObject(travelBooks[0]);
-            var requiredMenuName = 'Po pouziti vam budou opraveny staty na spravne hodnoty. Pozor, pri oprave vam spadne vase brneni do batuzku!';
-            var openedMenu = Orion.WaitForGump(2000) && ((_a = Orion.GetLastGump()) === null || _a === void 0 ? void 0 : _a.Select(Orion.CreateGumpHook(2))) &&
-                Orion.WaitForMenu(2000) &&
-                Orion.GetMenu('last');
-            (openedMenu === null || openedMenu === void 0 ? void 0 : openedMenu.Name()) === requiredMenuName && openedMenu.Select('Ano, oprav');
+            if (travelBook) {
+                Scripts.Port.travelBook(PortBookOptionsEnum.opravaStats);
+            }
+            else {
+                Scripts.Port.cestovniKniha(PortBookOptionsEnum.opravaStats);
+            }
+            Orion.Wait(responseDelay);
+            Scripts.Dress.equip(currentEquip);
         };
-        Dress.setDress = function () {
-            var maximumDressParts = 20;
-            for (var i = 0; i < maximumDressParts; i++) {
-                if (!Orion.FindObject('Dress.Object' + i)) {
+        Dress.getSerialsFromCurrentEquip = function () {
+            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q;
+            var serials = [];
+            serials.push((_a = Orion.ObjAtLayer(14, 'self')) === null || _a === void 0 ? void 0 : _a.Serial());
+            serials.push((_b = Orion.ObjAtLayer(2, 'self')) === null || _b === void 0 ? void 0 : _b.Serial());
+            serials.push((_c = Orion.ObjAtLayer(13, 'self')) === null || _c === void 0 ? void 0 : _c.Serial());
+            serials.push((_d = Orion.ObjAtLayer(4, 'self')) === null || _d === void 0 ? void 0 : _d.Serial());
+            serials.push((_e = Orion.ObjAtLayer(24, 'self')) === null || _e === void 0 ? void 0 : _e.Serial());
+            serials.push((_f = Orion.ObjAtLayer(19, 'self')) === null || _f === void 0 ? void 0 : _f.Serial());
+            serials.push((_g = Orion.ObjAtLayer(6, 'self')) === null || _g === void 0 ? void 0 : _g.Serial());
+            serials.push((_h = Orion.ObjAtLayer(7, 'self')) === null || _h === void 0 ? void 0 : _h.Serial());
+            serials.push((_j = Orion.ObjAtLayer(10, 'self')) === null || _j === void 0 ? void 0 : _j.Serial());
+            serials.push((_k = Orion.ObjAtLayer(1, 'self')) === null || _k === void 0 ? void 0 : _k.Serial());
+            serials.push((_l = Orion.ObjAtLayer(22, 'self')) === null || _l === void 0 ? void 0 : _l.Serial());
+            serials.push((_m = Orion.ObjAtLayer(3, 'self')) === null || _m === void 0 ? void 0 : _m.Serial());
+            serials.push((_o = Orion.ObjAtLayer(17, 'self')) === null || _o === void 0 ? void 0 : _o.Serial());
+            serials.push((_p = Orion.ObjAtLayer(12, 'self')) === null || _p === void 0 ? void 0 : _p.Serial());
+            serials.push((_q = Orion.ObjAtLayer(20, 'self')) === null || _q === void 0 ? void 0 : _q.Serial());
+            return serials;
+        };
+        Dress.saveEquip = function () {
+            var equipSerials = Scripts.Dress.getSerialsFromCurrentEquip();
+            Shared.AddArray('savedEquip', equipSerials);
+            Scripts.Utils.playerPrint('ULOZEN EQUIP');
+        };
+        Dress.equip = function (eq) {
+            if (!eq) {
+                eq = Shared.GetArray('savedEquip');
+            }
+            for (var _i = 0, eq_1 = eq; _i < eq_1.length; _i++) {
+                var s = eq_1[_i];
+                if (!s) {
                     continue;
                 }
-                Orion.RemoveObject('Dress.Object' + i);
-                Orion.Wait(250);
-            }
-            Orion.ClearJournal();
-            for (var i = 0; i < maximumDressParts; i++) {
-                if (Orion.InJournal('stopdress')) {
-                    break;
-                }
-                Orion.AddObject('Dress.Object' + i);
-                Orion.Print('-1', 'Target your dress. Type "stopdress" when done');
-                Orion.Wait(250);
-            }
-        };
-        Dress.dressUp = function () {
-            for (var i = 0; i < 20; i++) {
-                if (!Orion.FindObject('Dress.Object' + i)) {
-                    continue;
-                }
-                Orion.UseObject('Dress.Object' + i);
-                Orion.Wait(250);
+                Orion.Equip(s);
+                Orion.Wait(150);
             }
         };
         return Dress;
@@ -2684,18 +2845,7 @@ var Scripts;
                 return;
             }
             var serialToAttack = enemySerialsAround[0];
-            Orion.Attack(serialToAttack);
-            Orion.Wait(6000);
-            var enemy = Orion.FindObject(serialToAttack);
-            if (enemy) {
-                Scripts.Utils.log('WalkTo');
-                while (enemy && !enemy.Dead()) {
-                    Orion.WalkTo(enemy.X(), enemy.Y(), enemy.Z(), 1);
-                    Orion.Wait(2000);
-                    enemy = Orion.FindObject(serialToAttack);
-                }
-                Scripts.Utils.log('end');
-            }
+            Scripts.Auto.killObject(serialToAttack);
         };
         Loot.lootAllFrom = function (delay) {
             if (delay === void 0) { delay = responseDelay; }
@@ -2752,6 +2902,36 @@ var Scripts;
             var visitedCoordinates = [];
             Scripts.Mining.saveCurrentPositionToArray(visitedCoordinates);
             Scripts.Mining.recurseMine(DirectionEnum.East, visitedCoordinates);
+        };
+        Mining.miningPort = function () {
+            Scripts.Mining.mining();
+            Scripts.Mining.portAndMoveToTreasure();
+        };
+        Mining.portAndMoveToTreasure = function () {
+            Orion.ClearJournal();
+            Scripts.Port.nbRune();
+            Scripts.Utils.waitWhileSomethingInJournal(['been teleported']);
+            var container = Orion.FindObject('miningTreasure');
+            Orion.WalkTo(container.X(), container.Y(), container.Z(), 1);
+            Orion.Wait(4000);
+            for (var ing in gameObject.resources.ingots) {
+                var ingotGraphic = gameObject.resources.ingots[ing].graphic;
+                var ingSerials = Orion.FindType(ingotGraphic);
+                for (var _i = 0, ingSerials_1 = ingSerials; _i < ingSerials_1.length; _i++) {
+                    var s = ingSerials_1[_i];
+                    Orion.MoveItem(s, undefined, 'miningTreasure');
+                    Orion.Wait(responseDelay);
+                }
+            }
+            for (var ore in gameObject.resources.ore) {
+                var oreGraphic = gameObject.resources.ore[ore].graphic;
+                var oreSerials = Orion.FindType(oreGraphic);
+                for (var _a = 0, oreSerials_1 = oreSerials; _a < oreSerials_1.length; _a++) {
+                    var s = oreSerials_1[_a];
+                    Orion.MoveItem(s, undefined, 'miningTreasure');
+                    Orion.Wait(responseDelay);
+                }
+            }
         };
         Mining.saveCurrentPositionToArray = function (arr) {
             arr.push({ x: Player.X(), y: Player.Y() });
@@ -2900,19 +3080,36 @@ var Scripts;
                             }
                         }
                     }
+                    if (!drop && Orion.InJournal('is too heavy')) {
+                        Scripts.Port.travelBook(PortBookOptionsEnum.mark);
+                        Orion.Wait(1000);
+                        Scripts.Mining.portAndMoveToTreasure();
+                        Orion.ClearJournal();
+                        Orion.Wait(1000);
+                        Scripts.Port.travelBook(PortBookOptionsEnum.kop);
+                        Scripts.Utils.waitWhileSomethingInJournal(['been teleported']);
+                        Orion.Wait(1000);
+                        var oreToPick = Orion.FindType("0x19B7|0x19BA|0x19B8|0x19B9", "-1", "ground", "item", 0);
+                        for (var _c = 0, oreToPick_1 = oreToPick; _c < oreToPick_1.length; _c++) {
+                            var ore = oreToPick_1[_c];
+                            Orion.MoveItem(ore);
+                        }
+                        Orion.Wait(1000);
+                    }
                     var forges = Orion.FindType('0x0FB1', '0x0000', 'ground', 'item', 3, '-1', true);
                     if (forges.length) {
                         drop && Orion.Wait(500);
-                        for (var _c = 0, ores_2 = ores; _c < ores_2.length; _c++) {
-                            var oreGraphic = ores_2[_c];
+                        for (var _d = 0, ores_2 = ores; _d < ores_2.length; _d++) {
+                            var oreGraphic = ores_2[_d];
                             var serials = Orion.FindType(oreGraphic);
                             if (!serials.length) {
                                 continue;
                             }
-                            for (var _d = 0, serials_3 = serials; _d < serials_3.length; _d++) {
-                                var serial = serials_3[_d];
+                            for (var _e = 0, serials_3 = serials; _e < serials_3.length; _e++) {
+                                var serial = serials_3[_e];
                                 Orion.UseObject(forges[0]);
-                                if (Orion.InJournal('reach that')) {
+                                Orion.Wait(responseDelay);
+                                if (Orion.InJournal('reach that|far')) {
                                     Orion.CancelTarget();
                                     break;
                                 }
@@ -3202,31 +3399,115 @@ var Scripts;
 })(Scripts || (Scripts = {}));
 var Scripts;
 (function (Scripts) {
+    var Port = (function () {
+        function Port() {
+        }
+        Port.nbRune = function () {
+            var selections = [{
+                    type: SelectionTypeEnum.gump,
+                    selection: 1
+                }];
+            var nbRuna = gameObject.uncategorized.nbRuna;
+            var serial = Scripts.Utils.findFirstType(nbRuna);
+            if (!serial) {
+                Scripts.Utils.log('NEMAS NB RUNU', ColorEnum.red);
+            }
+            Scripts.Utils.useAndSelect(serial, selections);
+        };
+        Port.travelBook = function (selection) {
+            if (selection === void 0) { selection = PortBookOptionsEnum.kop; }
+            var selections;
+            switch (selection) {
+                case PortBookOptionsEnum.opravaStats:
+                    selections = [{
+                            type: SelectionTypeEnum.gump,
+                            selection: 2
+                        }, {
+                            type: SelectionTypeEnum.menu,
+                            selection: { name: '', selection: 'Ano, oprav' }
+                        }];
+                    break;
+                case PortBookOptionsEnum.mark:
+                    selections = [{
+                            type: SelectionTypeEnum.gump,
+                            selection: 4
+                        }, {
+                            type: SelectionTypeEnum.gump,
+                            selection: 3
+                        }];
+                    break;
+                default:
+                    selections = [{
+                            type: SelectionTypeEnum.gump,
+                            selection: 4
+                        }, {
+                            type: SelectionTypeEnum.gump,
+                            selection: 1
+                        }];
+            }
+            var book = gameObject.books.travelBook;
+            var serial = Scripts.Utils.findFirstType(book);
+            if (!serial) {
+                Scripts.Utils.log('NEMAS TRAVEL BOOK', ColorEnum.red);
+            }
+            Scripts.Utils.useAndSelect(serial, selections);
+        };
+        Port.cestovniKniha = function (selection) {
+            if (selection === void 0) { selection = PortBookOptionsEnum.kop; }
+            var selections;
+            switch (selection) {
+                case PortBookOptionsEnum.opravaStats:
+                    selections = [{
+                            type: SelectionTypeEnum.gump,
+                            selection: 2
+                        }, {
+                            type: SelectionTypeEnum.menu,
+                            selection: { name: '', selection: 'Ano, oprav' }
+                        }];
+                    break;
+                case PortBookOptionsEnum.mark:
+                    selections = [{
+                            type: SelectionTypeEnum.gump,
+                            selection: 7
+                        }];
+                    break;
+                default:
+                    selections = [{
+                            type: SelectionTypeEnum.gump,
+                            selection: 5
+                        }];
+            }
+            var book = gameObject.books.cestovniKniha;
+            var serial = Scripts.Utils.findFirstType(book);
+            if (!serial) {
+                Scripts.Utils.log('NEMAS CESTOVNI KNIHU', ColorEnum.red);
+            }
+            Scripts.Utils.useAndSelect(serial, selections);
+        };
+        return Port;
+    }());
+    Scripts.Port = Port;
+})(Scripts || (Scripts = {}));
+var Scripts;
+(function (Scripts) {
     var Potions = (function () {
         function Potions() {
         }
         Potions.getEmptyBottle = function () {
-            var emptyBottles = Orion.FindType(gameObject.uncategorized.emptyBottles.graphic, gameObject.uncategorized.emptyBottles.color);
-            if (!emptyBottles.length) {
+            var emptyBottles = Scripts.Utils.findFirstType(gameObject.uncategorized.emptyBottles);
+            if (!emptyBottles) {
                 Scripts.Utils.log("Nemas prazdne lahve", ColorEnum.red);
                 throw 'Nemas prazdne lahve';
             }
-            return emptyBottles[0];
+            return emptyBottles;
         };
         Potions.getKadForPotion = function (potion) {
-            var kade = Orion.FindType(potion.kad.graphic, potion.kad.color);
-            if (!kade.length) {
+            var kad = Scripts.Utils.findFirstType(potion.kad);
+            if (!kad) {
                 Scripts.Utils.log("Nemas kad s potionem", ColorEnum.red);
                 throw 'Nemas kad s potionem';
             }
-            return kade[0];
-        };
-        Potions.getPotion = function (potion) {
-            var potions = Orion.FindType(potion.graphic, potion.color);
-            if (!potions.length) {
-                return false;
-            }
-            return potions[0];
+            return kad;
         };
         Potions.getMortar = function () {
             var mortars = Orion.FindType(gameObject.uncategorized.mortar.graphic, gameObject.uncategorized.mortar.color);
@@ -3236,28 +3517,39 @@ var Scripts;
             }
             return mortars[0];
         };
-        Potions.drinkPotion = function (potionName, switchWarModeWhenNeeded) {
+        Potions.drinkPotion = function (potionName, switchWarModeWhenNeeded, displayTimers, displayInfo) {
             if (switchWarModeWhenNeeded === void 0) { switchWarModeWhenNeeded = true; }
+            if (displayTimers === void 0) { displayTimers = true; }
+            if (displayInfo === void 0) { displayInfo = true; }
             if (!isPotionsEnum(potionName)) {
                 return;
             }
             var p = gameObject.potions[potionName];
-            var potion = Scripts.Potions.getPotion(p);
+            var potion = Scripts.Utils.findFirstType(p);
             if (!potion) {
                 Scripts.Potions.fillPotion(potionName, switchWarModeWhenNeeded);
-                potion = Scripts.Potions.getPotion(p);
+                potion = Scripts.Utils.findFirstType(p);
                 if (!potion) {
                     Scripts.Utils.playerPrint("!! NEMAS [ " + potionName + " ] !!", ColorEnum.red);
                     return;
                 }
             }
+            Orion.ClearJournal();
+            Orion.Wait(50);
             Orion.UseObject(potion);
             Orion.Wait(responseDelay);
             if (Orion.InJournal('You put the empty bottless')) {
-                Orion.AddDisplayTimer(TimersEnum.drink, 18000, 'RightTop', 'Circle', 'Drink potion', 0, 0, '0x100', 0, 'red');
+                var drinkTimer = 17500;
+                var gsTimer = 130000;
+                displayTimers && Orion.AddDisplayTimer(TimersEnum.drink, drinkTimer, 'LeftTop', 'Line|Bar', 'Drink', 0, 0, '0x88B', 0, '0x88B');
                 Scripts.Utils.resetTimer(TimersEnum.drink);
                 var potionsCount = Orion.Count(p.graphic, p.color);
                 Scripts.Utils.playerPrint("[ " + potionName + " " + potionsCount + " ]", potionsCount === 0 ? ColorEnum.red : ColorEnum.green);
+                if (potionName === PotionsEnum.gs) {
+                    displayTimers && Orion.AddDisplayTimer(TimersEnum.gs, gsTimer, 'LeftTop', 'Line|Bar', 'GS', 0, 55, '0x88B', 0, '0x88B');
+                    Scripts.Utils.resetTimer(TimersEnum.gs);
+                }
+                displayInfo && Orion.Exec('displayDrinkInfo', false, [potionName.toString()]);
             }
         };
         Potions.gmMortar = function (potionName) {
@@ -3327,7 +3619,7 @@ var Scripts;
                 Orion.UseObject(mortar);
                 Scripts.Utils.waitWhileSomethingInJournal(['You pour']);
                 Orion.ClearJournal();
-                var potion = Scripts.Potions.getPotion(p);
+                var potion = Scripts.Utils.findFirstType(p);
                 var kad = Scripts.Potions.getKadForPotion(p);
                 Orion.WaitTargetObject(potion);
                 Orion.UseObject(kad);
@@ -3390,10 +3682,10 @@ var Scripts;
             }
             Orion.ClearJournal();
             Scripts.Utils.waitTarget(target);
-            Orion.UseType(s.graphic, s.color);
+            Orion.UseType(s.graphic);
             Scripts.Utils.waitWhileSomethingInJournal(['Select Target', 'You can\'t cast']);
             if (Orion.InJournal('Select Target')) {
-                Orion.AddDisplayTimer('scroll', s.timer, 'AboveChar', 'bar', '', 0, 75, '0x100', 1, 'yellow');
+                s.timer && Orion.AddDisplayTimer('scroll', s.timer, 'AboveChar', 'bar', '', 0, 75, '0x100', 1, 'yellow');
             }
             else {
                 var reason = 'TIMER';
@@ -3410,22 +3702,21 @@ var Scripts;
                 Scripts.Utils.playerPrint('!! MANA !!', ColorEnum.red);
                 return;
             }
-            if (Orion.Count(s.graphic, s.color) < 1) {
+            var scrollSerial = Scripts.Utils.findFirstType(s);
+            if (!scrollSerial) {
                 Scripts.Utils.playerPrint("NEMAS SVITKY " + scroll, ColorEnum.red);
                 return;
             }
-            var lastTimerLimit = parseInt(Orion.GetGlobal('lastNecroScrollTimerLimit'), 10);
-            var nextTimer = s.timer;
-            var timer = Orion.Timer('necroScrollTimer');
-            var cantCast = timer !== -1 && timer < lastTimerLimit;
-            if (cantCast) {
-                Scripts.Utils.playerPrint('TIMER na svitky', ColorEnum.red);
-                return;
-            }
+            Orion.ClearJournal();
             Scripts.Utils.waitTarget(target);
-            Orion.UseType(s.graphic, s.color);
-            Scripts.Utils.resetTimer('necroScrollTimer');
-            Orion.SetGlobal('lastNecroScrollTimerLimit', s.timer);
+            Orion.UseObject(scrollSerial);
+            Scripts.Utils.waitWhileSomethingInJournal(['Select Target', 'You can\'t cast']);
+            if (Orion.InJournal('Select Target')) {
+                s.timer && Orion.AddDisplayTimer('scroll', s.timer, 'AboveChar', 'bar', '', 0, 75, '0x100', 1, 'yellow');
+            }
+            else {
+                Scripts.Utils.playerPrint('TIMER', ColorEnum.red);
+            }
         };
         Spells.castUntilSuccess = function (spell, target, castTime) {
             do {
@@ -3473,7 +3764,7 @@ var Scripts;
                 }
                 totalTries++;
                 Scripts.Utils.log("napsano " + finishedCount + " / " + totalTries);
-                if (Player.Mana() + 60 < Player.Int()) {
+                if (Player.Mana() + 70 < Player.Int()) {
                     var isDrinkTimerSet = Orion.Timer(TimersEnum.drink) !== -1;
                     while (isDrinkTimerSet && Orion.Timer(TimersEnum.drink) < 18000) {
                         Orion.Wait(200);
@@ -3492,23 +3783,22 @@ var Scripts;
         function Taming() {
         }
         Taming.useTrainingTamingStaff = function (targetSerial) {
-            Orion.Disarm();
-            Orion.Wait(500);
-            var staff = Orion.FindType(gameObject.taming.staffs.training.graphic, gameObject.taming.staffs.training.color);
-            if (!staff.length) {
+            var staff = Scripts.Utils.findFirstType(gameObject.taming.staffs.training, 2);
+            if (!staff) {
                 Scripts.Utils.log('missing training taming staff', ColorEnum.red);
                 return false;
             }
             Orion.WaitTargetObject(targetSerial);
-            Orion.UseObject(staff[0]);
+            Orion.UseObject(staff);
             while (!Orion.InJournal('What do you want to use this on')) {
                 Orion.Wait(500);
                 Orion.WaitTargetObject(targetSerial);
-                Orion.UseObject(staff[0]);
+                Orion.UseObject(staff);
             }
             return true;
         };
-        Taming.waitOnTaming = function () {
+        Taming.waitOnTaming = function (animalSerial) {
+            var animal = Orion.FindObject(animalSerial);
             while (!(Orion.InJournal('Your taming failed') ||
                 Orion.InJournal('Ochoceni se nezdarilo') ||
                 Orion.InJournal('Too far') ||
@@ -3517,6 +3807,7 @@ var Scripts;
                 Orion.InJournal('Cannot learn anything more') ||
                 Orion.InJournal('You are not able to tame this animal'))) {
                 Orion.Wait(500);
+                Orion.WalkTo(animal.X(), animal.Y(), animal.Z(), 1);
             }
         };
         Taming.dressRobeOfDruids = function () {
@@ -3531,68 +3822,64 @@ var Scripts;
             Orion.Unequip('Robe');
             Orion.Wait(1000);
         };
-        Taming.trainOnAnimal = function (animalSerial) {
+        Taming.trainOnAnimal = function (animalSerial, ranger) {
+            if (ranger === void 0) { ranger = true; }
             Scripts.Utils.log('train on animal serial ' + animalSerial);
             var animal = Orion.FindObject(animalSerial);
             Orion.SetGlobal('tamingCounter', (parseInt(Orion.GetGlobal('tamingCounter'), 10) + 1).toString(10));
             if (parseInt(Orion.GetGlobal('tamingCounter'), 10) > 33) {
-                Scripts.Taming.dressRobeOfDruids();
+                ranger && Scripts.Taming.dressRobeOfDruids();
             }
             Orion.ClearJournal();
             if (!Scripts.Taming.useTrainingTamingStaff(animalSerial)) {
                 return;
             }
-            Scripts.Taming.waitOnTaming();
-            if (Orion.InJournal('You are not able to tame this animal')) {
-                if (Scripts.Taming.dressRobeOfDruids()) {
-                    Scripts.Taming.trainOnAnimal(animalSerial);
-                }
-                return;
-            }
-            if (Orion.InJournal('Cannot learn anything more') ||
+            Scripts.Taming.waitOnTaming(animalSerial);
+            if (Orion.InJournal('You are not able to tame this animal') ||
+                Orion.InJournal('Cannot learn anything more') ||
                 Orion.InJournal('Not tamable')) {
-                Orion.Disarm();
-                Orion.Wait(500);
-                Scripts.Taming.undressRobe();
-                Scripts.Utils.log('kill animal serial ' + animalSerial);
-                Orion.CancelWaitTarget();
-                Orion.UseObject('0x40337EE9');
-                while (animal && !animal.Dead()) {
-                    Orion.Wait(500);
-                    Orion.WalkTo(animal.X(), animal.Y(), animal.Z(), 0);
-                    Orion.Attack(animalSerial);
-                    Orion.Wait(2000);
-                    animal = Orion.FindObject(animalSerial);
+                if (ranger && Scripts.Taming.dressRobeOfDruids()) {
+                    Scripts.Taming.trainOnAnimal(animalSerial, ranger);
+                    return;
                 }
+                ranger && Scripts.Taming.undressRobe();
+                Scripts.Utils.log('kill animal serial ' + animalSerial);
+                Orion.Equip('fightWeapon');
+                Scripts.Auto.killObject(animalSerial);
                 return;
             }
             if (Orion.InJournal('Your taming failed') ||
                 Orion.InJournal('Ochoceni se nezdarilo')) {
-                Scripts.Taming.trainOnAnimal(animalSerial);
+                Scripts.Taming.trainOnAnimal(animalSerial, ranger);
                 return;
             }
             if (Orion.InJournal('Too far')) {
                 Orion.Wait(500);
-                Orion.WalkTo(animal.X(), animal.Y(), animal.Z(), 0);
+                Orion.WalkTo(animal.X(), animal.Y(), animal.Z(), 1);
                 Orion.Wait(2000);
-                Scripts.Taming.trainOnAnimal(animalSerial);
+                Scripts.Taming.trainOnAnimal(animalSerial, ranger);
                 return;
             }
             if (Orion.InJournal('byl tamnut')) {
-                Scripts.Taming.undressRobe();
+                ranger && Scripts.Taming.undressRobe();
                 return true;
             }
         };
-        Taming.trainOnAnimalsAround = function () {
+        Taming.trainOnAnimalsAround = function (ranger) {
+            if (ranger === void 0) { ranger = true; }
+            if (!Orion.FindObject('fightWeapon')) {
+                Scripts.Utils.playerPrint('Target your weapon');
+                Orion.WaitForAddObject('fightWeapon', 60000);
+            }
             Orion.IgnoreReset();
             Orion.ClearJournal();
-            Scripts.Taming.undressRobe();
-            var monstersAround = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "live", 22, "gray");
+            ranger && Scripts.Taming.undressRobe();
+            var monstersAround = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "nothuman|live|near", 22, "gray");
             while (monstersAround.length) {
                 Orion.Ignore(monstersAround[0]);
                 Orion.SetGlobal('tamingCounter', '0');
-                Scripts.Taming.trainOnAnimal(monstersAround[0]);
-                monstersAround = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "live", 22, "gray");
+                Scripts.Taming.trainOnAnimal(monstersAround[0], ranger);
+                monstersAround = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "nothuman|live|near", 22, "gray");
             }
         };
         Taming.useShrinkKad = function () {
@@ -3600,13 +3887,11 @@ var Scripts;
             Orion.UseType(kad.graphic, kad.color);
         };
         Taming.taming = function () {
-            Orion.Disarm();
-            Orion.Wait(responseDelay);
             var loadedStaff = gameObject.taming.staffs.tamingShrink;
-            var loadedStaffSerials = Orion.FindType(loadedStaff.graphic, loadedStaff.color);
+            var loadedStaffSerial = Scripts.Utils.findFirstType(loadedStaff, 2);
             var staff = gameObject.taming.staffs.taming;
-            var staffSerials = Orion.FindType(staff.graphic, staff.color);
-            if (!loadedStaffSerials.length && staffSerials.length) {
+            var staffSerial = Scripts.Utils.findFirstType(staff, 2);
+            if (!loadedStaffSerial && staffSerial) {
                 var shrink = gameObject.potions.shrink;
                 var shrinkSerials = Orion.FindType(shrink.graphic, shrink.color);
                 var shrinkKadSerials = Orion.FindType(shrink.kad.graphic, shrink.kad.color);
@@ -3616,13 +3901,12 @@ var Scripts;
                 else if (shrinkKadSerials.length) {
                     Orion.WaitTargetObject(shrinkKadSerials[0]);
                 }
-                Orion.UseObject(staffSerials[0]);
+                Orion.UseObject(staffSerial);
                 Scripts.Utils.waitWhileSomethingInJournal(['Hul nabita']);
-                Orion.Disarm();
                 Orion.Wait(responseDelay);
             }
-            loadedStaffSerials = Orion.FindType(loadedStaff.graphic, loadedStaff.color);
-            if (!loadedStaffSerials) {
+            loadedStaffSerial = Scripts.Utils.findFirstType(loadedStaff, 2);
+            if (!loadedStaffSerial) {
                 Scripts.Utils.playerPrint('Nemas potrebne vybaveni na taming', ColorEnum.red);
                 return;
             }
@@ -3636,7 +3920,7 @@ var Scripts;
             while (!tamnuto) {
                 var target = Orion.FindObject('tamingTarget');
                 Orion.WaitTargetObject('tamingTarget');
-                Orion.UseObject(loadedStaffSerials[0]);
+                Orion.UseObject(loadedStaffSerial);
                 Scripts.Utils.waitWhileSomethingInJournal([
                     'Hul nabita',
                     'Your taming failed',
@@ -3663,8 +3947,6 @@ var Scripts;
                     }
                     tamnuto = true;
                 }
-                Orion.Disarm();
-                Orion.Wait(responseDelay);
                 Orion.ClearJournal();
             }
         };
@@ -3707,7 +3989,7 @@ var Scripts;
         };
         Targeting.targetNext = function (reverse, timeToStorePreviousTargets, additionalFlags, notoriety) {
             if (reverse === void 0) { reverse = false; }
-            if (timeToStorePreviousTargets === void 0) { timeToStorePreviousTargets = 2500; }
+            if (timeToStorePreviousTargets === void 0) { timeToStorePreviousTargets = 1500; }
             if (additionalFlags === void 0) { additionalFlags = []; }
             if (notoriety === void 0) { notoriety = []; }
             if (Orion.Timer('targetTimer') === -1) {
@@ -3808,6 +4090,33 @@ var Scripts;
             s.splice(0, 1);
             Scripts.Utils.selectMenu(menuToSelect, s, false);
         };
+        Utils.useAndSelect = function (serial, selections, use) {
+            var _a;
+            if (use === void 0) { use = true; }
+            use && Orion.UseObject(serial);
+            var selectionsDupe = __spreadArrays(selections);
+            var selection = selectionsDupe.shift();
+            if (selection.type === SelectionTypeEnum.gump) {
+                var s = selection.selection;
+                if (!Orion.WaitForGump(2000)) {
+                    return;
+                }
+                (_a = Orion.GetLastGump()) === null || _a === void 0 ? void 0 : _a.Select(Orion.CreateGumpHook(s));
+            }
+            else if (selection.type === SelectionTypeEnum.menu) {
+                var s = selection.selection;
+                if (!Orion.WaitForMenu(2000)) {
+                    return;
+                }
+                var lastMenu = Orion.GetMenu('last');
+                if (lastMenu.Name().indexOf(s.name) === 0) {
+                    lastMenu.Select(s.selection);
+                }
+            }
+            if (selectionsDupe.length) {
+                Scripts.Utils.useAndSelect(serial, selectionsDupe, false);
+            }
+        };
         Utils.refill = function (obj, sourceContainerId, quantity, targetContainerId, refillJustWhenIHaveNothing, itemName) {
             if (quantity === void 0) { quantity = 1; }
             if (targetContainerId === void 0) { targetContainerId = 'backpack'; }
@@ -3902,6 +4211,9 @@ var Scripts;
             else if (target === TargetEnum.self) {
                 Orion.WaitTargetObject(Player.Serial());
             }
+            else if (target !== undefined) {
+                Orion.WaitTargetObject(target);
+            }
         };
         Utils.resetTimer = function (timer) {
             Orion.RemoveTimer(timer);
@@ -3992,7 +4304,7 @@ var Scripts;
                 Orion.PrintFast(serial, Scripts.Utils.determineHpColor(hp / max * 100), 0, "[" + hp + "/" + max + "]");
             }
         };
-        Utils.use = function (val, name, minimalCountForWarn) {
+        Utils.use = function (val, name, minimalCountForWarn, warnWavPath) {
             if (name === void 0) { name = ''; }
             if (isMyGameObject(val)) {
                 val = [val];
@@ -4006,7 +4318,29 @@ var Scripts;
                     serials.push(s);
                 }
             }
+            if (!serials.length) {
+                for (var _b = 0, val_2 = val; _b < val_2.length; _b++) {
+                    var o = val_2[_b];
+                    if (!o.name) {
+                        continue;
+                    }
+                    var oSerials = Orion.FindType(o.graphic);
+                    for (var _c = 0, oSerials_2 = oSerials; _c < oSerials_2.length; _c++) {
+                        var s = oSerials_2[_c];
+                        Orion.Click(s);
+                        Orion.Wait(100);
+                        if (Orion.FindObject(s).Name().indexOf(o.name) === 0) {
+                            serials.push(s);
+                        }
+                    }
+                }
+            }
             var count = Scripts.Utils.countItemsBySerials(serials);
+            if (!count && warnWavPath) {
+                Orion.PlayWav(warnWavPath);
+                Scripts.Utils.playerPrint("!! NEMAS " + name + " !!", ColorEnum.red);
+                return;
+            }
             if ((minimalCountForWarn !== undefined && count <= minimalCountForWarn) || (minimalCountForWarn === undefined && !count)) {
                 Scripts.Utils.playerPrint("[ " + name + " " + count + " ]", ColorEnum.red);
             }
@@ -4020,6 +4354,41 @@ var Scripts;
             Orion.Print('-1', message);
             if (selection !== 1) {
                 throw 'bad target';
+            }
+        };
+        Utils.findFirstType = function (myGameObject, layer) {
+            var graphic = myGameObject.graphic;
+            var color = myGameObject.color;
+            var name = myGameObject.name;
+            var serials = Orion.FindType(graphic, color);
+            if (serials.length) {
+                return serials[0];
+            }
+            if (layer !== undefined) {
+                var l = Orion.ObjAtLayer(layer);
+                if (l && l.Graphic() === graphic && l.Color() === color) {
+                    return l.Serial();
+                }
+            }
+            if (!name) {
+                return;
+            }
+            serials = Orion.FindType(graphic);
+            for (var _i = 0, serials_5 = serials; _i < serials_5.length; _i++) {
+                var s = serials_5[_i];
+                Orion.Click(s);
+                Orion.Wait(100);
+                if (Orion.FindObject(s).Name().indexOf(name) === 0) {
+                    return s;
+                }
+            }
+            if (layer !== undefined) {
+                var l = Orion.ObjAtLayer(layer);
+                Orion.Click(l.Serial());
+                Orion.Wait(100);
+                if (l && l.Graphic() === graphic && l.Name() === name) {
+                    return l.Serial();
+                }
             }
         };
         return Utils;
@@ -4048,38 +4417,6 @@ var Scripts;
             var wm = Player.WarMode();
             if (!wm) {
                 Orion.WarMode(true);
-            }
-        };
-        Wip.Travel = function () {
-            var travel = gameObject.books.travelBook;
-            var travelSerials = Orion.FindType(travel.graphic, travel.color);
-            if (!travelSerials.length) {
-                Scripts.Utils.log('NEMAS TRAVEL BOOK', ColorEnum.red);
-            }
-            Orion.UseObject(travelSerials[0]);
-            if (Orion.WaitForGump(1000)) {
-                var gump0 = Orion.GetLastGump();
-                if (gump0 !== null) {
-                    gump0.Select(Orion.CreateGumpHook(4));
-                    if (Orion.WaitForGump(1000)) {
-                        var gump1 = Orion.GetLastGump();
-                        gump1.Select(Orion.CreateGumpHook(1));
-                    }
-                }
-            }
-        };
-        Wip.Nbruna = function () {
-            var nbRuna = gameObject.uncategorized.nbRuna;
-            var nbRunesSerials = Orion.FindType(nbRuna.graphic, nbRuna.color);
-            if (!nbRunesSerials.length) {
-                Scripts.Utils.log('NEMAS NB RUNU', ColorEnum.red);
-            }
-            Orion.UseObject(nbRunesSerials[0]);
-            if (Orion.WaitForGump(1000)) {
-                var gump0 = Orion.GetLastGump();
-                if (gump0 !== null) {
-                    gump0.Select(Orion.CreateGumpHook(1));
-                }
             }
         };
         Wip.Afk = function () {

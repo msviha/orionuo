@@ -28,44 +28,6 @@ namespace Scripts {
             }
         }
 
-        static Travel() {
-            const travel = <IMyGameObject>gameObject.books.travelBook;
-            const travelSerials = Orion.FindType(travel.graphic, travel.color);
-            if (!travelSerials.length) {
-                Scripts.Utils.log('NEMAS TRAVEL BOOK', ColorEnum.red);
-            }
-
-            Orion.UseObject(travelSerials[0]);
-            if (Orion.WaitForGump(1000)) {
-                let gump0 = Orion.GetLastGump();
-                if (gump0 !== null) {
-                    gump0.Select(Orion.CreateGumpHook(4));
-                    if  (Orion.WaitForGump(1000)) {
-                        let gump1 = Orion.GetLastGump();
-                        gump1.Select(Orion.CreateGumpHook(1));
-                    }
-                }
-            }
-        }
-
-        static Nbruna() {
-            const nbRuna = <IMyGameObject>gameObject.uncategorized.nbRuna;
-            const nbRunesSerials = Orion.FindType(nbRuna.graphic, nbRuna.color);
-            if (!nbRunesSerials.length) {
-                Scripts.Utils.log('NEMAS NB RUNU', ColorEnum.red);
-            }
-
-            Orion.UseObject(nbRunesSerials[0]);
-            if (Orion.WaitForGump(1000))
-            {
-                let gump0 = Orion.GetLastGump();
-                if (gump0 !== null)
-                {
-                    gump0.Select(Orion.CreateGumpHook(1));
-                }
-            }
-        }
-
         static Afk() {
             let Msg = "You see:";
             while (!Player.Dead()) {
