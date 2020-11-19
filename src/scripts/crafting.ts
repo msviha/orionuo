@@ -100,6 +100,13 @@ namespace Scripts {
                     count -= itemObject.make.outputCount || 1;
                     finishedCount++;
                 }
+                if (success) {
+                    count -= itemObject.make.outputCount || 1;
+                    finishedCount++;
+                    const item = Scripts.Utils.findFirstType(itemObject);
+                    setInputs && Orion.MoveItem(item, 1,  'outputContainer');
+                    Orion.Wait(responseDelay);
+                }
                 Scripts.Utils.log(`vyrobeno ${itemName} - ${finishedCount} / ${++totalTries}`);
             }
         }

@@ -18,7 +18,7 @@ namespace Scripts {
          *
          * vykouzli summona
          */
-        static summon(creature:string, target?:TargetEnum) {
+        static summon(creature:string, target?:TargetEnum|string) {
             Orion.CancelWaitMenu();
             Orion.WaitMenu('What do you want to summon', creature);
             Scripts.Spells.cast('Summ. Creature', target);

@@ -26,7 +26,7 @@ export default interface CharacterMovement {
 	* Path search to the specified coordinates until the specified distance is reached. Can be used within one screen.
 	* Result: true if the destination or specified distance is reached.
 	*/
-	WalkTo(x: number | string, y: number | string, z: number | string, distance: number | string): boolean;
+	WalkTo(x: number | string, y: number | string, z: number | string, distance?: number | string, run?: number, openDoor?: number, maxWalkingTime?: number): boolean;
 
 	/**
 	* void Orion.StopWalking();

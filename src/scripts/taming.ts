@@ -36,7 +36,11 @@ namespace Scripts {
                 Orion.InJournal('Your taming failed') ||
                 Orion.InJournal('Ochoceni se nezdarilo') ||
                 Orion.InJournal('Too far') ||
+                Orion.InJournal('Nelze ochocit') ||
+                Orion.InJournal('Jsi prilis vzdalen') ||
+                Orion.InJournal('Jsi moc daleko') ||
                 Orion.InJournal('Not tamable') ||
+                Orion.InJournal('nelze ochocit') ||
                 Orion.InJournal('byl tamnut') ||
                 Orion.InJournal('Cannot learn anything more') ||
                 Orion.InJournal('You are not able to tame this animal')
@@ -137,12 +141,24 @@ namespace Scripts {
             }
         }
 
+        static tameAnimalsAround() {
+            Orion.IgnoreReset();
+            Orion.ClearJournal();
+            let monstersAround = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "nothuman|live|near", 22, "gray");
+
+            while (monstersAround.length) {
+                Orion.Ignore(monstersAround[0]);
+                Scripts.Taming.taming(monstersAround[0]);
+                monstersAround = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "nothuman|live|near", 22, "gray");
+            }
+        }
+
         static useShrinkKad() {
             const kad = gameObject.potions.shrink.kad;
             Orion.UseType(kad.graphic, kad.color);
         }
 
-        static taming() {
+        static taming(animalSerial?:string) {
             const loadedStaff = gameObject.taming.staffs.tamingShrink;
             let loadedStaffSerial = Scripts.Utils.findFirstType(loadedStaff, 2);
             const staff = gameObject.taming.staffs.taming;
@@ -171,10 +187,15 @@ namespace Scripts {
 
             Orion.ClearJournal();
 
-            Scripts.Utils.playerPrint('Co chces tamnout ?');
-            const selection = Orion.WaitForAddObject('tamingTarget');
-            if (selection !== 1) {
-                return;
+            if (!animalSerial) {
+                Scripts.Utils.playerPrint('Co chces tamnout ?');
+                const selection = Orion.WaitForAddObject('tamingTarget');
+                if (selection !== 1) {
+                    return;
+                }
+            }
+            else {
+                Orion.AddObject('tamingTarget', animalSerial);
             }
 
             let tamnuto = false;
@@ -183,23 +204,12 @@ namespace Scripts {
 
                 Orion.WaitTargetObject('tamingTarget');
                 Orion.UseObject(loadedStaffSerial);
-
-                Scripts.Utils.waitWhileSomethingInJournal([
-                    'Hul nabita',
-                    'Your taming failed',
-                    'Ochoceni se nezdarilo',
-                    'Too far',
-                    'Jsi prilis vzdalen',
-                    'Jsi moc daleko',
-                    'Not tamable',
-                    'byl tamnut',
-                    'You are not able to tame this animal'
-                ]);
+                Scripts.Taming.waitOnTaming('tamingTarget');
 
                 if (Orion.InJournal('Too far|Jsi prilis vzdalen|Jsi moc daleko')) {
                     Orion.WalkTo(target.X(), target.Y(), target.Z(), 1);
                 }
-                if (Orion.InJournal('Not tamable|You are not able to tame this animal')) {
+                if (Orion.InJournal('Not tamable|nelze ochocit|You are not able to tame this animal')) {
                     Scripts.Utils.playerPrint('Na toto zviratko nemas', ColorEnum.red);
                     break;
                 }

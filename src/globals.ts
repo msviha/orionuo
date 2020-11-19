@@ -1,4 +1,8 @@
+/**
+ * @internal
+ */
 const responseDelay = 350;
+
 const gameObject:any = {
     uncategorized: {
         emptyBottles: {
@@ -37,6 +41,10 @@ const gameObject:any = {
         nbRuna: {
             graphic: '0x1F14',
             color: '0x0B1D'
+        },
+        recallRune: {
+            graphic: '0x1F14',
+            color: '0x0482'
         },
         anyKey: {
             graphic: '0x1012',
@@ -1192,6 +1200,10 @@ const gameObject:any = {
             },
             ress: {
                 graphic: '0x1F67',
+                color: '0x0000'
+            },
+            recall: {
+                graphic: '0x1F4C',
                 color: '0x0000'
             }
         },

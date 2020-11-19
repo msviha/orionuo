@@ -5,37 +5,10 @@ namespace Scripts {
      */
     export class Wip {
 
-        static dropItem(item:IMyGameObject) {
-            //todo why the color is backpack
-            let serials = Orion.FindType(item.graphic, "backpack")
-            if (!serials.length) {
-                Scripts.Utils.playerPrint('NEMAS ITEM NA DROPNUTI');
-            }
-
-            Orion.Drop(serials[0]);
-        }
-
         static Tracking(who = 'Players') {
             Orion.CancelWaitMenu();
             Orion.WaitMenu('Tracking', who);
             Orion.UseSkill('Tracking');
-        }
-
-        static EnsureWarMode() {
-            let wm = Player.WarMode();
-            if (!wm) {
-                Orion.WarMode(true);
-            }
-        }
-
-        static Afk() {
-            let Msg = "You see:";
-            while (!Player.Dead()) {
-                if (Orion.InJournal(Msg, 'Sys/system')) {
-                    Orion.ClearJournal(Msg);
-                    Orion.PlayWav('C:/afk.wav')
-                }
-            }
         }
 
         static MassMove()

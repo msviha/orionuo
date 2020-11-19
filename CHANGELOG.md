@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## 0.1.0
+### features
+- `taming` pridan parametr, aby byla moznost automaticky potamovat vse okolo sebe
+
+### enhancements
+- `poisonTrain` poisnuje i humany (vse cervene a sedive), upraveno jednorazove volani - jiz se nevola pred prichodem k monstru ale az u nej
+- `PortBookOptionsEnum` obsahuje hodnotu `nabiti` takze je mozne jiz mozne scriptem nabijet `travelBook` nebo `cestovniKniha`
+- pridana kontrola ze netargetis sebe k nekolika funkcim
+
+### fixes
+- `make` ucrafteny item uz presouva do zvoleneho kontejneru
+- `lootAll` pri zamereni sebe uz neprehazuje veci v baglu (neseseda z jezditka)
+
 ## 0.0.9
 ### features
 - `drink('gs')` zobrazuje timer a informuje o konci GS

@@ -74,8 +74,12 @@ namespace Scripts {
             }
         }
 
+        static getObjSerials(obj:IMyGameObject, container = 'backpack') {
+            return Orion.FindType(obj.graphic, obj.color || '0xFFFF', container);
+        }
+
         static countObjectInContainer(obj:IMyGameObject, container = 'backpack'):number {
-            const serials = Orion.FindType(obj.graphic, obj.color || '0xFFFF', container);
+            const serials = Scripts.Utils.getObjSerials(obj, container);
             return Scripts.Utils.countItemsBySerials(serials);
         }
 
@@ -85,6 +89,20 @@ namespace Scripts {
                 result += Orion.FindObject(item).Count();
             }
             return result;
+        }
+
+        static moveObjectToContainer(obj:any, fromContainer = 'backpack', targetContainer:string) {
+            if (isMyGameObject(obj)) {
+                const count = Scripts.Utils.countObjectInContainer(obj, fromContainer);
+                const serials = Scripts.Utils.getObjSerials(obj, fromContainer);
+                Scripts.Utils.moveItems(serials, targetContainer, count);
+            }
+            else {
+                for (const key in obj) {
+                    Scripts.Utils.moveObjectToContainer(obj[key], fromContainer, targetContainer);
+                }
+            }
+            
         }
 
         // return missing quantity
@@ -165,16 +183,25 @@ namespace Scripts {
             }
         }
 
-        static movePlayerToDirection(direction:DirectionEnum):boolean {
-            Scripts.Utils.worldSaveCheckWait();
-
-            Orion.Turn(direction);
-            Orion.Wait(200);
-            const success = Orion.Step(direction, false);
-            Orion.Wait(415);
-            Scripts.Utils.worldSaveCheckWait();
-
-            return success;
+        static getCoordinatesForDirection(direction):ICoordinates {
+            let x = Player.X();
+            let y = Player.Y();
+            let nextCoordinates = {x: Player.X(), y: Player.Y()};
+            switch (direction) {
+            case DirectionEnum.West:
+                nextCoordinates = {x: x - 1, y};
+                break;
+            case DirectionEnum.North:
+                nextCoordinates = {x, y: y - 1};
+                break;
+            case DirectionEnum.East:
+                nextCoordinates = {x: x + 1, y};
+                break;
+            default:
+                nextCoordinates = {x, y: y + 1};
+                break;
+            }
+            return nextCoordinates;
         }
 
         static getSerialsFromMyGameObject(type:IMyGameObject):string[] {
@@ -358,5 +385,25 @@ namespace Scripts {
             }
         }
 
+        static walkToSerial(serial:string, distance = 1) {
+            const o = Orion.FindObject(serial);
+            Orion.WalkTo(o.X(), o.Y(), o.Z(), distance);
+            Orion.Wait(1000);
+        }
+
+        static targetObjectNotSelf(objectAlias:string, message = 'Target object') {
+            Scripts.Utils.playerPrint(message);
+            const selection = Orion.WaitForAddObject(objectAlias, 60000);
+
+            if (selection !== 1) {
+                Scripts.Utils.playerPrint(`Cancel`);
+                throw 'cancel'
+            }
+            else if (Orion.FindObject(objectAlias).Serial() === Player.Serial()) {
+                Scripts.Utils.playerPrint(`Zameruj lepe :-)`);
+                Scripts.Utils.targetObjectNotSelf(objectAlias, message);
+                return;
+            }
+        }
     }
 }

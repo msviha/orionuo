@@ -1,7 +1,7 @@
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 0.0.9');
+    Orion.Print(-1, 'version 0.1.0');
     Orion.Print(-1, '-------------+');
 }
 
@@ -370,15 +370,6 @@ function manualTarget() {
 }
 
 /**
- * Kopne pres NB runu
- * @example in client `_nbRune`
- * @example external code `nbRune()`
- */
-function nbRune() {
-    Scripts.Port.nbRune();
-}
-
-/**
  * Naseda a seseda z jezditka. Pokud Vam jezditko umre, nebo mate nasetovane nejake ktere neni v dosahu, zobrazi se zamereni jezditka
  * @example in client `_mount`
  * @example external code `mount();`
@@ -388,13 +379,22 @@ function mount() {
 }
 
 /**
+ * Kopne pres NB runu
+ * @example in client `_nbRune`
+ * @example external code `nbRune()`
+ */
+function nbRune() {
+    Scripts.Port.nbRune();
+}
+
+/**
  * Poisne trenink kitem nejblizsim enemy monstrum jakmile k nejakemu dobehnes (netreni na tech co maji human grafiku);
  * @param keepRunning pokud date true, tak vam to po jednom spusteni pobezi stale na pozadi a bude poisnovat kdyz okolo neceho probehnete
  * @example external code `poisonTrain()` ceka az se priblizis k monstru a pak jednorazove poisne a skonci
  * @example external code `poisonTrain(true)` nekonecny cyklus kdy staci jen behat okolo monster a poisnis to
  */
 function poisonTrain(keepRunning = false) {
-    Scripts.Common.poisonTrain(keepRunning);
+    keepRunning ? Scripts.Common.poisonTrainAuto() : Scripts.Common.poisonTrain();
 }
 
 /**
@@ -446,9 +446,10 @@ function summon(creature:string, target?:TargetEnum) {
  * Zacilis co chces tamnout a po tamnuti hodi do baglu
  * @example in client `_taming`
  * @example external code `taming()`
+ * @param allAround {boolean} tamuje vse co vidi okolo sebe
  */
-function taming() {
-    Scripts.Taming.taming();
+function taming(allAround = false) {
+    allAround ? Scripts.Taming.tameAnimalsAround() : Scripts.Taming.taming();
 }
 
 /**

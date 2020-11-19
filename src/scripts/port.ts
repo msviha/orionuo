@@ -15,6 +15,14 @@ namespace Scripts {
             Scripts.Utils.useAndSelect(serial, selections);
         }
 
+        static rune(runeSerial:string) {
+            const selections:ISelect[] = [{
+                type: SelectionTypeEnum.menu,
+                selection: {name: 'Jak chces runu pouzit?', selection: 'Recall'}
+            }];
+            Scripts.Utils.useAndSelect(runeSerial, selections);
+        }
+
         static travelBook(selection = PortBookOptionsEnum.kop) {
             let selections:ISelect[];
             switch (selection) {
@@ -34,6 +42,12 @@ namespace Scripts {
                     }, {
                         type: SelectionTypeEnum.gump,
                         selection: 3
+                    }];
+                    break;
+                case PortBookOptionsEnum.nabiti:
+                    selections = [{
+                        type: SelectionTypeEnum.gump,
+                        selection: 1
                     }];
                     break;
                 default:

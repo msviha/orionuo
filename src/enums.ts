@@ -87,7 +87,8 @@ enum TimersEnum {
 enum PortBookOptionsEnum {
     opravaStats = 'opravaStats',
     mark = 'mark',
-    kop = 'kop'
+    kop = 'kop',
+    nabiti = 'nabiti'
 }
 
 enum SelectionTypeEnum {

@@ -196,44 +196,44 @@ namespace Scripts {
             }
         }
 
-        static poisonTrain(keepRunning = false) {
-            const kitDef = gameObject.uncategorized.apprenticesPoisoningKit;
-            const kits = Orion.FindType(kitDef.graphic, kitDef.color);
-            if (!kits.length) {
+        static poisonTrain(serialToPoison?:string) {
+            if (!serialToPoison) {
+                const mobiles = Orion.FindType('any', 'any', 'ground', 'fast|live|mobile', 1, `${NotorietyEnum.red}|${NotorietyEnum.gray}`);
+                if (!mobiles.length) {
+                    return;
+
+                }
+                serialToPoison = mobiles[0];
+            }
+            const kitSerial = Scripts.Utils.findFirstType(gameObject.uncategorized.apprenticesPoisoningKit);
+            if (kitSerial) {
+                Orion.WarMode(true);
+                Orion.WaitTargetObject(serialToPoison);
+                Orion.UseObject(kitSerial);
+            }
+        }
+
+        static poisonTrainAuto() {
+            const kitSerial = Scripts.Utils.findFirstType(gameObject.uncategorized.apprenticesPoisoningKit);
+            if (!kitSerial) {
                 Scripts.Utils.playerPrint('nemas poison kit na treneni', ColorEnum.red);
                 return;
             }
 
-            const kitSerial = kits[0];
-
-            let run = true;
-            while (run) {
+            while (true) {
                 if (Orion.InJournal('Kdyz se snazis')) {
                     Orion.WarMode(true);
                     Orion.ClearJournal();
                     Orion.Wait(responseDelay);
                 }
-                const targets = Orion.FindType('any', 'any', 'ground', 'fast|nothuman|live|mobile', 1);
+                const targets = Orion.FindType('any', 'any', 'ground', 'fast|live|mobile', 1, `${NotorietyEnum.red}|${NotorietyEnum.gray}`);
 
-                if (!targets.length) {
-                    Orion.Wait(responseDelay);
-                    continue;
+                if (targets.length) {
+                    const target = targets[0];
+                    Orion.WaitTargetObject(target);
+                    Orion.UseObject(kitSerial);
                 }
-
-                const target = targets[0];
-                Orion.WaitTargetObject(target);
-                Orion.UseObject(kitSerial);
                 Orion.Wait(responseDelay);
-                Orion.Ignore(target)
-
-                if (!keepRunning) {
-                    Orion.Wait(1500);
-                    Orion.IgnoreReset();
-                    run = false;
-                }
-                else {
-                    Orion.Wait(responseDelay);
-                }
             }
         }
     }

@@ -27,8 +27,7 @@ namespace Scripts {
          * Registruje jezditko
          */
         static addMount() {
-            Orion.AddObject('myMount');
-            Orion.Print('-1', 'Target your mount')
+            Scripts.Utils.targetObjectNotSelf('myMount', `Target your mount`);
         }
     }
 }

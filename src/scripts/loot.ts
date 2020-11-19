@@ -31,7 +31,8 @@ namespace Scripts {
             castCure = false,
             drinkCure = false,
             castReactive = false,
-            weapon = true
+            weapon = true,
+            poisonTrain = false
         }: {
             cut?:boolean,
             wayPoints?:ICoordinates[],
@@ -42,7 +43,8 @@ namespace Scripts {
             castCure?:boolean,
             drinkCure?:boolean,
             castReactive?:boolean,
-            weapon?:boolean
+            weapon?:boolean,
+            poisonTrain?:boolean
         }) {
             Orion.SetTimer('ReactiveArmorTimer');
             let currentWaypointIndex = 0;
@@ -77,7 +79,7 @@ namespace Scripts {
                 Scripts.Loot.healAndCureWhenHarving(dmgToStartHeal, fullHeal, castCure, drinkCure);
                 const enemySerialsAround = Orion.FindType(enemiesTypesToHarv.join('|'), '-1', 'ground', 'fast', 4, 'red');
                 currentWaypointIndex = Scripts.Loot.moveToNextWaypointWhenNeeded(wayPoints, enemySerialsAround, currentWaypointIndex, trapDelay);
-                Scripts.Loot.attackOnEnemy(enemySerialsAround, lastAttack);
+                Scripts.Loot.attackOnEnemy(enemySerialsAround, lastAttack, poisonTrain);
 
                 Orion.Wait(500);
             }
@@ -191,17 +193,16 @@ namespace Scripts {
             }
         }
 
-        static attackOnEnemy(enemySerialsAround:string[], lastAttackSerial?:string):string|undefined {
+        static attackOnEnemy(enemySerialsAround:string[], lastAttackSerial?:string, poisonTrain?:boolean):string|undefined {
             if (!enemySerialsAround.length || (lastAttackSerial && enemySerialsAround.indexOf(lastAttackSerial) > -1)) {
                 return;
             }
             const serialToAttack = enemySerialsAround[0];
-            Scripts.Auto.killObject(serialToAttack);
+            Scripts.Auto.killObject(serialToAttack, poisonTrain);
         }
 
         static lootAllFrom(delay = responseDelay) {
-            Scripts.Utils.playerPrint(`Target object to loot`);
-            Orion.WaitForAddObject('lootAllContainer', 60000);
+            Scripts.Utils.targetObjectNotSelf('lootAllContainer', `Target object to loot`);
 
             Orion.OpenContainer('lootAllContainer', 5000, `Container not found`);
             let itemsInCorpse = Orion.FindType('any', 'any', 'lootAllContainer');
