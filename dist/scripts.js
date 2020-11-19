@@ -1996,8 +1996,12 @@ var Scripts;
     var Auto = (function () {
         function Auto() {
         }
-        Auto.killObject = function (serialToKill, poisonTrain) {
+        Auto.killObject = function (serialToKill, poisonTrain, dmgToStartHeal, fullHeal, castCure, drinkCure) {
             if (poisonTrain === void 0) { poisonTrain = false; }
+            if (dmgToStartHeal === void 0) { dmgToStartHeal = 40; }
+            if (fullHeal === void 0) { fullHeal = false; }
+            if (castCure === void 0) { castCure = false; }
+            if (drinkCure === void 0) { drinkCure = false; }
             var enemy = Orion.FindObject(serialToKill);
             Orion.WalkTo(enemy.X(), enemy.Y(), enemy.Z(), 1);
             poisonTrain && Scripts.Common.poisonTrain(serialToKill);
@@ -2007,9 +2011,30 @@ var Scripts;
                 while (enemy && !enemy.Dead()) {
                     Orion.WalkTo(enemy.X(), enemy.Y(), enemy.Z(), 1);
                     Orion.Wait(2000);
+                    var needToAttackAgain = Scripts.Auto.healAndCureWhenHarving(dmgToStartHeal, fullHeal, castCure, drinkCure);
+                    needToAttackAgain && Orion.Attack(serialToKill);
                     enemy = Orion.FindObject(serialToKill);
                 }
             }
+        };
+        Auto.healAndCureWhenHarving = function (dmgToStartHeal, fullHeal, castCure, drinkCure) {
+            if (Player.Hits() > Player.MaxHits() - dmgToStartHeal) {
+                return false;
+            }
+            var keepHealing = fullHeal;
+            while (keepHealing || Player.Hits() <= Player.MaxHits() - dmgToStartHeal) {
+                Scripts.Common.bandageSelf();
+                keepHealing = fullHeal && Player.Hits() !== Player.MaxHits();
+            }
+            if (Player.Poisoned()) {
+                if (castCure) {
+                    Scripts.Spells.castUntilSuccess('Cure', TargetEnum.self, 2500);
+                }
+                else if (drinkCure) {
+                    Scripts.Potions.drinkPotion(PotionsEnum.lc);
+                }
+            }
+            return true;
         };
         Auto.afk = function (file, pattern, flags, repeatPeriod, duration) {
             if (file === void 0) { file = 'C:/critical.wav'; }
@@ -2800,10 +2825,14 @@ var Scripts;
                     Scripts.Spells.castUntilSuccess('Reactive Armor', TargetEnum.self, 2500);
                 }
                 Scripts.Loot.lootCorpsesAround(cut, weapon);
-                Scripts.Loot.healAndCureWhenHarving(dmgToStartHeal, fullHeal, castCure, drinkCure);
+                Scripts.Auto.healAndCureWhenHarving(dmgToStartHeal, fullHeal, castCure, drinkCure);
                 var enemySerialsAround = Orion.FindType(enemiesTypesToHarv.join('|'), '-1', 'ground', 'fast', 4, 'red');
                 currentWaypointIndex = Scripts.Loot.moveToNextWaypointWhenNeeded(wayPoints, enemySerialsAround, currentWaypointIndex, trapDelay);
-                Scripts.Loot.attackOnEnemy(enemySerialsAround, lastAttack, poisonTrain);
+                if (!enemySerialsAround.length || (lastAttack && enemySerialsAround.indexOf(lastAttack) > -1)) {
+                    return;
+                }
+                var serialToAttack = enemySerialsAround[0];
+                Scripts.Auto.killObject(serialToAttack, poisonTrain, dmgToStartHeal, fullHeal, castCure, drinkCure);
                 Orion.Wait(500);
             }
         };
@@ -2845,24 +2874,6 @@ var Scripts;
                 }
             }
         };
-        Loot.healAndCureWhenHarving = function (dmgToStartHeal, fullHeal, castCure, drinkCure) {
-            if (Player.Hits() > Player.MaxHits() - dmgToStartHeal) {
-                return;
-            }
-            var keepHealing = fullHeal;
-            while (keepHealing || Player.Hits() <= Player.MaxHits() - dmgToStartHeal) {
-                Scripts.Common.bandageSelf();
-                keepHealing = fullHeal && Player.Hits() !== Player.MaxHits();
-            }
-            if (Player.Poisoned()) {
-                if (castCure) {
-                    Scripts.Spells.castUntilSuccess('Cure', TargetEnum.self, 2500);
-                }
-                else if (drinkCure) {
-                    Scripts.Potions.drinkPotion(PotionsEnum.lc);
-                }
-            }
-        };
         Loot.moveToNextWaypointWhenNeeded = function (wayPoints, enemySerialsAround, currentWaypointIndex, trapDelay) {
             if (wayPoints && enemySerialsAround) {
                 if (!enemySerialsAround.length) {
@@ -2877,13 +2888,6 @@ var Scripts;
                     return currentWaypointIndex;
                 }
             }
-        };
-        Loot.attackOnEnemy = function (enemySerialsAround, lastAttackSerial, poisonTrain) {
-            if (!enemySerialsAround.length || (lastAttackSerial && enemySerialsAround.indexOf(lastAttackSerial) > -1)) {
-                return;
-            }
-            var serialToAttack = enemySerialsAround[0];
-            Scripts.Auto.killObject(serialToAttack, poisonTrain);
         };
         Loot.lootAllFrom = function (delay) {
             if (delay === void 0) { delay = responseDelay; }
