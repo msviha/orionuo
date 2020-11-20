@@ -1,6 +1,6 @@
 namespace Scripts {
     export class Port {
-        static nbRune() {
+        static nbRune(waitForKop = false) {
             const selections:ISelect[] = [{
                 type: SelectionTypeEnum.gump,
                 selection: 1
@@ -13,17 +13,25 @@ namespace Scripts {
             }
 
             Scripts.Utils.useAndSelect(serial, selections);
+            if (waitForKop) {
+                const teleported = Scripts.Utils.waitWhileSomethingInJournal(['been teleported'], 40000);
+                !teleported && Scripts.Utils.useAndSelect(serial, selections);
+            }
         }
 
-        static rune(runeSerial:string) {
+        static rune(runeSerial:string, waitForKop = false) {
             const selections:ISelect[] = [{
                 type: SelectionTypeEnum.menu,
                 selection: {name: 'Jak chces runu pouzit?', selection: 'Recall'}
             }];
             Scripts.Utils.useAndSelect(runeSerial, selections);
+            if (waitForKop) {
+                const teleported = Scripts.Utils.waitWhileSomethingInJournal(['been teleported'], 40000);
+                !teleported && Scripts.Utils.useAndSelect(runeSerial, selections);
+            }
         }
 
-        static travelBook(selection = PortBookOptionsEnum.kop) {
+        static travelBook(selection = PortBookOptionsEnum.kop, waitForKop = false) {
             let selections:ISelect[];
             switch (selection) {
                 case PortBookOptionsEnum.opravaStats:
@@ -67,6 +75,10 @@ namespace Scripts {
             }
 
             Scripts.Utils.useAndSelect(serial, selections);
+            if (selection === PortBookOptionsEnum.kop && waitForKop) {
+                const teleported = Scripts.Utils.waitWhileSomethingInJournal(['been teleported'], 40000);
+                !teleported && Scripts.Utils.useAndSelect(serial, selections);
+            }
         }
 
         static cestovniKniha(selection = PortBookOptionsEnum.kop) {

@@ -5,7 +5,7 @@ namespace Scripts {
      */
     export class Utils {
 
-        static selectMenu(menuName:string, selections:string[], firstCall = true) {
+        static selectMenu(menuName:string|ISpecialSelection, selections:Array<string|ISpecialSelection>, firstCall = true) {
             if (!selections || !selections.length) {
                 return;
             }
@@ -13,7 +13,10 @@ namespace Scripts {
             firstCall && Orion.CancelWaitMenu();
             Scripts.Utils.worldSaveCheckWait();
             const menuToSelect = s[0];
-            Orion.WaitMenu(menuName, menuToSelect);
+            Orion.WaitMenu(
+                typeof menuName === 'string' ? menuName : menuName.menu,
+                typeof menuToSelect === 'string' ? menuToSelect : menuToSelect.item
+            );
             s.splice(0, 1);
             Scripts.Utils.selectMenu(menuToSelect, s, false);
         }
@@ -134,15 +137,16 @@ namespace Scripts {
             return needToMove;
         }
 
-        static waitWhileSomethingInJournal(messages:string[], wait?:number) {
+        static waitWhileSomethingInJournal(messages:string[], wait?:number):boolean {
             let keepWait = true;
-            while (!Orion.InJournal(messages.join('|')) && keepWait) {
+            while (!Orion.InJournal(messages.join('|')) && keepWait && !Player.Dead()) {
                 Orion.Wait(50);
                 if (wait) {
                     wait -= 50;
                     keepWait = wait > 0;
                 }
             }
+            return keepWait;
         }
 
         static worldSaveCheckWait() {

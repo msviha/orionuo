@@ -29,12 +29,7 @@ namespace Scripts {
                     Scripts.Utils.log('ROZBITA RUNA', ColorEnum.red);
                     continue;
                 }
-                Orion.MoveItem(rune);
-                Orion.Wait(responseDelay);
-                Scripts.Port.rune(rune);
-                Orion.Wait(1000);
-                Orion.MoveItem(rune, undefined, source);
-                Scripts.Utils.waitWhileSomethingInJournal(['been teleported']);
+                Scripts.Mining.takeRunePortAndReturnItBack(rune, source);
                 Scripts.Mining.mining(true);
                 Scripts.Mining.portAndMoveToTreasure();
             }
@@ -43,13 +38,22 @@ namespace Scripts {
         static portAndMoveToTreasure() {
             const treasure = 'miningTreasure';
             Orion.ClearJournal();
-            Scripts.Port.nbRune();
-            Scripts.Utils.waitWhileSomethingInJournal(['been teleported']);
+            Scripts.Port.nbRune(true);
             Scripts.Utils.walkToSerial(treasure);
             Scripts.Utils.moveObjectToContainer(gameObject.resources.ingots, 'backpack', treasure);
             Scripts.Utils.moveObjectToContainer(gameObject.resources.ore, 'backpack', treasure);
             Scripts.Utils.moveObjectToContainer(gameObject.resources.stones, 'backpack', treasure);
             Orion.ClearJournal();
+        }
+
+        static takeRunePortAndReturnItBack(runeSerial:string, sourceContainer:string) {
+            Orion.MoveItem(runeSerial);
+            Orion.Wait(responseDelay);
+            Scripts.Port.rune(runeSerial);
+            Orion.Wait(1000);
+            Orion.MoveItem(runeSerial, undefined, sourceContainer);
+            const teleported = Scripts.Utils.waitWhileSomethingInJournal(['been teleported'], 40000);
+            !teleported && Scripts.Mining.takeRunePortAndReturnItBack(runeSerial, sourceContainer);
         }
 
         static saveCurrentPositionToArray(arr:ICoordinates[]) {
@@ -63,6 +67,10 @@ namespace Scripts {
             Scripts.Mining.pickOresAround(1);
             const n = Player.Name();
             let isRock = Scripts.Mining.rockMine(kopAndTreasure, skladacka, fullMine) && (!n.indexOf('Wil') || !n.indexOf('Urc'));
+
+            if (Player.Dead()) {
+                throw 'dead'
+            }
 
             if (isRock) {
                 if (Scripts.Mining.moveDirection(next[0], visitedCoordinates)) {
@@ -240,7 +248,6 @@ namespace Scripts {
 
             // port zpet
             Scripts.Port.travelBook(PortBookOptionsEnum.kop);
-            Scripts.Utils.waitWhileSomethingInJournal(['been teleported']);
             Orion.Wait(500);
         }
 
@@ -310,7 +317,7 @@ namespace Scripts {
         static pickOresAround(distance = 3) {
             const colors = Scripts.Mining.getWantedOreColorsFilter();
             let stop = false;
-            while (!stop) {
+            while (!stop && !Player.Dead()) {
                 stop = true;
 
                 let oresAround = Orion.FindType("0x19B7|0x19BA|0x19B8|0x19B9", colors, "ground", "item", distance);

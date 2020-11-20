@@ -86,10 +86,7 @@ namespace Scripts {
                 Scripts.Auto.killObject(
                     serialToAttack,
                     poisonTrain,
-                    dmgToStartHeal,
-                    fullHeal,
-                    castCure,
-                    drinkCure
+                    false
                 );
 
                 Orion.Wait(500);

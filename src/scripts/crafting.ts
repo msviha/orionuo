@@ -91,15 +91,17 @@ namespace Scripts {
                     }
                 }
                 Orion.ClearJournal();
-                Scripts.Utils.selectMenu(itemObject.make.menu.name, itemObject.make.menu.selections);
+
                 const tool = Scripts.Utils.parseObject(itemObject.make.tool);
+                const toolTarget = itemObject.make.toolTarget ? Scripts.Utils.parseObject(itemObject.make.toolTarget) : undefined;
+
+                Scripts.Utils.selectMenu(itemObject.make.menu.name, itemObject.make.menu.selections);
+                toolTarget && Orion.WaitTargetType(toolTarget.graphic, toolTarget.color);
                 Orion.UseType(tool.graphic, tool.color);
 
+
+
                 const success = Scripts.Crafting.makeProgress();
-                if (success) {
-                    count -= itemObject.make.outputCount || 1;
-                    finishedCount++;
-                }
                 if (success) {
                     count -= itemObject.make.outputCount || 1;
                     finishedCount++;

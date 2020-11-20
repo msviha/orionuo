@@ -76,6 +76,10 @@ const gameObject:any = {
         apprenticesPoisoningKit: {
             graphic: '0x1837',
             color: '0x0000'
+        },
+        prut: {
+            graphic: '0x0DBF',
+            color: '0x0000'
         }
     },
     tools: {
@@ -218,6 +222,14 @@ const gameObject:any = {
                 graphic: '0x0F11',
                 color: '0x0000'
             }
+        },
+        foldedCloth: {
+            graphic: '0x175D',
+            color: '0x0000'
+        },
+        pilesOfHides: {
+            graphic: '0x1078',
+            color: '0x0000'
         }
     },
     crafting: {
@@ -865,6 +877,63 @@ const gameObject:any = {
                         menu: {
                             name: 'Tinkering',
                             selections: ['Special Items', 'Recharge Crystal +5']
+                        }
+                    }
+                }
+            }
+        },
+        tailoring: {
+            headwear: {
+                bandana: {
+                    graphic: '0x153F',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.sewingKit',
+                        toolTarget: 'gameObject.resources.foldedCloth',
+                        refill: {
+                            resources: [{item: 'gameObject.resources.foldedCloth', count: 1}]
+                        },
+                        menu: {
+                            name: 'Cloth',
+                            selections: ['Headwear', 'Bandana']
+                        }
+                    }
+                }
+            },
+            footwear: {
+                sandals: {
+                    graphic: '0x170D',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.sewingKit',
+                        toolTarget: 'gameObject.resources.pilesOfHides',
+                        refill: {
+                            resources: [{item: 'gameObject.resources.pilesOfHides', count: 4}]
+                        },
+                        menu: {
+                            name: 'Leather',
+                            selections: ['Footwear', 'Sandals']
+                        }
+                    }
+                }
+            }
+        },
+        blacksmithing: {
+            ironWeapons: {
+                swordsAndBlades: {
+                    dagger: {
+                        graphic: '0x0F51',
+                        color: '0x0000',
+                        make: {
+                            tool: 'gameObject.tools.silverHammer',
+                            toolTarget: 'gameObject.resources.ingots.iron',
+                            refill: {
+                                resources: [{item: 'gameObject.resources.ingots.iron', count: 1}]
+                            },
+                            menu: {
+                                name: 'Blacksmithing',
+                                selections: ['Iron Weapons', {item: 'Swords & Blades', menu: 'Iron Swords & Blades'}, 'Dagger']
+                            }
                         }
                     }
                 }

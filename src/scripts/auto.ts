@@ -6,23 +6,19 @@ namespace Scripts {
         static killObject(
             serialToKill:string,
             poisonTrain = false,
-            dmgToStartHeal = 40,
-            fullHeal = false,
-            castCure = false,
-            drinkCure = false
+            waitUntilDead = true
         ) {
             let enemy = Orion.FindObject(serialToKill);
             Orion.WalkTo(enemy.X(), enemy.Y(), enemy.Z(), 1);
             poisonTrain && Scripts.Common.poisonTrain(serialToKill);
+            Orion.Wait(responseDelay);
             Orion.Attack(serialToKill);
             Orion.Wait(6000);
 
-            if (enemy) {
+            if (enemy && waitUntilDead) {
                 while (enemy && !enemy.Dead()) {
                     Orion.WalkTo(enemy.X(), enemy.Y(), enemy.Z(), 1);
                     Orion.Wait(2000);
-                    const needToAttackAgain = Scripts.Auto.healAndCureWhenHarving(dmgToStartHeal, fullHeal, castCure, drinkCure);
-                    needToAttackAgain && Orion.Attack(serialToKill);
                     enemy = Orion.FindObject(serialToKill);
                 }
             }

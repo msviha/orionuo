@@ -16,9 +16,15 @@ interface IBagDestination extends ICoordinates{
 
 interface IMakeProps {
     tool:string,
+    toolTarget?:string,
     refill?:IRefillProps,
     menu:IMenuWithSelections,
     outputCount?:number
+}
+
+interface ISpecialSelection {
+    menu:string,
+    item:string
 }
 
 interface IRefillProps {

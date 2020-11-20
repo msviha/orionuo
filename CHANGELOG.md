@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.1 - hotfix
+### fixes
+- `make` spatny soucet celkovych vyrobku (preklep)
+
 ## 0.1.0
 ### features
 - `taming` pridan parametr, aby byla moznost automaticky potamovat vse okolo sebe
