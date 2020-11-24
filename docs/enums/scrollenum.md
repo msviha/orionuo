@@ -16,6 +16,8 @@
 * [para](scrollenum.md#para)
 * [pog](scrollenum.md#pog)
 * [port](scrollenum.md#port)
+* [recall](scrollenum.md#recall)
+* [ress](scrollenum.md#ress)
 * [wos](scrollenum.md#wos)
 
 ## Enumeration members
@@ -24,7 +26,7 @@
 
 •  **bolt**:  = "bolt"
 
-*Defined in [enums.ts:23](https://github.com/msviha/orionuo/blob/6a225b8/src/enums.ts#L23)*
+*Defined in [enums.ts:23](https://github.com/msviha/orionuo/blob/ec017d9/src/enums.ts#L23)*
 
 ___
 
@@ -32,7 +34,7 @@ ___
 
 •  **ef**:  = "ef"
 
-*Defined in [enums.ts:27](https://github.com/msviha/orionuo/blob/6a225b8/src/enums.ts#L27)*
+*Defined in [enums.ts:27](https://github.com/msviha/orionuo/blob/ec017d9/src/enums.ts#L27)*
 
 ___
 
@@ -40,7 +42,7 @@ ___
 
 •  **ijs**:  = "ijs"
 
-*Defined in [enums.ts:25](https://github.com/msviha/orionuo/blob/6a225b8/src/enums.ts#L25)*
+*Defined in [enums.ts:25](https://github.com/msviha/orionuo/blob/ec017d9/src/enums.ts#L25)*
 
 ___
 
@@ -48,7 +50,7 @@ ___
 
 •  **ivm**:  = "ivm"
 
-*Defined in [enums.ts:30](https://github.com/msviha/orionuo/blob/6a225b8/src/enums.ts#L30)*
+*Defined in [enums.ts:30](https://github.com/msviha/orionuo/blob/ec017d9/src/enums.ts#L30)*
 
 ___
 
@@ -56,7 +58,7 @@ ___
 
 •  **kvf**:  = "kvf"
 
-*Defined in [enums.ts:22](https://github.com/msviha/orionuo/blob/6a225b8/src/enums.ts#L22)*
+*Defined in [enums.ts:22](https://github.com/msviha/orionuo/blob/ec017d9/src/enums.ts#L22)*
 
 ___
 
@@ -64,7 +66,7 @@ ___
 
 •  **para**:  = "para"
 
-*Defined in [enums.ts:28](https://github.com/msviha/orionuo/blob/6a225b8/src/enums.ts#L28)*
+*Defined in [enums.ts:28](https://github.com/msviha/orionuo/blob/ec017d9/src/enums.ts#L28)*
 
 ___
 
@@ -72,7 +74,7 @@ ___
 
 •  **pog**:  = "pog"
 
-*Defined in [enums.ts:24](https://github.com/msviha/orionuo/blob/6a225b8/src/enums.ts#L24)*
+*Defined in [enums.ts:24](https://github.com/msviha/orionuo/blob/ec017d9/src/enums.ts#L24)*
 
 ___
 
@@ -80,7 +82,23 @@ ___
 
 •  **port**:  = "port"
 
-*Defined in [enums.ts:26](https://github.com/msviha/orionuo/blob/6a225b8/src/enums.ts#L26)*
+*Defined in [enums.ts:26](https://github.com/msviha/orionuo/blob/ec017d9/src/enums.ts#L26)*
+
+___
+
+### recall
+
+•  **recall**:  = "recall"
+
+*Defined in [enums.ts:32](https://github.com/msviha/orionuo/blob/ec017d9/src/enums.ts#L32)*
+
+___
+
+### ress
+
+•  **ress**:  = "ress"
+
+*Defined in [enums.ts:31](https://github.com/msviha/orionuo/blob/ec017d9/src/enums.ts#L31)*
 
 ___
 
@@ -88,4 +106,4 @@ ___
 
 •  **wos**:  = "wos"
 
-*Defined in [enums.ts:29](https://github.com/msviha/orionuo/blob/6a225b8/src/enums.ts#L29)*
+*Defined in [enums.ts:29](https://github.com/msviha/orionuo/blob/ec017d9/src/enums.ts#L29)*

@@ -35,6 +35,8 @@
 	*/
 	Z(): number;
 
+	Distance(): number;
+
 	/**
 	* String obj.Container();
 	* Result: Serial number of an Main(parent)-Object. 0xFFFFFFFF if object is located in world.

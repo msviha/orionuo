@@ -151,14 +151,24 @@ namespace Scripts {
 
         static lavaBomb() {
             const bomb = gameObject.potions.lavabomb;
-            Scripts.Potions.fillPotion(PotionsEnum.lavabomb);
-            const bombSerials = Orion.FindType(bomb.graphic, bomb.color);
 
-            if (!bombSerials.length) {
-                return;
+            let bombSerial = Scripts.Utils.findFirstType(bomb);
+
+            if (!bombSerial) {
+                Scripts.Potions.fillPotion(PotionsEnum.lavabomb);
+                bombSerial = Scripts.Utils.findFirstType(bomb);
+                if (!bombSerial) {
+                    return;
+                }
+            }
+            else {
+                Orion.Drop(bombSerial);
+                Orion.Wait(responseDelay);
+                Orion.MoveItem(bombSerial);
+                Orion.Wait(responseDelay);
             }
 
-            Orion.UseObject(bombSerials[0]);
+            Orion.UseObject(bombSerial);
         }
 
         static trackingPvp() {
@@ -235,6 +245,13 @@ namespace Scripts {
                 }
                 Orion.Wait(responseDelay);
             }
+        }
+
+        static openBank():boolean {
+            Orion.ClearJournal();
+            Orion.Wait(350);
+            Orion.Say('Bank');
+            return Orion.WaitForContainerGump(500) && !!Orion.InJournal('stones in your bank box');
         }
     }
 }

@@ -1,7 +1,7 @@
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 0.1.1');
+    Orion.Print(-1, 'version 0.1.2');
     Orion.Print(-1, '-------------+');
 }
 
@@ -280,7 +280,8 @@ function kill() {
 }
 
 /**
- * Cepne a odpali lavabombu - vyhodi target na koho ji chces pouzit
+ * Hodi na zem a veme + odpali lavabombu - vyhodi target na koho ji chces pouzit
+ * pokud nemas cepnutou tak cepne a odpali lavabombu - vyhodi target na koho ji chces pouzit
  * @example in client `_lavaBomb`
  * @example external code `lavaBomb()`
  */
@@ -388,6 +389,17 @@ function nbRune() {
 }
 
 /**
+ * Prepne na dalsi zbran
+ * (zbrane si nasetujte pomoci resetWeapons)
+ * @param showName - zobrazuje nad hracem nazev zbrane po prepnuti
+ * @example in client `_nextWeapon`
+ * @example external code `nextWeapon()`
+ */
+function nextWeapon(showName = false) {
+    Scripts.Dress.nextWeapon(showName);
+}
+
+/**
  * Poisne trenink kitem nejblizsim enemy monstrum jakmile k nejakemu dobehnes (netreni na tech co maji human grafiku);
  * @param keepRunning pokud date true, tak vam to po jednom spusteni pobezi stale na pozadi a bude poisnovat kdyz okolo neceho probehnete
  * @example external code `poisonTrain()` ceka az se priblizis k monstru a pak jednorazove poisne a skonci
@@ -395,6 +407,17 @@ function nbRune() {
  */
 function poisonTrain(keepRunning = false) {
     keepRunning ? Scripts.Common.poisonTrainAuto() : Scripts.Common.poisonTrain();
+}
+
+/**
+ * Prepne na predchozi zbran
+ * (zbrane si nasetujte pomoci resetWeapons)
+ * @param showName - zobrazuje nad hracem nazev zbrane po prepnuti
+ * @example in client `_previousWeapon`
+ * @example external code `previousWeapon()`
+ */
+function previousWeapon(showName = false) {
+    Scripts.Dress.nextWeapon(showName, true);
 }
 
 /**
@@ -422,6 +445,15 @@ function resetFriends() {
  */
 function resetStats() {
     Scripts.Dress.resetStats();
+}
+
+/**
+ * Resetuje zbrane a stit ( nasledne vyuziti u funkci nextWeapon a previousWeapon )
+ * @example in client `_resetWeapons`
+ * @example external code `resetWeapons()`
+ */
+function resetWeapons() {
+    Scripts.Dress.resetWeaponsArray();
 }
 
 /**

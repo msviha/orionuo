@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 0.1.2
+### features
+- `resetWeapons` nastavi zbrane a stit ( nasledne vyuziti u funkci nextWeapon a previousWeapon )
+- `nextWeapon` prepne na dalsi zbran
+- `previousWeapon` prepne na dalsi zbran
+
+### enhancements
+- `lavaBomb` funguje i bez kade, pokud mate ceple lahvicky s lavabombama
+- `ScrollEnum` obsahuje `ress` a `recall`
+
 ## 0.1.1 - hotfix
 ### fixes
 - `make` spatny soucet celkovych vyrobku (preklep)

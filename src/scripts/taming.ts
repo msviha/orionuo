@@ -71,10 +71,20 @@ namespace Scripts {
         static trainOnAnimal(animalSerial:string, ranger = true):boolean|undefined {
             Scripts.Utils.log('train on animal serial ' + animalSerial);
             let animal = Orion.FindObject(animalSerial);
+            if (!animal) {
+                return;
+            }
             Orion.SetGlobal('tamingCounter', (parseInt(Orion.GetGlobal('tamingCounter'), 10) + 1).toString(10))
 
-            if (parseInt(Orion.GetGlobal('tamingCounter'), 10) > 33) {
-                ranger && Scripts.Taming.dressRobeOfDruids();
+            if (parseInt(Orion.GetGlobal('tamingCounter'), 10) > 100) {
+                if (ranger) {
+                    Scripts.Taming.dressRobeOfDruids();
+                }
+                else {
+                    Orion.Equip('fightWeapon');
+                    Scripts.Auto.killObject(animalSerial);
+                    return;
+                }
             }
 
             Orion.ClearJournal();
@@ -117,7 +127,7 @@ namespace Scripts {
                 return;
             }
 
-            if (Orion.InJournal('byl tamnut')) {
+            if (Orion.InJournal('byl tamnut|see the target')) {
                 ranger && Scripts.Taming.undressRobe();
                 return true;
             }

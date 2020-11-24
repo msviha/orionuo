@@ -51,3 +51,19 @@ function isBagDestination(val:any):val is IBagDestination {
     !success && Scripts.Utils.log('x and y should be a number', ColorEnum.red);
     return success;
 }
+
+function isArray(val:any):val is any[] {
+    return val && typeof val.length === 'number';
+}
+
+function isStringArray(val:any):val is string[] {
+    let success = isArray(val);
+    for (const v of val) {
+        success = success && typeof v === 'string';
+    }
+    return success;
+}
+
+function isIPotion(val:any):val is IPotion {
+    return val && val.graphic && val.kad;
+}

@@ -27,7 +27,20 @@ enum ScrollEnum {
     ef = 'ef',
     para = 'para',
     wos = 'wos',
-    ivm = 'ivm'
+    ivm = 'ivm',
+    ress = 'ress',
+    recall = 'recall'
+}
+
+enum ReagentsEnum {
+    mr = 'mr',
+    ss = 'ss',
+    bm = 'bm',
+    bp = 'bp',
+    ga = 'ga',
+    gi = 'gi',
+    ns = 'ns',
+    sa = 'sa'
 }
 
 enum FlagsEnum {

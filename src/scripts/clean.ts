@@ -46,8 +46,6 @@ namespace Scripts {
             tName?:string
         ) {
             let serials = Scripts.Utils.getSerialsFromMyGameObject(type);
-            Orion.Print(ColorEnum.none, `${tName}: ${serials.length}`);
-
             let bag = type.bag?.objectAlias;
             if (bag && !Orion.FindObject(bag)) {
                 Orion.AddObject(bag);

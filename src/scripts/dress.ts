@@ -71,8 +71,77 @@ namespace Scripts {
                     continue;
                 }
                 Orion.Equip(s);
-                Orion.Wait(150);
+                Orion.Wait(200);
             }
+        }
+
+        static nextWeapon(showName = false, previous = false) {
+            let currentWeaponIndex = Shared.GetVar('currentWeaponArrayIndex', -1);
+            const weapons = Shared.GetArray('weapons');
+            if (!weapons?.length) {
+                Scripts.Utils.playerPrint('Nemas nasetovane zadne zbrane, zkus dat nejdrive _resetWeapons');
+                return;
+            }
+
+            if (previous) {
+                currentWeaponIndex--;
+                currentWeaponIndex < 0 && (currentWeaponIndex = weapons.length - 1);
+            }
+            else {
+                currentWeaponIndex++;
+                weapons.length === currentWeaponIndex && (currentWeaponIndex = 0);
+            }
+            Shared.AddVar('currentWeaponArrayIndex', currentWeaponIndex);
+
+            const w = weapons[currentWeaponIndex];
+            const weaponAlias = w.alias;
+            const weaponName = w.name;
+            const weapon = Orion.FindObject(weaponAlias);
+            if (!weapon) {
+                Scripts.Utils.playerPrint(`nenasel jsem zbran ${weaponAlias}`, ColorEnum.red);
+            }
+            else {
+                showName && Scripts.Utils.playerPrint(weaponName, ColorEnum.orange);
+                Orion.Equip(weaponAlias);
+                Orion.Wait(responseDelay);
+            }
+
+            if (!Orion.ObjAtLayer(2, 'self')) {
+                const shield = Orion.FindObject('shield');
+                if (shield) {
+                    Orion.Equip('shield');
+                }
+            }
+        }
+
+        static addWeapon(index:number):boolean {
+            Scripts.Utils.playerPrint(`Add weapon on slot ${index}`);
+            const alias = `weapon${index}`;
+            const selection = Orion.WaitForAddObject(alias, 60000);
+            return selection === 1;
+        }
+
+        static addShield():boolean {
+            Scripts.Utils.playerPrint(`Add shield`);
+            const alias = `shield`;
+            const selection = Orion.WaitForAddObject(alias, 60000);
+            return selection === 1;
+        }
+
+        static resetWeaponsArray() {
+            let i = 1;
+            const weapons = [];
+            while (Scripts.Dress.addWeapon(i)) {
+                const alias = `weapon${i}`;
+                Orion.Click(alias);
+                Orion.Wait(responseDelay);
+                const weapon = Orion.FindObject(alias);
+                weapons.push({alias, name: weapon.Name()});
+                i++;
+            }
+            Scripts.Dress.addShield();
+
+            Shared.AddArray('weapons', weapons);
         }
     }
 }

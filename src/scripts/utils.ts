@@ -55,12 +55,13 @@ namespace Scripts {
             quantity = 1,
             targetContainerId = 'backpack',
             refillJustWhenIHaveNothing = false,
-            itemName?:string
+            itemName?:string,
+            sourceContainerIsItemOnGround = false
         ):number {
             const serialsInTargetContainer = Orion.FindType(obj.graphic, obj.color || '0xFFFF', targetContainerId);
-            const serialsInSourceContainer = Orion.FindType(obj.graphic, obj.color || '0xFFFF', sourceContainerId);
+            const serialsInSourceContainer = sourceContainerIsItemOnGround ? [sourceContainerId] : Orion.FindType(obj.graphic, obj.color || '0xFFFF', sourceContainerId);
             const itemsInTarget = Scripts.Utils.countObjectInContainer(obj, targetContainerId);
-            const itemsInSource = Scripts.Utils.countObjectInContainer(obj, sourceContainerId);
+            const itemsInSource = Scripts.Utils.countObjectInContainer(obj, sourceContainerId, sourceContainerIsItemOnGround);
 
             if (itemsInTarget > quantity) {
                 return Scripts.Utils.moveItems(serialsInTargetContainer, sourceContainerId, itemsInTarget - quantity);
@@ -81,8 +82,8 @@ namespace Scripts {
             return Orion.FindType(obj.graphic, obj.color || '0xFFFF', container);
         }
 
-        static countObjectInContainer(obj:IMyGameObject, container = 'backpack'):number {
-            const serials = Scripts.Utils.getObjSerials(obj, container);
+        static countObjectInContainer(obj:IMyGameObject, container = 'backpack', containerIsObjItemOnGround = false):number {
+            const serials = containerIsObjItemOnGround ? [container] : Scripts.Utils.getObjSerials(obj, container);
             return Scripts.Utils.countItemsBySerials(serials);
         }
 

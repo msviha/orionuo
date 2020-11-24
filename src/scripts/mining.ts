@@ -53,7 +53,12 @@ namespace Scripts {
             Orion.Wait(1000);
             Orion.MoveItem(runeSerial, undefined, sourceContainer);
             const teleported = Scripts.Utils.waitWhileSomethingInJournal(['been teleported'], 40000);
-            !teleported && Scripts.Mining.takeRunePortAndReturnItBack(runeSerial, sourceContainer);
+            if (!teleported) {
+                Scripts.Utils.refill(gameObject.regy.bm, sourceContainer, 20);
+                Scripts.Utils.refill(gameObject.regy.bp, sourceContainer, 20);
+                Scripts.Utils.refill(gameObject.regy.mr, sourceContainer, 20);
+                Scripts.Mining.takeRunePortAndReturnItBack(runeSerial, sourceContainer);
+            }
         }
 
         static saveCurrentPositionToArray(arr:ICoordinates[]) {
@@ -247,7 +252,7 @@ namespace Scripts {
             Orion.Wait(500);
 
             // port zpet
-            Scripts.Port.travelBook(PortBookOptionsEnum.kop);
+            Scripts.Port.travelBook(PortBookOptionsEnum.kop, true);
             Orion.Wait(500);
         }
 

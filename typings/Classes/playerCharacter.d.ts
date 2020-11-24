@@ -5,6 +5,8 @@
 	*/
 	Serial(): string;
 
+	BankSerial(): string;
+
 	/**
 	* String obj.Graphic();
 	* Result: Type of an Object (Picture ID).

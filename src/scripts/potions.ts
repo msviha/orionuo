@@ -3,7 +3,8 @@ namespace Scripts {
     export class Potions {
 
         static getEmptyBottle():string {
-            const emptyBottles = Scripts.Utils.findFirstType(gameObject.uncategorized.emptyBottles);
+            const eb = gameObject.uncategorized.emptyBottles;
+            let emptyBottles = Scripts.Utils.findFirstType(eb)
             if (!emptyBottles) {
                 Scripts.Utils.log(`Nemas prazdne lahve`, ColorEnum.red);
                 throw 'Nemas prazdne lahve';
@@ -161,13 +162,18 @@ namespace Scripts {
             }
         }
 
-        static fillPotion(potionName:PotionsEnum, switchWarModeWhenNeeded = true) {
+        static fillPotion(
+            potionName:PotionsEnum,
+            switchWarModeWhenNeeded = true,
+            kadSerial?:string,
+            emptyBottleSerial?:string
+        ) {
             if (!isPotionsEnum(potionName)) {
                 return;
             }
             const p = gameObject.potions[potionName];
-            const potionKad = Scripts.Potions.getKadForPotion(p);
-            const emptyBottle = Scripts.Potions.getEmptyBottle();
+            const potionKad = kadSerial || Scripts.Potions.getKadForPotion(p);
+            const emptyBottle = emptyBottleSerial || Scripts.Potions.getEmptyBottle();
 
             Orion.ClearJournal();
             Orion.WaitTargetObject(emptyBottle);
@@ -186,6 +192,25 @@ namespace Scripts {
                 Orion.UseObject(potionKad);
                 Orion.Wait(responseDelay);
             }
+        }
+
+        static potionToKad(potionName:PotionsEnum, switchWarModeWhenNeeded = true, kadSerial?:string) {
+            if (!isPotionsEnum(potionName)) {
+                return;
+            }
+            const p = gameObject.potions[potionName];
+            const potionKad = kadSerial || Scripts.Potions.getKadForPotion(p);
+            const potion = Scripts.Utils.findFirstType(p);
+
+            if (!potion) {
+                Scripts.Utils.log(`Nemas lahvicku s ${potionName}`, ColorEnum.red);
+                throw 'err';
+            }
+
+            Orion.ClearJournal();
+            Orion.WaitTargetObject(potion);
+            Orion.UseObject(potionKad);
+            Orion.Wait(responseDelay);
         }
 
     }

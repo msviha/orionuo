@@ -38,6 +38,8 @@ export default interface Gumps {
 	*/
 	GumpCount(): number;
 
+	GumpExists(type: string, serial?: string, id?: string): boolean
+
 	/**
 	* GumpObject Orion.GetLastGump();
 	* Get last gump sent by server.
@@ -65,4 +67,6 @@ export default interface Gumps {
 	* Returns true if a gump was received during delay period.
 	*/
 	WaitForGump(delay?: number): boolean;
+
+	WaitForContainerGump(delay?: number): boolean;
 }
