@@ -1,11 +1,11 @@
 namespace Scripts {
     export class Refill {
 
-        static manager(stuff:Array<{item:string, total:number}>, containerPathsToSearch?:Array<string[]>|string[]) {
+        static manager(stuff:Array<{item:string, total:number}>, containerPathsToSearch?:Array<string[]>|string[], clean = true) {
             const canTakeFromBank = Scripts.Common.openBank();
             for (const i of stuff) {
                 Scripts.Refill.universalRefill(i.item, i.total, canTakeFromBank, containerPathsToSearch);
-                Scripts.Clean.cleanObjectInBag(Scripts.Utils.parseObject(i.item));
+                clean && Scripts.Clean.cleanObjectInBag(Scripts.Utils.parseObject(i.item));
             }
 
             Scripts.Utils.playerPrint(`vazis: ${Player.Weight()}/${Player.MaxWeight()}`);
@@ -93,9 +93,7 @@ namespace Scripts {
 
             if (itemSerial) {
                 if (isIPotion(item)) {
-                    Orion.Print(-1, JSON.stringify(item));
                     const eb = gameObject.uncategorized.emptyBottles;
-                    Orion.Print(-1, lastContainerSerial === itemSerial ? 'ground' : lastContainerSerial);
                     const emptyBottleSerials = Orion.FindType(eb.graphic, eb.color, lastContainerSerial === itemSerial ? 'ground' : lastContainerSerial, 'near|item', 3);
                     const emptyBottleSerial = emptyBottleSerials.length ? emptyBottleSerials[0] : undefined;
                     Scripts.Refill.refillPotions(<PotionsEnum>name, total, itemSerial, needToTakeToBackpack, emptyBottleSerial)

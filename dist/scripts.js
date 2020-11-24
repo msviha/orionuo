@@ -3986,12 +3986,13 @@ var Scripts;
     var Refill = (function () {
         function Refill() {
         }
-        Refill.manager = function (stuff, containerPathsToSearch) {
+        Refill.manager = function (stuff, containerPathsToSearch, clean) {
+            if (clean === void 0) { clean = true; }
             var canTakeFromBank = Scripts.Common.openBank();
             for (var _i = 0, stuff_1 = stuff; _i < stuff_1.length; _i++) {
                 var i = stuff_1[_i];
                 Scripts.Refill.universalRefill(i.item, i.total, canTakeFromBank, containerPathsToSearch);
-                Scripts.Clean.cleanObjectInBag(Scripts.Utils.parseObject(i.item));
+                clean && Scripts.Clean.cleanObjectInBag(Scripts.Utils.parseObject(i.item));
             }
             Scripts.Utils.playerPrint("vazis: " + Player.Weight() + "/" + Player.MaxWeight());
         };
@@ -4063,9 +4064,7 @@ var Scripts;
             }
             if (itemSerial) {
                 if (isIPotion(item)) {
-                    Orion.Print(-1, JSON.stringify(item));
                     var eb = gameObject.uncategorized.emptyBottles;
-                    Orion.Print(-1, lastContainerSerial === itemSerial ? 'ground' : lastContainerSerial);
                     var emptyBottleSerials = Orion.FindType(eb.graphic, eb.color, lastContainerSerial === itemSerial ? 'ground' : lastContainerSerial, 'near|item', 3);
                     var emptyBottleSerial = emptyBottleSerials.length ? emptyBottleSerials[0] : undefined;
                     Scripts.Refill.refillPotions(name, total, itemSerial, needToTakeToBackpack, emptyBottleSerial);
