@@ -1806,7 +1806,7 @@ function displayHidingInfo() {
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 0.1.2');
+    Orion.Print(-1, 'version 0.1.3');
     Orion.Print(-1, '-------------+');
 }
 function Autostart() {
@@ -1837,15 +1837,16 @@ function Autostart() {
             Scripts.Utils.playerPrint("World save !!!", ColorEnum.red);
             Orion.PauseScript('all', 'Autostart');
             Orion.ClearJournal('World save has been initiated.', 'sys');
-            Orion.Wait(1000);
+            Orion.Wait(5000);
             Orion.Click(Player.Serial());
-            var time = Orion.Now() + 25000;
+            var time = Orion.Now() + 20000;
             while (!(((_a = Orion.InJournal(Player.Name(), 'my', Player.Serial())) === null || _a === void 0 ? void 0 : _a.Text().indexOf(Player.Name())) > -1) &&
                 Orion.Now() < time && !Player.Dead()) {
                 Orion.Wait(50);
             }
-            Orion.ResumeScript('all', 'Autostart');
             Scripts.Utils.playerPrint("World save DONE", ColorEnum.green);
+            Orion.Wait(1500);
+            Orion.ResumeScript('all', 'Autostart');
         }
         Orion.Wait(updateRate);
     }
@@ -1909,6 +1910,9 @@ function equip() {
 function fillPotion(potionName, switchWarModeWhenNeeded) {
     if (switchWarModeWhenNeeded === void 0) { switchWarModeWhenNeeded = true; }
     Scripts.Potions.fillPotion(potionName, switchWarModeWhenNeeded);
+}
+function fishTrain(walkingCoordinates) {
+    Scripts.Fishing.fishTrain(walkingCoordinates);
 }
 function friend() {
     Scripts.Targeting.addFriend();
@@ -2795,7 +2799,7 @@ var Scripts;
             }
             for (var _i = 0, wayPoints_1 = wayPoints; _i < wayPoints_1.length; _i++) {
                 var w = wayPoints_1[_i];
-                Orion.WalkTo(w.x, w.y, Player.Z());
+                Orion.WalkTo(w.x, w.y, Player.Z(), 1, undefined);
                 for (var x = distance * -1; x <= distance; x++) {
                     for (var y = distance * -1; y <= distance; y++) {
                         Orion.ClearJournal();
