@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 0.1.3
+### features
+- hlasi worldsave a konec worldsave v autostartu - pausuje a resumuje bezici scripty behem WS (mohlo by pomoct pokud nekde neni osetreny WS)
+- `fishTrain` hloupe chytani ryb a chozeni mezi x/y waypointama
+- `attackLast` attackuje attacklast a ne lasttarget jako je to pomoci nativniho client makra
+
+### fixes
+- `targetNext` a `targetPrevious` vytahuje statusbary kousek doprava aby byly videt drink timery
+
 ## 0.1.2
 ### features
 - `resetWeapons` nastavi zbrane a stit ( nasledne vyuziti u funkci nextWeapon a previousWeapon )

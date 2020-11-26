@@ -18,7 +18,7 @@
 
 •  **drink**:  = "drink"
 
-*Defined in [enums.ts:95](https://github.com/msviha/orionuo/blob/ec017d9/src/enums.ts#L95)*
+*Defined in [enums.ts:95](https://github.com/msviha/orionuo/blob/5713165/src/enums.ts#L95)*
 
 ___
 
@@ -26,7 +26,7 @@ ___
 
 •  **gs**:  = "gs"
 
-*Defined in [enums.ts:96](https://github.com/msviha/orionuo/blob/ec017d9/src/enums.ts#L96)*
+*Defined in [enums.ts:96](https://github.com/msviha/orionuo/blob/5713165/src/enums.ts#L96)*
 
 ___
 
@@ -34,4 +34,4 @@ ___
 
 •  **hiding**:  = "hiding"
 
-*Defined in [enums.ts:97](https://github.com/msviha/orionuo/blob/ec017d9/src/enums.ts#L97)*
+*Defined in [enums.ts:97](https://github.com/msviha/orionuo/blob/5713165/src/enums.ts#L97)*

@@ -1,7 +1,7 @@
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 0.1.2');
+    Orion.Print(-1, 'version 0.1.3');
     Orion.Print(-1, '-------------+');
 }
 
@@ -34,7 +34,24 @@ function Autostart() {
             }
             previousLastAttackSerial = lastAttackSerial;
         }
+        if (Orion.InJournal('World save has been initiated.', 'sys')) {
+            Scripts.Utils.playerPrint(`World save !!!`, ColorEnum.red);
+            Orion.PauseScript('all', 'Autostart');
+            Orion.ClearJournal('World save has been initiated.', 'sys');
+            Orion.Wait(5000);
+            Orion.Click(Player.Serial());
 
+            const time = Orion.Now() + 20000;
+            while (
+                !(Orion.InJournal(Player.Name(), 'my', Player.Serial())?.Text().indexOf(Player.Name()) > -1) &&
+                Orion.Now() < time && !Player.Dead()
+                ) {
+                Orion.Wait(50);
+            }
+            Scripts.Utils.playerPrint(`World save DONE`, ColorEnum.green);
+            Orion.Wait(1500);
+            Orion.ResumeScript('all', 'Autostart');
+        }
         Orion.Wait(updateRate);
     }
 }
@@ -65,6 +82,15 @@ function addMount() {
  */
 function alchemy(potionName:PotionsEnum) {
     Scripts.Potions.alchemy(potionName);
+}
+
+/**
+ * Utoci na lastattack alias
+ * @example in client `_lastattack`
+ * @example external code `lastattack();`
+ */
+function attackLast() {
+    Orion.Attack(Orion.ClientLastAttack());
 }
 
 /**
@@ -208,6 +234,16 @@ function equip() {
  */
 function fillPotion(potionName:PotionsEnum, switchWarModeWhenNeeded = true) {
     Scripts.Potions.fillPotion(potionName, switchWarModeWhenNeeded);
+}
+
+/**
+ * Hazi prutem okolo sebe a chyta ryby.. nebere je, nereze je..
+ * @param walkingCoordinates muzete si nastavit mezi kteryma mistama ma chodit
+ * @example in client `_fishTrain`
+ * @example external code `fishTrain([{x: 10, y: 800}, {x: 20, y: 810}]);`
+ */
+function fishTrain(walkingCoordinates?:ICoordinates[]) {
+    Scripts.Fishing.fishTrain(walkingCoordinates)
 }
 
 /**

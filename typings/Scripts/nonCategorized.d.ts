@@ -285,4 +285,8 @@ export default interface NonCategorized {
 	* Load OA profile by name.
 	*/
 	LoadProfile(name: string): void;
+
+	PauseScript(scripts?:string, exceptScripts?:string):void;
+
+	ResumeScript(scripts?:string, exceptScripts?:string):void;
 }

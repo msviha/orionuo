@@ -19,7 +19,7 @@
 
 •  **kop**:  = "kop"
 
-*Defined in [enums.ts:103](https://github.com/msviha/orionuo/blob/ec017d9/src/enums.ts#L103)*
+*Defined in [enums.ts:103](https://github.com/msviha/orionuo/blob/5713165/src/enums.ts#L103)*
 
 ___
 
@@ -27,7 +27,7 @@ ___
 
 •  **mark**:  = "mark"
 
-*Defined in [enums.ts:102](https://github.com/msviha/orionuo/blob/ec017d9/src/enums.ts#L102)*
+*Defined in [enums.ts:102](https://github.com/msviha/orionuo/blob/5713165/src/enums.ts#L102)*
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 •  **nabiti**:  = "nabiti"
 
-*Defined in [enums.ts:104](https://github.com/msviha/orionuo/blob/ec017d9/src/enums.ts#L104)*
+*Defined in [enums.ts:104](https://github.com/msviha/orionuo/blob/5713165/src/enums.ts#L104)*
 
 ___
 
@@ -43,4 +43,4 @@ ___
 
 •  **opravaStats**:  = "opravaStats"
 
-*Defined in [enums.ts:101](https://github.com/msviha/orionuo/blob/ec017d9/src/enums.ts#L101)*
+*Defined in [enums.ts:101](https://github.com/msviha/orionuo/blob/5713165/src/enums.ts#L101)*

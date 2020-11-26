@@ -11,7 +11,7 @@ namespace Scripts {
             }
 
             for (const w of wayPoints) {
-                Orion.WalkTo(w.x, w.y, Player.Z());
+                Orion.WalkTo(w.x, w.y, Player.Z(), 1, undefined);
 
                 for (let x = distance * -1; x <= distance; x++) {
                     for (let y = distance * -1; y <= distance; y++) {
