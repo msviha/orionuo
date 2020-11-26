@@ -261,7 +261,7 @@ namespace Scripts {
             const currentStatusBarSerial = Orion.GetGlobal('currentStatusBarSerial');
             currentStatusBarSerial && Orion.CloseStatusbar(currentStatusBarSerial);
             Orion.SetGlobal('currentStatusBarSerial', newSerial);
-            Orion.ShowStatusbar(newSerial, 20, 20);
+            Orion.ShowStatusbar(newSerial, 70, 20);
         }
 
         static determineHpColor(percent:number):ColorEnum {
