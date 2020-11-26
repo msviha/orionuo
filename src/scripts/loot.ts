@@ -1,98 +1,6 @@
 namespace Scripts {
     export class Loot {
 
-        /**
-         * Scripts.Loot.harving
-         * stability beta
-         *
-         * TODO nahozeni zbrane po rezani (pokud se mlati jinou nez reze)
-         * @param cut rezat ?
-         * @param wayPoints pole coordinates kudy ma chodit, je vhodne cestu vyzkouset bez enemiesTypesToHarv, aby bylo jasne ze se nesekne
-         * viz. [{x: 3570, y: 1430, trap: true}, {x: 3590, y: 1433}, {x: 3580, y: 1439, trap: true}]
-         * chodi mezi temito dvema polickama stale dokola
-         * @param enemiesTypesToHarv seznam typu potvor ktere ma primarne zabijet (ziskas pomoci _info na potvoru)
-         * viz. ['0x0047', '0x0003']
-         * teratan droni a mumie
-         * @param trapDelay jak dlouho cekat na waypointu s priznakem trap (default 10 vterin)
-         * @param dmgToStartHeal kolik hp musi chybet do full, aby se zacal lecit (default 40)
-         * @param fullHeal ma se vylecit uplne ?
-         * @param castCure ma na sebe kouzlit cure ?
-         * @param drinkCure ma pit cure ? // todo checknout.. je to ted nastavene jen na lessercure, ktere leci i deadly
-         * @param castReactive ma na sebe kouzlit reactive armor v 5ti minutovych intervalech
-         * @param weapon zepta se kterou zbrani budes mlatit
-         */
-        static harving({
-            cut,
-            wayPoints,
-            enemiesTypesToHarv,
-            trapDelay = 10000,
-            dmgToStartHeal = 40,
-            fullHeal = false,
-            castCure = false,
-            drinkCure = false,
-            castReactive = false,
-            weapon = true,
-            poisonTrain = false
-        }: {
-            cut?:boolean,
-            wayPoints?:ICoordinates[],
-            enemiesTypesToHarv?:string[],
-            trapDelay?:number,
-            dmgToStartHeal?:number,
-            fullHeal?:boolean,
-            castCure?:boolean,
-            drinkCure?:boolean,
-            castReactive?:boolean,
-            weapon?:boolean,
-            poisonTrain?:boolean
-        }) {
-            Orion.SetTimer('ReactiveArmorTimer');
-            let currentWaypointIndex = 0;
-            let lastAttack = undefined;
-
-            const selection_1 = Scripts.Loot.addCutWeapon();
-            Scripts.Utils.playerPrint('Target your loot bag');
-            const selection_2 = Orion.WaitForAddObject('myLootBag', 60000);
-
-            let selection_3 = 1;
-            if (weapon) {
-                Scripts.Utils.playerPrint('Target your weapon');
-                selection_3 = Orion.WaitForAddObject('fightWeapon', 60000);
-            }
-
-
-            // check the proper selection (game objects)
-            if (1 !== selection_1 || 1 !== selection_2 || 1 !== selection_3) {
-                Scripts.Utils.log('All selections must be game objects', ColorEnum.red);
-                return;
-            }
-
-            while (true) {
-                lastAttack = Orion.ClientLastAttack();
-                // reactive armor
-                if (castReactive && Orion.Timer('ReactiveArmorTimer') > 300000) {
-                    Scripts.Utils.resetTimer('ReactiveArmorTimer');
-                    Scripts.Spells.castUntilSuccess('Reactive Armor', TargetEnum.self, 2500);
-                }
-
-                Scripts.Loot.lootCorpsesAround(cut, weapon);
-                Scripts.Auto.healAndCureWhenHarving(dmgToStartHeal, fullHeal, castCure, drinkCure);
-                const enemySerialsAround = Orion.FindType(enemiesTypesToHarv.join('|'), '-1', 'ground', 'fast', 4, 'red');
-                currentWaypointIndex = Scripts.Loot.moveToNextWaypointWhenNeeded(wayPoints, enemySerialsAround, currentWaypointIndex, trapDelay);
-                if (!enemySerialsAround.length || (lastAttack && enemySerialsAround.indexOf(lastAttack) > -1)) {
-                    return;
-                }
-                const serialToAttack = enemySerialsAround[0];
-                Scripts.Auto.killObject(
-                    serialToAttack,
-                    poisonTrain,
-                    false
-                );
-
-                Orion.Wait(500);
-            }
-        }
-
         static addCutWeapon():number {
             Scripts.Utils.playerPrint('Target your cut weapon');
             return Orion.WaitForAddObject('cutWeapon', 60000);
@@ -142,34 +50,6 @@ namespace Scripts {
                     Orion.MoveItem(itemId, 0, "myLootBag");
                     Orion.Wait(serverLagActionsLeft ? 50 : 350);
                     serverLagActionsLeft--;
-                }
-            }
-        }
-
-        /**
-         * Scripts.Loot.moveToNextWaypointWhenNeeded
-         * stability beta
-         *
-         * presouva se na dalsi waypoint pokud je potreba
-         * return nextWaypointIndex
-         */
-        static moveToNextWaypointWhenNeeded(
-            wayPoints:ICoordinates[],
-            enemySerialsAround:string[],
-            currentWaypointIndex:number,
-            trapDelay:number
-        ):number {
-            if (wayPoints && enemySerialsAround) {
-                if (!enemySerialsAround.length) {
-                    const w = wayPoints[currentWaypointIndex];
-                    Orion.WalkTo(w.x, w.y, Player.Z(), 0);
-                    if ((<any>w).trap) {
-                        Orion.Wait(trapDelay);
-                    }
-                    return currentWaypointIndex + 1 === wayPoints.length ? 0 : currentWaypointIndex + 1;
-                }
-                else {
-                    return currentWaypointIndex;
                 }
             }
         }
