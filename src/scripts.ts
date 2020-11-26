@@ -34,7 +34,23 @@ function Autostart() {
             }
             previousLastAttackSerial = lastAttackSerial;
         }
+        if (Orion.InJournal('World save has been initiated.', 'sys')) {
+            Scripts.Utils.playerPrint(`World save !!!`, ColorEnum.red);
+            Orion.PauseScript('all', 'Autostart');
+            Orion.ClearJournal('World save has been initiated.', 'sys');
+            Orion.Wait(1000);
+            Orion.Click(Player.Serial());
 
+            const time = Orion.Now() + 25000;
+            while (
+                !(Orion.InJournal(Player.Name(), 'my', Player.Serial())?.Text().indexOf(Player.Name()) > -1) &&
+                Orion.Now() < time && !Player.Dead()
+                ) {
+                Orion.Wait(50);
+            }
+            Orion.ResumeScript('all', 'Autostart');
+            Scripts.Utils.playerPrint(`World save DONE`, ColorEnum.green);
+        }
         Orion.Wait(updateRate);
     }
 }
