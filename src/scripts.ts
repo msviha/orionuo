@@ -237,6 +237,16 @@ function fillPotion(potionName:PotionsEnum, switchWarModeWhenNeeded = true) {
 }
 
 /**
+ * Hazi prutem okolo sebe a chyta ryby.. nebere je, nereze je..
+ * @param walkingCoordinates muzete si nastavit mezi kteryma mistama ma chodit
+ * @example in client `_fishTrain`
+ * @example external code `fishTrain([{x: 10, y: 800}, {x: 20, y: 810}]);`
+ */
+function fishTrain(walkingCoordinates?:ICoordinates[]) {
+    Scripts.Fishing.fishTrain(walkingCoordinates)
+}
+
+/**
  * Prida frienda do friendlistu (dobre pouziti s targetNext)
  * @example in client `_friend`
  * @example external code `friend()`
