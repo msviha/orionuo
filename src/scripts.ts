@@ -68,6 +68,15 @@ function alchemy(potionName:PotionsEnum) {
 }
 
 /**
+ * Utoci na lastattack alias
+ * @example in client `_lastattack`
+ * @example external code `lastattack();`
+ */
+function attackLast() {
+    Orion.Attack(Orion.ClientLastAttack());
+}
+
+/**
  * Da si bandu, pokud dosli tak prehraje zvuk z C:\critical.wav
  * Poslednich 10 band hlasi nad hracem
  * @param minimalCountForWarn zobrazi varovani pokud budes mit tento pocet band (a mene)
