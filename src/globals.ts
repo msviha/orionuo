@@ -321,6 +321,30 @@ const gameObject:any = {
                             selections: ['Containers & Cont. parts', 'Forma na lahve']
                         }
                     }
+                },
+                deedToShips: {
+                    deedToSmallShip: {
+                        graphic: '0x14F1',
+                        color: '0x0000',
+                        make: {
+                            tool: 'gameObject.tools.saw',
+                            refill: {
+                                resources: [
+                                    {item: 'gameObject.resources.logs', count: 30},
+                                    {item: 'gameObject.resources.foldedCloth', count: 20}
+                                ],
+                                crafting: [
+                                    {item: 'gameObject.crafting.tinkering.parts.hinge', count: 20},
+                                    {item: 'gameObject.crafting.tinkering.parts.nails', count: 35},
+                                    {item: 'gameObject.crafting.carpentry.miscellaneous.boards', count: 250}
+                                ]
+                            },
+                            menu: {
+                                name: 'Carpentry',
+                                selections: ['Deeds to Ships', 'Deed to a small ship']
+                            }
+                        }
+                    }
                 }
             }
         },
@@ -403,6 +427,22 @@ const gameObject:any = {
                 }
             },
             wires: {
+                iron: {
+                    graphic: '0x1876',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                {item: 'gameObject.resources.ingots.iron', count: 2}
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Wires', 'Iron Wire']
+                        }
+                    }
+                },
                 copper: {
                     graphic: '0x1879',
                     color: '0x0000',
