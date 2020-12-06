@@ -32,6 +32,11 @@ enum ScrollEnum {
     recall = 'recall'
 }
 
+enum TargetIndicationEnum {
+    none = 'none',
+    large = 'large'
+}
+
 enum ReagentsEnum {
     mr = 'mr',
     ss = 'ss',

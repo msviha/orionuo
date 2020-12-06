@@ -44,7 +44,20 @@ namespace Scripts {
          * @param reverse if true.. it behaves like TargetPrevious
          * @constructor
          */
-        static targetNext(reverse = false, timeToStorePreviousTargets = 1500, additionalFlags:string[] = [], notoriety:string[] = []) {
+        static targetNext(
+            reverse = false,
+            timeToStorePreviousTargets = 1500,
+            additionalFlags:string[] = [],
+            notoriety:string[] = [],
+            opts:ITargetNextOpts = {
+                targetIndication: TargetIndicationEnum.large,
+                showStatusBar: true,
+                statusBarPosition: {
+                    x: 70,
+                    y: 20
+                }
+            }
+        ) {
             // initialization
             if (Orion.Timer('targetTimer') === -1) {
                 Orion.SetTimer('targetTimer');
@@ -107,7 +120,7 @@ namespace Scripts {
             const enemySerial = store[currentIndex].serial;
             const enemy = Orion.FindObject(enemySerial);
             if (enemy) {
-                Scripts.Targeting.highlightEnemy(enemySerial, enemy);
+                Scripts.Targeting.highlightEnemy(enemySerial, enemy, opts.showStatusBar, opts.targetIndication, opts.statusBarPosition);
             }
             else {
                 const enemyNameFromStore = store[currentIndex].name;
@@ -115,7 +128,16 @@ namespace Scripts {
             }
         }
 
-        static manualTarget() {
+        static manualTarget(
+            opts:ITargetNextOpts = {
+                targetIndication: TargetIndicationEnum.large,
+                showStatusBar: true,
+                statusBarPosition: {
+                    x: 70,
+                    y: 20
+                }
+            }
+        ) {
             const selection = Orion.WaitForAddObject('manualTargetEnemy');
             Scripts.Utils.waitWhileTargeting();
 
@@ -125,17 +147,23 @@ namespace Scripts {
 
             const enemy = Orion.FindObject('manualTargetEnemy');
             if (enemy && enemy.Mobile() && !enemy.Dead()) {
-                Scripts.Targeting.highlightEnemy('manualTargetEnemy', enemy);
+                Scripts.Targeting.highlightEnemy('manualTargetEnemy', enemy, opts.showStatusBar, opts.targetIndication, opts.statusBarPosition);
             }
         }
 
-        static highlightEnemy(enemySerial:string, enemy:GameObject) {
+        static highlightEnemy(
+            enemySerial:string,
+            enemy:GameObject,
+            showStatusBar = true,
+            targetIndicationEnum = TargetIndicationEnum.large,
+            statusBarPosition:ICoordinates
+        ) {
             const notoColor = Scripts.Wip.getColorByNotoriety(enemy.Notoriety());
 
             Scripts.Utils.playerPrint(`[${enemy.Name() || 'target'}]: ${enemy.Hits()}/${enemy.MaxHits()}`, notoColor);
             Orion.CharPrint(enemySerial, notoColor, `[${enemy.Name() || 'target'}]: ${enemy.Hits()}/${enemy.MaxHits()}`);
             Scripts.Utils.printColoredHpBar(enemySerial, enemy.Hits() / enemy.MaxHits() * 100);
-            Scripts.Utils.updateCurrentStatusBar(enemySerial);
+            showStatusBar && Scripts.Utils.updateCurrentStatusBar(enemySerial, statusBarPosition);
 
             Orion.Attack(enemySerial);
             Orion.WarMode(false);

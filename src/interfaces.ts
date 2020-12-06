@@ -10,6 +10,12 @@ interface IPotion extends IMyGameObject {
     kad:IMyGameObject
 }
 
+interface ITargetNextOpts {
+    targetIndication?:TargetIndicationEnum,
+    showStatusBar?:boolean,
+    statusBarPosition?:ICoordinates
+}
+
 interface IBagDestination extends ICoordinates{
     objectAlias?:string
 }

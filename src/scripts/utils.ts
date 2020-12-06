@@ -257,11 +257,11 @@ namespace Scripts {
             return item;
         }
 
-        static updateCurrentStatusBar(newSerial:string) {
+        static updateCurrentStatusBar(newSerial:string, position:ICoordinates) {
             const currentStatusBarSerial = Orion.GetGlobal('currentStatusBarSerial');
             currentStatusBarSerial && Orion.CloseStatusbar(currentStatusBarSerial);
             Orion.SetGlobal('currentStatusBarSerial', newSerial);
-            Orion.ShowStatusbar(newSerial, 70, 20);
+            Orion.ShowStatusbar(newSerial, position.x, position.y);
         }
 
         static determineHpColor(percent:number):ColorEnum {

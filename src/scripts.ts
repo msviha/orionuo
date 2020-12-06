@@ -540,8 +540,8 @@ function tamingTrain(robeOfDruids = true) {
  * @example external code `targetNext(1000, [FlagsEnum.ignorefriends]);`
  * @example external code `targetNext(1000, undefined, [NotorietyEnum.orange, NotorietyEnum.red, NotorietyEnum.criminal]);`
  */
-function targetNext(timeToStorePreviousTargets = 1500, additionalFlags?:FlagsEnum[], notoriety?:NotorietyEnum[]) {
-    Scripts.Targeting.targetNext(false, timeToStorePreviousTargets, additionalFlags, notoriety);
+function targetNext(timeToStorePreviousTargets = 1500, additionalFlags?:FlagsEnum[], notoriety?:NotorietyEnum[], opts?:ITargetNextOpts) {
+    Scripts.Targeting.targetNext(false, timeToStorePreviousTargets, additionalFlags, notoriety, opts);
 }
 
 /**
@@ -554,8 +554,8 @@ function targetNext(timeToStorePreviousTargets = 1500, additionalFlags?:FlagsEnu
  * @example external code `targetPrevious(1000, [FlagsEnum.ignorefriends]);`
  * @example external code `targetPrevious(1000, undefined, [NotorietyEnum.orange, NotorietyEnum.red, NotorietyEnum.criminal]);`
  */
-function targetPrevious(timeToStorePreviousTargets = 1500, additionalFlags?:string[], notoriety?:string[]) {
-    Scripts.Targeting.targetNext(true, timeToStorePreviousTargets, additionalFlags, notoriety);
+function targetPrevious(timeToStorePreviousTargets = 1500, additionalFlags?:string[], notoriety?:string[], opts?:ITargetNextOpts) {
+    Scripts.Targeting.targetNext(true, timeToStorePreviousTargets, additionalFlags, notoriety, opts);
 }
 
 /**

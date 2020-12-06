@@ -32,6 +32,11 @@ var ScrollEnum;
     ScrollEnum["ress"] = "ress";
     ScrollEnum["recall"] = "recall";
 })(ScrollEnum || (ScrollEnum = {}));
+var TargetIndicationEnum;
+(function (TargetIndicationEnum) {
+    TargetIndicationEnum["none"] = "none";
+    TargetIndicationEnum["large"] = "large";
+})(TargetIndicationEnum || (TargetIndicationEnum = {}));
 var ReagentsEnum;
 (function (ReagentsEnum) {
     ReagentsEnum["mr"] = "mr";
@@ -2010,13 +2015,13 @@ function tamingTrain(robeOfDruids) {
     if (robeOfDruids === void 0) { robeOfDruids = true; }
     Scripts.Taming.trainOnAnimalsAround(robeOfDruids);
 }
-function targetNext(timeToStorePreviousTargets, additionalFlags, notoriety) {
+function targetNext(timeToStorePreviousTargets, additionalFlags, notoriety, opts) {
     if (timeToStorePreviousTargets === void 0) { timeToStorePreviousTargets = 1500; }
-    Scripts.Targeting.targetNext(false, timeToStorePreviousTargets, additionalFlags, notoriety);
+    Scripts.Targeting.targetNext(false, timeToStorePreviousTargets, additionalFlags, notoriety, opts);
 }
-function targetPrevious(timeToStorePreviousTargets, additionalFlags, notoriety) {
+function targetPrevious(timeToStorePreviousTargets, additionalFlags, notoriety, opts) {
     if (timeToStorePreviousTargets === void 0) { timeToStorePreviousTargets = 1500; }
-    Scripts.Targeting.targetNext(true, timeToStorePreviousTargets, additionalFlags, notoriety);
+    Scripts.Targeting.targetNext(true, timeToStorePreviousTargets, additionalFlags, notoriety, opts);
 }
 function tracking(who) {
     if (who === void 0) { who = 'Players'; }
@@ -4081,11 +4086,19 @@ var Scripts;
             Orion.ClearEnemyList();
             while (Scripts.Targeting.addEnemy()) { }
         };
-        Targeting.targetNext = function (reverse, timeToStorePreviousTargets, additionalFlags, notoriety) {
+        Targeting.targetNext = function (reverse, timeToStorePreviousTargets, additionalFlags, notoriety, opts) {
             if (reverse === void 0) { reverse = false; }
             if (timeToStorePreviousTargets === void 0) { timeToStorePreviousTargets = 1500; }
             if (additionalFlags === void 0) { additionalFlags = []; }
             if (notoriety === void 0) { notoriety = []; }
+            if (opts === void 0) { opts = {
+                targetIndication: TargetIndicationEnum.large,
+                showStatusBar: true,
+                statusBarPosition: {
+                    x: 70,
+                    y: 20
+                }
+            }; }
             if (Orion.Timer('targetTimer') === -1) {
                 Orion.SetTimer('targetTimer');
                 Orion.SetGlobal('targetStore', '[]');
@@ -4134,14 +4147,22 @@ var Scripts;
             var enemySerial = store[currentIndex].serial;
             var enemy = Orion.FindObject(enemySerial);
             if (enemy) {
-                Scripts.Targeting.highlightEnemy(enemySerial, enemy);
+                Scripts.Targeting.highlightEnemy(enemySerial, enemy, opts.showStatusBar, opts.targetIndication, opts.statusBarPosition);
             }
             else {
                 var enemyNameFromStore = store[currentIndex].name;
                 Scripts.Utils.playerPrint("[" + enemyNameFromStore + "] out of distance", ColorEnum.red);
             }
         };
-        Targeting.manualTarget = function () {
+        Targeting.manualTarget = function (opts) {
+            if (opts === void 0) { opts = {
+                targetIndication: TargetIndicationEnum.large,
+                showStatusBar: true,
+                statusBarPosition: {
+                    x: 70,
+                    y: 20
+                }
+            }; }
             var selection = Orion.WaitForAddObject('manualTargetEnemy');
             Scripts.Utils.waitWhileTargeting();
             if (selection !== 1) {
@@ -4149,15 +4170,17 @@ var Scripts;
             }
             var enemy = Orion.FindObject('manualTargetEnemy');
             if (enemy && enemy.Mobile() && !enemy.Dead()) {
-                Scripts.Targeting.highlightEnemy('manualTargetEnemy', enemy);
+                Scripts.Targeting.highlightEnemy('manualTargetEnemy', enemy, opts.showStatusBar, opts.targetIndication, opts.statusBarPosition);
             }
         };
-        Targeting.highlightEnemy = function (enemySerial, enemy) {
+        Targeting.highlightEnemy = function (enemySerial, enemy, showStatusBar, targetIndicationEnum, statusBarPosition) {
+            if (showStatusBar === void 0) { showStatusBar = true; }
+            if (targetIndicationEnum === void 0) { targetIndicationEnum = TargetIndicationEnum.large; }
             var notoColor = Scripts.Wip.getColorByNotoriety(enemy.Notoriety());
             Scripts.Utils.playerPrint("[" + (enemy.Name() || 'target') + "]: " + enemy.Hits() + "/" + enemy.MaxHits(), notoColor);
             Orion.CharPrint(enemySerial, notoColor, "[" + (enemy.Name() || 'target') + "]: " + enemy.Hits() + "/" + enemy.MaxHits());
             Scripts.Utils.printColoredHpBar(enemySerial, enemy.Hits() / enemy.MaxHits() * 100);
-            Scripts.Utils.updateCurrentStatusBar(enemySerial);
+            showStatusBar && Scripts.Utils.updateCurrentStatusBar(enemySerial, statusBarPosition);
             Orion.Attack(enemySerial);
             Orion.WarMode(false);
             Orion.WarMode(true);
@@ -4395,11 +4418,11 @@ var Scripts;
             }
             return item;
         };
-        Utils.updateCurrentStatusBar = function (newSerial) {
+        Utils.updateCurrentStatusBar = function (newSerial, position) {
             var currentStatusBarSerial = Orion.GetGlobal('currentStatusBarSerial');
             currentStatusBarSerial && Orion.CloseStatusbar(currentStatusBarSerial);
             Orion.SetGlobal('currentStatusBarSerial', newSerial);
-            Orion.ShowStatusbar(newSerial, 70, 20);
+            Orion.ShowStatusbar(newSerial, position.x, position.y);
         };
         Utils.determineHpColor = function (percent) {
             var c = Math.ceil(percent * 3 / 100);
