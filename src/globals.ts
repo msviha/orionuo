@@ -80,6 +80,10 @@ const gameObject:any = {
         prut: {
             graphic: '0x0DBF',
             color: '0x0000'
+        },
+        hodf: {
+            graphic: '0x136C',
+            color: '0x0B89'
         }
     },
     tools: {
@@ -1650,6 +1654,16 @@ const gameObject:any = {
                 graphic: '0x2131',
                 color: '0xFFFF'
             }
+        }
+    },
+    poisonGuns: {
+        spear: {
+            graphic: '0x0F62',
+            color: '0x08A1'
+        },
+        halberd: {
+            graphic: '0x143E',
+            color: '0x08A1'
         }
     }
 };
