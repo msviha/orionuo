@@ -84,6 +84,10 @@ const gameObject:any = {
         hodf: {
             graphic: '0x136C',
             color: '0x0B89'
+        },
+        petarda: {
+            graphic: '0x1BE0',
+            color: '0x061C'
         }
     },
     tools: {
@@ -923,6 +927,12 @@ const gameObject:any = {
             }
         },
         blacksmithing: {
+            tools: {
+                petardCauldron: {
+                    graphic: '0x0990',
+                    color: '0x04B1'
+                }
+            },
             ironWeapons: {
                 swordsAndBlades: {
                     dagger: {
