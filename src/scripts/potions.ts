@@ -92,12 +92,13 @@ namespace Scripts {
 
             while (true) {
                 Orion.ClearJournal();
+                Orion.Wait(50);
 
                 const kadePrevious = Orion.FindType(gameObject.uncategorized.emptyKad.graphic);
 
                 Scripts.Utils.selectMenu('Vyber typ potionu', [p.gmMortarSelection]);
                 Orion.UseObject('gmMortar');
-                Scripts.Utils.waitWhileSomethingInJournal(['You vylil', 'Musis mit']);
+                Scripts.Utils.waitWhileSomethingInJournal(['You put the Nadoba', 'Musis mit']);
                 if (Orion.InJournal('Musis mit')) {
                     Scripts.Utils.log('Dosly regy', ColorEnum.red);
                     return;
@@ -107,17 +108,20 @@ namespace Scripts {
                 const michnutaKadSerial = kadeNew.filter(i => kadePrevious.indexOf(i) === -1)[0];
 
                 Orion.ClearJournal();
+                Orion.Wait(50);
                 Orion.WaitTargetObject(cilovaKadSerial);
                 Orion.UseObject(michnutaKadSerial);
                 Scripts.Utils.waitWhileSomethingInJournal(['Prelil jsi']);
 
                 Orion.ClearJournal();
+                Orion.Wait(responseDelay);
                 const emptyBottle = Scripts.Potions.getEmptyBottle();
                 Orion.WaitTargetObject(emptyBottle);
                 Orion.UseObject(michnutaKadSerial);
                 Scripts.Utils.waitWhileSomethingInJournal(['You put']);
 
                 Orion.ClearJournal();
+                Orion.Wait(50);
                 Orion.WaitTargetType(p.graphic, p.color);
                 Orion.UseObject(cilovaKadSerial);
                 Scripts.Utils.waitWhileSomethingInJournal(['You put']);
