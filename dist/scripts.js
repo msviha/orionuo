@@ -1868,9 +1868,10 @@ function alchemy(potionName) {
 function attackLast() {
     Orion.Attack(Orion.ClientLastAttack());
 }
-function bandageSelf(minimalCountForWarn) {
+function bandageSelf(minimalCountForWarn, failedMessage) {
     if (minimalCountForWarn === void 0) { minimalCountForWarn = 10; }
-    Scripts.Common.bandageSelf(minimalCountForWarn);
+    if (failedMessage === void 0) { failedMessage = true; }
+    Scripts.Common.bandageSelf(minimalCountForWarn, undefined, failedMessage);
 }
 function carveBody(carveNearestBodyAutomatically) {
     if (carveNearestBodyAutomatically === void 0) { carveNearestBodyAutomatically = false; }
@@ -2296,9 +2297,10 @@ var Scripts;
             Orion.AddDisplayTimer(TimersEnum.hiding, 2000, 'AboveChar', 'bar', "Hiding", 0, 100, '0x100', 0, 'red');
             Orion.Exec('displayHidingInfo', true);
         };
-        Common.bandageSelf = function (minimalCountToWarn, pathToNoBandagesWavFile) {
+        Common.bandageSelf = function (minimalCountToWarn, pathToNoBandagesWavFile, failedMessage) {
             if (minimalCountToWarn === void 0) { minimalCountToWarn = 10; }
             if (pathToNoBandagesWavFile === void 0) { pathToNoBandagesWavFile = 'C:/critical.wav'; }
+            if (failedMessage === void 0) { failedMessage = true; }
             var bandagesSerials = Orion.FindType(gameObject.uncategorized.bandy.graphic);
             var count = Scripts.Utils.countItemsBySerials(bandagesSerials);
             if (!count) {
@@ -2311,6 +2313,7 @@ var Scripts;
             while (!Orion.InJournal('You put') && !Orion.InJournal('You apply') && !Orion.InJournal('Chces vytvorit')) {
                 Orion.Wait(200);
             }
+            Orion.InJournal('You apply') && Orion.PrintFast(Player.Serial(), ColorEnum.red, 0, "bandage failed");
             count--;
             if (count <= minimalCountToWarn) {
                 Scripts.Utils.playerPrint("posledni" + (count > 4 ? 'ch' : '') + " " + count + " band" + (count > 4 ? '' : count > 1 ? 'y' : 'a'), ColorEnum.red);

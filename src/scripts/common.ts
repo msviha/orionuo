@@ -76,7 +76,7 @@ namespace Scripts {
          *
          * hodi si bandu, pripadne vypise ze nema a prehraje wav soubor
          */
-        static bandageSelf(minimalCountToWarn = 10, pathToNoBandagesWavFile = 'C:/critical.wav') {
+        static bandageSelf(minimalCountToWarn = 10, pathToNoBandagesWavFile = 'C:/critical.wav', failedMessage = true) {
             let bandagesSerials = Orion.FindType(gameObject.uncategorized.bandy.graphic);
             let count = Scripts.Utils.countItemsBySerials(bandagesSerials);
             if (!count) {
@@ -90,6 +90,7 @@ namespace Scripts {
             while (!Orion.InJournal('You put') && !Orion.InJournal('You apply') && !Orion.InJournal('Chces vytvorit')) {
                 Orion.Wait(200);
             }
+            Orion.InJournal('You apply') && Orion.PrintFast(Player.Serial(), ColorEnum.red, 0, `bandage failed`);
             count--;
 
             if (count <= minimalCountToWarn) {
