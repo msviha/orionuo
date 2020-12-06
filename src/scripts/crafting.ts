@@ -45,6 +45,7 @@ namespace Scripts {
             if (missingCount && res.make) {
                 Scripts.Crafting.make(missingCount, resourcePath, false);
                 Orion.Wait(responseDelay);
+                missingCount = Scripts.Utils.countObjectInContainer(res);
                 missingCount = Scripts.Utils.refill(res, 'resourcesContainer', missingCount, 'backpack', false, itemName);
             }
 
@@ -80,6 +81,7 @@ namespace Scripts {
             let totalTries = 0;
             while (count > 0) {
                 Scripts.Utils.worldSaveCheckWait();
+                Orion.ClearJournal();
                 if (itemObject.make.refill?.crafting) {
                     for (const ref of itemObject.make.refill?.crafting) {
                         Scripts.Crafting.refOrMake(ref.count, ref.item);
@@ -164,7 +166,6 @@ namespace Scripts {
                 return;
             }
             const count = parseInt(text.replace(Player.Name() + ':', ''), 10);
-            Orion.Print(-1, typeof count);
             Orion.Print(-1, count.toString());
             Scripts.Crafting.make(count, pathAsString);
         }

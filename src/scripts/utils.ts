@@ -76,6 +76,8 @@ namespace Scripts {
                 }
                 return Scripts.Utils.moveItems(serialsInSourceContainer, targetContainerId, quantity - itemsInTarget);
             }
+
+            return 0;
         }
 
         static getObjSerials(obj:IMyGameObject, container = 'backpack') {
@@ -124,9 +126,11 @@ namespace Scripts {
                 else {
                     Orion.ClearJournal();
                     Orion.MoveItem(item, quantity, targetContainerId);
-                    Orion.Wait(responseDelay);
-                    if (quantity === 1 && Orion.InJournal('too heavy')) {
+                    Orion.Wait(responseDelay * 2);
+                    const i = Orion.FindObject(item);
+                    if (quantity === 1 && !Scripts.Utils.countObjectInContainer({graphic: i.Graphic(), color: i.Color()})) {
                         Orion.MoveItem(item, 2, targetContainerId);
+                        Orion.Wait(responseDelay);
                     }
                     needToMove = 0;
                 }
