@@ -13,7 +13,11 @@ namespace Scripts {
         }
 
         static getKadForPotion(potion:IPotion):string {
-            const kad = Scripts.Utils.findFirstType(potion.kad);
+            let kad = Scripts.Utils.findFirstType(potion.kad);
+            if (!kad) {
+                const find = Orion.FindType(potion.kad.graphic, potion.kad.color, 'ground', 'near|item', 3);
+                find.length && (kad = find[0]);
+            }
             if (!kad) {
                 Scripts.Utils.log(`Nemas kad s potionem`, ColorEnum.red);
                 throw 'Nemas kad s potionem';
