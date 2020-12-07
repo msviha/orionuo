@@ -1,5 +1,25 @@
 # CHANGELOG
 
+## 0.1.4
+### features
+- `killAll` nova verze ktera by mela nahradit predchozi `kill`
+- `killTarget` postupne volani killu prez vsechny summy s vyhozenim targetu
+- `ocaruj` script pro magic minera na ocarovavani lootu v monstrech a pripadne lootovani (viz. `loot` script nastaveni)
+- `rozbij` script pro magic minera na rozbijeni ingu na dusty
+- `statusbar` prvni verze zalozek s hpckama
+
+### enhancements
+- `targetNext` nove optiony viz. dokumentace (pozice statusbaru, vypinani statusbaru, vypnuti HP indikace)
+- `bandageSelf` zobrazuje hlasku bandage failed pokud se banda nepodari
+- `fillPotion` cepuje i ze zeme, pokud nemate kad v baglu
+- `gameObject` pridano par veci (hodf, poison zbrane, petarda, vyroba lod)
+- `taming` nove optiony viz. dokumentace (hidovani a chozeni)
+
+### fixes
+- worldsave hlasky upraveny, odstraneno pausovani scriptu
+- `gmMortar` fixnuto michani
+- `make` opraveno vytuhnuti scriptu pri presunu 1 itemu z tezke hromady
+
 ## 0.1.3
 ### features
 - hlasi worldsave a konec worldsave v autostartu - pausuje a resumuje bezici scripty behem WS (mohlo by pomoct pokud nekde neni osetreny WS)

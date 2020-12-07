@@ -317,6 +317,24 @@ function kill() {
 }
 
 /**
+ * Prejmenuje vsechny summony a posle na lastattack
+ * @example `_killAll`
+ * @example external code `killAll();`
+ */
+function killAll() {
+    Scripts.PetCommander.killAll();
+}
+
+/**
+ * Prejmenuje summa a zarve s nim kill a necha vyhozenej target. Dobre na posilani summu na ruzne targety (toci je to)
+ * @example `_killTarget`
+ * @example external code `killTarget();`
+ */
+function killTarget() {
+    Scripts.PetCommander.killTarget();
+}
+
+/**
  * Hodi na zem a veme + odpali lavabombu - vyhodi target na koho ji chces pouzit
  * pokud nemas cepnutou tak cepne a odpali lavabombu - vyhodi target na koho ji chces pouzit
  * @example in client `_lavaBomb`
