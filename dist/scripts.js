@@ -114,6 +114,10 @@ var TimersEnum;
     TimersEnum["gs"] = "gs";
     TimersEnum["hiding"] = "hiding";
 })(TimersEnum || (TimersEnum = {}));
+var GlobalEnum;
+(function (GlobalEnum) {
+    GlobalEnum["customStatusBars"] = "customStatusBars";
+})(GlobalEnum || (GlobalEnum = {}));
 var PortBookOptionsEnum;
 (function (PortBookOptionsEnum) {
     PortBookOptionsEnum["opravaStats"] = "opravaStats";
@@ -2036,6 +2040,12 @@ function inscription(circle, spell, quantity) {
 function kill() {
     Scripts.PetCommander.kill();
 }
+function killAll() {
+    Scripts.PetCommander.killAll();
+}
+function killTarget() {
+    Scripts.PetCommander.killTarget();
+}
 function lavaBomb() {
     Scripts.Common.lavaBomb();
 }
@@ -2107,6 +2117,9 @@ function rozbij(ingy, kolik) {
 }
 function saveEquip() {
     Scripts.Dress.saveEquip();
+}
+function statusBar() {
+    Scripts.Statusbar.create();
 }
 function summon(creature, target) {
     Scripts.Spells.summon(creature, target);
@@ -4161,6 +4174,121 @@ var Scripts;
 })(Scripts || (Scripts = {}));
 var Scripts;
 (function (Scripts) {
+    var Statusbar = (function () {
+        function Statusbar() {
+        }
+        Statusbar.create = function () {
+            Scripts.Utils.createGameObjectSelections([{ ask: 'Target mobile', addObject: 'lastCustomStatusBar' }]);
+            var o = Orion.FindObject('lastCustomStatusBar');
+            var serial = o.Serial();
+            var name = o.Name();
+            var max = o.MaxHits();
+            var hp = o.Hits();
+            var statusBars = Shared.GetArray(GlobalEnum.customStatusBars, []);
+            var s = {
+                serial: serial,
+                hp: hp,
+                max: max,
+                name: name,
+                poisoned: o.Poisoned(),
+                visible: false,
+                dead: o.Dead()
+            };
+            statusBars.push(s);
+            Shared.AddArray(GlobalEnum.customStatusBars, statusBars);
+            var gump = Orion.CreateCustomGump(parseInt(serial, 16));
+            gump.SetCallback("customStatusBarCallBack " + serial);
+            Scripts.Statusbar.updateStatusBarGumpForObject(o, s, gump, true);
+        };
+        Statusbar.updateStatusbars = function () {
+            var statusBars = Shared.GetArray(GlobalEnum.customStatusBars, []);
+            for (var _i = 0, statusBars_1 = statusBars; _i < statusBars_1.length; _i++) {
+                var s = statusBars_1[_i];
+                var gump = Orion.CreateCustomGump(parseInt(s.serial, 16));
+                var o = Orion.FindObject(s.serial);
+                if (o) {
+                    Scripts.Statusbar.updateStatusBarGumpForObject(o, s, gump);
+                }
+                else if (s.visible) {
+                    s.visible = false;
+                    Scripts.Statusbar.redrawBodyToNoObject(s, gump);
+                }
+            }
+            Shared.AddArray(GlobalEnum.customStatusBars, statusBars);
+        };
+        Statusbar.updateStatusBarGumpForObject = function (o, s, gump, forceUpdate) {
+            if (forceUpdate === void 0) { forceUpdate = false; }
+            var name = o.Name();
+            var dead = o.Dead();
+            var poisoned = o.Poisoned();
+            var hp = o.Hits();
+            var max = o.MaxHits();
+            if (!forceUpdate && s.visible && s.dead === dead && s.hp === hp &&
+                s.max === max && s.name === name && s.poisoned === poisoned) {
+                return;
+            }
+            var updateText = false;
+            if (s.dead !== dead || (!s.visible && dead)) {
+                s.dead = dead;
+                s.visible = true;
+                updateText = true;
+                gump.Clear();
+                var ARGBcolor = Scripts.Utils.getARGBColorByNotoriety(o.Notoriety(), 'cc');
+                Scripts.Statusbar.drawBody(gump, o.Notoriety(), dead);
+            }
+            if (!s.visible) {
+                s.visible = true;
+                updateText = true;
+                gump.Clear();
+                Scripts.Statusbar.drawBody(gump, o.Notoriety());
+            }
+            if (s.name !== name || updateText) {
+                s.name = name;
+                Scripts.Statusbar.drawName(gump, name);
+            }
+            !max && (max = s.max);
+            hp < 0 && (hp = 0);
+            if (s.hp !== hp || s.max !== max || s.poisoned !== poisoned || updateText) {
+                s.hp = hp;
+                s.max = max;
+                s.poisoned = poisoned;
+                Scripts.Statusbar.drawHP(gump, hp, max, poisoned);
+            }
+            gump.Update();
+        };
+        Statusbar.drawBody = function (gump, notoriety, dead) {
+            if (dead === void 0) { dead = false; }
+            var ARGBcolor = dead ? '#ffff4dff' : typeof notoriety === 'number' ? Scripts.Utils.getARGBColorByNotoriety(notoriety) : '#ccffffff';
+            gump.AddColoredPolygone(0, 0, 170, 50, ARGBcolor);
+            gump.AddHitBox(CustomStatusBarEnum.click, 0, 0, 170, 50, 1);
+        };
+        Statusbar.redrawBodyToNoObject = function (s, gump) {
+            gump.Clear();
+            Scripts.Statusbar.drawBody(gump);
+            Scripts.Statusbar.drawName(gump, s.name);
+            Scripts.Statusbar.drawHP(gump, s.hp, s.max, s.poisoned);
+            gump.Update();
+        };
+        Statusbar.drawName = function (gump, name) {
+            gump.AddText(10, 7, '0', "" + name, 0, 202);
+        };
+        Statusbar.drawHP = function (gump, hp, max, poisoned) {
+            var lineLength = 70;
+            var relative = lineLength / max;
+            var current = hp * relative;
+            var over = hp > max;
+            var currentColor = poisoned ? '#00FF00' : Scripts.Utils.determineHpColorRGB(current * 100 / lineLength);
+            gump.AddText(10, 25, '0', hp + "/" + max, 0, 201);
+            gump.AddLine(89, 35, 161, 35, 'black', 10, 101);
+            gump.AddLine(90, 35, (over ? lineLength : current) + 90, 35, currentColor, 8, 102);
+            over && gump.AddText(152, 25, '0', "<basefont size='small' color='red'>+</basefont>");
+        };
+        return Statusbar;
+    }());
+    Scripts.Statusbar = Statusbar;
+})(Scripts || (Scripts = {}));
+var Scripts;
+(function (Scripts) {
     var Taming = (function () {
         function Taming() {
         }
@@ -4752,6 +4880,35 @@ var Scripts;
         Utils.determineHpColor = function (percent) {
             var c = Math.ceil(percent * 3 / 100);
             return c === 1 ? ColorEnum.red : c === 2 ? ColorEnum.orange : ColorEnum.green;
+        };
+        Utils.determineHpColorRGB = function (percent) {
+            var c = Math.ceil(percent * 3 / 100);
+            return c === 1 ? '#FF0000' : c === 2 ? '#FFFF00' : '#007B00';
+        };
+        Utils.getARGBColorByNotoriety = function (notoriety, hexaOpacity) {
+            if (hexaOpacity === void 0) { hexaOpacity = 'ff'; }
+            switch (notoriety) {
+                case 1:
+                    return "#" + hexaOpacity + "26beed";
+                    break;
+                case 2:
+                    return "#" + hexaOpacity + "00cc00";
+                    break;
+                case 3:
+                    return "#" + hexaOpacity + "999999";
+                    break;
+                case 4:
+                    return "#" + hexaOpacity + "999999";
+                    break;
+                case 5:
+                    return "#" + hexaOpacity + "ff8c1a";
+                    break;
+                case 6:
+                    return "#" + hexaOpacity + "e62a00";
+                    break;
+                default:
+                    return "#" + hexaOpacity + "ffff1a";
+            }
         };
         Utils.printColoredHpBar = function (target, percent) {
             var fullBoxCount = Math.ceil(percent * 6 / 100);

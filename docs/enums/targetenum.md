@@ -10,6 +10,7 @@
 
 * [lastattack](targetenum.md#lastattack)
 * [laststatus](targetenum.md#laststatus)
+* [lasttarget](targetenum.md#lasttarget)
 * [self](targetenum.md#self)
 
 ## Enumeration members
@@ -18,7 +19,7 @@
 
 •  **lastattack**:  = "lastattack"
 
-*Defined in [enums.ts:17](https://github.com/msviha/orionuo/blob/5713165/src/enums.ts#L17)*
+*Defined in [enums.ts:17](https://github.com/msviha/orionuo/blob/8c76826/src/enums.ts#L17)*
 
 ___
 
@@ -26,7 +27,15 @@ ___
 
 •  **laststatus**:  = "laststatus"
 
-*Defined in [enums.ts:18](https://github.com/msviha/orionuo/blob/5713165/src/enums.ts#L18)*
+*Defined in [enums.ts:18](https://github.com/msviha/orionuo/blob/8c76826/src/enums.ts#L18)*
+
+___
+
+### lasttarget
+
+•  **lasttarget**:  = "lasttarget"
+
+*Defined in [enums.ts:19](https://github.com/msviha/orionuo/blob/8c76826/src/enums.ts#L19)*
 
 ___
 
@@ -34,4 +43,4 @@ ___
 
 •  **self**:  = "self"
 
-*Defined in [enums.ts:16](https://github.com/msviha/orionuo/blob/5713165/src/enums.ts#L16)*
+*Defined in [enums.ts:16](https://github.com/msviha/orionuo/blob/8c76826/src/enums.ts#L16)*
