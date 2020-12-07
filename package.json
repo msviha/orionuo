@@ -1,6 +1,6 @@
 {
   "name": "orionuo",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Scripts for OrionUO assistant on Darkparadise.cz",
   "scripts": {
     "build": "tsc",

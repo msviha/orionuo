@@ -1939,7 +1939,7 @@ function customStatusBarCallBack(s) {
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 0.1.3');
+    Orion.Print(-1, 'version 0.1.4');
     Orion.Print(-1, '-------------+');
 }
 function Autostart() {
