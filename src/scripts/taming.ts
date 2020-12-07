@@ -30,8 +30,9 @@ namespace Scripts {
             return true;
         }
 
-        static waitOnTaming(animalSerial:string, walkTo = true) {
-            const animal = Orion.FindObject(animalSerial);
+        static waitOnTaming(animalSerial:string, walkTo = true):string|undefined {
+            let animal = Orion.FindObject(animalSerial);
+            let groundItemsSerials = Orion.FindType('any', 'any', 'ground', 'item', 3);
             while (!(
                 Orion.InJournal('Your taming failed') ||
                 Orion.InJournal('Ochoceni se nezdarilo') ||
@@ -46,8 +47,21 @@ namespace Scripts {
                 Orion.InJournal('You are not able to tame this animal')
             )) {
                 Orion.Wait(500);
-                walkTo && Orion.WalkTo(animal.X(), animal.Y(), animal.Z(), 1);
+                animal = Orion.FindObject(animalSerial);
+                if (animal) {
+                    walkTo && Orion.WalkTo(animal.X(), animal.Y(), animal.Z(), 1);
+                    groundItemsSerials = Orion.FindType('any', 'any', 'ground', 'item', 3);
+                }
+                Orion.Print(-1, JSON.stringify(groundItemsSerials));
             }
+            if (Orion.InJournal('byl tamnut')) {
+                const newGroundItemsSerials = Orion.FindType('any', 'any', 'ground', 'item', 3);
+                Orion.Print(-1, JSON.stringify(newGroundItemsSerials));
+                const filter = newGroundItemsSerials.filter(i => groundItemsSerials.indexOf(i) === -1);
+                Orion.Print(-1, JSON.stringify(filter));
+                return filter[0];
+            }
+            return;
         }
 
         // false in case there is no such robe, undefined when it is already dressed
@@ -215,12 +229,13 @@ namespace Scripts {
 
                 Orion.WaitTargetObject('tamingTarget');
                 Orion.UseObject(loadedStaffSerial);
+                Orion.Wait(responseDelay);
                 opts.hidding && Scripts.Common.hiding();
-                Scripts.Taming.waitOnTaming('tamingTarget', opts.walkTo);
+                const pickup = Scripts.Taming.waitOnTaming('tamingTarget', opts.walkTo);
 
                 if (Orion.InJournal('Too far|Jsi prilis vzdalen|Jsi moc daleko')) {
                     if (opts.walkTo) {
-                        Orion.WalkTo(target.X(), target.Y(), target.Z(), 1)
+                        Orion.WalkTo(target.X(), target.Y(), target.Z(), 1);
                     }
                     else {
                         break;
@@ -231,12 +246,10 @@ namespace Scripts {
                     break;
                 }
                 if (Orion.InJournal('byl tamnut')) {
-                    const groundItemsSerials = Orion.FindType('any', 'any', 'ground', 'item', 3);
-                    for (const g of groundItemsSerials) {
-                        Orion.MoveItem(g);
-                    }
+                    pickup && Orion.MoveItem(pickup);
                     tamnuto = true;
                 }
+                Orion.Say('*');
                 Orion.ClearJournal();
             }
         }
