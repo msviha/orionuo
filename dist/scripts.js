@@ -1906,6 +1906,36 @@ function displayHidingInfo() {
         Orion.CharPrint(Player.Serial(), ColorEnum.red, '[ FAILED ]');
     }
 }
+function scheduleClick(s) {
+    Orion.Wait(350);
+    Orion.Click(s);
+}
+function customStatusBarCallBack(s) {
+    var code = CustomGumpResponse.ReturnCode();
+    var serial = (s.toString)(16);
+    if (code === CustomStatusBarEnum.close) {
+        Shared.AddVar(s, false);
+    }
+    else if (code === CustomStatusBarEnum.click) {
+        if (Orion.HaveTarget()) {
+            Orion.TargetObject(serial);
+            Orion.CancelTarget();
+            Orion.AddObject('lasttarget', serial);
+            return;
+        }
+        Orion.Terminate('scheduleClick');
+        Orion.Exec('scheduleClick', true, [s]);
+        if (Player.WarMode()) {
+            if (Orion.Timer(s) === -1 || Orion.Timer(s) > 300) {
+                Scripts.Utils.resetTimer(s);
+            }
+            else {
+                Orion.Terminate('scheduleClick');
+                Orion.Attack(s);
+            }
+        }
+    }
+}
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
@@ -1915,6 +1945,8 @@ function version() {
 function Autostart() {
     var _a;
     version();
+    Shared.AddArray('customStatusBars', []);
+    Shared.AddVar('ws', false);
     var previousLastAttackSerial;
     var previousLastAttackHp;
     var previousPlayerHp;
@@ -1937,8 +1969,8 @@ function Autostart() {
             previousLastAttackSerial = lastAttackSerial;
         }
         if (Orion.InJournal('World save has been initiated.', 'sys')) {
+            Shared.AddVar('ws', true);
             Scripts.Utils.playerPrint("World save !!!", ColorEnum.red);
-            Orion.PauseScript('all', 'Autostart');
             Orion.ClearJournal('World save has been initiated.', 'sys');
             Orion.Wait(5000);
             Orion.Click(Player.Serial());
@@ -1949,8 +1981,9 @@ function Autostart() {
             }
             Scripts.Utils.playerPrint("World save DONE", ColorEnum.green);
             Orion.Wait(1500);
-            Orion.ResumeScript('all', 'Autostart');
+            Shared.AddVar('ws', false);
         }
+        Scripts.Statusbar.updateStatusbars();
         Orion.Wait(updateRate);
     }
 }

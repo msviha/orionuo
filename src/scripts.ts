@@ -10,13 +10,14 @@ function version() {
  */
 function Autostart() {
     version();
+    Shared.AddArray('customStatusBars', []);
+    Shared.AddVar('ws', false);
     let previousLastAttackSerial:string;
     let previousLastAttackHp:number;
     let previousPlayerHp:number;
     let updateRate = 500;
 
     Scripts.Dress.saveEquip();
-
     while (true) {
         Scripts.Utils.printDamage(Player.Serial(), previousPlayerHp);
         previousPlayerHp = Player.Hits();
@@ -35,8 +36,8 @@ function Autostart() {
             previousLastAttackSerial = lastAttackSerial;
         }
         if (Orion.InJournal('World save has been initiated.', 'sys')) {
+            Shared.AddVar('ws', true);
             Scripts.Utils.playerPrint(`World save !!!`, ColorEnum.red);
-            Orion.PauseScript('all', 'Autostart');
             Orion.ClearJournal('World save has been initiated.', 'sys');
             Orion.Wait(5000);
             Orion.Click(Player.Serial());
@@ -50,8 +51,10 @@ function Autostart() {
             }
             Scripts.Utils.playerPrint(`World save DONE`, ColorEnum.green);
             Orion.Wait(1500);
-            Orion.ResumeScript('all', 'Autostart');
+            Shared.AddVar('ws', false);
         }
+
+        Scripts.Statusbar.updateStatusbars();
         Orion.Wait(updateRate);
     }
 }
