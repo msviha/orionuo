@@ -16,6 +16,11 @@ interface ITargetNextOpts {
     statusBarPosition?:ICoordinates
 }
 
+interface ITamingOptions {
+    walkTo?:boolean,
+    hidding?:boolean
+}
+
 interface IBagDestination extends ICoordinates{
     objectAlias?:string
 }

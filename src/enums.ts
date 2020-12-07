@@ -15,7 +15,13 @@ enum ColorEnum {
 enum TargetEnum {
     self = 'self',
     lastattack = 'lastattack',
-    laststatus = 'laststatus'
+    laststatus = 'laststatus',
+    lasttarget = 'lasttarget'
+}
+
+enum CustomStatusBarEnum {
+    close = 0,
+    click = 666
 }
 
 enum ScrollEnum {

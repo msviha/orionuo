@@ -515,10 +515,12 @@ function summon(creature:string, target?:TargetEnum) {
  * Zacilis co chces tamnout a po tamnuti hodi do baglu
  * @example in client `_taming`
  * @example external code `taming()`
+ * @example external code `taming(true, {walkTo: false, hidding: true})`
  * @param allAround {boolean} tamuje vse co vidi okolo sebe
+ * @param opts {ITamingOptions} optiony pro tamovani
  */
-function taming(allAround = false) {
-    allAround ? Scripts.Taming.tameAnimalsAround() : Scripts.Taming.taming();
+function taming(allAround = false, opts:ITamingOptions = {walkTo: true, hidding: false}) {
+    allAround ? Scripts.Taming.tameAnimalsAround(opts) : Scripts.Taming.taming(opts);
 }
 
 /**

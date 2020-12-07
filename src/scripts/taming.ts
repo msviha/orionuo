@@ -30,7 +30,7 @@ namespace Scripts {
             return true;
         }
 
-        static waitOnTaming(animalSerial:string) {
+        static waitOnTaming(animalSerial:string, walkTo = true) {
             const animal = Orion.FindObject(animalSerial);
             while (!(
                 Orion.InJournal('Your taming failed') ||
@@ -46,7 +46,7 @@ namespace Scripts {
                 Orion.InJournal('You are not able to tame this animal')
             )) {
                 Orion.Wait(500);
-                Orion.WalkTo(animal.X(), animal.Y(), animal.Z(), 1);
+                walkTo && Orion.WalkTo(animal.X(), animal.Y(), animal.Z(), 1);
             }
         }
 
@@ -151,14 +151,14 @@ namespace Scripts {
             }
         }
 
-        static tameAnimalsAround() {
+        static tameAnimalsAround(opts:ITamingOptions) {
             Orion.IgnoreReset();
             Orion.ClearJournal();
             let monstersAround = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "nothuman|live|near", 22, "gray");
 
             while (monstersAround.length) {
                 Orion.Ignore(monstersAround[0]);
-                Scripts.Taming.taming(monstersAround[0]);
+                Scripts.Taming.taming(opts, monstersAround[0]);
                 monstersAround = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "nothuman|live|near", 22, "gray");
             }
         }
@@ -168,7 +168,7 @@ namespace Scripts {
             Orion.UseType(kad.graphic, kad.color);
         }
 
-        static taming(animalSerial?:string) {
+        static taming(opts:ITamingOptions, animalSerial?:string) {
             const loadedStaff = gameObject.taming.staffs.tamingShrink;
             let loadedStaffSerial = Scripts.Utils.findFirstType(loadedStaff, 2);
             const staff = gameObject.taming.staffs.taming;
@@ -210,14 +210,21 @@ namespace Scripts {
 
             let tamnuto = false;
             while (!tamnuto) {
+                Orion.WarMode(true);
                 const target = Orion.FindObject('tamingTarget');
 
                 Orion.WaitTargetObject('tamingTarget');
                 Orion.UseObject(loadedStaffSerial);
-                Scripts.Taming.waitOnTaming('tamingTarget');
+                opts.hidding && Scripts.Common.hiding();
+                Scripts.Taming.waitOnTaming('tamingTarget', opts.walkTo);
 
                 if (Orion.InJournal('Too far|Jsi prilis vzdalen|Jsi moc daleko')) {
-                    Orion.WalkTo(target.X(), target.Y(), target.Z(), 1);
+                    if (opts.walkTo) {
+                        Orion.WalkTo(target.X(), target.Y(), target.Z(), 1)
+                    }
+                    else {
+                        break;
+                    }
                 }
                 if (Orion.InJournal('Not tamable|nelze ochocit|You are not able to tame this animal')) {
                     Scripts.Utils.playerPrint('Na toto zviratko nemas', ColorEnum.red);
