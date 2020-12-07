@@ -414,5 +414,27 @@ namespace Scripts {
                 return;
             }
         }
+
+        static createGameObjectSelections(selections:Array<{ask:string, addObject:string}>) {
+            for (const s of selections) {
+                Scripts.Utils.playerPrint(s.ask);
+                const selection = Orion.WaitForAddObject(s.addObject, 60000);
+                if (selection !== 1) {
+                    Scripts.Utils.log('All selections must be game objects', ColorEnum.red);
+                    throw 'err';
+                }
+            }
+        }
+
+        static openContainer(s:string, maxWaitingTime = 2000) {
+            Orion.OpenContainer(s);
+            while (!Orion.GumpExists('container', s) && maxWaitingTime > 0) {
+                maxWaitingTime -= 100;
+                Orion.Wait(100);
+            }
+            if (maxWaitingTime <= 0) {
+                throw 'e';
+            }
+        }
     }
 }

@@ -437,6 +437,17 @@ function nextWeapon(showName = false) {
 }
 
 /**
+ * Ocaruje pytel v mrtvolce mytheril dustem
+ * Zepta se na target, zamerite mrtvolku a pokud jste daleko tak vam vypise 5ti vterinovy timer kdy musite k mrtvole dojit aby ji ocaroval
+ * @param dusty {OcarovaniEnum} cim budes carovat
+ * @example in client `_ocaruj`
+ * @example external code `ocaruj()`
+ */
+function ocaruj(dusty:OcarovaniEnum = OcarovaniEnum.mytheril) {
+    Scripts.MagicMiner.ocaruj(dusty);
+}
+
+/**
  * Poisne trenink kitem nejblizsim enemy monstrum jakmile k nejakemu dobehnes (netreni na tech co maji human grafiku);
  * @param keepRunning pokud date true, tak vam to po jednom spusteni pobezi stale na pozadi a bude poisnovat kdyz okolo neceho probehnete
  * @example external code `poisonTrain()` ceka az se priblizis k monstru a pak jednorazove poisne a skonci
@@ -491,6 +502,16 @@ function resetStats() {
  */
 function resetWeapons() {
     Scripts.Dress.resetWeaponsArray();
+}
+
+/**
+ * Rozbiji ingy na dusty
+ * @param ingy {OcarovaniEnum} co budes rozbijet
+ * @param kolik {number} kolik toho rozbijes
+ * @example external code `rozbij(OcarovaniEnum.blood, 1)`
+ */
+function rozbij(ingy:OcarovaniEnum = OcarovaniEnum.mytheril, kolik = 5) {
+    Scripts.MagicMiner.rozbij(ingy, kolik);
 }
 
 /**

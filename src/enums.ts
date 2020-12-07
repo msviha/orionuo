@@ -24,6 +24,12 @@ enum CustomStatusBarEnum {
     click = 666
 }
 
+enum OcarovaniEnum {
+    mytheril = 'mytheril',
+    black = 'black',
+    blood = 'blood'
+}
+
 enum ScrollEnum {
     kvf = 'kvf',
     bolt = 'bolt',

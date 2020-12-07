@@ -88,6 +88,24 @@ const gameObject:any = {
         petarda: {
             graphic: '0x1BE0',
             color: '0x061C'
+        },
+        adaHammer: {
+            graphic: '0x1438',
+            color: '0x044C'
+        },
+        dusty: {
+            mytheril: {
+                graphic: '0x103D',
+                color: '0x052D'
+            },
+            black: {
+                graphic: '0x103D',
+                color: '0x0455'
+            },
+            blood: {
+                graphic: '0x103D',
+                color: '0x0280'
+            }
         }
     },
     tools: {
