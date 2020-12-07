@@ -22,6 +22,7 @@ import Speech from './Scripts/speech';
 import Targeting from './Scripts/targeting';
 import Timers from './Scripts/timers';
 import TradeWindow from './Scripts/tradeWindow';
+import CustomGump from './Scripts/customGump';
 
 
 declare global {
@@ -30,6 +31,7 @@ declare global {
 	const Player: PlayerCharacter;
 	const SelectedTile: SelectedTile;
 	const Shared: Shared;
+	const CustomGumpResponse: CustomGumpResponse;
 }
 
 interface OrionStatic extends
@@ -38,6 +40,8 @@ interface OrionStatic extends
 	ClientOptions,
 	Collections,
 	ContextMenu,
+	CustomGump,
+	CustomGumpObject,
 	Equipment,
 	Gumps,
 	InteractionWithFiles,

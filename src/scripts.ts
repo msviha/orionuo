@@ -524,6 +524,15 @@ function saveEquip() {
 }
 
 /**
+ * Vytvori zalozku s hpckama
+ * @example in client `_statusBar`
+ * @example external code `statusBar()`
+ */
+function statusBar() {
+    Scripts.Statusbar.create();
+}
+
+/**
  * Kouzli summona (jmeno je treba zadat tak jak je v nabidce summonu) na pozadovany target, pokud je uveden
  * @example external code `summon("Horse", "self");`
  * @example external code `summon("Giant Viper");`

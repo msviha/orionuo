@@ -114,6 +114,10 @@ enum TimersEnum {
     hiding = 'hiding'
 }
 
+enum GlobalEnum {
+    customStatusBars = 'customStatusBars'
+}
+
 enum PortBookOptionsEnum {
     opravaStats = 'opravaStats',
     mark = 'mark',

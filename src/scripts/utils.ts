@@ -273,6 +273,36 @@ namespace Scripts {
             return c === 1 ? ColorEnum.red : c === 2 ? ColorEnum.orange : ColorEnum.green;
         }
 
+        static determineHpColorRGB(percent:number):string {
+            const c = Math.ceil(percent * 3 / 100);
+            return c === 1 ? '#FF0000' : c === 2 ? '#FFFF00' : '#007B00';
+        }
+
+        static getARGBColorByNotoriety(notoriety:number, hexaOpacity:string = 'ff'):string {
+            switch (notoriety) {
+                case 1: //blue
+                    return `#${hexaOpacity}26beed`
+                    break;
+                case 2: //green
+                    return `#${hexaOpacity}00cc00`
+                    break;
+                case 3: //gray
+                    return `#${hexaOpacity}999999`
+                    break;
+                case 4: //criminal
+                    return `#${hexaOpacity}999999`
+                    break;
+                case 5: //orange
+                    return `#${hexaOpacity}ff8c1a`
+                    break;
+                case 6: //red
+                    return `#${hexaOpacity}e62a00`
+                    break;
+                default: // 7 - yellow
+                    return `#${hexaOpacity}ffff1a`
+            }
+        }
+
         static printColoredHpBar(target:string, percent:number) {
             const fullBoxCount = Math.ceil(percent * 6 / 100);
             const color = Scripts.Utils.determineHpColor(percent);
