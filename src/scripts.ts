@@ -421,11 +421,12 @@ function make(count:number, objectAsString:string, setInputs = true) {
 /**
  * Zobrazi zamerovac pro zamereni cile, ktery se ulozi pod lastattack
  * Cil je tim padem zbarven a jsou vypsany jeho zivoty
+ * @param opts {ITargetNextOpts} optiony pro targetovani
  * @example in client `_manualTarget`
  * @example external code `manualTarget()`
  */
-function manualTarget() {
-    Scripts.Targeting.manualTarget();
+function manualTarget(opts?:ITargetNextOpts) {
+    Scripts.Targeting.manualTarget(opts);
 }
 
 /**
