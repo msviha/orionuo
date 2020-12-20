@@ -209,10 +209,10 @@ namespace Scripts {
 
         static poisonTrain(serialToPoison?:string) {
             if (!serialToPoison) {
-                const mobiles = Orion.FindType('any', 'any', 'ground', 'fast|live|mobile', 1, `${NotorietyEnum.red}|${NotorietyEnum.gray}`);
+                const mobiles = Orion.FindType('any', 'any', 'ground', 'fast|live|mobile|ignoreself', 1, `${NotorietyEnum.red}|${NotorietyEnum.gray}`);
                 if (!mobiles.length) {
+                    Scripts.Utils.playerPrint('neni tu nikdo na poison train', ColorEnum.red);
                     return;
-
                 }
                 serialToPoison = mobiles[0];
             }
@@ -237,7 +237,7 @@ namespace Scripts {
                     Orion.ClearJournal();
                     Orion.Wait(responseDelay);
                 }
-                const targets = Orion.FindType('any', 'any', 'ground', 'fast|live|mobile', 1, `${NotorietyEnum.red}|${NotorietyEnum.gray}`);
+                const targets = Orion.FindType('any', 'any', 'ground', 'fast|live|mobile|ignoreself', 1, `${NotorietyEnum.red}|${NotorietyEnum.gray}`);
 
                 if (targets.length) {
                     const target = targets[0];
