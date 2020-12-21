@@ -433,6 +433,7 @@ function make(count:number, objectAsString:string, setInputs = true) {
  * @param opts {ITargetNextOpts} optiony pro targetovani
  * @example in client `_manualTarget`
  * @example external code `manualTarget()`
+ * @example external code `manualTarget({targetIndication: TargetIndicationEnum.large, showStatusBar: true, statusBarPosition: {x: 70, y: 20});`
  */
 function manualTarget(opts:ITargetNextOpts = TARGET_OPTS_DEFAULTS) {
     opts = {...TARGET_OPTS_DEFAULTS, ...opts};
@@ -599,12 +600,14 @@ function tamingTrain(robeOfDruids = true) {
 /**
  * Targeti zive jednotky okolo tebe. Uchovava list targetu po dobu 2,5 vteriny pro pouziti s `targetPrevious`.
  * Vybrany target ma rovnou status `attackLast` (ale neutocis to na nej, jen mas zaply war) takze je mozne na nej kouzlit
- * @param timeToStorePreviousTargets {number} cas pro uchovavani predchozich targetu v pameti
- * @param additionalFlags {FlagsEnum[]} pole flagu pro vyhledavani targetu ktere se spoji s defaultnim polem `['near', 'mobile', 'live', 'ignoreself']`
- * @param notoriety {NotorietyEnum[]} pole notoriety pro specifikaci targetu
+ * @param timeToStorePreviousTargets cas pro uchovavani predchozich targetu v pameti
+ * @param additionalFlags pole flagu pro vyhledavani targetu ktere se spoji s defaultnim polem `['near', 'mobile', 'live', 'ignoreself']`
+ * @param notoriety pole notoriety pro specifikaci targetu
  * @example external code `targetNext();`
  * @example external code `targetNext(1000, [FlagsEnum.ignorefriends]);`
  * @example external code `targetNext(1000, undefined, [NotorietyEnum.orange, NotorietyEnum.red, NotorietyEnum.criminal]);`
+ * @example external code `targetNext(1000, [FlagsEnum.ignorefriends], undefined,
+ {targetIndication: TargetIndicationEnum.large, showStatusBar: true, statusBarPosition: {x: 70, y: 20});`
  */
 function targetNext(
     timeToStorePreviousTargets = 1500,
@@ -625,6 +628,8 @@ function targetNext(
  * @example external code `targetPrevious();`
  * @example external code `targetPrevious(1000, [FlagsEnum.ignorefriends]);`
  * @example external code `targetPrevious(1000, undefined, [NotorietyEnum.orange, NotorietyEnum.red, NotorietyEnum.criminal]);`
+ * @example external code `targetPrevious(1000, [FlagsEnum.ignorefriends], undefined,
+ {targetIndication: TargetIndicationEnum.large, showStatusBar: true, statusBarPosition: {x: 70, y: 20});`
  */
 function targetPrevious(
     timeToStorePreviousTargets = 1500,

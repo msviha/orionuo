@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "doc": "typedoc --out docs src --includeDeclarations --stripInternal --excludeExternals --ignoreCompilerErrors --mode file --plugin typedoc-plugin-markdown --exclude \"src/+(utils|interfaces|typeguards).ts\""
+    "doc": "typedoc --out docs src --includeDeclarations --stripInternal --excludeExternals --ignoreCompilerErrors --mode file --plugin typedoc-plugin-markdown --exclude \"src/+(utils|typeguards).ts\""
   },
   "author": "Michal Sviha",
   "license": "ISC",
