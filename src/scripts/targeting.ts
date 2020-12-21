@@ -49,14 +49,7 @@ namespace Scripts {
             timeToStorePreviousTargets = 1500,
             additionalFlags:string[] = [],
             notoriety:string[] = [],
-            opts:ITargetNextOpts = {
-                targetIndication: TargetIndicationEnum.large,
-                showStatusBar: true,
-                statusBarPosition: {
-                    x: 70,
-                    y: 20
-                }
-            }
+            opts:ITargetNextOpts
         ) {
             // initialization
             if (Orion.Timer('targetTimer') === -1) {
@@ -128,16 +121,7 @@ namespace Scripts {
             }
         }
 
-        static manualTarget(
-            opts:ITargetNextOpts = {
-                targetIndication: TargetIndicationEnum.large,
-                showStatusBar: true,
-                statusBarPosition: {
-                    x: 70,
-                    y: 20
-                }
-            }
-        ) {
+        static manualTarget(opts:ITargetNextOpts) {
             const selection = Orion.WaitForAddObject('manualTargetEnemy');
             Scripts.Utils.waitWhileTargeting();
 

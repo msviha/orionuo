@@ -49,12 +49,12 @@ namespace Scripts {
                 Orion.Wait(500);
                 animal = Orion.FindObject(animalSerial);
                 if (animal) {
-                    walkTo && Orion.WalkTo(animal.X(), animal.Y(), animal.Z(), 1);
                     groundItemsSerials = Orion.FindType('any', 'any', 'ground', 'item', 3);
+                    walkTo && Orion.WalkTo(animal.X(), animal.Y(), animal.Z(), 1);
                 }
-                Orion.Print(-1, JSON.stringify(groundItemsSerials));
             }
             if (Orion.InJournal('byl tamnut')) {
+                Orion.Wait(200);
                 const newGroundItemsSerials = Orion.FindType('any', 'any', 'ground', 'item', 3);
                 Orion.Print(-1, JSON.stringify(newGroundItemsSerials));
                 const filter = newGroundItemsSerials.filter(i => groundItemsSerials.indexOf(i) === -1);
@@ -225,12 +225,21 @@ namespace Scripts {
             let tamnuto = false;
             while (!tamnuto) {
                 Orion.WarMode(true);
+                Orion.Wait(100);
                 const target = Orion.FindObject('tamingTarget');
 
+                if (opts.walkTo) {
+                    Orion.WalkTo(target.X(), target.Y(), target.Z(), 1);
+                    Orion.Wait(responseDelay);
+                }
+                if (opts.hiding) {
+                    Scripts.Common.hiding();
+                    Orion.Wait(responseDelay);
+                }
                 Orion.WaitTargetObject('tamingTarget');
                 Orion.UseObject(loadedStaffSerial);
                 Orion.Wait(responseDelay);
-                opts.hidding && Scripts.Common.hiding();
+                opts.hiding && Scripts.Common.hiding();
                 const pickup = Scripts.Taming.waitOnTaming('tamingTarget', opts.walkTo);
 
                 if (Orion.InJournal('Too far|Jsi prilis vzdalen|Jsi moc daleko')) {
@@ -249,7 +258,6 @@ namespace Scripts {
                     pickup && Orion.MoveItem(pickup);
                     tamnuto = true;
                 }
-                Orion.Say('*');
                 Orion.ClearJournal();
             }
         }

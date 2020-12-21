@@ -434,7 +434,8 @@ function make(count:number, objectAsString:string, setInputs = true) {
  * @example in client `_manualTarget`
  * @example external code `manualTarget()`
  */
-function manualTarget(opts?:ITargetNextOpts) {
+function manualTarget(opts:ITargetNextOpts = TARGET_OPTS_DEFAULTS) {
+    opts = {...TARGET_OPTS_DEFAULTS, ...opts};
     Scripts.Targeting.manualTarget(opts);
 }
 
@@ -580,7 +581,8 @@ function summon(creature:string, target?:TargetEnum) {
  * @param allAround {boolean} tamuje vse co vidi okolo sebe
  * @param opts {ITamingOptions} optiony pro tamovani
  */
-function taming(allAround = false, opts:ITamingOptions = {walkTo: true, hidding: false}) {
+function taming(allAround = false, opts:ITamingOptions = TAMING_OPTS_DEFAULTS) {
+    opts = {...TAMING_OPTS_DEFAULTS, ...opts};
     allAround ? Scripts.Taming.tameAnimalsAround(opts) : Scripts.Taming.taming(opts);
 }
 
@@ -604,7 +606,13 @@ function tamingTrain(robeOfDruids = true) {
  * @example external code `targetNext(1000, [FlagsEnum.ignorefriends]);`
  * @example external code `targetNext(1000, undefined, [NotorietyEnum.orange, NotorietyEnum.red, NotorietyEnum.criminal]);`
  */
-function targetNext(timeToStorePreviousTargets = 1500, additionalFlags?:FlagsEnum[], notoriety?:NotorietyEnum[], opts?:ITargetNextOpts) {
+function targetNext(
+    timeToStorePreviousTargets = 1500,
+    additionalFlags?:FlagsEnum[],
+    notoriety?:NotorietyEnum[],
+    opts:ITargetNextOpts = TARGET_OPTS_DEFAULTS
+) {
+    opts = {...TARGET_OPTS_DEFAULTS, ...opts};
     Scripts.Targeting.targetNext(false, timeToStorePreviousTargets, additionalFlags, notoriety, opts);
 }
 
@@ -618,7 +626,13 @@ function targetNext(timeToStorePreviousTargets = 1500, additionalFlags?:FlagsEnu
  * @example external code `targetPrevious(1000, [FlagsEnum.ignorefriends]);`
  * @example external code `targetPrevious(1000, undefined, [NotorietyEnum.orange, NotorietyEnum.red, NotorietyEnum.criminal]);`
  */
-function targetPrevious(timeToStorePreviousTargets = 1500, additionalFlags?:string[], notoriety?:string[], opts?:ITargetNextOpts) {
+function targetPrevious(
+    timeToStorePreviousTargets = 1500,
+    additionalFlags?:string[],
+    notoriety?:string[],
+    opts:ITargetNextOpts = TARGET_OPTS_DEFAULTS
+) {
+    opts = {...TARGET_OPTS_DEFAULTS, ...opts};
     Scripts.Targeting.targetNext(true, timeToStorePreviousTargets, additionalFlags, notoriety, opts);
 }
 

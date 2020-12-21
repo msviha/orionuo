@@ -20,11 +20,23 @@ interface ITargetNextOpts {
     showStatusBar?:boolean,
     statusBarPosition?:ICoordinates
 }
+const TARGET_OPTS_DEFAULTS = {
+    targetIndication: TargetIndicationEnum.none,
+    showStatusBar: false,
+    statusBarPosition: {
+        x: 70,
+        y: 20
+    }
+}
 
 interface ITamingOptions {
     walkTo?:boolean,
-    hidding?:boolean
+    hiding?:boolean
 }
+const TAMING_OPTS_DEFAULTS:ITamingOptions = {
+    walkTo: true,
+    hiding: false
+};
 
 interface IBagDestination extends ICoordinates{
     objectAlias?:string

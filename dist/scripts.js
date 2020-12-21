@@ -1870,6 +1870,18 @@ var trackingFilter = {
     '0x20D9': ['Gargoyle'],
     '0x2100': []
 };
+var TARGET_OPTS_DEFAULTS = {
+    targetIndication: TargetIndicationEnum.none,
+    showStatusBar: false,
+    statusBarPosition: {
+        x: 70,
+        y: 20
+    }
+};
+var TAMING_OPTS_DEFAULTS = {
+    walkTo: true,
+    hiding: false
+};
 function displayDrinkInfo(potionName) {
     var drinkTimer = 17500;
     var gsTimer = 130000;
@@ -1896,14 +1908,32 @@ function displayDrinkInfo(potionName) {
         }
     }
 }
-function displayHidingInfo() {
+function _hiding() {
     Orion.ClearJournal();
-    Scripts.Utils.waitWhileSomethingInJournal(['You have hidden yourself well', 't seem to hide here']);
+    Orion.Print(ColorEnum.none, 'Start Hiding');
+    Orion.UseSkill('Hiding');
+    Orion.Wait(100);
+    if (Orion.InJournal('You must wait')) {
+        Orion.ClearJournal('You must wait');
+        return;
+    }
+    Orion.Exec('_hidingPreoccupiedCheck', true);
+}
+function _hidingPreoccupiedCheck() {
+    Orion.AddDisplayTimer(TimersEnum.hiding, 2000, 'AboveChar', 'bar', "Hiding", 0, 100, '0x100', 0, 'red');
+    Scripts.Utils.waitWhileSomethingInJournal(['You have hidden yourself well', 't seem to hide here', 'preoccupied'], 3000);
+    Orion.RemoveDisplayTimer(TimersEnum.hiding);
     if (Orion.InJournal('You have hidden yourself well')) {
         Orion.CharPrint(Player.Serial(), ColorEnum.green, '[ Hidden ]');
     }
-    if (Orion.InJournal('t seem to hide here')) {
+    else if (Orion.InJournal('t seem to hide here')) {
         Orion.CharPrint(Player.Serial(), ColorEnum.red, '[ FAILED ]');
+    }
+    else if (Orion.InJournal('preoccupied')) {
+        Orion.WarMode(true);
+        Orion.Wait(100);
+        Orion.Print(ColorEnum.none, 'preoccupied - trying to hide again');
+        Orion.Exec('_hiding', true);
     }
 }
 function scheduleClick(s) {
@@ -1936,6 +1966,17 @@ function customStatusBarCallBack(s) {
         }
     }
 }
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
@@ -2060,6 +2101,9 @@ function gmMortar(potionName) {
 function harp(target) {
     Scripts.Music.harp(target);
 }
+function healPets() {
+    Scripts.PetCommander.healPetsToggle();
+}
 function hideAll() {
     Scripts.Common.hideAll();
 }
@@ -2106,8 +2150,10 @@ function make(count, objectAsString, setInputs) {
     if (setInputs === void 0) { setInputs = true; }
     Scripts.Crafting.make(count, objectAsString, setInputs);
 }
-function manualTarget() {
-    Scripts.Targeting.manualTarget();
+function manualTarget(opts) {
+    if (opts === void 0) { opts = TARGET_OPTS_DEFAULTS; }
+    opts = __assign(__assign({}, TARGET_OPTS_DEFAULTS), opts);
+    Scripts.Targeting.manualTarget(opts);
 }
 function mount() {
     Scripts.Mount.mountAndDismount();
@@ -2159,7 +2205,8 @@ function summon(creature, target) {
 }
 function taming(allAround, opts) {
     if (allAround === void 0) { allAround = false; }
-    if (opts === void 0) { opts = { walkTo: true, hidding: false }; }
+    if (opts === void 0) { opts = TAMING_OPTS_DEFAULTS; }
+    opts = __assign(__assign({}, TAMING_OPTS_DEFAULTS), opts);
     allAround ? Scripts.Taming.tameAnimalsAround(opts) : Scripts.Taming.taming(opts);
 }
 function tamingTrain(robeOfDruids) {
@@ -2168,10 +2215,14 @@ function tamingTrain(robeOfDruids) {
 }
 function targetNext(timeToStorePreviousTargets, additionalFlags, notoriety, opts) {
     if (timeToStorePreviousTargets === void 0) { timeToStorePreviousTargets = 1500; }
+    if (opts === void 0) { opts = TARGET_OPTS_DEFAULTS; }
+    opts = __assign(__assign({}, TARGET_OPTS_DEFAULTS), opts);
     Scripts.Targeting.targetNext(false, timeToStorePreviousTargets, additionalFlags, notoriety, opts);
 }
 function targetPrevious(timeToStorePreviousTargets, additionalFlags, notoriety, opts) {
     if (timeToStorePreviousTargets === void 0) { timeToStorePreviousTargets = 1500; }
+    if (opts === void 0) { opts = TARGET_OPTS_DEFAULTS; }
+    opts = __assign(__assign({}, TARGET_OPTS_DEFAULTS), opts);
     Scripts.Targeting.targetNext(true, timeToStorePreviousTargets, additionalFlags, notoriety, opts);
 }
 function tracking(who) {
@@ -2372,17 +2423,6 @@ var Scripts;
     }());
     Scripts.Clean = Clean;
 })(Scripts || (Scripts = {}));
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var Scripts;
 (function (Scripts) {
     var Common = (function () {
@@ -2411,23 +2451,7 @@ var Scripts;
             }
         };
         Common.hiding = function () {
-            Orion.ClearJournal();
-            Orion.Print(ColorEnum.none, 'Start Hiding');
-            Orion.UseSkill('Hiding');
-            Orion.Wait(100);
-            if (Orion.InJournal('You must wait')) {
-                return;
-            }
-            Scripts.Utils.resetTimer(TimersEnum.hiding);
-            while (Orion.InJournal('preoccupied')) {
-                Orion.ClearJournal();
-                Orion.WarMode(true);
-                Orion.Wait(100);
-                Orion.Print(ColorEnum.none, 'preoccupied - trying to hide again');
-                Orion.UseSkill('Hiding');
-            }
-            Orion.AddDisplayTimer(TimersEnum.hiding, 2000, 'AboveChar', 'bar', "Hiding", 0, 100, '0x100', 0, 'red');
-            Orion.Exec('displayHidingInfo', true);
+            Orion.Exec('_hiding', true);
         };
         Common.bandageSelf = function (minimalCountToWarn, pathToNoBandagesWavFile, failedMessage) {
             if (minimalCountToWarn === void 0) { minimalCountToWarn = 10; }
@@ -2552,8 +2576,9 @@ var Scripts;
         };
         Common.poisonTrain = function (serialToPoison) {
             if (!serialToPoison) {
-                var mobiles = Orion.FindType('any', 'any', 'ground', 'fast|live|mobile', 1, NotorietyEnum.red + "|" + NotorietyEnum.gray);
+                var mobiles = Orion.FindType('any', 'any', 'ground', 'fast|live|mobile|ignoreself', 1, NotorietyEnum.red + "|" + NotorietyEnum.gray);
                 if (!mobiles.length) {
+                    Scripts.Utils.playerPrint('neni tu nikdo na poison train', ColorEnum.red);
                     return;
                 }
                 serialToPoison = mobiles[0];
@@ -2577,7 +2602,7 @@ var Scripts;
                     Orion.ClearJournal();
                     Orion.Wait(responseDelay);
                 }
-                var targets = Orion.FindType('any', 'any', 'ground', 'fast|live|mobile', 1, NotorietyEnum.red + "|" + NotorietyEnum.gray);
+                var targets = Orion.FindType('any', 'any', 'ground', 'fast|live|mobile|ignoreself', 1, NotorietyEnum.red + "|" + NotorietyEnum.gray);
                 if (targets.length) {
                     var target = targets[0];
                     Orion.WaitTargetObject(target);
@@ -3588,6 +3613,17 @@ var Scripts;
         PetCommander.getMyPets = function () {
             return Shared.GetArray('myPets', []);
         };
+        PetCommander.filterPetsInDistance = function () {
+            var myPets = Scripts.PetCommander.getMyPets();
+            for (var _i = 0, myPets_1 = myPets; _i < myPets_1.length; _i++) {
+                var pet = myPets_1[_i];
+                var petObject = Orion.FindObject(pet.serial);
+                if (!petObject || petObject.Distance() > 12) {
+                    Scripts.PetCommander.removeFromMyPets(pet.name);
+                }
+            }
+            return myPets;
+        };
         PetCommander.removeFromMyPets = function (name) {
             var myPets = Scripts.PetCommander.getMyPets();
             for (var i = 0; i < myPets.length; i++) {
@@ -3612,8 +3648,8 @@ var Scripts;
         };
         PetCommander.ignoreMyPets = function () {
             var myPets = Scripts.PetCommander.getMyPets();
-            for (var _i = 0, myPets_1 = myPets; _i < myPets_1.length; _i++) {
-                var p = myPets_1[_i];
+            for (var _i = 0, myPets_2 = myPets; _i < myPets_2.length; _i++) {
+                var p = myPets_2[_i];
                 Orion.Ignore(p.serial);
             }
         };
@@ -3647,7 +3683,7 @@ var Scripts;
             return namesPool[random];
         };
         PetCommander.getNewPet = function () {
-            var monstersAlive = Orion.FindType('!0x0190|!0x0191', '0xFFFF', 'ground', 'live', 18);
+            var monstersAlive = Orion.FindType('!0x0190|!0x0191', '0xFFFF', 'ground', 'live', 12);
             for (var _i = 0, monstersAlive_1 = monstersAlive; _i < monstersAlive_1.length; _i++) {
                 var serial = monstersAlive_1[_i];
                 var isMyMonster = Orion.FindObject(serial).CanChangeName();
@@ -3663,7 +3699,7 @@ var Scripts;
         };
         PetCommander.killTarget = function () {
             var pet = Scripts.PetCommander.getNewPet();
-            var myPets = Scripts.PetCommander.getMyPets();
+            var myPets = Scripts.PetCommander.filterPetsInDistance();
             if (!pet && myPets.length) {
                 var killIndex = Shared.GetVar('nextPetKillIndex', 0);
                 if (killIndex >= myPets.length) {
@@ -3691,22 +3727,22 @@ var Scripts;
         };
         PetCommander.killAll = function () {
             while (Scripts.PetCommander.getNewPet()) { }
-            var myPets = Scripts.PetCommander.getMyPets();
+            var myPets = Scripts.PetCommander.filterPetsInDistance();
             if (!myPets.length) {
                 return;
             }
             Orion.IgnoreReset();
-            for (var _i = 0, myPets_2 = myPets; _i < myPets_2.length; _i++) {
-                var pet = myPets_2[_i];
+            for (var _i = 0, myPets_3 = myPets; _i < myPets_3.length; _i++) {
+                var pet = myPets_3[_i];
                 var petObject = Orion.FindObject(pet.serial);
-                if (!petObject) {
+                if (!petObject || petObject.Distance() > 12) {
                     Scripts.PetCommander.removeFromMyPets(pet.name);
                 }
                 else {
                     Orion.WaitTargetObject(Orion.ClientLastAttack());
                     Orion.Say(pet.name + " kill");
-                    Orion.WaitForTarget(1000);
-                    Scripts.Utils.waitWhileTargeting();
+                    var success = Orion.WaitForTarget(1000);
+                    !success && Scripts.PetCommander.removeFromMyPets(pet.name);
                 }
             }
             Scripts.PetCommander.ignoreMyPets();
@@ -3732,7 +3768,7 @@ var Scripts;
                 'Hernan', 'Iselle', 'Julio', 'Karina', 'Lowell', 'Marie', 'Norbert', 'Odile', 'Polo', 'Rachel', 'Simon', 'Trudy', 'Vance', 'Winnie', 'Xavier', 'Yolanda', 'Zeke', 'Talim',
                 'Doksuri', 'Khanun', 'Vicente', 'Saola'
             ];
-            var monstersAlive = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "fast|live", 13, "blue|gray|criminal|orange|red");
+            var monstersAlive = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "fast|live", 12, "blue|gray|criminal|orange|red");
             var myMonsters = [];
             while (monstersAlive.length) {
                 var monsterSerial = monstersAlive[0];
@@ -3762,10 +3798,84 @@ var Scripts;
                     Scripts.Utils.waitWhileTargeting();
                 }
                 Orion.Ignore(monsterSerial);
-                monstersAlive = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "near|live", 13, "blue|gray|criminal|orange|red");
+                monstersAlive = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "near|live", 12, "blue|gray|criminal|orange|red");
             }
             Orion.SetGlobal('myMonstersKill', JSON.stringify(myMonsters));
             Orion.IgnoreReset();
+        };
+        PetCommander.healPetsToggleStart = function () {
+            Scripts.Utils.playerPrint('Healing pets START', ColorEnum.green);
+            Shared.AddVar('healPetsToggle', true);
+        };
+        PetCommander.healPetsToggleStop = function (message) {
+            Scripts.Utils.playerPrint('Healing pets STOP', ColorEnum.red);
+            message && Scripts.Utils.playerPrint(message, ColorEnum.orange);
+            Shared.AddVar('healPetsToggle', false);
+        };
+        PetCommander.sortPetsByHits = function (arr) {
+            return arr.sort(function (a, b) {
+                var pet1 = Orion.FindObject(a.serial);
+                var pet2 = Orion.FindObject(b.serial);
+                return (pet1.MaxHits() - pet1.Hits()) > (pet2.MaxHits() - pet2.Hits()) ? 1 : -1;
+            });
+        };
+        PetCommander.healPetsToggle = function () {
+            Orion.ClearJournal();
+            while (Scripts.PetCommander.getNewPet()) { }
+            var myPets = Scripts.PetCommander.getMyPets();
+            var toggle = Shared.GetVar('healPetsToggle', false);
+            toggle ? Scripts.PetCommander.healPetsToggleStop() : Scripts.PetCommander.healPetsToggleStart();
+            toggle = Shared.GetVar('healPetsToggle');
+            while (toggle) {
+                if (!myPets.length) {
+                    Scripts.PetCommander.healPetsToggleStop('Nemas zadne pety');
+                    break;
+                }
+                Scripts.PetCommander.sortPetsByHits(myPets);
+                var distance = false;
+                var heal = false;
+                for (var _i = 0, myPets_4 = myPets; _i < myPets_4.length; _i++) {
+                    var p = myPets_4[_i];
+                    Orion.ClearJournal();
+                    var pet = Orion.FindObject(p.serial);
+                    if (pet.Distance() <= 6) {
+                        distance = true;
+                        if (pet.MaxHits() <= pet.Hits() || heal) {
+                            continue;
+                        }
+                        Scripts.Utils.playerPrint("Healing [" + pet.Name() + "]");
+                        var b = Scripts.Utils.findFirstType(gameObject.uncategorized.bandy);
+                        Orion.WaitTargetObject(p.serial);
+                        Orion.UseObject(b);
+                        var previousHp = pet.Hits();
+                        Scripts.Utils.waitWhileSomethingInJournal([
+                            'You put',
+                            'You apply',
+                            'Chces vytvorit',
+                            'must be able to reach',
+                            'Nemuzes pouzit bandy'
+                        ]);
+                        if (Orion.InJournal('Chces vytvorit|Nemuzes pouzit bandy|must be able to reach')) {
+                            Orion.Wait(responseDelay);
+                            continue;
+                        }
+                        heal = true;
+                        Scripts.Utils.printDamage(p.serial, previousHp);
+                    }
+                    else if (pet.MaxHits() > pet.Hits()) {
+                        Orion.PrintFast(p.serial, '0x0021', 0, "potrebuji heal");
+                    }
+                }
+                if (!distance) {
+                    Scripts.PetCommander.healPetsToggleStop('Musis jit bliz');
+                    break;
+                }
+                if (!heal) {
+                    Scripts.Utils.playerPrint('hlidam pety');
+                    Orion.Wait(1000);
+                }
+                toggle = Shared.GetVar('healPetsToggle');
+            }
         };
         return PetCommander;
     }());
@@ -4358,12 +4468,12 @@ var Scripts;
                 Orion.Wait(500);
                 animal = Orion.FindObject(animalSerial);
                 if (animal) {
-                    walkTo && Orion.WalkTo(animal.X(), animal.Y(), animal.Z(), 1);
                     groundItemsSerials = Orion.FindType('any', 'any', 'ground', 'item', 3);
+                    walkTo && Orion.WalkTo(animal.X(), animal.Y(), animal.Z(), 1);
                 }
-                Orion.Print(-1, JSON.stringify(groundItemsSerials));
             }
             if (Orion.InJournal('byl tamnut')) {
+                Orion.Wait(200);
                 var newGroundItemsSerials = Orion.FindType('any', 'any', 'ground', 'item', 3);
                 Orion.Print(-1, JSON.stringify(newGroundItemsSerials));
                 var filter = newGroundItemsSerials.filter(function (i) { return groundItemsSerials.indexOf(i) === -1; });
@@ -4506,11 +4616,20 @@ var Scripts;
             var tamnuto = false;
             while (!tamnuto) {
                 Orion.WarMode(true);
+                Orion.Wait(100);
                 var target = Orion.FindObject('tamingTarget');
+                if (opts.walkTo) {
+                    Orion.WalkTo(target.X(), target.Y(), target.Z(), 1);
+                    Orion.Wait(responseDelay);
+                }
+                if (opts.hiding) {
+                    Scripts.Common.hiding();
+                    Orion.Wait(responseDelay);
+                }
                 Orion.WaitTargetObject('tamingTarget');
                 Orion.UseObject(loadedStaffSerial);
                 Orion.Wait(responseDelay);
-                opts.hidding && Scripts.Common.hiding();
+                opts.hiding && Scripts.Common.hiding();
                 var pickup = Scripts.Taming.waitOnTaming('tamingTarget', opts.walkTo);
                 if (Orion.InJournal('Too far|Jsi prilis vzdalen|Jsi moc daleko')) {
                     if (opts.walkTo) {
@@ -4528,7 +4647,6 @@ var Scripts;
                     pickup && Orion.MoveItem(pickup);
                     tamnuto = true;
                 }
-                Orion.Say('*');
                 Orion.ClearJournal();
             }
         };
@@ -4574,14 +4692,6 @@ var Scripts;
             if (timeToStorePreviousTargets === void 0) { timeToStorePreviousTargets = 1500; }
             if (additionalFlags === void 0) { additionalFlags = []; }
             if (notoriety === void 0) { notoriety = []; }
-            if (opts === void 0) { opts = {
-                targetIndication: TargetIndicationEnum.large,
-                showStatusBar: true,
-                statusBarPosition: {
-                    x: 70,
-                    y: 20
-                }
-            }; }
             if (Orion.Timer('targetTimer') === -1) {
                 Orion.SetTimer('targetTimer');
                 Orion.SetGlobal('targetStore', '[]');
@@ -4638,14 +4748,6 @@ var Scripts;
             }
         };
         Targeting.manualTarget = function (opts) {
-            if (opts === void 0) { opts = {
-                targetIndication: TargetIndicationEnum.large,
-                showStatusBar: true,
-                statusBarPosition: {
-                    x: 70,
-                    y: 20
-                }
-            }; }
             var selection = Orion.WaitForAddObject('manualTargetEnemy');
             Scripts.Utils.waitWhileTargeting();
             if (selection !== 1) {
