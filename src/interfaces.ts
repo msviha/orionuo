@@ -10,6 +10,11 @@ interface IPotion extends IMyGameObject {
     kad:IMyGameObject
 }
 
+interface IMyPet {
+    serial:string,
+    name:string
+}
+
 interface ITargetNextOpts {
     targetIndication?:TargetIndicationEnum,
     showStatusBar?:boolean,

@@ -5,8 +5,19 @@ namespace Scripts {
             return Shared.GetArray('usedNames', []);
         }
 
-        static getMyPets():{serial:string, name:string}[] {
+        static getMyPets():IMyPet[] {
             return Shared.GetArray('myPets', []);
+        }
+
+        static filterPetsInDistance():IMyPet[] {
+            const myPets = Scripts.PetCommander.getMyPets();
+            for (const pet of myPets) {
+                const petObject = Orion.FindObject(pet.serial);
+                if (!petObject || petObject.Distance() > 12) {
+                    Scripts.PetCommander.removeFromMyPets(pet.name);
+                }
+            }
+            return myPets;
         }
 
         static removeFromMyPets(name:string) {
@@ -26,7 +37,7 @@ namespace Scripts {
             Shared.AddArray('myPets', myPets);
         }
 
-        static getNextPetByIndex(index:number):{serial:string, name:string}|undefined {
+        static getNextPetByIndex(index:number):IMyPet|undefined {
             const myPets = Shared.GetArray('myPets', []);
             if (myPets.length - 1 < index) {
                 return;
@@ -73,8 +84,8 @@ namespace Scripts {
             return namesPool[random];
         }
 
-        static getNewPet():{serial:string, name:string}|undefined {
-            let monstersAlive = Orion.FindType('!0x0190|!0x0191', '0xFFFF', 'ground', 'live', 18);
+        static getNewPet():IMyPet|undefined {
+            let monstersAlive = Orion.FindType('!0x0190|!0x0191', '0xFFFF', 'ground', 'live', 12);
             for (const serial of monstersAlive) {
                 const isMyMonster = Orion.FindObject(serial).CanChangeName();
                 if (isMyMonster) {
@@ -90,7 +101,7 @@ namespace Scripts {
 
         static killTarget() {
             let pet = Scripts.PetCommander.getNewPet();
-            let myPets = Scripts.PetCommander.getMyPets();
+            let myPets = Scripts.PetCommander.filterPetsInDistance();
 
             if (!pet && myPets.length) {
                 let killIndex = Shared.GetVar('nextPetKillIndex', 0);
@@ -124,21 +135,21 @@ namespace Scripts {
 
         static killAll() {
             while (Scripts.PetCommander.getNewPet()) {}
-            let myPets = Scripts.PetCommander.getMyPets();
+            let myPets = Scripts.PetCommander.filterPetsInDistance();
             if (!myPets.length) {
                 return;
             }
             Orion.IgnoreReset();
             for (const pet of myPets) {
                 const petObject = Orion.FindObject(pet.serial);
-                if (!petObject) {
+                if (!petObject || petObject.Distance() > 12) {
                     Scripts.PetCommander.removeFromMyPets(pet.name);
                 }
                 else {
                     Orion.WaitTargetObject(Orion.ClientLastAttack());
                     Orion.Say(`${pet.name} kill`);
-                    Orion.WaitForTarget(1000);
-                    Scripts.Utils.waitWhileTargeting();
+                    const success = Orion.WaitForTarget(1000);
+                    !success && Scripts.PetCommander.removeFromMyPets(pet.name);
                 }
             }
             Scripts.PetCommander.ignoreMyPets();
@@ -167,7 +178,7 @@ namespace Scripts {
                 'Doksuri', 'Khanun', 'Vicente', 'Saola'
             ];
 
-            let monstersAlive = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "fast|live", 13, "blue|gray|criminal|orange|red");
+            let monstersAlive = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "fast|live", 12, "blue|gray|criminal|orange|red");
 
             const myMonsters = [];
             while (monstersAlive.length) {
@@ -204,10 +215,91 @@ namespace Scripts {
                 }
 
                 Orion.Ignore(monsterSerial);
-                monstersAlive = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "near|live", 13, "blue|gray|criminal|orange|red");
+                monstersAlive = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "near|live", 12, "blue|gray|criminal|orange|red");
             }
             Orion.SetGlobal('myMonstersKill', JSON.stringify(myMonsters));
             Orion.IgnoreReset();
+        }
+
+        static healPetsToggleStart() {
+            Scripts.Utils.playerPrint('Healing pets START', ColorEnum.green);
+            Shared.AddVar('healPetsToggle', true);
+        }
+
+        static healPetsToggleStop(message?:string) {
+            Scripts.Utils.playerPrint('Healing pets STOP', ColorEnum.red);
+            message && Scripts.Utils.playerPrint(message, ColorEnum.orange);
+            Shared.AddVar('healPetsToggle', false);
+        }
+
+        static sortPetsByHits(arr:IMyPet[]):IMyPet[] {
+            return arr.sort((a, b) => {
+                const pet1 = Orion.FindObject(a.serial);
+                const pet2 = Orion.FindObject(b.serial);
+                return (pet1.MaxHits() - pet1.Hits()) > (pet2.MaxHits() - pet2.Hits()) ? 1 : -1;
+            });
+        }
+
+        static healPetsToggle() {
+            Orion.ClearJournal();
+            while (Scripts.PetCommander.getNewPet()) {}
+            const myPets = Scripts.PetCommander.getMyPets();
+
+            let toggle = Shared.GetVar('healPetsToggle', false);
+            toggle ? Scripts.PetCommander.healPetsToggleStop() : Scripts.PetCommander.healPetsToggleStart();
+            toggle = Shared.GetVar('healPetsToggle');
+
+            while (toggle) {
+                if (!myPets.length) {
+                    Scripts.PetCommander.healPetsToggleStop('Nemas zadne pety');
+                    break;
+                }
+                Scripts.PetCommander.sortPetsByHits(myPets);
+
+                let distance = false;
+                let heal = false;
+                for (const p of myPets) {
+                    Orion.ClearJournal();
+                    const pet = Orion.FindObject(p.serial);
+                    if (pet.Distance() <= 6) {
+                        distance = true;
+                        if (pet.MaxHits() <= pet.Hits() || heal) {
+                            continue;
+                        }
+                        Scripts.Utils.playerPrint(`Healing [${pet.Name()}]`);
+                        const b = Scripts.Utils.findFirstType(gameObject.uncategorized.bandy);
+                        Orion.WaitTargetObject(p.serial);
+                        Orion.UseObject(b);
+                        const previousHp = pet.Hits();
+                        Scripts.Utils.waitWhileSomethingInJournal([
+                            'You put',
+                            'You apply',
+                            'Chces vytvorit',
+                            'must be able to reach',
+                            'Nemuzes pouzit bandy'
+                        ]);
+                        if (Orion.InJournal('Chces vytvorit|Nemuzes pouzit bandy|must be able to reach')) {
+                            Orion.Wait(responseDelay);
+                            continue;
+                        }
+                        heal = true;
+                        Scripts.Utils.printDamage(p.serial, previousHp);
+                    }
+                    else if (pet.MaxHits() > pet.Hits()) {
+                        Orion.PrintFast(p.serial, '0x0021', 0, `potrebuji heal`);
+                    }
+                }
+
+                if (!distance) {
+                    Scripts.PetCommander.healPetsToggleStop('Musis jit bliz');
+                    break;
+                }
+                if(!heal) {
+                    Scripts.Utils.playerPrint('hlidam pety')
+                    Orion.Wait(1000);
+                }
+                toggle = Shared.GetVar('healPetsToggle');
+            }
         }
     }
 }

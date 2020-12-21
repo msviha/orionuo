@@ -282,6 +282,15 @@ function harp(target?:TargetEnum) {
 }
 
 /**
+ * Zacne lecit pety (vlastni!) okolo sebe. Pri opakovanem volani prestane lecit, stejne jako pokud se od petu vzdalite
+ * @example in client `_healPets`
+ * @example external code `healPets()`
+ */
+function healPets() {
+    Scripts.PetCommander.healPetsToggle();
+}
+
+/**
  * Prepina mezi dvema stavy - hiduje hrace v okruhu 15ti policek a dalsi volani dava resync/resend. Nevidim na cudlik protoze mi tam nekdo stoji atd.
  * @example in client `_hideAll`
  * @example external code `hideAll();`
