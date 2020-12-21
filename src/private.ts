@@ -25,14 +25,33 @@ function displayDrinkInfo(potionName:PotionsEnum) {
     }
 }
 
-function displayHidingInfo() {
+function _hiding() {
     Orion.ClearJournal();
-    Scripts.Utils.waitWhileSomethingInJournal(['You have hidden yourself well', 't seem to hide here']);
+    Orion.Print(ColorEnum.none, 'Start Hiding');
+    Orion.UseSkill('Hiding');
+    Orion.Wait(100);
+    if (Orion.InJournal('You must wait')) {
+        Orion.ClearJournal('You must wait');
+        return;
+    }
+    Orion.Exec('_hidingPreoccupiedCheck', true);
+}
+
+function _hidingPreoccupiedCheck() {
+    Orion.AddDisplayTimer(TimersEnum.hiding, 2000, 'AboveChar', 'bar', "Hiding", 0, 100, '0x100', 0, 'red');
+    Scripts.Utils.waitWhileSomethingInJournal(['You have hidden yourself well', 't seem to hide here', 'preoccupied'], 3000);
+    Orion.RemoveDisplayTimer(TimersEnum.hiding);
     if (Orion.InJournal('You have hidden yourself well')) {
         Orion.CharPrint(Player.Serial(), ColorEnum.green, '[ Hidden ]');
     }
-    if (Orion.InJournal('t seem to hide here')) {
+    else if (Orion.InJournal('t seem to hide here')) {
         Orion.CharPrint(Player.Serial(), ColorEnum.red, '[ FAILED ]');
+    }
+    else if (Orion.InJournal('preoccupied')) {
+        Orion.WarMode(true);
+        Orion.Wait(100);
+        Orion.Print(ColorEnum.none, 'preoccupied - trying to hide again');
+        Orion.Exec('_hiding', true);
     }
 }
 

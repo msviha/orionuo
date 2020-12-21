@@ -49,25 +49,7 @@ namespace Scripts {
          * hidne, pripadne prepne war a hidne
          */
         static hiding() {
-            Orion.ClearJournal();
-            Orion.Print(ColorEnum.none, 'Start Hiding');
-            Orion.UseSkill('Hiding');
-            Orion.Wait(100);
-            if (Orion.InJournal('You must wait')) {
-                return;
-            }
-            Scripts.Utils.resetTimer(TimersEnum.hiding);
-
-            while(Orion.InJournal('preoccupied')) {
-                Orion.ClearJournal();
-                Orion.WarMode(true);
-                Orion.Wait(100);
-                Orion.Print(ColorEnum.none, 'preoccupied - trying to hide again');
-                Orion.UseSkill('Hiding');
-            }
-
-            Orion.AddDisplayTimer(TimersEnum.hiding, 2000, 'AboveChar', 'bar', "Hiding", 0, 100, '0x100', 0, 'red');
-            Orion.Exec('displayHidingInfo', true);
+            Orion.Exec('_hiding', true);
         }
 
         /**
