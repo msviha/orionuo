@@ -182,7 +182,6 @@ namespace Scripts {
 
         static webDestroyer() {
             const webs = Orion.FindType('0x0EE3|0x0EE4|0x0EE5|0x0EE6', '0x0000', 'ground', 'item', 1);
-            Orion.Print(-1, JSON.stringify(webs));
             for (const web of webs) {
                 Orion.UseObject(web);
                 Orion.Wait(100);
