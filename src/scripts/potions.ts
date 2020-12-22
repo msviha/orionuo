@@ -61,10 +61,10 @@ namespace Scripts {
             Orion.Wait(50);
             Orion.UseObject(potion);
             Orion.Wait(responseDelay);
-            if (Orion.InJournal('You put the empty bottless')) {
-                const drinkTimer = 17500;
-                const gsTimer = 130000;
 
+            const drinkTimer = 17500;
+            const gsTimer = 130000;
+            if (Orion.InJournal('You put the empty bottless')) {
                 displayTimers && Orion.AddDisplayTimer(TimersEnum.drink, drinkTimer, 'LeftTop', 'Line|Bar', 'Drink', 0, 0, '0x88B', 0, '0x88B');
                 Scripts.Utils.resetTimer(TimersEnum.drink);
                 const potionsCount = Orion.Count(p.graphic, p.color);
@@ -74,6 +74,9 @@ namespace Scripts {
                     Scripts.Utils.resetTimer(TimersEnum.gs);
                 }
                 displayInfo && Orion.Exec('displayDrinkInfo', false, [potionName.toString()]);
+            }
+            else {
+                Scripts.Utils.playerPrint(`potion timer ${((drinkTimer - Orion.Timer(TimersEnum.drink)) / 1000).toFixed(2)}s`, ColorEnum.red);
             }
         }
 
