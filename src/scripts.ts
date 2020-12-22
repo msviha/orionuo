@@ -18,6 +18,7 @@ function Autostart() {
     let updateRate = 500;
 
     Scripts.Dress.saveEquip();
+    Orion.Exec('userAutostart');
     while (true) {
         Scripts.Utils.printDamage(Player.Serial(), previousPlayerHp);
         previousPlayerHp = Player.Hits();
