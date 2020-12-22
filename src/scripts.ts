@@ -643,6 +643,13 @@ function targetPrevious(
 }
 
 /**
+ * Killne vsechny bezici scripty (s vyjimkou Autostart a userAutostart funkce)
+ */
+function terminateAll() {
+    Orion.Terminate('all', 'Autostart|userAutostart');
+}
+
+/**
  * Trackuje hrace nebo pozadovanou volbu z menu
  * @param who - volba z menu
  * @example in client `_tracking` trackuje hrace
