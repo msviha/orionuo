@@ -869,7 +869,25 @@ const gameObject:any = {
                             selections: ['Tools', 'Apprentice\'s Poisoning Kit (trenink)']
                         }
                     }
-                }
+                },
+                lockpickX50: {
+                    graphic: '0x14FB',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                {item: 'gameObject.resources.ingots.iron', count: 1},
+                                {item: 'gameObject.resources.ingots.bronze', count: 50}
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Tools', '50x Lockpick']
+                        },
+                        outputCount: 50
+                    }
+                },
             },
             specialItems: {
                 magicBall: {

@@ -105,10 +105,11 @@ namespace Scripts {
 
                 const success = Scripts.Crafting.makeProgress();
                 if (success) {
-                    count -= itemObject.make.outputCount || 1;
+                    const outputCount = itemObject.make.outputCount || 1
+                    count -= outputCount;
                     finishedCount++;
                     const item = Scripts.Utils.findFirstType(itemObject);
-                    setInputs && Orion.MoveItem(item, 1,  'outputContainer');
+                    setInputs && Orion.MoveItem(item, outputCount,  'outputContainer');
                     Orion.Wait(responseDelay);
                 }
                 Scripts.Utils.log(`vyrobeno ${itemName} - ${finishedCount} / ${++totalTries}`);
