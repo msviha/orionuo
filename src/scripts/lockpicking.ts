@@ -23,6 +23,7 @@ namespace Scripts {
                 Orion.CancelWaitTarget();
                 Orion.WaitTargetObject(targetSerial);
                 Orion.UseObject(lockpick);
+                Orion.Wait(responseDelay);
 
                 Scripts.Utils.waitWhileSomethingInJournal(['You fail', 'cannot be'], 500);
                 Orion.InJournal('cannot be') && (unlocked = true);
@@ -51,6 +52,7 @@ namespace Scripts {
             Orion.CancelWaitTarget();
             Orion.WaitTargetObject(targetSerial);
             Orion.UseObject(key);
+            Orion.Wait(responseDelay);
             Scripts.Utils.waitWhileSomethingInJournal(['You lock', 'You unlock']);
             if (Orion.InJournal('You unlock')) {
                 Orion.WaitTargetObject(targetSerial);
@@ -71,6 +73,7 @@ namespace Scripts {
             }
 
             while (true) {
+                Orion.Wait(responseDelay);
                 Scripts.Lockpicking.lock(targetSerial, key);
                 if (!Scripts.Lockpicking.unlock(targetSerial)) {
                     break;
