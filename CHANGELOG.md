@@ -1,5 +1,27 @@
 # CHANGELOG
 
+## 0.1.5
+### features
+- `healPets` leci vlastni pety v dosahu - funguje jako prepinac, pri opakovanem spusteni ukonci leceni
+- `userAutostart` v pripade ze ve scriptech budete potrebovat bezet nejaky vlastni autostart tak ho prosim pojmenujte takto. Muj `Autostart` spusti (jednou) tuto funkci `userAutostart`. Muzete si tak osetrit vlastnimi scripty udalosti ktere chcete resit behem hry, aniz by jste prepisovali muj autostart, nebo ten vas pousteli pri kazdem startu rucne
+- `terminateAll` zrusi vsechny bezici scripty (vyjma `Autostart` a `userAutostart`) 
+
+### enhancements
+- `manualTarget` pridany optiony jako u `targetNext` (1.4.0)
+- `drink` zobrazi timer nad hracem pokud ho pouzijete drive nez je mozne
+- `mount` automaticky odshrinkne prvni jezditko z baglu (ktere jde odshrinknout), nasetuje si ho a naskoci na nej
+
+### fixes
+- `poisonTrain` pridan flag ignoreself (od nejake verze to bez nej zaclo blbnout)
+- `hiding` nekolik vylepseni k celkovemu lepsimu chovani 
+- `taming` upraveno sbirani tamnutych zviratek a chovani s optionem hiding
+- `make` opraveno pocitani a presouvani, pokud je vyrabeno neco co ma vetsi output jak 1 (napriklad lockpicky po 50ks)
+- `unlock` / `lockpicking` pridana pauza, aby nelagoval server
+- `taming` ukonci se pokud nejsou shrinky
+
+### documentation
+- priklad optionu pro targetovani (`targetNext`, `targetPrevious` a `manualTarget`)
+
 ## 0.1.4
 ### features
 - `killAll` nova verze ktera by mela nahradit predchozi `kill`

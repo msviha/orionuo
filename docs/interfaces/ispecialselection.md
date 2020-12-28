@@ -21,7 +21,7 @@
 
 •  **item**: string
 
-*Defined in [interfaces.ts:55](https://github.com/msviha/orionuo/blob/94d05d0/src/interfaces.ts#L55)*
+*Defined in [interfaces.ts:55](https://github.com/msviha/orionuo/blob/bbe2852/src/interfaces.ts#L55)*
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 •  **menu**: string
 
-*Defined in [interfaces.ts:54](https://github.com/msviha/orionuo/blob/94d05d0/src/interfaces.ts#L54)*
+*Defined in [interfaces.ts:54](https://github.com/msviha/orionuo/blob/bbe2852/src/interfaces.ts#L54)*
