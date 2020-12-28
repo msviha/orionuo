@@ -56,9 +56,7 @@ namespace Scripts {
             if (Orion.InJournal('byl tamnut')) {
                 Orion.Wait(200);
                 const newGroundItemsSerials = Orion.FindType('any', 'any', 'ground', 'item', 3);
-                Orion.Print(-1, JSON.stringify(newGroundItemsSerials));
                 const filter = newGroundItemsSerials.filter(i => groundItemsSerials.indexOf(i) === -1);
-                Orion.Print(-1, JSON.stringify(filter));
                 return filter[0];
             }
             return;
@@ -197,6 +195,10 @@ namespace Scripts {
                 }
                 else if (shrinkKadSerials.length) {
                     Orion.WaitTargetObject(shrinkKadSerials[0]);
+                }
+                else {
+                    Scripts.Utils.log('nejsou shrinky', ColorEnum.red);
+                    throw 'e';
                 }
                 Orion.UseObject(staffSerial);
                 Scripts.Utils.waitWhileSomethingInJournal(['Hul nabita']);
