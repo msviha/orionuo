@@ -23,6 +23,9 @@
 ### documentation
 - priklad optionu pro targetovani (`targetNext`, `targetPrevious` a `manualTarget`)
 
+### gameObject.crafting 
+- `tinkering.tools.lockpickX50` pridana vyroba lockpicku po 50ti kusech
+
 ## 0.1.4
 ### features
 - `killAll` nova verze ktera by mela nahradit predchozi `kill`
