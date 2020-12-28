@@ -12,6 +12,7 @@
 - `mount` automaticky odshrinkne prvni jezditko z baglu (ktere jde odshrinknout), nasetuje si ho a naskoci na nej
 
 ### fixes
+- `killAll` par oprav, pokud jste daleko od petu (13+), aby se je to nesnazilo ovladat (ovladani nasledne bugovalo)
 - `poisonTrain` pridan flag ignoreself (od nejake verze to bez nej zaclo blbnout)
 - `hiding` nekolik vylepseni k celkovemu lepsimu chovani 
 - `taming` upraveno sbirani tamnutych zviratek a chovani s optionem hiding
