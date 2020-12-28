@@ -6,6 +6,7 @@ namespace Scripts {
     export class Lockpicking {
 
         static unlock(targetSerial?:string):boolean {
+            Orion.SetTimer('unlockTimer');
             if (!targetSerial) {
                 Scripts.Utils.playerPrint('Target what do you want to unlock');
                 Orion.WaitForAddObject('unlockTarget', 60000);
@@ -18,12 +19,16 @@ namespace Scripts {
             let unlocked = false;
             while (lockpicks.length && !unlocked) {
                 Orion.ClearJournal();
+                const timer = Orion.Timer('unlockTimer');
+                if (timer < 500) {
+                    Orion.Wait(500 - timer);
+                    Scripts.Utils.resetTimer('unlockTimer');
+                }
 
                 const lockpick = lockpicks[0];
                 Orion.CancelWaitTarget();
                 Orion.WaitTargetObject(targetSerial);
                 Orion.UseObject(lockpick);
-                Orion.Wait(responseDelay);
 
                 Scripts.Utils.waitWhileSomethingInJournal(['You fail', 'cannot be'], 500);
                 Orion.InJournal('cannot be') && (unlocked = true);
@@ -52,7 +57,6 @@ namespace Scripts {
             Orion.CancelWaitTarget();
             Orion.WaitTargetObject(targetSerial);
             Orion.UseObject(key);
-            Orion.Wait(responseDelay);
             Scripts.Utils.waitWhileSomethingInJournal(['You lock', 'You unlock']);
             if (Orion.InJournal('You unlock')) {
                 Orion.WaitTargetObject(targetSerial);
@@ -73,7 +77,6 @@ namespace Scripts {
             }
 
             while (true) {
-                Orion.Wait(responseDelay);
                 Scripts.Lockpicking.lock(targetSerial, key);
                 if (!Scripts.Lockpicking.unlock(targetSerial)) {
                     break;
