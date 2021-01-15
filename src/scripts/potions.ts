@@ -144,6 +144,7 @@ namespace Scripts {
             const mortar = Scripts.Potions.getMortar();
 
             while (true) {
+                Scripts.Utils.worldSaveCheckWait();
                 Orion.ClearJournal();
 
                 Scripts.Utils.selectMenu('Vyber typ potionu', [p.alchemySelection]);
@@ -160,16 +161,20 @@ namespace Scripts {
                     continue;
                 }
 
+                Scripts.Utils.worldSaveCheckWait();
                 Orion.ClearJournal();
                 Orion.UseObject(mortar);
                 Scripts.Utils.waitWhileSomethingInJournal(['You pour']);
+                Orion.Wait(responseDelay);
 
+                Scripts.Utils.worldSaveCheckWait();
                 Orion.ClearJournal();
                 const potion = Scripts.Utils.findFirstType(p);
                 const kad = Scripts.Potions.getKadForPotion(p);
                 Orion.WaitTargetObject(potion);
                 Orion.UseObject(kad);
                 Scripts.Utils.waitWhileSomethingInJournal(['You put']);
+                Orion.Wait(responseDelay);
             }
         }
 
