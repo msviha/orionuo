@@ -157,7 +157,7 @@ namespace Scripts {
         static worldSaveCheckWait() {
             if (Orion.InJournal("World save has been")) {
                 Orion.Wait(25000);
-                Orion.ClearJournal(undefined, 'sys');
+                Orion.ClearJournal('World save has been', 'sys');
             }
         }
 
