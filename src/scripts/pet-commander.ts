@@ -236,31 +236,42 @@ namespace Scripts {
             return arr.sort((a, b) => {
                 const pet1 = Orion.FindObject(a.serial);
                 const pet2 = Orion.FindObject(b.serial);
+                if (!pet1) {
+                    return -1;
+                }
+                if (!pet2) {
+                    return 1;
+                }
                 return (pet1.MaxHits() - pet1.Hits()) > (pet2.MaxHits() - pet2.Hits()) ? 1 : -1;
             });
         }
 
         static healPetsToggle() {
             Orion.ClearJournal();
-            while (Scripts.PetCommander.getNewPet()) {}
-            const myPets = Scripts.PetCommander.getMyPets();
 
             let toggle = Shared.GetVar('healPetsToggle', false);
             toggle ? Scripts.PetCommander.healPetsToggleStop() : Scripts.PetCommander.healPetsToggleStart();
             toggle = Shared.GetVar('healPetsToggle');
 
             while (toggle) {
+                while (Scripts.PetCommander.getNewPet()) {}
+                const myPets = Scripts.PetCommander.filterPetsInDistance();
                 if (!myPets.length) {
                     Scripts.PetCommander.healPetsToggleStop('Nemas zadne pety');
                     break;
                 }
-                Scripts.PetCommander.sortPetsByHits(myPets);
+                else if (myPets.length > 1) {
+                    Scripts.PetCommander.sortPetsByHits(myPets);
+                }
 
                 let distance = false;
                 let heal = false;
                 for (const p of myPets) {
                     Orion.ClearJournal();
                     const pet = Orion.FindObject(p.serial);
+                    if (!pet) {
+                        continue;
+                    }
                     if (pet.Distance() <= 6) {
                         distance = true;
                         if (pet.MaxHits() <= pet.Hits() || heal) {
