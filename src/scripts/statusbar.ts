@@ -22,6 +22,7 @@ namespace Scripts {
                 dead: o.Dead()
             }
             statusBars.push(s);
+            Shared.AddVar(serial, true);
             Shared.AddArray(GlobalEnum.customStatusBars, statusBars);
 
             const gump = Orion.CreateCustomGump(parseInt(serial, 16));
@@ -34,6 +35,9 @@ namespace Scripts {
             const statusBars = Shared.GetArray(GlobalEnum.customStatusBars, []);
 
             for (const s of statusBars) {
+                if (!Shared.GetVar(s.serial, true)) {
+                    continue;
+                }
                 const gump = Orion.CreateCustomGump(parseInt(s.serial, 16));
                 const o = Orion.FindObject(s.serial);
 
@@ -131,7 +135,7 @@ namespace Scripts {
             gump.AddText(10, 25, '0', `${hp}/${max}`, 0, 201);
             gump.AddLine(89, 35, 161, 35, 'black', 10, 101);
             gump.AddLine(90, 35, (over ? lineLength : current) + 90, 35, currentColor, 8, 102);
-            over && gump.AddText(152, 25, '0', "<basefont size='small' color='red'>+</basefont>");
+            gump.AddText(152, 25, '0', over ? "<basefont size='small' color='red'>+</basefont>" : ' ', 0, 103);
         }
 
     }
