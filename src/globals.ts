@@ -106,6 +106,10 @@ const gameObject:any = {
                 graphic: '0x103D',
                 color: '0x0280'
             }
+        },
+        necroMystic: {
+            graphic: '0x1F0B',
+            color: '0x0485'
         }
     },
     tools: {

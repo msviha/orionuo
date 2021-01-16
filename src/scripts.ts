@@ -460,6 +460,15 @@ function nbRune() {
 }
 
 /**
+ * Pouzije necro mystic (sleze z jezditka a vrati se zpet + vrati predchozi helmu zpet)
+ * @param message Hlaska kterou rekne hrac pri pouziti mystiku do hry
+ * @example external code `necroMystik('Necro mystic - HEAL!')`
+ */
+function necroMystic(message:string) {
+    Scripts.Common.necroMystic(message);
+}
+
+/**
  * Prepne na dalsi zbran
  * (zbrane si nasetujte pomoci resetWeapons)
  * @param showName - zobrazuje nad hracem nazev zbrane po prepnuti
