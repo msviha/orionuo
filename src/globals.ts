@@ -936,6 +936,26 @@ const gameObject:any = {
                     }
                 },
             },
+            keys: {
+                magicKey: {
+                    graphic: '0x1837',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                {item: 'gameObject.resources.ingots.copper', count: 5},
+                                {item: 'gameObject.resources.ingots.gold', count: 5},
+                                {item: 'gameObject.resources.ingots.silver', count: 5}
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Keys', 'Magic Key']
+                        }
+                    }
+                }
+            },
             specialItems: {
                 magicBall: {
                     graphic: '0x0E2D',
