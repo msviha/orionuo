@@ -746,12 +746,13 @@ function useGGR() {
  * @param lvl {number} pozadovany level klamaka
  * @param useAim {boolean} pokud chcete zamerovat misto kam ho vyhodit
  * @param priorityList {string[]} pokud chcete prioritizovat ktere klamaky to ma nejdrive v baglu hledat
+ * @param ignoreSerials {string[]} serialy ktere pri vyhazovani klamaku script ignoruje (kocici NB itemy)
  * @example external code `useKlamak(1)` vyhodi klamaka level 1
  * @example external code `useKlamak(1, true)` zobrazi zamerovatko a pak vyhodi klamaka level 1 na target
  * @example external code `useKlamak(3, false, ['Bull', 'Cow'])`vyhodi pod vas Bulla, pokud ho nemate, tak Kravu a pokud ani tu nemate tak zkusi vyhodit jiny lvl 3 klamak
  */
-function useKlamak(lvl:number, useAim = false, priorityList?:string[]) {
-    Scripts.Klamak.useKlamak(lvl, useAim, priorityList)
+function useKlamak(lvl:number, useAim = false, priorityList?:string[], ignoreSerials?:string[]) {
+    Scripts.Klamak.useKlamak(lvl, useAim, priorityList, ignoreSerials)
 }
 
 /**

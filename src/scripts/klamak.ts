@@ -26,7 +26,7 @@ namespace Scripts {
             Scripts.Utils.playerPrint(nextList);
         }
 
-        static useKlamak(lvl:number, useAim = false, priorityList:string[] = []) {
+        static useKlamak(lvl:number, useAim = false, priorityList:string[] = [], ignoreSerials:string[] = []) {
             const level = gameObject.klamak['lvl' + lvl];
 
             let findSerial = '';
@@ -35,8 +35,9 @@ namespace Scripts {
                     if (klamakName === itemName) {
                         const klamak = level[itemName];
                         const klamakSerials = Orion.FindType(klamak.graphic, klamak.color);
-                        if (klamakSerials) {
-                            findSerial = klamakSerials[0];
+                        const s = klamakSerials.filter((i) => ignoreSerials.indexOf(i) === -1);
+                        if (s.length) {
+                            findSerial = s[0];
                             break;
                         }
                     }
@@ -55,8 +56,9 @@ namespace Scripts {
                     }
                     const klamak = level[itemName];
                     const klamakSerials = Orion.FindType(klamak.graphic, klamak.color);
-                    if (klamakSerials.length) {
-                        findSerial = klamakSerials[0];
+                    const s = klamakSerials.filter((i) => ignoreSerials.indexOf(i) === -1);
+                    if (s.length) {
+                        findSerial = s[0];
                         break;
                     }
                 }
