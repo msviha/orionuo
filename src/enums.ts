@@ -97,6 +97,8 @@ enum PotionsEnum {
     tr = 'tr',
     gc = 'gc',
     lc = 'lc',
+    lp = 'lp',
+    dp = 'dp',
     ns = 'ns',
     shrink = 'shrink',
     lavabomb = 'lavabomb'

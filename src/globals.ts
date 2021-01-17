@@ -1209,7 +1209,24 @@ const gameObject:any = {
             kad: {
                 graphic: '0x1843',
                 color: '0x0091'
-            }
+            },
+            alchemySelection: 'Lesser Cure Potion'
+        },
+        dp: {
+            name: 'Deathly Poison Potion',
+            graphic: '0x0F0A',
+            color: '0x0000',
+            bag: {
+                x: 80,
+                y: 15
+            },
+            kad: {
+                name: 'Nadoba s Deadly Poison',
+                graphic: '0x1843',
+                color: '0x08A2'
+            },
+            gmMortarSelection: 'Deadly Poison (1020 Nightshades)',
+            alchemySelection: 'Deadly Poison'
         },
         ns: {
             name: 'Nightsight Potion',
@@ -1258,6 +1275,15 @@ const gameObject:any = {
                 color: '0x0B77'
             },
             alchemySelection: 'Invisibility'
+        },
+        lp: {
+            graphic: '0x0F0A',
+            color: '0x0000',
+            kad: {
+                graphic: '0x1843',
+                color: '0x089F'
+            },
+            alchemySelection: 'Lesser Poison'
         }
     },
     books: {
