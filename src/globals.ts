@@ -257,6 +257,10 @@ const gameObject:any = {
             graphic: '0x175D',
             color: '0x0000'
         },
+        thread: {
+            graphic: '0x0FA0',
+            color: '0x0000'
+        },
         pilesOfHides: {
             graphic: '0x1078',
             color: '0x0000'
@@ -462,6 +466,45 @@ const gameObject:any = {
                         menu: {
                             name: 'Tinkering',
                             selections: ['Wires', 'Iron Wire']
+                        }
+                    }
+                },
+                vlasec: {
+                    graphic: '0x0FA0',
+                    color: '0x02B3',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                {item: 'gameObject.resources.ingots.iron', count: 1},
+                                {item: 'gameObject.resources.thread', count: 4}
+                            ],
+                            crafting: [
+                                {item: 'gameObject.crafting.tinkering.wires.ironString', count: 2}
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Wires', 'Vlasec']
+                        }
+                    }
+                },
+                ironString: {
+                    graphic: '0x1420',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                {item: 'gameObject.resources.ingots.iron', count: 1}
+                            ],
+                            crafting: [
+                                {item: 'gameObject.crafting.tinkering.wires.iron', count: 1}
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Wires', 'Iron String']
                         }
                     }
                 },
