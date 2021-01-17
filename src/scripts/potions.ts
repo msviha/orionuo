@@ -160,7 +160,7 @@ namespace Scripts {
                 Scripts.Utils.selectMenu('Vyber typ potionu', [p.alchemySelection]);
                 Orion.UseObject(mortar);
 
-                Scripts.Utils.waitWhileSomethingInJournal(['You completed', 'You toss', 'Nemas dostatecny']);
+                Scripts.Utils.waitWhileSomethingInJournal(['You completed', 'You toss', 'Nemas dostatecny'], 60000);
 
                 if (Orion.InJournal('Nemas dostatecny')) {
                     Scripts.Utils.log('Dosly regy', ColorEnum.red);
@@ -174,7 +174,7 @@ namespace Scripts {
                 Scripts.Utils.worldSaveCheckWait();
                 Orion.ClearJournal();
                 Orion.UseObject(mortar);
-                Scripts.Utils.waitWhileSomethingInJournal(['You pour']);
+                Scripts.Utils.waitWhileSomethingInJournal(['You pour'], 60000);
                 Orion.Wait(responseDelay);
 
                 Scripts.Utils.worldSaveCheckWait();
@@ -183,7 +183,7 @@ namespace Scripts {
                 const kad = Scripts.Potions.getKadForPotion(p);
                 Orion.WaitTargetObject(potion);
                 Orion.UseObject(kad);
-                Scripts.Utils.waitWhileSomethingInJournal(['You put']);
+                Scripts.Utils.waitWhileSomethingInJournal(['You put'], 60000);
                 Orion.Wait(responseDelay);
             }
         }
