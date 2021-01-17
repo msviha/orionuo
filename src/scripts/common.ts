@@ -67,7 +67,7 @@ namespace Scripts {
                 return;
             }
 
-            Orion.ClearJournal();
+            Orion.ClearJournal('You put the bloody|You apply|Chces vytvorit');
             Orion.BandageSelf();
             while (!Orion.InJournal('You put') && !Orion.InJournal('You apply') && !Orion.InJournal('Chces vytvorit')) {
                 Orion.Wait(200);
