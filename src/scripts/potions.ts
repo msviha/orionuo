@@ -57,14 +57,16 @@ namespace Scripts {
             }
 
             // vypiti
-            Orion.ClearJournal();
-            Orion.Wait(50);
-            Orion.UseObject(potion);
-            Orion.Wait(responseDelay);
-
+            const succMsg = 'You put the empty bottle';
+            const failMsg = 'drink another potion';
+            const paraMsg = 'reach that';
+            const messages = [succMsg, failMsg, paraMsg];
             const drinkTimer = 17500;
             const gsTimer = 130000;
-            if (Orion.InJournal('You put the empty bottless')) {
+            Orion.UseObject(potion);
+            const m = Scripts.Utils.waitWhileSomethingInJournal(messages, 1000, 1000);
+
+            if (m === 0) {
                 displayTimers && Orion.AddDisplayTimer(TimersEnum.drink, drinkTimer, 'LeftTop', 'Line|Bar', 'Drink', 0, 0, '0x88B', 0, '0x88B');
                 Scripts.Utils.resetTimer(TimersEnum.drink);
                 const potionsCount = Orion.Count(p.graphic, p.color);
@@ -75,9 +77,17 @@ namespace Scripts {
                 }
                 displayInfo && Orion.Exec('displayDrinkInfo', false, [potionName.toString()]);
             }
-            else {
-                Scripts.Utils.playerPrint(`potion timer ${((drinkTimer - Orion.Timer(TimersEnum.drink)) / 1000).toFixed(2)}s`, ColorEnum.red);
+            else if (m === 1) {
+                const remainingTime = drinkTimer - Orion.Timer(TimersEnum.drink);
+                remainingTime > 0 && Scripts.Utils.playerPrint(`potion timer ${((drinkTimer - Orion.Timer(TimersEnum.drink)) / 1000).toFixed(2)}s`, ColorEnum.red);
             }
+            else if (m === 2) {
+                Scripts.Utils.playerPrint(`You can't reach that`, ColorEnum.orange);
+            }
+            else {
+                Scripts.Utils.log('Nenalezena drink hlaska v journalu za posledni vterinu', ColorEnum.red);
+            }
+            Orion.ClearJournal(`${succMsg}|${failMsg}|${paraMsg}`);
         }
 
         static gmMortar(potionName:PotionsEnum) {

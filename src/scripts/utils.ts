@@ -142,16 +142,27 @@ namespace Scripts {
             return needToMove;
         }
 
-        static waitWhileSomethingInJournal(messages:string[], wait?:number):boolean {
+        static waitWhileSomethingInJournal(messages:string[], wait?:number, timeAhead?:number, flags = 'sys'):number {
+            const messagesAsString = messages.join('|');
             let keepWait = true;
-            while (!Orion.InJournal(messages.join('|')) && keepWait && !Player.Dead()) {
-                Orion.Wait(50);
+            let startTime = timeAhead ? Orion.Now() - timeAhead : 0;
+            while (keepWait && !Player.Dead()) {
+                const journalMessage = Orion.InJournal(messagesAsString, undefined, undefined, 'any', startTime, Orion.Now());
+                if (journalMessage) {
+                    for (let i = 0; i < messages.length; i++) {
+                        const m = messages[i];
+                        if (journalMessage.Text().indexOf(m) > -1) {
+                            return i;
+                        }
+                    }
+                }
+                Orion.Wait(10);
                 if (wait) {
-                    wait -= 50;
+                    wait -= 10;
                     keepWait = wait > 0;
                 }
             }
-            return keepWait;
+            return -1;
         }
 
         static worldSaveCheckWait() {

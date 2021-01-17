@@ -10,6 +10,7 @@ function version() {
  */
 function Autostart() {
     version();
+    Orion.ClearJournal();
     Shared.AddArray('customStatusBars', []);
     Shared.AddVar('ws', false);
     let previousLastAttackSerial:string;

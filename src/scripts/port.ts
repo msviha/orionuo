@@ -14,7 +14,7 @@ namespace Scripts {
 
             Scripts.Utils.useAndSelect(serial, selections);
             if (waitForKop) {
-                const teleported = Scripts.Utils.waitWhileSomethingInJournal(['been teleported'], 40000);
+                const teleported = Scripts.Utils.waitWhileSomethingInJournal(['been teleported'], 40000) !== -1;
                 !teleported && Scripts.Utils.useAndSelect(serial, selections);
             }
         }
@@ -26,7 +26,7 @@ namespace Scripts {
             }];
             Scripts.Utils.useAndSelect(runeSerial, selections);
             if (waitForKop) {
-                const teleported = Scripts.Utils.waitWhileSomethingInJournal(['been teleported'], 40000);
+                const teleported = Scripts.Utils.waitWhileSomethingInJournal(['been teleported'], 40000) !== -1;
                 !teleported && Scripts.Utils.useAndSelect(runeSerial, selections);
             }
         }
@@ -76,7 +76,7 @@ namespace Scripts {
 
             Scripts.Utils.useAndSelect(serial, selections);
             if (selection === PortBookOptionsEnum.kop && waitForKop) {
-                const teleported = Scripts.Utils.waitWhileSomethingInJournal(['been teleported'], 40000);
+                const teleported = Scripts.Utils.waitWhileSomethingInJournal(['been teleported'], 40000) !== -1;
                 !teleported && Scripts.Utils.useAndSelect(serial, selections);
             }
         }
