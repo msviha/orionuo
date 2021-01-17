@@ -149,9 +149,9 @@ namespace Scripts {
             Scripts.Utils.printColoredHpBar(enemySerial, enemy.Hits() / enemy.MaxHits() * 100);
             showStatusBar && Scripts.Utils.updateCurrentStatusBar(enemySerial, statusBarPosition);
 
-            Orion.Attack(enemySerial);
-            Orion.WarMode(false);
-            Orion.WarMode(true);
+            Orion.ClearHighlightCharacters();
+            Orion.AddObject('lastattack', enemySerial);
+            Orion.AddHighlightCharacter(enemySerial, Scripts.Wip.getColorByNotoriety(enemy.Notoriety()));
         }
     }
 }
