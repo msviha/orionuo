@@ -477,5 +477,56 @@ namespace Scripts {
                 throw 'e';
             }
         }
+
+        static isItemStackable(serial:string):boolean {
+            const itemObject = Orion.FindObject(serial);
+            let checkSerials = Orion.FindType(itemObject.Graphic(), itemObject.Color(), itemObject.Container());
+            let stackable = false;
+
+            for (const s of checkSerials) {
+                if (Orion.FindObject(s).Count() > 1) {
+                    stackable = true;
+                    break;
+                }
+            }
+            if (!stackable && checkSerials.length > 1) {
+                const itemToMove = Orion.FindObject(checkSerials[0]);
+                const x = itemToMove.X();
+                const y = itemToMove.Y();
+                const container = itemToMove.Container();
+                Orion.MoveItem(checkSerials[0], 1, checkSerials[1]);
+                Orion.Wait(responseDelay);
+                if (Orion.FindObject(checkSerials[1])) {
+                    Orion.MoveItem(checkSerials[0], 1, container, x, y);
+                    Orion.Wait(responseDelay);
+                    stackable = false;
+                }
+                else {
+                    stackable = true;
+                }
+            }
+            return stackable;
+        }
+
+        static askForCount():number {
+            Scripts.Utils.playerPrint('Po kolika kusech to budes prehazovat ?');
+            Orion.ClearJournal();
+            while (!Orion.InJournal('', 'my')) {
+                Orion.Wait(500);
+            }
+            const text = Orion.InJournal('', 'my')?.Text();
+            if (!text) {
+                Scripts.Utils.log('Nic jsi nenapsal ?', ColorEnum.red);
+                throw 'err'
+            }
+            const count = parseInt(text.replace(Player.Name() + ':', ''), 10);
+
+            if (typeof count !== 'number' || count < 0) {
+                Scripts.Utils.log('Spatne zadany pocet', ColorEnum.red);
+                throw 'err'
+            }
+
+            return count;
+        }
     }
 }

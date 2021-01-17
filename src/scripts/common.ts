@@ -81,6 +81,59 @@ namespace Scripts {
 
         }
 
+        static massMove(requiredCountInTarget = 0, onlyType = true) {
+            Scripts.Utils.createGameObjectSelections([
+                {ask: 'Co chces prehazovat ?', addObject: 'massMoveItem'},
+                {ask: 'Kam to chces nahazet (container) ?', addObject: 'massMoveTargetContainer'}
+            ]);
+
+            let itemObject = Orion.FindObject('massMoveItem');
+            const stackable = Scripts.Utils.isItemStackable(itemObject.Serial());
+            const count = stackable ? Scripts.Utils.askForCount() : 0;
+            itemObject = Orion.FindObject('massMoveItem');
+
+            // no recurse.. just from the container where it is targeted
+            const graphic = itemObject.Graphic();
+            const color = onlyType ? '0xFFFF' : itemObject.Color();
+            const container = itemObject.Container();
+            let serialsToMove = Orion.FindType(graphic, color, container, undefined, undefined, undefined, false);
+            Orion.OpenContainer('massMoveTargetContainer');
+
+            let typesInTargetContainer = Orion.FindType(graphic, color, 'massMoveTargetContainer');
+            let coordinates:ICoordinates|undefined;
+            let stackableTarget:string|undefined;
+            let totalInTarget = Scripts.Utils.countObjectInContainer({graphic, color}, 'massMoveTargetContainer');
+
+            while (serialsToMove.length && (!requiredCountInTarget || totalInTarget !== requiredCountInTarget)) {
+                const s = serialsToMove[0];
+                if (typesInTargetContainer.length) {
+                    if (!coordinates && !stackableTarget) {
+                        const targetContainerItem = Orion.FindObject(typesInTargetContainer[0]);
+                        stackableTarget = targetContainerItem.Serial();
+                        coordinates = {
+                            x: targetContainerItem.X(),
+                            y: targetContainerItem.Y()
+                        };
+                    }
+                }
+
+                Orion.MoveItem(
+                    s,
+                    count,
+                    stackable && stackableTarget ? stackableTarget : 'massMoveTargetContainer',
+                    coordinates?.x,
+                    coordinates?.y
+                );
+                stackable && (stackableTarget = s);
+                Orion.Wait(responseDelay);
+                typesInTargetContainer = Orion.FindType(graphic, color, 'massMoveTargetContainer');
+                serialsToMove = Orion.FindType(graphic, color, container, undefined, undefined, undefined, false);
+                totalInTarget = Scripts.Utils.countObjectInContainer({graphic, color}, 'massMoveTargetContainer');
+            }
+
+            Scripts.Utils.playerPrint(`Mas uz ${totalInTarget} techto itemu v containeru`);
+        }
+
         static mysticCounter() {
             Orion.ClearJournal();
             const recepts = Orion.FindType('0x14ED', '0x06ED'); // recept

@@ -443,6 +443,34 @@ function manualTarget(opts:ITargetNextOpts = TARGET_OPTS_DEFAULTS) {
 }
 
 /**
+ * Mass move checkuje jen graphic a presouva i itemy s rozdilnou barvou, pokud se item stackuje tak se zepta po kolika kusech to budes prehazovat
+ * @param requiredCountInTarget {number} kolik toho ma byt celkem v cilovem kontejneru
+ * @example in client `_mm` vyhodi zamerovac co chces presunout a kam
+ * @example in client `_mm 20` takto by melo byt v cilovem kontejneru nakonec 20 kousku
+ */
+function mm(requiredCountInTarget?:number) {
+    if (requiredCountInTarget) {
+        const parsedParam = parseParam(requiredCountInTarget);
+        requiredCountInTarget = typeof parsedParam === 'number' ? parsedParam : 0;
+    }
+    Scripts.Common.massMove(requiredCountInTarget, true);
+}
+
+/**
+ * Mass move checkuje graphic i color, pokud se item stackuje tak se zepta po kolika kusech to budes prehazovat
+ * @param requiredCountInTarget {number} kolik toho ma byt celkem v cilovem kontejneru
+ * @example in client `_mm` vyhodi zamerovac co chces presunout a kam
+ * @example in client `_mm 20` takto by melo byt v cilovem kontejneru nakonec 20 kousku
+ */
+function mmc(requiredCountInTarget?:number) {
+    if (requiredCountInTarget) {
+        const parsedParam = parseParam(requiredCountInTarget);
+        requiredCountInTarget = typeof parsedParam === 'number' ? parsedParam : 0;
+    }
+    Scripts.Common.massMove(requiredCountInTarget, false);
+}
+
+/**
  * Naseda a seseda z jezditka. Pokud Vam jezditko umre, nebo mate nasetovane nejake ktere neni v dosahu, zobrazi se zamereni jezditka
  * @example in client `_mount`
  * @example external code `mount();`
