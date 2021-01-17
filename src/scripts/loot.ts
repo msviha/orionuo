@@ -68,23 +68,19 @@ namespace Scripts {
         }
 
         static carveBody(carveNearestBodyAutomatically = false) {
-
-            let cutWeapon = Orion.FindObject('cutWeapon');
+            const CUT_WEAPON = 'cutWeapon';
+            let cutWeapon = Orion.FindObject(CUT_WEAPON);
 
             if (!cutWeapon) {
-                const nbDagger = gameObject.uncategorized.nbDagger;
-                const nbDaggerSerials = Orion.FindType(nbDagger.graphic, nbDagger.color);
-                if (!nbDaggerSerials.length) {
-                    const selection = Orion.WaitForAddObject('cutWeapon')
-                    Scripts.Utils.playerPrint('target your cutWeapon');
-                    if (selection !== 1) {
-                        Orion.RemoveObject('cutWeapon');
-                        throw 'e';
-                    }
-                    cutWeapon = Orion.FindObject('cutWeapon');
+                const nbDaggerSerial = Scripts.Utils.findFirstType(gameObject.uncategorized.nbDagger, 1);
+                if (!nbDaggerSerial) {
+                    Scripts.Utils.createGameObjectSelections([
+                        {ask: 'Cim budes rezat ?', addObject: CUT_WEAPON}
+                    ]);
+                    cutWeapon = Orion.FindObject(CUT_WEAPON);
                 }
                 else {
-                    cutWeapon = Orion.FindObject(nbDaggerSerials[0]);
+                    cutWeapon = Orion.FindObject(nbDaggerSerial);
                 }
             }
 
