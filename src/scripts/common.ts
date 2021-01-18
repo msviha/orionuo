@@ -316,5 +316,16 @@ namespace Scripts {
             Orion.Say('Bank');
             return Orion.WaitForContainerGump(500) && !!Orion.InJournal('stones in your bank box');
         }
+
+        static turboRess() {
+            var serialGhost = Orion.FindType('1', '-1', 'ground', "human|fast|dead",1)
+            if (!serialGhost.length) {
+                Scripts.Utils.playerPrint('Nevidis zadneho ducha k oziveni');
+            }
+            else {
+                Orion.WaitTargetObject(serialGhost[0]);
+                Orion.UseType(gameObject.uncategorized.bandy.graphic);
+            }
+        }
     }
 }

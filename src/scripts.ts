@@ -712,6 +712,14 @@ function travelBook(selection = PortBookOptionsEnum.kop) {
 }
 
 /**
+ * Ozivi ducha v okruhu 1 policka
+ * @example external code `turboRess()`
+ */
+function turboRess() {
+    Scripts.Common.turboRess();
+}
+
+/**
  * Lockpickuje zamcenou bednu, dokud ji neotevre (nebo nedojdou locky)
  * @example in client `_unlock`
  * @example external code `unlock();`
