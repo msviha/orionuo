@@ -72,6 +72,7 @@ enum FlagsEnum {
     injured = 'injured',
     next = 'next',
     ignorefriends = 'ignorefriends',
+    ignorefriendlytypes = 'ignorefriendlytypes',
     ignoreenemies = 'ignoreenemies',
     ignoreself = 'ignoreself',
     inlos = 'inlos',

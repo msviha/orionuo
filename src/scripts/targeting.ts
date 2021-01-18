@@ -85,7 +85,19 @@ namespace Scripts {
             else {
                 const flags = ['near', 'mobile', 'live', 'ignoreself'].concat(additionalFlags).join('|');
                 const noto = notoriety.join('|') || undefined;
-                const nearestNewTarget = Orion.FindType("any", "any", "ground", flags, 15, noto);
+                let nearestNewTarget = Orion.FindType("any", "any", "ground", flags, 15, noto);
+                let resolved = false;
+                while (!resolved && nearestNewTarget?.length && flags.indexOf('ignorefriendlytypes') !== -1) {
+                    const t = Orion.FindObject(nearestNewTarget[0]);
+                    const isFriendly = Scripts.Targeting.isFriendlyTargetType(t.Graphic(), t.Color(), t.Name());
+                    if (!isFriendly) {
+                        resolved = true;
+                    }
+                    else {
+                        Orion.Ignore(t.Serial());
+                        nearestNewTarget = Orion.FindType("any", "any", "ground", flags, 15, noto);
+                    }
+                }
                 const isSomeNewTargetAround = !!nearestNewTarget?.length;
                 if (isSomeNewTargetAround) {
                     // push new target to store
@@ -152,6 +164,27 @@ namespace Scripts {
             Orion.ClearHighlightCharacters();
             Orion.AddObject('lastattack', enemySerial);
             Orion.AddHighlightCharacter(enemySerial, Scripts.Wip.getColorByNotoriety(enemy.Notoriety()));
+        }
+
+        static isFriendlyTargetType(graphic:string, color:string, name:string):boolean {
+            const friendly = [
+                {graphic: '0x000E', color: '0x0000', exceptionNames: ['Earth Elemental']},
+                {graphic: '0x000D', color: '0x0000'}, // death vortex
+                {graphic: '0x0039', color: '0x0835'}, // skeleton warrior
+                {graphic: '0x0003', color: '0x0835'}, // mummy
+                {graphic: '0x00D4', color: '0x0712', exceptionNames: ['Grizzly Bear']},
+                {graphic: '0x00E8', color: '0x01BB'}, // Bull
+                {graphic: '0x00D8', color: '0x0000'}, // Cow
+                {graphic: '0x0015', color: '0x0757'}, // Giant Viper
+                {graphic: '0x00CC', color: '0x0000'} // Horse
+            ];
+
+            for (const f of friendly) {
+                if (f.graphic === graphic && f.color === color && (!f.exceptionNames || f.exceptionNames.indexOf(name) === -1)) {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
