@@ -101,6 +101,11 @@ namespace Scripts {
                 s.hp = hp;
                 s.max = max;
                 s.poisoned = poisoned;
+                if (!updateText) {
+                    gump.Clear();
+                    Scripts.Statusbar.drawBody(gump, o.Notoriety());
+                    Scripts.Statusbar.drawName(gump, name);
+                }
                 Scripts.Statusbar.drawHP(gump, hp, max, poisoned);
             }
 
