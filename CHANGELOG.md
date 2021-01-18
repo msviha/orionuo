@@ -1,5 +1,36 @@
 # CHANGELOG
 
+## 0.1.6
+
+Byla pridana moznost configurace nekterych scriptu globalnim configem. Jako napriklad moznost zvolit si jak rychlej chcete update hlavniho loopu (zajistuje napriklad update dmg a statusBaru), nebo moznost konfigurace zobrazeni timeru pro piti/hiding jak stylu tak pozic. 
+
+**Priklad pouziti bude na discordu v `prvni-kroky`**
+
+### features
+- `necroMystic` pouziti mystiku pro Necromancera
+- `mm` massmove ktery ignoruje barvu
+- `mmc` massmove ktery neignoruje barvu
+- `turboRess` ressuje bandou
+
+### enhancements
+- `statusBar` pokus o update celeho gumpu kdyz se meni HP (uvidime, jak to bude fungovat)
+- `gameObject.crafting` pridan vlasec, ironString, magicKey do vyroby,
+- `alchemy` lesserPoison (`lp`) a deadlyPoison (`dp`)
+- `gmMortar` deadlyPoison (`dp`)
+- `useKlamak` pridan parametr ignoreSerials, pro kocky aby si mohli ignorovat ty NB kockoveci v baglu
+- `targetNext` je mozne pridat flag `FlagsEnum.ignorefriendlytypes` kterym budete ignorovat bezne modely zpratelenych summonu (je potreba dodelat vice je tam jen zaklad - posilejte info co pridat)
+- `ScrollEnum.heal` pridan `heal` do svitku pro pouziti v `castScroll`
+
+### fixes
+- `alchemy` world save stability
+- `statusBar` update plus znamenka kdyz ma vic/min HP jak max
+- `statusBar` po uzavreni se neotevre sam znovu
+- `healPets` po shrinknuti peta neskonci errorem
+- `drinkPotion` vylepsena stabilita a oprava u zobrazeni timeru pokud se pouzije drive nez je mozne pit
+- `carveBody` oprava rezani s mystikem ktery mate v ruce
+- `bandageSelf` uprava v mazani journalu (narusovalo chod jinych scriptu)
+
+
 ## 0.1.5
 ### features
 - `healPets` leci vlastni pety v dosahu - funguje jako prepinac, pri opakovanem spusteni ukonci leceni

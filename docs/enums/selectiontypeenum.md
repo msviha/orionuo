@@ -17,7 +17,7 @@
 
 •  **gump**:  = "gump"
 
-*Defined in [enums.ts:129](https://github.com/msviha/orionuo/blob/bbe2852/src/enums.ts#L129)*
+*Defined in [enums.ts:133](https://github.com/msviha/orionuo/blob/b5379e7/src/enums.ts#L133)*
 
 ___
 
@@ -25,4 +25,4 @@ ___
 
 •  **menu**:  = "menu"
 
-*Defined in [enums.ts:130](https://github.com/msviha/orionuo/blob/bbe2852/src/enums.ts#L130)*
+*Defined in [enums.ts:134](https://github.com/msviha/orionuo/blob/b5379e7/src/enums.ts#L134)*
