@@ -41,7 +41,8 @@ enum ScrollEnum {
     wos = 'wos',
     ivm = 'ivm',
     ress = 'ress',
-    recall = 'recall'
+    recall = 'recall',
+    heal = 'heal'
 }
 
 enum TargetIndicationEnum {
