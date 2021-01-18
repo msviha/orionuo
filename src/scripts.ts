@@ -16,7 +16,6 @@ function Autostart() {
     let previousLastAttackSerial:string;
     let previousLastAttackHp:number;
     let previousPlayerHp:number;
-    let updateRate = 500;
 
     Scripts.Dress.saveEquip();
     Orion.Exec('userAutostart');
@@ -57,7 +56,7 @@ function Autostart() {
         }
 
         Scripts.Statusbar.updateStatusbars();
-        Orion.Wait(updateRate);
+        Orion.Wait(config?.updateRate || 500);
     }
 }
 

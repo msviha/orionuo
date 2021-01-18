@@ -67,12 +67,36 @@ namespace Scripts {
             const m = Scripts.Utils.waitWhileSomethingInJournal(messages, 1000, 1000);
 
             if (m === 0) {
-                displayTimers && Orion.AddDisplayTimer(TimersEnum.drink, drinkTimer, 'LeftTop', 'Line|Bar', 'Drink', 0, 0, '0x88B', 0, '0x88B');
+                const potionTimer = config?.drinkPotion.timer;
+                displayTimers && Orion.AddDisplayTimer(
+                    TimersEnum.drink,
+                    drinkTimer,
+                    potionTimer?.position || 'LeftTop',
+                    potionTimer?.type || 'Line|Bar',
+                    potionTimer?.text || 'Drink',
+                    potionTimer?.xFromPosition || 0,
+                    potionTimer?.yFromPosition || 0,
+                    potionTimer?.textColor || '0x88B',
+                    potionTimer?.font || 0,
+                    potionTimer?.backgroundColor || '0x88B'
+                );
                 Scripts.Utils.resetTimer(TimersEnum.drink);
                 const potionsCount = Orion.Count(p.graphic, p.color);
                 Scripts.Utils.playerPrint(`[ ${potionName} ${potionsCount} ]`, potionsCount === 0 ? ColorEnum.red : ColorEnum.green);
                 if (potionName === PotionsEnum.gs) {
-                    displayTimers && Orion.AddDisplayTimer(TimersEnum.gs, gsTimer, 'LeftTop', 'Line|Bar', 'GS', 0, 55, '0x88B', 0, '0x88B');
+                    const gsPotionTimer = config?.drinkPotion.gsTimer;
+                    displayTimers && Orion.AddDisplayTimer(
+                        TimersEnum.gs,
+                        gsTimer,
+                        gsPotionTimer?.position || 'LeftTop',
+                        gsPotionTimer?.type || 'Line|Bar',
+                        gsPotionTimer?.text || 'GS',
+                        gsPotionTimer?.xFromPosition || 0,
+                        gsPotionTimer?.yFromPosition || 55,
+                        gsPotionTimer?.textColor || '0x88B',
+                        gsPotionTimer?.font || 0,
+                        gsPotionTimer?.backgroundColor || '0x88B'
+                    );
                     Scripts.Utils.resetTimer(TimersEnum.gs);
                 }
                 displayInfo && Orion.Exec('displayDrinkInfo', false, [potionName.toString()]);

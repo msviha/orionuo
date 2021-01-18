@@ -38,7 +38,19 @@ function _hiding() {
 }
 
 function _hidingPreoccupiedCheck() {
-    Orion.AddDisplayTimer(TimersEnum.hiding, 2000, 'AboveChar', 'bar', "Hiding", 0, 100, '0x100', 0, 'red');
+    const hidTimer = config?.hiding?.timer;
+    Orion.AddDisplayTimer(
+        TimersEnum.hiding,
+        2000,
+        hidTimer?.position || 'AboveChar',
+        hidTimer?.type || 'bar',
+        hidTimer?.text || "Hiding",
+        hidTimer?.xFromPosition || 0,
+        hidTimer?.yFromPosition || 100,
+        hidTimer?.textColor || '0x100',
+        hidTimer?.font || 0,
+        hidTimer?.backgroundColor || 'red'
+    );
     Scripts.Utils.waitWhileSomethingInJournal(['You have hidden yourself well', 't seem to hide here', 'preoccupied'], 3000);
     Orion.RemoveDisplayTimer(TimersEnum.hiding);
     if (Orion.InJournal('You have hidden yourself well')) {
