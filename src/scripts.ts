@@ -1,7 +1,7 @@
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 0.1.6');
+    Orion.Print(-1, 'version 0.1.7');
     Orion.Print(-1, '-------------+');
 }
 
@@ -516,6 +516,15 @@ function nextWeapon(showName = false) {
  */
 function ocaruj(dusty:OcarovaniEnum = OcarovaniEnum.mytheril) {
     Scripts.MagicMiner.ocaruj(dusty);
+}
+
+/**
+ * Otevira containery (hlavne pomaha s bezpecnyma truhlama a pretahavanim klicku)
+ * exaxmple in client `_openContainer`
+ * example external code `openContainer()`
+ */
+function openContainer() {
+    Scripts.Common.openContainer();
 }
 
 /**

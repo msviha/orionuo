@@ -317,6 +317,54 @@ namespace Scripts {
             return Orion.WaitForContainerGump(500) && !!Orion.InJournal('stones in your bank box');
         }
 
+        static openContainer() {
+            Scripts.Utils.createGameObjectSelections([
+                {ask: 'Target container to open', addObject: 'openContainer'}
+            ]);
+            const container = Orion.FindObject('openContainer');
+            if (!container) {
+                return;
+            }
+            const bezpecnaColor = '0x0B1C';
+            if (container.Color() === bezpecnaColor) {
+                const x = container.X();
+                const y = container.Y();
+                const z = container.Z();
+                const klicAlias = `bezpecnyKlic_${Player.Name()}_(${x},${y},${z})`;
+                const klicObj = Orion.FindObject(klicAlias);
+
+                if (klicObj) {
+                    Orion.MoveItem(klicAlias);
+                }
+                else {
+                    Orion.ClearJournal();
+                    Orion.Wait(1000);
+                    const klice = Orion.FindType('0x1012', '0x0003');
+                    for (const serial of klice) {
+                        Orion.ClearJournal('Bezpecny klic')
+                        Orion.Wait(50);
+                        Orion.Click(serial);
+                        Scripts.Utils.waitWhileSomethingInJournal(['Bezpecny klic'], 5000);
+                        if (!Orion.InJournal('Bezpecny klic')) {
+                            Scripts.Utils.log('neco se rozbilo', ColorEnum.red);
+                            throw 'e'
+                        }
+                        const msg = Orion.InJournal('Bezpecny klic');
+                        const c = msg.Text().match(/\d+/g);
+                        const alias = `bezpecnyKlic_${Player.Name()}_(${c[0]},${c[1]},${c[2]})`
+                        Orion.AddObject(alias, serial);
+                        if (alias === klicAlias) {
+                            Orion.MoveItem(alias);
+                            break;
+                        }
+                    }
+                }
+                Orion.Wait(responseDelay);
+            }
+
+            Orion.OpenContainer('openContainer');
+        }
+
         static turboRess() {
             var serialGhost = Orion.FindType('1', '-1', 'ground', "human|fast|dead",1)
             if (!serialGhost.length) {

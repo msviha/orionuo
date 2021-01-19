@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.1.7 (zapomenuta featurka)
+
+### features
+- `openContainer` otevira bedny/pytliky (hlavne pomaha pokud mas vic klicu od bezpecnych truhel)
+
+
 ## 0.1.6
 
 Byla pridana moznost configurace nekterych scriptu globalnim configem. Jako napriklad moznost zvolit si jak rychlej chcete update hlavniho loopu (zajistuje napriklad update dmg a statusBaru), nebo moznost konfigurace zobrazeni timeru pro piti/hiding jak stylu tak pozic. 

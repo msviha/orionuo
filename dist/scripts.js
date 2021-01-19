@@ -2139,7 +2139,7 @@ var __assign = (this && this.__assign) || function () {
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 0.1.6');
+    Orion.Print(-1, 'version 0.1.7');
     Orion.Print(-1, '-------------+');
 }
 function Autostart() {
@@ -2345,6 +2345,9 @@ function nextWeapon(showName) {
 function ocaruj(dusty) {
     if (dusty === void 0) { dusty = OcarovaniEnum.mytheril; }
     Scripts.MagicMiner.ocaruj(dusty);
+}
+function openContainer() {
+    Scripts.Common.openContainer();
 }
 function poisonTrain(keepRunning) {
     if (keepRunning === void 0) { keepRunning = false; }
@@ -2863,6 +2866,52 @@ var Scripts;
             Orion.Wait(350);
             Orion.Say('Bank');
             return Orion.WaitForContainerGump(500) && !!Orion.InJournal('stones in your bank box');
+        };
+        Common.openContainer = function () {
+            Scripts.Utils.createGameObjectSelections([
+                { ask: 'Target container to open', addObject: 'openContainer' }
+            ]);
+            var container = Orion.FindObject('openContainer');
+            if (!container) {
+                return;
+            }
+            var bezpecnaColor = '0x0B1C';
+            if (container.Color() === bezpecnaColor) {
+                var x = container.X();
+                var y = container.Y();
+                var z = container.Z();
+                var klicAlias = "bezpecnyKlic_" + Player.Name() + "_(" + x + "," + y + "," + z + ")";
+                var klicObj = Orion.FindObject(klicAlias);
+                if (klicObj) {
+                    Orion.MoveItem(klicAlias);
+                }
+                else {
+                    Orion.ClearJournal();
+                    Orion.Wait(1000);
+                    var klice = Orion.FindType('0x1012', '0x0003');
+                    for (var _i = 0, klice_1 = klice; _i < klice_1.length; _i++) {
+                        var serial = klice_1[_i];
+                        Orion.ClearJournal('Bezpecny klic');
+                        Orion.Wait(50);
+                        Orion.Click(serial);
+                        Scripts.Utils.waitWhileSomethingInJournal(['Bezpecny klic'], 5000);
+                        if (!Orion.InJournal('Bezpecny klic')) {
+                            Scripts.Utils.log('neco se rozbilo', ColorEnum.red);
+                            throw 'e';
+                        }
+                        var msg = Orion.InJournal('Bezpecny klic');
+                        var c = msg.Text().match(/\d+/g);
+                        var alias = "bezpecnyKlic_" + Player.Name() + "_(" + c[0] + "," + c[1] + "," + c[2] + ")";
+                        Orion.AddObject(alias, serial);
+                        if (alias === klicAlias) {
+                            Orion.MoveItem(alias);
+                            break;
+                        }
+                    }
+                }
+                Orion.Wait(responseDelay);
+            }
+            Orion.OpenContainer('openContainer');
         };
         Common.turboRess = function () {
             var serialGhost = Orion.FindType('1', '-1', 'ground', "human|fast|dead", 1);

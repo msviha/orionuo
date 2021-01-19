@@ -21,7 +21,7 @@
 
 •  **name**: string
 
-*Defined in [interfaces.ts:15](https://github.com/msviha/orionuo/blob/b5379e7/src/interfaces.ts#L15)*
+*Defined in [interfaces.ts:15](https://github.com/msviha/orionuo/blob/7fb91e0/src/interfaces.ts#L15)*
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 •  **serial**: string
 
-*Defined in [interfaces.ts:14](https://github.com/msviha/orionuo/blob/b5379e7/src/interfaces.ts#L14)*
+*Defined in [interfaces.ts:14](https://github.com/msviha/orionuo/blob/7fb91e0/src/interfaces.ts#L14)*
