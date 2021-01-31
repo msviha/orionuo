@@ -368,7 +368,7 @@ namespace Scripts {
         static turboRess(bandageAfterRess = false) {
             const closestGhosts = Orion.FindType(-1, -1, 'ground', 'human|dead|fast', 1);
             if (closestGhosts?.length < 1) {
-                Scripts.Utils.playerPrint('Nevidis zadneho ducha k oziveni');
+                return Scripts.Utils.playerPrint('Nevidis zadneho ducha k oziveni');
             }
             
             Orion.WaitTargetObject(closestGhosts[0]);
@@ -383,7 +383,7 @@ namespace Scripts {
         static turboRessFull() {
             const closestGhosts = Orion.FindType(-1, -1, 'ground', 'human|dead|fast', 1);
             if (closestGhosts?.length < 1) {
-                Scripts.Utils.playerPrint('Nevidis zadneho ducha k oziveni');
+                return Scripts.Utils.playerPrint('Nevidis zadneho ducha k oziveni');
             }
             
             if (Orion.Count(gameObject.uncategorized.krvavaBanda1.graphic) >= 30) {
