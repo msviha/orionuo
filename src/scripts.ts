@@ -721,10 +721,19 @@ function travelBook(selection = PortBookOptionsEnum.kop) {
 
 /**
  * Ozivi ducha v okruhu 1 policka
+ * @param bandageAfterRess {boolean} ci ma hned po resse hodit bandu na target
  * @example external code `turboRess()`
  */
-function turboRess() {
-    Scripts.Common.turboRess();
+function turboRess(bandageAfterRess = false) {
+    Scripts.Common.turboRess(bandageAfterRess);
+}
+
+/**
+ * Ozivi ducha v okruhu 1 policka do plnych hp (krvavou bandou - Medic)
+ * @example external code `turboRessFull()`
+ */
+function turboRessFull() {
+    Scripts.Common.turboRessFull();
 }
 
 /**
