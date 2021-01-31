@@ -269,6 +269,18 @@ namespace Scripts {
             }
         }
 
+        static poisonLastAttack() {
+            const kitSerial = Scripts.Utils.findFirstType(gameObject.uncategorized.apprenticesPoisoningKit);
+            if (kitSerial) {
+                Orion.WarMode(false);
+                Orion.Wait(100);
+                Orion.WarMode(true);
+                Orion.WaitTargetObject(Orion.ClientLastAttack());
+                Orion.UseObject(kitSerial);
+                Orion.Wait(100);
+            }
+        }
+
         static poisonTrain(serialToPoison?:string) {
             if (!serialToPoison) {
                 const mobiles = Orion.FindType('any', 'any', 'ground', 'fast|live|mobile|ignoreself', 1, `${NotorietyEnum.red}|${NotorietyEnum.gray}`);

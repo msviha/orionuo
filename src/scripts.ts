@@ -538,6 +538,14 @@ function poisonTrain(keepRunning = false) {
 }
 
 /**
+ * Poisne trenink kitem `lastattack` target;
+ * @example external code `poisonLastAttack()`
+ */
+function poisonLastAttack() {
+    Scripts.Common.poisonLastAttack();
+}
+
+/**
  * Prepne na predchozi zbran
  * (zbrane si nasetujte pomoci resetWeapons)
  * @param showName - zobrazuje nad hracem nazev zbrane po prepnuti
