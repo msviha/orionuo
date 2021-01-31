@@ -576,6 +576,33 @@ function resetStats() {
 }
 
 /**
+ * Medic - Pouziti KPZ - pritahne cil k sobe
+ * @example in client `_kpzpull`
+ * @example external code `KPZPull()`
+ */
+function KPZPull() {
+    Scripts.Medic.KPZPull();
+}
+
+/**
+ * Medic - Pouziti KPZ - pritahne sebe na cil
+ * @example in client `_kpzjump`
+ * @example external code `KPZJump()`
+ */
+function KPZJump() {
+    Scripts.Medic.KPZJump();
+}
+
+/**
+ * Medic - Pouziti KPZ - prohozeni hp s cilem
+ * @example in client `_kphpswitch`
+ * @example external code `KPZHpSwitch()`
+ */
+function KPZHpSwitch() {
+    Scripts.Medic.KPZHpSwitch();
+}
+
+/**
  * Resetuje zbrane a stit ( nasledne vyuziti u funkci nextWeapon a previousWeapon )
  * @example in client `_resetWeapons`
  * @example external code `resetWeapons()`

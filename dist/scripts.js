@@ -2366,6 +2366,15 @@ function resetFriends() {
 function resetStats() {
     Scripts.Dress.resetStats();
 }
+function KPZPull() {
+    Scripts.Medic.KPZPull();
+}
+function KPZJump() {
+    Scripts.Medic.KPZJump();
+}
+function KPZHpSwitch() {
+    Scripts.Medic.KPZHpSwitch();
+}
 function resetWeapons() {
     Scripts.Dress.resetWeaponsArray();
 }
@@ -5751,4 +5760,55 @@ var Scripts;
         return Wip;
     }());
     Scripts.Wip = Wip;
+})(Scripts || (Scripts = {}));
+var Scripts;
+(function (Scripts) {
+    var KPZ = {
+        graphic: "0x09B0",
+        color: "0x0493"
+    };
+    var Actions;
+    (function (Actions) {
+        Actions["pull"] = "KPZ - Pull";
+        Actions["jump"] = "KPZ - Jump";
+        Actions["switchHp"] = "KPZ - Switch HP";
+    })(Actions || (Actions = {}));
+    var Medic = (function () {
+        function Medic() {
+        }
+        Medic.KPZPull = function () {
+            Medic.useKPZ(function () {
+                Scripts.Utils.playerPrint(Actions.pull, ColorEnum.green);
+                Orion.Cast("Greater Heal");
+            });
+        };
+        Medic.KPZJump = function () {
+            Medic.useKPZ(function () {
+                Scripts.Utils.playerPrint(Actions.jump, ColorEnum.green);
+                Orion.Cast("Protection");
+            });
+        };
+        Medic.KPZHpSwitch = function () {
+            Medic.useKPZ(function () {
+                Scripts.Utils.playerPrint(Actions.switchHp, ColorEnum.green);
+                Orion.Cast("Reactive Armor");
+            });
+        };
+        Medic.useKPZ = function (cb) {
+            var kpzList = Orion.FindType(KPZ.graphic, KPZ.color, "backpack");
+            var kpz = kpzList.length > 0 ? kpzList[0] : null;
+            Orion.ClearJournal();
+            if (!kpz) {
+                Scripts.Utils.playerPrint('Nemas KPZ');
+                return false;
+            }
+            Orion.UseObject(kpz);
+            Scripts.Utils.waitWhileSomethingInJournal(['activated KPZ', 't use that yet', 'pouze v dungeon zone'], 3000);
+            if (Orion.InJournal('activated KPZ')) {
+                cb();
+            }
+        };
+        return Medic;
+    }());
+    Scripts.Medic = Medic;
 })(Scripts || (Scripts = {}));
