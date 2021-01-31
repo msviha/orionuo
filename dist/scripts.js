@@ -2416,8 +2416,12 @@ function travelBook(selection) {
     if (selection === void 0) { selection = PortBookOptionsEnum.kop; }
     Scripts.Port.travelBook(selection);
 }
-function turboRess() {
-    Scripts.Common.turboRess();
+function turboRess(bandageAfterRess) {
+    if (bandageAfterRess === void 0) { bandageAfterRess = false; }
+    Scripts.Common.turboRess(bandageAfterRess);
+}
+function turboRessFull() {
+    Scripts.Common.turboRessFull();
 }
 function unlock() {
     Scripts.Lockpicking.unlock();
@@ -2913,14 +2917,41 @@ var Scripts;
             }
             Orion.OpenContainer('openContainer');
         };
-        Common.turboRess = function () {
-            var serialGhost = Orion.FindType('1', '-1', 'ground', "human|fast|dead", 1);
-            if (!serialGhost.length) {
-                Scripts.Utils.playerPrint('Nevidis zadneho ducha k oziveni');
+        Common.turboRess = function (bandageAfterRess) {
+            if (bandageAfterRess === void 0) { bandageAfterRess = false; }
+            var closestGhosts = Orion.FindType(-1, -1, 'ground', 'human|dead|fast', 1);
+            if ((closestGhosts === null || closestGhosts === void 0 ? void 0 : closestGhosts.length) < 1) {
+                return Scripts.Utils.playerPrint('Nevidis zadneho ducha k oziveni');
+            }
+            Orion.WaitTargetObject(closestGhosts[0]);
+            Orion.UseType(gameObject.uncategorized.bandy.graphic);
+            Orion.Wait(100);
+            if (bandageAfterRess) {
+                Orion.WaitTargetObject(closestGhosts[0]);
+                Orion.UseType(gameObject.uncategorized.bandy.graphic);
+            }
+        };
+        Common.turboRessFull = function () {
+            var closestGhosts = Orion.FindType(-1, -1, 'ground', 'human|dead|fast', 1);
+            if ((closestGhosts === null || closestGhosts === void 0 ? void 0 : closestGhosts.length) < 1) {
+                return Scripts.Utils.playerPrint('Nevidis zadneho ducha k oziveni');
+            }
+            if (Orion.Count(gameObject.uncategorized.krvavaBanda1.graphic) >= 30) {
+                Orion.WaitTargetObject(closestGhosts[0]);
+                Orion.UseType(gameObject.uncategorized.krvavaBanda1.graphic);
+                Orion.Wait(100);
+                Orion.WaitTargetObject(closestGhosts[0]);
+                Orion.UseType(gameObject.uncategorized.bandy.graphic);
+            }
+            else if (Orion.Count(gameObject.uncategorized.krvavaBanda2.graphic) >= 30) {
+                Orion.WaitTargetObject(closestGhosts[0]);
+                Orion.UseType(gameObject.uncategorized.krvavaBanda2.graphic);
+                Orion.Wait(100);
+                Orion.WaitTargetObject(closestGhosts[0]);
+                Orion.UseType(gameObject.uncategorized.bandy.graphic);
             }
             else {
-                Orion.WaitTargetObject(serialGhost[0]);
-                Orion.UseType(gameObject.uncategorized.bandy.graphic);
+                Scripts.Common.turboRess(true);
             }
         };
         return Common;
