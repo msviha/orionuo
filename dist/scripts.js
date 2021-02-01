@@ -2830,12 +2830,10 @@ var Scripts;
         Common.poisonLastAttack = function () {
             var kitSerial = Scripts.Utils.findFirstType(gameObject.uncategorized.apprenticesPoisoningKit);
             if (kitSerial) {
-                Orion.WarMode(false);
-                Orion.Wait(100);
                 Orion.WarMode(true);
+                Orion.Wait(50);
                 Orion.WaitTargetObject(Orion.ClientLastAttack());
                 Orion.UseObject(kitSerial);
-                Orion.Wait(100);
             }
         };
         Common.poisonTrain = function (serialToPoison) {
