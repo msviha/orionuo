@@ -375,14 +375,46 @@ namespace Scripts {
             Orion.OpenContainer('openContainer');
         }
 
-        static turboRess() {
-            var serialGhost = Orion.FindType('1', '-1', 'ground', "human|fast|dead",1)
-            if (!serialGhost.length) {
-                Scripts.Utils.playerPrint('Nevidis zadneho ducha k oziveni');
+        static turboRess(bandageAfterRess = false) {
+            const closestGhosts = Orion.FindType(-1, -1, 'ground', 'human|dead|fast', 1);
+            if (closestGhosts?.length < 1) {
+                return Scripts.Utils.playerPrint('Nevidis zadneho ducha k oziveni');
             }
-            else {
-                Orion.WaitTargetObject(serialGhost[0]);
+            
+            Orion.WaitTargetObject(closestGhosts[0]);
+            Orion.UseType(gameObject.uncategorized.bandy.graphic);
+            Orion.Wait(100);
+            if (bandageAfterRess) {
+                Orion.WaitTargetObject(closestGhosts[0]);
                 Orion.UseType(gameObject.uncategorized.bandy.graphic);
+            }
+        }
+
+        static turboRessFull() {
+            const getBloodyBandageGraphic = () => {
+                if (Orion.Count(gameObject.uncategorized.krvavaBanda1.graphic) >= 30) {
+                    return gameObject.uncategorized.krvavaBanda1.graphic;
+                } else if (Orion.Count(gameObject.uncategorized.krvavaBanda2.graphic) >= 30) {
+                    return gameObject.uncategorized.krvavaBanda2.graphic;
+                }
+
+                return null
+            }
+
+            const closestGhosts = Orion.FindType(-1, -1, 'ground', 'human|dead|fast', 1);
+            if (closestGhosts?.length < 1) {
+                return Scripts.Utils.playerPrint('Nevidis zadneho ducha k oziveni');
+            }
+            
+            const bloodyBandageGraphic = getBloodyBandageGraphic();
+            if (bloodyBandageGraphic) {
+                Orion.WaitTargetObject(closestGhosts[0]);
+                Orion.UseType(bloodyBandageGraphic);
+                Orion.Wait(100);
+                Orion.WaitTargetObject(closestGhosts[0]);
+                Orion.UseType(gameObject.uncategorized.bandy.graphic);
+            } else {
+                Scripts.Common.turboRess(true)
             }
         }
     }
