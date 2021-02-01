@@ -171,6 +171,12 @@ var SelectionTypeEnum;
     SelectionTypeEnum["gump"] = "gump";
     SelectionTypeEnum["menu"] = "menu";
 })(SelectionTypeEnum || (SelectionTypeEnum = {}));
+var MedicActionsEnum;
+(function (MedicActionsEnum) {
+    MedicActionsEnum["pull"] = "KPZ - Pull";
+    MedicActionsEnum["jump"] = "KPZ - Jump";
+    MedicActionsEnum["switchHp"] = "KPZ - Switch HP";
+})(MedicActionsEnum || (MedicActionsEnum = {}));
 var responseDelay = 350;
 var gameObject = {
     uncategorized: {
@@ -2017,6 +2023,12 @@ var gameObject = {
         halberd: {
             graphic: '0x143E',
             color: '0x08A1'
+        }
+    },
+    medic: {
+        kpz: {
+            graphic: "0x09B0",
+            color: "0x0493"
         }
     }
 };
@@ -5763,39 +5775,29 @@ var Scripts;
 })(Scripts || (Scripts = {}));
 var Scripts;
 (function (Scripts) {
-    var KPZ = {
-        graphic: "0x09B0",
-        color: "0x0493"
-    };
-    var Actions;
-    (function (Actions) {
-        Actions["pull"] = "KPZ - Pull";
-        Actions["jump"] = "KPZ - Jump";
-        Actions["switchHp"] = "KPZ - Switch HP";
-    })(Actions || (Actions = {}));
     var Medic = (function () {
         function Medic() {
         }
         Medic.KPZPull = function () {
             Medic.useKPZ(function () {
-                Scripts.Utils.playerPrint(Actions.pull, ColorEnum.green);
+                Scripts.Utils.playerPrint(MedicActionsEnum.pull, ColorEnum.green);
                 Orion.Cast("Greater Heal");
             });
         };
         Medic.KPZJump = function () {
             Medic.useKPZ(function () {
-                Scripts.Utils.playerPrint(Actions.jump, ColorEnum.green);
+                Scripts.Utils.playerPrint(MedicActionsEnum.jump, ColorEnum.green);
                 Orion.Cast("Protection");
             });
         };
         Medic.KPZHpSwitch = function () {
             Medic.useKPZ(function () {
-                Scripts.Utils.playerPrint(Actions.switchHp, ColorEnum.green);
+                Scripts.Utils.playerPrint(MedicActionsEnum.switchHp, ColorEnum.green);
                 Orion.Cast("Reactive Armor");
             });
         };
         Medic.useKPZ = function (cb) {
-            var kpzList = Orion.FindType(KPZ.graphic, KPZ.color, "backpack");
+            var kpzList = Orion.FindType(gameObject.medic.kpz.graphic, gameObject.medic.kpz.color, "backpack");
             var kpz = kpzList.length > 0 ? kpzList[0] : null;
             Orion.ClearJournal();
             if (!kpz) {
