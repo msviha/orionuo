@@ -2932,20 +2932,23 @@ var Scripts;
             }
         };
         Common.turboRessFull = function () {
+            var getBloodyBandageGraphic = function () {
+                if (Orion.Count(gameObject.uncategorized.krvavaBanda1.graphic) >= 30) {
+                    return gameObject.uncategorized.krvavaBanda1.graphic;
+                }
+                else if (Orion.Count(gameObject.uncategorized.krvavaBanda2.graphic) >= 30) {
+                    return gameObject.uncategorized.krvavaBanda2.graphic;
+                }
+                return null;
+            };
             var closestGhosts = Orion.FindType(-1, -1, 'ground', 'human|dead|fast', 1);
             if ((closestGhosts === null || closestGhosts === void 0 ? void 0 : closestGhosts.length) < 1) {
                 return Scripts.Utils.playerPrint('Nevidis zadneho ducha k oziveni');
             }
-            if (Orion.Count(gameObject.uncategorized.krvavaBanda1.graphic) >= 30) {
+            var bloodyBandageGraphic = getBloodyBandageGraphic();
+            if (bloodyBandageGraphic) {
                 Orion.WaitTargetObject(closestGhosts[0]);
-                Orion.UseType(gameObject.uncategorized.krvavaBanda1.graphic);
-                Orion.Wait(100);
-                Orion.WaitTargetObject(closestGhosts[0]);
-                Orion.UseType(gameObject.uncategorized.bandy.graphic);
-            }
-            else if (Orion.Count(gameObject.uncategorized.krvavaBanda2.graphic) >= 30) {
-                Orion.WaitTargetObject(closestGhosts[0]);
-                Orion.UseType(gameObject.uncategorized.krvavaBanda2.graphic);
+                Orion.UseType(bloodyBandageGraphic);
                 Orion.Wait(100);
                 Orion.WaitTargetObject(closestGhosts[0]);
                 Orion.UseType(gameObject.uncategorized.bandy.graphic);
