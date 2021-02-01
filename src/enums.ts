@@ -133,3 +133,9 @@ enum SelectionTypeEnum {
     gump = 'gump',
     menu = 'menu'
 }
+
+enum MedicActionsEnum {
+    pull = "KPZ - Pull",
+    jump = "KPZ - Jump",
+    switchHp = "KPZ - Switch HP"
+}

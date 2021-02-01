@@ -171,6 +171,12 @@ var SelectionTypeEnum;
     SelectionTypeEnum["gump"] = "gump";
     SelectionTypeEnum["menu"] = "menu";
 })(SelectionTypeEnum || (SelectionTypeEnum = {}));
+var MedicActionsEnum;
+(function (MedicActionsEnum) {
+    MedicActionsEnum["pull"] = "KPZ - Pull";
+    MedicActionsEnum["jump"] = "KPZ - Jump";
+    MedicActionsEnum["switchHp"] = "KPZ - Switch HP";
+})(MedicActionsEnum || (MedicActionsEnum = {}));
 var responseDelay = 350;
 var gameObject = {
     uncategorized: {
@@ -2018,6 +2024,12 @@ var gameObject = {
             graphic: '0x143E',
             color: '0x08A1'
         }
+    },
+    medic: {
+        kpz: {
+            graphic: "0x09B0",
+            color: "0x0493"
+        }
     }
 };
 var trackingFilter = {
@@ -2368,6 +2380,15 @@ function resetFriends() {
 }
 function resetStats() {
     Scripts.Dress.resetStats();
+}
+function KPZPull() {
+    Scripts.Medic.KPZPull();
+}
+function KPZJump() {
+    Scripts.Medic.KPZJump();
+}
+function KPZHpSwitch() {
+    Scripts.Medic.KPZHpSwitch();
 }
 function resetWeapons() {
     Scripts.Dress.resetWeaponsArray();
@@ -5797,4 +5818,45 @@ var Scripts;
         return Wip;
     }());
     Scripts.Wip = Wip;
+})(Scripts || (Scripts = {}));
+var Scripts;
+(function (Scripts) {
+    var Medic = (function () {
+        function Medic() {
+        }
+        Medic.KPZPull = function () {
+            Medic.useKPZ(function () {
+                Scripts.Utils.playerPrint(MedicActionsEnum.pull, ColorEnum.green);
+                Orion.Cast("Greater Heal");
+            });
+        };
+        Medic.KPZJump = function () {
+            Medic.useKPZ(function () {
+                Scripts.Utils.playerPrint(MedicActionsEnum.jump, ColorEnum.green);
+                Orion.Cast("Protection");
+            });
+        };
+        Medic.KPZHpSwitch = function () {
+            Medic.useKPZ(function () {
+                Scripts.Utils.playerPrint(MedicActionsEnum.switchHp, ColorEnum.green);
+                Orion.Cast("Reactive Armor");
+            });
+        };
+        Medic.useKPZ = function (cb) {
+            var kpzList = Orion.FindType(gameObject.medic.kpz.graphic, gameObject.medic.kpz.color, "backpack");
+            var kpz = kpzList.length > 0 ? kpzList[0] : null;
+            Orion.ClearJournal();
+            if (!kpz) {
+                Scripts.Utils.playerPrint('Nemas KPZ');
+                return false;
+            }
+            Orion.UseObject(kpz);
+            Scripts.Utils.waitWhileSomethingInJournal(['activated KPZ', 't use that yet', 'pouze v dungeon zone'], 3000);
+            if (Orion.InJournal('activated KPZ')) {
+                cb();
+            }
+        };
+        return Medic;
+    }());
+    Scripts.Medic = Medic;
 })(Scripts || (Scripts = {}));
