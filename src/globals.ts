@@ -1849,6 +1849,12 @@ const gameObject:any = {
             graphic: '0x143E',
             color: '0x08A1'
         }
+    },
+    medic: {
+        kpz: {
+            graphic: "0x09B0",
+            color: "0x0493",
+        }
     }
 };
 

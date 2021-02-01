@@ -2,42 +2,31 @@
  * @internal
  */
 namespace Scripts {
-    const KPZ = {
-        graphic: "0x09B0",
-        color: "0x0493",
-    }
-
-    enum Actions {
-        pull = "KPZ - Pull",
-        jump = "KPZ - Jump",
-        switchHp = "KPZ - Switch HP",
-    }
-
     export class Medic {
 
         static KPZPull() {
             Medic.useKPZ(() => {
-                Scripts.Utils.playerPrint(Actions.pull, ColorEnum.green);
+                Scripts.Utils.playerPrint(MedicActionsEnum.pull, ColorEnum.green);
                 Orion.Cast("Greater Heal");
             });
         }
 
         static KPZJump() {
             Medic.useKPZ(() => {
-                Scripts.Utils.playerPrint(Actions.jump, ColorEnum.green);
+                Scripts.Utils.playerPrint(MedicActionsEnum.jump, ColorEnum.green);
                 Orion.Cast("Protection");
             });
         }
 
         static KPZHpSwitch() {
             Medic.useKPZ(() => {
-                Scripts.Utils.playerPrint(Actions.switchHp, ColorEnum.green);
+                Scripts.Utils.playerPrint(MedicActionsEnum.switchHp, ColorEnum.green);
                 Orion.Cast("Reactive Armor");
             });
         }
 
         static useKPZ(cb: Function): boolean {
-            const kpzList = Orion.FindType(KPZ.graphic, KPZ.color, "backpack");
+            const kpzList = Orion.FindType(gameObject.medic.kpz.graphic, gameObject.medic.kpz.color, "backpack");
             const kpz = kpzList.length > 0 ? kpzList[0] : null;
 
             Orion.ClearJournal();
