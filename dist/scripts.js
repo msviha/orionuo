@@ -2353,6 +2353,9 @@ function poisonTrain(keepRunning) {
     if (keepRunning === void 0) { keepRunning = false; }
     keepRunning ? Scripts.Common.poisonTrainAuto() : Scripts.Common.poisonTrain();
 }
+function poisonLastAttack() {
+    Scripts.Common.poisonLastAttack();
+}
 function previousWeapon(showName) {
     if (showName === void 0) { showName = false; }
     Scripts.Dress.nextWeapon(showName, true);
@@ -2822,6 +2825,15 @@ var Scripts;
                 var web = webs_1[_i];
                 Orion.UseObject(web);
                 Orion.Wait(100);
+            }
+        };
+        Common.poisonLastAttack = function () {
+            var kitSerial = Scripts.Utils.findFirstType(gameObject.uncategorized.apprenticesPoisoningKit);
+            if (kitSerial) {
+                Orion.WarMode(true);
+                Orion.Wait(50);
+                Orion.WaitTargetObject(Orion.ClientLastAttack());
+                Orion.UseObject(kitSerial);
             }
         };
         Common.poisonTrain = function (serialToPoison) {
