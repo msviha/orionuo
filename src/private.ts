@@ -1,6 +1,6 @@
-function displayDrinkInfo(potionName:PotionsEnum) {
-    let drinkTimer = 17500;
-    let gsTimer = 130000;
+function displayDrinkInfo(potionName: PotionsEnum) {
+    const drinkTimer = 17500;
+    const gsTimer = 130000;
     let time = 1000;
     Orion.Wait(time);
     while (Orion.Timer(TimersEnum.drink) >= 1000) {
@@ -44,22 +44,23 @@ function _hidingPreoccupiedCheck() {
         2000,
         hidTimer?.position || 'AboveChar',
         hidTimer?.type || 'bar',
-        hidTimer?.text || "Hiding",
+        hidTimer?.text || 'Hiding',
         hidTimer?.xFromPosition || 0,
         hidTimer?.yFromPosition || 100,
         hidTimer?.textColor || '0x100',
         hidTimer?.font || 0,
-        hidTimer?.backgroundColor || 'red'
+        hidTimer?.backgroundColor || 'red',
     );
-    Scripts.Utils.waitWhileSomethingInJournal(['You have hidden yourself well', 't seem to hide here', 'preoccupied'], 3000);
+    Scripts.Utils.waitWhileSomethingInJournal(
+        ['You have hidden yourself well', 't seem to hide here', 'preoccupied'],
+        3000,
+    );
     Orion.RemoveDisplayTimer(TimersEnum.hiding);
     if (Orion.InJournal('You have hidden yourself well')) {
         Orion.CharPrint(Player.Serial(), ColorEnum.green, '[ Hidden ]');
-    }
-    else if (Orion.InJournal('t seem to hide here')) {
+    } else if (Orion.InJournal('t seem to hide here')) {
         Orion.CharPrint(Player.Serial(), ColorEnum.red, '[ FAILED ]');
-    }
-    else if (Orion.InJournal('preoccupied')) {
+    } else if (Orion.InJournal('preoccupied')) {
         Orion.WarMode(true);
         Orion.Wait(100);
         Orion.Print(ColorEnum.none, 'preoccupied - trying to hide again');
@@ -67,18 +68,17 @@ function _hidingPreoccupiedCheck() {
     }
 }
 
-function scheduleClick(s:string) {
+function scheduleClick(s: string) {
     Orion.Wait(350);
     Orion.Click(s);
 }
 
-function customStatusBarCallBack(s:string) {
+function customStatusBarCallBack(s: string) {
     const code = CustomGumpResponse.ReturnCode();
-    const serial:string = <string>(<any>(s.toString))(16);
+    const serial: string = <string>(<any>s.toString)(16);
     if (code === CustomStatusBarEnum.close) {
         Shared.AddVar(s, false);
-    }
-    else if (code === CustomStatusBarEnum.click) {
+    } else if (code === CustomStatusBarEnum.click) {
         if (Orion.HaveTarget()) {
             Orion.TargetObject(serial);
             Orion.CancelTarget();
@@ -90,8 +90,7 @@ function customStatusBarCallBack(s:string) {
         if (Player.WarMode()) {
             if (Orion.Timer(s) === -1 || Orion.Timer(s) > 300) {
                 Scripts.Utils.resetTimer(s);
-            }
-            else {
+            } else {
                 Orion.Terminate('scheduleClick');
                 Orion.Attack(s);
             }

@@ -1,5 +1,4 @@
 namespace Scripts {
-
     /**
      * Scripty na vyrobu cehokoliv
      *
@@ -9,12 +8,11 @@ namespace Scripts {
      * example - Scripts.Crafting.Make(o.crafting.tinkering.wires.copper, 5)
      */
     export class Crafting {
-
         /**
          * Creates globals for setting the containers with resources and the finished items
          * @param itemName name of the item which will be crafted
          */
-        static setInputs(itemName:string) {
+        static setInputs(itemName: string) {
             Scripts.Utils.playerPrint(`Kde je container se surovinami ?`);
             Orion.WaitForAddObject('resourcesContainer', 60000);
             Orion.UseObject('resourcesContainer');
@@ -26,7 +24,7 @@ namespace Scripts {
          * Waits for the journal message with the crafting status
          * @returns {boolean} success/fail
          */
-        static makeProgress():boolean {
+        static makeProgress(): boolean {
             Orion.ClearJournal();
             Scripts.Utils.waitWhileSomethingInJournal(['You fail', 'You put', 'failed']);
             return !!Orion.InJournal('You put');
@@ -37,7 +35,7 @@ namespace Scripts {
          * @param count number of resources
          * @param resourcePath objectAsString which targets the resource from the global object 'o'
          */
-        static refOrMake(count:number, resourcePath:string) {
+        static refOrMake(count: number, resourcePath: string) {
             const res = Scripts.Utils.parseObject(resourcePath);
             const itemName = resourcePath.replace(/[^.]*\.[^.]*\./, '');
 
@@ -46,7 +44,14 @@ namespace Scripts {
                 Scripts.Crafting.make(missingCount, resourcePath, false);
                 Orion.Wait(responseDelay);
                 missingCount = Scripts.Utils.countObjectInContainer(res);
-                missingCount = Scripts.Utils.refill(res, 'resourcesContainer', missingCount, 'backpack', false, itemName);
+                missingCount = Scripts.Utils.refill(
+                    res,
+                    'resourcesContainer',
+                    missingCount,
+                    'backpack',
+                    false,
+                    itemName,
+                );
             }
 
             if (missingCount) {
@@ -61,7 +66,7 @@ namespace Scripts {
          * @param objectAsString object from the global 'o' which will be crafted
          * @param setInputs defines whether the function should ask for the containers (resources & finished)
          */
-        static make(count:number, objectAsString:string, setInputs = true) {
+        static make(count: number, objectAsString: string, setInputs = true) {
             Orion.ClearJournal();
             const itemObject = Scripts.Utils.parseObject(objectAsString);
             const itemName = objectAsString.replace(/[^.]*\.[^.]*\./, '');
@@ -95,28 +100,28 @@ namespace Scripts {
                 Orion.ClearJournal();
 
                 const tool = Scripts.Utils.parseObject(itemObject.make.tool);
-                const toolTarget = itemObject.make.toolTarget ? Scripts.Utils.parseObject(itemObject.make.toolTarget) : undefined;
+                const toolTarget = itemObject.make.toolTarget
+                    ? Scripts.Utils.parseObject(itemObject.make.toolTarget)
+                    : undefined;
 
                 Scripts.Utils.selectMenu(itemObject.make.menu.name, itemObject.make.menu.selections);
                 toolTarget && Orion.WaitTargetType(toolTarget.graphic, toolTarget.color);
                 Orion.UseType(tool.graphic, tool.color);
 
-
-
                 const success = Scripts.Crafting.makeProgress();
                 if (success) {
-                    const outputCount = itemObject.make.outputCount || 1
+                    const outputCount = itemObject.make.outputCount || 1;
                     count -= outputCount;
                     finishedCount++;
                     const item = Scripts.Utils.findFirstType(itemObject);
-                    setInputs && Orion.MoveItem(item, outputCount,  'outputContainer');
+                    setInputs && Orion.MoveItem(item, outputCount, 'outputContainer');
                     Orion.Wait(responseDelay);
                 }
                 Scripts.Utils.log(`vyrobeno ${itemName} - ${finishedCount} / ${++totalTries}`);
             }
         }
 
-        static countMaterialForOneItem(objectAsString:string, callStack = 0, count = 1, crafting = true) {
+        static countMaterialForOneItem(objectAsString: string, callStack = 0, count = 1, crafting = true) {
             const itemObject = Scripts.Utils.parseObject(objectAsString);
 
             if (!itemObject.make) {
@@ -159,7 +164,7 @@ namespace Scripts {
             Scripts.Utils.playerPrint(`${pathAsString}`, ColorEnum.red);
             Scripts.Utils.playerPrint('Kolik chces vyrobit ?');
             Orion.ClearJournal();
-            while (!Orion.InJournal('','my')) {
+            while (!Orion.InJournal('', 'my')) {
                 Orion.Wait(500);
             }
             const text = Orion.InJournal('', 'my')?.Text();
@@ -174,19 +179,18 @@ namespace Scripts {
         static listMakeMenu() {
             const timer = Orion.Timer('listMakeMenuTimer');
 
-            let highlightIndex:number|undefined;
-            let list:any[];
+            let highlightIndex: number | undefined;
+            let list: any[];
 
             if (timer === -1 || timer > 3000) {
-                Shared.AddVar('currentListMakeItemPath', 'gameObject.crafting')
+                Shared.AddVar('currentListMakeItemPath', 'gameObject.crafting');
                 highlightIndex = undefined;
                 list = [];
                 for (const item in gameObject.crafting) {
                     list.push(item);
                 }
                 Shared.AddArray('listMakeMenu', list);
-            }
-            else {
+            } else {
                 highlightIndex = Shared.GetVar('highlightIndex');
                 list = Shared.GetArray('listMakeMenu');
             }
@@ -194,9 +198,9 @@ namespace Scripts {
             Scripts.Utils.resetTimer('listMakeMenuTimer');
 
             if (list.length < 5) {
-                highlightIndex = highlightIndex === undefined || highlightIndex + 1 === list.length ? 0 : highlightIndex + 1;
-            }
-            else {
+                highlightIndex =
+                    highlightIndex === undefined || highlightIndex + 1 === list.length ? 0 : highlightIndex + 1;
+            } else {
                 highlightIndex = 2;
                 const temp = list.shift();
                 list.push(temp);
@@ -233,8 +237,7 @@ namespace Scripts {
                 Shared.AddArray('listMakeMenu', newList);
                 Shared.AddVar('highlightIndex', undefined);
                 Scripts.Crafting.listMakeMenu();
-            }
-            else {
+            } else {
                 Scripts.Crafting.makeFromSelection();
             }
         }

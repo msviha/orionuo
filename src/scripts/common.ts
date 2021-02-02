@@ -1,10 +1,8 @@
 namespace Scripts {
-
     /**
      * Obsahuje zakladni scripty
      */
     export class Common {
-
         /**
          * Scripts.Common.svetlo
          * stability released
@@ -19,9 +17,8 @@ namespace Scripts {
             if (kad.length) {
                 Orion.WaitTargetObject('self');
                 Orion.UseObject(kad[0]);
-            }
-            else if (shouldCast) {
-                Scripts.Spells.cast('Night Sight',TargetEnum.self);
+            } else if (shouldCast) {
+                Scripts.Spells.cast('Night Sight', TargetEnum.self);
             }
         }
 
@@ -36,8 +33,7 @@ namespace Scripts {
             const kad = Orion.FindType(shrink.kad.graphic, shrink.kad.color);
             if (kad.length) {
                 Orion.UseObject(kad[0]);
-            }
-            else {
+            } else {
                 Scripts.Utils.log('NEMAS SHRINK KAD', ColorEnum.red);
             }
         }
@@ -59,7 +55,7 @@ namespace Scripts {
          * hodi si bandu, pripadne vypise ze nema a prehraje wav soubor
          */
         static bandageSelf(minimalCountToWarn = 10, pathToNoBandagesWavFile = 'C:/critical.wav', failedMessage = true) {
-            let bandagesSerials = Orion.FindType(gameObject.uncategorized.bandy.graphic);
+            const bandagesSerials = Orion.FindType(gameObject.uncategorized.bandy.graphic);
             let count = Scripts.Utils.countItemsBySerials(bandagesSerials);
             if (!count) {
                 Orion.PlayWav(pathToNoBandagesWavFile);
@@ -76,15 +72,17 @@ namespace Scripts {
             count--;
 
             if (count <= minimalCountToWarn) {
-                Scripts.Utils.playerPrint(`posledni${count > 4 ? 'ch' : ''} ${count} band${count > 4 ? '' : count > 1 ? 'y' : 'a'}`, ColorEnum.red);
+                Scripts.Utils.playerPrint(
+                    `posledni${count > 4 ? 'ch' : ''} ${count} band${count > 4 ? '' : count > 1 ? 'y' : 'a'}`,
+                    ColorEnum.red,
+                );
             }
-
         }
 
         static massMove(requiredCountInTarget = 0, onlyType = true) {
             Scripts.Utils.createGameObjectSelections([
-                {ask: 'Co chces prehazovat ?', addObject: 'massMoveItem'},
-                {ask: 'Kam to chces nahazet (container) ?', addObject: 'massMoveTargetContainer'}
+                { ask: 'Co chces prehazovat ?', addObject: 'massMoveItem' },
+                { ask: 'Kam to chces nahazet (container) ?', addObject: 'massMoveTargetContainer' },
             ]);
 
             let itemObject = Orion.FindObject('massMoveItem');
@@ -100,9 +98,9 @@ namespace Scripts {
             Orion.OpenContainer('massMoveTargetContainer');
 
             let typesInTargetContainer = Orion.FindType(graphic, color, 'massMoveTargetContainer');
-            let coordinates:ICoordinates|undefined;
-            let stackableTarget:string|undefined;
-            let totalInTarget = Scripts.Utils.countObjectInContainer({graphic, color}, 'massMoveTargetContainer');
+            let coordinates: ICoordinates | undefined;
+            let stackableTarget: string | undefined;
+            let totalInTarget = Scripts.Utils.countObjectInContainer({ graphic, color }, 'massMoveTargetContainer');
 
             while (serialsToMove.length && (!requiredCountInTarget || totalInTarget !== requiredCountInTarget)) {
                 const s = serialsToMove[0];
@@ -112,7 +110,7 @@ namespace Scripts {
                         stackableTarget = targetContainerItem.Serial();
                         coordinates = {
                             x: targetContainerItem.X(),
-                            y: targetContainerItem.Y()
+                            y: targetContainerItem.Y(),
                         };
                     }
                 }
@@ -122,13 +120,13 @@ namespace Scripts {
                     count,
                     stackable && stackableTarget ? stackableTarget : 'massMoveTargetContainer',
                     coordinates?.x,
-                    coordinates?.y
+                    coordinates?.y,
                 );
                 stackable && (stackableTarget = s);
                 Orion.Wait(responseDelay);
                 typesInTargetContainer = Orion.FindType(graphic, color, 'massMoveTargetContainer');
                 serialsToMove = Orion.FindType(graphic, color, container, undefined, undefined, undefined, false);
-                totalInTarget = Scripts.Utils.countObjectInContainer({graphic, color}, 'massMoveTargetContainer');
+                totalInTarget = Scripts.Utils.countObjectInContainer({ graphic, color }, 'massMoveTargetContainer');
             }
 
             Scripts.Utils.playerPrint(`Mas uz ${totalInTarget} techto itemu v containeru`);
@@ -137,7 +135,7 @@ namespace Scripts {
         static mysticCounter() {
             Orion.ClearJournal();
             const recepts = Orion.FindType('0x14ED', '0x06ED'); // recept
-            const mystics = {...gameObject.mystics};
+            const mystics = { ...gameObject.mystics };
 
             for (const recept of recepts) {
                 Orion.UseObject(recept);
@@ -152,17 +150,17 @@ namespace Scripts {
                 Orion.ClearJournal();
             }
 
-            Orion.Print(-1 , '* zbyva doplnit *');
+            Orion.Print(-1, '* zbyva doplnit *');
             for (const m in mystics) {
                 const required = mystics[m].required;
                 const have = Scripts.Utils.countObjectInContainer(mystics[m], 'backpack');
                 const count = required - have < 0 ? 0 : required - have;
-                Orion.Print(-1 , m + ': ' + count.toString());
+                Orion.Print(-1, m + ': ' + count.toString());
             }
-            Orion.Print(-1 , '*****************');
+            Orion.Print(-1, '*****************');
         }
 
-        static necroMystic(msg:string) {
+        static necroMystic(msg: string) {
             const necroMystic = gameObject.uncategorized.necroMystic;
             const mysticSerial = Scripts.Utils.findFirstType(necroMystic, 6);
 
@@ -197,19 +195,19 @@ namespace Scripts {
             const timer = Orion.Timer('resendTime');
 
             if (!hidden) {
-                const mobiles = Orion.FindType('any', "any", "ground", 'mobile', 15);
+                const mobiles = Orion.FindType('any', 'any', 'ground', 'mobile', 15);
                 for (const m of mobiles) {
                     Orion.Hide(m);
                 }
                 Orion.SetGlobal('hideAll', '1');
-            }
-            else if (timer >= 10000) {
+            } else if (timer >= 10000) {
                 Scripts.Utils.resetTimer('resendTime');
                 Orion.Resend();
                 Orion.SetGlobal('hideAll', '0');
-            }
-            else {
-                Scripts.Utils.log(`jeste nemuzes dat znovu resync/resend, pockej jeste ${(10000 - timer)/1000} sekund(y)`)
+            } else {
+                Scripts.Utils.log(
+                    `jeste nemuzes dat znovu resync/resend, pockej jeste ${(10000 - timer) / 1000} sekund(y)`,
+                );
             }
         }
 
@@ -224,8 +222,7 @@ namespace Scripts {
                 if (!bombSerial) {
                     return;
                 }
-            }
-            else {
+            } else {
                 Orion.Drop(bombSerial);
                 Orion.Wait(responseDelay);
                 Orion.MoveItem(bombSerial);
@@ -242,7 +239,7 @@ namespace Scripts {
             Orion.WaitMenu('Tracking', 'Anything that moves');
             Orion.UseSkill('Tracking');
             Orion.ClearJournal();
-            while(!(Orion.MenuCount() || Orion.InJournal('no signs'))) {
+            while (!(Orion.MenuCount() || Orion.InJournal('no signs'))) {
                 Orion.Wait(50);
             }
 
@@ -279,9 +276,16 @@ namespace Scripts {
             }
         }
 
-        static poisonTrain(serialToPoison?:string) {
+        static poisonTrain(serialToPoison?: string) {
             if (!serialToPoison) {
-                const mobiles = Orion.FindType('any', 'any', 'ground', 'fast|live|mobile|ignoreself', 1, `${NotorietyEnum.red}|${NotorietyEnum.gray}`);
+                const mobiles = Orion.FindType(
+                    'any',
+                    'any',
+                    'ground',
+                    'fast|live|mobile|ignoreself',
+                    1,
+                    `${NotorietyEnum.red}|${NotorietyEnum.gray}`,
+                );
                 if (!mobiles.length) {
                     Scripts.Utils.playerPrint('neni tu nikdo na poison train', ColorEnum.red);
                     return;
@@ -309,7 +313,14 @@ namespace Scripts {
                     Orion.ClearJournal();
                     Orion.Wait(responseDelay);
                 }
-                const targets = Orion.FindType('any', 'any', 'ground', 'fast|live|mobile|ignoreself', 1, `${NotorietyEnum.red}|${NotorietyEnum.gray}`);
+                const targets = Orion.FindType(
+                    'any',
+                    'any',
+                    'ground',
+                    'fast|live|mobile|ignoreself',
+                    1,
+                    `${NotorietyEnum.red}|${NotorietyEnum.gray}`,
+                );
 
                 if (targets.length) {
                     const target = targets[0];
@@ -320,7 +331,7 @@ namespace Scripts {
             }
         }
 
-        static openBank():boolean {
+        static openBank(): boolean {
             Orion.ClearJournal();
             Orion.Wait(350);
             Orion.Say('Bank');
@@ -328,9 +339,7 @@ namespace Scripts {
         }
 
         static openContainer() {
-            Scripts.Utils.createGameObjectSelections([
-                {ask: 'Target container to open', addObject: 'openContainer'}
-            ]);
+            Scripts.Utils.createGameObjectSelections([{ ask: 'Target container to open', addObject: 'openContainer' }]);
             const container = Orion.FindObject('openContainer');
             if (!container) {
                 return;
@@ -345,23 +354,22 @@ namespace Scripts {
 
                 if (klicObj) {
                     Orion.MoveItem(klicAlias);
-                }
-                else {
+                } else {
                     Orion.ClearJournal();
                     Orion.Wait(1000);
                     const klice = Orion.FindType('0x1012', '0x0003');
                     for (const serial of klice) {
-                        Orion.ClearJournal('Bezpecny klic')
+                        Orion.ClearJournal('Bezpecny klic');
                         Orion.Wait(50);
                         Orion.Click(serial);
                         Scripts.Utils.waitWhileSomethingInJournal(['Bezpecny klic'], 5000);
                         if (!Orion.InJournal('Bezpecny klic')) {
                             Scripts.Utils.log('neco se rozbilo', ColorEnum.red);
-                            throw 'e'
+                            throw 'e';
                         }
                         const msg = Orion.InJournal('Bezpecny klic');
                         const c = msg.Text().match(/\d+/g);
-                        const alias = `bezpecnyKlic_${Player.Name()}_(${c[0]},${c[1]},${c[2]})`
+                        const alias = `bezpecnyKlic_${Player.Name()}_(${c[0]},${c[1]},${c[2]})`;
                         Orion.AddObject(alias, serial);
                         if (alias === klicAlias) {
                             Orion.MoveItem(alias);
@@ -380,7 +388,7 @@ namespace Scripts {
             if (closestGhosts?.length < 1) {
                 return Scripts.Utils.playerPrint('Nevidis zadneho ducha k oziveni');
             }
-            
+
             Orion.WaitTargetObject(closestGhosts[0]);
             Orion.UseType(gameObject.uncategorized.bandy.graphic);
             Orion.Wait(100);
@@ -398,14 +406,14 @@ namespace Scripts {
                     return gameObject.uncategorized.krvavaBanda2.graphic;
                 }
 
-                return null
-            }
+                return null;
+            };
 
             const closestGhosts = Orion.FindType(-1, -1, 'ground', 'human|dead|fast', 1);
             if (closestGhosts?.length < 1) {
                 return Scripts.Utils.playerPrint('Nevidis zadneho ducha k oziveni');
             }
-            
+
             const bloodyBandageGraphic = getBloodyBandageGraphic();
             if (bloodyBandageGraphic) {
                 Orion.WaitTargetObject(closestGhosts[0]);
@@ -414,7 +422,7 @@ namespace Scripts {
                 Orion.WaitTargetObject(closestGhosts[0]);
                 Orion.UseType(gameObject.uncategorized.bandy.graphic);
             } else {
-                Scripts.Common.turboRess(true)
+                Scripts.Common.turboRess(true);
             }
         }
     }

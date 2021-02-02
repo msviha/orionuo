@@ -3,11 +3,7 @@
  */
 namespace Scripts {
     export class Auto {
-        static killObject(
-            serialToKill:string,
-            poisonTrain = false,
-            waitUntilDead = true
-        ) {
+        static killObject(serialToKill: string, poisonTrain = false, waitUntilDead = true) {
             let enemy = Orion.FindObject(serialToKill);
             Orion.WalkTo(enemy.X(), enemy.Y(), enemy.Z(), 1);
             poisonTrain && Scripts.Common.poisonTrain(serialToKill);
@@ -24,7 +20,12 @@ namespace Scripts {
             }
         }
 
-        static healAndCureWhenHarving(dmgToStartHeal:number, fullHeal:boolean, castCure:boolean, drinkCure:boolean):boolean {
+        static healAndCureWhenHarving(
+            dmgToStartHeal: number,
+            fullHeal: boolean,
+            castCure: boolean,
+            drinkCure: boolean,
+        ): boolean {
             if (Player.Hits() > Player.MaxHits() - dmgToStartHeal) {
                 return false;
             }
@@ -38,8 +39,7 @@ namespace Scripts {
             if (Player.Poisoned()) {
                 if (castCure) {
                     Scripts.Spells.castUntilSuccess('Cure', TargetEnum.self, 2500);
-                }
-                else if (drinkCure) {
+                } else if (drinkCure) {
                     Scripts.Potions.drinkPotion(PotionsEnum.lc);
                 }
             }

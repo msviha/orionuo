@@ -1,7 +1,6 @@
 namespace Scripts {
     export class Loot {
-
-        static addCutWeapon():number {
+        static addCutWeapon(): number {
             Scripts.Utils.playerPrint('Target your cut weapon');
             return Orion.WaitForAddObject('cutWeapon', 60000);
         }
@@ -12,7 +11,7 @@ namespace Scripts {
          *
          * vylotuje mrtvolky v okoli
          */
-        static lootCorpsesAround(cut?:boolean, weapon?:boolean) {
+        static lootCorpsesAround(cut?: boolean, weapon?: boolean) {
             let listOfCorpses = Orion.FindType('0x2006', '-1', 'ground', 'fast', 2, 'red');
             while (listOfCorpses.length) {
                 for (const id of listOfCorpses) {
@@ -40,14 +39,14 @@ namespace Scripts {
          *
          * vylotuje z konkretni mrtvolky veci nastavene v lootItems listu
          */
-        static lootCorpseId(id:string) {
+        static lootCorpseId(id: string) {
             let serverLagActionsLeft = 4;
             Orion.OpenContainer(id, 5000, `Container id ${id} not found`);
-            let itemsInCorpse = Orion.FindList('lootItems', id);
+            const itemsInCorpse = Orion.FindList('lootItems', id);
             if (itemsInCorpse.length) {
                 for (const itemId of itemsInCorpse) {
                     // TODO doresit prehazeni veci z hlavniho baglu do myLootBag pri lotovani pytliku
-                    Orion.MoveItem(itemId, 0, "myLootBag");
+                    Orion.MoveItem(itemId, 0, 'myLootBag');
                     Orion.Wait(serverLagActionsLeft ? 50 : 350);
                     serverLagActionsLeft--;
                 }
@@ -58,10 +57,10 @@ namespace Scripts {
             Scripts.Utils.targetObjectNotSelf('lootAllContainer', `Target object to loot`);
 
             Orion.OpenContainer('lootAllContainer', 5000, `Container not found`);
-            let itemsInCorpse = Orion.FindType('any', 'any', 'lootAllContainer');
+            const itemsInCorpse = Orion.FindType('any', 'any', 'lootAllContainer');
             if (itemsInCorpse.length) {
                 for (const itemId of itemsInCorpse) {
-                    Orion.MoveItem(itemId, 0, "myLootBag");
+                    Orion.MoveItem(itemId, 0, 'myLootBag');
                     Orion.Wait(delay);
                 }
             }
@@ -74,12 +73,9 @@ namespace Scripts {
             if (!cutWeapon) {
                 const nbDaggerSerial = Scripts.Utils.findFirstType(gameObject.uncategorized.nbDagger, 1);
                 if (!nbDaggerSerial) {
-                    Scripts.Utils.createGameObjectSelections([
-                        {ask: 'Cim budes rezat ?', addObject: CUT_WEAPON}
-                    ]);
+                    Scripts.Utils.createGameObjectSelections([{ ask: 'Cim budes rezat ?', addObject: CUT_WEAPON }]);
                     cutWeapon = Orion.FindObject(CUT_WEAPON);
-                }
-                else {
+                } else {
                     cutWeapon = Orion.FindObject(nbDaggerSerial);
                 }
             }

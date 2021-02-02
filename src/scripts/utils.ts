@@ -1,27 +1,29 @@
 namespace Scripts {
-
     /**
      * Obsahuje pouze pomocne funkce pro ostatni scripty
      */
     export class Utils {
-
-        static selectMenu(menuName:string|ISpecialSelection, selections:Array<string|ISpecialSelection>, firstCall = true) {
+        static selectMenu(
+            menuName: string | ISpecialSelection,
+            selections: Array<string | ISpecialSelection>,
+            firstCall = true,
+        ) {
             if (!selections || !selections.length) {
                 return;
             }
-            let s = [...selections];
+            const s = [...selections];
             firstCall && Orion.CancelWaitMenu();
             Scripts.Utils.worldSaveCheckWait();
             const menuToSelect = s[0];
             Orion.WaitMenu(
                 typeof menuName === 'string' ? menuName : menuName.menu,
-                typeof menuToSelect === 'string' ? menuToSelect : menuToSelect.item
+                typeof menuToSelect === 'string' ? menuToSelect : menuToSelect.item,
             );
             s.splice(0, 1);
             Scripts.Utils.selectMenu(menuToSelect, s, false);
         }
 
-        static useAndSelect(serial:string, selections:ISelect[], use = true) {
+        static useAndSelect(serial: string, selections: ISelect[], use = true) {
             use && Orion.UseObject(serial);
             const selectionsDupe = [...selections];
             const selection = selectionsDupe.shift();
@@ -31,8 +33,7 @@ namespace Scripts {
                     return;
                 }
                 Orion.GetLastGump()?.Select(Orion.CreateGumpHook(s));
-            }
-            else if (selection.type === SelectionTypeEnum.menu) {
+            } else if (selection.type === SelectionTypeEnum.menu) {
                 const s = <IMenuSelection>selection.selection;
                 if (!Orion.WaitForMenu(2000)) {
                     return;
@@ -50,28 +51,36 @@ namespace Scripts {
 
         // return missing quantity
         static refill(
-            obj:IMyGameObject,
-            sourceContainerId:string,
+            obj: IMyGameObject,
+            sourceContainerId: string,
             quantity = 1,
             targetContainerId = 'backpack',
             refillJustWhenIHaveNothing = false,
-            itemName?:string,
-            sourceContainerIsItemOnGround = false
-        ):number {
+            itemName?: string,
+            sourceContainerIsItemOnGround = false,
+        ): number {
             const serialsInTargetContainer = Orion.FindType(obj.graphic, obj.color || '0xFFFF', targetContainerId);
-            const serialsInSourceContainer = sourceContainerIsItemOnGround ? [sourceContainerId] : Orion.FindType(obj.graphic, obj.color || '0xFFFF', sourceContainerId);
+            const serialsInSourceContainer = sourceContainerIsItemOnGround
+                ? [sourceContainerId]
+                : Orion.FindType(obj.graphic, obj.color || '0xFFFF', sourceContainerId);
             const itemsInTarget = Scripts.Utils.countObjectInContainer(obj, targetContainerId);
-            const itemsInSource = Scripts.Utils.countObjectInContainer(obj, sourceContainerId, sourceContainerIsItemOnGround);
+            const itemsInSource = Scripts.Utils.countObjectInContainer(
+                obj,
+                sourceContainerId,
+                sourceContainerIsItemOnGround,
+            );
 
             if (itemsInTarget > quantity) {
                 return Scripts.Utils.moveItems(serialsInTargetContainer, sourceContainerId, itemsInTarget - quantity);
-            }
-            else if (itemsInTarget < quantity) {
+            } else if (itemsInTarget < quantity) {
                 if (refillJustWhenIHaveNothing && itemsInTarget) {
                     return 0;
                 }
                 if (!itemsInSource) {
-                    Scripts.Utils.log(`Nemas dostatek ${itemName ? itemName : obj.graphic} pro doplneni`, ColorEnum.orange);
+                    Scripts.Utils.log(
+                        `Nemas dostatek ${itemName ? itemName : obj.graphic} pro doplneni`,
+                        ColorEnum.orange,
+                    );
                     return quantity;
                 }
                 return Scripts.Utils.moveItems(serialsInSourceContainer, targetContainerId, quantity - itemsInTarget);
@@ -80,16 +89,20 @@ namespace Scripts {
             return 0;
         }
 
-        static getObjSerials(obj:IMyGameObject, container = 'backpack') {
+        static getObjSerials(obj: IMyGameObject, container = 'backpack') {
             return Orion.FindType(obj.graphic, obj.color || '0xFFFF', container);
         }
 
-        static countObjectInContainer(obj:IMyGameObject, container = 'backpack', containerIsObjItemOnGround = false):number {
+        static countObjectInContainer(
+            obj: IMyGameObject,
+            container = 'backpack',
+            containerIsObjItemOnGround = false,
+        ): number {
             const serials = containerIsObjItemOnGround ? [container] : Scripts.Utils.getObjSerials(obj, container);
             return Scripts.Utils.countItemsBySerials(serials);
         }
 
-        static countItemsBySerials(itemsSerials:string[]):number {
+        static countItemsBySerials(itemsSerials: string[]): number {
             let result = 0;
             for (const item of itemsSerials) {
                 result += Orion.FindObject(item).Count();
@@ -97,22 +110,20 @@ namespace Scripts {
             return result;
         }
 
-        static moveObjectToContainer(obj:any, fromContainer = 'backpack', targetContainer:string) {
+        static moveObjectToContainer(obj: any, fromContainer = 'backpack', targetContainer: string) {
             if (isMyGameObject(obj)) {
                 const count = Scripts.Utils.countObjectInContainer(obj, fromContainer);
                 const serials = Scripts.Utils.getObjSerials(obj, fromContainer);
                 Scripts.Utils.moveItems(serials, targetContainer, count);
-            }
-            else {
+            } else {
                 for (const key in obj) {
                     Scripts.Utils.moveObjectToContainer(obj[key], fromContainer, targetContainer);
                 }
             }
-            
         }
 
         // return missing quantity
-        static moveItems(itemsSerials:string[], targetContainerId:string, quantity:number):number {
+        static moveItems(itemsSerials: string[], targetContainerId: string, quantity: number): number {
             if (quantity < 1) {
                 return 0;
             }
@@ -122,13 +133,15 @@ namespace Scripts {
                 if (needToMove > itemCount) {
                     Orion.MoveItem(item, itemCount, targetContainerId);
                     needToMove -= itemCount;
-                }
-                else {
+                } else {
                     Orion.ClearJournal();
                     Orion.MoveItem(item, quantity, targetContainerId);
                     Orion.Wait(responseDelay * 2);
                     const i = Orion.FindObject(item);
-                    if (quantity === 1 && !Scripts.Utils.countObjectInContainer({graphic: i.Graphic(), color: i.Color()})) {
+                    if (
+                        quantity === 1 &&
+                        !Scripts.Utils.countObjectInContainer({ graphic: i.Graphic(), color: i.Color() })
+                    ) {
                         Orion.MoveItem(item, 2, targetContainerId);
                         Orion.Wait(responseDelay);
                     }
@@ -142,12 +155,24 @@ namespace Scripts {
             return needToMove;
         }
 
-        static waitWhileSomethingInJournal(messages:string[], wait?:number, timeAhead?:number, flags = 'sys'):number {
+        static waitWhileSomethingInJournal(
+            messages: string[],
+            wait?: number,
+            timeAhead?: number,
+            flags = 'sys',
+        ): number {
             const messagesAsString = messages.join('|');
             let keepWait = true;
-            let startTime = timeAhead ? Orion.Now() - timeAhead : 0;
+            const startTime = timeAhead ? Orion.Now() - timeAhead : 0;
             while (keepWait && !Player.Dead()) {
-                const journalMessage = Orion.InJournal(messagesAsString, undefined, undefined, 'any', startTime, Orion.Now());
+                const journalMessage = Orion.InJournal(
+                    messagesAsString,
+                    undefined,
+                    undefined,
+                    'any',
+                    startTime,
+                    Orion.Now(),
+                );
                 if (journalMessage) {
                     for (let i = 0; i < messages.length; i++) {
                         const m = messages[i];
@@ -166,33 +191,31 @@ namespace Scripts {
         }
 
         static worldSaveCheckWait() {
-            if (Orion.InJournal("World save has been")) {
+            if (Orion.InJournal('World save has been')) {
                 Orion.Wait(25000);
                 Orion.ClearJournal('World save has been', 'sys');
             }
         }
 
-        static log(message:string, color:ColorEnum = ColorEnum.none) {
+        static log(message: string, color: ColorEnum = ColorEnum.none) {
             Orion.Print(<string>color, message);
         }
 
-        static playerPrint(message:string, color:ColorEnum|number = ColorEnum.none) {
+        static playerPrint(message: string, color: ColorEnum | number = ColorEnum.none) {
             Orion.CharPrint(Player.Serial(), color, message);
         }
 
-        static waitTarget(target?:TargetEnum|string) {
+        static waitTarget(target?: TargetEnum | string) {
             if (target === TargetEnum.lastattack) {
                 Orion.WaitTargetObject(Orion.ClientLastAttack());
-            }
-            else if (target === TargetEnum.self) {
+            } else if (target === TargetEnum.self) {
                 Orion.WaitTargetObject(Player.Serial());
-            }
-            else if (target !== undefined) {
+            } else if (target !== undefined) {
                 Orion.WaitTargetObject(target);
             }
         }
 
-        static resetTimer(timer:string) {
+        static resetTimer(timer: string) {
             Orion.RemoveTimer(timer);
             Orion.SetTimer(timer);
         }
@@ -203,37 +226,36 @@ namespace Scripts {
             }
         }
 
-        static getCoordinatesForDirection(direction):ICoordinates {
-            let x = Player.X();
-            let y = Player.Y();
-            let nextCoordinates = {x: Player.X(), y: Player.Y()};
+        static getCoordinatesForDirection(direction): ICoordinates {
+            const x = Player.X();
+            const y = Player.Y();
+            let nextCoordinates = { x: Player.X(), y: Player.Y() };
             switch (direction) {
-            case DirectionEnum.West:
-                nextCoordinates = {x: x - 1, y};
-                break;
-            case DirectionEnum.North:
-                nextCoordinates = {x, y: y - 1};
-                break;
-            case DirectionEnum.East:
-                nextCoordinates = {x: x + 1, y};
-                break;
-            default:
-                nextCoordinates = {x, y: y + 1};
-                break;
+                case DirectionEnum.West:
+                    nextCoordinates = { x: x - 1, y };
+                    break;
+                case DirectionEnum.North:
+                    nextCoordinates = { x, y: y - 1 };
+                    break;
+                case DirectionEnum.East:
+                    nextCoordinates = { x: x + 1, y };
+                    break;
+                default:
+                    nextCoordinates = { x, y: y + 1 };
+                    break;
             }
             return nextCoordinates;
         }
 
-        static getSerialsFromMyGameObject(type:IMyGameObject):string[] {
+        static getSerialsFromMyGameObject(type: IMyGameObject): string[] {
             if (type.color) {
                 return Orion.FindType(type.graphic, type.color);
-            }
-            else {
+            } else {
                 return Orion.FindType(type.graphic);
             }
         }
 
-        static findMyDefinitionForGameObject(gameObject:GameObject, obj?:any):IMyGameObject|undefined {
+        static findMyDefinitionForGameObject(gameObject: GameObject, obj?: any): IMyGameObject | undefined {
             const graphic = gameObject.Graphic().toUpperCase();
             const color = gameObject.Color().toUpperCase();
             obj === undefined && (obj = gameObject);
@@ -241,14 +263,14 @@ namespace Scripts {
             if (isMyGameObject(obj)) {
                 if (
                     obj.graphic.toUpperCase() === graphic &&
-                    (!obj.color && color === '0X0000' || obj.color.toUpperCase() === color)
+                    ((!obj.color && color === '0X0000') || obj.color.toUpperCase() === color)
                 ) {
                     return obj;
                 }
                 return;
             }
 
-            let myDefinition:IMyGameObject|undefined;
+            let myDefinition: IMyGameObject | undefined;
             for (const key in obj) {
                 myDefinition = Scripts.Utils.findMyDefinitionForGameObject(gameObject, obj[key]);
                 if (isMyGameObject(myDefinition)) {
@@ -262,86 +284,98 @@ namespace Scripts {
          * @param objectAsString
          * @returns IMyGameObject
          */
-        static parseObject(objectAsString:string):IMyGameObject {
+        static parseObject(objectAsString: string): IMyGameObject {
             const arr = objectAsString.split('.');
             arr.shift(); // remove the 'o'
-            let item:any = gameObject;
+            let item: any = gameObject;
             for (const i of arr) {
                 item = item[i];
             }
             return item;
         }
 
-        static updateCurrentStatusBar(newSerial:string, position:ICoordinates) {
+        static updateCurrentStatusBar(newSerial: string, position: ICoordinates) {
             const currentStatusBarSerial = Orion.GetGlobal('currentStatusBarSerial');
             currentStatusBarSerial && Orion.CloseStatusbar(currentStatusBarSerial);
             Orion.SetGlobal('currentStatusBarSerial', newSerial);
             Orion.ShowStatusbar(newSerial, position.x, position.y);
         }
 
-        static determineHpColor(percent:number):ColorEnum {
-            const c = Math.ceil(percent * 3 / 100)
+        static determineHpColor(percent: number): ColorEnum {
+            const c = Math.ceil((percent * 3) / 100);
             return c === 1 ? ColorEnum.red : c === 2 ? ColorEnum.orange : ColorEnum.green;
         }
 
-        static determineHpColorRGB(percent:number):string {
-            const c = Math.ceil(percent * 3 / 100);
+        static determineHpColorRGB(percent: number): string {
+            const c = Math.ceil((percent * 3) / 100);
             return c === 1 ? '#FF0000' : c === 2 ? '#FFFF00' : '#007B00';
         }
 
-        static getARGBColorByNotoriety(notoriety:number, hexaOpacity:string = 'ff'):string {
+        static getARGBColorByNotoriety(notoriety: number, hexaOpacity = 'ff'): string {
             switch (notoriety) {
                 case 1: //blue
-                    return `#${hexaOpacity}26beed`
+                    return `#${hexaOpacity}26beed`;
                     break;
                 case 2: //green
-                    return `#${hexaOpacity}00cc00`
+                    return `#${hexaOpacity}00cc00`;
                     break;
                 case 3: //gray
-                    return `#${hexaOpacity}999999`
+                    return `#${hexaOpacity}999999`;
                     break;
                 case 4: //criminal
-                    return `#${hexaOpacity}999999`
+                    return `#${hexaOpacity}999999`;
                     break;
                 case 5: //orange
-                    return `#${hexaOpacity}ff8c1a`
+                    return `#${hexaOpacity}ff8c1a`;
                     break;
                 case 6: //red
-                    return `#${hexaOpacity}e62a00`
+                    return `#${hexaOpacity}e62a00`;
                     break;
-                default: // 7 - yellow
-                    return `#${hexaOpacity}ffff1a`
+                default:
+                    // 7 - yellow
+                    return `#${hexaOpacity}ffff1a`;
             }
         }
 
-        static printColoredHpBar(target:string, percent:number) {
-            const fullBoxCount = Math.ceil(percent * 6 / 100);
+        static printColoredHpBar(target: string, percent: number) {
+            const fullBoxCount = Math.ceil((percent * 6) / 100);
             const color = Scripts.Utils.determineHpColor(percent);
             let text = '';
             for (let i = 0; i < 6; i++) {
-                text += i < fullBoxCount ? '\u25A0' : '\u25A1'
+                text += i < fullBoxCount ? '\u25A0' : '\u25A1';
             }
 
             Orion.CharPrint(target, color, text);
         }
 
-        static getLivingObjectInDistance(objectSerial:string):GameObject|null {
+        static getLivingObjectInDistance(objectSerial: string): GameObject | null {
             const o = Orion.FindObject(objectSerial);
-            return (o && !o.Dead()) ? o : null;
+            return o && !o.Dead() ? o : null;
         }
 
-        static printDamage(serial:string, previousHp:number, force = false) {
+        static printDamage(serial: string, previousHp: number, force = false) {
             const o = Orion.FindObject(serial);
             const hp = o.Hits();
             const max = o.MaxHits();
             const diff = hp - previousHp;
             if (diff !== 0 || force) {
-                diff !== 0 && Orion.PrintFast(serial, diff > 0 ? ColorEnum.green : ColorEnum.red, 0, `${diff > 0 ? '+' : ''}${diff.toString()}`);
-                Orion.PrintFast(serial, Scripts.Utils.determineHpColor(hp / max * 100), 0, `[${hp}/${max}]`);
+                diff !== 0 &&
+                    Orion.PrintFast(
+                        serial,
+                        diff > 0 ? ColorEnum.green : ColorEnum.red,
+                        0,
+                        `${diff > 0 ? '+' : ''}${diff.toString()}`,
+                    );
+                Orion.PrintFast(serial, Scripts.Utils.determineHpColor((hp / max) * 100), 0, `[${hp}/${max}]`);
             }
         }
 
-        static use(val:IMyGameObject|IMyGameObject[], name = '', minimalCountForWarn?:number, warnWavPath?:string) {
+        static use(
+            val: IMyGameObject | IMyGameObject[],
+            name = '',
+            minimalCountForWarn?: number,
+            warnWavPath?: string,
+        ) {
             if (isMyGameObject(val)) {
                 val = [val];
             }
@@ -373,13 +407,16 @@ namespace Scripts {
                 }
             }
 
-            let count = Scripts.Utils.countItemsBySerials(serials);
+            const count = Scripts.Utils.countItemsBySerials(serials);
             if (!count && warnWavPath) {
                 Orion.PlayWav(warnWavPath);
                 Scripts.Utils.playerPrint(`!! NEMAS ${name} !!`, ColorEnum.red);
                 return;
             }
-            if ((minimalCountForWarn !== undefined && count <= minimalCountForWarn) || (minimalCountForWarn === undefined && !count)) {
+            if (
+                (minimalCountForWarn !== undefined && count <= minimalCountForWarn) ||
+                (minimalCountForWarn === undefined && !count)
+            ) {
                 Scripts.Utils.playerPrint(`[ ${name} ${count} ]`, ColorEnum.red);
             }
             if (count) {
@@ -387,18 +424,18 @@ namespace Scripts {
             }
         }
 
-        static setTargetAlias(targetAliasToSet:string, message = 'nastav target') {
+        static setTargetAlias(targetAliasToSet: string, message = 'nastav target') {
             const selection = Orion.WaitForAddObject(targetAliasToSet, 60000);
             Orion.Print('-1', message);
             if (selection !== 1) {
-                throw 'bad target'
+                throw 'bad target';
             }
         }
 
-        static findFirstType(myGameObject:IMyGameObject, layer?:number):string|undefined {
-            let graphic = myGameObject.graphic;
-            let color = myGameObject.color;
-            let name = myGameObject.name;
+        static findFirstType(myGameObject: IMyGameObject, layer?: number): string | undefined {
+            const graphic = myGameObject.graphic;
+            const color = myGameObject.color;
+            const name = myGameObject.name;
             let serials = Orion.FindType(graphic, color);
 
             if (serials.length) {
@@ -426,7 +463,7 @@ namespace Scripts {
             }
 
             if (layer !== undefined) {
-                let l = Orion.ObjAtLayer(layer);
+                const l = Orion.ObjAtLayer(layer);
                 Orion.Click(l.Serial());
                 Orion.Wait(100);
                 if (l && l.Graphic() === graphic && l.Name() === name) {
@@ -435,28 +472,27 @@ namespace Scripts {
             }
         }
 
-        static walkToSerial(serial:string, distance = 1) {
+        static walkToSerial(serial: string, distance = 1) {
             const o = Orion.FindObject(serial);
             Orion.WalkTo(o.X(), o.Y(), o.Z(), distance);
             Orion.Wait(1000);
         }
 
-        static targetObjectNotSelf(objectAlias:string, message = 'Target object') {
+        static targetObjectNotSelf(objectAlias: string, message = 'Target object') {
             Scripts.Utils.playerPrint(message);
             const selection = Orion.WaitForAddObject(objectAlias, 60000);
 
             if (selection !== 1) {
                 Scripts.Utils.playerPrint(`Cancel`);
-                throw 'cancel'
-            }
-            else if (Orion.FindObject(objectAlias).Serial() === Player.Serial()) {
+                throw 'cancel';
+            } else if (Orion.FindObject(objectAlias).Serial() === Player.Serial()) {
                 Scripts.Utils.playerPrint(`Zameruj lepe :-)`);
                 Scripts.Utils.targetObjectNotSelf(objectAlias, message);
                 return;
             }
         }
 
-        static createGameObjectSelections(selections:Array<{ask:string, addObject:string}>) {
+        static createGameObjectSelections(selections: Array<{ ask: string; addObject: string }>) {
             for (const s of selections) {
                 Scripts.Utils.playerPrint(s.ask);
                 const selection = Orion.WaitForAddObject(s.addObject, 60000);
@@ -467,7 +503,7 @@ namespace Scripts {
             }
         }
 
-        static openContainer(s:string, maxWaitingTime = 2000) {
+        static openContainer(s: string, maxWaitingTime = 2000) {
             Orion.OpenContainer(s);
             while (!Orion.GumpExists('container', s) && maxWaitingTime > 0) {
                 maxWaitingTime -= 100;
@@ -478,9 +514,9 @@ namespace Scripts {
             }
         }
 
-        static isItemStackable(serial:string):boolean {
+        static isItemStackable(serial: string): boolean {
             const itemObject = Orion.FindObject(serial);
-            let checkSerials = Orion.FindType(itemObject.Graphic(), itemObject.Color(), itemObject.Container());
+            const checkSerials = Orion.FindType(itemObject.Graphic(), itemObject.Color(), itemObject.Container());
             let stackable = false;
 
             for (const s of checkSerials) {
@@ -500,15 +536,14 @@ namespace Scripts {
                     Orion.MoveItem(checkSerials[0], 1, container, x, y);
                     Orion.Wait(responseDelay);
                     stackable = false;
-                }
-                else {
+                } else {
                     stackable = true;
                 }
             }
             return stackable;
         }
 
-        static askForCount():number {
+        static askForCount(): number {
             Scripts.Utils.playerPrint('Po kolika kusech to budes prehazovat ?');
             Orion.ClearJournal();
             while (!Orion.InJournal('', 'my')) {
@@ -517,13 +552,13 @@ namespace Scripts {
             const text = Orion.InJournal('', 'my')?.Text();
             if (!text) {
                 Scripts.Utils.log('Nic jsi nenapsal ?', ColorEnum.red);
-                throw 'err'
+                throw 'err';
             }
             const count = parseInt(text.replace(Player.Name() + ':', ''), 10);
 
             if (typeof count !== 'number' || count < 0) {
                 Scripts.Utils.log('Spatne zadany pocet', ColorEnum.red);
-                throw 'err'
+                throw 'err';
             }
 
             return count;

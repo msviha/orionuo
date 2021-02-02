@@ -1,22 +1,19 @@
 namespace Scripts {
-
     /**
      * Work in progress - nutno zjistit co funguje, pripadne upravit
      */
     export class Wip {
-
         static Tracking(who = 'Players') {
             Orion.CancelWaitMenu();
             Orion.WaitMenu('Tracking', who);
             Orion.UseSkill('Tracking');
         }
 
-        static MassMove()
-        {
+        static MassMove() {
             Scripts.Utils.log('MASSMOVE What?', ColorEnum.none);
             Orion.AddObject('whatToMove');
             Scripts.Utils.waitWhileTargeting();
-            var item = Orion.GetSerial('whatToMove');
+            const item = Orion.GetSerial('whatToMove');
 
             const itemObject = Orion.FindObject(item);
             const graphic = itemObject.Graphic();
@@ -31,17 +28,16 @@ namespace Scripts {
             Scripts.Utils.waitWhileTargeting();
             const destination = Orion.GetSerial('whereToMove');
 
-            var itemIDArr = Orion.FindType(graphic, color, container, undefined, undefined, undefined, false);
+            const itemIDArr = Orion.FindType(graphic, color, container, undefined, undefined, undefined, false);
             Scripts.Utils.log(itemIDArr.length.toString(), ColorEnum.none);
-            for (let i = 0; i < itemIDArr.length; i++)
-            {
+            for (let i = 0; i < itemIDArr.length; i++) {
                 Orion.MoveItem(itemIDArr[i], 0, destination, destinationX, destinationY);
                 destinationX += 3;
                 Orion.Wait(300);
             }
         }
 
-        static getColorByNotoriety(notoriety?:number) {
+        static getColorByNotoriety(notoriety?: number) {
             let notoColor = 906;
             switch (notoriety) {
                 case 1:

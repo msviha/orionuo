@@ -1,11 +1,9 @@
 namespace Scripts {
-
     /**
      * lockpicking
      */
     export class Lockpicking {
-
-        static unlock(targetSerial?:string):boolean {
+        static unlock(targetSerial?: string): boolean {
             Orion.SetTimer('unlockTimer');
             if (!targetSerial) {
                 Scripts.Utils.playerPrint('Target what do you want to unlock');
@@ -41,7 +39,7 @@ namespace Scripts {
             return unlocked;
         }
 
-        static lock(targetSerial?:string, key?:string) {
+        static lock(targetSerial?: string, key?: string) {
             if (!targetSerial) {
                 Scripts.Utils.playerPrint('Target what do you want to lock');
                 Orion.WaitForAddObject('lockTarget', 60000);
@@ -64,7 +62,7 @@ namespace Scripts {
             }
         }
 
-        static lockpicking(targetSerial?:string, key?:string) {
+        static lockpicking(targetSerial?: string, key?: string) {
             if (!targetSerial) {
                 Scripts.Utils.playerPrint('Target what do you want to lock');
                 Orion.WaitForAddObject('lockTarget', 60000);
@@ -82,8 +80,6 @@ namespace Scripts {
                     break;
                 }
             }
-
         }
-
     }
 }

@@ -1,6 +1,5 @@
 namespace Scripts {
     export class Spells {
-
         /**
          * Scripts.Spells.cast
          * stability released
@@ -8,7 +7,7 @@ namespace Scripts {
          * @param spell nazev kouzla
          * @param target na koho ma kouzlit
          */
-        static cast(spell:string, target?:TargetEnum|string) {
+        static cast(spell: string, target?: TargetEnum | string) {
             Scripts.Utils.waitTarget(target);
             Orion.Cast(spell);
         }
@@ -18,7 +17,7 @@ namespace Scripts {
          *
          * vykouzli summona
          */
-        static summon(creature:string, target?:TargetEnum|string) {
+        static summon(creature: string, target?: TargetEnum | string) {
             Orion.CancelWaitMenu();
             Orion.WaitMenu('What do you want to summon', creature);
             Scripts.Spells.cast('Summ. Creature', target);
@@ -36,11 +35,7 @@ namespace Scripts {
          * CastScroll(ScrollEnum.port)
          * CastScroll('port')
          */
-        static castScroll(
-            scroll:ScrollEnum,
-            target?:TargetEnum|string,
-            backupHeadCast?:string
-        ) {
+        static castScroll(scroll: ScrollEnum, target?: TargetEnum | string, backupHeadCast?: string) {
             const s = gameObject.scrolls['standard'][scroll];
 
             if (s.minMana > Player.Mana()) {
@@ -50,25 +45,29 @@ namespace Scripts {
 
             if (Orion.Count(s.graphic) < 1) {
                 const reason = 'NEMAS SVITKY';
-                backupHeadCast ? Scripts.Spells.backupHeadCast(reason, backupHeadCast, target) : Scripts.Utils.playerPrint(reason, ColorEnum.red);
+                backupHeadCast
+                    ? Scripts.Spells.backupHeadCast(reason, backupHeadCast, target)
+                    : Scripts.Utils.playerPrint(reason, ColorEnum.red);
                 return;
             }
 
             Orion.ClearJournal();
             Scripts.Utils.waitTarget(target);
             Orion.UseType(s.graphic);
-            Scripts.Utils.waitWhileSomethingInJournal(['Select Target', 'You can\'t cast']);
+            Scripts.Utils.waitWhileSomethingInJournal(['Select Target', "You can't cast"]);
 
             if (Orion.InJournal('Select Target')) {
-                s.timer && Orion.AddDisplayTimer('scroll', s.timer, 'AboveChar', 'bar', '', 0, 75, '0x100', 1, 'yellow');
-            }
-            else {
+                s.timer &&
+                    Orion.AddDisplayTimer('scroll', s.timer, 'AboveChar', 'bar', '', 0, 75, '0x100', 1, 'yellow');
+            } else {
                 const reason = 'TIMER';
-                backupHeadCast ? Scripts.Spells.backupHeadCast(reason, backupHeadCast, target) : Scripts.Utils.playerPrint(reason, ColorEnum.red);
+                backupHeadCast
+                    ? Scripts.Spells.backupHeadCast(reason, backupHeadCast, target)
+                    : Scripts.Utils.playerPrint(reason, ColorEnum.red);
             }
         }
 
-        static backupHeadCast(reason:string, spell:string, target?:TargetEnum|string) {
+        static backupHeadCast(reason: string, spell: string, target?: TargetEnum | string) {
             Scripts.Utils.playerPrint(reason + ' - backup cast', ColorEnum.orange);
             Scripts.Spells.cast(spell, target);
         }
@@ -78,10 +77,7 @@ namespace Scripts {
          * CastScroll('vfp', 'lastattack')
          * CastScroll('kalnox')
          */
-        static castNecroScroll(
-            scroll:NecroScrollEnum,
-            target?:TargetEnum|string
-        ) {
+        static castNecroScroll(scroll: NecroScrollEnum, target?: TargetEnum | string) {
             const s = gameObject.scrolls['necro'][scroll];
 
             if (s.minMana > Player.Mana()) {
@@ -91,19 +87,19 @@ namespace Scripts {
 
             const scrollSerial = Scripts.Utils.findFirstType(s);
             if (!scrollSerial) {
-                Scripts.Utils.playerPrint("NEMAS SVITKY " + scroll, ColorEnum.red);
+                Scripts.Utils.playerPrint('NEMAS SVITKY ' + scroll, ColorEnum.red);
                 return;
             }
 
             Orion.ClearJournal();
             Scripts.Utils.waitTarget(target);
             Orion.UseObject(scrollSerial);
-            Scripts.Utils.waitWhileSomethingInJournal(['Select Target', 'You can\'t cast']);
+            Scripts.Utils.waitWhileSomethingInJournal(['Select Target', "You can't cast"]);
 
             if (Orion.InJournal('Select Target')) {
-                s.timer && Orion.AddDisplayTimer('scroll', s.timer, 'AboveChar', 'bar', '', 0, 75, '0x100', 1, 'yellow');
-            }
-            else {
+                s.timer &&
+                    Orion.AddDisplayTimer('scroll', s.timer, 'AboveChar', 'bar', '', 0, 75, '0x100', 1, 'yellow');
+            } else {
                 Scripts.Utils.playerPrint('TIMER', ColorEnum.red);
             }
         }
@@ -114,13 +110,13 @@ namespace Scripts {
          *
          * Kouzli tak dlouho, dokud se mu to nepovede, nebo nedojde mana
          */
-        static castUntilSuccess(spell:string, target:TargetEnum, castTime:number) {
+        static castUntilSuccess(spell: string, target: TargetEnum, castTime: number) {
             do {
                 Orion.WarMode(true);
                 Orion.ClearJournal();
                 Scripts.Spells.cast(spell, target);
                 Orion.Wait(castTime);
-            } while (Orion.InJournal('fizzles'))
+            } while (Orion.InJournal('fizzles'));
 
             Orion.WarMode(true);
         }
@@ -131,7 +127,7 @@ namespace Scripts {
          *
          * Pise svitky
          */
-        static inscription(circle:number, spell:string, quantity = 0) {
+        static inscription(circle: number, spell: string, quantity = 0) {
             const menuName = 'Spell Circles';
             const spellCircle = `Spell Circle ${circle}`;
             const blank = gameObject.scrolls.blank;
@@ -151,15 +147,15 @@ namespace Scripts {
 
             const finishedScroll = {
                 graphic: Orion.FindObject('finishedScroll').Graphic(),
-                color: Orion.FindObject('finishedScroll').Color()
-            }
+                color: Orion.FindObject('finishedScroll').Color(),
+            };
 
             let finishedCount = 0;
             let totalTries = 0;
             while (quantity === 0 || finishedCount !== quantity) {
                 Scripts.Utils.worldSaveCheckWait();
 
-                Scripts.Utils.refill(blank, 'blankScrollsContainer', 10, 'backpack', true)
+                Scripts.Utils.refill(blank, 'blankScrollsContainer', 10, 'backpack', true);
 
                 Orion.ClearJournal();
                 Scripts.Utils.selectMenu(menuName, [spellCircle, spell]);
@@ -176,7 +172,7 @@ namespace Scripts {
                 }
 
                 totalTries++;
-                Scripts.Utils.log(`napsano ${finishedCount} / ${totalTries}`)
+                Scripts.Utils.log(`napsano ${finishedCount} / ${totalTries}`);
 
                 if (Player.Mana() + 70 < Player.Int()) {
                     const isDrinkTimerSet = Orion.Timer(TimersEnum.drink) !== -1;

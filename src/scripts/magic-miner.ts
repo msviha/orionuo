@@ -11,12 +11,12 @@ namespace Scripts {
                 Scripts.Utils.playerPrint('Nemam dusty', ColorEnum.red);
                 return;
             }
-            Scripts.Utils.createGameObjectSelections([{ask: 'Jakou mrtvolku budes ocarovavat ?', addObject: target}]);
+            Scripts.Utils.createGameObjectSelections([{ ask: 'Jakou mrtvolku budes ocarovavat ?', addObject: target }]);
             const o = Orion.FindObject(target);
 
             if (o.Distance() > 3) {
                 Scripts.Utils.playerPrint('Musis k ni dobehnout');
-                Orion.AddDisplayTimer(timer, 5000, 'AboveChar', 'bar', "Hiding", 0, 100, '0x100', 0, 'white');
+                Orion.AddDisplayTimer(timer, 5000, 'AboveChar', 'bar', 'Hiding', 0, 100, '0x100', 0, 'white');
             }
             let w = 5000;
             while (o.Distance() > 3 && w) {
@@ -67,8 +67,7 @@ namespace Scripts {
             const dusty = Orion.FindType(dust.graphic, dust.color, 'ground', 'item', 1);
             if (!dusty.length) {
                 Scripts.Utils.playerPrint('neco se pokazilo.. nevidim pode mnou dusty', ColorEnum.red);
-            }
-            else {
+            } else {
                 Orion.MoveItem(dusty[0]);
             }
         }

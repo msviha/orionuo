@@ -13,9 +13,9 @@ function Autostart() {
     Orion.ClearJournal();
     Shared.AddArray('customStatusBars', []);
     Shared.AddVar('ws', false);
-    let previousLastAttackSerial:string;
-    let previousLastAttackHp:number;
-    let previousPlayerHp:number;
+    let previousLastAttackSerial: string;
+    let previousLastAttackHp: number;
+    let previousPlayerHp: number;
 
     Scripts.Dress.saveEquip();
     Orion.Exec('userAutostart');
@@ -29,8 +29,7 @@ function Autostart() {
             if (previousLastAttackSerial !== lastAttackSerial) {
                 previousLastAttackHp = lastAttack.Hits();
                 Scripts.Utils.printDamage(lastAttackSerial, previousLastAttackHp, true);
-            }
-            else {
+            } else {
                 Scripts.Utils.printDamage(lastAttackSerial, previousLastAttackHp);
                 previousLastAttackHp = lastAttack.Hits();
             }
@@ -46,8 +45,9 @@ function Autostart() {
             const time = Orion.Now() + 20000;
             while (
                 !(Orion.InJournal(Player.Name(), 'my', Player.Serial())?.Text().indexOf(Player.Name()) > -1) &&
-                Orion.Now() < time && !Player.Dead()
-                ) {
+                Orion.Now() < time &&
+                !Player.Dead()
+            ) {
                 Orion.Wait(50);
             }
             Scripts.Utils.playerPrint(`World save DONE`, ColorEnum.green);
@@ -84,7 +84,7 @@ function addMount() {
  * @example in client `_alchemy tmr`
  * @example external code `alchemy('tmr');`
  */
-function alchemy(potionName:PotionsEnum) {
+function alchemy(potionName: PotionsEnum) {
     Scripts.Potions.alchemy(potionName);
 }
 
@@ -126,7 +126,7 @@ function carveBody(carveNearestBodyAutomatically = false) {
  * @example external code `cast("Harm", "lastattack");`
  * @example external code `cast("Magic Reflection", "self");`
  */
-function cast(spell:string, target?:TargetEnum) {
+function cast(spell: string, target?: TargetEnum) {
     Scripts.Spells.cast(spell, target);
 }
 
@@ -135,7 +135,7 @@ function cast(spell:string, target?:TargetEnum) {
  * @example external code `castNecroScroll("kalnox", "self");`
  * @example external code `castNecroScroll("vfp", "lastattack");`
  */
-function castNecroScroll(scroll:NecroScrollEnum, target?:TargetEnum) {
+function castNecroScroll(scroll: NecroScrollEnum, target?: TargetEnum) {
     Scripts.Spells.castNecroScroll(scroll, target);
 }
 
@@ -144,7 +144,7 @@ function castNecroScroll(scroll:NecroScrollEnum, target?:TargetEnum) {
  * @example external code `castScroll("ijs", "self", "Magic Reflection");`
  * @example external code `castScroll("pog", "lastattack");`
  */
-function castScroll(scroll:ScrollEnum, target?:TargetEnum, backupHeadCast?:string) {
+function castScroll(scroll: ScrollEnum, target?: TargetEnum, backupHeadCast?: string) {
     Scripts.Spells.castScroll(scroll, target, backupHeadCast);
 }
 
@@ -157,7 +157,7 @@ function castScroll(scroll:ScrollEnum, target?:TargetEnum, backupHeadCast?:strin
  * @example external code `cestovniKniha(PortBookOptionsEnum.mark);` markne vlastni misto
  */
 function cestovniKniha(selection = PortBookOptionsEnum.kop) {
-    Scripts.Port.cestovniKniha(selection)
+    Scripts.Port.cestovniKniha(selection);
 }
 
 /**
@@ -169,7 +169,7 @@ function cestovniKniha(selection = PortBookOptionsEnum.kop) {
  * @example external code - pokud si to budete definovat sami `Scripts.Clean.cleanObjectInBag({graphic: '0x0E9C', color: '0x0000', bag: {x: 20, y: 50}}, 'buben');`
  * takto je mozne si na jeden hotkey dat tuto funkci vicekrat pod sebe, aby to na zmacknuti uklidilo vice veci
  */
-function cleanObjectInBag(object:any, objectName?:string) {
+function cleanObjectInBag(object: any, objectName?: string) {
     Scripts.Clean.cleanObjectInBag(object, objectName);
 }
 
@@ -196,7 +196,7 @@ function craftSelect() {
  * @example in client `_drink tmr`
  * @example external code `drink('tmr');`
  */
-function drink(potionName:PotionsEnum, switchWarModeWhenNeeded = true, displayTimers = true) {
+function drink(potionName: PotionsEnum, switchWarModeWhenNeeded = true, displayTimers = true) {
     Scripts.Potions.drinkPotion(potionName, switchWarModeWhenNeeded, displayTimers);
 }
 
@@ -208,7 +208,7 @@ function drink(potionName:PotionsEnum, switchWarModeWhenNeeded = true, displayTi
  * @example external code `drum()`
  * @example external code `drum('self');`
  */
-function drum(target?:TargetEnum) {
+function drum(target?: TargetEnum) {
     Scripts.Music.drum(target);
 }
 
@@ -237,7 +237,7 @@ function equip() {
  * @example in client `_fillPotion tmr`
  * @example external code `fillPotion('tmr');`
  */
-function fillPotion(potionName:PotionsEnum, switchWarModeWhenNeeded = true) {
+function fillPotion(potionName: PotionsEnum, switchWarModeWhenNeeded = true) {
     Scripts.Potions.fillPotion(potionName, switchWarModeWhenNeeded);
 }
 
@@ -247,8 +247,8 @@ function fillPotion(potionName:PotionsEnum, switchWarModeWhenNeeded = true) {
  * @example in client `_fishTrain`
  * @example external code `fishTrain([{x: 10, y: 800}, {x: 20, y: 810}]);`
  */
-function fishTrain(walkingCoordinates?:ICoordinates[]) {
-    Scripts.Fishing.fishTrain(walkingCoordinates)
+function fishTrain(walkingCoordinates?: ICoordinates[]) {
+    Scripts.Fishing.fishTrain(walkingCoordinates);
 }
 
 /**
@@ -266,7 +266,7 @@ function friend() {
  * @example in client `_gmMortar tmr`
  * @example external code `gmMortar('tmr');`
  */
-function gmMortar(potionName:PotionsEnum) {
+function gmMortar(potionName: PotionsEnum) {
     Scripts.Potions.gmMortar(potionName);
 }
 
@@ -278,7 +278,7 @@ function gmMortar(potionName:PotionsEnum) {
  * @example external code `harp()`
  * @example external code `harp('self');`
  */
-function harp(target?:TargetEnum) {
+function harp(target?: TargetEnum) {
     Scripts.Music.harp(target);
 }
 
@@ -316,7 +316,7 @@ function hiding() {
  * @param quantity {number} pocet svitku k napsani (0 je default a znamena, ze pise dokud nedojde spotrebak)
  * @example external code `inscription(2, 'Resurrection', 20);`
  */
-function inscription(circle:number, spell:string, quantity = 0) {
+function inscription(circle: number, spell: string, quantity = 0) {
     Scripts.Spells.inscription(circle, spell, quantity);
 }
 
@@ -414,7 +414,7 @@ function lootAll(delay = responseDelay) {
  * @example external code `lute()`
  * @example external code `lute('self');`
  */
-function lute(target?:TargetEnum) {
+function lute(target?: TargetEnum) {
     Scripts.Music.lute(target);
 }
 
@@ -424,7 +424,7 @@ function lute(target?:TargetEnum) {
  * @example external code `make(100, 'gameObject.crafting.carpentry.miscellaneous.krabiceKadi');`
  * @example external code `make(70, 'gameObject.crafting.tinkering.wires.shadow');`
  */
-function make(count:number, objectAsString:string, setInputs = true) {
+function make(count: number, objectAsString: string, setInputs = true) {
     Scripts.Crafting.make(count, objectAsString, setInputs);
 }
 
@@ -436,8 +436,8 @@ function make(count:number, objectAsString:string, setInputs = true) {
  * @example external code `manualTarget()`
  * @example external code `manualTarget({targetIndication: TargetIndicationEnum.large, showStatusBar: true, statusBarPosition: {x: 70, y: 20});`
  */
-function manualTarget(opts:ITargetNextOpts = TARGET_OPTS_DEFAULTS) {
-    opts = {...TARGET_OPTS_DEFAULTS, ...opts};
+function manualTarget(opts: ITargetNextOpts = TARGET_OPTS_DEFAULTS) {
+    opts = { ...TARGET_OPTS_DEFAULTS, ...opts };
     Scripts.Targeting.manualTarget(opts);
 }
 
@@ -447,7 +447,7 @@ function manualTarget(opts:ITargetNextOpts = TARGET_OPTS_DEFAULTS) {
  * @example in client `_mm` vyhodi zamerovac co chces presunout a kam
  * @example in client `_mm 20` takto by melo byt v cilovem kontejneru nakonec 20 kousku
  */
-function mm(requiredCountInTarget?:number) {
+function mm(requiredCountInTarget?: number) {
     if (requiredCountInTarget) {
         const parsedParam = parseParam(requiredCountInTarget);
         requiredCountInTarget = typeof parsedParam === 'number' ? parsedParam : 0;
@@ -461,7 +461,7 @@ function mm(requiredCountInTarget?:number) {
  * @example in client `_mm` vyhodi zamerovac co chces presunout a kam
  * @example in client `_mm 20` takto by melo byt v cilovem kontejneru nakonec 20 kousku
  */
-function mmc(requiredCountInTarget?:number) {
+function mmc(requiredCountInTarget?: number) {
     if (requiredCountInTarget) {
         const parsedParam = parseParam(requiredCountInTarget);
         requiredCountInTarget = typeof parsedParam === 'number' ? parsedParam : 0;
@@ -492,7 +492,7 @@ function nbRune() {
  * @param message Hlaska kterou rekne hrac pri pouziti mystiku do hry
  * @example external code `necroMystik('Necro mystic - HEAL!')`
  */
-function necroMystic(message:string) {
+function necroMystic(message: string) {
     Scripts.Common.necroMystic(message);
 }
 
@@ -514,7 +514,7 @@ function nextWeapon(showName = false) {
  * @example in client `_ocaruj`
  * @example external code `ocaruj()`
  */
-function ocaruj(dusty:OcarovaniEnum = OcarovaniEnum.mytheril) {
+function ocaruj(dusty: OcarovaniEnum = OcarovaniEnum.mytheril) {
     Scripts.MagicMiner.ocaruj(dusty);
 }
 
@@ -541,7 +541,7 @@ function poisonTrain(keepRunning = false) {
  * Poisne trenink kitem `lastattack` target;
  * @example external code `poisonLastAttack()`
  */
-function poisonLastAttack() {
+function poisonLastAttack() {
     Scripts.Common.poisonLastAttack();
 }
 
@@ -625,7 +625,7 @@ function resetWeapons() {
  * @param kolik {number} kolik toho rozbijes
  * @example external code `rozbij(OcarovaniEnum.blood, 1)`
  */
-function rozbij(ingy:OcarovaniEnum = OcarovaniEnum.mytheril, kolik = 5) {
+function rozbij(ingy: OcarovaniEnum = OcarovaniEnum.mytheril, kolik = 5) {
     Scripts.MagicMiner.rozbij(ingy, kolik);
 }
 
@@ -652,7 +652,7 @@ function statusBar() {
  * @example external code `summon("Horse", "self");`
  * @example external code `summon("Giant Viper");`
  */
-function summon(creature:string, target?:TargetEnum) {
+function summon(creature: string, target?: TargetEnum) {
     Scripts.Spells.summon(creature, target);
 }
 
@@ -664,8 +664,8 @@ function summon(creature:string, target?:TargetEnum) {
  * @param allAround {boolean} tamuje vse co vidi okolo sebe
  * @param opts {ITamingOptions} optiony pro tamovani
  */
-function taming(allAround = false, opts:ITamingOptions = TAMING_OPTS_DEFAULTS) {
-    opts = {...TAMING_OPTS_DEFAULTS, ...opts};
+function taming(allAround = false, opts: ITamingOptions = TAMING_OPTS_DEFAULTS) {
+    opts = { ...TAMING_OPTS_DEFAULTS, ...opts };
     allAround ? Scripts.Taming.tameAnimalsAround(opts) : Scripts.Taming.taming(opts);
 }
 
@@ -693,11 +693,11 @@ function tamingTrain(robeOfDruids = true) {
  */
 function targetNext(
     timeToStorePreviousTargets = 1500,
-    additionalFlags?:FlagsEnum[],
-    notoriety?:NotorietyEnum[],
-    opts:ITargetNextOpts = TARGET_OPTS_DEFAULTS
+    additionalFlags?: FlagsEnum[],
+    notoriety?: NotorietyEnum[],
+    opts: ITargetNextOpts = TARGET_OPTS_DEFAULTS,
 ) {
-    opts = {...TARGET_OPTS_DEFAULTS, ...opts};
+    opts = { ...TARGET_OPTS_DEFAULTS, ...opts };
     Scripts.Targeting.targetNext(false, timeToStorePreviousTargets, additionalFlags, notoriety, opts);
 }
 
@@ -715,11 +715,11 @@ function targetNext(
  */
 function targetPrevious(
     timeToStorePreviousTargets = 1500,
-    additionalFlags?:string[],
-    notoriety?:string[],
-    opts:ITargetNextOpts = TARGET_OPTS_DEFAULTS
+    additionalFlags?: string[],
+    notoriety?: string[],
+    opts: ITargetNextOpts = TARGET_OPTS_DEFAULTS,
 ) {
-    opts = {...TARGET_OPTS_DEFAULTS, ...opts};
+    opts = { ...TARGET_OPTS_DEFAULTS, ...opts };
     Scripts.Targeting.targetNext(true, timeToStorePreviousTargets, additionalFlags, notoriety, opts);
 }
 
@@ -751,7 +751,7 @@ function tracking(who = 'Players') {
  * @example external code `travelBook(PortBookOptionsEnum.mark);` markne vlastni misto
  */
 function travelBook(selection = PortBookOptionsEnum.kop) {
-    Scripts.Port.travelBook(selection)
+    Scripts.Port.travelBook(selection);
 }
 
 /**
@@ -788,7 +788,7 @@ function unlock() {
  * @example external code `use(gameObject.ryba.modra, 'modra ryba', 3)`
  * @example external code `use([gameObject.uncategorized.krvavaBanda1, gameObject.uncategorized.krvavaBanda2], 'krvave bandy', 200)`
  */
-function use(object:IMyGameObject|IMyGameObject[], name = '', minimalCountForWarn?:number) {
+function use(object: IMyGameObject | IMyGameObject[], name = '', minimalCountForWarn?: number) {
     Scripts.Utils.use(object, name, minimalCountForWarn);
 }
 
@@ -811,8 +811,8 @@ function useGGR() {
  * @example external code `useKlamak(1, true)` zobrazi zamerovatko a pak vyhodi klamaka level 1 na target
  * @example external code `useKlamak(3, false, ['Bull', 'Cow'])`vyhodi pod vas Bulla, pokud ho nemate, tak Kravu a pokud ani tu nemate tak zkusi vyhodit jiny lvl 3 klamak
  */
-function useKlamak(lvl:number, useAim = false, priorityList?:string[], ignoreSerials?:string[]) {
-    Scripts.Klamak.useKlamak(lvl, useAim, priorityList, ignoreSerials)
+function useKlamak(lvl: number, useAim = false, priorityList?: string[], ignoreSerials?: string[]) {
+    Scripts.Klamak.useKlamak(lvl, useAim, priorityList, ignoreSerials);
 }
 
 /**

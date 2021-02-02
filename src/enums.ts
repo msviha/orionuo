@@ -2,32 +2,32 @@ enum DirectionEnum {
     West = 6,
     North = 0,
     East = 2,
-    South = 4
+    South = 4,
 }
 
 enum ColorEnum {
     none = '0xffff',
     red = '0x0021',
     green = '0x0044',
-    orange = '0x002c'
+    orange = '0x002c',
 }
 
 enum TargetEnum {
     self = 'self',
     lastattack = 'lastattack',
     laststatus = 'laststatus',
-    lasttarget = 'lasttarget'
+    lasttarget = 'lasttarget',
 }
 
 enum CustomStatusBarEnum {
     close = 0,
-    click = 666
+    click = 666,
 }
 
 enum OcarovaniEnum {
     mytheril = 'mytheril',
     black = 'black',
-    blood = 'blood'
+    blood = 'blood',
 }
 
 enum ScrollEnum {
@@ -42,12 +42,12 @@ enum ScrollEnum {
     ivm = 'ivm',
     ress = 'ress',
     recall = 'recall',
-    heal = 'heal'
+    heal = 'heal',
 }
 
 enum TargetIndicationEnum {
     none = 'none',
-    large = 'large'
+    large = 'large',
 }
 
 enum ReagentsEnum {
@@ -58,7 +58,7 @@ enum ReagentsEnum {
     ga = 'ga',
     gi = 'gi',
     ns = 'ns',
-    sa = 'sa'
+    sa = 'sa',
 }
 
 enum FlagsEnum {
@@ -78,7 +78,7 @@ enum FlagsEnum {
     ignoreself = 'ignoreself',
     inlos = 'inlos',
     nearmouse = 'nearmouse',
-    recurse = 'recurse'
+    recurse = 'recurse',
 }
 
 enum NotorietyEnum {
@@ -88,7 +88,7 @@ enum NotorietyEnum {
     criminal = 'criminal',
     orange = 'orange',
     red = 'red',
-    yellow = 'yellow'
+    yellow = 'yellow',
 }
 
 enum PotionsEnum {
@@ -103,39 +103,39 @@ enum PotionsEnum {
     dp = 'dp',
     ns = 'ns',
     shrink = 'shrink',
-    lavabomb = 'lavabomb'
+    lavabomb = 'lavabomb',
 }
 
 enum NecroScrollEnum {
     vfp = 'vfp',
     kalnox = 'kalnox',
-    haluze = 'haluze'
+    haluze = 'haluze',
 }
 
 enum TimersEnum {
     drink = 'drink',
     gs = 'gs',
-    hiding = 'hiding'
+    hiding = 'hiding',
 }
 
 enum GlobalEnum {
-    customStatusBars = 'customStatusBars'
+    customStatusBars = 'customStatusBars',
 }
 
 enum PortBookOptionsEnum {
     opravaStats = 'opravaStats',
     mark = 'mark',
     kop = 'kop',
-    nabiti = 'nabiti'
+    nabiti = 'nabiti',
 }
 
 enum SelectionTypeEnum {
     gump = 'gump',
-    menu = 'menu'
+    menu = 'menu',
 }
 
 enum MedicActionsEnum {
-    pull = "KPZ - Pull",
-    jump = "KPZ - Jump",
-    switchHp = "KPZ - Switch HP"
+    pull = 'KPZ - Pull',
+    jump = 'KPZ - Jump',
+    switchHp = 'KPZ - Switch HP',
 }

@@ -3,9 +3,8 @@
  */
 namespace Scripts {
     export class Statusbar {
-
         static create() {
-            Scripts.Utils.createGameObjectSelections([{ask: 'Target mobile', addObject: 'lastCustomStatusBar'}]);
+            Scripts.Utils.createGameObjectSelections([{ ask: 'Target mobile', addObject: 'lastCustomStatusBar' }]);
             const o = Orion.FindObject('lastCustomStatusBar');
             const serial = o.Serial();
             const name = o.Name();
@@ -19,8 +18,8 @@ namespace Scripts {
                 name,
                 poisoned: o.Poisoned(),
                 visible: false,
-                dead: o.Dead()
-            }
+                dead: o.Dead(),
+            };
             statusBars.push(s);
             Shared.AddVar(serial, true);
             Shared.AddArray(GlobalEnum.customStatusBars, statusBars);
@@ -43,8 +42,7 @@ namespace Scripts {
 
                 if (o) {
                     Scripts.Statusbar.updateStatusBarGumpForObject(o, s, gump);
-                }
-                else if (s.visible) {
+                } else if (s.visible) {
                     s.visible = false;
                     Scripts.Statusbar.redrawBodyToNoObject(s, gump);
                 }
@@ -53,15 +51,22 @@ namespace Scripts {
             Shared.AddArray(GlobalEnum.customStatusBars, statusBars);
         }
 
-        static updateStatusBarGumpForObject(o:GameObject, s:any, gump:CustomGumpObject, forceUpdate = false) {
+        static updateStatusBarGumpForObject(o: GameObject, s: any, gump: CustomGumpObject, forceUpdate = false) {
             const name = o.Name();
             const dead = o.Dead();
             const poisoned = o.Poisoned();
             let hp = o.Hits();
             let max = o.MaxHits();
 
-            if (!forceUpdate && s.visible && s.dead === dead && s.hp === hp &&
-                s.max === max && s.name === name && s.poisoned === poisoned) {
+            if (
+                !forceUpdate &&
+                s.visible &&
+                s.dead === dead &&
+                s.hp === hp &&
+                s.max === max &&
+                s.name === name &&
+                s.poisoned === poisoned
+            ) {
                 return;
             }
 
@@ -112,13 +117,17 @@ namespace Scripts {
             gump.Update();
         }
 
-        static drawBody(gump:CustomGumpObject, notoriety?:number, dead = false) {
-            const ARGBcolor = dead ? '#ffff4dff' : typeof notoriety === 'number' ? Scripts.Utils.getARGBColorByNotoriety(notoriety) : '#ccffffff';
+        static drawBody(gump: CustomGumpObject, notoriety?: number, dead = false) {
+            const ARGBcolor = dead
+                ? '#ffff4dff'
+                : typeof notoriety === 'number'
+                ? Scripts.Utils.getARGBColorByNotoriety(notoriety)
+                : '#ccffffff';
             gump.AddColoredPolygone(0, 0, 170, 50, ARGBcolor);
             gump.AddHitBox(CustomStatusBarEnum.click, 0, 0, 170, 50, 1);
         }
 
-        static redrawBodyToNoObject(s:any, gump:CustomGumpObject) {
+        static redrawBodyToNoObject(s: any, gump: CustomGumpObject) {
             gump.Clear();
             Scripts.Statusbar.drawBody(gump);
             Scripts.Statusbar.drawName(gump, s.name);
@@ -126,22 +135,21 @@ namespace Scripts {
             gump.Update();
         }
 
-        static drawName(gump:CustomGumpObject, name) {
+        static drawName(gump: CustomGumpObject, name) {
             gump.AddText(10, 7, '0', `${name}`, 0, 202);
         }
 
-        static drawHP(gump:CustomGumpObject, hp:number, max:number, poisoned:boolean) {
+        static drawHP(gump: CustomGumpObject, hp: number, max: number, poisoned: boolean) {
             const lineLength = 70;
             const relative = lineLength / max;
             const current = hp * relative;
             const over = hp > max;
-            let currentColor = poisoned ? '#00FF00' : Scripts.Utils.determineHpColorRGB(current * 100 / lineLength);
+            const currentColor = poisoned ? '#00FF00' : Scripts.Utils.determineHpColorRGB((current * 100) / lineLength);
 
             gump.AddText(10, 25, '0', `${hp}/${max}`, 0, 201);
             gump.AddLine(89, 35, 161, 35, 'black', 10, 101);
             gump.AddLine(90, 35, (over ? lineLength : current) + 90, 35, currentColor, 8, 102);
             gump.AddText(152, 25, '0', over ? "<basefont size='small' color='red'>+</basefont>" : ' ', 0, 103);
         }
-
     }
 }

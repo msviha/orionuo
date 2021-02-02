@@ -21,10 +21,7 @@ namespace Scripts {
          *
          * Uklidi vsechny veci ktere maji nastaveny bag v danem objectu, uklizi celou strukturu objektu
          */
-        static cleanObjectInBag(
-            object:any,
-            objectName?:string
-        ) {
+        static cleanObjectInBag(object: any, objectName?: string) {
             if (isMyGameObject(object)) {
                 Scripts.Clean.cleanMyGameObjectInBag(object, objectName);
                 return;
@@ -41,16 +38,13 @@ namespace Scripts {
          *
          * Uklidi vsechny veci ktere maji nastaveny bag v danem objectu
          */
-        static cleanMyGameObjectInBag(
-            type:IMyGameObject,
-            tName?:string
-        ) {
+        static cleanMyGameObjectInBag(type: IMyGameObject, tName?: string) {
             let serials = Scripts.Utils.getSerialsFromMyGameObject(type);
             let bag = type.bag?.objectAlias;
             if (bag && !Orion.FindObject(bag)) {
                 Orion.AddObject(bag);
                 Orion.Print(ColorEnum.none, `Target your [${bag}] for object [${tName?.toUpperCase()}]`);
-                 Scripts.Utils.waitWhileTargeting();
+                Scripts.Utils.waitWhileTargeting();
             }
             !bag && (bag = 'backpack');
 

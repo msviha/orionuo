@@ -1,4 +1,4 @@
-let config = Shared.GetVar('config', {
+const config = Shared.GetVar('config', {
     updateRate: 500,
     drinkPotion: {
         timer: {
@@ -9,7 +9,7 @@ let config = Shared.GetVar('config', {
             yFromPosition: 0,
             textColor: '0x88B',
             font: 0,
-            backgroundColor: '0x88B'
+            backgroundColor: '0x88B',
         },
         gsTimer: {
             position: 'LeftTop',
@@ -19,8 +19,8 @@ let config = Shared.GetVar('config', {
             yFromPosition: 55,
             textColor: '0x88B',
             font: 0,
-            backgroundColor: '0x88B'
-        }
+            backgroundColor: '0x88B',
+        },
     },
     hiding: {
         timer: {
@@ -31,7 +31,7 @@ let config = Shared.GetVar('config', {
             yFromPosition: 100,
             textColor: '0x100',
             font: 0,
-            backgroundColor: 'red'
-        }
-    }
+            backgroundColor: 'red',
+        },
+    },
 });

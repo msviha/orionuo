@@ -1,6 +1,5 @@
 namespace Scripts {
     export class Dress {
-
         /**
          * Scripts.Dress.resetStats()
          * stability beta
@@ -23,8 +22,7 @@ namespace Scripts {
 
             if (travelBook) {
                 Scripts.Port.travelBook(PortBookOptionsEnum.opravaStats);
-            }
-            else {
+            } else {
                 Scripts.Port.cestovniKniha(PortBookOptionsEnum.opravaStats);
             }
 
@@ -32,7 +30,7 @@ namespace Scripts {
             Scripts.Dress.equip(currentEquip);
         }
 
-        static getSerialsFromCurrentEquip():Array<string|undefined> {
+        static getSerialsFromCurrentEquip(): Array<string | undefined> {
             const serials = [];
             serials.push(Orion.ObjAtLayer(14, 'self')?.Serial()); // bracelet
 
@@ -62,7 +60,7 @@ namespace Scripts {
             Scripts.Utils.playerPrint('ULOZEN EQUIP');
         }
 
-        static equip(eq?:Array<string|undefined>) {
+        static equip(eq?: Array<string | undefined>) {
             if (!eq) {
                 eq = Shared.GetArray('savedEquip');
             }
@@ -86,8 +84,7 @@ namespace Scripts {
             if (previous) {
                 currentWeaponIndex--;
                 currentWeaponIndex < 0 && (currentWeaponIndex = weapons.length - 1);
-            }
-            else {
+            } else {
                 currentWeaponIndex++;
                 weapons.length === currentWeaponIndex && (currentWeaponIndex = 0);
             }
@@ -99,8 +96,7 @@ namespace Scripts {
             const weapon = Orion.FindObject(weaponAlias);
             if (!weapon) {
                 Scripts.Utils.playerPrint(`nenasel jsem zbran ${weaponAlias}`, ColorEnum.red);
-            }
-            else {
+            } else {
                 showName && Scripts.Utils.playerPrint(weaponName, ColorEnum.orange);
                 Orion.Equip(weaponAlias);
                 Orion.Wait(responseDelay);
@@ -114,14 +110,14 @@ namespace Scripts {
             }
         }
 
-        static addWeapon(index:number):boolean {
+        static addWeapon(index: number): boolean {
             Scripts.Utils.playerPrint(`Add weapon on slot ${index}`);
             const alias = `weapon${index}`;
             const selection = Orion.WaitForAddObject(alias, 60000);
             return selection === 1;
         }
 
-        static addShield():boolean {
+        static addShield(): boolean {
             Scripts.Utils.playerPrint(`Add shield`);
             const alias = `shield`;
             const selection = Orion.WaitForAddObject(alias, 60000);
@@ -136,7 +132,7 @@ namespace Scripts {
                 Orion.Click(alias);
                 Orion.Wait(responseDelay);
                 const weapon = Orion.FindObject(alias);
-                weapons.push({alias, name: weapon.Name()});
+                weapons.push({ alias, name: weapon.Name() });
                 i++;
             }
             Scripts.Dress.addShield();
