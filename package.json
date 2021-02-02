@@ -5,6 +5,7 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
+    "lint": "eslint 'src/**/*.ts' --quiet --fix",
     "doc": "typedoc --out docs src --includeDeclarations --stripInternal --excludeExternals --ignoreCompilerErrors --mode file --plugin typedoc-plugin-markdown --exclude \"src/+(utils|typeguards).ts\""
   },
   "author": "Michal Sviha",
@@ -13,6 +14,12 @@
     "typescript": "4.0.5"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.14.2",
+    "@typescript-eslint/parser": "^4.14.2",
+    "eslint": "^7.19.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "prettier": "^2.2.1",
     "typedoc": "^0.19.2",
     "typedoc-plugin-markdown": "^3.0.9"
   }
