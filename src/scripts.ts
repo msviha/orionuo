@@ -407,6 +407,15 @@ function lootAll(delay = responseDelay) {
 }
 
 /**
+ * Obycejny lumber script co si chodi po lese, tezi jen magicke drevo a snazi se vyhnout enemy
+ * @example `_lumber`
+ * @example external code `lumber();`
+ */
+function lumber() {
+    Scripts.Lumber.lumber();
+}
+
+/**
  * Pouzije loutnu
  * @param target na koho chces zahrat ? pokud nevyplnis tak hodi kurzor
  * @example in client `_lute`
