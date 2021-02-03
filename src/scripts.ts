@@ -371,8 +371,8 @@ function light(shouldCast = true) {
 
 /**
  * Trenuje lockpicking pomoci bedynky a klice (rozbaleny lockpicking training kit)
- * @example in client `_unlock`
- * @example external code `unlock();`
+ * @example in client `_lockpicking`
+ * @example external code `lockpicking();`
  */
 function lockpicking() {
     Scripts.Lockpicking.lockpicking();

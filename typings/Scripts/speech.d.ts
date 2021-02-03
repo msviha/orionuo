@@ -6,7 +6,7 @@ export default interface Speech {
 	* @param color - message color.
 	* @param text - message text.
 	*/
-	Print(color: string | number, text: string): void;
+	Print(color: string | number, text?: string): void;
 
 	/**
 	* void Orion.CharPrint('serial', 'color', 'text');

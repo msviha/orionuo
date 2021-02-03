@@ -72,6 +72,8 @@ export default interface Targeting {
 	*/
 	WaitTargetTileRelative(graphic: string | number, x, y, z): void;
 
+	GetTilesInRect(target:string, startX:number, startY:number, endX:number, endY:number):SelectedTile[];
+
 	/**
 	* void Orion.CancelWaitTarget();
 	* Cancel of the current wait of the target.
