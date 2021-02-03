@@ -427,9 +427,16 @@ namespace Scripts {
             }
 
             if (!helm) {
-                Scripts.Utils.createGameObjectSelections([{
-                    ask: 'Target you primary helmet', addObject: 'bishopToggleHelm'
-                }]);
+                // plate helm ?
+                const helmSerial = Scripts.Utils.findFirstType({graphic: '0x1412', color: '0xFFFF'}, 6);
+                if (!helmSerial) {
+                    Scripts.Utils.createGameObjectSelections([{
+                        ask: 'Target you primary helmet', addObject: 'bishopToggleHelm'
+                    }]);
+                }
+                else {
+                    Orion.AddObject('bishopToggleHelm', helmSerial);
+                }
             }
 
             const currentHelm = Orion.ObjAtLayer('Helmet');
