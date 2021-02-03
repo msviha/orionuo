@@ -18,7 +18,7 @@
 
 •  **haluze**:  = "haluze"
 
-*Defined in [enums.ts:112](https://github.com/msviha/orionuo/blob/7fb91e0/src/enums.ts#L112)*
+*Defined in [enums.ts:112](https://github.com/msviha/orionuo/blob/6f2627d/src/enums.ts#L112)*
 
 ___
 
@@ -26,7 +26,7 @@ ___
 
 •  **kalnox**:  = "kalnox"
 
-*Defined in [enums.ts:111](https://github.com/msviha/orionuo/blob/7fb91e0/src/enums.ts#L111)*
+*Defined in [enums.ts:111](https://github.com/msviha/orionuo/blob/6f2627d/src/enums.ts#L111)*
 
 ___
 
@@ -34,4 +34,4 @@ ___
 
 •  **vfp**:  = "vfp"
 
-*Defined in [enums.ts:110](https://github.com/msviha/orionuo/blob/7fb91e0/src/enums.ts#L110)*
+*Defined in [enums.ts:110](https://github.com/msviha/orionuo/blob/6f2627d/src/enums.ts#L110)*

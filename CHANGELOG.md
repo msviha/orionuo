@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## 0.1.8
+
+Novy scripter co prispiva featurkama - **Kandown** - diky moc !
+
+### features
+- `KPZPull` Medic - Pouziti KPZ - pritahne cil k sobe
+- `KPZJump` Medic - Pouziti KPZ - pritahne sebe na cil
+- `KPZHpSwitch` Medic - Pouziti KPZ - prohozeni hp s cilem
+- `turboRessFull` Ozivi ducha v okruhu 1 policka do plnych hp (krvavou bandou - Medic)
+- `poisonLastAttack` Poisne trenink kitem `lastattack` target
+- `lumber` Obycejny lumber script co si chodi po lese, tezi jen magicke drevo a snazi se vyhnout enemy
+- `bishopToggle` Prepina mezi bishopkou a druhou helmou
+- `bowcraftTrain` Trenink Bowcraft
+
+### fixes
+- `turboRess` neresoval, ted uz bude :-)
+
+
 ## 0.1.7 (zapomenuta featurka)
 
 ### features

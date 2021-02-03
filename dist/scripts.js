@@ -2151,7 +2151,7 @@ var __assign = (this && this.__assign) || function () {
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 0.1.7');
+    Orion.Print(-1, 'version 0.1.8');
     Orion.Print(-1, '-------------+');
 }
 function Autostart() {
@@ -2211,6 +2211,12 @@ function alchemy(potionName) {
 }
 function attackLast() {
     Orion.Attack(Orion.ClientLastAttack());
+}
+function bishopToggle() {
+    Scripts.Common.bishopToggle();
+}
+function bowcraftTrain() {
+    Scripts.Crafting.bowcraftTrain();
 }
 function bandageSelf(minimalCountForWarn, failedMessage) {
     if (minimalCountForWarn === void 0) { minimalCountForWarn = 10; }
@@ -2314,6 +2320,9 @@ function loot(cut) {
 function lootAll(delay) {
     if (delay === void 0) { delay = responseDelay; }
     Scripts.Loot.lootAllFrom(delay);
+}
+function lumber() {
+    Scripts.Lumber.lumber();
 }
 function lute(target) {
     Scripts.Music.lute(target);
@@ -2990,6 +2999,34 @@ var Scripts;
                 Scripts.Common.turboRess(true);
             }
         };
+        Common.bishopToggle = function () {
+            var helm = Orion.FindObject('bishopToggleHelm');
+            var bishopHelm = Scripts.Utils.findFirstType({ graphic: '0x1DB9', color: '0x0BB0' }, 6);
+            if (!bishopHelm) {
+                Scripts.Utils.playerPrint('nemas Bishopku', ColorEnum.red);
+            }
+            if (!helm) {
+                var helmSerial = Scripts.Utils.findFirstType({ graphic: '0x1412', color: '0xFFFF' }, 6);
+                if (!helmSerial) {
+                    Scripts.Utils.createGameObjectSelections([{
+                            ask: 'Target you primary helmet', addObject: 'bishopToggleHelm'
+                        }]);
+                }
+                else {
+                    Orion.AddObject('bishopToggleHelm', helmSerial);
+                }
+            }
+            var currentHelm = Orion.ObjAtLayer('Helmet');
+            if (!currentHelm) {
+                Orion.UseObject(bishopHelm);
+            }
+            else if (currentHelm.Serial() === bishopHelm) {
+                Orion.UseObject('bishopToggleHelm');
+            }
+            else {
+                Orion.UseObject(bishopHelm);
+            }
+        };
         return Common;
     }());
     Scripts.Common = Common;
@@ -3191,6 +3228,36 @@ var Scripts;
             }
             else {
                 Scripts.Crafting.makeFromSelection();
+            }
+        };
+        Crafting.bowcraftTrain = function () {
+            Scripts.Utils.createGameObjectSelections([
+                { ask: 'Target container with logs', addObject: 'logsContainer' },
+                { ask: 'Target container with shafts', addObject: 'shaftsContainer' }
+            ]);
+            var dagger = Scripts.Utils.findFirstType(gameObject.crafting.blacksmithing.ironWeapons.swordsAndBlades.dagger, 1);
+            if (!dagger) {
+                Scripts.Utils.log('nemas dagger', ColorEnum.red);
+            }
+            while (true) {
+                Orion.ClearJournal();
+                Orion.Wait(50);
+                var logs = Scripts.Utils.findFirstType(gameObject.resources.logs);
+                if (!logs) {
+                    var shafts = Orion.FindType('0x1BD4');
+                    Orion.MoveItem(shafts[0], 0, 'shaftsContainer');
+                    Orion.Wait(responseDelay);
+                }
+                Scripts.Utils.refill(gameObject.resources.logs, 'logsContainer', 20, undefined, true, 'logs');
+                var l = Scripts.Utils.findFirstType(gameObject.resources.logs);
+                Orion.MoveItem(l, 1, 'backpack', 20, 20);
+                Orion.Wait(responseDelay);
+                Scripts.Utils.selectMenu('Bowcraft', ['Shafts']);
+                Orion.WaitTargetObject(l);
+                Orion.UseObject(dagger);
+                Scripts.Utils.waitWhileSomethingInJournal(['You fail to create', 'You put the Unfinished']);
+                Orion.UseType('0x1BD6');
+                Orion.Wait(responseDelay);
             }
         };
         return Crafting;
@@ -3666,6 +3733,165 @@ var Scripts;
         return Loot;
     }());
     Scripts.Loot = Loot;
+})(Scripts || (Scripts = {}));
+var Scripts;
+(function (Scripts) {
+    var Lumber = (function () {
+        function Lumber() {
+        }
+        Lumber.lumber = function () {
+            var akce = false;
+            Shared.AddArray('trees', []);
+            Shared.AddArray('harvestedTrees', []);
+            var _loop_1 = function () {
+                Orion.ClearJournal(undefined, 'sys');
+                var savedTrees = Shared.GetArray('trees', []);
+                var newTreesAround = Scripts.Lumber.findTreesAround();
+                var all = savedTrees.concat(newTreesAround.filter(function (obj) {
+                    return !savedTrees.some(function (obj2) {
+                        return obj.x === obj2.x && obj.y === obj2.y;
+                    });
+                }));
+                Shared.AddArray('trees', all);
+                var x = Player.X();
+                var y = Player.Y();
+                var z = Player.Z();
+                var harvestedTrees = Shared.GetArray('harvestedTrees', []);
+                var treesToHarv = all.filter(function (obj) {
+                    return !harvestedTrees.some(function (obj2) {
+                        return obj.x === obj2.x && obj.y === obj2.y;
+                    });
+                });
+                var nearestIndex = Scripts.Lumber.findNearestTree(treesToHarv);
+                if (nearestIndex === -1) {
+                    Scripts.Utils.log('Nejsou v dosahu dalsi stromy');
+                    return { value: void 0 };
+                }
+                var coordinates = treesToHarv[nearestIndex];
+                harvestedTrees.push(coordinates);
+                Shared.AddArray('harvestedTrees', harvestedTrees);
+                Orion.WalkTo(coordinates.x, coordinates.y, coordinates.z, 1);
+                var msg = 0;
+                if (akce) {
+                    Scripts.Utils.waitWhileSomethingInJournal(['akce skoncila'], 60000, undefined, undefined);
+                    Orion.Wait(responseDelay);
+                    akce = false;
+                }
+                if (Orion.InJournal('attacking you')) {
+                    var i = 0;
+                    while (!Orion.WalkTo(treesToHarv[i].x, treesToHarv[i].y, treesToHarv[i].z, 1, undefined, 1)) {
+                        i++;
+                    }
+                    return "continue";
+                }
+                var reds = Orion.FindType('any', 'any', 'ground', 'mobile|ignoreself', 18, NotorietyEnum.red);
+                if (reds.length) {
+                    var o = Orion.FindObject(reds[0]);
+                    if (o) {
+                        Orion.Print('pozor na ' + o.Name());
+                    }
+                    return "continue";
+                }
+                do {
+                    Orion.ClearJournal(undefined, 'sys');
+                    Orion.WaitTargetTile('tree', coordinates.x, coordinates.y, coordinates.z);
+                    Orion.UseType('0x0F43');
+                    msg = Scripts.Utils.waitWhileSomethingInJournal([
+                        'You put the',
+                        'destroyed hatchet',
+                        'no logs left',
+                        'way to use that',
+                        'fail to produce'
+                    ], undefined, undefined, undefined);
+                    if (Orion.InJournal('attacking you')) {
+                        var i = 0;
+                        while (!Orion.WalkTo(treesToHarv[i].x, treesToHarv[i].y, treesToHarv[i].z, 1, undefined, 1)) {
+                            i++;
+                        }
+                        continue;
+                    }
+                    if (msg === 1) {
+                        continue;
+                    }
+                    if (msg === 2) {
+                        akce = true;
+                        break;
+                    }
+                    Scripts.Utils.waitWhileSomethingInJournal(['akce skoncila'], undefined, undefined, undefined);
+                    if (Orion.InJournal('found something special')) {
+                        var specialLogs = Orion.FindType('0x1BDD', '!0x0000', 'ground', '', 3);
+                        Orion.MoveItem(specialLogs[0]);
+                    }
+                    else {
+                        var logs = Orion.FindType('0x1BDD', '0x0000');
+                        logs.length && Orion.Drop(logs[0]);
+                    }
+                    Orion.Wait(responseDelay);
+                    if (Player.MaxWeight() - 30 < Player.Weight()) {
+                        Scripts.Port.travelBook(PortBookOptionsEnum.kop);
+                        return { value: void 0 };
+                    }
+                } while (msg !== 2 && msg !== 3);
+            };
+            while (!Player.Dead()) {
+                var state_1 = _loop_1();
+                if (typeof state_1 === "object")
+                    return state_1.value;
+            }
+        };
+        Lumber.findTreesAround = function () {
+            var dist = 9;
+            var coordinates = [];
+            var px = Player.X();
+            var py = Player.Y();
+            var rect = Orion.GetTilesInRect('tree', px - dist, py - dist, px + dist, py + dist);
+            for (var i = 0; i < rect.length; i++) {
+                var t = rect[i];
+                coordinates.push({ x: t.X(), y: t.Y(), z: t.Z() });
+            }
+            var trees = __spreadArrays(coordinates);
+            var reds = Orion.FindType('any', 'any', 'ground', 'mobile|ignoreself', 18, NotorietyEnum.red);
+            if (reds.length) {
+                for (var i_1 = coordinates.length - 1; i_1 >= 0; i_1--) {
+                    var t_1 = coordinates[i_1];
+                    for (var _i = 0, reds_1 = reds; _i < reds_1.length; _i++) {
+                        var r = reds_1[_i];
+                        var ro = Orion.FindObject(r);
+                        var rx = ro.X();
+                        var ry = ro.Y();
+                        var dx = t_1.x > rx ? t_1.x - rx : rx - t_1.x;
+                        var dy = t_1.y > ry ? t_1.y - ry : ry - t_1.y;
+                        if (dx < 15 && dy < 15) {
+                            trees.splice(i_1, 1);
+                            break;
+                        }
+                    }
+                }
+            }
+            return trees;
+        };
+        Lumber.findNearestTree = function (trees) {
+            var index = -1;
+            var dist = 999;
+            var px = Player.X();
+            var py = Player.Y();
+            for (var i = 0; i < trees.length; i++) {
+                var t = trees[i];
+                var x = t.x;
+                var y = t.y;
+                var dx = x > px ? x - px : px - x;
+                var dy = y > py ? y - py : py - y;
+                var d = dx + dy;
+                if (dist > d) {
+                    dist = d;
+                    index = i;
+                }
+            }
+            return index;
+        };
+        return Lumber;
+    }());
+    Scripts.Lumber = Lumber;
 })(Scripts || (Scripts = {}));
 var Scripts;
 (function (Scripts) {
@@ -4535,7 +4761,7 @@ var Scripts;
             }
             Scripts.Utils.playerPrint("Target gmmortar for making \"" + potionName + "\"");
             Orion.WaitForAddObject('gmMortar', 60000);
-            var _loop_1 = function () {
+            var _loop_2 = function () {
                 Orion.ClearJournal();
                 Orion.Wait(50);
                 var kadePrevious = Orion.FindType(gameObject.uncategorized.emptyKad.graphic);
@@ -4566,9 +4792,9 @@ var Scripts;
                 Scripts.Utils.waitWhileSomethingInJournal(['You put']);
             };
             while (true) {
-                var state_1 = _loop_1();
-                if (typeof state_1 === "object")
-                    return state_1.value;
+                var state_2 = _loop_2();
+                if (typeof state_2 === "object")
+                    return state_2.value;
             }
         };
         Potions.alchemy = function (potionName) {
