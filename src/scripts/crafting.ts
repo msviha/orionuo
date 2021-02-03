@@ -238,5 +238,40 @@ namespace Scripts {
                 Scripts.Crafting.makeFromSelection();
             }
         }
+
+        static bowcraftTrain() {
+            Scripts.Utils.createGameObjectSelections([
+                {ask: 'Target container with logs', addObject: 'logsContainer'},
+                {ask: 'Target container with shafts', addObject: 'shaftsContainer'}
+            ]);
+
+            const dagger = Scripts.Utils.findFirstType(gameObject.crafting.blacksmithing.ironWeapons.swordsAndBlades.dagger, 1);
+            if (!dagger) {
+                Scripts.Utils.log('nemas dagger', ColorEnum.red);
+            }
+
+            while (true) {
+                Orion.ClearJournal();
+                Orion.Wait(50);
+                const logs = Scripts.Utils.findFirstType(gameObject.resources.logs);
+                if (!logs) {
+                    const shafts = Orion.FindType('0x1BD4');
+                    Orion.MoveItem(shafts[0], 0, 'shaftsContainer');
+                    Orion.Wait(responseDelay);
+                }
+                Scripts.Utils.refill(gameObject.resources.logs, 'logsContainer', 20, undefined, true, 'logs');
+                const l = Scripts.Utils.findFirstType(gameObject.resources.logs);
+                Orion.MoveItem(l, 1, 'backpack', 20, 20);
+                Orion.Wait(responseDelay);
+
+                Scripts.Utils.selectMenu('Bowcraft', ['Shafts']);
+                Orion.WaitTargetObject(l);
+                Orion.UseObject(dagger);
+
+                Scripts.Utils.waitWhileSomethingInJournal(['You fail to create', 'You put the Unfinished']);
+                Orion.UseType('0x1BD6');
+                Orion.Wait(responseDelay);
+            }
+        }
     }
 }

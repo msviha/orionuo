@@ -106,6 +106,15 @@ function bishopToggle() {
 }
 
 /**
+ * Trenink Bowcraft
+ * @example external code `bowcraftTrain();
+ * @example in client `_bowcraftTrain;
+ */
+function bowcraftTrain() {
+    Scripts.Crafting.bowcraftTrain();
+}
+
+/**
  * Da si bandu, pokud dosli tak prehraje zvuk z C:\critical.wav
  * Poslednich 10 band hlasi nad hracem
  * @param minimalCountForWarn zobrazi varovani pokud budes mit tento pocet band (a mene)
