@@ -98,6 +98,14 @@ function attackLast() {
 }
 
 /**
+ * Prepina mezi bishopkou a druhou helmou
+ * @example external code `bishopToggle();`
+ */
+function bishopToggle() {
+    Scripts.Common.bishopToggle();
+}
+
+/**
  * Da si bandu, pokud dosli tak prehraje zvuk z C:\critical.wav
  * Poslednich 10 band hlasi nad hracem
  * @param minimalCountForWarn zobrazi varovani pokud budes mit tento pocet band (a mene)

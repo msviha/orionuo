@@ -417,5 +417,31 @@ namespace Scripts {
                 Scripts.Common.turboRess(true)
             }
         }
+
+        static bishopToggle() {
+            const helm = Orion.FindObject('bishopToggleHelm');
+            const bishopHelm = Scripts.Utils.findFirstType({graphic: '0x1DB9', color: '0x0BB0'}, 6);
+
+            if (!bishopHelm) {
+                Scripts.Utils.playerPrint('nemas Bishopku', ColorEnum.red);
+            }
+
+            if (!helm) {
+                Scripts.Utils.createGameObjectSelections([{
+                    ask: 'Target you primary helmet', addObject: 'bishopToggleHelm'
+                }]);
+            }
+
+            const currentHelm = Orion.ObjAtLayer('Helmet');
+            if (!currentHelm) {
+                Orion.UseObject(bishopHelm);
+            }
+            else if (currentHelm.Serial() === bishopHelm) {
+                Orion.UseObject('bishopToggleHelm');
+            }
+            else {
+                Orion.UseObject(bishopHelm);
+            }
+        }
     }
 }
