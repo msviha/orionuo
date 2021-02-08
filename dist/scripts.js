@@ -2476,6 +2476,9 @@ function useRR() {
 function useShrinkKad() {
     Scripts.Taming.useShrinkKad();
 }
+function shrinkAll() {
+    Scripts.Taming.shrinkAll();
+}
 function webDestroyer() {
     Scripts.Common.webDestroyer();
 }
@@ -5344,6 +5347,26 @@ var Scripts;
                 }
                 Orion.ClearJournal();
             }
+        };
+        Taming.shrinkAll = function () {
+            var _this = this;
+            var petsAround = Orion.FindType('!0x0190|!0x0191', '0xFFFF', 'ground', 'live', 2);
+            var availablePets = [];
+            while (petsAround.length) {
+                var petSerial = petsAround[0];
+                var pet = Orion.FindObject(petSerial);
+                if (pet.CanChangeName()) {
+                    availablePets.push(petSerial);
+                }
+                Orion.Ignore(petSerial);
+                petsAround = Orion.FindType('!0x0190|!0x0191', '0xFFFF', 'ground', 'live', 2);
+            }
+            Orion.IgnoreReset();
+            availablePets.forEach(function (pet) {
+                Orion.WaitTargetObject(pet);
+                _this.useShrinkKad();
+                Orion.Wait(250);
+            });
         };
         return Taming;
     }());

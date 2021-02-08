@@ -860,6 +860,15 @@ function useShrinkKad() {
 }
 
 /**
+ * Shrinkne vsechny klamaky v okoli 2 policek
+ * @example in client `_shrinkAll`
+ * @example external code `shrinkAll()`
+ */
+function shrinkAll() {
+    Scripts.Taming.shrinkAll();
+}
+
+/**
  * Znici vsechny pavucinky okolo hrace
  * @example external code `webDestroyer()`
  */
