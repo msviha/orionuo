@@ -268,11 +268,11 @@ namespace Scripts {
             let petsAround = Orion.FindType('!0x0190|!0x0191', '0xFFFF', 'ground', 'live', 2);
             const availablePets = [];
             while(petsAround.length) {
-                const petSerial = petsAround[0]
+                const petSerial = petsAround[0];
                 const pet = Orion.FindObject(petSerial);
 
                 if (pet.CanChangeName()) {
-                    availablePets.push(petSerial)
+                    availablePets.push(petSerial);
                 }
 
                 Orion.Ignore(petSerial);
