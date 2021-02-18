@@ -26,7 +26,7 @@ namespace Scripts {
         }
 
         static getMortar():string {
-            const mortars = Orion.FindType(gameObject.uncategorized.mortar.graphic, gameObject.uncategorized.mortar.color);
+            const mortars = Orion.FindType(gameObject.uncategorized.mortar.graphic);
             if (!mortars.length) {
                 Scripts.Utils.log(`Nemas mortar`, ColorEnum.red);
                 throw 'Nemas mortar';
