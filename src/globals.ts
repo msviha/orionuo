@@ -1123,7 +1123,8 @@ const gameObject:any = {
                 graphic: '0x1843',
                 color: '0x0005'
             },
-            alchemySelection: 'Mana Refresh'
+            alchemySelection: 'Mana Refresh Potion',
+            gmMortarSelection: 'Mana Refresh (306 Eyes of Newt)',
         },
         gb: {
             name: 'Greater Blood potion',
@@ -1134,6 +1135,20 @@ const gameObject:any = {
                 graphic: '0x1843',
                 color: '0x0025'
             }
+        },
+        ga: {
+            name: 'Greater Agility',
+            graphic: '0x0F08',
+            color: '0x0000',
+            kad: {
+                name: 'Nadoba s Greater Blood',
+                graphic: '0x1843',
+                color: '0x00BD',
+            },
+            gmMortarSelection: 'Greater Agility (306 Blood Mosses)',
+            alchemySelection: 'Greater Agility',
+            reagentsCount: 3,
+            reagent: 'bm',
         },
         gh: {
             name: 'Greater Heal Potion',
