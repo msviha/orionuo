@@ -93,8 +93,10 @@ enum NotorietyEnum {
 
 enum PotionsEnum {
     tmr = 'tmr',
+    mr = 'mr',
     gh = 'gh',
     gs = 'gs',
+    ga = 'ga',
     gb = 'gb',
     tr = 'tr',
     gc = 'gc',
