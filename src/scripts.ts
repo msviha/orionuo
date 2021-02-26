@@ -339,15 +339,6 @@ function inscription(circle:number, spell:string, quantity = 0) {
 
 /**
  * Prejmenuje vsechny summony a posle na lastattack
- * @example `_kill`
- * @example external code `kill();`
- */
-function kill() {
-    Scripts.PetCommander.kill();
-}
-
-/**
- * Prejmenuje vsechny summony a posle na lastattack
  * @example `_killAll`
  * @example external code `killAll();`
  */
