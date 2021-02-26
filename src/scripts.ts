@@ -505,6 +505,15 @@ function mount() {
 }
 
 /**
+ * Spocita potrebne mystiky podle receptu co mate u sebe
+ * @example in client `_mysticCounter`
+ * @example external code `mysticCounter();`
+ */
+function mysticCounter() {
+    Scripts.Common.mysticCounter();
+}
+
+/**
  * Kopne pres NB runu
  * @example in client `_nbRune`
  * @example external code `nbRune()`
@@ -662,6 +671,15 @@ function rozbij(ingy:OcarovaniEnum = OcarovaniEnum.mytheril, kolik = 5) {
  */
 function saveEquip() {
     Scripts.Dress.saveEquip();
+}
+
+/**
+ * Shrinkne vsechny klamaky v okoli 2 policek
+ * @example in client `_shrinkAll`
+ * @example external code `shrinkAll()`
+ */
+function shrinkAll() {
+    Scripts.Taming.shrinkAll();
 }
 
 /**
@@ -857,15 +875,6 @@ function useRR() {
  */
 function useShrinkKad() {
     Scripts.Taming.useShrinkKad();
-}
-
-/**
- * Shrinkne vsechny klamaky v okoli 2 policek
- * @example in client `_shrinkAll`
- * @example external code `shrinkAll()`
- */
-function shrinkAll() {
-    Scripts.Taming.shrinkAll();
 }
 
 /**
