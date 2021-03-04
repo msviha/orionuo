@@ -264,6 +264,18 @@ const gameObject:any = {
         pilesOfHides: {
             graphic: '0x1078',
             color: '0x0000'
+        },
+        pitcherOfWater: {
+            graphic: '0x0FF8',
+            color: '0x0000'
+        },
+        fairyDust: {
+            graphic: '0x103D',
+            color: '0x0B52'
+        },
+        soulShard: {
+            graphic: '0x0FC4',
+            color: '0x0498'
         }
     },
     crafting: {
@@ -348,27 +360,62 @@ const gameObject:any = {
                         }
                     }
                 },
-                deedToShips: {
-                    deedToSmallShip: {
-                        graphic: '0x14F1',
-                        color: '0x0000',
-                        make: {
-                            tool: 'gameObject.tools.saw',
-                            refill: {
-                                resources: [
-                                    {item: 'gameObject.resources.logs', count: 30},
-                                    {item: 'gameObject.resources.foldedCloth', count: 20}
-                                ],
-                                crafting: [
-                                    {item: 'gameObject.crafting.tinkering.parts.hinge', count: 20},
-                                    {item: 'gameObject.crafting.tinkering.parts.nails', count: 35},
-                                    {item: 'gameObject.crafting.carpentry.miscellaneous.boards', count: 250}
-                                ]
-                            },
-                            menu: {
-                                name: 'Carpentry',
-                                selections: ['Deeds to Ships', 'Deed to a small ship']
-                            }
+                washBasin: {
+                    graphic: '0x1008',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.saw',
+                        refill: {
+                            resources: [{ item: 'gameObject.resources.logs', count: 1 },
+                                { item: 'gameObject.resources.ingots.iron', count: 2 },
+                                { item: 'gameObject.resources.pitcherOfWater', count: 1}],
+                            crafting: [{ item: 'gameObject.crafting.carpentry.miscellaneous.boards', count: 2 },       { item: 'gameObject.crafting.tinkering.parts.nails', count: 2 }]
+                        },
+                        menu: {
+                            name: 'Carpentry',
+                            selections: ['Containers & Cont. parts', 'Wash Basin']
+                        }
+                    }
+                },
+                woodenBox: {
+                    graphic: '0x0E7D',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.saw',
+                        refill: {
+                            resources: [{item: 'gameObject.resources.logs', count: 4}],
+                            crafting: [
+                                {item: 'gameObject.crafting.tinkering.parts.hinge', count: 2},
+                                {item: 'gameObject.crafting.tinkering.parts.nails', count: 1}
+                            ]
+                        },
+                        menu: {
+                            name: 'Carpentry',
+                            selections: ['Containers & Cont. parts', 'Wooden Box']
+                        }
+                    }
+                }
+            },
+            deedToShips: {
+                deedToSmallShip: {
+                    graphic: '0x14F1',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.saw',
+                        refill: {
+                            resources: [
+                                {item: 'gameObject.resources.logs', count: 30},
+                                {item: 'gameObject.resources.foldedCloth', count: 20}
+                            ],
+                            crafting: [
+                                {item: 'gameObject.crafting.tinkering.parts.hinge', count: 20},
+                                {item: 'gameObject.crafting.tinkering.parts.nails', count: 35},
+                                {item: 'gameObject.crafting.carpentry.miscellaneous.boards', count: 250}
+                            ]
+                        },
+                        menu: {
+                            name: 'Carpentry',
+                            selections: ['Deeds to Ships', 'Deed to a small ship']
                         }
                     }
                 }
@@ -934,7 +981,7 @@ const gameObject:any = {
                         },
                         outputCount: 50
                     }
-                },
+                }
             },
             keys: {
                 magicKey: {
@@ -1073,7 +1120,127 @@ const gameObject:any = {
             tools: {
                 petardCauldron: {
                     graphic: '0x0990',
-                    color: '0x04B1'
+                    color: '0x04B1',
+                    make: {
+                        tool: 'gameObject.tools.silverHammer',
+                        toolTarget: 'gameObject.resources.ingots.iron',
+                        refill: {
+                            resources: [
+                                {item: 'gameObject.resources.ingots.iron', count: 10},
+                                {item: 'gameObject.resources.ingots.rose', count: 6},
+                                {item: 'gameObject.resources.ingots.blood', count: 1}
+                            ],
+                            crafting: [
+                                {item: 'gameObject.crafting.tinkering.wires.iron', count: 5}
+                            ]
+                        },
+                        menu: {
+                            name: 'Blacksmithing',
+                            selections: ['Tools', 'Petard Cauldron']
+                        }
+                    }
+                },
+                sekera: {
+                    graphic: '0x0F43',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.silverHammer',
+                        toolTarget: 'gameObject.resources.ingots.iron',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.iron', count: 4 },
+                                { item: 'gameObject.resources.logs', count: 1 }
+                            ],
+
+                        },
+                        menu: {
+                            name: 'Blacksmithing',
+                            selections: ['Tools', 'Hatchet']
+                        }
+                    }
+                },
+                krumpac: {
+                    graphic: '0x0E85',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.silverHammer',
+                        toolTarget: 'gameObject.resources.ingots.iron',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.iron', count: 4 },
+                                { item: 'gameObject.resources.logs', count: 1 }
+                            ],
+
+                        },
+                        menu: {
+                            name: 'Blacksmithing',
+                            selections: ['Tools', 'Pick axe']
+                        }
+                    }
+                },
+                bloodSphere: {
+                    graphic: '0x0E2D',
+                    color: '0x0846',
+                    make: {
+                        tool: 'gameObject.tools.silverHammer',
+                        toolTarget: 'gameObject.resources.ingots.iron',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.iron', count:  5},
+                                { item: 'gameObject.resources.fairyDust', count: 1 }
+                            ],
+                            crafting: [{ item: 'gameObject.crafting.tinkering.wires.rose', count: 15 },
+                                { item: 'gameObject.crafting.tinkering.wires.blood', count: 15 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Blacksmithing',
+                            selections: ['Tools', 'Blood Rock Sphere']
+                        }
+                    }
+                },
+                blackSphere: {
+                    graphic: '0x0E2D',
+                    color: '0x0B15',
+                    make: {
+                        tool: 'gameObject.tools.silverHammer',
+                        toolTarget: 'gameObject.resources.ingots.iron',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.iron', count:  5},
+                                { item: 'gameObject.resources.fairyDust', count: 1 }
+                            ],
+                            crafting: [{ item: 'gameObject.crafting.tinkering.wires.shadow', count: 15 },
+                                { item: 'gameObject.crafting.tinkering.wires.black', count: 15 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Blacksmithing',
+                            selections: ['Tools', 'Black Rock Sphere']
+                        }
+                    }
+                },
+                mytherilSphere: {
+                    graphic: '0x0E2D',
+                    color: '0x0B8A',
+                    make: {
+                        tool: 'gameObject.tools.silverHammer',
+                        toolTarget: 'gameObject.resources.ingots.iron',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.iron', count:  5},
+                                { item: 'gameObject.resources.fairyDust', count: 1 },
+                                { item: 'gameObject.resources.soulShard', count: 1 }
+                            ],
+                            crafting: [{ item: 'gameObject.crafting.tinkering.wires.gold', count: 15 },
+                                { item: 'gameObject.crafting.tinkering.wires.mytheril', count: 15 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Blacksmithing',
+                            selections: ['Tools', 'Mytheril Sphere']
+                        }
+                    }
                 }
             },
             ironWeapons: {
@@ -1123,8 +1290,7 @@ const gameObject:any = {
                 graphic: '0x1843',
                 color: '0x0005'
             },
-            alchemySelection: 'Mana Refresh Potion',
-            gmMortarSelection: 'Mana Refresh (306 Eyes of Newt)',
+            alchemySelection: 'Mana Refresh'
         },
         gb: {
             name: 'Greater Blood potion',
@@ -1135,20 +1301,6 @@ const gameObject:any = {
                 graphic: '0x1843',
                 color: '0x0025'
             }
-        },
-        ga: {
-            name: 'Greater Agility',
-            graphic: '0x0F08',
-            color: '0x0000',
-            kad: {
-                name: 'Nadoba s Greater Blood',
-                graphic: '0x1843',
-                color: '0x00BD',
-            },
-            gmMortarSelection: 'Greater Agility (306 Blood Mosses)',
-            alchemySelection: 'Greater Agility',
-            reagentsCount: 3,
-            reagent: 'bm',
         },
         gh: {
             name: 'Greater Heal Potion',
@@ -1214,19 +1366,6 @@ const gameObject:any = {
             gmMortarSelection: 'Greater Cure (612 Garlics)',
             alchemySelection: 'Greater Cure'
         },
-        lc: {
-            graphic: '0x0F07',
-            color: '0x0000',
-            bag: {
-                x: 80,
-                y: 15
-            },
-            kad: {
-                graphic: '0x1843',
-                color: '0x0091'
-            },
-            alchemySelection: 'Lesser Cure Potion'
-        },
         dp: {
             name: 'Deathly Poison Potion',
             graphic: '0x0F0A',
@@ -1243,6 +1382,19 @@ const gameObject:any = {
             gmMortarSelection: 'Deadly Poison (1020 Nightshades)',
             alchemySelection: 'Deadly Poison'
         },
+        lc: {
+            graphic: '0x0F07',
+            color: '0x0000',
+            bag: {
+                x: 80,
+                y: 15
+            },
+            kad: {
+                graphic: '0x1843',
+                color: '0x0091'
+            },
+            alchemySelection: 'Lesser Cure Potion'
+        },
         ns: {
             name: 'Nightsight Potion',
             graphic: '0x0F06',
@@ -1253,6 +1405,17 @@ const gameObject:any = {
                 color: '0x03C4'
             },
             alchemySelection: 'Nightsight'
+        },
+        ag: {
+            name: 'Agility Potion',
+            graphic: '0x0F08',
+            color: '0x0000',
+            kad: {
+                name: 'Nadoba s Agility',
+                graphic: '0x1843',
+                color: '0x00BF'
+            },
+            alchemySelection: 'Agility Potion'
         },
         shrink: {
             name: 'Shrink',
@@ -1289,6 +1452,7 @@ const gameObject:any = {
                 graphic: '0x1843',
                 color: '0x0B77'
             },
+            gmMortarSelection: 'Invisibility (408 Wyrm\'s Hearts)',
             alchemySelection: 'Invisibility'
         },
         lp: {
@@ -1415,6 +1579,16 @@ const gameObject:any = {
             }
         }
     },
+    neklances: {
+        titan: {
+            graphic: '0x1088',
+            color: '0x0485',
+            bag: {
+                x: 64,
+                y: 35
+            }
+        }
+    },
     scrolls: {
         blank: {
             graphic: '0x0E34',
@@ -1472,11 +1646,6 @@ const gameObject:any = {
             recall: {
                 graphic: '0x1F4C',
                 color: '0x0000'
-            },
-            heal: {
-                graphic: '0x1F31',
-                color: '0x0000',
-                minMana: 3
             }
         },
         necro: {
@@ -1765,7 +1934,9 @@ const gameObject:any = {
             },
             goat: {
                 graphic: '0x2108',
-                color: '0xFFFF'
+                color: '0xFFFF',
+                gWidth: 41,
+                gHeight: 36
             },
             dog: {
                 graphic: '0x09A8',
@@ -1863,12 +2034,6 @@ const gameObject:any = {
         halberd: {
             graphic: '0x143E',
             color: '0x08A1'
-        }
-    },
-    medic: {
-        kpz: {
-            graphic: "0x09B0",
-            color: "0x0493",
         }
     }
 };
