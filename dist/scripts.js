@@ -131,8 +131,10 @@ var NotorietyEnum;
 var PotionsEnum;
 (function (PotionsEnum) {
     PotionsEnum["tmr"] = "tmr";
+    PotionsEnum["mr"] = "mr";
     PotionsEnum["gh"] = "gh";
     PotionsEnum["gs"] = "gs";
+    PotionsEnum["ga"] = "ga";
     PotionsEnum["gb"] = "gb";
     PotionsEnum["tr"] = "tr";
     PotionsEnum["gc"] = "gc";
@@ -439,6 +441,18 @@ var gameObject = {
         pilesOfHides: {
             graphic: '0x1078',
             color: '0x0000'
+        },
+        pitcherOfWater: {
+            graphic: '0x0FF8',
+            color: '0x0000'
+        },
+        fairyDust: {
+            graphic: '0x103D',
+            color: '0x0B52'
+        },
+        soulShard: {
+            graphic: '0x0FC4',
+            color: '0x0498'
         }
     },
     crafting: {
@@ -523,27 +537,62 @@ var gameObject = {
                         }
                     }
                 },
-                deedToShips: {
-                    deedToSmallShip: {
-                        graphic: '0x14F1',
-                        color: '0x0000',
-                        make: {
-                            tool: 'gameObject.tools.saw',
-                            refill: {
-                                resources: [
-                                    { item: 'gameObject.resources.logs', count: 30 },
-                                    { item: 'gameObject.resources.foldedCloth', count: 20 }
-                                ],
-                                crafting: [
-                                    { item: 'gameObject.crafting.tinkering.parts.hinge', count: 20 },
-                                    { item: 'gameObject.crafting.tinkering.parts.nails', count: 35 },
-                                    { item: 'gameObject.crafting.carpentry.miscellaneous.boards', count: 250 }
-                                ]
-                            },
-                            menu: {
-                                name: 'Carpentry',
-                                selections: ['Deeds to Ships', 'Deed to a small ship']
-                            }
+                washBasin: {
+                    graphic: '0x1008',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.saw',
+                        refill: {
+                            resources: [{ item: 'gameObject.resources.logs', count: 1 },
+                                { item: 'gameObject.resources.ingots.iron', count: 2 },
+                                { item: 'gameObject.resources.pitcherOfWater', count: 1 }],
+                            crafting: [{ item: 'gameObject.crafting.carpentry.miscellaneous.boards', count: 2 }, { item: 'gameObject.crafting.tinkering.parts.nails', count: 2 }]
+                        },
+                        menu: {
+                            name: 'Carpentry',
+                            selections: ['Containers & Cont. parts', 'Wash Basin']
+                        }
+                    }
+                },
+                woodenBox: {
+                    graphic: '0x0E7D',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.saw',
+                        refill: {
+                            resources: [{ item: 'gameObject.resources.logs', count: 4 }],
+                            crafting: [
+                                { item: 'gameObject.crafting.tinkering.parts.hinge', count: 2 },
+                                { item: 'gameObject.crafting.tinkering.parts.nails', count: 1 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Carpentry',
+                            selections: ['Containers & Cont. parts', 'Wooden Box']
+                        }
+                    }
+                }
+            },
+            deedToShips: {
+                deedToSmallShip: {
+                    graphic: '0x14F1',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.saw',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.logs', count: 30 },
+                                { item: 'gameObject.resources.foldedCloth', count: 20 }
+                            ],
+                            crafting: [
+                                { item: 'gameObject.crafting.tinkering.parts.hinge', count: 20 },
+                                { item: 'gameObject.crafting.tinkering.parts.nails', count: 35 },
+                                { item: 'gameObject.crafting.carpentry.miscellaneous.boards', count: 250 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Carpentry',
+                            selections: ['Deeds to Ships', 'Deed to a small ship']
                         }
                     }
                 }
@@ -1248,7 +1297,125 @@ var gameObject = {
             tools: {
                 petardCauldron: {
                     graphic: '0x0990',
-                    color: '0x04B1'
+                    color: '0x04B1',
+                    make: {
+                        tool: 'gameObject.tools.silverHammer',
+                        toolTarget: 'gameObject.resources.ingots.iron',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.iron', count: 10 },
+                                { item: 'gameObject.resources.ingots.rose', count: 6 },
+                                { item: 'gameObject.resources.ingots.blood', count: 1 }
+                            ],
+                            crafting: [
+                                { item: 'gameObject.crafting.tinkering.wires.iron', count: 5 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Blacksmithing',
+                            selections: ['Tools', 'Petard Cauldron']
+                        }
+                    }
+                },
+                sekera: {
+                    graphic: '0x0F43',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.silverHammer',
+                        toolTarget: 'gameObject.resources.ingots.iron',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.iron', count: 4 },
+                                { item: 'gameObject.resources.logs', count: 1 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Blacksmithing',
+                            selections: ['Tools', 'Hatchet']
+                        }
+                    }
+                },
+                krumpac: {
+                    graphic: '0x0E85',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.silverHammer',
+                        toolTarget: 'gameObject.resources.ingots.iron',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.iron', count: 4 },
+                                { item: 'gameObject.resources.logs', count: 1 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Blacksmithing',
+                            selections: ['Tools', 'Pick axe']
+                        }
+                    }
+                },
+                bloodSphere: {
+                    graphic: '0x0E2D',
+                    color: '0x0846',
+                    make: {
+                        tool: 'gameObject.tools.silverHammer',
+                        toolTarget: 'gameObject.resources.ingots.iron',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.iron', count: 5 },
+                                { item: 'gameObject.resources.fairyDust', count: 1 }
+                            ],
+                            crafting: [{ item: 'gameObject.crafting.tinkering.wires.rose', count: 15 },
+                                { item: 'gameObject.crafting.tinkering.wires.blood', count: 15 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Blacksmithing',
+                            selections: ['Tools', 'Blood Rock Sphere']
+                        }
+                    }
+                },
+                blackSphere: {
+                    graphic: '0x0E2D',
+                    color: '0x0B15',
+                    make: {
+                        tool: 'gameObject.tools.silverHammer',
+                        toolTarget: 'gameObject.resources.ingots.iron',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.iron', count: 5 },
+                                { item: 'gameObject.resources.fairyDust', count: 1 }
+                            ],
+                            crafting: [{ item: 'gameObject.crafting.tinkering.wires.shadow', count: 15 },
+                                { item: 'gameObject.crafting.tinkering.wires.black', count: 15 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Blacksmithing',
+                            selections: ['Tools', 'Black Rock Sphere']
+                        }
+                    }
+                },
+                mytherilSphere: {
+                    graphic: '0x0E2D',
+                    color: '0x0B8A',
+                    make: {
+                        tool: 'gameObject.tools.silverHammer',
+                        toolTarget: 'gameObject.resources.ingots.iron',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.iron', count: 5 },
+                                { item: 'gameObject.resources.fairyDust', count: 1 },
+                                { item: 'gameObject.resources.soulShard', count: 1 }
+                            ],
+                            crafting: [{ item: 'gameObject.crafting.tinkering.wires.gold', count: 15 },
+                                { item: 'gameObject.crafting.tinkering.wires.mytheril', count: 15 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Blacksmithing',
+                            selections: ['Tools', 'Mytheril Sphere']
+                        }
+                    }
                 }
             },
             ironWeapons: {
@@ -1374,19 +1541,6 @@ var gameObject = {
             gmMortarSelection: 'Greater Cure (612 Garlics)',
             alchemySelection: 'Greater Cure'
         },
-        lc: {
-            graphic: '0x0F07',
-            color: '0x0000',
-            bag: {
-                x: 80,
-                y: 15
-            },
-            kad: {
-                graphic: '0x1843',
-                color: '0x0091'
-            },
-            alchemySelection: 'Lesser Cure Potion'
-        },
         dp: {
             name: 'Deathly Poison Potion',
             graphic: '0x0F0A',
@@ -1403,6 +1557,19 @@ var gameObject = {
             gmMortarSelection: 'Deadly Poison (1020 Nightshades)',
             alchemySelection: 'Deadly Poison'
         },
+        lc: {
+            graphic: '0x0F07',
+            color: '0x0000',
+            bag: {
+                x: 80,
+                y: 15
+            },
+            kad: {
+                graphic: '0x1843',
+                color: '0x0091'
+            },
+            alchemySelection: 'Lesser Cure Potion'
+        },
         ns: {
             name: 'Nightsight Potion',
             graphic: '0x0F06',
@@ -1413,6 +1580,17 @@ var gameObject = {
                 color: '0x03C4'
             },
             alchemySelection: 'Nightsight'
+        },
+        ag: {
+            name: 'Agility Potion',
+            graphic: '0x0F08',
+            color: '0x0000',
+            kad: {
+                name: 'Nadoba s Agility',
+                graphic: '0x1843',
+                color: '0x00BF'
+            },
+            alchemySelection: 'Agility Potion'
         },
         shrink: {
             name: 'Shrink',
@@ -1449,6 +1627,7 @@ var gameObject = {
                 graphic: '0x1843',
                 color: '0x0B77'
             },
+            gmMortarSelection: 'Invisibility (408 Wyrm\'s Hearts)',
             alchemySelection: 'Invisibility'
         },
         lp: {
@@ -1575,6 +1754,16 @@ var gameObject = {
             }
         }
     },
+    neklances: {
+        titan: {
+            graphic: '0x1088',
+            color: '0x0485',
+            bag: {
+                x: 64,
+                y: 35
+            }
+        }
+    },
     scrolls: {
         blank: {
             graphic: '0x0E34',
@@ -1632,11 +1821,6 @@ var gameObject = {
             recall: {
                 graphic: '0x1F4C',
                 color: '0x0000'
-            },
-            heal: {
-                graphic: '0x1F31',
-                color: '0x0000',
-                minMana: 3
             }
         },
         necro: {
@@ -1925,7 +2109,9 @@ var gameObject = {
             },
             goat: {
                 graphic: '0x2108',
-                color: '0xFFFF'
+                color: '0xFFFF',
+                gWidth: 41,
+                gHeight: 36
             },
             dog: {
                 graphic: '0x09A8',
@@ -2023,12 +2209,6 @@ var gameObject = {
         halberd: {
             graphic: '0x143E',
             color: '0x08A1'
-        }
-    },
-    medic: {
-        kpz: {
-            graphic: "0x09B0",
-            color: "0x0493"
         }
     }
 };
@@ -2292,9 +2472,6 @@ function inscription(circle, spell, quantity) {
     if (quantity === void 0) { quantity = 0; }
     Scripts.Spells.inscription(circle, spell, quantity);
 }
-function kill() {
-    Scripts.PetCommander.kill();
-}
 function killAll() {
     Scripts.PetCommander.killAll();
 }
@@ -2353,6 +2530,9 @@ function mmc(requiredCountInTarget) {
 function mount() {
     Scripts.Mount.mountAndDismount();
 }
+function mysticCounter() {
+    Scripts.Common.mysticCounter();
+}
 function nbRune() {
     Scripts.Port.nbRune();
 }
@@ -2409,6 +2589,9 @@ function rozbij(ingy, kolik) {
 }
 function saveEquip() {
     Scripts.Dress.saveEquip();
+}
+function shrinkAll() {
+    Scripts.Taming.shrinkAll();
 }
 function statusBar() {
     Scripts.Statusbar.create();
@@ -2475,9 +2658,6 @@ function useRR() {
 }
 function useShrinkKad() {
     Scripts.Taming.useShrinkKad();
-}
-function shrinkAll() {
-    Scripts.Taming.shrinkAll();
 }
 function webDestroyer() {
     Scripts.Common.webDestroyer();
@@ -4264,21 +4444,27 @@ var Scripts;
         function PetCommander() {
         }
         PetCommander.getUsedNames = function () {
-            return Shared.GetArray('usedNames', []);
+            var usedNames = [];
+            var myPets = Scripts.PetCommander.getMyPets();
+            for (var _i = 0, myPets_1 = myPets; _i < myPets_1.length; _i++) {
+                var pet = myPets_1[_i];
+                usedNames.push(pet.name);
+            }
+            return usedNames;
         };
         PetCommander.getMyPets = function () {
             return Shared.GetArray('myPets', []);
         };
         PetCommander.filterPetsInDistance = function () {
             var myPets = Scripts.PetCommander.getMyPets();
-            for (var _i = 0, myPets_1 = myPets; _i < myPets_1.length; _i++) {
-                var pet = myPets_1[_i];
+            for (var _i = 0, myPets_2 = myPets; _i < myPets_2.length; _i++) {
+                var pet = myPets_2[_i];
                 var petObject = Orion.FindObject(pet.serial);
                 if (!petObject || petObject.Distance() > 12) {
                     Scripts.PetCommander.removeFromMyPets(pet.name);
                 }
             }
-            return myPets;
+            return Scripts.PetCommander.getMyPets();
         };
         PetCommander.removeFromMyPets = function (name) {
             var myPets = Scripts.PetCommander.getMyPets();
@@ -4290,10 +4476,12 @@ var Scripts;
                 }
             }
         };
-        PetCommander.addToMyPets = function (pet) {
-            var myPets = Scripts.PetCommander.getMyPets();
-            myPets.push(pet);
-            Shared.AddArray('myPets', myPets);
+        PetCommander.renameAndSavePet = function (petSerial) {
+            var petName = Scripts.PetCommander.getRandomAvailableName();
+            var pet = { serial: petSerial, name: petName };
+            Orion.RenameMount(pet.serial, pet.name);
+            Scripts.PetCommander.savePet(pet);
+            return pet;
         };
         PetCommander.getNextPetByIndex = function (index) {
             var myPets = Shared.GetArray('myPets', []);
@@ -4304,8 +4492,8 @@ var Scripts;
         };
         PetCommander.ignoreMyPets = function () {
             var myPets = Scripts.PetCommander.getMyPets();
-            for (var _i = 0, myPets_2 = myPets; _i < myPets_2.length; _i++) {
-                var p = myPets_2[_i];
+            for (var _i = 0, myPets_3 = myPets; _i < myPets_3.length; _i++) {
+                var p = myPets_3[_i];
                 Orion.Ignore(p.serial);
             }
         };
@@ -4335,8 +4523,17 @@ var Scripts;
         };
         PetCommander.getRandomAvailableName = function () {
             var namesPool = Scripts.PetCommander.getAvailableNames();
+            if (!namesPool.length) {
+                Scripts.Utils.playerPrint('chyba');
+                return 'Chyba';
+            }
             var random = Math.floor(Math.random() * (namesPool.length));
             return namesPool[random];
+        };
+        PetCommander.savePet = function (pet) {
+            var myPets = Scripts.PetCommander.getMyPets();
+            myPets.push(pet);
+            Shared.AddArray('myPets', myPets);
         };
         PetCommander.getNewPet = function () {
             var monstersAlive = Orion.FindType('!0x0190|!0x0191', '0xFFFF', 'ground', 'live', 12);
@@ -4344,11 +4541,8 @@ var Scripts;
                 var serial = monstersAlive_1[_i];
                 var isMyMonster = Orion.FindObject(serial).CanChangeName();
                 if (isMyMonster) {
-                    var name_2 = Scripts.PetCommander.getRandomAvailableName();
-                    Orion.RenameMount(serial, name_2);
-                    var pet = { serial: serial, name: name_2 };
-                    Scripts.PetCommander.addToMyPets(pet);
-                    Orion.Ignore(pet.serial);
+                    var pet = Scripts.PetCommander.renameAndSavePet(serial);
+                    Orion.Ignore(serial);
                     return pet;
                 }
             }
@@ -4388,8 +4582,8 @@ var Scripts;
                 return;
             }
             Orion.IgnoreReset();
-            for (var _i = 0, myPets_3 = myPets; _i < myPets_3.length; _i++) {
-                var pet = myPets_3[_i];
+            for (var _i = 0, myPets_4 = myPets; _i < myPets_4.length; _i++) {
+                var pet = myPets_4[_i];
                 var petObject = Orion.FindObject(pet.serial);
                 if (!petObject || petObject.Distance() > 12) {
                     Scripts.PetCommander.removeFromMyPets(pet.name);
@@ -4402,62 +4596,6 @@ var Scripts;
                 }
             }
             Scripts.PetCommander.ignoreMyPets();
-        };
-        PetCommander.kill = function () {
-            !Orion.GetGlobal('myMonstersKill') && Orion.SetGlobal('myMonstersKill', '[]');
-            var globalMyMonsters = JSON.parse(Orion.GetGlobal('myMonstersKill'));
-            var namesPool = ['Andres', 'Blanca', 'Carlos', 'Dolores', 'Enrique', 'Felicia', 'Guillermo', 'Hilda', 'Ignacio', 'Jimena', 'Kevin', 'Linda', 'Marty', 'Nora', 'Olaf', 'Damrey',
-                'Haikui', 'Kirogi', 'Tembin', 'Bolaven', 'Sanba', 'Jelawat', 'Ewiniar', 'Malaksi', 'Gaemi', 'Prapiroon', 'Maria', 'SonTinh', 'Bopha', 'Wukong', 'Sonamu',
-                'Shanshan', 'Yagi', 'Leepi', 'Bebinca', 'Rumbia', 'Soulik', 'Cimaron', 'Jebi', 'Mangkhut', 'Utor', 'Trami', 'Yutu', 'Toraji', 'Usagi', 'Pabuk', 'Wutip', 'Sepat',
-                'Fitow', 'Danas', 'Nari', 'Wipha', 'Francisco', 'Lekima', 'Krosa', 'Haiyan', 'Podul', 'Lingling', 'Kaziki', 'Faxai', 'Peipah', 'Tapah', 'Mitag', 'Hagibis', 'Neoguri',
-                'Rammasun', 'Matmo', 'Halong', 'Nakri', 'Fengshen', 'Kalmaegi', 'Kanmuri', 'Phanfone', 'Vongfong', 'Nuri', 'Sinlaku', 'Hagupit', 'Jangmi', 'Mekkhala', 'Higos',
-                'Bavi', 'Maysak', 'Haishen', 'Noul', 'Dolphin', 'Kujira', 'Chanhom', 'Linfa', 'Nangka', 'Soudelor', 'Molave', 'Goni', 'Morakot', 'Etau', 'Vamco', 'Krovanh', 'Dujuan',
-                'Mujigae', 'Choiwan', 'Koppu', 'Ketsana', 'Parma', 'Melor', 'Nepartak', 'Lupit', 'Mirinae', 'Nida', 'Omais', 'Conson', 'Chanthu', 'Dianmu', 'Mindulle', 'Lionrock',
-                'Kompasu', 'Namtheun', 'Malou', 'Meranti', 'Fanapi', 'Malakas', 'Megi', 'Chaba', 'Aere', 'Songda', 'Sarika', 'Haima', 'Meari', 'Tokage', 'Muifa', 'Merbok',
-                'Nanmadol', 'Talas', 'Noru', 'Kulap', 'Roke', 'Sonca', 'Nesat', 'Haitang', 'Nalgae', 'Banyan', 'Washi', 'Pakhar', 'Sanvu', 'Mawar', 'Guchol', 'Patricia', 'Rick',
-                'Sandra', 'Terry', 'Vivian', 'Waldo', 'Xina', 'York', 'Zelda', 'Agatha', 'Blas', 'Celia', 'Darby', 'Estelle', 'Frank', 'Georgette', 'Howard', 'Isis', 'Javier', 'Kay', 'Lester',
-                'Madeline', 'Newton', 'Orlene', 'Paine', 'Roslyn', 'Seymour', 'Tina', 'Virgil', 'Winifred', 'Xavier', 'Yolanda', 'Zeke', 'Adrian', 'Beatriz', 'Calvin', 'Dora', 'Eugene',
-                'Fernanda', 'Greg', 'Hilary', 'Irwin', 'Jova', 'Kenneth', 'Lidia', 'Max', 'Norma', 'Otis', 'Pilar', 'Ramon', 'Selma', 'Todd', 'Veronica', 'Wiley', 'Xina', 'York', 'Zelda',
-                'Aletta', 'Bud', 'Carlotta', 'Daniel', 'Emilia', 'Fabio', 'Gilma', 'Hector', 'Ileana', 'John', 'Kristy', 'Lane', 'Miriam', 'Norman', 'Olivia', 'Paul', 'Rosa', 'Sergio', 'Tara',
-                'Vicente', 'Willa', 'Xavier', 'Yolanda', 'Zeke', 'Alvin', 'Barbara', 'Cosme', 'Dalila', 'Erick', 'Flossie', 'Gil', 'Henriette', 'Ivo', 'Juliette', 'Kiko', 'Lorena', 'Manuel',
-                'Narda', 'Octave', 'Priscilla', 'Raymond', 'Sonia', 'Tico', 'Velma', 'Wallis', 'Xina', 'York', 'Zelda', 'Amanda', 'Boris', 'Cristina', 'Douglas', 'Elida', 'Fausto', 'Genevieve',
-                'Hernan', 'Iselle', 'Julio', 'Karina', 'Lowell', 'Marie', 'Norbert', 'Odile', 'Polo', 'Rachel', 'Simon', 'Trudy', 'Vance', 'Winnie', 'Xavier', 'Yolanda', 'Zeke', 'Talim',
-                'Doksuri', 'Khanun', 'Vicente', 'Saola'
-            ];
-            var monstersAlive = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "fast|live", 12, "blue|gray|criminal|orange|red");
-            var myMonsters = [];
-            while (monstersAlive.length) {
-                var monsterSerial = monstersAlive[0];
-                var isMyMonster = Orion.FindObject(monsterSerial).CanChangeName();
-                if (isMyMonster) {
-                    var name_3 = '';
-                    var isAlreadyRenamed = false;
-                    for (var _i = 0, globalMyMonsters_1 = globalMyMonsters; _i < globalMyMonsters_1.length; _i++) {
-                        var m = globalMyMonsters_1[_i];
-                        isAlreadyRenamed = m.serial === monsterSerial;
-                        if (isAlreadyRenamed) {
-                            name_3 = m.name;
-                            break;
-                        }
-                    }
-                    if (!isAlreadyRenamed) {
-                        var random = Math.floor(Math.random() * (namesPool.length));
-                        name_3 = namesPool[random];
-                        Orion.RenameMount(monsterSerial, name_3);
-                        Orion.Wait(50);
-                        namesPool.splice(random, 1);
-                    }
-                    myMonsters.push({ serial: monsterSerial, name: name_3 });
-                    Orion.WaitTargetObject(Orion.ClientLastAttack());
-                    Orion.Say(name_3 + " kill");
-                    Orion.WaitForTarget(1000);
-                    Scripts.Utils.waitWhileTargeting();
-                }
-                Orion.Ignore(monsterSerial);
-                monstersAlive = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "near|live", 12, "blue|gray|criminal|orange|red");
-            }
-            Orion.SetGlobal('myMonstersKill', JSON.stringify(myMonsters));
-            Orion.IgnoreReset();
         };
         PetCommander.healPetsToggleStart = function () {
             Scripts.Utils.playerPrint('Healing pets START', ColorEnum.green);
@@ -4498,8 +4636,8 @@ var Scripts;
                 }
                 var distance = false;
                 var heal = false;
-                for (var _i = 0, myPets_4 = myPets; _i < myPets_4.length; _i++) {
-                    var p = myPets_4[_i];
+                for (var _i = 0, myPets_5 = myPets; _i < myPets_5.length; _i++) {
+                    var p = myPets_5[_i];
                     Orion.ClearJournal();
                     var pet = Orion.FindObject(p.serial);
                     if (!pet) {
@@ -4694,7 +4832,7 @@ var Scripts;
             return kad;
         };
         Potions.getMortar = function () {
-            var mortars = Orion.FindType(gameObject.uncategorized.mortar.graphic, gameObject.uncategorized.mortar.color);
+            var mortars = Orion.FindType(gameObject.uncategorized.mortar.graphic);
             if (!mortars.length) {
                 Scripts.Utils.log("Nemas mortar", ColorEnum.red);
                 throw 'Nemas mortar';
@@ -4996,6 +5134,95 @@ var Scripts;
                     }
                     Scripts.Potions.drinkPotion(PotionsEnum.tmr);
                 }
+            }
+        };
+        Spells.wos = function (scroll, timer) {
+            if (scroll === void 0) { scroll = false; }
+            if (timer === void 0) { timer = 70000; }
+            var target = Scripts.Utils.waitTargetTileOrObject();
+            if (!target) {
+                return;
+            }
+            scroll ? Scripts.Spells.castScroll(ScrollEnum.wos) : Scripts.Spells.cast('Wall of Stone');
+            Orion.ClearJournal('Target is not in line of sight|The spell fizzles');
+            var castResult = Scripts.Utils.waitWhileSomethingInJournal(['Target is not in line of sight', 'The spell fizzles'], 2500);
+            if (castResult === 0 || castResult === 1) {
+                return;
+            }
+            var timerObjectSerial = '';
+            var walls = Orion.FindType('0x0080', '0x0000', 'ground', undefined, 18);
+            var found = false;
+            for (var _i = 0, walls_1 = walls; _i < walls_1.length; _i++) {
+                var serial = walls_1[_i];
+                var o = Orion.FindObject(serial);
+                if (o.X() === target.x && o.Y() === target.y) {
+                    timerObjectSerial = serial;
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                return;
+            }
+            var id = Math.random().toString();
+            Orion.AddDisplayTimer(id, timer, 'UnderChar', 'Rectangle', undefined, 0, 0, 'any', 1, '0x000000FE');
+            Orion.DisplayTimerSetObject(id, timerObjectSerial);
+        };
+        Spells.ef = function (self, scroll, timer) {
+            if (self === void 0) { self = false; }
+            if (scroll === void 0) { scroll = false; }
+            if (timer === void 0) { timer = 70000; }
+            var target = {};
+            self ? Orion.WaitTargetObject('self') : (target = Scripts.Utils.waitTargetTileOrObject());
+            scroll ? Scripts.Spells.castScroll(ScrollEnum.ef) : Scripts.Spells.cast('Energy Field');
+            var timerObjectSerial = '';
+            if (self) {
+                var keepChecking = true;
+                var timer_1 = 5000;
+                var wait = 20;
+                while (keepChecking && timer_1) {
+                    Orion.ClearJournal('Target is not in line of sight|The spell fizzles');
+                    if (Orion.InJournal('Target is not in line of sight|The spell fizzles')) {
+                        keepChecking = false;
+                    }
+                    var walls = Orion.FindType('0x3947', '0x0000', 'ground', undefined, 0);
+                    if (walls.length) {
+                        timerObjectSerial = walls[0];
+                        break;
+                    }
+                    Orion.Wait(wait);
+                    timer_1 -= wait;
+                }
+            }
+            else {
+                var keepChecking = true;
+                var timer_2 = 4500;
+                var wait = 20;
+                while (keepChecking && timer_2) {
+                    Orion.ClearJournal('Target is not in line of sight|The spell fizzles');
+                    if (Orion.InJournal('Target is not in line of sight|The spell fizzles')) {
+                        keepChecking = false;
+                    }
+                    var walls = Orion.FindType('0x3947', '0x0000', 'ground', undefined, 18);
+                    var found = false;
+                    for (var _i = 0, walls_2 = walls; _i < walls_2.length; _i++) {
+                        var serial = walls_2[_i];
+                        var o = Orion.FindObject(serial);
+                        if (o.X() === target.x && o.Y() === target.y) {
+                            timerObjectSerial = serial;
+                            found = true;
+                            keepChecking = false;
+                            break;
+                        }
+                    }
+                    Orion.Wait(wait);
+                    timer_2 -= wait;
+                }
+            }
+            if (timerObjectSerial) {
+                var id = Math.random().toString();
+                Orion.AddDisplayTimer(id, timer, 'UnderChar', 'Rectangle', undefined, 0, 0, 'any', 1, '0x000000FE');
+                Orion.DisplayTimerSetObject(id, timerObjectSerial);
             }
         };
         return Spells;
@@ -6007,6 +6234,27 @@ var Scripts;
                 throw 'err';
             }
             return count;
+        };
+        Utils.waitTargetTileOrObject = function () {
+            var target = {};
+            var selection = Orion.WaitForAddObject('wosTarget');
+            if (selection === 0) {
+                return;
+            }
+            if (selection === 1) {
+                var targetGameObject = Orion.FindObject('wosTarget');
+                target.x = targetGameObject.X();
+                target.y = targetGameObject.Y();
+                target.z = targetGameObject.Z();
+                Orion.WaitTargetObject('wosTarget');
+            }
+            else {
+                target.x = SelectedTile.X();
+                target.y = SelectedTile.Y();
+                target.z = SelectedTile.Z();
+                Orion.WaitTargetTile(SelectedTile.Graphic(), target.x, target.y, target.z);
+            }
+            return target;
         };
         return Utils;
     }());
