@@ -5165,7 +5165,7 @@ var Scripts;
                 return;
             }
             var id = Math.random().toString();
-            Orion.AddDisplayTimer(id, timer, 'UnderChar', 'Rectangle', undefined, 0, 0, 'any', 1, '0x000000FE');
+            Orion.AddDisplayTimer(id, timer, 'AboveChar', 'Rectangle', undefined, Orion.ClientOptionGet('GameWindowX'), Orion.ClientOptionGet('GameWindowY') + 30, 'any', 1, '0x000000FE');
             Orion.DisplayTimerSetObject(id, timerObjectSerial);
         };
         Spells.ef = function (self, scroll, timer) {
@@ -5221,7 +5221,7 @@ var Scripts;
             }
             if (timerObjectSerial) {
                 var id = Math.random().toString();
-                Orion.AddDisplayTimer(id, timer, 'UnderChar', 'Rectangle', undefined, 0, 0, 'any', 1, '0x000000FE');
+                Orion.AddDisplayTimer(id, timer, 'AboveChar', 'Rectangle', undefined, Orion.ClientOptionGet('GameWindowX'), Orion.ClientOptionGet('GameWindowY') + 30, 'any', 1, '0x000000FE');
                 Orion.DisplayTimerSetObject(id, timerObjectSerial);
             }
         };

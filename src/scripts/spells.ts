@@ -218,7 +218,7 @@ namespace Scripts {
                 return;
             }
             const id = Math.random().toString();
-            Orion.AddDisplayTimer(id, timer, 'UnderChar', 'Rectangle', undefined, 0, 0, 'any', 1, '0x000000FE');
+            Orion.AddDisplayTimer(id, timer, 'AboveChar', 'Rectangle', undefined, Orion.ClientOptionGet('GameWindowX'), Orion.ClientOptionGet('GameWindowY') + 30, 'any', 1, '0x000000FE');
             Orion.DisplayTimerSetObject(id, timerObjectSerial);
         }
 
@@ -273,7 +273,7 @@ namespace Scripts {
 
             if (timerObjectSerial) {
                 const id = Math.random().toString();
-                Orion.AddDisplayTimer(id, timer, 'UnderChar', 'Rectangle', undefined, 0, 0, 'any', 1, '0x000000FE');
+                Orion.AddDisplayTimer(id, timer, 'AboveChar', 'Rectangle', undefined, Orion.ClientOptionGet('GameWindowX'), Orion.ClientOptionGet('GameWindowY') + 30, 'any', 1, '0x000000FE');
                 Orion.DisplayTimerSetObject(id, timerObjectSerial);
             }
         }

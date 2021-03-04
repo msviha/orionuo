@@ -1,4 +1,5 @@
 export default interface ClientOptions {
+	ClientOptionGet(option:string):number
 	/**
 	* bool Orion.OptionSound();
 	* Get status of Sound option.
