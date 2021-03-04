@@ -187,5 +187,95 @@ namespace Scripts {
                 }
             }
         }
+
+        static wos(scroll = false, timer = 70000) {
+            const target = Scripts.Utils.waitTargetTileOrObject();
+            if (!target) {
+                return;
+            }
+
+            scroll ? Scripts.Spells.castScroll(ScrollEnum.wos) : Scripts.Spells.cast('Wall of Stone');
+            Orion.ClearJournal('Target is not in line of sight|The spell fizzles');
+            const castResult = Scripts.Utils.waitWhileSomethingInJournal(['Target is not in line of sight', 'The spell fizzles'], 2500);
+
+            if (castResult === 0 || castResult === 1) {
+                return;
+            }
+
+            // najdi stred zdi
+            let timerObjectSerial = '';
+            const walls = Orion.FindType('0x0080', '0x0000', 'ground', undefined, 18);
+            let found = false;
+            for (const serial of walls) {
+                const o = Orion.FindObject(serial);
+                if (o.X() === target.x && o.Y() === target.y) {
+                    timerObjectSerial = serial;
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                return;
+            }
+            const id = Math.random().toString();
+            Orion.AddDisplayTimer(id, timer, 'UnderChar', 'Rectangle', undefined, 0, 0, 'any', 1, '0x000000FE');
+            Orion.DisplayTimerSetObject(id, timerObjectSerial);
+        }
+
+        static ef(self = false, scroll = false, timer = 70000) {
+            let target:any = {};
+            self ? Orion.WaitTargetObject('self') : (target = Scripts.Utils.waitTargetTileOrObject());
+            scroll ? Scripts.Spells.castScroll(ScrollEnum.ef) : Scripts.Spells.cast('Energy Field');
+
+            let timerObjectSerial = '';
+            if (self) {
+                let keepChecking = true;
+                let timer = 5000;
+                const wait = 20;
+                while (keepChecking && timer) {
+                    Orion.ClearJournal('Target is not in line of sight|The spell fizzles');
+                    if (Orion.InJournal('Target is not in line of sight|The spell fizzles')) {
+                        keepChecking = false;
+                    }
+                    const walls = Orion.FindType('0x3947', '0x0000', 'ground', undefined, 0);
+                    if (walls.length) {
+                        timerObjectSerial = walls[0];
+                        break;
+                    }
+                    Orion.Wait(wait);
+                    timer -= wait;
+                }
+            }
+            else {
+                let keepChecking = true;
+                let timer = 4500;
+                const wait = 20;
+                while (keepChecking && timer) {
+                    Orion.ClearJournal('Target is not in line of sight|The spell fizzles');
+                    if (Orion.InJournal('Target is not in line of sight|The spell fizzles')) {
+                        keepChecking = false;
+                    }
+                    const walls = Orion.FindType('0x3947', '0x0000', 'ground', undefined, 18);
+                    let found = false;
+                    for (const serial of walls) {
+                        const o = Orion.FindObject(serial);
+                        if (o.X() === target.x && o.Y() === target.y) {
+                            timerObjectSerial = serial;
+                            found = true;
+                            keepChecking = false;
+                            break;
+                        }
+                    }
+                    Orion.Wait(wait);
+                    timer -= wait;
+                }
+            }
+
+            if (timerObjectSerial) {
+                const id = Math.random().toString();
+                Orion.AddDisplayTimer(id, timer, 'UnderChar', 'Rectangle', undefined, 0, 0, 'any', 1, '0x000000FE');
+                Orion.DisplayTimerSetObject(id, timerObjectSerial);
+            }
+        }
     }
 }

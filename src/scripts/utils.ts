@@ -528,5 +528,27 @@ namespace Scripts {
 
             return count;
         }
+
+        static waitTargetTileOrObject():ICoordinates|undefined {
+            const target:any = {}
+            const selection = Orion.WaitForAddObject('wosTarget');
+            if (selection === 0) {
+                return;
+            }
+            if (selection === 1) {
+                const targetGameObject = Orion.FindObject('wosTarget');
+                target.x = targetGameObject.X();
+                target.y = targetGameObject.Y();
+                target.z = targetGameObject.Z();
+                Orion.WaitTargetObject('wosTarget');
+            }
+            else {
+                target.x = SelectedTile.X();
+                target.y = SelectedTile.Y();
+                target.z = SelectedTile.Z();
+                Orion.WaitTargetTile(SelectedTile.Graphic(), target.x, target.y, target.z);
+            }
+            return target;
+        }
     }
 }

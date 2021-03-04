@@ -21,6 +21,8 @@ export default interface InteractionWithOtherScripts {
 	 */
 	AddDisplayTimer(id:string, timer:number, position:string, type:string, text:string, xFromPosition:number, yFromPosition:number, textColor:string|number, font?:number, backgroundColor?:string)
 
+	DisplayTimerSetObject(id:string, serial:string)
+
 	RemoveDisplayTimer(id:string)
 
 	/**
