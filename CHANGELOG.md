@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.1.9
+
+### features 
+- `Statusbar.create` Pridany optional parameter na serial targetu z ktoreho sa vytvori status bar
+
 ## 0.1.8
 
 Novy scripter co prispiva featurkama - **Kandown** - diky moc !
