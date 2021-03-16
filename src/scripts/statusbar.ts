@@ -10,7 +10,6 @@ namespace Scripts {
             }
             
             let o = targetSerial === undefined ? Orion.FindObject('lastCustomStatusBar') : Orion.FindObject(targetSerial);
-            const o = Orion.FindObject('lastCustomStatusBar');
             const serial = o.Serial();
             const name = o.Name();
             const max = o.MaxHits();
