@@ -28,7 +28,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Install dependencies and build
         run: |
-          npm install
+          npm i
           npm run build 
           
       - name: Archive Artifacts
