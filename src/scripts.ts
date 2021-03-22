@@ -637,6 +637,17 @@ function KPZHpSwitch() {
 }
 
 /**
+ *
+ * @param stuff co se bude doplnovat (nebo odhazovat zpatky do beden)
+ * @param containerPathsToSearch pole serialu, skrz ktere je potreba se doklikat k itemum, ktere se refuji
+ * @param clean flag ktery urcuje, zda se ma v batuzku item uklidit na pozici dle configu
+ * @example external code je k dispozici na discordu v navodech
+ */
+function refillManager(stuff:Array<{item:string, total:number}>, containerPathsToSearch?:Array<string[]>|string[], clean = true) {
+    Scripts.Refill.manager(stuff,containerPathsToSearch, clean);
+}
+
+/**
  * Resetuje zbrane a stit ( nasledne vyuziti u funkci nextWeapon a previousWeapon )
  * @example in client `_resetWeapons`
  * @example external code `resetWeapons()`

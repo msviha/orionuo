@@ -2037,13 +2037,3 @@ const gameObject:any = {
         }
     }
 };
-
-const trackingFilter:any = {
-    // graphic co ti to bude trackovat
-    // jmena ktera chces odfiltrovat dej do zavorky a oddel carkou
-    '0x2106': [], // chlap
-    '0x2107': [], // zenska
-    '0x20F9': ['Imp'], // malej vamp
-    '0x20D9': ['Gargoyle'], // velkej vamp
-    '0x2100': [] // ghost
-};
