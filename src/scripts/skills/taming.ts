@@ -1,13 +1,5 @@
 namespace Scripts {
 
-    /**
-     * Stability EXPERIMENTAL
-     *
-     * je potreba si poupravit nejaka IDcka jako treba robe of druids atd,
-     * hlavni ucel byl pro pousteni scriptu trainOnAnimalsAround
-     * ktery se ale obcas zasekne
-     * Je to potreba jeste poupravit a dodelat.. (portovani pres runy atd)
-     */
     export class Taming {
         /**
          * Scripts.Taming.useTrainingTamingStaff
@@ -235,13 +227,13 @@ namespace Scripts {
                     Orion.Wait(responseDelay);
                 }
                 if (opts.hiding) {
-                    Scripts.Common.hiding();
+                    Scripts.Hiding.hiding();
                     Orion.Wait(responseDelay);
                 }
                 Orion.WaitTargetObject('tamingTarget');
                 Orion.UseObject(loadedStaffSerial);
                 Orion.Wait(responseDelay);
-                opts.hiding && Scripts.Common.hiding();
+                opts.hiding && Scripts.Hiding.hiding();
                 const pickup = Scripts.Taming.waitOnTaming('tamingTarget', opts.walkTo);
 
                 if (Orion.InJournal('Too far|Jsi prilis vzdalen|Jsi moc daleko')) {

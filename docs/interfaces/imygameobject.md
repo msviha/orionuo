@@ -26,7 +26,7 @@
 
 • `Optional` **bag**: [IBagDestination](ibagdestination.md)
 
-*Defined in [interfaces.ts:4](https://github.com/msviha/orionuo/blob/6f2627d/src/interfaces.ts#L4)*
+*Defined in [types/interfaces.ts:4](https://github.com/msviha/orionuo/blob/1e2926d/src/types/interfaces.ts#L4)*
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 • `Optional` **color**: string
 
-*Defined in [interfaces.ts:3](https://github.com/msviha/orionuo/blob/6f2627d/src/interfaces.ts#L3)*
+*Defined in [types/interfaces.ts:3](https://github.com/msviha/orionuo/blob/1e2926d/src/types/interfaces.ts#L3)*
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 •  **graphic**: string
 
-*Defined in [interfaces.ts:2](https://github.com/msviha/orionuo/blob/6f2627d/src/interfaces.ts#L2)*
+*Defined in [types/interfaces.ts:2](https://github.com/msviha/orionuo/blob/1e2926d/src/types/interfaces.ts#L2)*
 
 ___
 
@@ -50,7 +50,7 @@ ___
 
 • `Optional` **make**: [IMakeProps](imakeprops.md)
 
-*Defined in [interfaces.ts:5](https://github.com/msviha/orionuo/blob/6f2627d/src/interfaces.ts#L5)*
+*Defined in [types/interfaces.ts:5](https://github.com/msviha/orionuo/blob/1e2926d/src/types/interfaces.ts#L5)*
 
 ___
 
@@ -58,4 +58,4 @@ ___
 
 • `Optional` **name**: string
 
-*Defined in [interfaces.ts:6](https://github.com/msviha/orionuo/blob/6f2627d/src/interfaces.ts#L6)*
+*Defined in [types/interfaces.ts:6](https://github.com/msviha/orionuo/blob/1e2926d/src/types/interfaces.ts#L6)*

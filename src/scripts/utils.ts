@@ -84,6 +84,24 @@ namespace Scripts {
             return Orion.FindType(obj.graphic, obj.color || '0xFFFF', container);
         }
 
+        static getColorByNotoriety(notoriety?:number) {
+            let notoColor = 906;
+            switch (notoriety) {
+                case 1:
+                    notoColor = 2119;
+                    break;
+                case 3:
+                    notoColor = 906;
+                    break;
+                case 6:
+                    notoColor = 33;
+                    break;
+                default:
+                    notoColor = 906;
+            }
+            return notoColor;
+        }
+
         static countObjectInContainer(obj:IMyGameObject, container = 'backpack', containerIsObjItemOnGround = false):number {
             const serials = containerIsObjItemOnGround ? [container] : Scripts.Utils.getObjSerials(obj, container);
             return Scripts.Utils.countItemsBySerials(serials);

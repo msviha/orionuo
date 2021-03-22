@@ -19,7 +19,7 @@
 
 •  **lastattack**:  = "lastattack"
 
-*Defined in [enums.ts:17](https://github.com/msviha/orionuo/blob/6f2627d/src/enums.ts#L17)*
+*Defined in [types/enums.ts:17](https://github.com/msviha/orionuo/blob/1e2926d/src/types/enums.ts#L17)*
 
 ___
 
@@ -27,7 +27,7 @@ ___
 
 •  **laststatus**:  = "laststatus"
 
-*Defined in [enums.ts:18](https://github.com/msviha/orionuo/blob/6f2627d/src/enums.ts#L18)*
+*Defined in [types/enums.ts:18](https://github.com/msviha/orionuo/blob/1e2926d/src/types/enums.ts#L18)*
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 •  **lasttarget**:  = "lasttarget"
 
-*Defined in [enums.ts:19](https://github.com/msviha/orionuo/blob/6f2627d/src/enums.ts#L19)*
+*Defined in [types/enums.ts:19](https://github.com/msviha/orionuo/blob/1e2926d/src/types/enums.ts#L19)*
 
 ___
 
@@ -43,4 +43,4 @@ ___
 
 •  **self**:  = "self"
 
-*Defined in [enums.ts:16](https://github.com/msviha/orionuo/blob/6f2627d/src/enums.ts#L16)*
+*Defined in [types/enums.ts:16](https://github.com/msviha/orionuo/blob/1e2926d/src/types/enums.ts#L16)*

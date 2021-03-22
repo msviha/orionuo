@@ -18,7 +18,7 @@
 
 •  **jump**:  = "KPZ - Jump"
 
-*Defined in [enums.ts:139](https://github.com/msviha/orionuo/blob/6f2627d/src/enums.ts#L139)*
+*Defined in [types/enums.ts:141](https://github.com/msviha/orionuo/blob/1e2926d/src/types/enums.ts#L141)*
 
 ___
 
@@ -26,7 +26,7 @@ ___
 
 •  **pull**:  = "KPZ - Pull"
 
-*Defined in [enums.ts:138](https://github.com/msviha/orionuo/blob/6f2627d/src/enums.ts#L138)*
+*Defined in [types/enums.ts:140](https://github.com/msviha/orionuo/blob/1e2926d/src/types/enums.ts#L140)*
 
 ___
 
@@ -34,4 +34,4 @@ ___
 
 •  **switchHp**:  = "KPZ - Switch HP"
 
-*Defined in [enums.ts:140](https://github.com/msviha/orionuo/blob/6f2627d/src/enums.ts#L140)*
+*Defined in [types/enums.ts:142](https://github.com/msviha/orionuo/blob/1e2926d/src/types/enums.ts#L142)*

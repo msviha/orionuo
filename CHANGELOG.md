@@ -211,7 +211,7 @@ Byla pridana moznost configurace nekterych scriptu globalnim configem. Jako napr
 - added `lute` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#lute)
 - added `manualTarget` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#manualTarget)
 - added `nbRune` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#nbRune)
-- added `tracking` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#tracking)
+- added `tracking.ts` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#tracking)
 - added `use` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#use)
 - added `useGGR` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#useGGR)
 - added `useKlamak` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#useKlamak)

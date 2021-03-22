@@ -21,7 +21,7 @@
 
 • `Optional` **hiding**: boolean
 
-*Defined in [interfaces.ts:34](https://github.com/msviha/orionuo/blob/6f2627d/src/interfaces.ts#L34)*
+*Defined in [types/interfaces.ts:34](https://github.com/msviha/orionuo/blob/1e2926d/src/types/interfaces.ts#L34)*
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 • `Optional` **walkTo**: boolean
 
-*Defined in [interfaces.ts:33](https://github.com/msviha/orionuo/blob/6f2627d/src/interfaces.ts#L33)*
+*Defined in [types/interfaces.ts:33](https://github.com/msviha/orionuo/blob/1e2926d/src/types/interfaces.ts#L33)*

@@ -102,7 +102,7 @@ function attackLast() {
  * @example external code `bishopToggle();`
  */
 function bishopToggle() {
-    Scripts.Common.bishopToggle();
+    Scripts.Clerik.bishopToggle();
 }
 
 /**
@@ -323,7 +323,7 @@ function hideAll() {
  * @example external code `hiding();`
  */
 function hiding() {
-    Scripts.Common.hiding();
+    Scripts.Hiding.hiding();
 }
 
 /**
@@ -334,7 +334,7 @@ function hiding() {
  * @example external code `inscription(2, 'Resurrection', 20);`
  */
 function inscription(circle:number, spell:string, quantity = 0) {
-    Scripts.Spells.inscription(circle, spell, quantity);
+    Scripts.Inscription.inscription(circle, spell, quantity);
 }
 
 /**
@@ -519,7 +519,7 @@ function nbRune() {
  * @example external code `necroMystik('Necro mystic - HEAL!')`
  */
 function necroMystic(message:string) {
-    Scripts.Common.necroMystic(message);
+    Scripts.Necromancer.necroMystic(message);
 }
 
 /**
@@ -541,7 +541,7 @@ function nextWeapon(showName = false) {
  * @example external code `ocaruj()`
  */
 function ocaruj(dusty:OcarovaniEnum = OcarovaniEnum.mytheril) {
-    Scripts.MagicMiner.ocaruj(dusty);
+    Scripts.Craft.ocaruj(dusty);
 }
 
 /**
@@ -615,7 +615,7 @@ function resetStats() {
  * @example external code `KPZPull()`
  */
 function KPZPull() {
-    Scripts.Medic.KPZPull();
+    Scripts.Clerik.KPZPull();
 }
 
 /**
@@ -624,7 +624,7 @@ function KPZPull() {
  * @example external code `KPZJump()`
  */
 function KPZJump() {
-    Scripts.Medic.KPZJump();
+    Scripts.Clerik.KPZJump();
 }
 
 /**
@@ -633,7 +633,7 @@ function KPZJump() {
  * @example external code `KPZHpSwitch()`
  */
 function KPZHpSwitch() {
-    Scripts.Medic.KPZHpSwitch();
+    Scripts.Clerik.KPZHpSwitch();
 }
 
 /**
@@ -652,7 +652,7 @@ function resetWeapons() {
  * @example external code `rozbij(OcarovaniEnum.blood, 1)`
  */
 function rozbij(ingy:OcarovaniEnum = OcarovaniEnum.mytheril, kolik = 5) {
-    Scripts.MagicMiner.rozbij(ingy, kolik);
+    Scripts.Craft.rozbij(ingy, kolik);
 }
 
 /**
@@ -774,7 +774,7 @@ function terminateAll() {
  * @example external code `tracking('Animals');` trackuje zvirata
  */
 function tracking(who = 'Players') {
-    Scripts.Wip.Tracking(who);
+    Scripts.Tracking.tracking(who);
 }
 
 /**
@@ -795,7 +795,7 @@ function travelBook(selection = PortBookOptionsEnum.kop) {
  * @example external code `turboRess()`
  */
 function turboRess(bandageAfterRess = false) {
-    Scripts.Common.turboRess(bandageAfterRess);
+    Scripts.Clerik.turboRess(bandageAfterRess);
 }
 
 /**
@@ -803,7 +803,7 @@ function turboRess(bandageAfterRess = false) {
  * @example external code `turboRessFull()`
  */
 function turboRessFull() {
-    Scripts.Common.turboRessFull();
+    Scripts.Clerik.turboRessFull();
 }
 
 /**

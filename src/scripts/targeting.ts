@@ -1,9 +1,4 @@
 namespace Scripts {
-
-    /**
-     * stability EXPERIMENTAL
-     * scripty na pvp a targetovani
-     */
     export class Targeting {
         static addFriend():string {
             Scripts.Utils.playerPrint('Add friend');
@@ -154,7 +149,7 @@ namespace Scripts {
             targetIndicationEnum = TargetIndicationEnum.large,
             statusBarPosition:ICoordinates
         ) {
-            const notoColor = Scripts.Wip.getColorByNotoriety(enemy.Notoriety());
+            const notoColor = Scripts.Utils.getColorByNotoriety(enemy.Notoriety());
 
             Scripts.Utils.playerPrint(`[${enemy.Name() || 'target'}]: ${enemy.Hits()}/${enemy.MaxHits()}`, notoColor);
             Orion.CharPrint(enemySerial, notoColor, `[${enemy.Name() || 'target'}]: ${enemy.Hits()}/${enemy.MaxHits()}`);
@@ -163,7 +158,7 @@ namespace Scripts {
 
             Orion.ClearHighlightCharacters();
             Orion.AddObject('lastattack', enemySerial);
-            Orion.AddHighlightCharacter(enemySerial, Scripts.Wip.getColorByNotoriety(enemy.Notoriety()));
+            Orion.AddHighlightCharacter(enemySerial, Scripts.Utils.getColorByNotoriety(enemy.Notoriety()));
         }
 
         static isFriendlyTargetType(graphic:string, color:string, name:string):boolean {

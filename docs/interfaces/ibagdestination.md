@@ -24,7 +24,7 @@
 
 • `Optional` **objectAlias**: string
 
-*Defined in [interfaces.ts:42](https://github.com/msviha/orionuo/blob/6f2627d/src/interfaces.ts#L42)*
+*Defined in [types/interfaces.ts:42](https://github.com/msviha/orionuo/blob/1e2926d/src/types/interfaces.ts#L42)*
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 *Inherited from [IBagDestination](ibagdestination.md).[x](ibagdestination.md#x)*
 
-*Defined in [interfaces.ts:74](https://github.com/msviha/orionuo/blob/6f2627d/src/interfaces.ts#L74)*
+*Defined in [types/interfaces.ts:74](https://github.com/msviha/orionuo/blob/1e2926d/src/types/interfaces.ts#L74)*
 
 ___
 
@@ -44,4 +44,4 @@ ___
 
 *Inherited from [IBagDestination](ibagdestination.md).[y](ibagdestination.md#y)*
 
-*Defined in [interfaces.ts:75](https://github.com/msviha/orionuo/blob/6f2627d/src/interfaces.ts#L75)*
+*Defined in [types/interfaces.ts:75](https://github.com/msviha/orionuo/blob/1e2926d/src/types/interfaces.ts#L75)*

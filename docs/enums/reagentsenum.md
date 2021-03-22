@@ -23,7 +23,7 @@
 
 •  **bm**:  = "bm"
 
-*Defined in [enums.ts:56](https://github.com/msviha/orionuo/blob/6f2627d/src/enums.ts#L56)*
+*Defined in [types/enums.ts:56](https://github.com/msviha/orionuo/blob/1e2926d/src/types/enums.ts#L56)*
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 •  **bp**:  = "bp"
 
-*Defined in [enums.ts:57](https://github.com/msviha/orionuo/blob/6f2627d/src/enums.ts#L57)*
+*Defined in [types/enums.ts:57](https://github.com/msviha/orionuo/blob/1e2926d/src/types/enums.ts#L57)*
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 •  **ga**:  = "ga"
 
-*Defined in [enums.ts:58](https://github.com/msviha/orionuo/blob/6f2627d/src/enums.ts#L58)*
+*Defined in [types/enums.ts:58](https://github.com/msviha/orionuo/blob/1e2926d/src/types/enums.ts#L58)*
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 •  **gi**:  = "gi"
 
-*Defined in [enums.ts:59](https://github.com/msviha/orionuo/blob/6f2627d/src/enums.ts#L59)*
+*Defined in [types/enums.ts:59](https://github.com/msviha/orionuo/blob/1e2926d/src/types/enums.ts#L59)*
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 •  **mr**:  = "mr"
 
-*Defined in [enums.ts:54](https://github.com/msviha/orionuo/blob/6f2627d/src/enums.ts#L54)*
+*Defined in [types/enums.ts:54](https://github.com/msviha/orionuo/blob/1e2926d/src/types/enums.ts#L54)*
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 •  **ns**:  = "ns"
 
-*Defined in [enums.ts:60](https://github.com/msviha/orionuo/blob/6f2627d/src/enums.ts#L60)*
+*Defined in [types/enums.ts:60](https://github.com/msviha/orionuo/blob/1e2926d/src/types/enums.ts#L60)*
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 •  **sa**:  = "sa"
 
-*Defined in [enums.ts:61](https://github.com/msviha/orionuo/blob/6f2627d/src/enums.ts#L61)*
+*Defined in [types/enums.ts:61](https://github.com/msviha/orionuo/blob/1e2926d/src/types/enums.ts#L61)*
 
 ___
 
@@ -79,4 +79,4 @@ ___
 
 •  **ss**:  = "ss"
 
-*Defined in [enums.ts:55](https://github.com/msviha/orionuo/blob/6f2627d/src/enums.ts#L55)*
+*Defined in [types/enums.ts:55](https://github.com/msviha/orionuo/blob/1e2926d/src/types/enums.ts#L55)*
