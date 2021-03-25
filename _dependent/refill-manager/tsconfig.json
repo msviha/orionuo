@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "module": "none",
+        "noImplicitAny": false,
+        "removeComments": true,
+        "outFile": "../../dist/refill-manager.js",
+        "types": [
+            "../../typings",
+            "../../dist"
+        ],
+        "typeRoots": [
+            "../../typings",
+            "../../dist"
+        ],
+        "sourceMap": false
+    },
+    "include": [
+		"../../typings/**/*",
+        "../../dist/**/*",
+        "refill-manager.ts"
+    ]
+}
