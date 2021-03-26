@@ -1,7 +1,7 @@
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 0.1.8');
+    Orion.Print(-1, 'version 1.0.0');
     Orion.Print(-1, '-------------+');
 }
 
@@ -227,6 +227,18 @@ function drink(potionName:PotionsEnum, switchWarModeWhenNeeded = true, displayTi
  */
 function drum(target?:TargetEnum) {
     Scripts.Music.drum(target);
+}
+
+/**
+ * Kouzli Energy field stenu na ktere se zobrazuje timer
+ * @param self {boolean} pokud date true tak bude kouzlit na sebe, v pripade ze date false tak ukazuje target pro zamereni kam chcete kouzlit
+ * @param scroll {boolean} pokud date true tak bude kouzlit ze svitku, v pripade ze date false tak z hlavy
+ * @param timer {number} cas odpoctu na zdi v milisekundach
+ * @example external code `ef(true, false, 60000);` vykouzli EF z hlavy na sebe a ukaze se na ni odpocet jedne minuty
+ * @example external code `ef(false, true, 60000);` zobrazi zamerovac pro kouzleni EF ze svitku, jakmile EF vykouzli, tak je na ni odpocet jedne minuty
+ */
+function ef(self = false, scroll = false, timer = 70000) {
+    Scripts.Spells.ef(self, scroll, timer)
 }
 
 /**
@@ -874,4 +886,24 @@ function useShrinkKad() {
  */
 function webDestroyer() {
     Scripts.Common.webDestroyer();
+}
+
+/**
+ *
+ * @param object {IMyGameObject|IMyGameObject[]} musi mit graphic a color
+ * @param name {string} pouziva se pro vypisovani poctu abys vedel co ti dochazi
+ * @param minimalCountForWarn zobrazi varovani pokud budes mit tento pocet band (a mene)
+ * @example external code `use(gameObject.ryba.modra, 'modra ryba', 3)`
+ * @example external code `use([gameObject.uncategorized.krvavaBanda1, gameObject.uncategorized.krvavaBanda2], 'krvave bandy', 200)`
+ */
+
+/**
+ * Kouzli Wall of stones na ktere se zobrazuje timer
+ * @param scroll {boolean} pokud date true tak bude kouzlit ze svitku, v pripade ze date false tak z hlavy
+ * @param timer {number} cas odpoctu na zdi v milisekundach
+ * @example external code `wos(false, 60000);` zobrazi zamerovac pro kouzleni WOS z hlavy, jakmile WOS vykouzli, tak je na ni odpocet jedne minuty
+ * @example external code `ef(true, 60000);` zobrazi zamerovac pro kouzleni WOS ze svitku, jakmile WOS vykouzli, tak je na ni odpocet jedne minuty
+ */
+function wos(scroll = false, timer = 70000) {
+    Scripts.Spells.wos(scroll, timer)
 }

@@ -2138,7 +2138,7 @@ var __assign = (this && this.__assign) || function () {
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 0.1.8');
+    Orion.Print(-1, 'version 1.0.0');
     Orion.Print(-1, '-------------+');
 }
 function Autostart() {
@@ -2243,6 +2243,12 @@ function drink(potionName, switchWarModeWhenNeeded, displayTimers) {
 }
 function drum(target) {
     Scripts.Music.drum(target);
+}
+function ef(self, scroll, timer) {
+    if (self === void 0) { self = false; }
+    if (scroll === void 0) { scroll = false; }
+    if (timer === void 0) { timer = 70000; }
+    Scripts.Spells.ef(self, scroll, timer);
 }
 function enemy() {
     Scripts.Targeting.addEnemy();
@@ -2468,6 +2474,11 @@ function useShrinkKad() {
 }
 function webDestroyer() {
     Scripts.Common.webDestroyer();
+}
+function wos(scroll, timer) {
+    if (scroll === void 0) { scroll = false; }
+    if (timer === void 0) { timer = 70000; }
+    Scripts.Spells.wos(scroll, timer);
 }
 function parseParam(param) {
     if (param === 'true') {

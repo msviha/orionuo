@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## 1.0.0
+
+### breaking changes
+- `kill` prikaz je odstraneny z baliku, dale je mozne pouzivat jen `killAll` nebo `killTarget` pripadne pockat az Caleb doladi sve killovani
+- `scripts.js` soubor byl prejmenovan na `index.js` a bude upraven navod/prvni-kroky
+
+### features
+- `wos` kouzli wall of stone na ktere se zobrazuje timer
+- `ef` kouzli energy field na ktere se zobrazuje timer
+- `mysticCounter` koukne na vsechny recepty a mystiky co mate u sebe a spocita kolik je treba doplnit mystiku
+- `refillManager` pro rychle doplnovani spotrebaku (napriklad do pvp) - jedna se o samostatny script ktery je zavisly na techto scriptech a bude ho potreba stahnout samostatne a includnout pod stavajici scripty (navod na discordu #refill-manager)
+
+### enhancements
+- crafting objekt obsahuje nejake dalsi vyrobky jako sphery, washBasin, woodenBox . . .
+
+### fixes
+- `targetNext` a `targetPrevious` propaguje se option `targetIndicationEnum` kde je defaultne nyni `none` (coz je bez kosticek nad targetem)
+
 ## 0.1.8
 
 Novy scripter co prispiva featurkama - **Kandown** - diky moc !

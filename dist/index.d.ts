@@ -23,6 +23,7 @@ declare function craftNext(): void;
 declare function craftSelect(): void;
 declare function drink(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean, displayTimers?: boolean): void;
 declare function drum(target?: TargetEnum): void;
+declare function ef(self?: boolean, scroll?: boolean, timer?: number): void;
 declare function enemy(): void;
 declare function equip(): void;
 declare function fillPotion(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean): void;
@@ -85,6 +86,7 @@ declare function useKlamak(lvl: number, useAim?: boolean, priorityList?: string[
 declare function useRR(): void;
 declare function useShrinkKad(): void;
 declare function webDestroyer(): void;
+declare function wos(scroll?: boolean, timer?: number): void;
 declare function parseParam(param: any): any;
 declare namespace Scripts {
     class Auto {

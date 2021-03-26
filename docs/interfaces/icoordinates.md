@@ -23,7 +23,7 @@
 
 •  **x**: number
 
-*Defined in [types/interfaces.ts:74](https://github.com/msviha/orionuo/blob/1e2926d/src/types/interfaces.ts#L74)*
+*Defined in [types/interfaces.ts:74](https://github.com/msviha/orionuo/blob/d630079/src/types/interfaces.ts#L74)*
 
 ___
 
@@ -31,4 +31,4 @@ ___
 
 •  **y**: number
 
-*Defined in [types/interfaces.ts:75](https://github.com/msviha/orionuo/blob/1e2926d/src/types/interfaces.ts#L75)*
+*Defined in [types/interfaces.ts:75](https://github.com/msviha/orionuo/blob/d630079/src/types/interfaces.ts#L75)*

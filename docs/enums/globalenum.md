@@ -16,4 +16,4 @@
 
 •  **customStatusBars**:  = "customStatusBars"
 
-*Defined in [types/enums.ts:124](https://github.com/msviha/orionuo/blob/1e2926d/src/types/enums.ts#L124)*
+*Defined in [types/enums.ts:124](https://github.com/msviha/orionuo/blob/d630079/src/types/enums.ts#L124)*
