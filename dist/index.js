@@ -1512,6 +1512,7 @@ var gameObject = {
             alchemySelection: 'Lava Bomb'
         },
         invis: {
+            name: 'Invisibility',
             graphic: '0x0F09',
             color: '0x0B77',
             kad: {
@@ -2005,7 +2006,7 @@ var gameObject = {
                 gHeight: 36
             },
             dog: {
-                graphic: '0x09A8',
+                graphic: '0x211C',
                 color: '0xFFFF'
             },
             boar: {
@@ -2092,6 +2093,16 @@ var gameObject = {
             }
         }
     },
+    medic: {
+        kpz: {
+            graphic: '0x09B0',
+            color: '0x0493'
+        },
+        kpzActive: {
+            graphic: '0x09B0',
+            color: '0x0494'
+        }
+    },
     poisonGuns: {
         spear: {
             graphic: '0x0F62',
@@ -2101,7 +2112,238 @@ var gameObject = {
             graphic: '0x143E',
             color: '0x08A1'
         }
+    },
+    shields: {
+        round: {
+            metalShield: {
+                graphic: '0x1B7B',
+                color: '0xFFFF'
+            },
+            buckler: {
+                graphic: '0x1B73',
+                color: '0xFFFF'
+            },
+            woodenShield: {
+                graphic: '0x1B7A',
+                color: '0xFFFF'
+            },
+            bronzeShield: {
+                graphic: '0x1B72',
+                color: '0xFFFF'
+            }
+        },
+        other: {
+            metalKiteShield: {
+                graphic: '0x0F4F',
+                color: '0xFFFF'
+            },
+            heaterShield: {
+                graphic: '0x1B76',
+                color: '0xFFFF'
+            },
+            woodenKiteShield: {
+                graphic: '0x1B78',
+                color: '0xFFFF'
+            },
+            lucerna: {
+                graphic: '0x0A15',
+                color: '0xFFFF'
+            }
+        }
+    },
+    weapons: {
+        archery: {
+            repeatingCrossbow: {
+                graphic: '0x26C3',
+                color: '0xFFFF'
+            },
+            crossbow: {
+                graphic: '0x0F4F',
+                color: '0xFFFF'
+            },
+            heawyCrossbow: {
+                graphic: '0x13FC',
+                color: '0xFFFF'
+            },
+            bow: {
+                graphic: '0x13B1',
+                color: '0xFFFF'
+            },
+            kratkyElfskyLuk: {
+                graphic: '0x2D1F',
+                color: '0xFFFF'
+            }
+        },
+        swordsmanship: {
+            halbert: {
+                graphic: '0x143E',
+                color: '0xFFFF'
+            },
+            bardiche: {
+                graphic: '0x0F4D',
+                color: '0xFFFF'
+            },
+            katana: {
+                graphic: '0x13FE',
+                color: '0xFFFF'
+            },
+            cutlass: {
+                graphic: '0x1440',
+                color: '0xFFFF'
+            },
+            vikingSword: {
+                graphic: '0x13B9',
+                color: '0xFFFF'
+            },
+            lba: {
+                graphic: '0x13FA',
+                color: '0xFFFF'
+            },
+            battleAxe: {
+                graphic: '0x0F47',
+                color: '0xFFFF'
+            },
+            longSword: {
+                graphic: '0x0F60',
+                color: '0xFFFF'
+            },
+            executionersAxe: {
+                graphic: '0x0F45',
+                color: '0xFFFF'
+            },
+            scimitar: {
+                graphic: '0x13B5',
+                color: '0xFFFF'
+            },
+            broadSword: {
+                graphic: '0x0F5E',
+                color: '0xFFFF'
+            },
+            axe: {
+                graphic: '0x0F49',
+                color: '0xFFFF'
+            },
+            doubleAxe: {
+                graphic: '0x0F4B',
+                color: '0xFFFF'
+            },
+            twoHandedAxe: {
+                graphic: '0x1442',
+                color: '0xFFFF'
+            },
+            bastardSword: {
+                graphic: '0x13B9',
+                color: '0xFFFF'
+            },
+            bow: {
+                graphic: '0x13B1',
+                color: '0xFFFF'
+            },
+            paladinsSword: {
+                graphic: '0x26CE',
+                color: '0xFFFF'
+            },
+            cleaver: {
+                graphic: '0x0EC2',
+                color: '0xFFFF'
+            },
+            slicer: {
+                graphic: '0x2D23',
+                color: '0xFFFF'
+            },
+            hatchet: {
+                graphic: '0x0F43',
+                color: '0xFFFF'
+            },
+            deamonBane: {
+                graphic: '0x2D28',
+                color: '0xFFFF'
+            },
+            warAxe: {
+                graphic: '0x13AF',
+                color: '0xFFFF'
+            },
+            machette: {
+                graphic: '0x13AF',
+                color: '0xFFFF'
+            }
+        },
+        macefighting: {
+            mace: {
+                graphic: '0x0F5C',
+                color: '0xFFFF'
+            },
+            maul: {
+                graphic: '0x143A',
+                color: '0xFFFF'
+            },
+            hammerPick: {
+                graphic: '0x143C',
+                color: '0xFFFF'
+            },
+            club: {
+                graphic: '0x13B3',
+                color: '0xFFFF'
+            },
+            warMace: {
+                graphic: '0x1406',
+                color: '0xFFFF'
+            },
+            warHammer: {
+                graphic: '0x1438',
+                color: '0xFFFF'
+            },
+            blackStaff: {
+                graphic: '0x0DF0',
+                color: '0xFFFF'
+            }
+        },
+        fencing: {
+            warFork: {
+                graphic: '0x1404',
+                color: '0xFFFF'
+            },
+            pithcFork: {
+                graphic: '0x0E87',
+                color: '0xFFFF'
+            },
+            spear: {
+                graphic: '0x0F62',
+                color: '0xFFFF'
+            },
+            kryss: {
+                graphic: '0x1401',
+                color: '0xFFFF'
+            },
+            kryss2: {
+                graphic: '0x1400',
+                color: '0xFFFF'
+            },
+            dagger: {
+                graphic: '0x0F51',
+                color: '0xFFFF'
+            },
+            shortSpear: {
+                graphic: '0x1402',
+                color: '0xFFFF'
+            },
+            guardiansLungbreaker: {
+                graphic: '0x26c5',
+                color: '0xFFFF'
+            },
+            drapy: {
+                graphic: '0x27ab',
+                color: '0xFFFF'
+            }
+        }
     }
+};
+var trackingFilter = {
+    '0x2106': [],
+    '0x2107': [],
+    '0x20F9': ['Imp'],
+    '0x20D9': ['Gargoyle'],
+    '0x2100': []
 };
 function displayDrinkInfo(potionName) {
     var drinkTimer = 17500;

@@ -1,6 +1,7 @@
 declare let config: any;
 declare const responseDelay = 350;
 declare const gameObject: any;
+declare const trackingFilter: any;
 declare function displayDrinkInfo(potionName: PotionsEnum): void;
 declare function scheduleClick(s: string): void;
 declare function customStatusBarCallBack(s: string): void;

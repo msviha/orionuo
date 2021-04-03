@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.1.1
+
+### fixes
+- `gameObject.medik.kpz` neexistoval nedavno byl omylem odstranen, nefungovalo KPZ 
+
 ## 1.1.0
 
 ### features
