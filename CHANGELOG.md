@@ -4,6 +4,7 @@
 
 ### fixes
 - `gameObject.medik.kpz` neexistoval nedavno byl omylem odstranen, nefungovalo KPZ 
+- `config.js` - oprava z GetVar na AddVar
 
 ## 1.1.0
 

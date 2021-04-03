@@ -1,4 +1,4 @@
-let config = Shared.GetVar('config', {
+let config = Shared.AddVar('config', {
     updateRate: 500,
     mobMaster: {
         sayColor: '0x00B3',

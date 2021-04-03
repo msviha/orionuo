@@ -1713,6 +1713,11 @@ var gameObject = {
             recall: {
                 graphic: '0x1F4C',
                 color: '0x0000'
+            },
+            heal: {
+                graphic: '0x1F31',
+                color: '0x0000',
+                minMana: 3
             }
         },
         necro: {
@@ -2415,7 +2420,7 @@ var __assign = (this && this.__assign) || function () {
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 1.1.0');
+    Orion.Print(-1, 'version 1.1.1');
     Orion.Print(-1, '-------------+');
 }
 function Autostart() {
