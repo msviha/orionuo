@@ -25,6 +25,8 @@ export default interface InteractionWithOtherScripts {
 
 	RemoveDisplayTimer(id:string)
 
+	DisplayTimerExists(id:string)
+
 	/**
 	* int Orion.Now();
 	* Result: the current time in milliseconds.

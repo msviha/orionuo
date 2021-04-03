@@ -120,6 +120,7 @@ namespace Scripts {
             const enemySerial = store[currentIndex].serial;
             const enemy = Orion.FindObject(enemySerial);
             if (enemy) {
+                Orion.GetStatus(enemySerial);
                 Scripts.Targeting.highlightEnemy(enemySerial, enemy, opts.showStatusBar, opts.targetIndication, opts.statusBarPosition);
             }
             else {
@@ -151,8 +152,13 @@ namespace Scripts {
         ) {
             const notoColor = Scripts.Utils.getColorByNotoriety(enemy.Notoriety());
 
-            Scripts.Utils.playerPrint(`[${enemy.Name() || 'target'}]: ${enemy.Hits()}/${enemy.MaxHits()}`, notoColor);
-            Orion.CharPrint(enemySerial, notoColor, `[${enemy.Name() || 'target'}]: ${enemy.Hits()}/${enemy.MaxHits()}`);
+            if (!config.targeting?.highlightEnemySilent) {
+                Scripts.Utils.playerPrint(`[${enemy.Name() || 'target'}]: ${enemy.Hits()}/${enemy.MaxHits()}`, notoColor);
+                Orion.CharPrint(enemySerial, notoColor, `[${enemy.Name() || 'target'}]: ${enemy.Hits()}/${enemy.MaxHits()}`);
+            } else {
+                Orion.CharPrint(enemySerial, notoColor, `[${enemy.Hits()}/${enemy.MaxHits()}`);
+            }
+
             targetIndicationEnum !== TargetIndicationEnum.none && Scripts.Utils.printColoredHpBar(enemySerial, enemy.Hits() / enemy.MaxHits() * 100);
             showStatusBar && Scripts.Utils.updateCurrentStatusBar(enemySerial, statusBarPosition);
 

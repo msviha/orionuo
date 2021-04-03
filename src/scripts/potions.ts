@@ -37,8 +37,10 @@ namespace Scripts {
         /**
          * @param potionName nazev potionu, ktery je definovan jako klic v objectu o.potions
          * @param switchWarModeWhenNeeded prepne war, pokud je potreba docepnout
+         * @param refillEmptyLimit pokud nelze pit prelije potion pokud je pocet prazdnych lahvicek vetsi nez limit, 0 = vypnuto, vychozi = 2
+         * @param displayInvisLongTimer pro Destra a Srnku kteri maji timer 5min 30s
          */
-        static drinkPotion(potionName:PotionsEnum, switchWarModeWhenNeeded = true, displayTimers = true, displayInfo = true) {
+        static drinkPotion(potionName:PotionsEnum, switchWarModeWhenNeeded = true, displayTimers = true, displayInfo = true, refillEmptyLimit = 0, displayInvisLongTimer = false) {
             if (!isPotionsEnum(potionName)) {
                 return;
             }
@@ -63,6 +65,8 @@ namespace Scripts {
             const messages = [succMsg, failMsg, paraMsg];
             const drinkTimer = 17500;
             const gsTimer = 130000;
+            const invisTimer = 27000;
+            const invisLongTimer = 328500; 
             Orion.UseObject(potion);
             const m = Scripts.Utils.waitWhileSomethingInJournal(messages, 1000, 1000);
 
@@ -99,11 +103,62 @@ namespace Scripts {
                     );
                     Scripts.Utils.resetTimer(TimersEnum.gs);
                 }
+                if (potionName === PotionsEnum.invis) {//Timeru na invisky je neomezeny pocet, dalsi vypiti neresetuje odhid ale akorat zacne novy timer na serveru
+
+                    const invisPotionTimer = config?.drinkPotion.invisTimer;
+                    for (let a = 0; a < 10; a++) {
+                        let id = TimersEnum.invis + "_" + a;
+                        if (Orion.DisplayTimerExists(id)) 
+                            continue;
+
+                        displayTimers && Orion.AddDisplayTimer(
+                            id,
+                            invisTimer,
+                            invisPotionTimer?.position || 'LeftTop',
+                            invisPotionTimer?.type || 'Line|Bar',
+                            invisPotionTimer?.text || 'Invis',
+                            (invisPotionTimer?.xFromPosition || 0) + (a * 55),
+                            invisPotionTimer?.yFromPosition || 110,
+                            invisPotionTimer?.textColor || '0x88B',
+                            invisPotionTimer?.font || 0,
+                            invisPotionTimer?.backgroundColor || '0x88B'
+                        );
+                        break;
+                    }
+                    if (displayInvisLongTimer) {
+                        const invisLongPotionTimer = config?.drinkPotion.invisLongTimer;
+                        for (let a = 0; a < 10; a++) {
+                            let id = TimersEnum.invisLong + "_" + a;
+                            if (Orion.DisplayTimerExists(id)) 
+                                continue;
+
+                            displayTimers && Orion.AddDisplayTimer(
+                                id,
+                                invisLongTimer,
+                                invisLongPotionTimer?.position || 'LeftTop',
+                                invisLongPotionTimer?.type || 'Line|Bar',
+                                invisLongPotionTimer?.text || 'InvisL',
+                                (invisLongPotionTimer?.xFromPosition || 0) + (a * 55),
+                                invisLongPotionTimer?.yFromPosition || 165,
+                                invisLongPotionTimer?.textColor || '0x88B',
+                                invisLongPotionTimer?.font || 0,
+                                invisLongPotionTimer?.backgroundColor || '0x88B'
+                            ); 
+                            break;
+                        }
+                    }
+                    Orion.RemoveTimer(TimersEnum.gs);
+                }
+
                 displayInfo && Orion.Exec('displayDrinkInfo', false, [potionName.toString()]);
             }
             else if (m === 1) {
                 const remainingTime = drinkTimer - Orion.Timer(TimersEnum.drink);
                 remainingTime > 0 && Scripts.Utils.playerPrint(`potion timer ${((drinkTimer - Orion.Timer(TimersEnum.drink)) / 1000).toFixed(2)}s`, ColorEnum.red);
+
+                if (refillEmptyLimit && refillEmptyLimit && Orion.Count(gameObject.uncategorized.emptyBottles.graphic, gameObject.uncategorized.emptyBottles.color) > refillEmptyLimit) {
+                    Scripts.Potions.fillPotion(potionName, switchWarModeWhenNeeded);
+                }
             }
             else if (m === 2) {
                 Scripts.Utils.playerPrint(`You can't reach that`, ColorEnum.orange);

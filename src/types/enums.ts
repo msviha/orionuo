@@ -9,7 +9,8 @@ enum ColorEnum {
     none = '0xffff',
     red = '0x0021',
     green = '0x0044',
-    orange = '0x002c'
+    orange = '0x002c',
+    pureWhite = '0x0B1D'
 }
 
 enum TargetEnum {
@@ -91,6 +92,16 @@ enum NotorietyEnum {
     yellow = 'yellow'
 }
 
+enum NotorietyNum {
+    blue = 1,
+    green = 2, 
+    gray = 3,
+    criminal = 4,
+    orange = 5,
+    red = 6,
+    yellow = 7
+}
+
 enum PotionsEnum {
     tmr = 'tmr',
     mr = 'mr',
@@ -105,7 +116,8 @@ enum PotionsEnum {
     dp = 'dp',
     ns = 'ns',
     shrink = 'shrink',
-    lavabomb = 'lavabomb'
+    lavabomb = 'lavabomb',
+    invis = 'invis'
 }
 
 enum NecroScrollEnum {
@@ -117,7 +129,10 @@ enum NecroScrollEnum {
 enum TimersEnum {
     drink = 'drink',
     gs = 'gs',
-    hiding = 'hiding'
+    hiding = 'hiding',
+    invis = 'invis',
+    invisLong = 'invisLong',
+    bandage = 'bandage'
 }
 
 enum GlobalEnum {
@@ -140,4 +155,26 @@ enum MedicActionsEnum {
     pull = "KPZ - Pull",
     jump = "KPZ - Jump",
     switchHp = "KPZ - Switch HP"
+}
+
+enum RenameNameType {
+    autoName = 'autoName',
+    nameList = 'nameList'
+} 
+
+enum TargetExEnum {
+    /**self ale pokud sem zranen nebo otraven*/
+    selfinjured = "selfinjured",
+    /**laststatus pokud to neni serial z friendlistu nebo pet*/
+    laststatusenemy = "laststatusenemy",
+    /**mount ulozeny pres moutn script*/
+    mount = "mount",
+    /**nejblizsi zraneny friend, pet nebo mount */
+    nearinjuredalie = "nearinjuredalie",
+    /**nejblizsi zraneny friend, pet nebo mount s vyuzitim Line of Sight (presne neni znamo jak dobre to funguje) */
+    nearinjuredalielos = "nearinjuredalielos",
+    /**nejvic zraneny friend, pet nebo mount */
+    mostinjuredalie = "mostinjuredalie",
+    /**nejvic zraneny friend, pet nebo mount s vyuzitim Line of Sight (presne neni znamo jak dobre to funguje) */
+    mostinjuredalielos = "mostinjuredalielos"
 }

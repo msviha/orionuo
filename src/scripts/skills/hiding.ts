@@ -43,10 +43,11 @@ function _hidingPreoccupiedCheck() {
     );
     Scripts.Utils.waitWhileSomethingInJournal(['You have hidden yourself well', 't seem to hide here', 'preoccupied'], 3000);
     Orion.RemoveDisplayTimer(TimersEnum.hiding);
-    if (Orion.InJournal('You have hidden yourself well')) {
+    const showMsg = config?.hiding?.showInnerMessages;
+    if (Orion.InJournal('You have hidden yourself well') && showMsg) {
         Orion.CharPrint(Player.Serial(), ColorEnum.green, '[ Hidden ]');
     }
-    else if (Orion.InJournal('t seem to hide here')) {
+    else if (Orion.InJournal('t seem to hide here') && showMsg) {
         Orion.CharPrint(Player.Serial(), ColorEnum.red, '[ FAILED ]');
     }
     else if (Orion.InJournal('preoccupied')) {

@@ -21,7 +21,8 @@ declare function cestovniKniha(selection?: PortBookOptionsEnum): void;
 declare function cleanObjectInBag(object: any, objectName?: string): void;
 declare function craftNext(): void;
 declare function craftSelect(): void;
-declare function drink(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean, displayTimers?: boolean): void;
+declare function drink(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean, displayTimers?: boolean, refillEmptyLimit?: number, displayInvisLongTimer?: boolean): void;
+declare function drinkFill(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean, displayTimers?: boolean, refillEmptyLimit?: number, displayInvisLongTimer?: boolean): void;
 declare function drum(target?: TargetEnum): void;
 declare function ef(self?: boolean, scroll?: boolean, timer?: number): void;
 declare function enemy(): void;
@@ -87,6 +88,15 @@ declare function useRR(): void;
 declare function useShrinkKad(): void;
 declare function webDestroyer(): void;
 declare function wos(scroll?: boolean, timer?: number): void;
+declare function sortBackpackCaleb(): void;
+declare function mobKill(targets?: string, useSavedTarget?: boolean): void;
+declare function mobGo(): void;
+declare function mobCome(): void;
+declare function mobStop(): void;
+declare function attackTarget(targets?: string): void;
+declare function castSpell(spellName: string, targets?: string): void;
+declare function shrinkOne(): void;
+declare function bandageTarget(targets?: string, showTarget?: boolean, minimalCountToWarn?: number): void;
 declare function parseParam(param: any): any;
 declare namespace Scripts {
     class Auto {
@@ -99,7 +109,12 @@ declare namespace Scripts {
     class Clean {
         static cleanBag(): void;
         static cleanObjectInBag(object: any, objectName?: string): void;
-        static cleanMyGameObjectInBag(type: IMyGameObject, tName?: string): void;
+        static cleanObjectInBagCoord(object: any, objectName?: string, recuseSearch?: boolean, coordinates?: ICoordinates, delta?: number): ICoordinates;
+        static getSerialsFromMyGameObject(type: IMyGameObject, recuseSearch?: boolean): string[];
+        static cleanMyGameObjectInBag(type: IMyGameObject, tName?: string, recuseSearch?: boolean, coordinates?: ICoordinates, delta?: number): ICoordinates;
+        static findUniqueGameObjects(object: any): Array<IMyGameObject>;
+        static getGameObjectList(object: any): Array<IMyGameObject>;
+        static sortBackpackCaleb(): void;
     }
 }
 declare namespace Scripts {
@@ -153,6 +168,23 @@ declare namespace Scripts {
     }
 }
 declare namespace Scripts {
+    class MobMaster {
+        static rename(mob: GameObject): boolean;
+        static resetMobCommands(): void;
+        static mobKill(targets?: string, useSavedTarget?: boolean): void;
+        static shrinkOne(): void;
+        static useShrinkKad(): void;
+        static mobCome(): void;
+        static mobStop(): void;
+        static mobGo(): void;
+        static getPrintAlieColorByHits(hits: number, maxHits: number): string;
+        static getPrintEnemyColorByHits(hits: number, maxHits: number): string;
+        static getPlayerShorCode(): string;
+        static mobNameSufix(name: string): string;
+        static isRenamedByPlayer(name: string): boolean;
+    }
+}
+declare namespace Scripts {
     class Mount {
         static mountAndDismount(): void;
         static resolveNewMount(): void;
@@ -198,7 +230,7 @@ declare namespace Scripts {
         static getEmptyBottle(): string;
         static getKadForPotion(potion: IPotion): string;
         static getMortar(): string;
-        static drinkPotion(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean, displayTimers?: boolean, displayInfo?: boolean): void;
+        static drinkPotion(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean, displayTimers?: boolean, displayInfo?: boolean, refillEmptyLimit?: number, displayInvisLongTimer?: boolean): void;
         static gmMortar(potionName: PotionsEnum): void;
         static alchemy(potionName: PotionsEnum): void;
         static fillPotion(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean, kadSerial?: string, emptyBottleSerial?: string): void;
@@ -241,6 +273,31 @@ declare namespace Scripts {
     }
 }
 declare namespace Scripts {
+    class TargetingEx {
+        static cancelResetTarget(): void;
+        static attack(targets: string): void;
+        static isEnemy(obj: GameObject): boolean;
+        static getAliveAlies(distance?: number): Array<GameObject>;
+        static getAliveAttackPets(distance?: number): Array<GameObject>;
+        static getTarget(targets: string, distance?: number): TargetResult | undefined;
+    }
+}
+declare namespace Scripts {
+    class TargetResult {
+        private serial?;
+        private object?;
+        private x?;
+        private y?;
+        private z?;
+        private graphic?;
+        success(): boolean | (() => boolean);
+        gameObject(serial?: string): GameObject;
+        isValid(): () => boolean;
+        isStatic(): boolean;
+        waitTarget(): void;
+    }
+}
+declare namespace Scripts {
     class Utils {
         static selectMenu(menuName: string | ISpecialSelection, selections: Array<string | ISpecialSelection>, firstCall?: boolean): void;
         static useAndSelect(serial: string, selections: ISelect[], use?: boolean): void;
@@ -254,7 +311,8 @@ declare namespace Scripts {
         static waitWhileSomethingInJournal(messages: string[], wait?: number, timeAhead?: number, flags?: string): number;
         static worldSaveCheckWait(): void;
         static log(message: string, color?: ColorEnum): void;
-        static playerPrint(message: string, color?: ColorEnum | number): void;
+        static playerPrint(message: string, color?: ColorEnum | number | string, fastPrint?: boolean): void;
+        static charPrint(serial: string, message: string, color?: ColorEnum | number | string, fastPrint?: boolean): void;
         static waitTarget(target?: TargetEnum | string): void;
         static resetTimer(timer: string): void;
         static waitWhileTargeting(): void;
@@ -282,6 +340,8 @@ declare namespace Scripts {
         static isItemStackable(serial: string): boolean;
         static askForCount(): number;
         static waitTargetTileOrObject(): ICoordinates | undefined;
+        static sayWithColor(text: any, color: any): void;
+        static ensureName(obj: GameObject | PlayerCharacter): string;
     }
 }
 declare namespace Scripts {
@@ -325,6 +385,11 @@ declare namespace Scripts {
     }
 }
 declare namespace Scripts {
+    class Healing {
+        static bandageTarget(targes?: string, showTarget?: boolean, minimalCountToWarn?: number): void;
+    }
+}
+declare namespace Scripts {
     class Hiding {
         static hiding(): void;
     }
@@ -348,6 +413,11 @@ declare namespace Scripts {
         static lumber(): void;
         static findTreesAround(): any[];
         static findNearestTree(trees: ICoordinates[]): number;
+    }
+}
+declare namespace Scripts {
+    class Magery {
+        static castSpell(spellName: string, targets: string): void;
     }
 }
 declare namespace Scripts {
@@ -400,7 +470,8 @@ declare enum ColorEnum {
     none = "0xffff",
     red = "0x0021",
     green = "0x0044",
-    orange = "0x002c"
+    orange = "0x002c",
+    pureWhite = "0x0B1D"
 }
 declare enum TargetEnum {
     self = "self",
@@ -473,6 +544,15 @@ declare enum NotorietyEnum {
     red = "red",
     yellow = "yellow"
 }
+declare enum NotorietyNum {
+    blue = 1,
+    green = 2,
+    gray = 3,
+    criminal = 4,
+    orange = 5,
+    red = 6,
+    yellow = 7
+}
 declare enum PotionsEnum {
     tmr = "tmr",
     mr = "mr",
@@ -487,7 +567,8 @@ declare enum PotionsEnum {
     dp = "dp",
     ns = "ns",
     shrink = "shrink",
-    lavabomb = "lavabomb"
+    lavabomb = "lavabomb",
+    invis = "invis"
 }
 declare enum NecroScrollEnum {
     vfp = "vfp",
@@ -497,7 +578,10 @@ declare enum NecroScrollEnum {
 declare enum TimersEnum {
     drink = "drink",
     gs = "gs",
-    hiding = "hiding"
+    hiding = "hiding",
+    invis = "invis",
+    invisLong = "invisLong",
+    bandage = "bandage"
 }
 declare enum GlobalEnum {
     customStatusBars = "customStatusBars"
@@ -516,6 +600,19 @@ declare enum MedicActionsEnum {
     pull = "KPZ - Pull",
     jump = "KPZ - Jump",
     switchHp = "KPZ - Switch HP"
+}
+declare enum RenameNameType {
+    autoName = "autoName",
+    nameList = "nameList"
+}
+declare enum TargetExEnum {
+    selfinjured = "selfinjured",
+    laststatusenemy = "laststatusenemy",
+    mount = "mount",
+    nearinjuredalie = "nearinjuredalie",
+    nearinjuredalielos = "nearinjuredalielos",
+    mostinjuredalie = "mostinjuredalie",
+    mostinjuredalielos = "mostinjuredalielos"
 }
 interface IMyGameObject {
     graphic: string;
@@ -586,6 +683,10 @@ interface ISelect {
 interface IMenuSelection {
     name: string;
     selection: string;
+}
+interface IRenamedMob {
+    serial: string;
+    graphic: string | number;
 }
 declare function isMyGameObject(val: any): val is IMyGameObject;
 declare function isMakeProps(val: any): val is IMakeProps;

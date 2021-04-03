@@ -1,5 +1,44 @@
 # CHANGELOG
 
+## 1.1.0
+
+### features
+- `auto` automaticke prejmenovani sumu
+- `mobKill` postupne posilani prikazu kill zasebou na zvoleny target. Upravena verze, jiz lze zadat vlastni target jako vstupni parametr a vypnout si ukladani. napr mobKill('lastattack', false); - je asi nebeznejsi jak hraci tento prikaz pouzivaji summy vzdy utoci na aktualni vas lasttattack
+- `mobGo` prime volani posledniho laststatus klamaka prikazem go
+- `mobCome` volani prikazu all come, pri pouzivani mobKill s ukladanim targetu nutne, protoze provadi zaroven reset ulozeneho targetu
+- `mobStop` volani prikazu all stop, pri pouzivani mobKill s ukladanim targetu nutne, protoze provadi zaroven reset ulozeneho targetu
+- `shrinkOne` shrinkovani jednoho klamaka, primarne bere nejvic zraneneho. Bere ze zeme Leopardy, havky atd. Bere je i bez shrinknuti, tj. 2 in 1
+- `attackTarget` klasicky attack s vyuzitim rozsirenych aliasu targetovani
+- `bandageTarget` badage s vyuzitim rozsirenych aliasu targetovani, idealni na healeni petu. 1x spusteni = 1x banda. Ukazuje timer bandaze.
+- `castSpell` standardni cast kouzla s vyuzitim rosirenych aliasu targetovani
+- `drinkFill` jako drink jen doplnuje lahvicky kdyz nemuzete pit, vychozi omezeni je do min 2 prazdnych
+- `drink + drinkFill` nova pretizeni a timery na invis a invis logn (5min30s - destro, srnka). Timery se pridavaji za sebe (postupne vas odhidovavaji) 
+- `nove aliasy targetu` viz popis enum TargetEx
+
+### fixes
+- `shrinkOne` opraveno zvedani nongenu na klamaky (hnedej ctverecek), zpusobovalo ze prestalio fungovat vyhazovani. 
+- `gameObject.klamak.lvl2.dog` chybna grafika. 
+
+### gameObject 
+- `weapons.fencing` zbrane fenc
+- `weapons.swordsmanship` zbrane sword
+- `weapons.macefighting` zbrane mace
+- `weapons.arcehry` zbrane archery
+- `wapons.shields` stity
+
+### config
+- `autoHandlers.autoRename.enabled` - true/false - zapne automaticke prejmenovani, vychozi false
+- `autoHandlers.autoRename.renameMounts` - true/false - prejmenovani jezditek, vychozi false
+- `autoHandlers.printDamageDiffOnly` - vypisuje jen zraneni a ne hodnotu hits/maxHits 
+
+- `mobMaster.sayColor` - vychozi barva pro prikazy mobkill, mobgo, mobstop, mobcome
+- `mobMaster.renameNameType` -  zatim nefunkcni, planuji dodelat podporu i pro jmena ze seznamu jako to bylo dosud v mleekove prejmenovani
+
+- `targeting.highlightEnemySilent` - targetNext - trosku konzervativnejsi vypis pri zamereni, nevypisuje nad hrace a nevypisuje jmeno, jako na fene jen hits/maxHits
+- `hiding.showInnerMessages` - nezobrazuje hlasky uspesneho/neuspesneho hidnuti, hodi se pokud vyuzivate textreplace.
+
+
 ## 1.0.0
 
 ### breaking changes
