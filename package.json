@@ -1,11 +1,13 @@
-{
   "name": "orionuo",
-  "version": "0.1.9",
+  "version": "1.0.0",
   "description": "Scripts for OrionUO assistant on Darkparadise.cz",
   "scripts": {
     "build": "tsc",
+    "build-all": "tsc && npm run build-config && npm run build-refill",
+    "build-config": "tsc -p config",
+    "build-refill": "tsc -p _dependent/refill-manager",
     "watch": "tsc -w",
-    "doc": "typedoc --out docs src --includeDeclarations --stripInternal --excludeExternals --ignoreCompilerErrors --mode file --plugin typedoc-plugin-markdown --exclude \"src/+(utils|typeguards).ts\""
+    "doc": "typedoc --out docs src --includeDeclarations --stripInternal --excludeExternals --ignoreCompilerErrors --mode file --plugin typedoc-plugin-markdown --exclude \"src/+(utils|typeguards|private-exec).ts\""
   },
   "author": "Michal Sviha",
   "license": "ISC",
@@ -13,7 +15,7 @@
     "typescript": "4.0.5"
   },
   "devDependencies": {
-    "typedoc": "^0.19.2",
-    "typedoc-plugin-markdown": "^3.0.9"
+    "typedoc": "0.19.2",
+    "typedoc-plugin-markdown": "3.0.9"
   }
 }
