@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 1.1.2
+
+### features
+- `novy alias targetu 'lasttargetmobile'` viz popis enum TargetEx
+- `highlightEnemy` oprava pri zapnuti highlightEnemySilent chybela prava zavorka za maxhits.
+
+### fixes
+- `mobKill` spatne razeni petu, vynechal v rade nektere jmena. lasttarget bral i nezive objekty.
+
+
 ## 1.1.1
 
 ### fixes

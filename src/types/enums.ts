@@ -176,5 +176,8 @@ enum TargetExEnum {
     /**nejvic zraneny friend, pet nebo mount */
     mostinjuredalie = "mostinjuredalie",
     /**nejvic zraneny friend, pet nebo mount s vyuzitim Line of Sight (presne neni znamo jak dobre to funguje) */
-    mostinjuredalielos = "mostinjuredalielos"
+    mostinjuredalielos = "mostinjuredalielos",
+    /**last target pouze pokud je to charakter */
+    lasttargetmobile = "lasttargetmobile"
+
 }

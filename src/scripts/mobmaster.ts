@@ -63,11 +63,14 @@ namespace Scripts {
         } 
 
         static resetMobCommands() {
-            Shared.RemoveVar('mobmaster.mobgo.lastSerial');
-            Shared.RemoveVar('mobmaster.mobkill.lastIndex'); 
-            Shared.RemoveVar('mobmaster.mobkill.target'); 
+            Shared.RemoveVar('mobgo.lastSerial');
+            Shared.RemoveVar('mobkill.target'); 
+            Shared.RemoveVar('mobkill.lastSerial'); 
         }
 
+        private static resolveSayColor(): string {
+            return config?.mobMaster.sayColor || '0x00B3';
+        }        
 
         /**
          * Vola po jednon vsechny pety, jedno volani = jedno jmeno na vybrany target, nebo vyhodi tercik
@@ -76,17 +79,33 @@ namespace Scripts {
          * tak summy si porad drzi puvodni target. Dokud neni zresetovani pri volani mobStop(), mobCome() 
          */
         static mobKill(targets?:string, useSavedTarget:boolean=true) { 
-            TargetingEx.cancelResetTarget();
-            let pets = Orion.FindTypeEx('!0x0190|!0x0191', '0xFFFF', 'ground', 'live', 20)
-            .filter((obj)=> { return obj.CanChangeName(); })
-            .sort((a, b)=> { return a > b ? -1 : 1 } );
 
-            let lastIndex =  Shared.GetVar('mobmaster.mobkill.lastIndex', 0);
+            let storedPets:Array<GameObject> = Shared.GetArray("mobKill.storedPets", new Array<GameObject>());
+            const currentPets = Orion.FindTypeEx('!0x0190|!0x0191', '0xFFFF', 'ground', 'live', 20)
+            .filter((obj)=> { return obj.CanChangeName() && !storedPets.some(a=>a.Serial() == obj.Serial()); });
+            currentPets.sort((a,b)=> { 
+                if (a.Serial() > b.Serial()) 
+                    return 0;
+                else 
+                    return 1;
+            });
+
+            currentPets.forEach(element => {
+                storedPets.push(element);
+            });
+            
+            for (let i = storedPets.length - 1; i >= 0; i--) {
+                if (!Orion.FindObject(storedPets[i].Serial()) || !storedPets[i].Exists()) {
+                    storedPets.splice(i);
+                }
+            }
+
+            let lastSerial = Shared.GetVar('mobkill.lastSerial', "");
             let pet = Orion.FindObject('0');
 
             let target = new TargetResult();
             if (useSavedTarget) {
-                let storedSerial = Shared.GetVar('mobmaster.mobkill.target');
+                let storedSerial = Shared.GetVar('mobkill.target');
                 if (storedSerial) {
                     target.gameObject(storedSerial);
                 }
@@ -96,45 +115,56 @@ namespace Scripts {
                 target = TargetingEx.getTarget(targets);
             }
 
-            if (target && target.isValid()) {
-                pets = pets.filter((obj)=> { return obj.Serial() !== target.gameObject().Serial() });
-                Shared.AddVar('mobmaster.mobkill.target', target.gameObject().Serial());
+            if (target?.isValid() && target?.gameObject().Mobile() && !target?.gameObject().Dead()) {
+                storedPets = storedPets.filter((obj)=> { return obj.Serial() !== target.gameObject().Serial() });
+                Shared.AddVar('mobkill.target', target.gameObject().Serial());
             }
 
-            if (pets) {
-                if (lastIndex >= pets.length) {
-                    lastIndex = 0;
-                }
-
-                for (let i = lastIndex; i < pets.length; i++) {
-                    const nextPet = pets[i];
-                    if (nextPet.Exists()) {
-                        Utils.ensureName(nextPet);
-                        pet = nextPet;
-                        lastIndex = i;
-                        break;
-                    }
+            if (storedPets && storedPets.length > 0) {
+                if (!lastSerial || lastSerial === "") {
+                    pet = storedPets[0];
+                    lastSerial = pet.Serial();
+                } else {
+                    for (let i = 0; i < storedPets.length; i++) {
+                        const nextPet = storedPets[i];
+                        if (nextPet.Exists() && nextPet.Serial() === lastSerial) {
+                            if (i === storedPets.length - 1) {
+                                pet = storedPets[0];
+                                lastSerial = pet.Serial();
+                            } else {
+                                pet = storedPets[i + 1];
+                                lastSerial = pet.Serial();
+                            }
+                            break;
+                        }
+                    }       
                 }
 
                 if (pet && pet.Exists()) {
-                    Shared.AddVar('mobmaster.mobkill.lastIndex', ++lastIndex); 
-                    let sayColor = config?.mobMaster?.sayColor || '0x00B3';
+                    Shared.AddVar('mobkill.lastSerial', lastSerial); 
+                    let sayColor = MobMaster.resolveSayColor();
+                    Utils.ensureName(pet);
 
-                    if (target && target.isValid()) {
+                    if (target?.isValid() && target?.gameObject().Mobile() && !target?.gameObject().Dead()) {
                         target.waitTarget();
+                        Utils.ensureName(target.gameObject());
 
-                        const fastTimer = Orion.Timer('mobmaster.mobkill.fastprintsufix');
+                        const fastTimer = Orion.Timer('mobkill.fastprintsufix');
                         const hitColor = MobMaster.getPrintEnemyColorByHits(target.gameObject().Hits(), target.gameObject().MaxHits());
                         sayColor = hitColor;
                         if (fastTimer > 3000) {
                             Orion.PrintFast(target.gameObject().Serial(),hitColor,0, `[${target.gameObject().Hits()}/${target.gameObject().MaxHits()}]`);
-                            Orion.SetTimer('mobmaster.mobkill.fastprintsufix');
+                            Orion.SetTimer('mobkill.fastprintsufix');
                         } else if (fastTimer < 0) {
-                            Orion.SetTimer('mobmaster.mobkill.fastprintsufix');
+                            Orion.SetTimer('mobkill.fastprintsufix');
                         }
                     }
                     Utils.sayWithColor(`${pet.Name()} kill`, sayColor);
+                } else {
+                    Shared.RemoveVar('mobkill.lastSerial'); 
                 }
+            } else {
+                Shared.RemoveVar('mobkill.lastSerial'); 
             }
         }
 
@@ -191,20 +221,18 @@ namespace Scripts {
             Orion.UseType(kad.graphic, kad.color);
         }
 
-        
-
         static mobCome() {
-            //Targeting.cancelResetTarget();
+            TargetingEx.cancelResetTarget();
             //TODO barvu podle celkoveho HP vsech mobu
-            let sayColor = config?.mobMaster.sayColor || '0x00B3';
+            let sayColor = MobMaster.resolveSayColor();
             MobMaster.resetMobCommands();
             Utils.sayWithColor('all come', sayColor);
         }        
 
         static mobStop() {
-            //Targeting.cancelResetTarget();
+            TargetingEx.cancelResetTarget();
             //TODO barvu podle celkoveho HP vsech mobu
-            let sayColor = config?.mobMaster.sayColor || '0x00B3';
+            let sayColor = MobMaster.resolveSayColor();
             MobMaster.resetMobCommands();
             Utils.sayWithColor('all stop', sayColor);
         }
@@ -215,8 +243,8 @@ namespace Scripts {
         static mobGo() {
             TargetingEx.cancelResetTarget();
             let text = "all go";
-            let sayColor = config?.mobMaster.sayColor || '0x00B3';
-            let lastMob = Orion.FindObject(Shared.GetVar('mobmaster.mobgo.lastSerial'));
+            let sayColor = MobMaster.resolveSayColor();
+            let lastMob = Orion.FindObject(Shared.GetVar('mobgo.lastSerial'));
             const statusMob = Orion.FindObject('laststatus');//Orion.ClientLastTarget());
 
             if (!lastMob || !lastMob.Exists()) {
@@ -229,28 +257,25 @@ namespace Scripts {
                 ) {
 
                     Utils.ensureName(lastMob);
-                Shared.AddVar('mobmaster.mobgo.lastSerial', lastMob.Serial());
+                Shared.AddVar('mobgo.lastSerial', lastMob.Serial());
                 const hitColor = MobMaster.getPrintAlieColorByHits(lastMob.Hits(), lastMob.MaxHits());
                 text = `${lastMob.Name()} go`;
                 sayColor = hitColor;
 
-                const fastTimer = Orion.Timer('mobmaster.mobgo.fastprintsufix');
+                const fastTimer = Orion.Timer('mobgo.fastprintsufix');
                 if (fastTimer > 2000) {
                     Orion.PrintFast(lastMob.Serial(),hitColor,0, MobMaster.mobNameSufix(lastMob.Name()));
-                    Orion.SetTimer('mobmaster.mobgo.fastprintsufix');
+                    Orion.SetTimer('mobgo.fastprintsufix');
                 } else if (fastTimer < 0) {
-                    Orion.SetTimer('mobmaster.mobgo.fastprintsufix');
+                    Orion.SetTimer('mobgo.fastprintsufix');
                 }
             } else {
-                Shared.RemoveVar('mobmaster.mobgo.lastSerial');
+                Shared.RemoveVar('mobgo.lastSerial');
             }
             Utils.sayWithColor(text, sayColor);
         }
 
-
-
-       
-         /**
+        /**
          * 
          * @param hits aktualni hodnota HP
          * @param maxHits maximalni hodnota HP
@@ -260,9 +285,8 @@ namespace Scripts {
             var c = '0x023b';
           
             if (hits && maxHits) {
- 
-                const perc = hits / maxHits;
-          
+                 const perc = hits / maxHits;
+         
                 if (perc >= 0.8)
                     c = '0x003e';
                 else if (perc >= 0.6)
@@ -321,19 +345,13 @@ namespace Scripts {
                     name = Player.Name();
                 }
 
-                name = name.toLocaleLowerCase();//MobMaster.string_ToLower(name);
+                name = name.toLocaleLowerCase();
                 name = name.replace(" ", "");
                 name = name.replace("-", "");
                 name = name.replace("'", "");
                 name = name.replace("_", "");
                 name = name.replace(".", "");
                 name = name.replace(",", "");
-                // name = MobMaster.string_ReplaceChar(name, " ", "");
-                // name = MobMaster.string_ReplaceChar(name, "-", "");
-                // name = MobMaster.string_ReplaceChar(name, "'", "");
-                // name = MobMaster.string_ReplaceChar(name, "_", "");
-                // name = MobMaster.string_ReplaceChar(name, ".", "");
-                // name = MobMaster.string_ReplaceChar(name, ",", "");
 
                 playerShorCode = name;
 

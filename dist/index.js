@@ -3757,22 +3757,37 @@ var Scripts;
             return false;
         };
         MobMaster.resetMobCommands = function () {
-            Shared.RemoveVar('mobmaster.mobgo.lastSerial');
-            Shared.RemoveVar('mobmaster.mobkill.lastIndex');
-            Shared.RemoveVar('mobmaster.mobkill.target');
+            Shared.RemoveVar('mobgo.lastSerial');
+            Shared.RemoveVar('mobkill.target');
+            Shared.RemoveVar('mobkill.lastSerial');
+        };
+        MobMaster.resolveSayColor = function () {
+            return (config === null || config === void 0 ? void 0 : config.mobMaster.sayColor) || '0x00B3';
         };
         MobMaster.mobKill = function (targets, useSavedTarget) {
-            var _a;
             if (useSavedTarget === void 0) { useSavedTarget = true; }
-            Scripts.TargetingEx.cancelResetTarget();
-            var pets = Orion.FindTypeEx('!0x0190|!0x0191', '0xFFFF', 'ground', 'live', 20)
-                .filter(function (obj) { return obj.CanChangeName(); })
-                .sort(function (a, b) { return a > b ? -1 : 1; });
-            var lastIndex = Shared.GetVar('mobmaster.mobkill.lastIndex', 0);
+            var storedPets = Shared.GetArray("mobKill.storedPets", new Array());
+            var currentPets = Orion.FindTypeEx('!0x0190|!0x0191', '0xFFFF', 'ground', 'live', 20)
+                .filter(function (obj) { return obj.CanChangeName() && !storedPets.some(function (a) { return a.Serial() == obj.Serial(); }); });
+            currentPets.sort(function (a, b) {
+                if (a.Serial() > b.Serial())
+                    return 0;
+                else
+                    return 1;
+            });
+            currentPets.forEach(function (element) {
+                storedPets.push(element);
+            });
+            for (var i = storedPets.length - 1; i >= 0; i--) {
+                if (!Orion.FindObject(storedPets[i].Serial()) || !storedPets[i].Exists()) {
+                    storedPets.splice(i);
+                }
+            }
+            var lastSerial = Shared.GetVar('mobkill.lastSerial', "");
             var pet = Orion.FindObject('0');
             var target = new Scripts.TargetResult();
             if (useSavedTarget) {
-                var storedSerial = Shared.GetVar('mobmaster.mobkill.target');
+                var storedSerial = Shared.GetVar('mobkill.target');
                 if (storedSerial) {
                     target.gameObject(storedSerial);
                 }
@@ -3780,41 +3795,57 @@ var Scripts;
             if (!target.isValid() && targets) {
                 target = Scripts.TargetingEx.getTarget(targets);
             }
-            if (target && target.isValid()) {
-                pets = pets.filter(function (obj) { return obj.Serial() !== target.gameObject().Serial(); });
-                Shared.AddVar('mobmaster.mobkill.target', target.gameObject().Serial());
+            if ((target === null || target === void 0 ? void 0 : target.isValid()) && (target === null || target === void 0 ? void 0 : target.gameObject().Mobile()) && !(target === null || target === void 0 ? void 0 : target.gameObject().Dead())) {
+                storedPets = storedPets.filter(function (obj) { return obj.Serial() !== target.gameObject().Serial(); });
+                Shared.AddVar('mobkill.target', target.gameObject().Serial());
             }
-            if (pets) {
-                if (lastIndex >= pets.length) {
-                    lastIndex = 0;
+            if (storedPets && storedPets.length > 0) {
+                if (!lastSerial || lastSerial === "") {
+                    pet = storedPets[0];
+                    lastSerial = pet.Serial();
                 }
-                for (var i = lastIndex; i < pets.length; i++) {
-                    var nextPet = pets[i];
-                    if (nextPet.Exists()) {
-                        Scripts.Utils.ensureName(nextPet);
-                        pet = nextPet;
-                        lastIndex = i;
-                        break;
+                else {
+                    for (var i = 0; i < storedPets.length; i++) {
+                        var nextPet = storedPets[i];
+                        if (nextPet.Exists() && nextPet.Serial() === lastSerial) {
+                            if (i === storedPets.length - 1) {
+                                pet = storedPets[0];
+                                lastSerial = pet.Serial();
+                            }
+                            else {
+                                pet = storedPets[i + 1];
+                                lastSerial = pet.Serial();
+                            }
+                            break;
+                        }
                     }
                 }
                 if (pet && pet.Exists()) {
-                    Shared.AddVar('mobmaster.mobkill.lastIndex', ++lastIndex);
-                    var sayColor = ((_a = config === null || config === void 0 ? void 0 : config.mobMaster) === null || _a === void 0 ? void 0 : _a.sayColor) || '0x00B3';
-                    if (target && target.isValid()) {
+                    Shared.AddVar('mobkill.lastSerial', lastSerial);
+                    var sayColor = MobMaster.resolveSayColor();
+                    Scripts.Utils.ensureName(pet);
+                    if ((target === null || target === void 0 ? void 0 : target.isValid()) && (target === null || target === void 0 ? void 0 : target.gameObject().Mobile()) && !(target === null || target === void 0 ? void 0 : target.gameObject().Dead())) {
                         target.waitTarget();
-                        var fastTimer = Orion.Timer('mobmaster.mobkill.fastprintsufix');
+                        Scripts.Utils.ensureName(target.gameObject());
+                        var fastTimer = Orion.Timer('mobkill.fastprintsufix');
                         var hitColor = MobMaster.getPrintEnemyColorByHits(target.gameObject().Hits(), target.gameObject().MaxHits());
                         sayColor = hitColor;
                         if (fastTimer > 3000) {
                             Orion.PrintFast(target.gameObject().Serial(), hitColor, 0, "[" + target.gameObject().Hits() + "/" + target.gameObject().MaxHits() + "]");
-                            Orion.SetTimer('mobmaster.mobkill.fastprintsufix');
+                            Orion.SetTimer('mobkill.fastprintsufix');
                         }
                         else if (fastTimer < 0) {
-                            Orion.SetTimer('mobmaster.mobkill.fastprintsufix');
+                            Orion.SetTimer('mobkill.fastprintsufix');
                         }
                     }
                     Scripts.Utils.sayWithColor(pet.Name() + " kill", sayColor);
                 }
+                else {
+                    Shared.RemoveVar('mobkill.lastSerial');
+                }
+            }
+            else {
+                Shared.RemoveVar('mobkill.lastSerial');
             }
         };
         MobMaster.shrinkOne = function () {
@@ -3862,20 +3893,22 @@ var Scripts;
             Orion.UseType(kad.graphic, kad.color);
         };
         MobMaster.mobCome = function () {
-            var sayColor = (config === null || config === void 0 ? void 0 : config.mobMaster.sayColor) || '0x00B3';
+            Scripts.TargetingEx.cancelResetTarget();
+            var sayColor = MobMaster.resolveSayColor();
             MobMaster.resetMobCommands();
             Scripts.Utils.sayWithColor('all come', sayColor);
         };
         MobMaster.mobStop = function () {
-            var sayColor = (config === null || config === void 0 ? void 0 : config.mobMaster.sayColor) || '0x00B3';
+            Scripts.TargetingEx.cancelResetTarget();
+            var sayColor = MobMaster.resolveSayColor();
             MobMaster.resetMobCommands();
             Scripts.Utils.sayWithColor('all stop', sayColor);
         };
         MobMaster.mobGo = function () {
             Scripts.TargetingEx.cancelResetTarget();
             var text = "all go";
-            var sayColor = (config === null || config === void 0 ? void 0 : config.mobMaster.sayColor) || '0x00B3';
-            var lastMob = Orion.FindObject(Shared.GetVar('mobmaster.mobgo.lastSerial'));
+            var sayColor = MobMaster.resolveSayColor();
+            var lastMob = Orion.FindObject(Shared.GetVar('mobgo.lastSerial'));
             var statusMob = Orion.FindObject('laststatus');
             if (!lastMob || !lastMob.Exists()) {
                 lastMob = statusMob;
@@ -3884,21 +3917,21 @@ var Scripts;
                 lastMob.Exists() &&
                 lastMob.CanChangeName()) {
                 Scripts.Utils.ensureName(lastMob);
-                Shared.AddVar('mobmaster.mobgo.lastSerial', lastMob.Serial());
+                Shared.AddVar('mobgo.lastSerial', lastMob.Serial());
                 var hitColor = MobMaster.getPrintAlieColorByHits(lastMob.Hits(), lastMob.MaxHits());
                 text = lastMob.Name() + " go";
                 sayColor = hitColor;
-                var fastTimer = Orion.Timer('mobmaster.mobgo.fastprintsufix');
+                var fastTimer = Orion.Timer('mobgo.fastprintsufix');
                 if (fastTimer > 2000) {
                     Orion.PrintFast(lastMob.Serial(), hitColor, 0, MobMaster.mobNameSufix(lastMob.Name()));
-                    Orion.SetTimer('mobmaster.mobgo.fastprintsufix');
+                    Orion.SetTimer('mobgo.fastprintsufix');
                 }
                 else if (fastTimer < 0) {
-                    Orion.SetTimer('mobmaster.mobgo.fastprintsufix');
+                    Orion.SetTimer('mobgo.fastprintsufix');
                 }
             }
             else {
-                Shared.RemoveVar('mobmaster.mobgo.lastSerial');
+                Shared.RemoveVar('mobgo.lastSerial');
             }
             Scripts.Utils.sayWithColor(text, sayColor);
         };
@@ -5055,7 +5088,7 @@ var Scripts;
             var enemySerial = store[currentIndex].serial;
             var enemy = Orion.FindObject(enemySerial);
             if (enemy) {
-                Orion.GetStatus(enemySerial);
+                Orion.ShowStatusbar(enemySerial, 300, 300);
                 Scripts.Targeting.highlightEnemy(enemySerial, enemy, opts.showStatusBar, opts.targetIndication, opts.statusBarPosition);
             }
             else {
@@ -5084,7 +5117,7 @@ var Scripts;
                 Orion.CharPrint(enemySerial, notoColor, "[" + (enemy.Name() || 'target') + "]: " + enemy.Hits() + "/" + enemy.MaxHits());
             }
             else {
-                Orion.CharPrint(enemySerial, notoColor, "[" + enemy.Hits() + "/" + enemy.MaxHits());
+                Orion.CharPrint(enemySerial, notoColor, "[" + enemy.Hits() + "/" + enemy.MaxHits() + "]");
             }
             targetIndicationEnum !== TargetIndicationEnum.none && Scripts.Utils.printColoredHpBar(enemySerial, enemy.Hits() / enemy.MaxHits() * 100);
             showStatusBar && Scripts.Utils.updateCurrentStatusBar(enemySerial, statusBarPosition);
@@ -5095,14 +5128,24 @@ var Scripts;
         Targeting.isFriendlyTargetType = function (graphic, color, name) {
             var friendly = [
                 { graphic: '0x000E', color: '0x0000', exceptionNames: ['Earth Elemental'] },
-                { graphic: '0x000D', color: '0x0000' },
+                { graphic: '0x000D', color: '0x0B77' },
                 { graphic: '0x0039', color: '0x0835' },
                 { graphic: '0x0003', color: '0x0835' },
                 { graphic: '0x00D4', color: '0x0712', exceptionNames: ['Grizzly Bear'] },
                 { graphic: '0x00E8', color: '0x01BB' },
                 { graphic: '0x00D8', color: '0x0000' },
                 { graphic: '0x0015', color: '0x0757' },
-                { graphic: '0x00CC', color: '0x0000' }
+                { graphic: '0x00CC', color: '0x0000' },
+                { graphic: '0x003C', color: '0x0751' },
+                { graphic: '0x0090', color: '0x4001' },
+                { graphic: '0x003A', color: '0x0B87' },
+                { graphic: '0x003A', color: '0x084C' },
+                { graphic: '0x00D3', color: '0x0712' },
+                { graphic: '0x00E1', color: '0x0712' },
+                { graphic: '0x00DD', color: '0x0712' },
+                { graphic: '0x0003', color: '0x049C' },
+                { graphic: '0x001A', color: '0x0835' },
+                { graphic: '0x0027', color: '0x0966' }
             ];
             for (var _i = 0, friendly_1 = friendly; _i < friendly_1.length; _i++) {
                 var f = friendly_1[_i];
@@ -5111,6 +5154,117 @@ var Scripts;
                 }
             }
             return false;
+        };
+        Targeting.targetNextMonster = function (timeToStorePreviousTargets, notoriety, statusWrapperOpt) {
+            var _a;
+            if (timeToStorePreviousTargets === void 0) { timeToStorePreviousTargets = 1500; }
+            if (notoriety === void 0) { notoriety = ['gray', 'criminal', 'orange', 'red']; }
+            var timer = Orion.Timer("tnm.prevTimer");
+            var targets = Shared.GetArray("tnm.targets", []);
+            var lastSerial = Shared.GetVar("tnm.lastSerial", "");
+            if (timer < 0 || timer > timeToStorePreviousTargets) {
+                Scripts.Utils.resetTimer("tnm.prevTimer");
+                Shared.RemoveVar("tnm.lastSerial");
+                lastSerial = "";
+                targets = [];
+                var noto = notoriety.join('|') || undefined;
+                var friendList_1 = Orion.GetFriendList();
+                var nearCharacters = Orion.FindTypeEx('any', '0xFFFF', 'ground', 'mobile|live|ignoreself', 18, noto).filter(function (a) {
+                    return !a.CanChangeName() &&
+                        !friendList_1.some(function (f) { return f === a.Serial(); });
+                }).sort(function (a, b) { return a.Distance() - b.Distance(); });
+                for (var _i = 0, nearCharacters_1 = nearCharacters; _i < nearCharacters_1.length; _i++) {
+                    var char = nearCharacters_1[_i];
+                    Scripts.Utils.ensureName(char);
+                    if (char.Name() &&
+                        char.Name().length === 8 &&
+                        char.Name()[0].toLowerCase() === char.Name()[0] &&
+                        char.Name()[char.Name().length - 1].toUpperCase() === char.Name()[char.Name().length - 1] ||
+                        Targeting.isFriendlyTargetType(char.Graphic(), char.Color(), char.Name())) {
+                        continue;
+                    }
+                    var targetObj = {
+                        serial: char.Serial(),
+                        distance: char.Distance(),
+                        priority: 0
+                    };
+                    targets.push(targetObj);
+                }
+                targets.sort(function (a, b) {
+                    if (a.distance < b.distance)
+                        return -1;
+                    else if (a.distance > b.distance)
+                        return 1;
+                    if (a.priority > b.priority)
+                        return -1;
+                    else if (a.priority < b.priority)
+                        return 1;
+                    var chrA = Orion.FindObject(a.serial);
+                    var chrB = Orion.FindObject(b.serial);
+                    if (chrA && chrB && chrA.MaxHits() > chrB.MaxHits())
+                        return -1;
+                    else if (chrA && chrB && chrA.MaxHits() < chrB.MaxHits())
+                        return 1;
+                    if (chrA && chrB && chrA.Hits() < chrB.Hits())
+                        return -1;
+                    else if (chrA && chrB && chrA.Hits() > chrB.Hits())
+                        return 1;
+                    return 0;
+                });
+                Shared.AddArray("tnm.targets", targets);
+            }
+            var result = new Scripts.TargetResult();
+            if (targets.length > 0) {
+                if (!lastSerial || lastSerial === "" || !((_a = Orion.FindObject(lastSerial)) === null || _a === void 0 ? void 0 : _a.Exists())) {
+                    result.gameObject(targets[0].serial);
+                    lastSerial = result.gameObject().Serial();
+                }
+                else {
+                    for (var i = 0; i < targets.length; i++) {
+                        var nextPet = Orion.FindObject(targets[i].serial);
+                        if ((nextPet === null || nextPet === void 0 ? void 0 : nextPet.Exists()) && nextPet.Serial() === lastSerial) {
+                            if (i === targets.length - 1) {
+                                result.gameObject(targets[0].serial);
+                                lastSerial = targets[0].serial;
+                            }
+                            else {
+                                result.gameObject(targets[i + 1].serial);
+                                lastSerial = targets[i + 1].serial;
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+            else {
+                Scripts.Utils.playerPrint("[ no targets ]", ColorEnum.green, true);
+                Shared.RemoveVar("tnm.lastSerial");
+            }
+            if (result.isValid()) {
+                Shared.AddVar("tnm.lastSerial", result.gameObject().Serial());
+                Targeting.showStatusBarOnWrapper(result.gameObject().Serial(), statusWrapperOpt);
+                Orion.ClientLastTarget(result.gameObject().Serial());
+                Scripts.Targeting.highlightEnemy(result.gameObject().Serial(), result.gameObject(), false, TargetIndicationEnum.none, { x: 300, y: 300 });
+            }
+            return result;
+        };
+        Targeting.showStatusBarOnWrapper = function (serial, statusWrapperOpt) {
+            var barObj = Orion.FindObject(serial);
+            var enabled = (statusWrapperOpt === null || statusWrapperOpt === void 0 ? void 0 : statusWrapperOpt.enabled) || true;
+            if ((barObj === null || barObj === void 0 ? void 0 : barObj.Exists()) && barObj.Mobile() && !barObj.Dead() && enabled) {
+                var startX = (statusWrapperOpt === null || statusWrapperOpt === void 0 ? void 0 : statusWrapperOpt.x) || 200;
+                var stattY = (statusWrapperOpt === null || statusWrapperOpt === void 0 ? void 0 : statusWrapperOpt.y) || 150;
+                var maxCount = (statusWrapperOpt === null || statusWrapperOpt === void 0 ? void 0 : statusWrapperOpt.maxCount) || 10;
+                var deltaX = (statusWrapperOpt === null || statusWrapperOpt === void 0 ? void 0 : statusWrapperOpt.deltaX) || 30;
+                var deltaY = (statusWrapperOpt === null || statusWrapperOpt === void 0 ? void 0 : statusWrapperOpt.deltaY) || 30;
+                var count = 0;
+                if (Scripts.TargetingEx.isEnemy(barObj)) {
+                    count = Shared.GetVar("showStatusBarOnWrapper.enemy.count", 0);
+                    Shared.AddVar("showStatusBarOnWrapper.enemy.count", ++count);
+                    Orion.Print(ColorEnum.pureWhite, "" + count);
+                }
+                Orion.ShowStatusbar(serial, startX + (deltaX * (count % maxCount)), stattY + (deltaY * (count % maxCount)));
+            }
         };
         return Targeting;
     }());
@@ -5122,7 +5276,6 @@ var Scripts;
         function TargetingEx() {
         }
         TargetingEx.cancelResetTarget = function () {
-            Orion.CancelTarget();
             Orion.CancelWaitTarget();
         };
         TargetingEx.attack = function (targets) {
@@ -5197,6 +5350,12 @@ var Scripts;
                 }
                 else if (value === "lasttarget") {
                     result.gameObject(Orion.ClientLastTarget());
+                }
+                else if (value === "lasttargetmobile") {
+                    var obj = Orion.FindObject(Orion.ClientLastTarget());
+                    if (obj && obj.Exists() && obj.Mobile()) {
+                        result.gameObject(Orion.ClientLastTarget());
+                    }
                 }
                 else if (value === "laststatus") {
                     result.gameObject((_a = Orion.FindObject('laststatus')) === null || _a === void 0 ? void 0 : _a.Serial());
@@ -5273,7 +5432,8 @@ var Scripts;
             return Orion.FindObject(this.serial);
         };
         TargetResult.prototype.isValid = function () {
-            return this.serial && Orion.FindObject(this.serial) && Orion.FindObject(this.serial).Exists;
+            var _a;
+            return this.serial && Orion.FindObject(this.serial) && ((_a = Orion.FindObject(this.serial)) === null || _a === void 0 ? void 0 : _a.Exists());
         };
         TargetResult.prototype.isStatic = function () {
             return this.x && this.y && this.x >= 0 && this.y >= 0;
@@ -7382,6 +7542,7 @@ var TargetExEnum;
     TargetExEnum["nearinjuredalielos"] = "nearinjuredalielos";
     TargetExEnum["mostinjuredalie"] = "mostinjuredalie";
     TargetExEnum["mostinjuredalielos"] = "mostinjuredalielos";
+    TargetExEnum["lasttargetmobile"] = "lasttargetmobile";
 })(TargetExEnum || (TargetExEnum = {}));
 var TARGET_OPTS_DEFAULTS = {
     targetIndication: TargetIndicationEnum.none,

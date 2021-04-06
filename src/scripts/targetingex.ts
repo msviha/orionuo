@@ -13,7 +13,7 @@ namespace Scripts {
          * Experimental - melo by zajist zruseni targetu, vyuziva se pred spustenim scriptu tak aby pred spustenim nevysel nejaky target? 
          */
         static cancelResetTarget() {
-            Orion.CancelTarget();
+            //Orion.CancelTarget();
             Orion.CancelWaitTarget();
         }
 
@@ -123,6 +123,11 @@ namespace Scripts {
                     result.gameObject(Player.Serial());
                 } else if (value === "lasttarget") {
                     result.gameObject(Orion.ClientLastTarget());                    
+                } else if (value === "lasttargetmobile") { 
+                    const obj = Orion.FindObject(Orion.ClientLastTarget());
+                    if (obj && obj.Exists() && obj.Mobile()) {
+                        result.gameObject(Orion.ClientLastTarget()); 
+                    }                   
                 } else if (value === "laststatus") {
                     result.gameObject(Orion.FindObject('laststatus')?.Serial());
                 } else if (value === "lastattack") {

@@ -172,6 +172,7 @@ declare namespace Scripts {
     class MobMaster {
         static rename(mob: GameObject): boolean;
         static resetMobCommands(): void;
+        private static resolveSayColor;
         static mobKill(targets?: string, useSavedTarget?: boolean): void;
         static shrinkOne(): void;
         static useShrinkKad(): void;
@@ -271,6 +272,8 @@ declare namespace Scripts {
         static manualTarget(opts: ITargetNextOpts): void;
         static highlightEnemy(enemySerial: string, enemy: GameObject, showStatusBar: boolean, targetIndicationEnum: TargetIndicationEnum, statusBarPosition: ICoordinates): void;
         static isFriendlyTargetType(graphic: string, color: string, name: string): boolean;
+        static targetNextMonster(timeToStorePreviousTargets: number, notoriety: string[], statusWrapperOpt: any): TargetResult;
+        static showStatusBarOnWrapper(serial: string, statusWrapperOpt: any): void;
     }
 }
 declare namespace Scripts {
@@ -291,9 +294,9 @@ declare namespace Scripts {
         private y?;
         private z?;
         private graphic?;
-        success(): boolean | (() => boolean);
+        success(): boolean;
         gameObject(serial?: string): GameObject;
-        isValid(): () => boolean;
+        isValid(): boolean;
         isStatic(): boolean;
         waitTarget(): void;
     }
@@ -613,7 +616,8 @@ declare enum TargetExEnum {
     nearinjuredalie = "nearinjuredalie",
     nearinjuredalielos = "nearinjuredalielos",
     mostinjuredalie = "mostinjuredalie",
-    mostinjuredalielos = "mostinjuredalielos"
+    mostinjuredalielos = "mostinjuredalielos",
+    lasttargetmobile = "lasttargetmobile"
 }
 interface IMyGameObject {
     graphic: string;
