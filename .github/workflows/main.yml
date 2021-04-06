@@ -33,7 +33,7 @@ jobs:
       - name: Install dependencies and build
         run: |
           npm i
-          npm run build 
+          npm run build-all
           
       - name: Archive Artifacts
         uses: actions/upload-artifact@v2
