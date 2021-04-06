@@ -4,9 +4,12 @@
 namespace Scripts {
     export class Statusbar {
 
-        static create() {
-            Scripts.Utils.createGameObjectSelections([{ask: 'Target mobile', addObject: 'lastCustomStatusBar'}]);
-            const o = Orion.FindObject('lastCustomStatusBar');
+        static create(targetSerial?:string) {
+            if (targetSerial === undefined) {
+                Scripts.Utils.createGameObjectSelections([{ask: 'Target mobile', addObject: 'lastCustomStatusBar'}]);
+            }
+            
+            let o = Orion.FindObject(targetSerial ?? 'lastCustomStatusBar');
             const serial = o.Serial();
             const name = o.Name();
             const max = o.MaxHits();
