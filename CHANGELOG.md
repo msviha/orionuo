@@ -1,9 +1,77 @@
 # CHANGELOG
 
-## 0.1.9
+## 1.1.2
 
-### features 
-- `Statusbar.create` Pridany optional parameter na serial targetu z ktoreho sa vytvori status bar
+### features
+- `novy alias targetu 'lasttargetmobile'` viz popis enum TargetEx
+- `mobKillAll` - stejne jako mobKill ale vola vsechny pety najednou
+
+### fixes
+- `mobKill` spatne razeni petu, vynechal v rade nektere jmena. lasttarget bral i nezive objekty.
+- `highlightEnemy` oprava pri zapnuti highlightEnemySilent chybela prava zavorka za maxhits.
+
+## 1.1.1
+
+### fixes
+- `gameObject.medik.kpz` neexistoval nedavno byl omylem odstranen, nefungovalo KPZ 
+- `config.js` - oprava z GetVar na AddVar
+
+## 1.1.0
+
+### features
+- `auto` automaticke prejmenovani sumu
+- `mobKill` postupne posilani prikazu kill zasebou na zvoleny target. Upravena verze, jiz lze zadat vlastni target jako vstupni parametr a vypnout si ukladani. napr mobKill('lastattack', false); - je asi nebeznejsi jak hraci tento prikaz pouzivaji summy vzdy utoci na aktualni vas lasttattack
+- `mobGo` prime volani posledniho laststatus klamaka prikazem go
+- `mobCome` volani prikazu all come, pri pouzivani mobKill s ukladanim targetu nutne, protoze provadi zaroven reset ulozeneho targetu
+- `mobStop` volani prikazu all stop, pri pouzivani mobKill s ukladanim targetu nutne, protoze provadi zaroven reset ulozeneho targetu
+- `shrinkOne` shrinkovani jednoho klamaka, primarne bere nejvic zraneneho. Bere ze zeme Leopardy, havky atd. Bere je i bez shrinknuti, tj. 2 in 1
+- `attackTarget` klasicky attack s vyuzitim rozsirenych aliasu targetovani
+- `bandageTarget` badage s vyuzitim rozsirenych aliasu targetovani, idealni na healeni petu. 1x spusteni = 1x banda. Ukazuje timer bandaze.
+- `castSpell` standardni cast kouzla s vyuzitim rosirenych aliasu targetovani
+- `drinkFill` jako drink jen doplnuje lahvicky kdyz nemuzete pit, vychozi omezeni je do min 2 prazdnych
+- `drink + drinkFill` nova pretizeni a timery na invis a invis logn (5min30s - destro, srnka). Timery se pridavaji za sebe (postupne vas odhidovavaji) 
+- `nove aliasy targetu` viz popis enum TargetEx
+
+### fixes
+- `shrinkOne` opraveno zvedani nongenu na klamaky (hnedej ctverecek), zpusobovalo ze prestalio fungovat vyhazovani. 
+- `gameObject.klamak.lvl2.dog` chybna grafika. 
+
+### gameObject 
+- `weapons.fencing` zbrane fenc
+- `weapons.swordsmanship` zbrane sword
+- `weapons.macefighting` zbrane mace
+- `weapons.arcehry` zbrane archery
+- `wapons.shields` stity
+
+### config
+- `autoHandlers.autoRename.enabled` - true/false - zapne automaticke prejmenovani, vychozi false
+- `autoHandlers.autoRename.renameMounts` - true/false - prejmenovani jezditek, vychozi false
+- `autoHandlers.printDamageDiffOnly` - vypisuje jen zraneni a ne hodnotu hits/maxHits 
+
+- `mobMaster.sayColor` - vychozi barva pro prikazy mobkill, mobgo, mobstop, mobcome
+- `mobMaster.renameNameType` -  zatim nefunkcni, planuji dodelat podporu i pro jmena ze seznamu jako to bylo dosud v mleekove prejmenovani
+
+- `targeting.highlightEnemySilent` - targetNext - trosku konzervativnejsi vypis pri zamereni, nevypisuje nad hrace a nevypisuje jmeno, jako na fene jen hits/maxHits
+- `hiding.showInnerMessages` - nezobrazuje hlasky uspesneho/neuspesneho hidnuti, hodi se pokud vyuzivate textreplace.
+
+
+## 1.0.0
+
+### breaking changes
+- `kill` prikaz je odstraneny z baliku, dale je mozne pouzivat jen `killAll` nebo `killTarget` pripadne pockat az Caleb doladi sve killovani
+- `scripts.js` soubor byl prejmenovan na `index.js` a bude upraven navod/prvni-kroky
+
+### features
+- `wos` kouzli wall of stone na ktere se zobrazuje timer
+- `ef` kouzli energy field na ktere se zobrazuje timer
+- `mysticCounter` koukne na vsechny recepty a mystiky co mate u sebe a spocita kolik je treba doplnit mystiku
+- `refillManager` pro rychle doplnovani spotrebaku (napriklad do pvp) - jedna se o samostatny script ktery je zavisly na techto scriptech a bude ho potreba stahnout samostatne a includnout pod stavajici scripty (navod na discordu #refill-manager)
+
+### enhancements
+- crafting objekt obsahuje nejake dalsi vyrobky jako sphery, washBasin, woodenBox . . .
+
+### fixes
+- `targetNext` a `targetPrevious` propaguje se option `targetIndicationEnum` kde je defaultne nyni `none` (coz je bez kosticek nad targetem)
 
 ## 0.1.8
 
@@ -216,7 +284,7 @@ Byla pridana moznost configurace nekterych scriptu globalnim configem. Jako napr
 - added `lute` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#lute)
 - added `manualTarget` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#manualTarget)
 - added `nbRune` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#nbRune)
-- added `tracking` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#tracking)
+- added `tracking.ts` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#tracking)
 - added `use` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#use)
 - added `useGGR` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#useGGR)
 - added `useKlamak` [function](https://github.com/msviha/orionuo/blob/master/docs/globals.md#useKlamak)
