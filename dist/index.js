@@ -3646,9 +3646,7 @@ var Scripts;
             if (!cutWeapon) {
                 var nbDaggerSerial = Scripts.Utils.findFirstType(gameObject.uncategorized.nbDagger, 1);
                 if (!nbDaggerSerial) {
-                    Scripts.Utils.createGameObjectSelections([
-                        { ask: 'Cim budes rezat ?', addObject: CUT_WEAPON }
-                    ]);
+                    Scripts.Utils.createGameObjectSelections([{ ask: 'Cim budes rezat ?', addObject: CUT_WEAPON }]);
                     cutWeapon = Orion.FindObject(CUT_WEAPON);
                 }
                 else {
@@ -3680,7 +3678,7 @@ var Scripts;
             if (itemsInCorpse.length) {
                 for (var _i = 0, itemsInCorpse_1 = itemsInCorpse; _i < itemsInCorpse_1.length; _i++) {
                     var itemId = itemsInCorpse_1[_i];
-                    Orion.MoveItem(itemId, 0, "myLootBag");
+                    Orion.MoveItem(itemId, 0, 'myLootBag');
                     Orion.Wait(delay);
                 }
             }
@@ -3708,7 +3706,7 @@ var Scripts;
         Loot.lootCorpseId = function (corpseId, cut, weapon) {
             var serverLagActionsLeft = 4;
             Orion.OpenContainer(corpseId, 5000, "Container id " + corpseId + " not found");
-            var hasLootBag = Orion.Count("0x0E76", "0x049A", corpseId) > 0;
+            var hasLootBag = Orion.Count('0x0E76', '0x049A', corpseId) > 0;
             if (hasLootBag && cut) {
                 Orion.UseObject('cutWeapon');
                 Orion.WaitForTarget(1000);
@@ -3723,7 +3721,7 @@ var Scripts;
             if (itemsInCorpse.length) {
                 for (var _i = 0, itemsInCorpse_2 = itemsInCorpse; _i < itemsInCorpse_2.length; _i++) {
                     var itemId = itemsInCorpse_2[_i];
-                    Orion.MoveItem(itemId, 0, "myLootBag");
+                    Orion.MoveItem(itemId, 0, 'myLootBag');
                     Orion.Wait(serverLagActionsLeft ? 150 : 500);
                     serverLagActionsLeft--;
                 }
@@ -5457,7 +5455,7 @@ var Scripts;
             var over = hp > max;
             var currentColor = poisoned ? '#00FF00' : Scripts.Utils.determineHpColorRGB((current * 100) / lineLength);
             gump.AddText(10, 25, '0', hp + "/" + max, 0, 201);
-            gump.AddColoredPolygone(89, 35, 72, 10, "black");
+            gump.AddColoredPolygone(89, 35, 72, 10, 'black');
             gump.AddColoredPolygone(90, 35, over ? lineLength : current, 10, currentColor);
         };
         return Statusbar;
@@ -6128,7 +6126,7 @@ var Scripts;
         Utils.playerPrint = function (message, color, fastPrint) {
             if (color === void 0) { color = ColorEnum.none; }
             if (fastPrint === void 0) { fastPrint = false; }
-            Utils.charPrint(Player.Serial(), message, color);
+            Utils.charPrint(Player.Serial(), message, color, fastPrint);
         };
         Utils.charPrint = function (serial, message, color, fastPrint) {
             if (color === void 0) { color = ColorEnum.none; }
