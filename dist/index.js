@@ -2420,7 +2420,7 @@ var __assign = (this && this.__assign) || function () {
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 1.1.1');
+    Orion.Print(-1, 'version 1.1.2');
     Orion.Print(-1, '-------------+');
 }
 function Autostart() {
@@ -5155,8 +5155,9 @@ var Scripts;
             }
             return false;
         };
-        Targeting.targetNextMonster = function (timeToStorePreviousTargets, notoriety, statusWrapperOpt) {
+        Targeting.targetNextMonster = function (reverse, timeToStorePreviousTargets, notoriety, statusWrapperOpt) {
             var _a;
+            if (reverse === void 0) { reverse = false; }
             if (timeToStorePreviousTargets === void 0) { timeToStorePreviousTargets = 1500; }
             if (notoriety === void 0) { notoriety = ['gray', 'criminal', 'orange', 'red']; }
             var timer = Orion.Timer("tnm.prevTimer");

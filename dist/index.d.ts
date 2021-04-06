@@ -272,7 +272,7 @@ declare namespace Scripts {
         static manualTarget(opts: ITargetNextOpts): void;
         static highlightEnemy(enemySerial: string, enemy: GameObject, showStatusBar: boolean, targetIndicationEnum: TargetIndicationEnum, statusBarPosition: ICoordinates): void;
         static isFriendlyTargetType(graphic: string, color: string, name: string): boolean;
-        static targetNextMonster(timeToStorePreviousTargets: number, notoriety: string[], statusWrapperOpt: any): TargetResult;
+        static targetNextMonster(reverse: boolean, timeToStorePreviousTargets: number, notoriety: string[], statusWrapperOpt: any): TargetResult;
         static showStatusBarOnWrapper(serial: string, statusWrapperOpt: any): void;
     }
 }
