@@ -150,8 +150,8 @@ namespace Scripts {
             const currentColor = poisoned ? '#00FF00' : Scripts.Utils.determineHpColorRGB((current * 100) / lineLength);
 
             gump.AddText(10, 25, '0', `${hp}/${max}`, 0, 201);
-            gump.AddColoredPolygone(89, 35, 72, 10, "black")
-            gump.AddColoredPolygone(90, 35, over ? lineLength : current, 10, currentColor)
+            gump.AddColoredPolygone(89, 35, 72, 10, 'black');
+            gump.AddColoredPolygone(90, 35, over ? lineLength : current, 10, currentColor);
         }
     }
 }
