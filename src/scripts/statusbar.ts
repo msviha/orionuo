@@ -9,7 +9,7 @@ namespace Scripts {
                 Scripts.Utils.createGameObjectSelections([{ask: 'Target mobile', addObject: 'lastCustomStatusBar'}]);
             }
             
-            let o = targetSerial === undefined ? Orion.FindObject('lastCustomStatusBar') : Orion.FindObject(targetSerial);
+            let o = Orion.FindObject(targetSerial ?? 'lastCustomStatusBar');
             const serial = o.Serial();
             const name = o.Name();
             const max = o.MaxHits();
