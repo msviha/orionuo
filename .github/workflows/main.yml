@@ -39,7 +39,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: build-output
-          path: dist/scripts.js
+          path: dist/*.*
           
       - name: release
         uses: "marvinpinto/action-automatic-releases@latest"
@@ -49,5 +49,5 @@ jobs:
           prerelease: true
           title: "Development Build"
           files: |
-            dist/*.js
+            dist/*.*
         
