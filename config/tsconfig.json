@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "module": "none",
+        "noImplicitAny": false,
+        "removeComments": true,
+        "outFile": "../dist/config.js",
+        "types": [
+            "../typings"
+        ],
+        "sourceMap": false
+    },
+    "include": [
+		"config.ts",
+		"../typings/**/*"
+    ],
+    "exclude": [
+		"../node_modules",
+		"../dist/**/*"
+    ]
+}

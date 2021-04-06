@@ -84,3 +84,8 @@ interface IMenuSelection {
     name:string,
     selection:string
 }
+
+interface IRenamedMob {
+    serial: string,
+    graphic: string|number
+}

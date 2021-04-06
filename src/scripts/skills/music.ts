@@ -1,8 +1,4 @@
 namespace Scripts {
-
-    /**
-     * Obsahuje zakladni scripty
-     */
     export class Music {
 
         static harp(targetAlias?:TargetEnum|string) {

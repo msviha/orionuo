@@ -53,6 +53,21 @@
 	*/
 	FindType(graphic: string | number, color?: string | number, container?: string, flags?: string, distance?: number | string, notoriety?: string, recurse?: boolean): Array<string> | null;	
 
+			/**
+	* StringList Orion.FindType('graphic', ['color'=0xFFFF], ['container'=backpack], ['flags'], ['distance'=searchObjectsDistance], ['notoriety'], [recurse=true]);
+	* Search for an object by type and color.
+	* @param graphic - Type or list of types. 0xFFFF is ignored.
+	* @param color - The color or list of colors. 0xFFFF is ignored.
+	* @param container - The container in which the search is performed.
+	* @param flags - Search filter flags.
+	* @param distance - The search distance.
+	* @param notoriety - Wickedness of the desired character.
+	* @param recurse - Recursive search for sub-containers.
+	* Result: List of found serials.
+	*/
+	FindTypeEx(graphic: string | number, color?: string | number, container?: string, flags?: string, distance?: number | string, notoriety?: string, recurse?: boolean): Array<GameObject> | null;	
+
+	
 	/**
 	* void Orion.Ignore('serial', [state=true]);
 	* Set / remove the ignore flag on the serial object.

@@ -29,7 +29,7 @@
 
 *Inherited from [IMyGameObject](imygameobject.md).[bag](imygameobject.md#bag)*
 
-*Defined in [interfaces.ts:4](https://github.com/msviha/orionuo/blob/6f2627d/src/interfaces.ts#L4)*
+*Defined in [types/interfaces.ts:4](https://github.com/msviha/orionuo/blob/e41bac5/src/types/interfaces.ts#L4)*
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 *Inherited from [IMyGameObject](imygameobject.md).[color](imygameobject.md#color)*
 
-*Defined in [interfaces.ts:3](https://github.com/msviha/orionuo/blob/6f2627d/src/interfaces.ts#L3)*
+*Defined in [types/interfaces.ts:3](https://github.com/msviha/orionuo/blob/e41bac5/src/types/interfaces.ts#L3)*
 
 ___
 
@@ -49,7 +49,7 @@ ___
 
 *Inherited from [IMyGameObject](imygameobject.md).[graphic](imygameobject.md#graphic)*
 
-*Defined in [interfaces.ts:2](https://github.com/msviha/orionuo/blob/6f2627d/src/interfaces.ts#L2)*
+*Defined in [types/interfaces.ts:2](https://github.com/msviha/orionuo/blob/e41bac5/src/types/interfaces.ts#L2)*
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 •  **kad**: [IMyGameObject](imygameobject.md)
 
-*Defined in [interfaces.ts:10](https://github.com/msviha/orionuo/blob/6f2627d/src/interfaces.ts#L10)*
+*Defined in [types/interfaces.ts:10](https://github.com/msviha/orionuo/blob/e41bac5/src/types/interfaces.ts#L10)*
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 *Inherited from [IMyGameObject](imygameobject.md).[make](imygameobject.md#make)*
 
-*Defined in [interfaces.ts:5](https://github.com/msviha/orionuo/blob/6f2627d/src/interfaces.ts#L5)*
+*Defined in [types/interfaces.ts:5](https://github.com/msviha/orionuo/blob/e41bac5/src/types/interfaces.ts#L5)*
 
 ___
 
@@ -77,4 +77,4 @@ ___
 
 *Inherited from [IMyGameObject](imygameobject.md).[name](imygameobject.md#name)*
 
-*Defined in [interfaces.ts:6](https://github.com/msviha/orionuo/blob/6f2627d/src/interfaces.ts#L6)*
+*Defined in [types/interfaces.ts:6](https://github.com/msviha/orionuo/blob/e41bac5/src/types/interfaces.ts#L6)*

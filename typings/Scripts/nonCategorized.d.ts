@@ -5,6 +5,9 @@ export default interface NonCategorized {
 	 */
 	CancelTarget(): void;
 
+	OAOptionGet(option:string):string;
+	OAOptionSet(option:string, val:string):void;
+
 	AddHighlightCharacter(serial:string, color:string|number, priorityHighlight?:boolean);
 
 	ClearHighlightCharacters(priorityHighlight?:boolean);

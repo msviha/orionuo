@@ -3,11 +3,12 @@
         "module": "none",
         "noImplicitAny": false,
         "removeComments": true,
-        "outFile": "./dist/scripts.js",
+        "outFile": "./dist/index.js",
         "types": [
             "./typings"
         ],
-        "sourceMap": false
+        "sourceMap": false,
+        "declaration": true
     },
     "include": [
 		"src/**/*",

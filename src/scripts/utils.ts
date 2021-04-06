@@ -84,6 +84,24 @@ namespace Scripts {
             return Orion.FindType(obj.graphic, obj.color || '0xFFFF', container);
         }
 
+        static getColorByNotoriety(notoriety?:number) {
+            let notoColor = 906;
+            switch (notoriety) {
+                case 1:
+                    notoColor = 2119;
+                    break;
+                case 3:
+                    notoColor = 906;
+                    break;
+                case 6:
+                    notoColor = 33;
+                    break;
+                default:
+                    notoColor = 906;
+            }
+            return notoColor;
+        }
+
         static countObjectInContainer(obj:IMyGameObject, container = 'backpack', containerIsObjItemOnGround = false):number {
             const serials = containerIsObjItemOnGround ? [container] : Scripts.Utils.getObjSerials(obj, container);
             return Scripts.Utils.countItemsBySerials(serials);
@@ -176,9 +194,18 @@ namespace Scripts {
             Orion.Print(<string>color, message);
         }
 
-        static playerPrint(message:string, color:ColorEnum|number = ColorEnum.none) {
-            Orion.CharPrint(Player.Serial(), color, message);
+        static playerPrint(message:string, color:ColorEnum|number|string = ColorEnum.none, fastPrint:boolean = false) {
+            Utils.charPrint(Player.Serial(), message, color);
+            
         }
+
+        static charPrint(serial:string, message:string, color:ColorEnum|number|string = ColorEnum.none, fastPrint:boolean = false) {
+            if (fastPrint) {
+                Orion.CharPrint(serial, color, message);
+            } else {
+                Orion.PrintFast(serial, color, 0, message);
+            }
+        }        
 
         static waitTarget(target?:TargetEnum|string) {
             if (target === TargetEnum.lastattack) {
@@ -336,8 +363,12 @@ namespace Scripts {
             const max = o.MaxHits();
             const diff = hp - previousHp;
             if (diff !== 0 || force) {
+
                 diff !== 0 && Orion.PrintFast(serial, diff > 0 ? ColorEnum.green : ColorEnum.red, 0, `${diff > 0 ? '+' : ''}${diff.toString()}`);
-                Orion.PrintFast(serial, Scripts.Utils.determineHpColor(hp / max * 100), 0, `[${hp}/${max}]`);
+                
+                if (!config.autoHandlers?.printDamageDiffOnly) {
+                    Orion.PrintFast(serial, Scripts.Utils.determineHpColor(hp / max * 100), 0, `[${hp}/${max}]`);
+                }
             }
         }
 
@@ -550,5 +581,32 @@ namespace Scripts {
             }
             return target;
         }
+
+                /**
+         * Rekne hlasku ve hre secifikovanou barvou
+         * @param text text ktery budu rikat
+         * @param color barava kterou text bude vykreslen
+         */
+            static sayWithColor(text, color) {
+            const originalState = Orion.GetFontColor();
+            const orignalValue = Orion.GetFontColorValue();
+            Orion.SetFontColor(true, color);
+            Orion.Say(text);
+            Orion.SetFontColor(originalState, orignalValue);
+        } 
+
+        /**
+         * Pro zajisteni vyplneni jmena u gameobjektu
+         * @param obj gameObject/player u ktereho chci zajistit vyplnene jmeno, pokud neni vyplnene requestne ho ze serveru
+         * @returns vraci requestnute jmeno
+         */
+         static ensureName(obj:GameObject|PlayerCharacter):string {
+            let result = '';
+            if (obj && !obj.Name()) {
+                Orion.RequestName(obj.Serial());
+                result = obj.Name();
+            }
+            return result;
+        }        
     }
 }

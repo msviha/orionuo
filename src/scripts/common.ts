@@ -43,16 +43,6 @@ namespace Scripts {
         }
 
         /**
-         * Scripts.Common.hiding
-         * stability beta
-         *
-         * hidne, pripadne prepne war a hidne
-         */
-        static hiding() {
-            Orion.Exec('_hiding', true);
-        }
-
-        /**
          * Scripts.Common.bandageSelf
          * stability beta
          *
@@ -162,34 +152,6 @@ namespace Scripts {
             Orion.Print(-1 , '*****************');
         }
 
-        static necroMystic(msg:string) {
-            const necroMystic = gameObject.uncategorized.necroMystic;
-            const mysticSerial = Scripts.Utils.findFirstType(necroMystic, 6);
-
-            if (!mysticSerial) {
-                Scripts.Utils.playerPrint('Nemas necro mystic !!!');
-                return;
-            }
-
-            const mount = Orion.ObjAtLayer('Mount');
-            if (mount) {
-                Orion.UseObject('self');
-                while (Orion.ObjAtLayer('Mount')) {
-                    Orion.Wait(50);
-                }
-            }
-
-            const previousHelmet = Orion.ObjAtLayer('Helmet');
-            Orion.UseObject(mysticSerial);
-            Orion.Say(msg);
-            if (previousHelmet && previousHelmet.Serial() !== mysticSerial) {
-                Orion.Wait(responseDelay);
-                Orion.UseObject(previousHelmet.Serial());
-            }
-            Orion.Wait(responseDelay);
-            mount && Scripts.Mount.mountAndDismount();
-        }
-
         static hideAll() {
             Orion.Timer('resendTime') === -1 && Orion.SetTimer('resendTime', 10000);
             !Orion.GetGlobal('hideAll') && Orion.SetGlobal('hideAll', '0');
@@ -233,32 +195,6 @@ namespace Scripts {
             }
 
             Orion.UseObject(bombSerial);
-        }
-
-        static trackingPvp() {
-            Orion.WarMode(true);
-            Orion.CancelWaitMenu();
-            Orion.CloseMenu('all');
-            Orion.WaitMenu('Tracking', 'Anything that moves');
-            Orion.UseSkill('Tracking');
-            Orion.ClearJournal();
-            while(!(Orion.MenuCount() || Orion.InJournal('no signs'))) {
-                Orion.Wait(50);
-            }
-
-            const menu = Orion.GetMenu('0');
-            let shouldCloseMenu = true;
-            for (let i = 0; i < menu.ItemsCount(); i++) {
-                const graphic = menu.ItemGraphic(i);
-                const name = menu.ItemName(i);
-
-                const list = trackingFilter[graphic];
-                if (list && list.indexOf(name) === -1) {
-                    shouldCloseMenu = false;
-                    Scripts.Utils.playerPrint(`[tracking]: ${name}`);
-                }
-            }
-            shouldCloseMenu && menu.Close();
         }
 
         static webDestroyer() {
@@ -373,82 +309,6 @@ namespace Scripts {
             }
 
             Orion.OpenContainer('openContainer');
-        }
-
-        static turboRess(bandageAfterRess = false) {
-            const closestGhosts = Orion.FindType(-1, -1, 'ground', 'human|dead|fast', 1);
-            if (closestGhosts?.length < 1) {
-                return Scripts.Utils.playerPrint('Nevidis zadneho ducha k oziveni');
-            }
-            
-            Orion.WaitTargetObject(closestGhosts[0]);
-            Orion.UseType(gameObject.uncategorized.bandy.graphic);
-            Orion.Wait(100);
-            if (bandageAfterRess) {
-                Orion.WaitTargetObject(closestGhosts[0]);
-                Orion.UseType(gameObject.uncategorized.bandy.graphic);
-            }
-        }
-
-        static turboRessFull() {
-            const getBloodyBandageGraphic = () => {
-                if (Orion.Count(gameObject.uncategorized.krvavaBanda1.graphic) >= 30) {
-                    return gameObject.uncategorized.krvavaBanda1.graphic;
-                } else if (Orion.Count(gameObject.uncategorized.krvavaBanda2.graphic) >= 30) {
-                    return gameObject.uncategorized.krvavaBanda2.graphic;
-                }
-
-                return null
-            }
-
-            const closestGhosts = Orion.FindType(-1, -1, 'ground', 'human|dead|fast', 1);
-            if (closestGhosts?.length < 1) {
-                return Scripts.Utils.playerPrint('Nevidis zadneho ducha k oziveni');
-            }
-            
-            const bloodyBandageGraphic = getBloodyBandageGraphic();
-            if (bloodyBandageGraphic) {
-                Orion.WaitTargetObject(closestGhosts[0]);
-                Orion.UseType(bloodyBandageGraphic);
-                Orion.Wait(100);
-                Orion.WaitTargetObject(closestGhosts[0]);
-                Orion.UseType(gameObject.uncategorized.bandy.graphic);
-            } else {
-                Scripts.Common.turboRess(true)
-            }
-        }
-
-        static bishopToggle() {
-            const helm = Orion.FindObject('bishopToggleHelm');
-            const bishopHelm = Scripts.Utils.findFirstType({graphic: '0x1DB9', color: '0x0BB0'}, 6);
-
-            if (!bishopHelm) {
-                Scripts.Utils.playerPrint('nemas Bishopku', ColorEnum.red);
-            }
-
-            if (!helm) {
-                // plate helm ?
-                const helmSerial = Scripts.Utils.findFirstType({graphic: '0x1412', color: '0xFFFF'}, 6);
-                if (!helmSerial) {
-                    Scripts.Utils.createGameObjectSelections([{
-                        ask: 'Target you primary helmet', addObject: 'bishopToggleHelm'
-                    }]);
-                }
-                else {
-                    Orion.AddObject('bishopToggleHelm', helmSerial);
-                }
-            }
-
-            const currentHelm = Orion.ObjAtLayer('Helmet');
-            if (!currentHelm) {
-                Orion.UseObject(bishopHelm);
-            }
-            else if (currentHelm.Serial() === bishopHelm) {
-                Orion.UseObject('bishopToggleHelm');
-            }
-            else {
-                Orion.UseObject(bishopHelm);
-            }
         }
     }
 }

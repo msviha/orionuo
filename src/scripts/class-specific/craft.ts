@@ -2,7 +2,7 @@
  * @internal
  */
 namespace Scripts {
-    export class MagicMiner {
+    export class Craft {
         static ocaruj(dusty = OcarovaniEnum.mytheril, loot = false) {
             const target = 'ocarujMrtvolku';
             const timer = 'ocarovani';

@@ -1,7 +1,7 @@
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 0.1.8');
+    Orion.Print(-1, 'version 1.1.2');
     Orion.Print(-1, '-------------+');
 }
 
@@ -13,6 +13,10 @@ function Autostart() {
     Orion.ClearJournal();
     Shared.AddArray('customStatusBars', []);
     Shared.AddVar('ws', false);
+    const autoRename = config?.autoHandlers.autoRename.enabled;
+    const autoHandlers = autoRename; 
+    const autoDinstance = 20;//TODO konfig
+
     let previousLastAttackSerial:string;
     let previousLastAttackHp:number;
     let previousPlayerHp:number;
@@ -54,6 +58,41 @@ function Autostart() {
             Orion.Wait(1500);
             Shared.AddVar('ws', false);
         }
+
+
+        if (autoHandlers) {
+
+            const nearCharacters = Orion.FindTypeEx('any', '0xFFFF', 'ground', 'live', autoDinstance);
+
+            if (autoRename) {
+                const doneList:Array<IRenamedMob> = Shared.GetArray('autoHandlers.autoRename.doneList', new Array<IRenamedMob>());
+                const renameMounts = config?.autoHandlers.autoRename.renameMounts;
+
+                for (let i = 0; i < nearCharacters.length; i++) {
+                    const char = nearCharacters[i];
+                    if (char.Serial() === Player.Serial()) {
+                        continue;
+                    }
+
+                    //Serialy se na serveru recykluji celkem casto, takze pro overeni i grafika, uvidime.
+                    if (doneList.some((o)=> { o.serial === char.Serial() && o.graphic === char.Graphic() })) {
+                        continue;
+                    }
+
+                    //Jezda
+                    if (!renameMounts && '0x00DF|0x00DC|0x00DA|0x00E2|0x00CC|0x00E4|0x00D2|0x00DB|0x00C8'.split('|').indexOf(char.Graphic()) > -1) {
+                        continue;
+                    }
+                    
+                    if (Scripts.MobMaster.rename(char)) {
+                        let doneItem:IRenamedMob = { graphic: char.Graphic(), serial: char.Serial() };
+                        doneList.push(doneItem);
+                        Shared.AddArray('autoHandlers.autoRename.doneList', doneList);
+                        break;
+                    }
+                }
+            }
+        }        
 
         Scripts.Statusbar.updateStatusbars();
         Orion.Wait(config?.updateRate || 500);
@@ -102,7 +141,7 @@ function attackLast() {
  * @example external code `bishopToggle();`
  */
 function bishopToggle() {
-    Scripts.Common.bishopToggle();
+    Scripts.Clerik.bishopToggle();
 }
 
 /**
@@ -210,11 +249,26 @@ function craftSelect() {
  * Chlasta lahvicky
  * @param potionName zkratka potionu
  * @param switchWarModeWhenNeeded date li 'false' pak neprepina war pokud nejde cepovat, tak necepne
+ * @param refillEmptyLimit pokud nelze pit prelije potion pokud je pocet prazdnych lahvicek vetsi nez limit, 0 = vypnuto, vychozi = 2
+ * @param displayInvisLongTimer pro Destra a Srnku kteri maji timer 5min 30s
  * @example in client `_drink tmr`
  * @example external code `drink('tmr');`
  */
-function drink(potionName:PotionsEnum, switchWarModeWhenNeeded = true, displayTimers = true) {
-    Scripts.Potions.drinkPotion(potionName, switchWarModeWhenNeeded, displayTimers);
+ function drink(potionName:PotionsEnum, switchWarModeWhenNeeded = true, displayTimers = true, refillEmptyLimit = 0, displayInvisLongTimer = false) {
+    Scripts.Potions.drinkPotion(potionName, switchWarModeWhenNeeded, displayTimers, true, refillEmptyLimit, displayInvisLongTimer);
+}
+
+/**
+ * Chlasta lahvicky a doliva kdyz nemuze pit
+ * @param potionName zkratka potionu
+ * @param switchWarModeWhenNeeded date li 'false' pak neprepina war pokud nejde cepovat, tak necepne
+ * @param refillEmptyLimit pokud nelze pit prelije potion pokud je pocet prazdnych lahvicek vetsi nez limit, 0 = vypnuto, vychozi = 2
+ * @param displayInvisLongTimer pro Destra a Srnku kteri maji timer 5min 30s
+ * @example in client `_drink tmr`
+ * @example external code `drink('tmr');`
+ */
+ function drinkFill(potionName:PotionsEnum, switchWarModeWhenNeeded = true, displayTimers = true, refillEmptyLimit = 2, displayInvisLongTimer = false) {
+    Scripts.Potions.drinkPotion(potionName, switchWarModeWhenNeeded, displayTimers, true, refillEmptyLimit, displayInvisLongTimer);
 }
 
 /**
@@ -227,6 +281,18 @@ function drink(potionName:PotionsEnum, switchWarModeWhenNeeded = true, displayTi
  */
 function drum(target?:TargetEnum) {
     Scripts.Music.drum(target);
+}
+
+/**
+ * Kouzli Energy field stenu na ktere se zobrazuje timer
+ * @param self {boolean} pokud date true tak bude kouzlit na sebe, v pripade ze date false tak ukazuje target pro zamereni kam chcete kouzlit
+ * @param scroll {boolean} pokud date true tak bude kouzlit ze svitku, v pripade ze date false tak z hlavy
+ * @param timer {number} cas odpoctu na zdi v milisekundach
+ * @example external code `ef(true, false, 60000);` vykouzli EF z hlavy na sebe a ukaze se na ni odpocet jedne minuty
+ * @example external code `ef(false, true, 60000);` zobrazi zamerovac pro kouzleni EF ze svitku, jakmile EF vykouzli, tak je na ni odpocet jedne minuty
+ */
+function ef(self = false, scroll = false, timer = 70000) {
+    Scripts.Spells.ef(self, scroll, timer)
 }
 
 /**
@@ -323,7 +389,7 @@ function hideAll() {
  * @example external code `hiding();`
  */
 function hiding() {
-    Scripts.Common.hiding();
+    Scripts.Hiding.hiding();
 }
 
 /**
@@ -334,7 +400,7 @@ function hiding() {
  * @example external code `inscription(2, 'Resurrection', 20);`
  */
 function inscription(circle:number, spell:string, quantity = 0) {
-    Scripts.Spells.inscription(circle, spell, quantity);
+    Scripts.Inscription.inscription(circle, spell, quantity);
 }
 
 /**
@@ -519,7 +585,7 @@ function nbRune() {
  * @example external code `necroMystik('Necro mystic - HEAL!')`
  */
 function necroMystic(message:string) {
-    Scripts.Common.necroMystic(message);
+    Scripts.Necromancer.necroMystic(message);
 }
 
 /**
@@ -541,7 +607,7 @@ function nextWeapon(showName = false) {
  * @example external code `ocaruj()`
  */
 function ocaruj(dusty:OcarovaniEnum = OcarovaniEnum.mytheril) {
-    Scripts.MagicMiner.ocaruj(dusty);
+    Scripts.Craft.ocaruj(dusty);
 }
 
 /**
@@ -615,7 +681,7 @@ function resetStats() {
  * @example external code `KPZPull()`
  */
 function KPZPull() {
-    Scripts.Medic.KPZPull();
+    Scripts.Clerik.KPZPull();
 }
 
 /**
@@ -624,7 +690,7 @@ function KPZPull() {
  * @example external code `KPZJump()`
  */
 function KPZJump() {
-    Scripts.Medic.KPZJump();
+    Scripts.Clerik.KPZJump();
 }
 
 /**
@@ -633,7 +699,7 @@ function KPZJump() {
  * @example external code `KPZHpSwitch()`
  */
 function KPZHpSwitch() {
-    Scripts.Medic.KPZHpSwitch();
+    Scripts.Clerik.KPZHpSwitch();
 }
 
 /**
@@ -652,7 +718,7 @@ function resetWeapons() {
  * @example external code `rozbij(OcarovaniEnum.blood, 1)`
  */
 function rozbij(ingy:OcarovaniEnum = OcarovaniEnum.mytheril, kolik = 5) {
-    Scripts.MagicMiner.rozbij(ingy, kolik);
+    Scripts.Craft.rozbij(ingy, kolik);
 }
 
 /**
@@ -774,7 +840,7 @@ function terminateAll() {
  * @example external code `tracking('Animals');` trackuje zvirata
  */
 function tracking(who = 'Players') {
-    Scripts.Wip.Tracking(who);
+    Scripts.Tracking.tracking(who);
 }
 
 /**
@@ -795,7 +861,7 @@ function travelBook(selection = PortBookOptionsEnum.kop) {
  * @example external code `turboRess()`
  */
 function turboRess(bandageAfterRess = false) {
-    Scripts.Common.turboRess(bandageAfterRess);
+    Scripts.Clerik.turboRess(bandageAfterRess);
 }
 
 /**
@@ -803,7 +869,7 @@ function turboRess(bandageAfterRess = false) {
  * @example external code `turboRessFull()`
  */
 function turboRessFull() {
-    Scripts.Common.turboRessFull();
+    Scripts.Clerik.turboRessFull();
 }
 
 /**
@@ -874,4 +940,123 @@ function useShrinkKad() {
  */
 function webDestroyer() {
     Scripts.Common.webDestroyer();
+}
+
+/**
+ *
+ * @param object {IMyGameObject|IMyGameObject[]} musi mit graphic a color
+ * @param name {string} pouziva se pro vypisovani poctu abys vedel co ti dochazi
+ * @param minimalCountForWarn zobrazi varovani pokud budes mit tento pocet band (a mene)
+ * @example external code `use(gameObject.ryba.modra, 'modra ryba', 3)`
+ * @example external code `use([gameObject.uncategorized.krvavaBanda1, gameObject.uncategorized.krvavaBanda2], 'krvave bandy', 200)`
+ */
+
+/**
+ * Kouzli Wall of stones na ktere se zobrazuje timer
+ * @param scroll {boolean} pokud date true tak bude kouzlit ze svitku, v pripade ze date false tak z hlavy
+ * @param timer {number} cas odpoctu na zdi v milisekundach
+ * @example external code `wos(false, 60000);` zobrazi zamerovac pro kouzleni WOS z hlavy, jakmile WOS vykouzli, tak je na ni odpocet jedne minuty
+ * @example external code `ef(true, 60000);` zobrazi zamerovac pro kouzleni WOS ze svitku, jakmile WOS vykouzli, tak je na ni odpocet jedne minuty
+ */
+function wos(scroll = false, timer = 70000) {
+    Scripts.Spells.wos(scroll, timer)
+}
+
+/**
+ * Setridi veci v baglu zhruba stejne jako z sorbasicbackpack z feny
+ * @example external code `sortBackpackCaleb()`
+ */
+ function sortBackpackCaleb() {
+    Scripts.Clean.sortBackpackCaleb();
+}
+
+/**
+ * Vola po jednon vsechny pety, jedno volani = jedno jmeno na vybrany target, nebo vyhodi tercik
+ * @param targets - rozsirene targetovani, zleva do prava aliasy targetu odelene '|'
+ * @param useSavedTarget - uklada pri prvnim volani nalezeny target dle aliasu, zajistuje ze pri zmene tohoto targetu napr. hrac pouziva lastattack a zautoci v prubehu boje na jineho mob, 
+ * tak summy si porad drzi puvodni target. Dokud neni zresetovani pri volani mobStop(), mobCome() 
+ * @example external code `mobKill('lastattack|laststatusenemy')` - uklada target
+ * @example external code `mobKill('lastattack', 'false')` - NEuklada target
+ */
+function mobKill(targets?:string, useSavedTarget?:boolean) {
+    Scripts.MobMaster.mobKill(targets, useSavedTarget);
+}
+
+
+/**
+ * Vola najednou vsechny pety, jmeno na vybrany target
+ * @param targets - rozsirene targetovani, zleva do prava aliasy targetu odelene '|'
+ * @param useSavedTarget - uklada pri prvnim volani nalezeny target dle aliasu, zajistuje ze pri zmene tohoto targetu napr. hrac pouziva lastattack a zautoci v prubehu boje na jineho mob, 
+ * tak summy si porad drzi puvodni target. Dokud neni zresetovani pri volani mobStop(), mobCome() 
+ * @example external code `mobKill('lastattack|laststatusenemy')` - uklada target
+ * @example external code `mobKill('lastattack', 'false')` - NEuklada target
+ */
+ function mobKillAll(targets?:string, useSavedTarget?:boolean) {
+    Scripts.MobMaster.mobKillAll(targets, useSavedTarget);
+}
+
+/**
+ * Vola "all go", pripadne go pro konkretniho peta podle laststatus tj. toho ktereho posleniho vytahnu. 
+ * @example  external code `mobGo()`
+ */
+function mobGo() {
+    Scripts.MobMaster.mobGo();
+}
+
+/**
+ * vola "all come" - navic resetuje target mobkill a posleniho suma v mobGo (nefunkcni +-)
+ * @example  external code `mobCome()`
+ */
+function mobCome() {
+    Scripts.MobMaster.mobCome();
+}
+
+/**
+ * vola "all stop" - navic resetuje target mobkill a posleniho suma v mobGo (nefunkcni +-)
+ * @example  external code `mobStop()`
+ */
+function mobStop() {
+    Scripts.MobMaster.mobStop();
+}
+
+/**
+ * Zjistuje utok, stejne jako Orion.Attack(), jen vyuziva noveho aliasovani. V bude vyuizovat i kotvy na zalozky tj automaticke vyhazovani
+ * @param targets - rozsirene targetovani. 
+ * @example  external code `attackTarget('lastattack|laststatusenemy')`
+ */
+function attackTarget(targets?:string) {
+    Scripts.TargetingEx.attack(targets);
+}
+
+/**
+ * Sesle kouzlo, vyuziva rozsirene targetovani, do budoucna bude resit i svitky jako ve fene
+ * @param spellName - standardni nazev kouzla
+ * @param targets - rozsirene targetovani, zleva do prava aliasy targetu odelene '|'
+ */
+function castSpell(spellName:string, targets?:string) {
+    Scripts.Magery.castSpell(spellName, targets);
+}
+
+/**
+ * Shrinkne nejzranenejsiho peta v okoli, pamatuje si summy a zveda ze zeme pokud jde o klamak ktery zustava na zemi. 
+ * Druhotna funcnost je zvedani shrnk klamaku ze zeme, takze i kdyz neni co shrinkovat lze pouzit jako rychle zvednuti napr na Skyhawkovi.
+ * Do 2 policek!
+ * @example  external code `shrinkOne()`
+ */
+function shrinkOne() {
+    Scripts.MobMaster.shrinkOne();
+}
+
+/**
+ * @exports
+ * Banduje zvoleny target, ukaze timer bandaze oznaci printfastem bandeni target a pokud je potreba vyhodi tercik
+ * @param targes - rozsirene targetovani, zleva do prava aliasy targetu odelene '|'
+ * @param showTarget - pokud targets nejsou zadany nebo zadny z nich neni nalezen vyhodi tercik. terick na vybrer ceka 4s
+ * @param minimalCountToWarn - pokud mate mene nebo rovno bandazi, zobrazi se hlaska s poctem zbyvajicich
+ * @example  external code `bandageTarget('selfinjured|mostinjuredalielos')`
+ * @example  external code `bandageTarget('selfinjured|mostinjuredalielos', false)`
+ * @example  external code `bandageTarget('selfinjured|mostinjuredalielos', false, 50)`
+*/
+function bandageTarget(targets?:string, showTarget?:boolean, minimalCountToWarn?:number) {
+    Scripts.Healing.bandageTarget(targets, showTarget, minimalCountToWarn);
 }
