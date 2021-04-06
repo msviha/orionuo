@@ -22,8 +22,20 @@ declare function cestovniKniha(selection?: PortBookOptionsEnum): void;
 declare function cleanObjectInBag(object: any, objectName?: string): void;
 declare function craftNext(): void;
 declare function craftSelect(): void;
-declare function drink(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean, displayTimers?: boolean, refillEmptyLimit?: number, displayInvisLongTimer?: boolean): void;
-declare function drinkFill(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean, displayTimers?: boolean, refillEmptyLimit?: number, displayInvisLongTimer?: boolean): void;
+declare function drink(
+    potionName: PotionsEnum,
+    switchWarModeWhenNeeded?: boolean,
+    displayTimers?: boolean,
+    refillEmptyLimit?: number,
+    displayInvisLongTimer?: boolean,
+): void;
+declare function drinkFill(
+    potionName: PotionsEnum,
+    switchWarModeWhenNeeded?: boolean,
+    displayTimers?: boolean,
+    refillEmptyLimit?: number,
+    displayInvisLongTimer?: boolean,
+): void;
 declare function drum(target?: TargetEnum): void;
 declare function ef(self?: boolean, scroll?: boolean, timer?: number): void;
 declare function enemy(): void;
@@ -74,8 +86,18 @@ declare function statusBar(): void;
 declare function summon(creature: string, target?: TargetEnum): void;
 declare function taming(allAround?: boolean, opts?: ITamingOptions): void;
 declare function tamingTrain(robeOfDruids?: boolean): void;
-declare function targetNext(timeToStorePreviousTargets?: number, additionalFlags?: FlagsEnum[], notoriety?: NotorietyEnum[], opts?: ITargetNextOpts): void;
-declare function targetPrevious(timeToStorePreviousTargets?: number, additionalFlags?: string[], notoriety?: string[], opts?: ITargetNextOpts): void;
+declare function targetNext(
+    timeToStorePreviousTargets?: number,
+    additionalFlags?: FlagsEnum[],
+    notoriety?: NotorietyEnum[],
+    opts?: ITargetNextOpts,
+): void;
+declare function targetPrevious(
+    timeToStorePreviousTargets?: number,
+    additionalFlags?: string[],
+    notoriety?: string[],
+    opts?: ITargetNextOpts,
+): void;
 declare function terminateAll(): void;
 declare function tracking(who?: string): void;
 declare function travelBook(selection?: PortBookOptionsEnum): void;
@@ -103,17 +125,41 @@ declare function parseParam(param: any): any;
 declare namespace Scripts {
     class Auto {
         static lagProtection(enemy: GameObject, run?: number): void;
-        static getToDistanceIfNeeded(enemy: GameObject, distance?: number, run?: number, maxWalkingTime?: number): boolean;
-        static killObject(serialToKill: string, poisonTrain?: boolean, waitUntilDead?: boolean, kill?: boolean, distance?: number, lagProtection?: boolean): void;
+        static getToDistanceIfNeeded(
+            enemy: GameObject,
+            distance?: number,
+            run?: number,
+            maxWalkingTime?: number,
+        ): boolean;
+        static killObject(
+            serialToKill: string,
+            poisonTrain?: boolean,
+            waitUntilDead?: boolean,
+            kill?: boolean,
+            distance?: number,
+            lagProtection?: boolean,
+        ): void;
     }
 }
 declare namespace Scripts {
     class Clean {
         static cleanBag(): void;
         static cleanObjectInBag(object: any, objectName?: string): void;
-        static cleanObjectInBagCoord(object: any, objectName?: string, recuseSearch?: boolean, coordinates?: ICoordinates, delta?: number): ICoordinates;
+        static cleanObjectInBagCoord(
+            object: any,
+            objectName?: string,
+            recuseSearch?: boolean,
+            coordinates?: ICoordinates,
+            delta?: number,
+        ): ICoordinates;
         static getSerialsFromMyGameObject(type: IMyGameObject, recuseSearch?: boolean): string[];
-        static cleanMyGameObjectInBag(type: IMyGameObject, tName?: string, recuseSearch?: boolean, coordinates?: ICoordinates, delta?: number): ICoordinates;
+        static cleanMyGameObjectInBag(
+            type: IMyGameObject,
+            tName?: string,
+            recuseSearch?: boolean,
+            coordinates?: ICoordinates,
+            delta?: number,
+        ): ICoordinates;
         static findUniqueGameObjects(object: any): Array<IMyGameObject>;
         static getGameObjectList(object: any): Array<IMyGameObject>;
         static sortBackpackCaleb(): void;
@@ -123,7 +169,11 @@ declare namespace Scripts {
     class Common {
         static svetlo(shouldCast?: boolean): void;
         static shrinkKad(): void;
-        static bandageSelf(minimalCountToWarn?: number, pathToNoBandagesWavFile?: string, failedMessage?: boolean): void;
+        static bandageSelf(
+            minimalCountToWarn?: number,
+            pathToNoBandagesWavFile?: string,
+            failedMessage?: boolean,
+        ): void;
         static massMove(requiredCountInTarget?: number, onlyType?: boolean): void;
         static mysticCounter(): void;
         static hideAll(): void;
@@ -160,13 +210,19 @@ declare namespace Scripts {
         static useKlamak(lvl: number, useAim?: boolean, priorityList?: string[], ignoreSerials?: string[]): void;
     }
 }
+declare const LOOT_BAG = 'loot/bag';
 declare namespace Scripts {
     class Loot {
+        static addLootBag(): number;
         static addCutWeapon(): number;
-        static lootCorpsesAround(cut?: boolean, weapon?: boolean): void;
-        static lootCorpseId(id: string): void;
-        static lootAllFrom(delay?: number): void;
         static carveBody(carveNearestBodyAutomatically?: boolean): void;
+        static corpses(cut?: boolean): void;
+        static lootAllFrom(delay?: number): void;
+        private static lootCorpsesAround;
+        static lootCorpseId(corpseId: string, cut?: boolean, weapon?: boolean): void;
+        private static getBagSnapshot;
+        private static moveLootToLootBag;
+        private static displayLoot;
     }
 }
 declare namespace Scripts {
@@ -210,10 +266,7 @@ declare namespace Scripts {
         static ignoreMyPets(): void;
         static getAvailableNames(): string[];
         static getRandomAvailableName(): string;
-        static savePet(pet: {
-            serial: string;
-            name: string;
-        }): void;
+        static savePet(pet: { serial: string; name: string }): void;
         static getNewPet(): IMyPet | undefined;
         static killTarget(): void;
         static killAll(): void;
@@ -236,10 +289,22 @@ declare namespace Scripts {
         static getEmptyBottle(): string;
         static getKadForPotion(potion: IPotion): string;
         static getMortar(): string;
-        static drinkPotion(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean, displayTimers?: boolean, displayInfo?: boolean, refillEmptyLimit?: number, displayInvisLongTimer?: boolean): void;
+        static drinkPotion(
+            potionName: PotionsEnum,
+            switchWarModeWhenNeeded?: boolean,
+            displayTimers?: boolean,
+            displayInfo?: boolean,
+            refillEmptyLimit?: number,
+            displayInvisLongTimer?: boolean,
+        ): void;
         static gmMortar(potionName: PotionsEnum): void;
         static alchemy(potionName: PotionsEnum): void;
-        static fillPotion(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean, kadSerial?: string, emptyBottleSerial?: string): void;
+        static fillPotion(
+            potionName: PotionsEnum,
+            switchWarModeWhenNeeded?: boolean,
+            kadSerial?: string,
+            emptyBottleSerial?: string,
+        ): void;
         static potionToKad(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean, kadSerial?: string): void;
     }
 }
@@ -272,11 +337,28 @@ declare namespace Scripts {
         static addEnemy(): string;
         static resetFriends(): void;
         static resetEnemies(): void;
-        static targetNext(reverse: boolean, timeToStorePreviousTargets: number, additionalFlags: string[], notoriety: string[], opts: ITargetNextOpts): void;
+        static targetNext(
+            reverse: boolean,
+            timeToStorePreviousTargets: number,
+            additionalFlags: string[],
+            notoriety: string[],
+            opts: ITargetNextOpts,
+        ): void;
         static manualTarget(opts: ITargetNextOpts): void;
-        static highlightEnemy(enemySerial: string, enemy: GameObject, showStatusBar: boolean, targetIndicationEnum: TargetIndicationEnum, statusBarPosition: ICoordinates): void;
+        static highlightEnemy(
+            enemySerial: string,
+            enemy: GameObject,
+            showStatusBar: boolean,
+            targetIndicationEnum: TargetIndicationEnum,
+            statusBarPosition: ICoordinates,
+        ): void;
         static isFriendlyTargetType(graphic: string, color: string, name: string): boolean;
-        static targetNextMonster(reverse: boolean, timeToStorePreviousTargets: number, notoriety: string[], statusWrapperOpt: any): TargetResult;
+        static targetNextMonster(
+            reverse: boolean,
+            timeToStorePreviousTargets: number,
+            notoriety: string[],
+            statusWrapperOpt: any,
+        ): TargetResult;
         static showStatusBarOnWrapper(serial: string, statusWrapperOpt: any): void;
     }
 }
@@ -307,20 +389,46 @@ declare namespace Scripts {
 }
 declare namespace Scripts {
     class Utils {
-        static selectMenu(menuName: string | ISpecialSelection, selections: Array<string | ISpecialSelection>, firstCall?: boolean): void;
+        static selectMenu(
+            menuName: string | ISpecialSelection,
+            selections: Array<string | ISpecialSelection>,
+            firstCall?: boolean,
+        ): void;
         static useAndSelect(serial: string, selections: ISelect[], use?: boolean): void;
-        static refill(obj: IMyGameObject, sourceContainerId: string, quantity?: number, targetContainerId?: string, refillJustWhenIHaveNothing?: boolean, itemName?: string, sourceContainerIsItemOnGround?: boolean): number;
+        static refill(
+            obj: IMyGameObject,
+            sourceContainerId: string,
+            quantity?: number,
+            targetContainerId?: string,
+            refillJustWhenIHaveNothing?: boolean,
+            itemName?: string,
+            sourceContainerIsItemOnGround?: boolean,
+        ): number;
         static getObjSerials(obj: IMyGameObject, container?: string): string[];
         static getColorByNotoriety(notoriety?: number): number;
-        static countObjectInContainer(obj: IMyGameObject, container?: string, containerIsObjItemOnGround?: boolean): number;
+        static countObjectInContainer(
+            obj: IMyGameObject,
+            container?: string,
+            containerIsObjItemOnGround?: boolean,
+        ): number;
         static countItemsBySerials(itemsSerials: string[]): number;
         static moveObjectToContainer(obj: any, fromContainer: string, targetContainer: string): void;
         static moveItems(itemsSerials: string[], targetContainerId: string, quantity: number): number;
-        static waitWhileSomethingInJournal(messages: string[], wait?: number, timeAhead?: number, flags?: string): number;
+        static waitWhileSomethingInJournal(
+            messages: string[],
+            wait?: number,
+            timeAhead?: number,
+            flags?: string,
+        ): number;
         static worldSaveCheckWait(): void;
         static log(message: string, color?: ColorEnum): void;
         static playerPrint(message: string, color?: ColorEnum | number | string, fastPrint?: boolean): void;
-        static charPrint(serial: string, message: string, color?: ColorEnum | number | string, fastPrint?: boolean): void;
+        static charPrint(
+            serial: string,
+            message: string,
+            color?: ColorEnum | number | string,
+            fastPrint?: boolean,
+        ): void;
         static waitTarget(target?: TargetEnum | string): void;
         static resetTimer(timer: string): void;
         static waitWhileTargeting(): void;
@@ -335,15 +443,22 @@ declare namespace Scripts {
         static printColoredHpBar(target: string, percent: number): void;
         static getLivingObjectInDistance(objectSerial: string): GameObject | null;
         static printDamage(serial: string, previousHp: number, force?: boolean): void;
-        static use(val: IMyGameObject | IMyGameObject[], name?: string, minimalCountForWarn?: number, warnWavPath?: string): void;
+        static use(
+            val: IMyGameObject | IMyGameObject[],
+            name?: string,
+            minimalCountForWarn?: number,
+            warnWavPath?: string,
+        ): void;
         static setTargetAlias(targetAliasToSet: string, message?: string): void;
         static findFirstType(myGameObject: IMyGameObject, layer?: number): string | undefined;
         static walkToSerial(serial: string, distance?: number): void;
         static targetObjectNotSelf(objectAlias: string, message?: string): void;
-        static createGameObjectSelections(selections: Array<{
-            ask: string;
-            addObject: string;
-        }>): void;
+        static createGameObjectSelections(
+            selections: Array<{
+                ask: string;
+                addObject: string;
+            }>,
+        ): void;
         static openContainer(s: string, maxWaitingTime?: number): void;
         static isItemStackable(serial: string): boolean;
         static askForCount(): number;
@@ -380,7 +495,12 @@ declare namespace Scripts {
         static makeProgress(): boolean;
         static refOrMake(count: number, resourcePath: string): void;
         static make(count: number, objectAsString: string, setInputs?: boolean): void;
-        static countMaterialForOneItem(objectAsString: string, callStack?: number, count?: number, crafting?: boolean): void;
+        static countMaterialForOneItem(
+            objectAsString: string,
+            callStack?: number,
+            count?: number,
+            crafting?: boolean,
+        ): void;
         static makeFromSelection(): void;
         static listMakeMenu(): void;
         static confirmMakeMenu(): void;
@@ -446,7 +566,11 @@ declare namespace Scripts {
         static harp(targetAlias?: TargetEnum | string): void;
         static lute(targetAlias?: TargetEnum | string): void;
         static drum(targetAlias?: TargetEnum | string): void;
-        static useMusicInstrument(instrument: IMyGameObject, missingMessage: string, targetAlias?: TargetEnum | string): void;
+        static useMusicInstrument(
+            instrument: IMyGameObject,
+            missingMessage: string,
+            targetAlias?: TargetEnum | string,
+        ): void;
     }
 }
 declare namespace Scripts {
@@ -472,85 +596,85 @@ declare enum DirectionEnum {
     West = 6,
     North = 0,
     East = 2,
-    South = 4
+    South = 4,
 }
 declare enum ColorEnum {
-    none = "0xffff",
-    red = "0x0021",
-    green = "0x0044",
-    orange = "0x002c",
-    pureWhite = "0x0B1D"
+    none = '0xffff',
+    red = '0x0021',
+    green = '0x0044',
+    orange = '0x002c',
+    pureWhite = '0x0B1D',
 }
 declare enum TargetEnum {
-    self = "self",
-    lastattack = "lastattack",
-    laststatus = "laststatus",
-    lasttarget = "lasttarget"
+    self = 'self',
+    lastattack = 'lastattack',
+    laststatus = 'laststatus',
+    lasttarget = 'lasttarget',
 }
 declare enum CustomStatusBarEnum {
     close = 0,
-    click = 666
+    click = 666,
 }
 declare enum OcarovaniEnum {
-    mytheril = "mytheril",
-    black = "black",
-    blood = "blood"
+    mytheril = 'mytheril',
+    black = 'black',
+    blood = 'blood',
 }
 declare enum ScrollEnum {
-    kvf = "kvf",
-    bolt = "bolt",
-    pog = "pog",
-    ijs = "ijs",
-    port = "port",
-    ef = "ef",
-    para = "para",
-    wos = "wos",
-    ivm = "ivm",
-    ress = "ress",
-    recall = "recall",
-    heal = "heal"
+    kvf = 'kvf',
+    bolt = 'bolt',
+    pog = 'pog',
+    ijs = 'ijs',
+    port = 'port',
+    ef = 'ef',
+    para = 'para',
+    wos = 'wos',
+    ivm = 'ivm',
+    ress = 'ress',
+    recall = 'recall',
+    heal = 'heal',
 }
 declare enum TargetIndicationEnum {
-    none = "none",
-    large = "large"
+    none = 'none',
+    large = 'large',
 }
 declare enum ReagentsEnum {
-    mr = "mr",
-    ss = "ss",
-    bm = "bm",
-    bp = "bp",
-    ga = "ga",
-    gi = "gi",
-    ns = "ns",
-    sa = "sa"
+    mr = 'mr',
+    ss = 'ss',
+    bm = 'bm',
+    bp = 'bp',
+    ga = 'ga',
+    gi = 'gi',
+    ns = 'ns',
+    sa = 'sa',
 }
 declare enum FlagsEnum {
-    fast = "fast",
-    near = "near",
-    mobile = "mobile",
-    item = "item",
-    human = "human",
-    nothuman = "nothuman",
-    live = "live",
-    dead = "dead",
-    injured = "injured",
-    next = "next",
-    ignorefriends = "ignorefriends",
-    ignorefriendlytypes = "ignorefriendlytypes",
-    ignoreenemies = "ignoreenemies",
-    ignoreself = "ignoreself",
-    inlos = "inlos",
-    nearmouse = "nearmouse",
-    recurse = "recurse"
+    fast = 'fast',
+    near = 'near',
+    mobile = 'mobile',
+    item = 'item',
+    human = 'human',
+    nothuman = 'nothuman',
+    live = 'live',
+    dead = 'dead',
+    injured = 'injured',
+    next = 'next',
+    ignorefriends = 'ignorefriends',
+    ignorefriendlytypes = 'ignorefriendlytypes',
+    ignoreenemies = 'ignoreenemies',
+    ignoreself = 'ignoreself',
+    inlos = 'inlos',
+    nearmouse = 'nearmouse',
+    recurse = 'recurse',
 }
 declare enum NotorietyEnum {
-    blue = "blue",
-    green = "green",
-    gray = "gray",
-    criminal = "criminal",
-    orange = "orange",
-    red = "red",
-    yellow = "yellow"
+    blue = 'blue',
+    green = 'green',
+    gray = 'gray',
+    criminal = 'criminal',
+    orange = 'orange',
+    red = 'red',
+    yellow = 'yellow',
 }
 declare enum NotorietyNum {
     blue = 1,
@@ -559,69 +683,69 @@ declare enum NotorietyNum {
     criminal = 4,
     orange = 5,
     red = 6,
-    yellow = 7
+    yellow = 7,
 }
 declare enum PotionsEnum {
-    tmr = "tmr",
-    mr = "mr",
-    gh = "gh",
-    gs = "gs",
-    ga = "ga",
-    gb = "gb",
-    tr = "tr",
-    gc = "gc",
-    lc = "lc",
-    lp = "lp",
-    dp = "dp",
-    ns = "ns",
-    shrink = "shrink",
-    lavabomb = "lavabomb",
-    invis = "invis"
+    tmr = 'tmr',
+    mr = 'mr',
+    gh = 'gh',
+    gs = 'gs',
+    ga = 'ga',
+    gb = 'gb',
+    tr = 'tr',
+    gc = 'gc',
+    lc = 'lc',
+    lp = 'lp',
+    dp = 'dp',
+    ns = 'ns',
+    shrink = 'shrink',
+    lavabomb = 'lavabomb',
+    invis = 'invis',
 }
 declare enum NecroScrollEnum {
-    vfp = "vfp",
-    kalnox = "kalnox",
-    haluze = "haluze"
+    vfp = 'vfp',
+    kalnox = 'kalnox',
+    haluze = 'haluze',
 }
 declare enum TimersEnum {
-    drink = "drink",
-    gs = "gs",
-    hiding = "hiding",
-    invis = "invis",
-    invisLong = "invisLong",
-    bandage = "bandage"
+    drink = 'drink',
+    gs = 'gs',
+    hiding = 'hiding',
+    invis = 'invis',
+    invisLong = 'invisLong',
+    bandage = 'bandage',
 }
 declare enum GlobalEnum {
-    customStatusBars = "customStatusBars"
+    customStatusBars = 'customStatusBars',
 }
 declare enum PortBookOptionsEnum {
-    opravaStats = "opravaStats",
-    mark = "mark",
-    kop = "kop",
-    nabiti = "nabiti"
+    opravaStats = 'opravaStats',
+    mark = 'mark',
+    kop = 'kop',
+    nabiti = 'nabiti',
 }
 declare enum SelectionTypeEnum {
-    gump = "gump",
-    menu = "menu"
+    gump = 'gump',
+    menu = 'menu',
 }
 declare enum MedicActionsEnum {
-    pull = "KPZ - Pull",
-    jump = "KPZ - Jump",
-    switchHp = "KPZ - Switch HP"
+    pull = 'KPZ - Pull',
+    jump = 'KPZ - Jump',
+    switchHp = 'KPZ - Switch HP',
 }
 declare enum RenameNameType {
-    autoName = "autoName",
-    nameList = "nameList"
+    autoName = 'autoName',
+    nameList = 'nameList',
 }
 declare enum TargetExEnum {
-    selfinjured = "selfinjured",
-    laststatusenemy = "laststatusenemy",
-    mount = "mount",
-    nearinjuredalie = "nearinjuredalie",
-    nearinjuredalielos = "nearinjuredalielos",
-    mostinjuredalie = "mostinjuredalie",
-    mostinjuredalielos = "mostinjuredalielos",
-    lasttargetmobile = "lasttargetmobile"
+    selfinjured = 'selfinjured',
+    laststatusenemy = 'laststatusenemy',
+    mount = 'mount',
+    nearinjuredalie = 'nearinjuredalie',
+    nearinjuredalielos = 'nearinjuredalielos',
+    mostinjuredalie = 'mostinjuredalie',
+    mostinjuredalielos = 'mostinjuredalielos',
+    lasttargetmobile = 'lasttargetmobile',
 }
 interface IMyGameObject {
     graphic: string;
