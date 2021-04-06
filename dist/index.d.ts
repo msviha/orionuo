@@ -91,6 +91,7 @@ declare function webDestroyer(): void;
 declare function wos(scroll?: boolean, timer?: number): void;
 declare function sortBackpackCaleb(): void;
 declare function mobKill(targets?: string, useSavedTarget?: boolean): void;
+declare function mobKillAll(targets?: string, useSavedTarget?: boolean): void;
 declare function mobGo(): void;
 declare function mobCome(): void;
 declare function mobStop(): void;
@@ -173,6 +174,9 @@ declare namespace Scripts {
         static rename(mob: GameObject): boolean;
         static resetMobCommands(): void;
         private static resolveSayColor;
+        private static resolveMobkillTarget;
+        private static resolveMobkillPets;
+        static mobKillAll(targets?: string, useSavedTarget?: boolean): void;
         static mobKill(targets?: string, useSavedTarget?: boolean): void;
         static shrinkOne(): void;
         static useShrinkKad(): void;

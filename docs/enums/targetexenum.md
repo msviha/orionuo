@@ -9,6 +9,7 @@
 ### Enumeration members
 
 * [laststatusenemy](targetexenum.md#laststatusenemy)
+* [lasttargetmobile](targetexenum.md#lasttargetmobile)
 * [mostinjuredalie](targetexenum.md#mostinjuredalie)
 * [mostinjuredalielos](targetexenum.md#mostinjuredalielos)
 * [mount](targetexenum.md#mount)
@@ -22,9 +23,19 @@
 
 •  **laststatusenemy**:  = "laststatusenemy"
 
-*Defined in [types/enums.ts:169](https://github.com/msviha/orionuo/blob/caea5c9/src/types/enums.ts#L169)*
+*Defined in [types/enums.ts:169](https://github.com/msviha/orionuo/blob/e41bac5/src/types/enums.ts#L169)*
 
 laststatus pokud to neni serial z friendlistu nebo pet
+
+___
+
+### lasttargetmobile
+
+•  **lasttargetmobile**:  = "lasttargetmobile"
+
+*Defined in [types/enums.ts:181](https://github.com/msviha/orionuo/blob/e41bac5/src/types/enums.ts#L181)*
+
+last target pouze pokud je to charakter
 
 ___
 
@@ -32,7 +43,7 @@ ___
 
 •  **mostinjuredalie**:  = "mostinjuredalie"
 
-*Defined in [types/enums.ts:177](https://github.com/msviha/orionuo/blob/caea5c9/src/types/enums.ts#L177)*
+*Defined in [types/enums.ts:177](https://github.com/msviha/orionuo/blob/e41bac5/src/types/enums.ts#L177)*
 
 nejvic zraneny friend, pet nebo mount
 
@@ -42,7 +53,7 @@ ___
 
 •  **mostinjuredalielos**:  = "mostinjuredalielos"
 
-*Defined in [types/enums.ts:179](https://github.com/msviha/orionuo/blob/caea5c9/src/types/enums.ts#L179)*
+*Defined in [types/enums.ts:179](https://github.com/msviha/orionuo/blob/e41bac5/src/types/enums.ts#L179)*
 
 nejvic zraneny friend, pet nebo mount s vyuzitim Line of Sight (presne neni znamo jak dobre to funguje)
 
@@ -52,7 +63,7 @@ ___
 
 •  **mount**:  = "mount"
 
-*Defined in [types/enums.ts:171](https://github.com/msviha/orionuo/blob/caea5c9/src/types/enums.ts#L171)*
+*Defined in [types/enums.ts:171](https://github.com/msviha/orionuo/blob/e41bac5/src/types/enums.ts#L171)*
 
 mount ulozeny pres moutn script
 
@@ -62,7 +73,7 @@ ___
 
 •  **nearinjuredalie**:  = "nearinjuredalie"
 
-*Defined in [types/enums.ts:173](https://github.com/msviha/orionuo/blob/caea5c9/src/types/enums.ts#L173)*
+*Defined in [types/enums.ts:173](https://github.com/msviha/orionuo/blob/e41bac5/src/types/enums.ts#L173)*
 
 nejblizsi zraneny friend, pet nebo mount
 
@@ -72,7 +83,7 @@ ___
 
 •  **nearinjuredalielos**:  = "nearinjuredalielos"
 
-*Defined in [types/enums.ts:175](https://github.com/msviha/orionuo/blob/caea5c9/src/types/enums.ts#L175)*
+*Defined in [types/enums.ts:175](https://github.com/msviha/orionuo/blob/e41bac5/src/types/enums.ts#L175)*
 
 nejblizsi zraneny friend, pet nebo mount s vyuzitim Line of Sight (presne neni znamo jak dobre to funguje)
 
@@ -82,6 +93,6 @@ ___
 
 •  **selfinjured**:  = "selfinjured"
 
-*Defined in [types/enums.ts:167](https://github.com/msviha/orionuo/blob/caea5c9/src/types/enums.ts#L167)*
+*Defined in [types/enums.ts:167](https://github.com/msviha/orionuo/blob/e41bac5/src/types/enums.ts#L167)*
 
 self ale pokud sem zranen nebo otraven

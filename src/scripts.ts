@@ -984,6 +984,18 @@ function mobKill(targets?:string, useSavedTarget?:boolean) {
 
 
 /**
+ * Vola najednou vsechny pety, jmeno na vybrany target
+ * @param targets - rozsirene targetovani, zleva do prava aliasy targetu odelene '|'
+ * @param useSavedTarget - uklada pri prvnim volani nalezeny target dle aliasu, zajistuje ze pri zmene tohoto targetu napr. hrac pouziva lastattack a zautoci v prubehu boje na jineho mob, 
+ * tak summy si porad drzi puvodni target. Dokud neni zresetovani pri volani mobStop(), mobCome() 
+ * @example external code `mobKill('lastattack|laststatusenemy')` - uklada target
+ * @example external code `mobKill('lastattack', 'false')` - NEuklada target
+ */
+ function mobKillAll(targets?:string, useSavedTarget?:boolean) {
+    Scripts.MobMaster.mobKillAll(targets, useSavedTarget);
+}
+
+/**
  * Vola "all go", pripadne go pro konkretniho peta podle laststatus tj. toho ktereho posleniho vytahnu. 
  * @example  external code `mobGo()`
  */

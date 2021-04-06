@@ -72,16 +72,31 @@ namespace Scripts {
             return config?.mobMaster.sayColor || '0x00B3';
         }        
 
-        /**
-         * Vola po jednon vsechny pety, jedno volani = jedno jmeno na vybrany target, nebo vyhodi tercik
-         * @param targets - rozsirene targetovani, zleva do prava aliasy targetu odelene '|'
-         * @param useSavedTarget - uklada pri prvnim volani nalezeny target dle aliasu, zajistuje ze pri zmene tohoto targetu napr. hrac pouziva lastattack a zautoci v prubehu boje na jineho mob, 
-         * tak summy si porad drzi puvodni target. Dokud neni zresetovani pri volani mobStop(), mobCome() 
-         */
-        static mobKill(targets?:string, useSavedTarget:boolean=true) { 
 
-            let storedPets:Array<GameObject> = Shared.GetArray("mobKill.storedPets", new Array<GameObject>());
-            const currentPets = Orion.FindTypeEx('!0x0190|!0x0191', '0xFFFF', 'ground', 'live', 20)
+        private static resolveMobkillTarget(targets?:string, useSavedTarget:boolean=true):TargetResult {
+            let target = new TargetResult();
+            if (useSavedTarget) {
+                let storedSerial = Shared.GetVar('mobkill.target');
+                if (storedSerial) {
+                    target.gameObject(storedSerial);
+                }
+            }
+
+            if (!target.isValid() && targets) {
+                target = TargetingEx.getTarget(targets);
+            }
+
+            if (target.isValid() && target.gameObject().Mobile() && !target.gameObject().Dead()) {
+                Shared.AddVar('mobkill.target', target.gameObject().Serial());
+            }
+
+            return target;
+        }
+
+        private static resolveMobkillPets(currentTarget:TargetResult):Array<GameObject> {
+
+            let storedPets:Array<GameObject> = new Array<GameObject>();
+            const currentPets = Orion.FindTypeEx('!0x0190|!0x0191', '0xFFFF', 'ground', 'live', 18)
             .filter((obj)=> { return obj.CanChangeName() && !storedPets.some(a=>a.Serial() == obj.Serial()); });
             currentPets.sort((a,b)=> { 
                 if (a.Serial() > b.Serial()) 
@@ -100,25 +115,63 @@ namespace Scripts {
                 }
             }
 
-            let lastSerial = Shared.GetVar('mobkill.lastSerial', "");
-            let pet = Orion.FindObject('0');
+            if (currentTarget?.isValid() && currentTarget?.gameObject().Mobile() && !currentTarget?.gameObject().Dead()) {
+                storedPets = storedPets.filter((obj)=> { 
+                    return obj.Serial() !== currentTarget.gameObject().Serial() 
+                });
+            }
 
-            let target = new TargetResult();
-            if (useSavedTarget) {
-                let storedSerial = Shared.GetVar('mobkill.target');
-                if (storedSerial) {
-                    target.gameObject(storedSerial);
+            return storedPets;
+        }
+
+               /**
+         * Vola vsechny pety na vybrany target
+         * @param targets - rozsirene targetovani, zleva do prava aliasy targetu odelene '|'
+         * @param useSavedTarget - uklada pri prvnim volani nalezeny target dle aliasu, zajistuje ze pri zmene tohoto targetu napr. hrac pouziva lastattack a zautoci v prubehu boje na jineho mob, 
+         * tak summy si porad drzi puvodni target. Dokud neni zresetovani pri volani mobStop(), mobCome() 
+         */ 
+        static mobKillAll(targets?:string, useSavedTarget:boolean=true) {  
+            const target = MobMaster.resolveMobkillTarget(targets, useSavedTarget);
+            const storedPets = MobMaster.resolveMobkillPets(target);
+
+            if (storedPets?.length && target?.isValid() && target?.gameObject().Mobile() && !target?.gameObject().Dead()) {
+                for (const pet of storedPets) {
+
+                    let sayColor = MobMaster.resolveSayColor();
+                    Utils.ensureName(pet);
+                    Utils.ensureName(target.gameObject());
+
+                    const fastTimer = Orion.Timer('mobkill.fastprintsufix');
+                    const hitColor = MobMaster.getPrintEnemyColorByHits(target.gameObject().Hits(), target.gameObject().MaxHits());
+                    sayColor = hitColor;
+                    if (fastTimer > 3000) {
+                        Orion.PrintFast(target.gameObject().Serial(),hitColor,0, `[${target.gameObject().Hits()}/${target.gameObject().MaxHits()}]`);
+                        Orion.SetTimer('mobkill.fastprintsufix');
+                    } else if (fastTimer < 0) {
+                        Orion.SetTimer('mobkill.fastprintsufix');
+                    }
+                    
+                    target.waitTarget();
+                    Utils.sayWithColor(`${pet.Name()} kill`, sayColor);
+                    const success = Orion.WaitForTarget(1000);
                 }
             }
-
-            if (!target.isValid() && targets) {
-                target = TargetingEx.getTarget(targets);
+            else  {
+                Utils.playerPrint(ColorEnum.orange, "[ no pets target ] ");
             }
+        }
+        /**
+         * Vola po jednon vsechny pety, jedno volani = jedno jmeno na vybrany target, nebo vyhodi tercik
+         * @param targets - rozsirene targetovani, zleva do prava aliasy targetu odelene '|'
+         * @param useSavedTarget - uklada pri prvnim volani nalezeny target dle aliasu, zajistuje ze pri zmene tohoto targetu napr. hrac pouziva lastattack a zautoci v prubehu boje na jineho mob, 
+         * tak summy si porad drzi puvodni target. Dokud neni zresetovani pri volani mobStop(), mobCome() 
+         */
+        static mobKill(targets?:string, useSavedTarget:boolean=true) { 
 
-            if (target?.isValid() && target?.gameObject().Mobile() && !target?.gameObject().Dead()) {
-                storedPets = storedPets.filter((obj)=> { return obj.Serial() !== target.gameObject().Serial() });
-                Shared.AddVar('mobkill.target', target.gameObject().Serial());
-            }
+            const target = MobMaster.resolveMobkillTarget(targets, useSavedTarget);
+            const storedPets = MobMaster.resolveMobkillPets(target);
+            let lastSerial = Shared.GetVar('mobkill.lastSerial', "");
+            let pet = Orion.FindObject('0');
 
             if (storedPets && storedPets.length > 0) {
                 if (!lastSerial || lastSerial === "") {
@@ -140,15 +193,12 @@ namespace Scripts {
                     }       
                 }
 
-                if (pet && pet.Exists()) {
+                if (pet?.Exists()) {
                     Shared.AddVar('mobkill.lastSerial', lastSerial); 
                     let sayColor = MobMaster.resolveSayColor();
                     Utils.ensureName(pet);
 
                     if (target?.isValid() && target?.gameObject().Mobile() && !target?.gameObject().Dead()) {
-                        target.waitTarget();
-                        Utils.ensureName(target.gameObject());
-
                         const fastTimer = Orion.Timer('mobkill.fastprintsufix');
                         const hitColor = MobMaster.getPrintEnemyColorByHits(target.gameObject().Hits(), target.gameObject().MaxHits());
                         sayColor = hitColor;
@@ -158,6 +208,8 @@ namespace Scripts {
                         } else if (fastTimer < 0) {
                             Orion.SetTimer('mobkill.fastprintsufix');
                         }
+                        Utils.ensureName(target.gameObject());
+                        target.waitTarget();
                     }
                     Utils.sayWithColor(`${pet.Name()} kill`, sayColor);
                 } else {

@@ -2810,6 +2810,9 @@ function sortBackpackCaleb() {
 function mobKill(targets, useSavedTarget) {
     Scripts.MobMaster.mobKill(targets, useSavedTarget);
 }
+function mobKillAll(targets, useSavedTarget) {
+    Scripts.MobMaster.mobKillAll(targets, useSavedTarget);
+}
 function mobGo() {
     Scripts.MobMaster.mobGo();
 }
@@ -3764,10 +3767,26 @@ var Scripts;
         MobMaster.resolveSayColor = function () {
             return (config === null || config === void 0 ? void 0 : config.mobMaster.sayColor) || '0x00B3';
         };
-        MobMaster.mobKill = function (targets, useSavedTarget) {
+        MobMaster.resolveMobkillTarget = function (targets, useSavedTarget) {
             if (useSavedTarget === void 0) { useSavedTarget = true; }
-            var storedPets = Shared.GetArray("mobKill.storedPets", new Array());
-            var currentPets = Orion.FindTypeEx('!0x0190|!0x0191', '0xFFFF', 'ground', 'live', 20)
+            var target = new Scripts.TargetResult();
+            if (useSavedTarget) {
+                var storedSerial = Shared.GetVar('mobkill.target');
+                if (storedSerial) {
+                    target.gameObject(storedSerial);
+                }
+            }
+            if (!target.isValid() && targets) {
+                target = Scripts.TargetingEx.getTarget(targets);
+            }
+            if (target.isValid() && target.gameObject().Mobile() && !target.gameObject().Dead()) {
+                Shared.AddVar('mobkill.target', target.gameObject().Serial());
+            }
+            return target;
+        };
+        MobMaster.resolveMobkillPets = function (currentTarget) {
+            var storedPets = new Array();
+            var currentPets = Orion.FindTypeEx('!0x0190|!0x0191', '0xFFFF', 'ground', 'live', 18)
                 .filter(function (obj) { return obj.CanChangeName() && !storedPets.some(function (a) { return a.Serial() == obj.Serial(); }); });
             currentPets.sort(function (a, b) {
                 if (a.Serial() > b.Serial())
@@ -3783,22 +3802,48 @@ var Scripts;
                     storedPets.splice(i);
                 }
             }
-            var lastSerial = Shared.GetVar('mobkill.lastSerial', "");
-            var pet = Orion.FindObject('0');
-            var target = new Scripts.TargetResult();
-            if (useSavedTarget) {
-                var storedSerial = Shared.GetVar('mobkill.target');
-                if (storedSerial) {
-                    target.gameObject(storedSerial);
+            if ((currentTarget === null || currentTarget === void 0 ? void 0 : currentTarget.isValid()) && (currentTarget === null || currentTarget === void 0 ? void 0 : currentTarget.gameObject().Mobile()) && !(currentTarget === null || currentTarget === void 0 ? void 0 : currentTarget.gameObject().Dead())) {
+                storedPets = storedPets.filter(function (obj) {
+                    return obj.Serial() !== currentTarget.gameObject().Serial();
+                });
+            }
+            return storedPets;
+        };
+        MobMaster.mobKillAll = function (targets, useSavedTarget) {
+            if (useSavedTarget === void 0) { useSavedTarget = true; }
+            var target = MobMaster.resolveMobkillTarget(targets, useSavedTarget);
+            var storedPets = MobMaster.resolveMobkillPets(target);
+            if ((storedPets === null || storedPets === void 0 ? void 0 : storedPets.length) && (target === null || target === void 0 ? void 0 : target.isValid()) && (target === null || target === void 0 ? void 0 : target.gameObject().Mobile()) && !(target === null || target === void 0 ? void 0 : target.gameObject().Dead())) {
+                for (var _i = 0, storedPets_1 = storedPets; _i < storedPets_1.length; _i++) {
+                    var pet = storedPets_1[_i];
+                    var sayColor = MobMaster.resolveSayColor();
+                    Scripts.Utils.ensureName(pet);
+                    Scripts.Utils.ensureName(target.gameObject());
+                    var fastTimer = Orion.Timer('mobkill.fastprintsufix');
+                    var hitColor = MobMaster.getPrintEnemyColorByHits(target.gameObject().Hits(), target.gameObject().MaxHits());
+                    sayColor = hitColor;
+                    if (fastTimer > 3000) {
+                        Orion.PrintFast(target.gameObject().Serial(), hitColor, 0, "[" + target.gameObject().Hits() + "/" + target.gameObject().MaxHits() + "]");
+                        Orion.SetTimer('mobkill.fastprintsufix');
+                    }
+                    else if (fastTimer < 0) {
+                        Orion.SetTimer('mobkill.fastprintsufix');
+                    }
+                    target.waitTarget();
+                    Scripts.Utils.sayWithColor(pet.Name() + " kill", sayColor);
+                    var success = Orion.WaitForTarget(1000);
                 }
             }
-            if (!target.isValid() && targets) {
-                target = Scripts.TargetingEx.getTarget(targets);
+            else {
+                Scripts.Utils.playerPrint(ColorEnum.orange, "[ no pets target ] ");
             }
-            if ((target === null || target === void 0 ? void 0 : target.isValid()) && (target === null || target === void 0 ? void 0 : target.gameObject().Mobile()) && !(target === null || target === void 0 ? void 0 : target.gameObject().Dead())) {
-                storedPets = storedPets.filter(function (obj) { return obj.Serial() !== target.gameObject().Serial(); });
-                Shared.AddVar('mobkill.target', target.gameObject().Serial());
-            }
+        };
+        MobMaster.mobKill = function (targets, useSavedTarget) {
+            if (useSavedTarget === void 0) { useSavedTarget = true; }
+            var target = MobMaster.resolveMobkillTarget(targets, useSavedTarget);
+            var storedPets = MobMaster.resolveMobkillPets(target);
+            var lastSerial = Shared.GetVar('mobkill.lastSerial', "");
+            var pet = Orion.FindObject('0');
             if (storedPets && storedPets.length > 0) {
                 if (!lastSerial || lastSerial === "") {
                     pet = storedPets[0];
@@ -3820,13 +3865,11 @@ var Scripts;
                         }
                     }
                 }
-                if (pet && pet.Exists()) {
+                if (pet === null || pet === void 0 ? void 0 : pet.Exists()) {
                     Shared.AddVar('mobkill.lastSerial', lastSerial);
                     var sayColor = MobMaster.resolveSayColor();
                     Scripts.Utils.ensureName(pet);
                     if ((target === null || target === void 0 ? void 0 : target.isValid()) && (target === null || target === void 0 ? void 0 : target.gameObject().Mobile()) && !(target === null || target === void 0 ? void 0 : target.gameObject().Dead())) {
-                        target.waitTarget();
-                        Scripts.Utils.ensureName(target.gameObject());
                         var fastTimer = Orion.Timer('mobkill.fastprintsufix');
                         var hitColor = MobMaster.getPrintEnemyColorByHits(target.gameObject().Hits(), target.gameObject().MaxHits());
                         sayColor = hitColor;
@@ -3837,6 +3880,8 @@ var Scripts;
                         else if (fastTimer < 0) {
                             Orion.SetTimer('mobkill.fastprintsufix');
                         }
+                        Scripts.Utils.ensureName(target.gameObject());
+                        target.waitTarget();
                     }
                     Scripts.Utils.sayWithColor(pet.Name() + " kill", sayColor);
                 }

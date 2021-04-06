@@ -4,11 +4,11 @@
 
 ### features
 - `novy alias targetu 'lasttargetmobile'` viz popis enum TargetEx
-- `highlightEnemy` oprava pri zapnuti highlightEnemySilent chybela prava zavorka za maxhits.
+- `mobKillAll` - stejne jako mobKill ale vola vsechny pety najednou
 
 ### fixes
 - `mobKill` spatne razeni petu, vynechal v rade nektere jmena. lasttarget bral i nezive objekty.
-
+- `highlightEnemy` oprava pri zapnuti highlightEnemySilent chybela prava zavorka za maxhits.
 
 ## 1.1.1
 
