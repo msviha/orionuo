@@ -167,6 +167,10 @@ namespace Scripts {
          * @param oldSnapshot - array serialov na ignorovanie
          */
         private static moveLootToLootBag(oldSnapshot: string[]) {
+            if (!Orion.FindObject(LOOT_BAG)) {
+                return;
+            }
+            
             this.getBagSnapshot()
                 .filter((serial) => oldSnapshot.indexOf(serial) < 0)
                 .forEach((serial, i) => {
