@@ -4916,9 +4916,11 @@ var Scripts;
     var Statusbar = (function () {
         function Statusbar() {
         }
-        Statusbar.create = function () {
-            Scripts.Utils.createGameObjectSelections([{ ask: 'Target mobile', addObject: 'lastCustomStatusBar' }]);
-            var o = Orion.FindObject('lastCustomStatusBar');
+        Statusbar.create = function (targetSerial) {
+            if (targetSerial === undefined) {
+                Scripts.Utils.createGameObjectSelections([{ ask: 'Target mobile', addObject: 'lastCustomStatusBar' }]);
+            }
+            var o = Orion.FindObject(targetSerial !== null && targetSerial !== void 0 ? targetSerial : 'lastCustomStatusBar');
             var serial = o.Serial();
             var name = o.Name();
             var max = o.MaxHits();
@@ -5027,9 +5029,8 @@ var Scripts;
             var over = hp > max;
             var currentColor = poisoned ? '#00FF00' : Scripts.Utils.determineHpColorRGB(current * 100 / lineLength);
             gump.AddText(10, 25, '0', hp + "/" + max, 0, 201);
-            gump.AddLine(89, 35, 161, 35, 'black', 10, 101);
-            gump.AddLine(90, 35, (over ? lineLength : current) + 90, 35, currentColor, 8, 102);
-            gump.AddText(152, 25, '0', over ? "<basefont size='small' color='red'>+</basefont>" : ' ', 0, 103);
+            gump.AddColoredPolygone(89, 35, 72, 10, "black");
+            gump.AddColoredPolygone(90, 35, over ? lineLength : current, 10, currentColor);
         };
         return Statusbar;
     }());
