@@ -129,8 +129,13 @@ namespace Scripts {
                 Orion.WaitForTarget(1000);
                 Orion.TargetObject(corpseId);
                 if (weapon) {
+                    const LHand = Orion.ObjAtLayer(1);
+                    const RHand = Orion.ObjAtLayer(2);
+                    
                     Orion.UseObject('fightWeapon');
                     Orion.WaitForTarget(1000) && Orion.CancelTarget();
+
+                    Scripts.Dress.equip([LHand.Serial(), RHand.Serial()]);
                 }
                 Orion.Wait(250);
             }
