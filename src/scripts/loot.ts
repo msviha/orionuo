@@ -113,7 +113,7 @@ namespace Scripts {
             let serverLagActionsLeft = 4;
             for (const itemId of itemsOnGround) {
                 Orion.MoveItem(itemId, 0, 'myLootBag');
-                Orion.Wait(serverLagActionsLeft ? 50 : 350);
+                Orion.Wait(serverLagActionsLeft > 0 ? 50 : 350);
                 serverLagActionsLeft--;
             }
         }
@@ -146,7 +146,7 @@ namespace Scripts {
                 for (const itemId of itemsInCorpse) {
                     // TODO doresit prehazeni veci z hlavniho baglu do myLootBag pri lotovani pytliku
                     Orion.MoveItem(itemId, 0, 'myLootBag');
-                    Orion.Wait(serverLagActionsLeft ? 150 : 500);
+                    Orion.Wait(serverLagActionsLeft > 0 ? 150 : 500);
                     serverLagActionsLeft--;
                 }
             }
@@ -170,7 +170,7 @@ namespace Scripts {
             if (!Orion.FindObject(LOOT_BAG)) {
                 return;
             }
-            
+
             this.getBagSnapshot()
                 .filter((serial) => oldSnapshot.indexOf(serial) < 0)
                 .forEach((serial, i) => {
