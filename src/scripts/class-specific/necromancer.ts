@@ -3,7 +3,7 @@
  */
 namespace Scripts {
     export class Necromancer {
-        static necroMystic(msg:string) {
+        static necroMystic(msg: string) {
             const necroMystic = gameObject.uncategorized.necroMystic;
             const mysticSerial = Scripts.Utils.findFirstType(necroMystic, 6);
 

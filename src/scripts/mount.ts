@@ -1,17 +1,14 @@
 namespace Scripts {
     export class Mount {
-
         /**
          * naseda/seseda z jezditka
          */
         static mountAndDismount() {
             if (Orion.ObjAtLayer('Mount')) {
                 Orion.UseObject('self');
-            }
-            else if (!Orion.FindObject('myMount')) {
+            } else if (!Orion.FindObject('myMount')) {
                 Scripts.Mount.resolveNewMount();
-            }
-            else {
+            } else {
                 Orion.UseObject('myMount');
             }
         }
@@ -34,7 +31,7 @@ namespace Scripts {
          * Najde vlastni jezditko v okoli 5 policek a nasedne na nej
          * pokud ne tak vrati false
          */
-        static mountMyPet():boolean {
+        static mountMyPet(): boolean {
             const mountsGraphic = '0x00DF|0x00DC|0x00DA|0x00E2|0x00CC|0x00E4|0x00D2|0x00DB|0x00C8';
             const groundPets = Orion.FindType(mountsGraphic, '0xFFFF', 'ground', 'live', 5);
             for (const pet of groundPets) {

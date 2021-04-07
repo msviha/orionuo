@@ -1,8 +1,6 @@
 namespace Scripts {
-
     // todo work in progress
     export class Klamak {
-
         /**
          * Scripts.Klamak.next
          * stability implementation
@@ -15,18 +13,17 @@ namespace Scripts {
 
             if (!current) {
                 Orion.SetGlobal('klamak', lists[0]);
-            }
-            else {
+            } else {
                 const currentIndex = lists.indexOf(current);
                 const nextIndex = currentIndex + 1 === lists.length ? 0 : currentIndex + 1;
-                Orion.SetGlobal('klamak', lists[nextIndex])
+                Orion.SetGlobal('klamak', lists[nextIndex]);
             }
 
             const nextList = Orion.GetGlobal('klamak');
             Scripts.Utils.playerPrint(nextList);
         }
 
-        static useKlamak(lvl:number, useAim = false, priorityList:string[] = [], ignoreSerials:string[] = []) {
+        static useKlamak(lvl: number, useAim = false, priorityList: string[] = [], ignoreSerials: string[] = []) {
             const level = gameObject.klamak['lvl' + lvl];
 
             let findSerial = '';
@@ -74,22 +71,20 @@ namespace Scripts {
                 if (selection === 0) {
                     return;
                 }
-                const target:any = {}
+                const target: any = {};
 
                 if (selection === 1) {
                     const targetGameObject = Orion.FindObject('klamakTarget');
                     target.x = targetGameObject.X();
                     target.y = targetGameObject.Y();
                     target.z = targetGameObject.Z();
-                }
-                else {
+                } else {
                     target.x = SelectedTile.X();
                     target.y = SelectedTile.Y();
                     target.z = SelectedTile.Z();
                 }
-                Orion.MoveItem(findSerial, 1, "ground", target.x, target.y, target.z);
+                Orion.MoveItem(findSerial, 1, 'ground', target.x, target.y, target.z);
                 Orion.Wait(responseDelay);
-
             }
             Orion.WarMode(true);
             Orion.Wait(100);

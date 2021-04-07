@@ -1,7 +1,6 @@
 namespace Scripts {
     export class PetCommander {
-
-        static getUsedNames():string[] {
+        static getUsedNames(): string[] {
             const usedNames = [];
             const myPets = Scripts.PetCommander.getMyPets();
             for (const pet of myPets) {
@@ -10,11 +9,11 @@ namespace Scripts {
             return usedNames;
         }
 
-        static getMyPets():IMyPet[] {
+        static getMyPets(): IMyPet[] {
             return Shared.GetArray('myPets', []);
         }
 
-        static filterPetsInDistance():IMyPet[] {
+        static filterPetsInDistance(): IMyPet[] {
             const myPets = Scripts.PetCommander.getMyPets();
             for (const pet of myPets) {
                 const petObject = Orion.FindObject(pet.serial);
@@ -25,7 +24,7 @@ namespace Scripts {
             return Scripts.PetCommander.getMyPets();
         }
 
-        static removeFromMyPets(name:string) {
+        static removeFromMyPets(name: string) {
             const myPets = Scripts.PetCommander.getMyPets();
             for (let i = 0; i < myPets.length; i++) {
                 if (myPets[i].name === name) {
@@ -36,15 +35,15 @@ namespace Scripts {
             }
         }
 
-        static renameAndSavePet(petSerial:string):IMyPet {
+        static renameAndSavePet(petSerial: string): IMyPet {
             const petName = Scripts.PetCommander.getRandomAvailableName();
-            const pet = {serial: petSerial, name: petName};
+            const pet = { serial: petSerial, name: petName };
             Orion.RenameMount(pet.serial, pet.name);
             Scripts.PetCommander.savePet(pet);
             return pet;
         }
 
-        static getNextPetByIndex(index:number):IMyPet|undefined {
+        static getNextPetByIndex(index: number): IMyPet | undefined {
             const myPets = Shared.GetArray('myPets', []);
             if (myPets.length - 1 < index) {
                 return;
@@ -59,50 +58,311 @@ namespace Scripts {
             }
         }
 
-        static getAvailableNames():string[] {
+        static getAvailableNames(): string[] {
             const usedNames = Scripts.PetCommander.getUsedNames();
             const namesPool = [
-                'Andres', 'Blanca', 'Carlos', 'Dolores', 'Enrique', 'Felicia', 'Guillermo', 'Hilda', 'Ignacio', 'Jimena', 'Kevin', 'Linda', 'Marty', 'Nora', 'Olaf', 'Damrey',
-                'Haikui', 'Kirogi', 'Tembin', 'Bolaven', 'Sanba', 'Jelawat', 'Ewiniar', 'Malaksi', 'Gaemi', 'Prapiroon', 'Maria', 'SonTinh', 'Bopha', 'Wukong', 'Sonamu',
-                'Shanshan', 'Yagi', 'Leepi', 'Bebinca', 'Rumbia', 'Soulik', 'Cimaron', 'Jebi', 'Mangkhut', 'Utor', 'Trami', 'Yutu', 'Toraji', 'Usagi', 'Pabuk', 'Wutip', 'Sepat',
-                'Fitow', 'Danas', 'Nari', 'Wipha', 'Francisco', 'Lekima', 'Krosa', 'Haiyan', 'Podul', 'Lingling', 'Kaziki', 'Faxai', 'Peipah', 'Tapah', 'Mitag', 'Hagibis', 'Neoguri',
-                'Rammasun', 'Matmo', 'Halong', 'Nakri', 'Fengshen', 'Kalmaegi', 'Kanmuri', 'Phanfone', 'Vongfong', 'Nuri', 'Sinlaku', 'Hagupit', 'Jangmi', 'Mekkhala', 'Higos',
-                'Bavi', 'Maysak', 'Haishen', 'Noul', 'Dolphin', 'Kujira', 'Chanhom', 'Linfa', 'Nangka', 'Soudelor', 'Molave', 'Goni', 'Morakot', 'Etau', 'Vamco', 'Krovanh', 'Dujuan',
-                'Mujigae', 'Choiwan', 'Koppu', 'Ketsana', 'Parma', 'Melor', 'Nepartak', 'Lupit', 'Mirinae', 'Nida', 'Omais', 'Conson', 'Chanthu', 'Dianmu', 'Mindulle', 'Lionrock',
-                'Kompasu', 'Namtheun', 'Malou', 'Meranti', 'Fanapi', 'Malakas', 'Megi', 'Chaba', 'Aere', 'Songda', 'Sarika', 'Haima', 'Meari', 'Tokage', 'Muifa', 'Merbok',
-                'Nanmadol', 'Talas', 'Noru', 'Kulap', 'Roke', 'Sonca', 'Nesat', 'Haitang', 'Nalgae', 'Banyan', 'Washi', 'Pakhar', 'Sanvu', 'Mawar', 'Guchol', 'Patricia', 'Rick',
-                'Sandra', 'Terry', 'Vivian', 'Waldo', 'Xina', 'York', 'Zelda', 'Agatha', 'Blas', 'Celia', 'Darby', 'Estelle', 'Frank', 'Georgette', 'Howard', 'Isis', 'Javier', 'Kay', 'Lester',
-                'Madeline', 'Newton', 'Orlene', 'Paine', 'Roslyn', 'Seymour', 'Tina', 'Virgil', 'Winifred', 'Xavier', 'Yolanda', 'Zeke', 'Adrian', 'Beatriz', 'Calvin', 'Dora', 'Eugene',
-                'Fernanda', 'Greg', 'Hilary', 'Irwin', 'Jova', 'Kenneth', 'Lidia', 'Max', 'Norma', 'Otis', 'Pilar', 'Ramon', 'Selma', 'Todd', 'Veronica', 'Wiley', 'Xina', 'York', 'Zelda',
-                'Aletta', 'Bud', 'Carlotta', 'Daniel', 'Emilia', 'Fabio', 'Gilma', 'Hector', 'Ileana', 'John', 'Kristy', 'Lane', 'Miriam', 'Norman', 'Olivia', 'Paul', 'Rosa', 'Sergio', 'Tara',
-                'Vicente', 'Willa', 'Xavier', 'Yolanda', 'Zeke', 'Alvin', 'Barbara', 'Cosme', 'Dalila', 'Erick', 'Flossie', 'Gil', 'Henriette', 'Ivo', 'Juliette', 'Kiko', 'Lorena', 'Manuel',
-                'Narda', 'Octave', 'Priscilla', 'Raymond', 'Sonia', 'Tico', 'Velma', 'Wallis', 'Xina', 'York', 'Zelda', 'Amanda', 'Boris', 'Cristina', 'Douglas', 'Elida', 'Fausto', 'Genevieve',
-                'Hernan', 'Iselle', 'Julio', 'Karina', 'Lowell', 'Marie', 'Norbert', 'Odile', 'Polo', 'Rachel', 'Simon', 'Trudy', 'Vance', 'Winnie', 'Xavier', 'Yolanda', 'Zeke', 'Talim',
-                'Doksuri', 'Khanun', 'Vicente', 'Saola'
+                'Andres',
+                'Blanca',
+                'Carlos',
+                'Dolores',
+                'Enrique',
+                'Felicia',
+                'Guillermo',
+                'Hilda',
+                'Ignacio',
+                'Jimena',
+                'Kevin',
+                'Linda',
+                'Marty',
+                'Nora',
+                'Olaf',
+                'Damrey',
+                'Haikui',
+                'Kirogi',
+                'Tembin',
+                'Bolaven',
+                'Sanba',
+                'Jelawat',
+                'Ewiniar',
+                'Malaksi',
+                'Gaemi',
+                'Prapiroon',
+                'Maria',
+                'SonTinh',
+                'Bopha',
+                'Wukong',
+                'Sonamu',
+                'Shanshan',
+                'Yagi',
+                'Leepi',
+                'Bebinca',
+                'Rumbia',
+                'Soulik',
+                'Cimaron',
+                'Jebi',
+                'Mangkhut',
+                'Utor',
+                'Trami',
+                'Yutu',
+                'Toraji',
+                'Usagi',
+                'Pabuk',
+                'Wutip',
+                'Sepat',
+                'Fitow',
+                'Danas',
+                'Nari',
+                'Wipha',
+                'Francisco',
+                'Lekima',
+                'Krosa',
+                'Haiyan',
+                'Podul',
+                'Lingling',
+                'Kaziki',
+                'Faxai',
+                'Peipah',
+                'Tapah',
+                'Mitag',
+                'Hagibis',
+                'Neoguri',
+                'Rammasun',
+                'Matmo',
+                'Halong',
+                'Nakri',
+                'Fengshen',
+                'Kalmaegi',
+                'Kanmuri',
+                'Phanfone',
+                'Vongfong',
+                'Nuri',
+                'Sinlaku',
+                'Hagupit',
+                'Jangmi',
+                'Mekkhala',
+                'Higos',
+                'Bavi',
+                'Maysak',
+                'Haishen',
+                'Noul',
+                'Dolphin',
+                'Kujira',
+                'Chanhom',
+                'Linfa',
+                'Nangka',
+                'Soudelor',
+                'Molave',
+                'Goni',
+                'Morakot',
+                'Etau',
+                'Vamco',
+                'Krovanh',
+                'Dujuan',
+                'Mujigae',
+                'Choiwan',
+                'Koppu',
+                'Ketsana',
+                'Parma',
+                'Melor',
+                'Nepartak',
+                'Lupit',
+                'Mirinae',
+                'Nida',
+                'Omais',
+                'Conson',
+                'Chanthu',
+                'Dianmu',
+                'Mindulle',
+                'Lionrock',
+                'Kompasu',
+                'Namtheun',
+                'Malou',
+                'Meranti',
+                'Fanapi',
+                'Malakas',
+                'Megi',
+                'Chaba',
+                'Aere',
+                'Songda',
+                'Sarika',
+                'Haima',
+                'Meari',
+                'Tokage',
+                'Muifa',
+                'Merbok',
+                'Nanmadol',
+                'Talas',
+                'Noru',
+                'Kulap',
+                'Roke',
+                'Sonca',
+                'Nesat',
+                'Haitang',
+                'Nalgae',
+                'Banyan',
+                'Washi',
+                'Pakhar',
+                'Sanvu',
+                'Mawar',
+                'Guchol',
+                'Patricia',
+                'Rick',
+                'Sandra',
+                'Terry',
+                'Vivian',
+                'Waldo',
+                'Xina',
+                'York',
+                'Zelda',
+                'Agatha',
+                'Blas',
+                'Celia',
+                'Darby',
+                'Estelle',
+                'Frank',
+                'Georgette',
+                'Howard',
+                'Isis',
+                'Javier',
+                'Kay',
+                'Lester',
+                'Madeline',
+                'Newton',
+                'Orlene',
+                'Paine',
+                'Roslyn',
+                'Seymour',
+                'Tina',
+                'Virgil',
+                'Winifred',
+                'Xavier',
+                'Yolanda',
+                'Zeke',
+                'Adrian',
+                'Beatriz',
+                'Calvin',
+                'Dora',
+                'Eugene',
+                'Fernanda',
+                'Greg',
+                'Hilary',
+                'Irwin',
+                'Jova',
+                'Kenneth',
+                'Lidia',
+                'Max',
+                'Norma',
+                'Otis',
+                'Pilar',
+                'Ramon',
+                'Selma',
+                'Todd',
+                'Veronica',
+                'Wiley',
+                'Xina',
+                'York',
+                'Zelda',
+                'Aletta',
+                'Bud',
+                'Carlotta',
+                'Daniel',
+                'Emilia',
+                'Fabio',
+                'Gilma',
+                'Hector',
+                'Ileana',
+                'John',
+                'Kristy',
+                'Lane',
+                'Miriam',
+                'Norman',
+                'Olivia',
+                'Paul',
+                'Rosa',
+                'Sergio',
+                'Tara',
+                'Vicente',
+                'Willa',
+                'Xavier',
+                'Yolanda',
+                'Zeke',
+                'Alvin',
+                'Barbara',
+                'Cosme',
+                'Dalila',
+                'Erick',
+                'Flossie',
+                'Gil',
+                'Henriette',
+                'Ivo',
+                'Juliette',
+                'Kiko',
+                'Lorena',
+                'Manuel',
+                'Narda',
+                'Octave',
+                'Priscilla',
+                'Raymond',
+                'Sonia',
+                'Tico',
+                'Velma',
+                'Wallis',
+                'Xina',
+                'York',
+                'Zelda',
+                'Amanda',
+                'Boris',
+                'Cristina',
+                'Douglas',
+                'Elida',
+                'Fausto',
+                'Genevieve',
+                'Hernan',
+                'Iselle',
+                'Julio',
+                'Karina',
+                'Lowell',
+                'Marie',
+                'Norbert',
+                'Odile',
+                'Polo',
+                'Rachel',
+                'Simon',
+                'Trudy',
+                'Vance',
+                'Winnie',
+                'Xavier',
+                'Yolanda',
+                'Zeke',
+                'Talim',
+                'Doksuri',
+                'Khanun',
+                'Vicente',
+                'Saola',
             ];
 
             const availableNames = namesPool.filter((i) => usedNames.indexOf(i) === -1);
             return availableNames;
         }
 
-        static getRandomAvailableName():string {
+        static getRandomAvailableName(): string {
             const namesPool = Scripts.PetCommander.getAvailableNames();
             if (!namesPool.length) {
                 Scripts.Utils.playerPrint('chyba');
-                return 'Chyba'
+                return 'Chyba';
             }
-            const random = Math.floor(Math.random() * (namesPool.length));
+            const random = Math.floor(Math.random() * namesPool.length);
             return namesPool[random];
         }
 
-        static savePet(pet:{serial:string, name:string}) {
+        static savePet(pet: { serial: string; name: string }) {
             const myPets = Scripts.PetCommander.getMyPets();
             myPets.push(pet);
             Shared.AddArray('myPets', myPets);
         }
 
-        static getNewPet():IMyPet|undefined {
-            let monstersAlive = Orion.FindType('!0x0190|!0x0191', '0xFFFF', 'ground', 'live', 12);
+        static getNewPet(): IMyPet | undefined {
+            const monstersAlive = Orion.FindType('!0x0190|!0x0191', '0xFFFF', 'ground', 'live', 12);
             for (const serial of monstersAlive) {
                 const isMyMonster = Orion.FindObject(serial).CanChangeName();
                 if (isMyMonster) {
@@ -149,7 +409,7 @@ namespace Scripts {
 
         static killAll() {
             while (Scripts.PetCommander.getNewPet()) {}
-            let myPets = Scripts.PetCommander.filterPetsInDistance();
+            const myPets = Scripts.PetCommander.filterPetsInDistance();
             if (!myPets.length) {
                 return;
             }
@@ -158,8 +418,7 @@ namespace Scripts {
                 const petObject = Orion.FindObject(pet.serial);
                 if (!petObject || petObject.Distance() > 12) {
                     Scripts.PetCommander.removeFromMyPets(pet.name);
-                }
-                else {
+                } else {
                     Orion.WaitTargetObject(Orion.ClientLastAttack());
                     Orion.Say(`${pet.name} kill`);
                     const success = Orion.WaitForTarget(1000);
@@ -174,13 +433,13 @@ namespace Scripts {
             Shared.AddVar('healPetsToggle', true);
         }
 
-        static healPetsToggleStop(message?:string) {
+        static healPetsToggleStop(message?: string) {
             Scripts.Utils.playerPrint('Healing pets STOP', ColorEnum.red);
             message && Scripts.Utils.playerPrint(message, ColorEnum.orange);
             Shared.AddVar('healPetsToggle', false);
         }
 
-        static sortPetsByHits(arr:IMyPet[]):IMyPet[] {
+        static sortPetsByHits(arr: IMyPet[]): IMyPet[] {
             return arr.sort((a, b) => {
                 const pet1 = Orion.FindObject(a.serial);
                 const pet2 = Orion.FindObject(b.serial);
@@ -190,7 +449,7 @@ namespace Scripts {
                 if (!pet2) {
                     return 1;
                 }
-                return (pet1.MaxHits() - pet1.Hits()) > (pet2.MaxHits() - pet2.Hits()) ? 1 : -1;
+                return pet1.MaxHits() - pet1.Hits() > pet2.MaxHits() - pet2.Hits() ? 1 : -1;
             });
         }
 
@@ -207,8 +466,7 @@ namespace Scripts {
                 if (!myPets.length) {
                     Scripts.PetCommander.healPetsToggleStop('Nemas zadne pety');
                     break;
-                }
-                else if (myPets.length > 1) {
+                } else if (myPets.length > 1) {
                     Scripts.PetCommander.sortPetsByHits(myPets);
                 }
 
@@ -235,7 +493,7 @@ namespace Scripts {
                             'You apply',
                             'Chces vytvorit',
                             'must be able to reach',
-                            'Nemuzes pouzit bandy'
+                            'Nemuzes pouzit bandy',
                         ]);
                         if (Orion.InJournal('Chces vytvorit|Nemuzes pouzit bandy|must be able to reach')) {
                             Orion.Wait(responseDelay);
@@ -243,8 +501,7 @@ namespace Scripts {
                         }
                         heal = true;
                         Scripts.Utils.printDamage(p.serial, previousHp);
-                    }
-                    else if (pet.MaxHits() > pet.Hits()) {
+                    } else if (pet.MaxHits() > pet.Hits()) {
                         Orion.PrintFast(p.serial, '0x0021', 0, `potrebuji heal`);
                     }
                 }
@@ -253,8 +510,8 @@ namespace Scripts {
                     Scripts.PetCommander.healPetsToggleStop('Musis jit bliz');
                     break;
                 }
-                if(!heal) {
-                    Scripts.Utils.playerPrint('hlidam pety')
+                if (!heal) {
+                    Scripts.Utils.playerPrint('hlidam pety');
                     Orion.Wait(1000);
                 }
                 toggle = Shared.GetVar('healPetsToggle');

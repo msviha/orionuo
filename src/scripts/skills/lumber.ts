@@ -1,6 +1,5 @@
 namespace Scripts {
     export class Lumber {
-
         static lumber() {
             let akce = false;
             Shared.AddArray('trees', []);
@@ -9,11 +8,13 @@ namespace Scripts {
                 Orion.ClearJournal(undefined, 'sys');
                 const savedTrees = Shared.GetArray('trees', []);
                 const newTreesAround = Scripts.Lumber.findTreesAround();
-                const all = savedTrees.concat(newTreesAround.filter((obj) => {
-                    return !savedTrees.some((obj2) => {
-                        return obj.x === obj2.x && obj.y === obj2.y;
-                    });
-                }));
+                const all = savedTrees.concat(
+                    newTreesAround.filter((obj) => {
+                        return !savedTrees.some((obj2) => {
+                            return obj.x === obj2.x && obj.y === obj2.y;
+                        });
+                    }),
+                );
                 Shared.AddArray('trees', all);
 
                 const x = Player.X();
@@ -33,7 +34,7 @@ namespace Scripts {
                 const coordinates = treesToHarv[nearestIndex];
                 harvestedTrees.push(coordinates);
                 Shared.AddArray('harvestedTrees', harvestedTrees);
-                Orion.WalkTo(coordinates.x, coordinates.y,coordinates.z, 1);
+                Orion.WalkTo(coordinates.x, coordinates.y, coordinates.z, 1);
 
                 let msg = 0;
                 if (akce) {
@@ -62,13 +63,12 @@ namespace Scripts {
                     Orion.ClearJournal(undefined, 'sys');
                     Orion.WaitTargetTile('tree', coordinates.x, coordinates.y, coordinates.z);
                     Orion.UseType('0x0F43');
-                    msg = Scripts.Utils.waitWhileSomethingInJournal([
-                        'You put the',
-                        'destroyed hatchet',
-                        'no logs left',
-                        'way to use that',
-                        'fail to produce'
-                    ], undefined, undefined, undefined);
+                    msg = Scripts.Utils.waitWhileSomethingInJournal(
+                        ['You put the', 'destroyed hatchet', 'no logs left', 'way to use that', 'fail to produce'],
+                        undefined,
+                        undefined,
+                        undefined,
+                    );
 
                     if (Orion.InJournal('attacking you')) {
                         let i = 0;
@@ -90,10 +90,9 @@ namespace Scripts {
                     Scripts.Utils.waitWhileSomethingInJournal(['akce skoncila'], undefined, undefined, undefined);
 
                     if (Orion.InJournal('found something special')) {
-                        const specialLogs = Orion.FindType('0x1BDD','!0x0000', 'ground', '', 3);
+                        const specialLogs = Orion.FindType('0x1BDD', '!0x0000', 'ground', '', 3);
                         Orion.MoveItem(specialLogs[0]);
-                    }
-                    else {
+                    } else {
                         const logs = Orion.FindType('0x1BDD', '0x0000');
                         logs.length && Orion.Drop(logs[0]);
                     }
@@ -103,19 +102,19 @@ namespace Scripts {
                         Scripts.Port.travelBook(PortBookOptionsEnum.kop);
                         return;
                     }
-                } while (msg !== 2 && msg !== 3)
+                } while (msg !== 2 && msg !== 3);
             }
         }
 
-        static findTreesAround():any[] {
+        static findTreesAround(): any[] {
             const dist = 9;
             const coordinates = [];
             const px = Player.X();
             const py = Player.Y();
             const rect = Orion.GetTilesInRect('tree', px - dist, py - dist, px + dist, py + dist);
-            for (var i = 0; i < rect.length; i++) {
-                var t = rect[i];
-                coordinates.push({x: t.X(), y: t.Y(), z: t.Z()})
+            for (let i = 0; i < rect.length; i++) {
+                const t = rect[i];
+                coordinates.push({ x: t.X(), y: t.Y(), z: t.Z() });
             }
 
             const trees = [...coordinates];
@@ -141,7 +140,7 @@ namespace Scripts {
         }
 
         // return index of nearest tree
-        static findNearestTree(trees:ICoordinates[]):number {
+        static findNearestTree(trees: ICoordinates[]): number {
             let index = -1;
             let dist = 999;
             const px = Player.X();

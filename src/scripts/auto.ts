@@ -3,13 +3,12 @@
  */
 namespace Scripts {
     export class Auto {
-
         /**
          * Pokud ma target 0 hp tak ho zkusi proslapnout (vypne a zapne IgnoreStaminaCheck)
          * @param enemy
          * @param run
          */
-        static lagProtection(enemy:GameObject, run = 1) {
+        static lagProtection(enemy: GameObject, run = 1) {
             if (enemy.Hits() > 0) {
                 return;
             }
@@ -20,7 +19,7 @@ namespace Scripts {
             const ey = enemy.Y();
 
             Scripts.Utils.log('lagProtection - monster hp < 1');
-            let staminaIgnore = Orion.OAOptionGet('IgnoreStaminaCheck');
+            const staminaIgnore = Orion.OAOptionGet('IgnoreStaminaCheck');
             if (staminaIgnore === '0') {
                 Orion.Print('zapinam docasne stamina ignore');
                 Orion.OAOptionSet('IgnoreStaminaCheck', '1');
@@ -44,25 +43,36 @@ namespace Scripts {
          * @param run
          * @param maxWalkingTime
          */
-        static getToDistanceIfNeeded(enemy:GameObject, distance = 1, run = 1, maxWalkingTime = 20000):boolean {
+        static getToDistanceIfNeeded(enemy: GameObject, distance = 1, run = 1, maxWalkingTime = 20000): boolean {
             const px = Player.X();
             const py = Player.Y();
             const ex = enemy.X();
             const ey = enemy.Y();
             let success = false;
             if (
-                px > ex && px - ex > 1 ||
-                px < ex && ex - px > 1 ||
-                py > ey && py - ey > 1 ||
-                py < ey && ey - py > 1
+                (px > ex && px - ex > 1) ||
+                (px < ex && ex - px > 1) ||
+                (py > ey && py - ey > 1) ||
+                (py < ey && ey - py > 1)
             ) {
-                Scripts.Utils.log(`going closer to enemy - Player{x: ${px}, y: ${py}, z: ${Player.Z()}} Enemy{x: ${ex}, y: ${ey}, z: ${enemy.Z()}}`);
+                Scripts.Utils.log(
+                    `going closer to enemy - Player{x: ${px}, y: ${py}, z: ${Player.Z()}} Enemy{x: ${ex}, y: ${ey}, z: ${enemy.Z()}}`,
+                );
                 success = Orion.WalkTo(enemy.X(), enemy.Y(), enemy.Z(), distance, 255, run, undefined, maxWalkingTime);
                 if (!success && Orion.InJournal('You are frozen')) {
                     Orion.ClearJournal('You are frozen');
                     Scripts.Spells.cast('Magic Arrow', TargetEnum.self);
                     Orion.Wait(2500);
-                    success = Orion.WalkTo(enemy.X(), enemy.Y(), enemy.Z(), distance, 255, run, undefined, maxWalkingTime);
+                    success = Orion.WalkTo(
+                        enemy.X(),
+                        enemy.Y(),
+                        enemy.Z(),
+                        distance,
+                        255,
+                        run,
+                        undefined,
+                        maxWalkingTime,
+                    );
                 }
             }
 
@@ -79,12 +89,12 @@ namespace Scripts {
          * @param lagProtection
          */
         static killObject(
-            serialToKill:string,
+            serialToKill: string,
             poisonTrain = false,
             waitUntilDead = true,
             kill = true,
             distance = 1,
-            lagProtection = true
+            lagProtection = true,
         ) {
             let enemy = Orion.FindObject(serialToKill);
             if (!enemy) {
@@ -101,7 +111,7 @@ namespace Scripts {
                 return;
             }
             Orion.AddObject('lasttarget', serialToKill);
-            var macro = Orion.CreateClientMacro('AttackLast');
+            const macro = Orion.CreateClientMacro('AttackLast');
             macro.Play();
 
             if (enemy && waitUntilDead) {

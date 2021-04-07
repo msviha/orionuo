@@ -6,11 +6,9 @@
 function parseParam(param) {
     if (param === 'true') {
         return true;
-    }
-    else if (param === 'false') {
+    } else if (param === 'false') {
         return false;
-    }
-    else if (parseInt(param).toString().length === param.length) {
+    } else if (parseInt(param).toString().length === param.length) {
         return parseInt(param);
     }
     return param;

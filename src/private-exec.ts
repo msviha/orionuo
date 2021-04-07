@@ -1,9 +1,9 @@
 /**
  * @internal
  */
-function displayDrinkInfo(potionName:PotionsEnum) {
-    let drinkTimer = 17500;
-    let gsTimer = 130000;
+function displayDrinkInfo(potionName: PotionsEnum) {
+    const drinkTimer = 17500;
+    const gsTimer = 130000;
     let time = 1000;
     Orion.Wait(time);
     while (Orion.Timer(TimersEnum.drink) >= 1000) {
@@ -31,7 +31,7 @@ function displayDrinkInfo(potionName:PotionsEnum) {
 /**
  * @internal
  */
-function scheduleClick(s:string) {
+function scheduleClick(s: string) {
     Orion.Wait(350);
     Orion.Click(s);
 }
@@ -39,13 +39,12 @@ function scheduleClick(s:string) {
 /**
  * @internal
  */
-function customStatusBarCallBack(s:string) {
+function customStatusBarCallBack(s: string) {
     const code = CustomGumpResponse.ReturnCode();
-    const serial:string = <string>(<any>(s.toString))(16);
+    const serial: string = <string>(<any>s.toString)(16);
     if (code === CustomStatusBarEnum.close) {
         Shared.AddVar(s, false);
-    }
-    else if (code === CustomStatusBarEnum.click) {
+    } else if (code === CustomStatusBarEnum.click) {
         if (Orion.HaveTarget()) {
             Orion.TargetObject(serial);
             Orion.CancelTarget();
@@ -57,8 +56,7 @@ function customStatusBarCallBack(s:string) {
         if (Player.WarMode()) {
             if (Orion.Timer(s) === -1 || Orion.Timer(s) > 300) {
                 Scripts.Utils.resetTimer(s);
-            }
-            else {
+            } else {
                 Orion.Terminate('scheduleClick');
                 Orion.Attack(s);
             }

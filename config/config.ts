@@ -1,18 +1,18 @@
-let config = Shared.AddVar('config', {
+const config = Shared.AddVar('config', {
     updateRate: 500,
     mobMaster: {
         sayColor: '0x00B3',
-        renameNameType: 'autoName'
+        renameNameType: 'autoName',
     },
     autoHandlers: {
         autoRename: {
             enabled: false,
-            renameMounts: false
+            renameMounts: false,
         },
-        printDamageDiffOnly: false
+        printDamageDiffOnly: false,
     },
     targeting: {
-        highlightEnemySilent: false
+        highlightEnemySilent: false,
     },
     drinkPotion: {
         timer: {
@@ -23,7 +23,7 @@ let config = Shared.AddVar('config', {
             yFromPosition: 0,
             textColor: '0x88B',
             font: 0,
-            backgroundColor: '0x88B'
+            backgroundColor: '0x88B',
         },
         gsTimer: {
             position: 'LeftTop',
@@ -33,7 +33,7 @@ let config = Shared.AddVar('config', {
             yFromPosition: 55,
             textColor: '0x88B',
             font: 0,
-            backgroundColor: '0x88B'
+            backgroundColor: '0x88B',
         },
         invisTimer: {
             position: 'LeftTop',
@@ -43,7 +43,7 @@ let config = Shared.AddVar('config', {
             yFromPosition: 110,
             textColor: '0x88B',
             font: 0,
-            backgroundColor: '0x88B'
+            backgroundColor: '0x88B',
         },
         invisLongTimer: {
             position: 'LeftTop',
@@ -53,8 +53,8 @@ let config = Shared.AddVar('config', {
             yFromPosition: 165,
             textColor: '0x88B',
             font: 0,
-            backgroundColor: '0x88B'
-        }
+            backgroundColor: '0x88B',
+        },
     },
     hiding: {
         timer: {
@@ -65,8 +65,8 @@ let config = Shared.AddVar('config', {
             yFromPosition: 100,
             textColor: '0x100',
             font: 0,
-            backgroundColor: 'red'
+            backgroundColor: 'red',
         },
-        showInnerMessages: true
-    }
+        showInnerMessages: true,
+    },
 });
