@@ -18,6 +18,37 @@ export default interface Collections {
     AddObject(objectName: string, objectValue?: string): void;
 
     /**
+     * Add Fake map object
+     */
+    AddFakeMapObject(serial: string, graphic: string, color: string, x: number, y: number, z: number): void;
+
+    AddFakeMapObject(
+        serial: string,
+        graphic: string,
+        color: string,
+        x: number,
+        y: number,
+        z: number,
+        map: string,
+    ): void;
+
+    AddFakeMapObject(
+        serial: string,
+        graphic: string,
+        color: string,
+        x: number,
+        y: number,
+        z: number,
+        timeToLive: number,
+        map?: string,
+    ): void;
+
+    /**
+     * Remove Fake map object
+     */
+    RemoveFakeMapObject(serial: string): void;
+
+    /**
      * Delete the previous alias of the object, call the scope to specify a new one manually and wait for the selection (or timeout).
      * Result: integer, 0 - cancel / timeout; 1 - selection of a game object; 2 - selection of a static object; 3 - land selection.
      */
