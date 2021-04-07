@@ -34,6 +34,13 @@ declare interface FileObject {
     ReadLine(): string;
 
     /**
+     * String file.ReadAll();
+     * Read the file contents.
+     * Result: string, reading result.
+     */
+    ReadAll(): string;
+
+    /**
      * String fileObject.Read();
      * Read the word (up to blank-space " ").
      * Result: The result of reading the data.
