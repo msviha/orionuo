@@ -69,7 +69,7 @@ namespace Scripts {
          * @param cut boolean - rezanie mrtvol? (default = true)
          */
         static corpses(cut = true) {
-            Orion.ClearJournal();
+            Orion.ClearJournal('You put the');
             const snapshot = this.getBagSnapshot();
             this.lootCorpsesAround(cut);
             Orion.Wait(350);
@@ -131,7 +131,7 @@ namespace Scripts {
                 if (weapon) {
                     const LHand = Orion.ObjAtLayer(1);
                     const RHand = Orion.ObjAtLayer(2);
-                    
+
                     Orion.UseObject('fightWeapon');
                     Orion.WaitForTarget(1000) && Orion.CancelTarget();
 

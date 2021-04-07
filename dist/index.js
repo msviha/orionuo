@@ -3663,7 +3663,7 @@ var Scripts;
         };
         Loot.corpses = function (cut) {
             if (cut === void 0) { cut = true; }
-            Orion.ClearJournal();
+            Orion.ClearJournal('You put the');
             var snapshot = this.getBagSnapshot();
             this.lootCorpsesAround(cut);
             Orion.Wait(350);
@@ -3705,8 +3705,11 @@ var Scripts;
                 Orion.WaitForTarget(1000);
                 Orion.TargetObject(corpseId);
                 if (weapon) {
+                    var LHand = Orion.ObjAtLayer(1);
+                    var RHand = Orion.ObjAtLayer(2);
                     Orion.UseObject('fightWeapon');
                     Orion.WaitForTarget(1000) && Orion.CancelTarget();
+                    Scripts.Dress.equip([LHand.Serial(), RHand.Serial()]);
                 }
                 Orion.Wait(250);
             }
