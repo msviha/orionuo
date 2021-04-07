@@ -100,6 +100,8 @@ namespace Scripts {
          */
         private static lootCorpsesAround(cut?: boolean, weapon?: boolean) {
             let listOfCorpses = Orion.FindType('0x2006', '-1', 'ground', 'fast', 2, 'red');
+            const LHand = Orion.ObjAtLayer(1);
+            const RHand = Orion.ObjAtLayer(2);
             while (listOfCorpses.length) {
                 for (const id of listOfCorpses) {
                     Scripts.Loot.lootCorpseId(id, cut, weapon);
@@ -107,6 +109,9 @@ namespace Scripts {
                     Orion.Wait(100);
                 }
                 listOfCorpses = Orion.FindType('0x2006', '-1', 'ground', 'fast', 2, 'red');
+            }
+            if (weapon) {
+                Scripts.Dress.equip([LHand.Serial(), RHand.Serial()]);
             }
 
             const itemsOnGround = Orion.FindList('lootItems', 'ground', 'fast', 4);
@@ -125,17 +130,13 @@ namespace Scripts {
 
             const hasLootBag = Orion.Count('0x0E76', '0x049A', corpseId) > 0;
             if (hasLootBag && cut) {
-                Orion.UseObject('cutWeapon');
-                Orion.WaitForTarget(1000);
-                Orion.TargetObject(corpseId);
-                if (weapon) {
-                    const LHand = Orion.ObjAtLayer(1);
-                    const RHand = Orion.ObjAtLayer(2);
-
+                if (Orion.FindObject('cutWeapon')) {
+                    Orion.UseObject('cutWeapon');
+                    Orion.WaitForTarget(1000);
+                    Orion.TargetObject(corpseId);
+                } else if (weapon) {
                     Orion.UseObject('fightWeapon');
                     Orion.WaitForTarget(1000) && Orion.CancelTarget();
-
-                    Scripts.Dress.equip([LHand.Serial(), RHand.Serial()]);
                 }
                 Orion.Wait(250);
             }

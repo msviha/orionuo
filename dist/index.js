@@ -3685,6 +3685,8 @@ var Scripts;
         };
         Loot.lootCorpsesAround = function (cut, weapon) {
             var listOfCorpses = Orion.FindType('0x2006', '-1', 'ground', 'fast', 2, 'red');
+            var LHand = Orion.ObjAtLayer(1);
+            var RHand = Orion.ObjAtLayer(2);
             while (listOfCorpses.length) {
                 for (var _i = 0, listOfCorpses_1 = listOfCorpses; _i < listOfCorpses_1.length; _i++) {
                     var id = listOfCorpses_1[_i];
@@ -3694,6 +3696,9 @@ var Scripts;
                 }
                 listOfCorpses = Orion.FindType('0x2006', '-1', 'ground', 'fast', 2, 'red');
             }
+            if (weapon) {
+                Scripts.Dress.equip([LHand.Serial(), RHand.Serial()]);
+            }
             var itemsOnGround = Orion.FindList('lootItems', 'ground', 'fast', 4);
             this.grabItems(itemsOnGround);
         };
@@ -3701,15 +3706,14 @@ var Scripts;
             Orion.OpenContainer(corpseId, 5000, "Container id " + corpseId + " not found");
             var hasLootBag = Orion.Count('0x0E76', '0x049A', corpseId) > 0;
             if (hasLootBag && cut) {
-                Orion.UseObject('cutWeapon');
-                Orion.WaitForTarget(1000);
-                Orion.TargetObject(corpseId);
-                if (weapon) {
-                    var LHand = Orion.ObjAtLayer(1);
-                    var RHand = Orion.ObjAtLayer(2);
+                if (Orion.FindObject('cutWeapon')) {
+                    Orion.UseObject('cutWeapon');
+                    Orion.WaitForTarget(1000);
+                    Orion.TargetObject(corpseId);
+                }
+                else if (weapon) {
                     Orion.UseObject('fightWeapon');
                     Orion.WaitForTarget(1000) && Orion.CancelTarget();
-                    Scripts.Dress.equip([LHand.Serial(), RHand.Serial()]);
                 }
                 Orion.Wait(250);
             }
