@@ -1,6 +1,6 @@
 namespace Scripts {
     export class Inscription {
-        static inscription(circle:number, spell:string, quantity = 0) {
+        static inscription(circle: number, spell: string, quantity = 0) {
             const menuName = 'Spell Circles';
             const spellCircle = `Spell Circle ${circle}`;
             const blank = gameObject.scrolls.blank;
@@ -20,15 +20,15 @@ namespace Scripts {
 
             const finishedScroll = {
                 graphic: Orion.FindObject('finishedScroll').Graphic(),
-                color: Orion.FindObject('finishedScroll').Color()
-            }
+                color: Orion.FindObject('finishedScroll').Color(),
+            };
 
             let finishedCount = 0;
             let totalTries = 0;
             while (quantity === 0 || finishedCount !== quantity) {
                 Scripts.Utils.worldSaveCheckWait();
 
-                Scripts.Utils.refill(blank, 'blankScrollsContainer', 10, 'backpack', true)
+                Scripts.Utils.refill(blank, 'blankScrollsContainer', 10, 'backpack', true);
 
                 Orion.ClearJournal();
                 Scripts.Utils.selectMenu(menuName, [spellCircle, spell]);
@@ -45,7 +45,7 @@ namespace Scripts {
                 }
 
                 totalTries++;
-                Scripts.Utils.log(`napsano ${finishedCount} / ${totalTries}`)
+                Scripts.Utils.log(`napsano ${finishedCount} / ${totalTries}`);
 
                 if (Player.Mana() + 70 < Player.Int()) {
                     const isDrinkTimerSet = Orion.Timer(TimersEnum.drink) !== -1;

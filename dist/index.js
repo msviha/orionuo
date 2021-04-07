@@ -419,7 +419,7 @@ var gameObject = {
                             resources: [{ item: 'gameObject.resources.logs', count: 1 }],
                             crafting: [
                                 { item: 'gameObject.crafting.carpentry.containersAndParts.barrelLid', count: 2 },
-                                { item: 'gameObject.crafting.carpentry.containersAndParts.barrelStaves', count: 2 }
+                                { item: 'gameObject.crafting.carpentry.containersAndParts.barrelStaves', count: 2 },
                             ]
                         },
                         menu: {
@@ -434,10 +434,15 @@ var gameObject = {
                     make: {
                         tool: 'gameObject.tools.saw',
                         refill: {
-                            resources: [{ item: 'gameObject.resources.logs', count: 1 },
+                            resources: [
+                                { item: 'gameObject.resources.logs', count: 1 },
                                 { item: 'gameObject.resources.ingots.iron', count: 2 },
-                                { item: 'gameObject.resources.pitcherOfWater', count: 1 }],
-                            crafting: [{ item: 'gameObject.crafting.carpentry.miscellaneous.boards', count: 2 }, { item: 'gameObject.crafting.tinkering.parts.nails', count: 2 }]
+                                { item: 'gameObject.resources.pitcherOfWater', count: 1 },
+                            ],
+                            crafting: [
+                                { item: 'gameObject.crafting.carpentry.miscellaneous.boards', count: 2 },
+                                { item: 'gameObject.crafting.tinkering.parts.nails', count: 2 },
+                            ]
                         },
                         menu: {
                             name: 'Carpentry',
@@ -454,7 +459,7 @@ var gameObject = {
                             resources: [{ item: 'gameObject.resources.logs', count: 4 }],
                             crafting: [
                                 { item: 'gameObject.crafting.tinkering.parts.hinge', count: 2 },
-                                { item: 'gameObject.crafting.tinkering.parts.nails', count: 1 }
+                                { item: 'gameObject.crafting.tinkering.parts.nails', count: 1 },
                             ]
                         },
                         menu: {
@@ -473,12 +478,12 @@ var gameObject = {
                         refill: {
                             resources: [
                                 { item: 'gameObject.resources.logs', count: 30 },
-                                { item: 'gameObject.resources.foldedCloth', count: 20 }
+                                { item: 'gameObject.resources.foldedCloth', count: 20 },
                             ],
                             crafting: [
                                 { item: 'gameObject.crafting.tinkering.parts.hinge', count: 20 },
                                 { item: 'gameObject.crafting.tinkering.parts.nails', count: 35 },
-                                { item: 'gameObject.crafting.carpentry.miscellaneous.boards', count: 250 }
+                                { item: 'gameObject.crafting.carpentry.miscellaneous.boards', count: 250 },
                             ]
                         },
                         menu: {
@@ -513,7 +518,7 @@ var gameObject = {
                         refill: {
                             resources: [
                                 { item: 'gameObject.resources.ingots.copper', count: 1 },
-                                { item: 'gameObject.resources.ingots.iron', count: 1 }
+                                { item: 'gameObject.resources.ingots.iron', count: 1 },
                             ]
                         },
                         menu: {
@@ -528,9 +533,7 @@ var gameObject = {
                     make: {
                         tool: 'gameObject.tools.tinkerTools',
                         refill: {
-                            resources: [
-                                { item: 'gameObject.resources.ingots.iron', count: 1 }
-                            ]
+                            resources: [{ item: 'gameObject.resources.ingots.iron', count: 1 }]
                         },
                         menu: {
                             name: 'Tinkering',
@@ -574,9 +577,7 @@ var gameObject = {
                     make: {
                         tool: 'gameObject.tools.tinkerTools',
                         refill: {
-                            resources: [
-                                { item: 'gameObject.resources.ingots.iron', count: 2 }
-                            ]
+                            resources: [{ item: 'gameObject.resources.ingots.iron', count: 2 }]
                         },
                         menu: {
                             name: 'Tinkering',
@@ -592,11 +593,9 @@ var gameObject = {
                         refill: {
                             resources: [
                                 { item: 'gameObject.resources.ingots.iron', count: 1 },
-                                { item: 'gameObject.resources.thread', count: 4 }
+                                { item: 'gameObject.resources.thread', count: 4 },
                             ],
-                            crafting: [
-                                { item: 'gameObject.crafting.tinkering.wires.ironString', count: 2 }
-                            ]
+                            crafting: [{ item: 'gameObject.crafting.tinkering.wires.ironString', count: 2 }]
                         },
                         menu: {
                             name: 'Tinkering',
@@ -610,12 +609,8 @@ var gameObject = {
                     make: {
                         tool: 'gameObject.tools.tinkerTools',
                         refill: {
-                            resources: [
-                                { item: 'gameObject.resources.ingots.iron', count: 1 }
-                            ],
-                            crafting: [
-                                { item: 'gameObject.crafting.tinkering.wires.iron', count: 1 }
-                            ]
+                            resources: [{ item: 'gameObject.resources.ingots.iron', count: 1 }],
+                            crafting: [{ item: 'gameObject.crafting.tinkering.wires.iron', count: 1 }]
                         },
                         menu: {
                             name: 'Tinkering',
@@ -631,7 +626,7 @@ var gameObject = {
                         refill: {
                             resources: [
                                 { item: 'gameObject.resources.ingots.copper', count: 2 },
-                                { item: 'gameObject.resources.ingots.iron', count: 2 }
+                                { item: 'gameObject.resources.ingots.iron', count: 2 },
                             ]
                         },
                         menu: {
@@ -648,7 +643,7 @@ var gameObject = {
                         refill: {
                             resources: [
                                 { item: 'gameObject.resources.ingots.rose', count: 2 },
-                                { item: 'gameObject.resources.ingots.iron', count: 2 }
+                                { item: 'gameObject.resources.ingots.iron', count: 2 },
                             ]
                         },
                         menu: {
@@ -665,7 +660,7 @@ var gameObject = {
                         refill: {
                             resources: [
                                 { item: 'gameObject.resources.ingots.silver', count: 2 },
-                                { item: 'gameObject.resources.ingots.iron', count: 2 }
+                                { item: 'gameObject.resources.ingots.iron', count: 2 },
                             ]
                         },
                         menu: {
@@ -682,7 +677,7 @@ var gameObject = {
                         refill: {
                             resources: [
                                 { item: 'gameObject.resources.ingots.gold', count: 2 },
-                                { item: 'gameObject.resources.ingots.iron', count: 2 }
+                                { item: 'gameObject.resources.ingots.iron', count: 2 },
                             ]
                         },
                         menu: {
@@ -699,7 +694,7 @@ var gameObject = {
                         refill: {
                             resources: [
                                 { item: 'gameObject.resources.ingots.shadow', count: 2 },
-                                { item: 'gameObject.resources.ingots.iron', count: 2 }
+                                { item: 'gameObject.resources.ingots.iron', count: 2 },
                             ]
                         },
                         menu: {
@@ -716,7 +711,7 @@ var gameObject = {
                         refill: {
                             resources: [
                                 { item: 'gameObject.resources.ingots.blood', count: 2 },
-                                { item: 'gameObject.resources.ingots.iron', count: 2 }
+                                { item: 'gameObject.resources.ingots.iron', count: 2 },
                             ]
                         },
                         menu: {
@@ -733,7 +728,7 @@ var gameObject = {
                         refill: {
                             resources: [
                                 { item: 'gameObject.resources.ingots.black', count: 2 },
-                                { item: 'gameObject.resources.ingots.iron', count: 2 }
+                                { item: 'gameObject.resources.ingots.iron', count: 2 },
                             ]
                         },
                         menu: {
@@ -750,7 +745,7 @@ var gameObject = {
                         refill: {
                             resources: [
                                 { item: 'gameObject.resources.ingots.mytheril', count: 2 },
-                                { item: 'gameObject.resources.ingots.iron', count: 2 }
+                                { item: 'gameObject.resources.ingots.iron', count: 2 },
                             ]
                         },
                         menu: {
@@ -769,7 +764,7 @@ var gameObject = {
                         refill: {
                             resources: [
                                 { item: 'gameObject.resources.logs', count: 2 },
-                                { item: 'gameObject.resources.ore.anyOre', count: 5 }
+                                { item: 'gameObject.resources.ore.anyOre', count: 5 },
                             ]
                         },
                         menu: {
@@ -788,10 +783,10 @@ var gameObject = {
                                 { item: 'gameObject.resources.logs', count: 2 },
                                 { item: 'gameObject.resources.ore.iron', count: 2 },
                                 { item: 'gameObject.resources.ingots.bronze', count: 1 },
-                                { item: 'gameObject.resources.ingots.iron', count: 1 }
+                                { item: 'gameObject.resources.ingots.iron', count: 1 },
                             ],
                             crafting: [
-                                { item: 'gameObject.crafting.carpentry.containersAndParts.formaNaLahve', count: 1 }
+                                { item: 'gameObject.crafting.carpentry.containersAndParts.formaNaLahve', count: 1 },
                             ]
                         },
                         menu: {
@@ -808,7 +803,7 @@ var gameObject = {
                         refill: {
                             resources: [
                                 { item: 'gameObject.resources.logs', count: 2 },
-                                { item: 'gameObject.resources.ingots.shadow', count: 20 }
+                                { item: 'gameObject.resources.ingots.shadow', count: 20 },
                             ]
                         },
                         menu: {
@@ -826,7 +821,7 @@ var gameObject = {
                             resources: [
                                 { item: 'gameObject.resources.logs', count: 2 },
                                 { item: 'gameObject.resources.ingots.gold', count: 5 },
-                                { item: 'gameObject.resources.ingots.iron', count: 15 }
+                                { item: 'gameObject.resources.ingots.iron', count: 15 },
                             ]
                         },
                         menu: {
@@ -843,7 +838,7 @@ var gameObject = {
                         refill: {
                             resources: [
                                 { item: 'gameObject.resources.logs', count: 5 },
-                                { item: 'gameObject.resources.ingots.gold', count: 5 }
+                                { item: 'gameObject.resources.ingots.gold', count: 5 },
                             ]
                         },
                         menu: {
@@ -860,7 +855,7 @@ var gameObject = {
                         refill: {
                             resources: [
                                 { item: 'gameObject.resources.logs', count: 5 },
-                                { item: 'gameObject.resources.ingots.gold', count: 5 }
+                                { item: 'gameObject.resources.ingots.gold', count: 5 },
                             ]
                         },
                         menu: {
@@ -877,11 +872,9 @@ var gameObject = {
                         refill: {
                             resources: [
                                 { item: 'gameObject.resources.logs', count: 5 },
-                                { item: 'gameObject.resources.furs', count: 5 }
+                                { item: 'gameObject.resources.furs', count: 5 },
                             ],
-                            crafting: [
-                                { item: 'gameObject.crafting.tinkering.containers.goldenBoxW', count: 1 }
-                            ]
+                            crafting: [{ item: 'gameObject.crafting.tinkering.containers.goldenBoxW', count: 1 }]
                         },
                         menu: {
                             name: 'Tinkering',
@@ -900,7 +893,7 @@ var gameObject = {
                                 { item: 'gameObject.resources.ingots.gold', count: 5 },
                                 { item: 'gameObject.resources.ingots.iron', count: 15 },
                                 { item: 'gameObject.resources.stones.diamonds', count: 2 },
-                                { item: 'gameObject.resources.stones.tourmalines', count: 2 }
+                                { item: 'gameObject.resources.stones.tourmalines', count: 2 },
                             ]
                         },
                         menu: {
@@ -920,7 +913,7 @@ var gameObject = {
                                 { item: 'gameObject.resources.ingots.gold', count: 5 },
                                 { item: 'gameObject.resources.ingots.iron', count: 15 },
                                 { item: 'gameObject.resources.stones.diamonds', count: 2 },
-                                { item: 'gameObject.resources.stones.tourmalines', count: 2 }
+                                { item: 'gameObject.resources.stones.tourmalines', count: 2 },
                             ]
                         },
                         menu: {
@@ -940,7 +933,7 @@ var gameObject = {
                                 { item: 'gameObject.resources.ingots.gold', count: 5 },
                                 { item: 'gameObject.resources.ingots.iron', count: 15 },
                                 { item: 'gameObject.resources.stones.diamonds', count: 2 },
-                                { item: 'gameObject.resources.stones.rubies', count: 4 }
+                                { item: 'gameObject.resources.stones.rubies', count: 4 },
                             ]
                         },
                         menu: {
@@ -960,7 +953,7 @@ var gameObject = {
                                 { item: 'gameObject.resources.ingots.gold', count: 5 },
                                 { item: 'gameObject.resources.ingots.iron', count: 15 },
                                 { item: 'gameObject.resources.stones.diamonds', count: 2 },
-                                { item: 'gameObject.resources.stones.rubies', count: 4 }
+                                { item: 'gameObject.resources.stones.rubies', count: 4 },
                             ]
                         },
                         menu: {
@@ -982,7 +975,7 @@ var gameObject = {
                                 { item: 'gameObject.resources.ingots.iron', count: 15 },
                                 { item: 'gameObject.resources.ingots.mytheril', count: 1 },
                                 { item: 'gameObject.resources.stones.diamonds', count: 1 },
-                                { item: 'gameObject.resources.stones.citrines', count: 2 }
+                                { item: 'gameObject.resources.stones.citrines', count: 2 },
                             ]
                         },
                         menu: {
@@ -999,11 +992,9 @@ var gameObject = {
                         refill: {
                             resources: [
                                 { item: 'gameObject.resources.logs', count: 5 },
-                                { item: 'gameObject.resources.furs', count: 5 }
+                                { item: 'gameObject.resources.furs', count: 5 },
                             ],
-                            crafting: [
-                                { item: 'gameObject.crafting.tinkering.containers.animalBox', count: 1 }
-                            ]
+                            crafting: [{ item: 'gameObject.crafting.tinkering.containers.animalBox', count: 1 }]
                         },
                         menu: {
                             name: 'Tinkering',
@@ -1023,12 +1014,12 @@ var gameObject = {
                                 { item: 'gameObject.resources.ingots.mytheril', count: 5 },
                                 { item: 'gameObject.resources.stones.citrines', count: 5 },
                                 { item: 'gameObject.resources.stones.diamonds', count: 5 },
-                                { item: 'gameObject.resources.stones.sapphires', count: 5 }
+                                { item: 'gameObject.resources.stones.sapphires', count: 5 },
                             ]
                         },
                         menu: {
                             name: 'Tinkering',
-                            selections: ['Tools', 'Apprentice\'s Poisoning Kit (trenink)']
+                            selections: ['Tools', "Apprentice's Poisoning Kit (trenink)"]
                         }
                     }
                 },
@@ -1040,7 +1031,7 @@ var gameObject = {
                         refill: {
                             resources: [
                                 { item: 'gameObject.resources.ingots.iron', count: 1 },
-                                { item: 'gameObject.resources.ingots.bronze', count: 50 }
+                                { item: 'gameObject.resources.ingots.bronze', count: 50 },
                             ]
                         },
                         menu: {
@@ -1061,7 +1052,7 @@ var gameObject = {
                             resources: [
                                 { item: 'gameObject.resources.ingots.copper', count: 5 },
                                 { item: 'gameObject.resources.ingots.gold', count: 5 },
-                                { item: 'gameObject.resources.ingots.silver', count: 5 }
+                                { item: 'gameObject.resources.ingots.silver', count: 5 },
                             ]
                         },
                         menu: {
@@ -1082,11 +1073,11 @@ var gameObject = {
                                 { item: 'gameObject.resources.ingots.gold', count: 1 },
                                 { item: 'gameObject.resources.ingots.iron', count: 1 },
                                 { item: 'gameObject.resources.stones.pieceOfAmber', count: 1 },
-                                { item: 'gameObject.resources.stones.starSapphire', count: 3 }
+                                { item: 'gameObject.resources.stones.starSapphire', count: 3 },
                             ],
                             crafting: [
                                 { item: 'gameObject.crafting.tinkering.parts.springs', count: 2 },
-                                { item: 'gameObject.crafting.tinkering.wires.copper', count: 5 }
+                                { item: 'gameObject.crafting.tinkering.wires.copper', count: 5 },
                             ]
                         },
                         menu: {
@@ -1103,7 +1094,7 @@ var gameObject = {
                         refill: {
                             resources: [
                                 { item: 'gameObject.resources.ingots.gold', count: 2 },
-                                { item: 'gameObject.resources.stones.amethyst', count: 2 }
+                                { item: 'gameObject.resources.stones.amethyst', count: 2 },
                             ]
                         },
                         menu: {
@@ -1120,7 +1111,7 @@ var gameObject = {
                         refill: {
                             resources: [
                                 { item: 'gameObject.resources.ingots.gold', count: 3 },
-                                { item: 'gameObject.resources.stones.citrines', count: 3 }
+                                { item: 'gameObject.resources.stones.citrines', count: 3 },
                             ]
                         },
                         menu: {
@@ -1137,7 +1128,7 @@ var gameObject = {
                         refill: {
                             resources: [
                                 { item: 'gameObject.resources.ingots.gold', count: 5 },
-                                { item: 'gameObject.resources.stones.diamonds', count: 5 }
+                                { item: 'gameObject.resources.stones.diamonds', count: 5 },
                             ]
                         },
                         menu: {
@@ -1196,11 +1187,9 @@ var gameObject = {
                             resources: [
                                 { item: 'gameObject.resources.ingots.iron', count: 10 },
                                 { item: 'gameObject.resources.ingots.rose', count: 6 },
-                                { item: 'gameObject.resources.ingots.blood', count: 1 }
+                                { item: 'gameObject.resources.ingots.blood', count: 1 },
                             ],
-                            crafting: [
-                                { item: 'gameObject.crafting.tinkering.wires.iron', count: 5 }
-                            ]
+                            crafting: [{ item: 'gameObject.crafting.tinkering.wires.iron', count: 5 }]
                         },
                         menu: {
                             name: 'Blacksmithing',
@@ -1217,7 +1206,7 @@ var gameObject = {
                         refill: {
                             resources: [
                                 { item: 'gameObject.resources.ingots.iron', count: 4 },
-                                { item: 'gameObject.resources.logs', count: 1 }
+                                { item: 'gameObject.resources.logs', count: 1 },
                             ]
                         },
                         menu: {
@@ -1235,7 +1224,7 @@ var gameObject = {
                         refill: {
                             resources: [
                                 { item: 'gameObject.resources.ingots.iron', count: 4 },
-                                { item: 'gameObject.resources.logs', count: 1 }
+                                { item: 'gameObject.resources.logs', count: 1 },
                             ]
                         },
                         menu: {
@@ -1253,10 +1242,11 @@ var gameObject = {
                         refill: {
                             resources: [
                                 { item: 'gameObject.resources.ingots.iron', count: 5 },
-                                { item: 'gameObject.resources.fairyDust', count: 1 }
+                                { item: 'gameObject.resources.fairyDust', count: 1 },
                             ],
-                            crafting: [{ item: 'gameObject.crafting.tinkering.wires.rose', count: 15 },
-                                { item: 'gameObject.crafting.tinkering.wires.blood', count: 15 }
+                            crafting: [
+                                { item: 'gameObject.crafting.tinkering.wires.rose', count: 15 },
+                                { item: 'gameObject.crafting.tinkering.wires.blood', count: 15 },
                             ]
                         },
                         menu: {
@@ -1274,10 +1264,11 @@ var gameObject = {
                         refill: {
                             resources: [
                                 { item: 'gameObject.resources.ingots.iron', count: 5 },
-                                { item: 'gameObject.resources.fairyDust', count: 1 }
+                                { item: 'gameObject.resources.fairyDust', count: 1 },
                             ],
-                            crafting: [{ item: 'gameObject.crafting.tinkering.wires.shadow', count: 15 },
-                                { item: 'gameObject.crafting.tinkering.wires.black', count: 15 }
+                            crafting: [
+                                { item: 'gameObject.crafting.tinkering.wires.shadow', count: 15 },
+                                { item: 'gameObject.crafting.tinkering.wires.black', count: 15 },
                             ]
                         },
                         menu: {
@@ -1296,10 +1287,11 @@ var gameObject = {
                             resources: [
                                 { item: 'gameObject.resources.ingots.iron', count: 5 },
                                 { item: 'gameObject.resources.fairyDust', count: 1 },
-                                { item: 'gameObject.resources.soulShard', count: 1 }
+                                { item: 'gameObject.resources.soulShard', count: 1 },
                             ],
-                            crafting: [{ item: 'gameObject.crafting.tinkering.wires.gold', count: 15 },
-                                { item: 'gameObject.crafting.tinkering.wires.mytheril', count: 15 }
+                            crafting: [
+                                { item: 'gameObject.crafting.tinkering.wires.gold', count: 15 },
+                                { item: 'gameObject.crafting.tinkering.wires.mytheril', count: 15 },
                             ]
                         },
                         menu: {
@@ -1322,7 +1314,11 @@ var gameObject = {
                             },
                             menu: {
                                 name: 'Blacksmithing',
-                                selections: ['Iron Weapons', { item: 'Swords & Blades', menu: 'Iron Swords & Blades' }, 'Dagger']
+                                selections: [
+                                    'Iron Weapons',
+                                    { item: 'Swords & Blades', menu: 'Iron Swords & Blades' },
+                                    'Dagger',
+                                ]
                             }
                         }
                     }
@@ -1519,7 +1515,7 @@ var gameObject = {
                 graphic: '0x1843',
                 color: '0x0B77'
             },
-            gmMortarSelection: 'Invisibility (408 Wyrm\'s Hearts)',
+            gmMortarSelection: "Invisibility (408 Wyrm's Hearts)",
             alchemySelection: 'Invisibility'
         },
         lp: {
@@ -2382,7 +2378,7 @@ function scheduleClick(s) {
 }
 function customStatusBarCallBack(s) {
     var code = CustomGumpResponse.ReturnCode();
-    var serial = (s.toString)(16);
+    var serial = s.toString(16);
     if (code === CustomStatusBarEnum.close) {
         Shared.AddVar(s, false);
     }
@@ -2461,7 +2457,8 @@ function Autostart() {
             Orion.Click(Player.Serial());
             var time = Orion.Now() + 20000;
             while (!(((_a = Orion.InJournal(Player.Name(), 'my', Player.Serial())) === null || _a === void 0 ? void 0 : _a.Text().indexOf(Player.Name())) > -1) &&
-                Orion.Now() < time && !Player.Dead()) {
+                Orion.Now() < time &&
+                !Player.Dead()) {
                 Orion.Wait(50);
             }
             Scripts.Utils.playerPrint("World save DONE", ColorEnum.green);
@@ -2478,10 +2475,15 @@ function Autostart() {
                     if (char.Serial() === Player.Serial()) {
                         return "continue";
                     }
-                    if (doneList.some(function (o) { o.serial === char.Serial() && o.graphic === char.Graphic(); })) {
+                    if (doneList.some(function (o) {
+                        o.serial === char.Serial() && o.graphic === char.Graphic();
+                    })) {
                         return "continue";
                     }
-                    if (!renameMounts && '0x00DF|0x00DC|0x00DA|0x00E2|0x00CC|0x00E4|0x00D2|0x00DB|0x00C8'.split('|').indexOf(char.Graphic()) > -1) {
+                    if (!renameMounts &&
+                        '0x00DF|0x00DC|0x00DA|0x00E2|0x00CC|0x00E4|0x00D2|0x00DB|0x00C8'
+                            .split('|')
+                            .indexOf(char.Graphic()) > -1) {
                         return "continue";
                     }
                     if (Scripts.MobMaster.rename(char)) {
@@ -2883,10 +2885,10 @@ var Scripts;
             var ex = enemy.X();
             var ey = enemy.Y();
             var success = false;
-            if (px > ex && px - ex > 1 ||
-                px < ex && ex - px > 1 ||
-                py > ey && py - ey > 1 ||
-                py < ey && ey - py > 1) {
+            if ((px > ex && px - ex > 1) ||
+                (px < ex && ex - px > 1) ||
+                (py > ey && py - ey > 1) ||
+                (py < ey && ey - py > 1)) {
                 Scripts.Utils.log("going closer to enemy - Player{x: " + px + ", y: " + py + ", z: " + Player.Z() + "} Enemy{x: " + ex + ", y: " + ey + ", z: " + enemy.Z() + "}");
                 success = Orion.WalkTo(enemy.X(), enemy.Y(), enemy.Z(), distance, 255, run, undefined, maxWalkingTime);
                 if (!success && Orion.InJournal('You are frozen')) {
@@ -3020,7 +3022,7 @@ var Scripts;
                 }
             }
             var resultList = new Array();
-            var _loop_2 = function () {
+            var _loop_2 = function (i) {
                 var item = list[i];
                 if (!resultList.some(function (o) {
                     return o.graphic === item.graphic && o.color === item.color;
@@ -3029,7 +3031,7 @@ var Scripts;
                 }
             };
             for (var i = 0; i < list.length; i++) {
-                _loop_2();
+                _loop_2(i);
             }
             return resultList;
         };
@@ -3141,7 +3143,7 @@ var Scripts;
             if (onlyType === void 0) { onlyType = true; }
             Scripts.Utils.createGameObjectSelections([
                 { ask: 'Co chces prehazovat ?', addObject: 'massMoveItem' },
-                { ask: 'Kam to chces nahazet (container) ?', addObject: 'massMoveTargetContainer' }
+                { ask: 'Kam to chces nahazet (container) ?', addObject: 'massMoveTargetContainer' },
             ]);
             var itemObject = Orion.FindObject('massMoveItem');
             var stackable = Scripts.Utils.isItemStackable(itemObject.Serial());
@@ -3210,7 +3212,7 @@ var Scripts;
             var hidden = !!parseInt(Orion.GetGlobal('hideAll'));
             var timer = Orion.Timer('resendTime');
             if (!hidden) {
-                var mobiles = Orion.FindType('any', "any", "ground", 'mobile', 15);
+                var mobiles = Orion.FindType('any', 'any', 'ground', 'mobile', 15);
                 for (var _i = 0, mobiles_1 = mobiles; _i < mobiles_1.length; _i++) {
                     var m = mobiles_1[_i];
                     Orion.Hide(m);
@@ -3305,9 +3307,7 @@ var Scripts;
             return Orion.WaitForContainerGump(500) && !!Orion.InJournal('stones in your bank box');
         };
         Common.openContainer = function () {
-            Scripts.Utils.createGameObjectSelections([
-                { ask: 'Target container to open', addObject: 'openContainer' }
-            ]);
+            Scripts.Utils.createGameObjectSelections([{ ask: 'Target container to open', addObject: 'openContainer' }]);
             var container = Orion.FindObject('openContainer');
             if (!container) {
                 return;
@@ -3516,7 +3516,7 @@ var Scripts;
                 var x = ringObject.X();
                 var y = ringObject.Y();
                 Orion.UseObject(ring);
-                if (Orion.InJournal("It too soon to use it again")) {
+                if (Orion.InJournal('It too soon to use it again')) {
                     Orion.MoveItem(ring, 0, 'backpack', x, y);
                     break;
                 }
@@ -3615,7 +3615,7 @@ var Scripts;
                     target.y = SelectedTile.Y();
                     target.z = SelectedTile.Z();
                 }
-                Orion.MoveItem(findSerial, 1, "ground", target.x, target.y, target.z);
+                Orion.MoveItem(findSerial, 1, 'ground', target.x, target.y, target.z);
                 Orion.Wait(responseDelay);
             }
             Orion.WarMode(true);
@@ -3663,7 +3663,7 @@ var Scripts;
             if (itemsInCorpse.length) {
                 for (var _i = 0, itemsInCorpse_1 = itemsInCorpse; _i < itemsInCorpse_1.length; _i++) {
                     var itemId = itemsInCorpse_1[_i];
-                    Orion.MoveItem(itemId, 0, "myLootBag");
+                    Orion.MoveItem(itemId, 0, 'myLootBag');
                     Orion.Wait(serverLagActionsLeft ? 50 : 350);
                     serverLagActionsLeft--;
                 }
@@ -3677,7 +3677,7 @@ var Scripts;
             if (itemsInCorpse.length) {
                 for (var _i = 0, itemsInCorpse_2 = itemsInCorpse; _i < itemsInCorpse_2.length; _i++) {
                     var itemId = itemsInCorpse_2[_i];
-                    Orion.MoveItem(itemId, 0, "myLootBag");
+                    Orion.MoveItem(itemId, 0, 'myLootBag');
                     Orion.Wait(delay);
                 }
             }
@@ -3689,9 +3689,7 @@ var Scripts;
             if (!cutWeapon) {
                 var nbDaggerSerial = Scripts.Utils.findFirstType(gameObject.uncategorized.nbDagger, 1);
                 if (!nbDaggerSerial) {
-                    Scripts.Utils.createGameObjectSelections([
-                        { ask: 'Cim budes rezat ?', addObject: CUT_WEAPON }
-                    ]);
+                    Scripts.Utils.createGameObjectSelections([{ ask: 'Cim budes rezat ?', addObject: CUT_WEAPON }]);
                     cutWeapon = Orion.FindObject(CUT_WEAPON);
                 }
                 else {
@@ -3716,7 +3714,7 @@ var Scripts;
         function MobMaster() {
         }
         MobMaster.rename = function (mob) {
-            var chars = "abcdefghijklmnopqrstuvwxyz1234567890";
+            var chars = 'abcdefghijklmnopqrstuvwxyz1234567890';
             var mobSerial = mob.Serial();
             var canRename = mob.CanChangeName();
             var mobName = mob.Name();
@@ -3727,13 +3725,16 @@ var Scripts;
                     mobName = mob.Name();
                 }
                 if (!MobMaster.isRenamedByPlayer(mobName)) {
-                    var resultName = "";
+                    var resultName = '';
                     for (var r = 0; r < 5; r++) {
                         var rand = Orion.Random(chars.length);
                         resultName = resultName + chars[rand];
                     }
                     resultName = MobMaster.getPlayerShorCode() + resultName;
-                    resultName = resultName.substring(0, resultName.length - 2) + (resultName[resultName.length - 2]).toLocaleUpperCase() + (resultName[resultName.length - 1]).toLocaleUpperCase();
+                    resultName =
+                        resultName.substring(0, resultName.length - 2) +
+                            resultName[resultName.length - 2].toLocaleUpperCase() +
+                            resultName[resultName.length - 1].toLocaleUpperCase();
                     Orion.RenameMount(mobSerial, resultName);
                     var sychr = 0;
                     var newName = mobName;
@@ -3786,8 +3787,9 @@ var Scripts;
         };
         MobMaster.resolveMobkillPets = function (currentTarget) {
             var storedPets = new Array();
-            var currentPets = Orion.FindTypeEx('!0x0190|!0x0191', '0xFFFF', 'ground', 'live', 18)
-                .filter(function (obj) { return obj.CanChangeName() && !storedPets.some(function (a) { return a.Serial() == obj.Serial(); }); });
+            var currentPets = Orion.FindTypeEx('!0x0190|!0x0191', '0xFFFF', 'ground', 'live', 18).filter(function (obj) {
+                return obj.CanChangeName() && !storedPets.some(function (a) { return a.Serial() == obj.Serial(); });
+            });
             currentPets.sort(function (a, b) {
                 if (a.Serial() > b.Serial())
                     return 0;
@@ -3802,7 +3804,8 @@ var Scripts;
                     storedPets.splice(i);
                 }
             }
-            if ((currentTarget === null || currentTarget === void 0 ? void 0 : currentTarget.isValid()) && (currentTarget === null || currentTarget === void 0 ? void 0 : currentTarget.gameObject().Mobile()) && !(currentTarget === null || currentTarget === void 0 ? void 0 : currentTarget.gameObject().Dead())) {
+            if ((currentTarget === null || currentTarget === void 0 ? void 0 : currentTarget.isValid()) && (currentTarget === null || currentTarget === void 0 ? void 0 : currentTarget.gameObject().Mobile()) &&
+                !(currentTarget === null || currentTarget === void 0 ? void 0 : currentTarget.gameObject().Dead())) {
                 storedPets = storedPets.filter(function (obj) {
                     return obj.Serial() !== currentTarget.gameObject().Serial();
                 });
@@ -3813,7 +3816,8 @@ var Scripts;
             if (useSavedTarget === void 0) { useSavedTarget = true; }
             var target = MobMaster.resolveMobkillTarget(targets, useSavedTarget);
             var storedPets = MobMaster.resolveMobkillPets(target);
-            if ((storedPets === null || storedPets === void 0 ? void 0 : storedPets.length) && (target === null || target === void 0 ? void 0 : target.isValid()) && (target === null || target === void 0 ? void 0 : target.gameObject().Mobile()) && !(target === null || target === void 0 ? void 0 : target.gameObject().Dead())) {
+            if ((storedPets === null || storedPets === void 0 ? void 0 : storedPets.length) && (target === null || target === void 0 ? void 0 : target.isValid()) && (target === null || target === void 0 ? void 0 : target.gameObject().Mobile()) &&
+                !(target === null || target === void 0 ? void 0 : target.gameObject().Dead())) {
                 for (var _i = 0, storedPets_1 = storedPets; _i < storedPets_1.length; _i++) {
                     var pet = storedPets_1[_i];
                     var sayColor = MobMaster.resolveSayColor();
@@ -3835,17 +3839,17 @@ var Scripts;
                 }
             }
             else {
-                Scripts.Utils.playerPrint(ColorEnum.orange, "[ no pets target ] ");
+                Scripts.Utils.playerPrint(ColorEnum.orange, '[ no pets target ] ');
             }
         };
         MobMaster.mobKill = function (targets, useSavedTarget) {
             if (useSavedTarget === void 0) { useSavedTarget = true; }
             var target = MobMaster.resolveMobkillTarget(targets, useSavedTarget);
             var storedPets = MobMaster.resolveMobkillPets(target);
-            var lastSerial = Shared.GetVar('mobkill.lastSerial', "");
+            var lastSerial = Shared.GetVar('mobkill.lastSerial', '');
             var pet = Orion.FindObject('0');
             if (storedPets && storedPets.length > 0) {
-                if (!lastSerial || lastSerial === "") {
+                if (!lastSerial || lastSerial === '') {
                     pet = storedPets[0];
                     lastSerial = pet.Serial();
                 }
@@ -3895,32 +3899,34 @@ var Scripts;
         };
         MobMaster.shrinkOne = function () {
             var pets = Orion.FindTypeEx('!0x0190|!0x0191', '0xFFFF', 'ground', 'live', 2);
-            var ignoreList = Shared.GetArray("mobmaster.shrinkOne.ignoreList", Array());
+            var ignoreList = Shared.GetArray('mobmaster.shrinkOne.ignoreList', Array());
             Orion.ClearJournal('Ale co to delas?|Bez bliz|Zviratko bylo shrinknuto');
-            pets = pets.filter(function (a) { return a.CanChangeName() && a.Exists() && !ignoreList.some(function (p) { return p === a.Serial(); }); }).sort(function (a, b) { return a.Hits() - b.Hits(); });
+            pets = pets
+                .filter(function (a) { return a.CanChangeName() && a.Exists() && !ignoreList.some(function (p) { return p === a.Serial(); }); })
+                .sort(function (a, b) { return a.Hits() - b.Hits(); });
             if (pets.length > 0) {
                 for (var i = 0; i < pets.length; i++) {
                     var pet = pets[i];
-                    Orion.PrintFast(pet.Serial(), ColorEnum.green, 0, "pet");
+                    Orion.PrintFast(pet.Serial(), ColorEnum.green, 0, 'pet');
                     Orion.WaitTargetObject(pet.Serial());
                     this.useShrinkKad();
-                    var resultIndex = Scripts.Utils.waitWhileSomethingInJournal(["Ale co to delas?", "Bez bliz", "Zviratko bylo shrinknuto"], 500);
+                    var resultIndex = Scripts.Utils.waitWhileSomethingInJournal(['Ale co to delas?', 'Bez bliz', 'Zviratko bylo shrinknuto'], 500);
                     if (resultIndex > -1) {
-                        if (Orion.InJournal("Ale co to delas?")) {
-                            Orion.PrintFast(pet.Serial(), ColorEnum.red, 0, "ignore");
+                        if (Orion.InJournal('Ale co to delas?')) {
+                            Orion.PrintFast(pet.Serial(), ColorEnum.red, 0, 'ignore');
                             ignoreList.push(pet.Serial());
                         }
                         else {
-                            Shared.AddArray("mobmaster.shrinkOne.ignoreList", ignoreList);
+                            Shared.AddArray('mobmaster.shrinkOne.ignoreList', ignoreList);
                         }
                     }
                     break;
                 }
             }
             else {
-                Orion.PrintFast(Player.Serial(), ColorEnum.green, 0, "no pets");
+                Orion.PrintFast(Player.Serial(), ColorEnum.green, 0, 'no pets');
             }
-            Shared.AddArray("mobmaster.shrinkOne.ignoreList", ignoreList);
+            Shared.AddArray('mobmaster.shrinkOne.ignoreList', ignoreList);
             var shrinkKlamakList = Scripts.Clean.getGameObjectList(gameObject.klamak);
             for (var i = 0; i < shrinkKlamakList.length; i++) {
                 var shrinked = Orion.FindTypeEx(shrinkKlamakList[i].graphic, shrinkKlamakList[i].color || '0xFFFF', 'ground', 'item', 2);
@@ -3951,16 +3957,14 @@ var Scripts;
         };
         MobMaster.mobGo = function () {
             Scripts.TargetingEx.cancelResetTarget();
-            var text = "all go";
+            var text = 'all go';
             var sayColor = MobMaster.resolveSayColor();
             var lastMob = Orion.FindObject(Shared.GetVar('mobgo.lastSerial'));
             var statusMob = Orion.FindObject('laststatus');
             if (!lastMob || !lastMob.Exists()) {
                 lastMob = statusMob;
             }
-            if (lastMob &&
-                lastMob.Exists() &&
-                lastMob.CanChangeName()) {
+            if (lastMob && lastMob.Exists() && lastMob.CanChangeName()) {
                 Scripts.Utils.ensureName(lastMob);
                 Shared.AddVar('mobgo.lastSerial', lastMob.Serial());
                 var hitColor = MobMaster.getPrintAlieColorByHits(lastMob.Hits(), lastMob.MaxHits());
@@ -4016,20 +4020,20 @@ var Scripts;
         };
         MobMaster.getPlayerShorCode = function () {
             var playerShorCode = Shared.GetVar('playerShorCode');
-            if (!playerShorCode || playerShorCode === "") {
+            if (!playerShorCode || playerShorCode === '') {
                 var name_1 = Player.Name();
-                if (!name_1 || name_1 === "") {
+                if (!name_1 || name_1 === '') {
                     Orion.GetStatus(Player.Serial());
                     Orion.RequestName(Player.Serial());
                     name_1 = Player.Name();
                 }
                 name_1 = name_1.toLocaleLowerCase();
-                name_1 = name_1.replace(" ", "");
-                name_1 = name_1.replace("-", "");
-                name_1 = name_1.replace("'", "");
-                name_1 = name_1.replace("_", "");
-                name_1 = name_1.replace(".", "");
-                name_1 = name_1.replace(",", "");
+                name_1 = name_1.replace(' ', '');
+                name_1 = name_1.replace('-', '');
+                name_1 = name_1.replace("'", '');
+                name_1 = name_1.replace('_', '');
+                name_1 = name_1.replace('.', '');
+                name_1 = name_1.replace(',', '');
                 playerShorCode = name_1;
                 if (name_1.length > 2) {
                     var mid = (name_1.length / 2) | 0;
@@ -4200,23 +4204,284 @@ var Scripts;
         PetCommander.getAvailableNames = function () {
             var usedNames = Scripts.PetCommander.getUsedNames();
             var namesPool = [
-                'Andres', 'Blanca', 'Carlos', 'Dolores', 'Enrique', 'Felicia', 'Guillermo', 'Hilda', 'Ignacio', 'Jimena', 'Kevin', 'Linda', 'Marty', 'Nora', 'Olaf', 'Damrey',
-                'Haikui', 'Kirogi', 'Tembin', 'Bolaven', 'Sanba', 'Jelawat', 'Ewiniar', 'Malaksi', 'Gaemi', 'Prapiroon', 'Maria', 'SonTinh', 'Bopha', 'Wukong', 'Sonamu',
-                'Shanshan', 'Yagi', 'Leepi', 'Bebinca', 'Rumbia', 'Soulik', 'Cimaron', 'Jebi', 'Mangkhut', 'Utor', 'Trami', 'Yutu', 'Toraji', 'Usagi', 'Pabuk', 'Wutip', 'Sepat',
-                'Fitow', 'Danas', 'Nari', 'Wipha', 'Francisco', 'Lekima', 'Krosa', 'Haiyan', 'Podul', 'Lingling', 'Kaziki', 'Faxai', 'Peipah', 'Tapah', 'Mitag', 'Hagibis', 'Neoguri',
-                'Rammasun', 'Matmo', 'Halong', 'Nakri', 'Fengshen', 'Kalmaegi', 'Kanmuri', 'Phanfone', 'Vongfong', 'Nuri', 'Sinlaku', 'Hagupit', 'Jangmi', 'Mekkhala', 'Higos',
-                'Bavi', 'Maysak', 'Haishen', 'Noul', 'Dolphin', 'Kujira', 'Chanhom', 'Linfa', 'Nangka', 'Soudelor', 'Molave', 'Goni', 'Morakot', 'Etau', 'Vamco', 'Krovanh', 'Dujuan',
-                'Mujigae', 'Choiwan', 'Koppu', 'Ketsana', 'Parma', 'Melor', 'Nepartak', 'Lupit', 'Mirinae', 'Nida', 'Omais', 'Conson', 'Chanthu', 'Dianmu', 'Mindulle', 'Lionrock',
-                'Kompasu', 'Namtheun', 'Malou', 'Meranti', 'Fanapi', 'Malakas', 'Megi', 'Chaba', 'Aere', 'Songda', 'Sarika', 'Haima', 'Meari', 'Tokage', 'Muifa', 'Merbok',
-                'Nanmadol', 'Talas', 'Noru', 'Kulap', 'Roke', 'Sonca', 'Nesat', 'Haitang', 'Nalgae', 'Banyan', 'Washi', 'Pakhar', 'Sanvu', 'Mawar', 'Guchol', 'Patricia', 'Rick',
-                'Sandra', 'Terry', 'Vivian', 'Waldo', 'Xina', 'York', 'Zelda', 'Agatha', 'Blas', 'Celia', 'Darby', 'Estelle', 'Frank', 'Georgette', 'Howard', 'Isis', 'Javier', 'Kay', 'Lester',
-                'Madeline', 'Newton', 'Orlene', 'Paine', 'Roslyn', 'Seymour', 'Tina', 'Virgil', 'Winifred', 'Xavier', 'Yolanda', 'Zeke', 'Adrian', 'Beatriz', 'Calvin', 'Dora', 'Eugene',
-                'Fernanda', 'Greg', 'Hilary', 'Irwin', 'Jova', 'Kenneth', 'Lidia', 'Max', 'Norma', 'Otis', 'Pilar', 'Ramon', 'Selma', 'Todd', 'Veronica', 'Wiley', 'Xina', 'York', 'Zelda',
-                'Aletta', 'Bud', 'Carlotta', 'Daniel', 'Emilia', 'Fabio', 'Gilma', 'Hector', 'Ileana', 'John', 'Kristy', 'Lane', 'Miriam', 'Norman', 'Olivia', 'Paul', 'Rosa', 'Sergio', 'Tara',
-                'Vicente', 'Willa', 'Xavier', 'Yolanda', 'Zeke', 'Alvin', 'Barbara', 'Cosme', 'Dalila', 'Erick', 'Flossie', 'Gil', 'Henriette', 'Ivo', 'Juliette', 'Kiko', 'Lorena', 'Manuel',
-                'Narda', 'Octave', 'Priscilla', 'Raymond', 'Sonia', 'Tico', 'Velma', 'Wallis', 'Xina', 'York', 'Zelda', 'Amanda', 'Boris', 'Cristina', 'Douglas', 'Elida', 'Fausto', 'Genevieve',
-                'Hernan', 'Iselle', 'Julio', 'Karina', 'Lowell', 'Marie', 'Norbert', 'Odile', 'Polo', 'Rachel', 'Simon', 'Trudy', 'Vance', 'Winnie', 'Xavier', 'Yolanda', 'Zeke', 'Talim',
-                'Doksuri', 'Khanun', 'Vicente', 'Saola'
+                'Andres',
+                'Blanca',
+                'Carlos',
+                'Dolores',
+                'Enrique',
+                'Felicia',
+                'Guillermo',
+                'Hilda',
+                'Ignacio',
+                'Jimena',
+                'Kevin',
+                'Linda',
+                'Marty',
+                'Nora',
+                'Olaf',
+                'Damrey',
+                'Haikui',
+                'Kirogi',
+                'Tembin',
+                'Bolaven',
+                'Sanba',
+                'Jelawat',
+                'Ewiniar',
+                'Malaksi',
+                'Gaemi',
+                'Prapiroon',
+                'Maria',
+                'SonTinh',
+                'Bopha',
+                'Wukong',
+                'Sonamu',
+                'Shanshan',
+                'Yagi',
+                'Leepi',
+                'Bebinca',
+                'Rumbia',
+                'Soulik',
+                'Cimaron',
+                'Jebi',
+                'Mangkhut',
+                'Utor',
+                'Trami',
+                'Yutu',
+                'Toraji',
+                'Usagi',
+                'Pabuk',
+                'Wutip',
+                'Sepat',
+                'Fitow',
+                'Danas',
+                'Nari',
+                'Wipha',
+                'Francisco',
+                'Lekima',
+                'Krosa',
+                'Haiyan',
+                'Podul',
+                'Lingling',
+                'Kaziki',
+                'Faxai',
+                'Peipah',
+                'Tapah',
+                'Mitag',
+                'Hagibis',
+                'Neoguri',
+                'Rammasun',
+                'Matmo',
+                'Halong',
+                'Nakri',
+                'Fengshen',
+                'Kalmaegi',
+                'Kanmuri',
+                'Phanfone',
+                'Vongfong',
+                'Nuri',
+                'Sinlaku',
+                'Hagupit',
+                'Jangmi',
+                'Mekkhala',
+                'Higos',
+                'Bavi',
+                'Maysak',
+                'Haishen',
+                'Noul',
+                'Dolphin',
+                'Kujira',
+                'Chanhom',
+                'Linfa',
+                'Nangka',
+                'Soudelor',
+                'Molave',
+                'Goni',
+                'Morakot',
+                'Etau',
+                'Vamco',
+                'Krovanh',
+                'Dujuan',
+                'Mujigae',
+                'Choiwan',
+                'Koppu',
+                'Ketsana',
+                'Parma',
+                'Melor',
+                'Nepartak',
+                'Lupit',
+                'Mirinae',
+                'Nida',
+                'Omais',
+                'Conson',
+                'Chanthu',
+                'Dianmu',
+                'Mindulle',
+                'Lionrock',
+                'Kompasu',
+                'Namtheun',
+                'Malou',
+                'Meranti',
+                'Fanapi',
+                'Malakas',
+                'Megi',
+                'Chaba',
+                'Aere',
+                'Songda',
+                'Sarika',
+                'Haima',
+                'Meari',
+                'Tokage',
+                'Muifa',
+                'Merbok',
+                'Nanmadol',
+                'Talas',
+                'Noru',
+                'Kulap',
+                'Roke',
+                'Sonca',
+                'Nesat',
+                'Haitang',
+                'Nalgae',
+                'Banyan',
+                'Washi',
+                'Pakhar',
+                'Sanvu',
+                'Mawar',
+                'Guchol',
+                'Patricia',
+                'Rick',
+                'Sandra',
+                'Terry',
+                'Vivian',
+                'Waldo',
+                'Xina',
+                'York',
+                'Zelda',
+                'Agatha',
+                'Blas',
+                'Celia',
+                'Darby',
+                'Estelle',
+                'Frank',
+                'Georgette',
+                'Howard',
+                'Isis',
+                'Javier',
+                'Kay',
+                'Lester',
+                'Madeline',
+                'Newton',
+                'Orlene',
+                'Paine',
+                'Roslyn',
+                'Seymour',
+                'Tina',
+                'Virgil',
+                'Winifred',
+                'Xavier',
+                'Yolanda',
+                'Zeke',
+                'Adrian',
+                'Beatriz',
+                'Calvin',
+                'Dora',
+                'Eugene',
+                'Fernanda',
+                'Greg',
+                'Hilary',
+                'Irwin',
+                'Jova',
+                'Kenneth',
+                'Lidia',
+                'Max',
+                'Norma',
+                'Otis',
+                'Pilar',
+                'Ramon',
+                'Selma',
+                'Todd',
+                'Veronica',
+                'Wiley',
+                'Xina',
+                'York',
+                'Zelda',
+                'Aletta',
+                'Bud',
+                'Carlotta',
+                'Daniel',
+                'Emilia',
+                'Fabio',
+                'Gilma',
+                'Hector',
+                'Ileana',
+                'John',
+                'Kristy',
+                'Lane',
+                'Miriam',
+                'Norman',
+                'Olivia',
+                'Paul',
+                'Rosa',
+                'Sergio',
+                'Tara',
+                'Vicente',
+                'Willa',
+                'Xavier',
+                'Yolanda',
+                'Zeke',
+                'Alvin',
+                'Barbara',
+                'Cosme',
+                'Dalila',
+                'Erick',
+                'Flossie',
+                'Gil',
+                'Henriette',
+                'Ivo',
+                'Juliette',
+                'Kiko',
+                'Lorena',
+                'Manuel',
+                'Narda',
+                'Octave',
+                'Priscilla',
+                'Raymond',
+                'Sonia',
+                'Tico',
+                'Velma',
+                'Wallis',
+                'Xina',
+                'York',
+                'Zelda',
+                'Amanda',
+                'Boris',
+                'Cristina',
+                'Douglas',
+                'Elida',
+                'Fausto',
+                'Genevieve',
+                'Hernan',
+                'Iselle',
+                'Julio',
+                'Karina',
+                'Lowell',
+                'Marie',
+                'Norbert',
+                'Odile',
+                'Polo',
+                'Rachel',
+                'Simon',
+                'Trudy',
+                'Vance',
+                'Winnie',
+                'Xavier',
+                'Yolanda',
+                'Zeke',
+                'Talim',
+                'Doksuri',
+                'Khanun',
+                'Vicente',
+                'Saola',
             ];
             var availableNames = namesPool.filter(function (i) { return usedNames.indexOf(i) === -1; });
             return availableNames;
@@ -4227,7 +4492,7 @@ var Scripts;
                 Scripts.Utils.playerPrint('chyba');
                 return 'Chyba';
             }
-            var random = Math.floor(Math.random() * (namesPool.length));
+            var random = Math.floor(Math.random() * namesPool.length);
             return namesPool[random];
         };
         PetCommander.savePet = function (pet) {
@@ -4316,7 +4581,7 @@ var Scripts;
                 if (!pet2) {
                     return 1;
                 }
-                return (pet1.MaxHits() - pet1.Hits()) > (pet2.MaxHits() - pet2.Hits()) ? 1 : -1;
+                return pet1.MaxHits() - pet1.Hits() > pet2.MaxHits() - pet2.Hits() ? 1 : -1;
             });
         };
         PetCommander.healPetsToggle = function () {
@@ -4358,7 +4623,7 @@ var Scripts;
                             'You apply',
                             'Chces vytvorit',
                             'must be able to reach',
-                            'Nemuzes pouzit bandy'
+                            'Nemuzes pouzit bandy',
                         ]);
                         if (Orion.InJournal('Chces vytvorit|Nemuzes pouzit bandy|must be able to reach')) {
                             Orion.Wait(responseDelay);
@@ -4393,10 +4658,12 @@ var Scripts;
         }
         Port.nbRune = function (waitForKop) {
             if (waitForKop === void 0) { waitForKop = false; }
-            var selections = [{
+            var selections = [
+                {
                     type: SelectionTypeEnum.gump,
                     selection: 1
-                }];
+                },
+            ];
             var nbRuna = gameObject.uncategorized.nbRuna;
             var serial = Scripts.Utils.findFirstType(nbRuna);
             if (!serial) {
@@ -4410,10 +4677,12 @@ var Scripts;
         };
         Port.rune = function (runeSerial, waitForKop) {
             if (waitForKop === void 0) { waitForKop = false; }
-            var selections = [{
+            var selections = [
+                {
                     type: SelectionTypeEnum.menu,
                     selection: { name: 'Jak chces runu pouzit?', selection: 'Recall' }
-                }];
+                },
+            ];
             Scripts.Utils.useAndSelect(runeSerial, selections);
             if (waitForKop) {
                 var teleported = Scripts.Utils.waitWhileSomethingInJournal(['been teleported'], 40000) !== -1;
@@ -4426,37 +4695,48 @@ var Scripts;
             var selections;
             switch (selection) {
                 case PortBookOptionsEnum.opravaStats:
-                    selections = [{
+                    selections = [
+                        {
                             type: SelectionTypeEnum.gump,
                             selection: 2
-                        }, {
+                        },
+                        {
                             type: SelectionTypeEnum.menu,
                             selection: { name: '', selection: 'Ano, oprav' }
-                        }];
+                        },
+                    ];
                     break;
                 case PortBookOptionsEnum.mark:
-                    selections = [{
+                    selections = [
+                        {
                             type: SelectionTypeEnum.gump,
                             selection: 4
-                        }, {
+                        },
+                        {
                             type: SelectionTypeEnum.gump,
                             selection: 3
-                        }];
+                        },
+                    ];
                     break;
                 case PortBookOptionsEnum.nabiti:
-                    selections = [{
+                    selections = [
+                        {
                             type: SelectionTypeEnum.gump,
                             selection: 1
-                        }];
+                        },
+                    ];
                     break;
                 default:
-                    selections = [{
+                    selections = [
+                        {
                             type: SelectionTypeEnum.gump,
                             selection: 4
-                        }, {
+                        },
+                        {
                             type: SelectionTypeEnum.gump,
                             selection: 1
-                        }];
+                        },
+                    ];
             }
             var book = gameObject.books.travelBook;
             var serial = Scripts.Utils.findFirstType(book);
@@ -4474,25 +4754,32 @@ var Scripts;
             var selections;
             switch (selection) {
                 case PortBookOptionsEnum.opravaStats:
-                    selections = [{
+                    selections = [
+                        {
                             type: SelectionTypeEnum.gump,
                             selection: 2
-                        }, {
+                        },
+                        {
                             type: SelectionTypeEnum.menu,
                             selection: { name: '', selection: 'Ano, oprav' }
-                        }];
+                        },
+                    ];
                     break;
                 case PortBookOptionsEnum.mark:
-                    selections = [{
+                    selections = [
+                        {
                             type: SelectionTypeEnum.gump,
                             selection: 7
-                        }];
+                        },
+                    ];
                     break;
                 default:
-                    selections = [{
+                    selections = [
+                        {
                             type: SelectionTypeEnum.gump,
                             selection: 5
-                        }];
+                        },
+                    ];
             }
             var book = gameObject.books.cestovniKniha;
             var serial = Scripts.Utils.findFirstType(book);
@@ -4570,31 +4857,35 @@ var Scripts;
             var m = Scripts.Utils.waitWhileSomethingInJournal(messages, 1000, 1000);
             if (m === 0) {
                 var potionTimer = config === null || config === void 0 ? void 0 : config.drinkPotion.timer;
-                displayTimers && Orion.AddDisplayTimer(TimersEnum.drink, drinkTimer, (potionTimer === null || potionTimer === void 0 ? void 0 : potionTimer.position) || 'LeftTop', (potionTimer === null || potionTimer === void 0 ? void 0 : potionTimer.type) || 'Line|Bar', (potionTimer === null || potionTimer === void 0 ? void 0 : potionTimer.text) || 'Drink', (potionTimer === null || potionTimer === void 0 ? void 0 : potionTimer.xFromPosition) || 0, (potionTimer === null || potionTimer === void 0 ? void 0 : potionTimer.yFromPosition) || 0, (potionTimer === null || potionTimer === void 0 ? void 0 : potionTimer.textColor) || '0x88B', (potionTimer === null || potionTimer === void 0 ? void 0 : potionTimer.font) || 0, (potionTimer === null || potionTimer === void 0 ? void 0 : potionTimer.backgroundColor) || '0x88B');
+                displayTimers &&
+                    Orion.AddDisplayTimer(TimersEnum.drink, drinkTimer, (potionTimer === null || potionTimer === void 0 ? void 0 : potionTimer.position) || 'LeftTop', (potionTimer === null || potionTimer === void 0 ? void 0 : potionTimer.type) || 'Line|Bar', (potionTimer === null || potionTimer === void 0 ? void 0 : potionTimer.text) || 'Drink', (potionTimer === null || potionTimer === void 0 ? void 0 : potionTimer.xFromPosition) || 0, (potionTimer === null || potionTimer === void 0 ? void 0 : potionTimer.yFromPosition) || 0, (potionTimer === null || potionTimer === void 0 ? void 0 : potionTimer.textColor) || '0x88B', (potionTimer === null || potionTimer === void 0 ? void 0 : potionTimer.font) || 0, (potionTimer === null || potionTimer === void 0 ? void 0 : potionTimer.backgroundColor) || '0x88B');
                 Scripts.Utils.resetTimer(TimersEnum.drink);
                 var potionsCount = Orion.Count(p.graphic, p.color);
                 Scripts.Utils.playerPrint("[ " + potionName + " " + potionsCount + " ]", potionsCount === 0 ? ColorEnum.red : ColorEnum.green);
                 if (potionName === PotionsEnum.gs) {
                     var gsPotionTimer = config === null || config === void 0 ? void 0 : config.drinkPotion.gsTimer;
-                    displayTimers && Orion.AddDisplayTimer(TimersEnum.gs, gsTimer, (gsPotionTimer === null || gsPotionTimer === void 0 ? void 0 : gsPotionTimer.position) || 'LeftTop', (gsPotionTimer === null || gsPotionTimer === void 0 ? void 0 : gsPotionTimer.type) || 'Line|Bar', (gsPotionTimer === null || gsPotionTimer === void 0 ? void 0 : gsPotionTimer.text) || 'GS', (gsPotionTimer === null || gsPotionTimer === void 0 ? void 0 : gsPotionTimer.xFromPosition) || 0, (gsPotionTimer === null || gsPotionTimer === void 0 ? void 0 : gsPotionTimer.yFromPosition) || 55, (gsPotionTimer === null || gsPotionTimer === void 0 ? void 0 : gsPotionTimer.textColor) || '0x88B', (gsPotionTimer === null || gsPotionTimer === void 0 ? void 0 : gsPotionTimer.font) || 0, (gsPotionTimer === null || gsPotionTimer === void 0 ? void 0 : gsPotionTimer.backgroundColor) || '0x88B');
+                    displayTimers &&
+                        Orion.AddDisplayTimer(TimersEnum.gs, gsTimer, (gsPotionTimer === null || gsPotionTimer === void 0 ? void 0 : gsPotionTimer.position) || 'LeftTop', (gsPotionTimer === null || gsPotionTimer === void 0 ? void 0 : gsPotionTimer.type) || 'Line|Bar', (gsPotionTimer === null || gsPotionTimer === void 0 ? void 0 : gsPotionTimer.text) || 'GS', (gsPotionTimer === null || gsPotionTimer === void 0 ? void 0 : gsPotionTimer.xFromPosition) || 0, (gsPotionTimer === null || gsPotionTimer === void 0 ? void 0 : gsPotionTimer.yFromPosition) || 55, (gsPotionTimer === null || gsPotionTimer === void 0 ? void 0 : gsPotionTimer.textColor) || '0x88B', (gsPotionTimer === null || gsPotionTimer === void 0 ? void 0 : gsPotionTimer.font) || 0, (gsPotionTimer === null || gsPotionTimer === void 0 ? void 0 : gsPotionTimer.backgroundColor) || '0x88B');
                     Scripts.Utils.resetTimer(TimersEnum.gs);
                 }
                 if (potionName === PotionsEnum.invis) {
                     var invisPotionTimer = config === null || config === void 0 ? void 0 : config.drinkPotion.invisTimer;
                     for (var a = 0; a < 10; a++) {
-                        var id = TimersEnum.invis + "_" + a;
+                        var id = TimersEnum.invis + '_' + a;
                         if (Orion.DisplayTimerExists(id))
                             continue;
-                        displayTimers && Orion.AddDisplayTimer(id, invisTimer, (invisPotionTimer === null || invisPotionTimer === void 0 ? void 0 : invisPotionTimer.position) || 'LeftTop', (invisPotionTimer === null || invisPotionTimer === void 0 ? void 0 : invisPotionTimer.type) || 'Line|Bar', (invisPotionTimer === null || invisPotionTimer === void 0 ? void 0 : invisPotionTimer.text) || 'Invis', ((invisPotionTimer === null || invisPotionTimer === void 0 ? void 0 : invisPotionTimer.xFromPosition) || 0) + (a * 55), (invisPotionTimer === null || invisPotionTimer === void 0 ? void 0 : invisPotionTimer.yFromPosition) || 110, (invisPotionTimer === null || invisPotionTimer === void 0 ? void 0 : invisPotionTimer.textColor) || '0x88B', (invisPotionTimer === null || invisPotionTimer === void 0 ? void 0 : invisPotionTimer.font) || 0, (invisPotionTimer === null || invisPotionTimer === void 0 ? void 0 : invisPotionTimer.backgroundColor) || '0x88B');
+                        displayTimers &&
+                            Orion.AddDisplayTimer(id, invisTimer, (invisPotionTimer === null || invisPotionTimer === void 0 ? void 0 : invisPotionTimer.position) || 'LeftTop', (invisPotionTimer === null || invisPotionTimer === void 0 ? void 0 : invisPotionTimer.type) || 'Line|Bar', (invisPotionTimer === null || invisPotionTimer === void 0 ? void 0 : invisPotionTimer.text) || 'Invis', ((invisPotionTimer === null || invisPotionTimer === void 0 ? void 0 : invisPotionTimer.xFromPosition) || 0) + a * 55, (invisPotionTimer === null || invisPotionTimer === void 0 ? void 0 : invisPotionTimer.yFromPosition) || 110, (invisPotionTimer === null || invisPotionTimer === void 0 ? void 0 : invisPotionTimer.textColor) || '0x88B', (invisPotionTimer === null || invisPotionTimer === void 0 ? void 0 : invisPotionTimer.font) || 0, (invisPotionTimer === null || invisPotionTimer === void 0 ? void 0 : invisPotionTimer.backgroundColor) || '0x88B');
                         break;
                     }
                     if (displayInvisLongTimer) {
                         var invisLongPotionTimer = config === null || config === void 0 ? void 0 : config.drinkPotion.invisLongTimer;
                         for (var a = 0; a < 10; a++) {
-                            var id = TimersEnum.invisLong + "_" + a;
+                            var id = TimersEnum.invisLong + '_' + a;
                             if (Orion.DisplayTimerExists(id))
                                 continue;
-                            displayTimers && Orion.AddDisplayTimer(id, invisLongTimer, (invisLongPotionTimer === null || invisLongPotionTimer === void 0 ? void 0 : invisLongPotionTimer.position) || 'LeftTop', (invisLongPotionTimer === null || invisLongPotionTimer === void 0 ? void 0 : invisLongPotionTimer.type) || 'Line|Bar', (invisLongPotionTimer === null || invisLongPotionTimer === void 0 ? void 0 : invisLongPotionTimer.text) || 'InvisL', ((invisLongPotionTimer === null || invisLongPotionTimer === void 0 ? void 0 : invisLongPotionTimer.xFromPosition) || 0) + (a * 55), (invisLongPotionTimer === null || invisLongPotionTimer === void 0 ? void 0 : invisLongPotionTimer.yFromPosition) || 165, (invisLongPotionTimer === null || invisLongPotionTimer === void 0 ? void 0 : invisLongPotionTimer.textColor) || '0x88B', (invisLongPotionTimer === null || invisLongPotionTimer === void 0 ? void 0 : invisLongPotionTimer.font) || 0, (invisLongPotionTimer === null || invisLongPotionTimer === void 0 ? void 0 : invisLongPotionTimer.backgroundColor) || '0x88B');
+                            displayTimers &&
+                                Orion.AddDisplayTimer(id, invisLongTimer, (invisLongPotionTimer === null || invisLongPotionTimer === void 0 ? void 0 : invisLongPotionTimer.position) || 'LeftTop', (invisLongPotionTimer === null || invisLongPotionTimer === void 0 ? void 0 : invisLongPotionTimer.type) || 'Line|Bar', (invisLongPotionTimer === null || invisLongPotionTimer === void 0 ? void 0 : invisLongPotionTimer.text) || 'InvisL', ((invisLongPotionTimer === null || invisLongPotionTimer === void 0 ? void 0 : invisLongPotionTimer.xFromPosition) || 0) + a * 55, (invisLongPotionTimer === null || invisLongPotionTimer === void 0 ? void 0 : invisLongPotionTimer.yFromPosition) || 165, (invisLongPotionTimer === null || invisLongPotionTimer === void 0 ? void 0 : invisLongPotionTimer.textColor) || '0x88B', (invisLongPotionTimer === null || invisLongPotionTimer === void 0 ? void 0 : invisLongPotionTimer.font) || 0, (invisLongPotionTimer === null || invisLongPotionTimer === void 0 ? void 0 : invisLongPotionTimer.backgroundColor) || '0x88B');
                             break;
                         }
                     }
@@ -4604,8 +4895,11 @@ var Scripts;
             }
             else if (m === 1) {
                 var remainingTime = drinkTimer - Orion.Timer(TimersEnum.drink);
-                remainingTime > 0 && Scripts.Utils.playerPrint("potion timer " + ((drinkTimer - Orion.Timer(TimersEnum.drink)) / 1000).toFixed(2) + "s", ColorEnum.red);
-                if (refillEmptyLimit && refillEmptyLimit && Orion.Count(gameObject.uncategorized.emptyBottles.graphic, gameObject.uncategorized.emptyBottles.color) > refillEmptyLimit) {
+                remainingTime > 0 &&
+                    Scripts.Utils.playerPrint("potion timer " + ((drinkTimer - Orion.Timer(TimersEnum.drink)) / 1000).toFixed(2) + "s", ColorEnum.red);
+                if (refillEmptyLimit &&
+                    refillEmptyLimit &&
+                    Orion.Count(gameObject.uncategorized.emptyBottles.graphic, gameObject.uncategorized.emptyBottles.color) > refillEmptyLimit) {
                     Scripts.Potions.fillPotion(potionName, switchWarModeWhenNeeded);
                 }
             }
@@ -4768,19 +5062,24 @@ var Scripts;
             }
             if (Orion.Count(s.graphic) < 1) {
                 var reason = 'NEMAS SVITKY';
-                backupHeadCast ? Scripts.Spells.backupHeadCast(reason, backupHeadCast, target) : Scripts.Utils.playerPrint(reason, ColorEnum.red);
+                backupHeadCast
+                    ? Scripts.Spells.backupHeadCast(reason, backupHeadCast, target)
+                    : Scripts.Utils.playerPrint(reason, ColorEnum.red);
                 return;
             }
             Orion.ClearJournal();
             Scripts.Utils.waitTarget(target);
             Orion.UseType(s.graphic);
-            Scripts.Utils.waitWhileSomethingInJournal(['Select Target', 'You can\'t cast']);
+            Scripts.Utils.waitWhileSomethingInJournal(['Select Target', "You can't cast"]);
             if (Orion.InJournal('Select Target')) {
-                s.timer && Orion.AddDisplayTimer('scroll', s.timer, 'AboveChar', 'bar', '', 0, 75, '0x100', 1, 'yellow');
+                s.timer &&
+                    Orion.AddDisplayTimer('scroll', s.timer, 'AboveChar', 'bar', '', 0, 75, '0x100', 1, 'yellow');
             }
             else {
                 var reason = 'TIMER';
-                backupHeadCast ? Scripts.Spells.backupHeadCast(reason, backupHeadCast, target) : Scripts.Utils.playerPrint(reason, ColorEnum.red);
+                backupHeadCast
+                    ? Scripts.Spells.backupHeadCast(reason, backupHeadCast, target)
+                    : Scripts.Utils.playerPrint(reason, ColorEnum.red);
             }
         };
         Spells.backupHeadCast = function (reason, spell, target) {
@@ -4795,15 +5094,16 @@ var Scripts;
             }
             var scrollSerial = Scripts.Utils.findFirstType(s);
             if (!scrollSerial) {
-                Scripts.Utils.playerPrint("NEMAS SVITKY " + scroll, ColorEnum.red);
+                Scripts.Utils.playerPrint('NEMAS SVITKY ' + scroll, ColorEnum.red);
                 return;
             }
             Orion.ClearJournal();
             Scripts.Utils.waitTarget(target);
             Orion.UseObject(scrollSerial);
-            Scripts.Utils.waitWhileSomethingInJournal(['Select Target', 'You can\'t cast']);
+            Scripts.Utils.waitWhileSomethingInJournal(['Select Target', "You can't cast"]);
             if (Orion.InJournal('Select Target')) {
-                s.timer && Orion.AddDisplayTimer('scroll', s.timer, 'AboveChar', 'bar', '', 0, 75, '0x100', 1, 'yellow');
+                s.timer &&
+                    Orion.AddDisplayTimer('scroll', s.timer, 'AboveChar', 'bar', '', 0, 75, '0x100', 1, 'yellow');
             }
             else {
                 Scripts.Utils.playerPrint('TIMER', ColorEnum.red);
@@ -4916,9 +5216,11 @@ var Scripts;
     var Statusbar = (function () {
         function Statusbar() {
         }
-        Statusbar.create = function () {
-            Scripts.Utils.createGameObjectSelections([{ ask: 'Target mobile', addObject: 'lastCustomStatusBar' }]);
-            var o = Orion.FindObject('lastCustomStatusBar');
+        Statusbar.create = function (targetSerial) {
+            if (targetSerial === undefined) {
+                Scripts.Utils.createGameObjectSelections([{ ask: 'Target mobile', addObject: 'lastCustomStatusBar' }]);
+            }
+            var o = Orion.FindObject(targetSerial !== null && targetSerial !== void 0 ? targetSerial : 'lastCustomStatusBar');
             var serial = o.Serial();
             var name = o.Name();
             var max = o.MaxHits();
@@ -4966,8 +5268,13 @@ var Scripts;
             var poisoned = o.Poisoned();
             var hp = o.Hits();
             var max = o.MaxHits();
-            if (!forceUpdate && s.visible && s.dead === dead && s.hp === hp &&
-                s.max === max && s.name === name && s.poisoned === poisoned) {
+            if (!forceUpdate &&
+                s.visible &&
+                s.dead === dead &&
+                s.hp === hp &&
+                s.max === max &&
+                s.name === name &&
+                s.poisoned === poisoned) {
                 return;
             }
             var updateText = false;
@@ -5006,7 +5313,11 @@ var Scripts;
         };
         Statusbar.drawBody = function (gump, notoriety, dead) {
             if (dead === void 0) { dead = false; }
-            var ARGBcolor = dead ? '#ffff4dff' : typeof notoriety === 'number' ? Scripts.Utils.getARGBColorByNotoriety(notoriety) : '#ccffffff';
+            var ARGBcolor = dead
+                ? '#ffff4dff'
+                : typeof notoriety === 'number'
+                    ? Scripts.Utils.getARGBColorByNotoriety(notoriety)
+                    : '#ccffffff';
             gump.AddColoredPolygone(0, 0, 170, 50, ARGBcolor);
             gump.AddHitBox(CustomStatusBarEnum.click, 0, 0, 170, 50, 1);
         };
@@ -5025,7 +5336,7 @@ var Scripts;
             var relative = lineLength / max;
             var current = hp * relative;
             var over = hp > max;
-            var currentColor = poisoned ? '#00FF00' : Scripts.Utils.determineHpColorRGB(current * 100 / lineLength);
+            var currentColor = poisoned ? '#00FF00' : Scripts.Utils.determineHpColorRGB((current * 100) / lineLength);
             gump.AddText(10, 25, '0', hp + "/" + max, 0, 201);
             gump.AddLine(89, 35, 161, 35, 'black', 10, 101);
             gump.AddLine(90, 35, (over ? lineLength : current) + 90, 35, currentColor, 8, 102);
@@ -5086,16 +5397,17 @@ var Scripts;
                 Orion.Ignore(item.serial);
             }
             var currentIndex = parseInt(Orion.GetGlobal('currentTargetIndex'));
-            if (store.length && ((currentIndex < store.length - 1 && !reverse) ||
-                (reverse && currentIndex))) {
-                currentIndex += (reverse ? -1 : 1);
+            if (store.length &&
+                ((currentIndex < store.length - 1 && !reverse) ||
+                    (reverse && currentIndex))) {
+                currentIndex += reverse ? -1 : 1;
                 Orion.SetGlobal('currentTargetIndex', currentIndex.toString());
                 Orion.SetGlobal('currentTarget', store[currentIndex]);
             }
             else {
                 var flags = ['near', 'mobile', 'live', 'ignoreself'].concat(additionalFlags).join('|');
                 var noto = notoriety.join('|') || undefined;
-                var nearestNewTarget = Orion.FindType("any", "any", "ground", flags, 15, noto);
+                var nearestNewTarget = Orion.FindType('any', 'any', 'ground', flags, 15, noto);
                 var resolved = false;
                 while (!resolved && (nearestNewTarget === null || nearestNewTarget === void 0 ? void 0 : nearestNewTarget.length) && flags.indexOf('ignorefriendlytypes') !== -1) {
                     var t = Orion.FindObject(nearestNewTarget[0]);
@@ -5105,7 +5417,7 @@ var Scripts;
                     }
                     else {
                         Orion.Ignore(t.Serial());
-                        nearestNewTarget = Orion.FindType("any", "any", "ground", flags, 15, noto);
+                        nearestNewTarget = Orion.FindType('any', 'any', 'ground', flags, 15, noto);
                     }
                 }
                 var isSomeNewTargetAround = !!(nearestNewTarget === null || nearestNewTarget === void 0 ? void 0 : nearestNewTarget.length);
@@ -5164,7 +5476,8 @@ var Scripts;
             else {
                 Orion.CharPrint(enemySerial, notoColor, "[" + enemy.Hits() + "/" + enemy.MaxHits() + "]");
             }
-            targetIndicationEnum !== TargetIndicationEnum.none && Scripts.Utils.printColoredHpBar(enemySerial, enemy.Hits() / enemy.MaxHits() * 100);
+            targetIndicationEnum !== TargetIndicationEnum.none &&
+                Scripts.Utils.printColoredHpBar(enemySerial, (enemy.Hits() / enemy.MaxHits()) * 100);
             showStatusBar && Scripts.Utils.updateCurrentStatusBar(enemySerial, statusBarPosition);
             Orion.ClearHighlightCharacters();
             Orion.AddObject('lastattack', enemySerial);
@@ -5190,11 +5503,13 @@ var Scripts;
                 { graphic: '0x00DD', color: '0x0712' },
                 { graphic: '0x0003', color: '0x049C' },
                 { graphic: '0x001A', color: '0x0835' },
-                { graphic: '0x0027', color: '0x0966' }
+                { graphic: '0x0027', color: '0x0966' },
             ];
             for (var _i = 0, friendly_1 = friendly; _i < friendly_1.length; _i++) {
                 var f = friendly_1[_i];
-                if (f.graphic === graphic && f.color === color && (!f.exceptionNames || f.exceptionNames.indexOf(name) === -1)) {
+                if (f.graphic === graphic &&
+                    f.color === color &&
+                    (!f.exceptionNames || f.exceptionNames.indexOf(name) === -1)) {
                     return true;
                 }
             }
@@ -5205,27 +5520,27 @@ var Scripts;
             if (reverse === void 0) { reverse = false; }
             if (timeToStorePreviousTargets === void 0) { timeToStorePreviousTargets = 1500; }
             if (notoriety === void 0) { notoriety = ['gray', 'criminal', 'orange', 'red']; }
-            var timer = Orion.Timer("tnm.prevTimer");
-            var targets = Shared.GetArray("tnm.targets", []);
-            var lastSerial = Shared.GetVar("tnm.lastSerial", "");
+            var timer = Orion.Timer('tnm.prevTimer');
+            var targets = Shared.GetArray('tnm.targets', []);
+            var lastSerial = Shared.GetVar('tnm.lastSerial', '');
             if (timer < 0 || timer > timeToStorePreviousTargets) {
-                Scripts.Utils.resetTimer("tnm.prevTimer");
-                Shared.RemoveVar("tnm.lastSerial");
-                lastSerial = "";
+                Scripts.Utils.resetTimer('tnm.prevTimer');
+                Shared.RemoveVar('tnm.lastSerial');
+                lastSerial = '';
                 targets = [];
                 var noto = notoriety.join('|') || undefined;
                 var friendList_1 = Orion.GetFriendList();
-                var nearCharacters = Orion.FindTypeEx('any', '0xFFFF', 'ground', 'mobile|live|ignoreself', 18, noto).filter(function (a) {
-                    return !a.CanChangeName() &&
-                        !friendList_1.some(function (f) { return f === a.Serial(); });
-                }).sort(function (a, b) { return a.Distance() - b.Distance(); });
+                var nearCharacters = Orion.FindTypeEx('any', '0xFFFF', 'ground', 'mobile|live|ignoreself', 18, noto)
+                    .filter(function (a) { return !a.CanChangeName() && !friendList_1.some(function (f) { return f === a.Serial(); }); })
+                    .sort(function (a, b) { return a.Distance() - b.Distance(); });
                 for (var _i = 0, nearCharacters_1 = nearCharacters; _i < nearCharacters_1.length; _i++) {
                     var char = nearCharacters_1[_i];
                     Scripts.Utils.ensureName(char);
-                    if (char.Name() &&
+                    if ((char.Name() &&
                         char.Name().length === 8 &&
                         char.Name()[0].toLowerCase() === char.Name()[0] &&
-                        char.Name()[char.Name().length - 1].toUpperCase() === char.Name()[char.Name().length - 1] ||
+                        char.Name()[char.Name().length - 1].toUpperCase() ===
+                            char.Name()[char.Name().length - 1]) ||
                         Targeting.isFriendlyTargetType(char.Graphic(), char.Color(), char.Name())) {
                         continue;
                     }
@@ -5257,11 +5572,11 @@ var Scripts;
                         return 1;
                     return 0;
                 });
-                Shared.AddArray("tnm.targets", targets);
+                Shared.AddArray('tnm.targets', targets);
             }
             var result = new Scripts.TargetResult();
             if (targets.length > 0) {
-                if (!lastSerial || lastSerial === "" || !((_a = Orion.FindObject(lastSerial)) === null || _a === void 0 ? void 0 : _a.Exists())) {
+                if (!lastSerial || lastSerial === '' || !((_a = Orion.FindObject(lastSerial)) === null || _a === void 0 ? void 0 : _a.Exists())) {
                     result.gameObject(targets[0].serial);
                     lastSerial = result.gameObject().Serial();
                 }
@@ -5283,11 +5598,11 @@ var Scripts;
                 }
             }
             else {
-                Scripts.Utils.playerPrint("[ no targets ]", ColorEnum.green, true);
-                Shared.RemoveVar("tnm.lastSerial");
+                Scripts.Utils.playerPrint('[ no targets ]', ColorEnum.green, true);
+                Shared.RemoveVar('tnm.lastSerial');
             }
             if (result.isValid()) {
-                Shared.AddVar("tnm.lastSerial", result.gameObject().Serial());
+                Shared.AddVar('tnm.lastSerial', result.gameObject().Serial());
                 Targeting.showStatusBarOnWrapper(result.gameObject().Serial(), statusWrapperOpt);
                 Orion.ClientLastTarget(result.gameObject().Serial());
                 Scripts.Targeting.highlightEnemy(result.gameObject().Serial(), result.gameObject(), false, TargetIndicationEnum.none, { x: 300, y: 300 });
@@ -5305,11 +5620,11 @@ var Scripts;
                 var deltaY = (statusWrapperOpt === null || statusWrapperOpt === void 0 ? void 0 : statusWrapperOpt.deltaY) || 30;
                 var count = 0;
                 if (Scripts.TargetingEx.isEnemy(barObj)) {
-                    count = Shared.GetVar("showStatusBarOnWrapper.enemy.count", 0);
-                    Shared.AddVar("showStatusBarOnWrapper.enemy.count", ++count);
-                    Orion.Print(ColorEnum.pureWhite, "" + count);
+                    count = Shared.GetVar('showStatusBarOnWrapper.enemy.count', 0);
+                    Shared.AddVar('showStatusBarOnWrapper.enemy.count', ++count);
+                    Orion.Print(ColorEnum.pureWhite, '' + count);
                 }
-                Orion.ShowStatusbar(serial, startX + (deltaX * (count % maxCount)), stattY + (deltaY * (count % maxCount)));
+                Orion.ShowStatusbar(serial, startX + deltaX * (count % maxCount), stattY + deltaY * (count % maxCount));
             }
         };
         return Targeting;
@@ -5331,12 +5646,14 @@ var Scripts;
                 Orion.Attack(target.gameObject().Serial());
             }
             else {
-                Scripts.Utils.playerPrint("[ no target ]", ColorEnum.green);
+                Scripts.Utils.playerPrint('[ no target ]', ColorEnum.green);
             }
         };
         TargetingEx.isEnemy = function (obj) {
             var friendList = Orion.GetFriendList();
-            if (obj && !obj.CanChangeName() && friendList.indexOf(obj.Serial()) == -1 &&
+            if (obj &&
+                !obj.CanChangeName() &&
+                friendList.indexOf(obj.Serial()) == -1 &&
                 (obj.Notoriety() === NotorietyNum.criminal ||
                     obj.Notoriety() === NotorietyNum.gray ||
                     obj.Notoriety() === NotorietyNum.red ||
@@ -5388,72 +5705,82 @@ var Scripts;
                     maxDisntace = parseInt(value.split(',')[1]);
                 }
                 result = new Scripts.TargetResult();
-                if (value === "self") {
+                if (value === 'self') {
                     result.gameObject(Player.Serial());
                 }
-                else if (value === "selfinjured" && !Player.Dead() && (Player.Hits() < Player.MaxHits() || Player.Poisoned())) {
+                else if (value === 'selfinjured' &&
+                    !Player.Dead() &&
+                    (Player.Hits() < Player.MaxHits() || Player.Poisoned())) {
                     result.gameObject(Player.Serial());
                 }
-                else if (value === "lasttarget") {
+                else if (value === 'lasttarget') {
                     result.gameObject(Orion.ClientLastTarget());
                 }
-                else if (value === "lasttargetmobile") {
+                else if (value === 'lasttargetmobile') {
                     var obj = Orion.FindObject(Orion.ClientLastTarget());
                     if (obj && obj.Exists() && obj.Mobile()) {
                         result.gameObject(Orion.ClientLastTarget());
                     }
                 }
-                else if (value === "laststatus") {
+                else if (value === 'laststatus') {
                     result.gameObject((_a = Orion.FindObject('laststatus')) === null || _a === void 0 ? void 0 : _a.Serial());
                 }
-                else if (value === "lastattack") {
+                else if (value === 'lastattack') {
                     result.gameObject(Orion.ClientLastAttack());
                 }
-                else if (value === "laststatusenemy") {
+                else if (value === 'laststatusenemy') {
                     var obj = Orion.FindObject('laststatus');
                     if (obj && obj.Exists() && TargetingEx.isEnemy(obj)) {
                         result.gameObject(obj.Serial());
                     }
                 }
-                else if (value === "mount") {
+                else if (value === 'mount') {
                     var obj = Orion.FindObject('myMount');
                     if (obj && obj.Exists() && obj.Distance() <= maxDisntace) {
                         result.gameObject(obj.Serial());
                     }
                 }
-                else if (value.indexOf("nearinjuredalie") > -1) {
+                else if (value.indexOf('nearinjuredalie') > -1) {
                     var arr = this.getAliveAlies();
                     arr.push.apply(arr, this.getAliveAttackPets());
-                    arr = arr.filter(function (a) { return (a.Hits() < a.MaxHits() || a.Poisoned()) && a.Distance() <= maxDisntace; }).sort(function (a, b) { return a.Distance() - b.Distance(); });
+                    arr = arr
+                        .filter(function (a) { return (a.Hits() < a.MaxHits() || a.Poisoned()) && a.Distance() <= maxDisntace; })
+                        .sort(function (a, b) { return a.Distance() - b.Distance(); });
                     if (arr.length > 0) {
                         result.gameObject(arr[0].Serial());
                     }
                 }
-                else if (value.indexOf("nearinjuredalielos") > -1) {
+                else if (value.indexOf('nearinjuredalielos') > -1) {
                     var arr = this.getAliveAlies();
                     arr.push.apply(arr, this.getAliveAttackPets());
-                    arr = arr.filter(function (a) { return (a.Hits() < a.MaxHits() || a.Poisoned()) && a.InLOS() && a.Distance() <= maxDisntace; }).sort(function (a, b) { return a.Distance() - b.Distance(); });
+                    arr = arr
+                        .filter(function (a) { return (a.Hits() < a.MaxHits() || a.Poisoned()) && a.InLOS() && a.Distance() <= maxDisntace; })
+                        .sort(function (a, b) { return a.Distance() - b.Distance(); });
                     if (arr.length > 0) {
                         result.gameObject(arr[0].Serial());
                     }
                 }
-                else if (value.indexOf("mostinjuredalie") > -1) {
+                else if (value.indexOf('mostinjuredalie') > -1) {
                     var arr = this.getAliveAlies();
                     arr.push.apply(arr, this.getAliveAttackPets());
-                    arr = arr.filter(function (a) { return (a.Hits() < a.MaxHits() || a.Poisoned()) && a.Distance() <= maxDisntace; }).sort(function (a, b) { return a.Hits() - b.Hits(); });
+                    arr = arr
+                        .filter(function (a) { return (a.Hits() < a.MaxHits() || a.Poisoned()) && a.Distance() <= maxDisntace; })
+                        .sort(function (a, b) { return a.Hits() - b.Hits(); });
                     if (arr.length > 0) {
                         result.gameObject(arr[0].Serial());
                     }
                 }
-                else if (value.indexOf("mostinjuredalielos") > -1) {
+                else if (value.indexOf('mostinjuredalielos') > -1) {
                     var arr = this.getAliveAlies();
                     arr.push.apply(arr, this.getAliveAttackPets());
-                    arr = arr.filter(function (a) { return (a.Hits() < a.MaxHits() || a.Poisoned()) && a.InLOS() && a.Distance() <= maxDisntace; }).sort(function (a, b) { return a.Hits() - b.Hits(); });
+                    arr = arr
+                        .filter(function (a) { return (a.Hits() < a.MaxHits() || a.Poisoned()) && a.InLOS() && a.Distance() <= maxDisntace; })
+                        .sort(function (a, b) { return a.Hits() - b.Hits(); });
                     if (arr.length > 0) {
                         result.gameObject(arr[0].Serial());
                     }
                 }
-                if (result.isValid() && result.gameObject().Exists() || result.isStatic()) {
+                if ((result.isValid() && result.gameObject().Exists()) || result.isStatic()) {
                     break;
                 }
             }
@@ -5548,7 +5875,9 @@ var Scripts;
             if (refillJustWhenIHaveNothing === void 0) { refillJustWhenIHaveNothing = false; }
             if (sourceContainerIsItemOnGround === void 0) { sourceContainerIsItemOnGround = false; }
             var serialsInTargetContainer = Orion.FindType(obj.graphic, obj.color || '0xFFFF', targetContainerId);
-            var serialsInSourceContainer = sourceContainerIsItemOnGround ? [sourceContainerId] : Orion.FindType(obj.graphic, obj.color || '0xFFFF', sourceContainerId);
+            var serialsInSourceContainer = sourceContainerIsItemOnGround
+                ? [sourceContainerId]
+                : Orion.FindType(obj.graphic, obj.color || '0xFFFF', sourceContainerId);
             var itemsInTarget = Scripts.Utils.countObjectInContainer(obj, targetContainerId);
             var itemsInSource = Scripts.Utils.countObjectInContainer(obj, sourceContainerId, sourceContainerIsItemOnGround);
             if (itemsInTarget > quantity) {
@@ -5631,7 +5960,8 @@ var Scripts;
                     Orion.MoveItem(item, quantity, targetContainerId);
                     Orion.Wait(responseDelay * 2);
                     var i = Orion.FindObject(item);
-                    if (quantity === 1 && !Scripts.Utils.countObjectInContainer({ graphic: i.Graphic(), color: i.Color() })) {
+                    if (quantity === 1 &&
+                        !Scripts.Utils.countObjectInContainer({ graphic: i.Graphic(), color: i.Color() })) {
                         Orion.MoveItem(item, 2, targetContainerId);
                         Orion.Wait(responseDelay);
                     }
@@ -5668,7 +5998,7 @@ var Scripts;
             return -1;
         };
         Utils.worldSaveCheckWait = function () {
-            if (Orion.InJournal("World save has been")) {
+            if (Orion.InJournal('World save has been')) {
                 Orion.Wait(25000);
                 Orion.ClearJournal('World save has been', 'sys');
             }
@@ -5746,7 +6076,7 @@ var Scripts;
             obj === undefined && (obj = gameObject);
             if (isMyGameObject(obj)) {
                 if (obj.graphic.toUpperCase() === graphic &&
-                    (!obj.color && color === '0X0000' || obj.color.toUpperCase() === color)) {
+                    ((!obj.color && color === '0X0000') || obj.color.toUpperCase() === color)) {
                     return obj;
                 }
                 return;
@@ -5776,11 +6106,11 @@ var Scripts;
             Orion.ShowStatusbar(newSerial, position.x, position.y);
         };
         Utils.determineHpColor = function (percent) {
-            var c = Math.ceil(percent * 3 / 100);
+            var c = Math.ceil((percent * 3) / 100);
             return c === 1 ? ColorEnum.red : c === 2 ? ColorEnum.orange : ColorEnum.green;
         };
         Utils.determineHpColorRGB = function (percent) {
-            var c = Math.ceil(percent * 3 / 100);
+            var c = Math.ceil((percent * 3) / 100);
             return c === 1 ? '#FF0000' : c === 2 ? '#FFFF00' : '#007B00';
         };
         Utils.getARGBColorByNotoriety = function (notoriety, hexaOpacity) {
@@ -5809,7 +6139,7 @@ var Scripts;
             }
         };
         Utils.printColoredHpBar = function (target, percent) {
-            var fullBoxCount = Math.ceil(percent * 6 / 100);
+            var fullBoxCount = Math.ceil((percent * 6) / 100);
             var color = Scripts.Utils.determineHpColor(percent);
             var text = '';
             for (var i = 0; i < 6; i++) {
@@ -5819,7 +6149,7 @@ var Scripts;
         };
         Utils.getLivingObjectInDistance = function (objectSerial) {
             var o = Orion.FindObject(objectSerial);
-            return (o && !o.Dead()) ? o : null;
+            return o && !o.Dead() ? o : null;
         };
         Utils.printDamage = function (serial, previousHp, force) {
             var _a;
@@ -5829,9 +6159,10 @@ var Scripts;
             var max = o.MaxHits();
             var diff = hp - previousHp;
             if (diff !== 0 || force) {
-                diff !== 0 && Orion.PrintFast(serial, diff > 0 ? ColorEnum.green : ColorEnum.red, 0, "" + (diff > 0 ? '+' : '') + diff.toString());
+                diff !== 0 &&
+                    Orion.PrintFast(serial, diff > 0 ? ColorEnum.green : ColorEnum.red, 0, "" + (diff > 0 ? '+' : '') + diff.toString());
                 if (!((_a = config.autoHandlers) === null || _a === void 0 ? void 0 : _a.printDamageDiffOnly)) {
-                    Orion.PrintFast(serial, Scripts.Utils.determineHpColor(hp / max * 100), 0, "[" + hp + "/" + max + "]");
+                    Orion.PrintFast(serial, Scripts.Utils.determineHpColor((hp / max) * 100), 0, "[" + hp + "/" + max + "]");
                 }
             }
         };
@@ -5872,7 +6203,8 @@ var Scripts;
                 Scripts.Utils.playerPrint("!! NEMAS " + name + " !!", ColorEnum.red);
                 return;
             }
-            if ((minimalCountForWarn !== undefined && count <= minimalCountForWarn) || (minimalCountForWarn === undefined && !count)) {
+            if ((minimalCountForWarn !== undefined && count <= minimalCountForWarn) ||
+                (minimalCountForWarn === undefined && !count)) {
                 Scripts.Utils.playerPrint("[ " + name + " " + count + " ]", ColorEnum.red);
             }
             if (count) {
@@ -6066,9 +6398,12 @@ var Scripts;
             if (!helm) {
                 var helmSerial = Scripts.Utils.findFirstType({ graphic: '0x1412', color: '0xFFFF' }, 6);
                 if (!helmSerial) {
-                    Scripts.Utils.createGameObjectSelections([{
-                            ask: 'Target you primary helmet', addObject: 'bishopToggleHelm'
-                        }]);
+                    Scripts.Utils.createGameObjectSelections([
+                        {
+                            ask: 'Target you primary helmet',
+                            addObject: 'bishopToggleHelm'
+                        },
+                    ]);
                 }
                 else {
                     Orion.AddObject('bishopToggleHelm', helmSerial);
@@ -6128,23 +6463,23 @@ var Scripts;
         Clerik.KPZPull = function () {
             Clerik.useKPZ(function () {
                 Scripts.Utils.playerPrint(MedicActionsEnum.pull, ColorEnum.green);
-                Orion.Cast("Greater Heal");
+                Orion.Cast('Greater Heal');
             });
         };
         Clerik.KPZJump = function () {
             Clerik.useKPZ(function () {
                 Scripts.Utils.playerPrint(MedicActionsEnum.jump, ColorEnum.green);
-                Orion.Cast("Protection");
+                Orion.Cast('Protection');
             });
         };
         Clerik.KPZHpSwitch = function () {
             Clerik.useKPZ(function () {
                 Scripts.Utils.playerPrint(MedicActionsEnum.switchHp, ColorEnum.green);
-                Orion.Cast("Reactive Armor");
+                Orion.Cast('Reactive Armor');
             });
         };
         Clerik.useKPZ = function (cb) {
-            var kpzList = Orion.FindType(gameObject.medic.kpz.graphic, gameObject.medic.kpz.color, "backpack");
+            var kpzList = Orion.FindType(gameObject.medic.kpz.graphic, gameObject.medic.kpz.color, 'backpack');
             var kpz = kpzList.length > 0 ? kpzList[0] : null;
             Orion.ClearJournal();
             if (!kpz) {
@@ -6180,7 +6515,7 @@ var Scripts;
             var o = Orion.FindObject(target);
             if (o.Distance() > 3) {
                 Scripts.Utils.playerPrint('Musis k ni dobehnout');
-                Orion.AddDisplayTimer(timer, 5000, 'AboveChar', 'bar', "Hiding", 0, 100, '0x100', 0, 'white');
+                Orion.AddDisplayTimer(timer, 5000, 'AboveChar', 'bar', 'Hiding', 0, 100, '0x100', 0, 'white');
             }
             var w = 5000;
             while (o.Distance() > 3 && w) {
@@ -6336,7 +6671,9 @@ var Scripts;
                 }
                 Orion.ClearJournal();
                 var tool = Scripts.Utils.parseObject(itemObject.make.tool);
-                var toolTarget = itemObject.make.toolTarget ? Scripts.Utils.parseObject(itemObject.make.toolTarget) : undefined;
+                var toolTarget = itemObject.make.toolTarget
+                    ? Scripts.Utils.parseObject(itemObject.make.toolTarget)
+                    : undefined;
                 Scripts.Utils.selectMenu(itemObject.make.menu.name, itemObject.make.menu.selections);
                 toolTarget && Orion.WaitTargetType(toolTarget.graphic, toolTarget.color);
                 Orion.UseType(tool.graphic, tool.color);
@@ -6427,7 +6764,8 @@ var Scripts;
             }
             Scripts.Utils.resetTimer('listMakeMenuTimer');
             if (list.length < 5) {
-                highlightIndex = highlightIndex === undefined || highlightIndex + 1 === list.length ? 0 : highlightIndex + 1;
+                highlightIndex =
+                    highlightIndex === undefined || highlightIndex + 1 === list.length ? 0 : highlightIndex + 1;
             }
             else {
                 highlightIndex = 2;
@@ -6471,7 +6809,7 @@ var Scripts;
         Crafting.bowcraftTrain = function () {
             Scripts.Utils.createGameObjectSelections([
                 { ask: 'Target container with logs', addObject: 'logsContainer' },
-                { ask: 'Target container with shafts', addObject: 'shaftsContainer' }
+                { ask: 'Target container with shafts', addObject: 'shaftsContainer' },
             ]);
             var dagger = Scripts.Utils.findFirstType(gameObject.crafting.blacksmithing.ironWeapons.swordsAndBlades.dagger, 1);
             if (!dagger) {
@@ -6522,13 +6860,13 @@ var Scripts;
                         Orion.Wait(responseDelay);
                         while (!Orion.InJournal('no fish here|Try fishing in water')) {
                             Orion.ClearJournal();
-                            Orion.WaitTargetTileRelative("any", x, y, Player.Z());
+                            Orion.WaitTargetTileRelative('any', x, y, Player.Z());
                             Orion.UseObject(prut);
                             Scripts.Utils.waitWhileSomethingInJournal([
                                 'You fish a while',
                                 'You pull out',
                                 'no fish here',
-                                'Try fishing in water'
+                                'Try fishing in water',
                             ]);
                         }
                         Orion.ClearJournal();
@@ -6560,10 +6898,10 @@ var Scripts;
             var bandTimer = (_a = config === null || config === void 0 ? void 0 : config.bandage) === null || _a === void 0 ? void 0 : _a.bandageTimer;
             if (!target.isValid() && (showTarget || !targes)) {
                 Orion.RemoveTimer(TimersEnum.bandage);
-                Orion.CharPrint(Player.Serial(), ColorEnum.green, "[ band > ? ]");
-                var resultObj = Orion.WaitForAddObject("LastBandageChar", 4000);
+                Orion.CharPrint(Player.Serial(), ColorEnum.green, '[ band > ? ]');
+                var resultObj = Orion.WaitForAddObject('LastBandageChar', 4000);
                 if (resultObj === 1) {
-                    target.gameObject(Orion.FindObject("LastBandageChar").Serial());
+                    target.gameObject(Orion.FindObject('LastBandageChar').Serial());
                 }
             }
             if (target.isValid()) {
@@ -6571,7 +6909,7 @@ var Scripts;
                 Scripts.Utils.resetTimer(TimersEnum.bandage);
                 target.waitTarget();
                 Orion.UseObject(bandagesSerials[0]);
-                Orion.PrintFast(target.gameObject().Serial(), ColorEnum.green, 0, "band..");
+                Orion.PrintFast(target.gameObject().Serial(), ColorEnum.green, 0, 'band..');
             }
             else {
                 Orion.Print(ColorEnum.green, "Zadne zraneni v dosahu {-'-}");
@@ -6610,7 +6948,7 @@ function _hiding() {
 function _hidingPreoccupiedCheck() {
     var _a, _b;
     var hidTimer = (_a = config === null || config === void 0 ? void 0 : config.hiding) === null || _a === void 0 ? void 0 : _a.timer;
-    Orion.AddDisplayTimer(TimersEnum.hiding, 2000, (hidTimer === null || hidTimer === void 0 ? void 0 : hidTimer.position) || 'AboveChar', (hidTimer === null || hidTimer === void 0 ? void 0 : hidTimer.type) || 'bar', (hidTimer === null || hidTimer === void 0 ? void 0 : hidTimer.text) || "Hiding", (hidTimer === null || hidTimer === void 0 ? void 0 : hidTimer.xFromPosition) || 0, (hidTimer === null || hidTimer === void 0 ? void 0 : hidTimer.yFromPosition) || 100, (hidTimer === null || hidTimer === void 0 ? void 0 : hidTimer.textColor) || '0x100', (hidTimer === null || hidTimer === void 0 ? void 0 : hidTimer.font) || 0, (hidTimer === null || hidTimer === void 0 ? void 0 : hidTimer.backgroundColor) || 'red');
+    Orion.AddDisplayTimer(TimersEnum.hiding, 2000, (hidTimer === null || hidTimer === void 0 ? void 0 : hidTimer.position) || 'AboveChar', (hidTimer === null || hidTimer === void 0 ? void 0 : hidTimer.type) || 'bar', (hidTimer === null || hidTimer === void 0 ? void 0 : hidTimer.text) || 'Hiding', (hidTimer === null || hidTimer === void 0 ? void 0 : hidTimer.xFromPosition) || 0, (hidTimer === null || hidTimer === void 0 ? void 0 : hidTimer.yFromPosition) || 100, (hidTimer === null || hidTimer === void 0 ? void 0 : hidTimer.textColor) || '0x100', (hidTimer === null || hidTimer === void 0 ? void 0 : hidTimer.font) || 0, (hidTimer === null || hidTimer === void 0 ? void 0 : hidTimer.backgroundColor) || 'red');
     Scripts.Utils.waitWhileSomethingInJournal(['You have hidden yourself well', 't seem to hide here', 'preoccupied'], 3000);
     Orion.RemoveDisplayTimer(TimersEnum.hiding);
     var showMsg = (_b = config === null || config === void 0 ? void 0 : config.hiding) === null || _b === void 0 ? void 0 : _b.showInnerMessages;
@@ -6822,13 +7160,7 @@ var Scripts;
                     Orion.ClearJournal(undefined, 'sys');
                     Orion.WaitTargetTile('tree', coordinates.x, coordinates.y, coordinates.z);
                     Orion.UseType('0x0F43');
-                    msg = Scripts.Utils.waitWhileSomethingInJournal([
-                        'You put the',
-                        'destroyed hatchet',
-                        'no logs left',
-                        'way to use that',
-                        'fail to produce'
-                    ], undefined, undefined, undefined);
+                    msg = Scripts.Utils.waitWhileSomethingInJournal(['You put the', 'destroyed hatchet', 'no logs left', 'way to use that', 'fail to produce'], undefined, undefined, undefined);
                     if (Orion.InJournal('attacking you')) {
                         var i = 0;
                         while (!Orion.WalkTo(treesToHarv[i].x, treesToHarv[i].y, treesToHarv[i].z, 1, undefined, 1)) {
@@ -6878,17 +7210,17 @@ var Scripts;
             var trees = __spreadArrays(coordinates);
             var reds = Orion.FindType('any', 'any', 'ground', 'mobile|ignoreself', 18, NotorietyEnum.red);
             if (reds.length) {
-                for (var i_1 = coordinates.length - 1; i_1 >= 0; i_1--) {
-                    var t_1 = coordinates[i_1];
+                for (var i = coordinates.length - 1; i >= 0; i--) {
+                    var t = coordinates[i];
                     for (var _i = 0, reds_1 = reds; _i < reds_1.length; _i++) {
                         var r = reds_1[_i];
                         var ro = Orion.FindObject(r);
                         var rx = ro.X();
                         var ry = ro.Y();
-                        var dx = t_1.x > rx ? t_1.x - rx : rx - t_1.x;
-                        var dy = t_1.y > ry ? t_1.y - ry : ry - t_1.y;
+                        var dx = t.x > rx ? t.x - rx : rx - t.x;
+                        var dy = t.y > ry ? t.y - ry : ry - t.y;
                         if (dx < 15 && dy < 15) {
-                            trees.splice(i_1, 1);
+                            trees.splice(i, 1);
                             break;
                         }
                     }
@@ -6961,7 +7293,7 @@ var Scripts;
                 { color: '0x002C', message: 'Citrine' },
                 { color: '0x0015', message: 'Amethyst' },
                 { color: '0x0027', message: 'Ruby' },
-                { color: '0x03E9', message: 'Diamond' }
+                { color: '0x03E9', message: 'Diamond' },
             ];
         };
         Mining.getWantedOreColorsFilter = function () {
@@ -6979,7 +7311,7 @@ var Scripts;
                 '0x19B7',
                 '0x19BA',
                 '0x19B8',
-                '0x19B9'
+                '0x19B9',
             ];
             var drop = false;
             for (var _i = 0, unwantedOre_2 = unwantedOre; _i < unwantedOre_2.length; _i++) {
@@ -7011,7 +7343,7 @@ var Scripts;
             var stop = false;
             while (!stop && !Player.Dead()) {
                 stop = true;
-                var oresAround = Orion.FindType("0x19B7|0x19BA|0x19B8|0x19B9", colors, "ground", "item", distance);
+                var oresAround = Orion.FindType('0x19B7|0x19BA|0x19B8|0x19B9', colors, 'ground', 'item', distance);
                 for (var _i = 0, oresAround_1 = oresAround; _i < oresAround_1.length; _i++) {
                     var ore = oresAround_1[_i];
                     if (distance === 0) {
@@ -7019,7 +7351,7 @@ var Scripts;
                     }
                     else {
                         var oreObject = Orion.FindObject(ore);
-                        if (!oreObject || oreObject.X() === Player.X() && oreObject.Y() === Player.Y()) {
+                        if (!oreObject || (oreObject.X() === Player.X() && oreObject.Y() === Player.Y())) {
                             continue;
                         }
                         var count = oreObject.Count();
@@ -7083,23 +7415,23 @@ var Scripts;
                 var relativeKopX = Player.Y() - y;
                 Orion.ClearJournal();
                 var keepMine = true;
-                while (keepMine && !Orion.InJournal("There is no ore") && !Orion.InJournal("Try mining")) {
+                while (keepMine && !Orion.InJournal('There is no ore') && !Orion.InJournal('Try mining')) {
                     Orion.ClearJournal();
                     Orion.UseType('0x0E85');
                     if (Orion.WaitForTarget(1000)) {
                         Orion.TargetTileRelative('any', relativeKopX, relativeKopY, 0);
                     }
-                    while (!(Orion.InJournal("You put the") ||
-                        Orion.InJournal("There is no ore") ||
-                        Orion.InJournal("Try mining") ||
-                        Orion.InJournal("You loosen") ||
-                        Orion.InJournal("You destroy"))) {
+                    while (!(Orion.InJournal('You put the') ||
+                        Orion.InJournal('There is no ore') ||
+                        Orion.InJournal('Try mining') ||
+                        Orion.InJournal('You loosen') ||
+                        Orion.InJournal('You destroy'))) {
                         Orion.Wait(200);
                     }
-                    if (Orion.InJournal("You loosen")) {
+                    if (Orion.InJournal('You loosen')) {
                         continue;
                     }
-                    if (!Orion.InJournal("You put the")) {
+                    if (!Orion.InJournal('You put the')) {
                         continue;
                     }
                     Scripts.Mining.dropUnwantedOre();
@@ -7252,8 +7584,7 @@ var Scripts;
                 Scripts.Auto.killObject(animalSerial);
                 return;
             }
-            if (Orion.InJournal('Your taming failed') ||
-                Orion.InJournal('Ochoceni se nezdarilo')) {
+            if (Orion.InJournal('Your taming failed') || Orion.InJournal('Ochoceni se nezdarilo')) {
                 Scripts.Taming.trainOnAnimal(animalSerial, ranger);
                 return;
             }
@@ -7278,22 +7609,22 @@ var Scripts;
             Orion.IgnoreReset();
             Orion.ClearJournal();
             ranger && Scripts.Taming.undressRobe();
-            var monstersAround = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "nothuman|live|near", 22, "gray");
+            var monstersAround = Orion.FindType('!0x0190|!0x0191', '-1', 'ground', 'nothuman|live|near', 22, 'gray');
             while (monstersAround.length) {
                 Orion.Ignore(monstersAround[0]);
                 Orion.SetGlobal('tamingCounter', '0');
                 Scripts.Taming.trainOnAnimal(monstersAround[0], ranger);
-                monstersAround = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "nothuman|live|near", 22, "gray");
+                monstersAround = Orion.FindType('!0x0190|!0x0191', '-1', 'ground', 'nothuman|live|near', 22, 'gray');
             }
         };
         Taming.tameAnimalsAround = function (opts) {
             Orion.IgnoreReset();
             Orion.ClearJournal();
-            var monstersAround = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "nothuman|live|near", 22, "gray");
+            var monstersAround = Orion.FindType('!0x0190|!0x0191', '-1', 'ground', 'nothuman|live|near', 22, 'gray');
             while (monstersAround.length) {
                 Orion.Ignore(monstersAround[0]);
                 Scripts.Taming.taming(opts, monstersAround[0]);
-                monstersAround = Orion.FindType("!0x0190|!0x0191", "-1", "ground", "nothuman|live|near", 22, "gray");
+                monstersAround = Orion.FindType('!0x0190|!0x0191', '-1', 'ground', 'nothuman|live|near', 22, 'gray');
             }
         };
         Taming.useShrinkKad = function () {

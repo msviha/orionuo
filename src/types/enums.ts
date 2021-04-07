@@ -2,7 +2,7 @@ enum DirectionEnum {
     West = 6,
     North = 0,
     East = 2,
-    South = 4
+    South = 4,
 }
 
 enum ColorEnum {
@@ -10,25 +10,25 @@ enum ColorEnum {
     red = '0x0021',
     green = '0x0044',
     orange = '0x002c',
-    pureWhite = '0x0B1D'
+    pureWhite = '0x0B1D',
 }
 
 enum TargetEnum {
     self = 'self',
     lastattack = 'lastattack',
     laststatus = 'laststatus',
-    lasttarget = 'lasttarget'
+    lasttarget = 'lasttarget',
 }
 
 enum CustomStatusBarEnum {
     close = 0,
-    click = 666
+    click = 666,
 }
 
 enum OcarovaniEnum {
     mytheril = 'mytheril',
     black = 'black',
-    blood = 'blood'
+    blood = 'blood',
 }
 
 enum ScrollEnum {
@@ -43,12 +43,12 @@ enum ScrollEnum {
     ivm = 'ivm',
     ress = 'ress',
     recall = 'recall',
-    heal = 'heal'
+    heal = 'heal',
 }
 
 enum TargetIndicationEnum {
     none = 'none',
-    large = 'large'
+    large = 'large',
 }
 
 enum ReagentsEnum {
@@ -59,7 +59,7 @@ enum ReagentsEnum {
     ga = 'ga',
     gi = 'gi',
     ns = 'ns',
-    sa = 'sa'
+    sa = 'sa',
 }
 
 enum FlagsEnum {
@@ -79,7 +79,7 @@ enum FlagsEnum {
     ignoreself = 'ignoreself',
     inlos = 'inlos',
     nearmouse = 'nearmouse',
-    recurse = 'recurse'
+    recurse = 'recurse',
 }
 
 enum NotorietyEnum {
@@ -89,17 +89,17 @@ enum NotorietyEnum {
     criminal = 'criminal',
     orange = 'orange',
     red = 'red',
-    yellow = 'yellow'
+    yellow = 'yellow',
 }
 
 enum NotorietyNum {
     blue = 1,
-    green = 2, 
+    green = 2,
     gray = 3,
     criminal = 4,
     orange = 5,
     red = 6,
-    yellow = 7
+    yellow = 7,
 }
 
 enum PotionsEnum {
@@ -117,13 +117,13 @@ enum PotionsEnum {
     ns = 'ns',
     shrink = 'shrink',
     lavabomb = 'lavabomb',
-    invis = 'invis'
+    invis = 'invis',
 }
 
 enum NecroScrollEnum {
     vfp = 'vfp',
     kalnox = 'kalnox',
-    haluze = 'haluze'
+    haluze = 'haluze',
 }
 
 enum TimersEnum {
@@ -132,52 +132,51 @@ enum TimersEnum {
     hiding = 'hiding',
     invis = 'invis',
     invisLong = 'invisLong',
-    bandage = 'bandage'
+    bandage = 'bandage',
 }
 
 enum GlobalEnum {
-    customStatusBars = 'customStatusBars'
+    customStatusBars = 'customStatusBars',
 }
 
 enum PortBookOptionsEnum {
     opravaStats = 'opravaStats',
     mark = 'mark',
     kop = 'kop',
-    nabiti = 'nabiti'
+    nabiti = 'nabiti',
 }
 
 enum SelectionTypeEnum {
     gump = 'gump',
-    menu = 'menu'
+    menu = 'menu',
 }
 
 enum MedicActionsEnum {
-    pull = "KPZ - Pull",
-    jump = "KPZ - Jump",
-    switchHp = "KPZ - Switch HP"
+    pull = 'KPZ - Pull',
+    jump = 'KPZ - Jump',
+    switchHp = 'KPZ - Switch HP',
 }
 
 enum RenameNameType {
     autoName = 'autoName',
-    nameList = 'nameList'
-} 
+    nameList = 'nameList',
+}
 
 enum TargetExEnum {
     /**self ale pokud sem zranen nebo otraven*/
-    selfinjured = "selfinjured",
+    selfinjured = 'selfinjured',
     /**laststatus pokud to neni serial z friendlistu nebo pet*/
-    laststatusenemy = "laststatusenemy",
+    laststatusenemy = 'laststatusenemy',
     /**mount ulozeny pres moutn script*/
-    mount = "mount",
+    mount = 'mount',
     /**nejblizsi zraneny friend, pet nebo mount */
-    nearinjuredalie = "nearinjuredalie",
+    nearinjuredalie = 'nearinjuredalie',
     /**nejblizsi zraneny friend, pet nebo mount s vyuzitim Line of Sight (presne neni znamo jak dobre to funguje) */
-    nearinjuredalielos = "nearinjuredalielos",
+    nearinjuredalielos = 'nearinjuredalielos',
     /**nejvic zraneny friend, pet nebo mount */
-    mostinjuredalie = "mostinjuredalie",
+    mostinjuredalie = 'mostinjuredalie',
     /**nejvic zraneny friend, pet nebo mount s vyuzitim Line of Sight (presne neni znamo jak dobre to funguje) */
-    mostinjuredalielos = "mostinjuredalielos",
+    mostinjuredalielos = 'mostinjuredalielos',
     /**last target pouze pokud je to charakter */
-    lasttargetmobile = "lasttargetmobile"
-
+    lasttargetmobile = 'lasttargetmobile',
 }

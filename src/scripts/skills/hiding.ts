@@ -34,23 +34,24 @@ function _hidingPreoccupiedCheck() {
         2000,
         hidTimer?.position || 'AboveChar',
         hidTimer?.type || 'bar',
-        hidTimer?.text || "Hiding",
+        hidTimer?.text || 'Hiding',
         hidTimer?.xFromPosition || 0,
         hidTimer?.yFromPosition || 100,
         hidTimer?.textColor || '0x100',
         hidTimer?.font || 0,
-        hidTimer?.backgroundColor || 'red'
+        hidTimer?.backgroundColor || 'red',
     );
-    Scripts.Utils.waitWhileSomethingInJournal(['You have hidden yourself well', 't seem to hide here', 'preoccupied'], 3000);
+    Scripts.Utils.waitWhileSomethingInJournal(
+        ['You have hidden yourself well', 't seem to hide here', 'preoccupied'],
+        3000,
+    );
     Orion.RemoveDisplayTimer(TimersEnum.hiding);
     const showMsg = config?.hiding?.showInnerMessages;
     if (Orion.InJournal('You have hidden yourself well') && showMsg) {
         Orion.CharPrint(Player.Serial(), ColorEnum.green, '[ Hidden ]');
-    }
-    else if (Orion.InJournal('t seem to hide here') && showMsg) {
+    } else if (Orion.InJournal('t seem to hide here') && showMsg) {
         Orion.CharPrint(Player.Serial(), ColorEnum.red, '[ FAILED ]');
-    }
-    else if (Orion.InJournal('preoccupied')) {
+    } else if (Orion.InJournal('preoccupied')) {
         Orion.WarMode(true);
         Orion.Wait(100);
         Orion.Print(ColorEnum.none, 'preoccupied - trying to hide again');

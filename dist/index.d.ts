@@ -1,4 +1,4 @@
-declare let config: any;
+declare const config: any;
 declare const responseDelay = 350;
 declare const gameObject: any;
 declare const trackingFilter: any;
@@ -257,7 +257,7 @@ declare namespace Scripts {
 }
 declare namespace Scripts {
     class Statusbar {
-        static create(): void;
+        static create(targetSerial?: string): void;
         static updateStatusbars(): void;
         static updateStatusBarGumpForObject(o: GameObject, s: any, gump: CustomGumpObject, forceUpdate?: boolean): void;
         static drawBody(gump: CustomGumpObject, notoriety?: number, dead?: boolean): void;

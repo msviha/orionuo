@@ -2,7 +2,7 @@ namespace Scripts {
     /**
      * Trida objektu ktery je vracen pri pouzivani rozsireneho targetovani
      */
-    export class TargetResult  {
+    export class TargetResult {
         private serial?: string;
         private object?: GameObject;
         private x?: number;
@@ -14,7 +14,7 @@ namespace Scripts {
             return this.isValid() || this.isStatic();
         }
 
-        public gameObject(serial?:string) {
+        public gameObject(serial?: string) {
             if (serial) {
                 this.serial = serial;
             }
@@ -33,9 +33,9 @@ namespace Scripts {
             TargetingEx.cancelResetTarget();
             if (this.isValid()) {
                 Orion.WaitTargetObject(this.serial);
-            }  else if (this.isStatic()) {
+            } else if (this.isStatic()) {
                 Orion.WaitTargetTile(this.graphic || '0xFFFF', this.x, this.y, this.z);
-            }         
+            }
         }
     }
 }

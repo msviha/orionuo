@@ -24,38 +24,37 @@ import Timers from './Scripts/timers';
 import TradeWindow from './Scripts/tradeWindow';
 import CustomGump from './Scripts/customGump';
 
-
 declare global {
-	const Orion: OrionStatic;
-	const TextWindow: TextWindow;
-	const Player: PlayerCharacter;
-	const SelectedTile: SelectedTile;
-	const Shared: Shared;
-	const CustomGumpResponse: CustomGumpResponse;
+    const Orion: OrionStatic;
+    const TextWindow: TextWindow;
+    const Player: PlayerCharacter;
+    const SelectedTile: SelectedTile;
+    const Shared: Shared;
+    const CustomGumpResponse: CustomGumpResponse;
 }
 
-interface OrionStatic extends
-	CharacterMovement,
-	ClientMacro,
-	ClientOptions,
-	Collections,
-	ContextMenu,
-	CustomGump,
-	CustomGumpObject,
-	Equipment,
-	Gumps,
-	InteractionWithFiles,
-	InteractionWithOtherScripts,
-	Journal,
-	Map,
-	Menu,
-	NewTargetingSystem,
-	NonCategorized,
-	Objects,
-	ObjectsSearching,
-	Prompt,
-	Shop,
-	Speech,
-	Targeting,
-	Timers,
-	TradeWindow { }
+interface OrionStatic
+    extends CharacterMovement,
+        ClientMacro,
+        ClientOptions,
+        Collections,
+        ContextMenu,
+        CustomGump,
+        CustomGumpObject,
+        Equipment,
+        Gumps,
+        InteractionWithFiles,
+        InteractionWithOtherScripts,
+        Journal,
+        Map,
+        Menu,
+        NewTargetingSystem,
+        NonCategorized,
+        Objects,
+        ObjectsSearching,
+        Prompt,
+        Shop,
+        Speech,
+        Targeting,
+        Timers,
+        TradeWindow {}
