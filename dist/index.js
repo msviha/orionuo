@@ -3699,7 +3699,7 @@ var Scripts;
             for (var _a = 0, itemsOnGround_1 = itemsOnGround; _a < itemsOnGround_1.length; _a++) {
                 var itemId = itemsOnGround_1[_a];
                 Orion.MoveItem(itemId, 0, 'myLootBag');
-                Orion.Wait(serverLagActionsLeft ? 50 : 350);
+                Orion.Wait(serverLagActionsLeft > 0 ? 50 : 350);
                 serverLagActionsLeft--;
             }
         };
@@ -3722,7 +3722,7 @@ var Scripts;
                 for (var _i = 0, itemsInCorpse_2 = itemsInCorpse; _i < itemsInCorpse_2.length; _i++) {
                     var itemId = itemsInCorpse_2[_i];
                     Orion.MoveItem(itemId, 0, 'myLootBag');
-                    Orion.Wait(serverLagActionsLeft ? 150 : 500);
+                    Orion.Wait(serverLagActionsLeft > 0 ? 150 : 500);
                     serverLagActionsLeft--;
                 }
             }
@@ -3731,6 +3731,9 @@ var Scripts;
             return Orion.FindType(-1, -1, 'backpack', 'item', undefined, undefined, false);
         };
         Loot.moveLootToLootBag = function (oldSnapshot) {
+            if (!Orion.FindObject(LOOT_BAG)) {
+                return;
+            }
             this.getBagSnapshot()
                 .filter(function (serial) { return oldSnapshot.indexOf(serial) < 0; })
                 .forEach(function (serial, i) {
