@@ -2416,7 +2416,7 @@ var __assign = (this && this.__assign) || function () {
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 1.1.2');
+    Orion.Print(-1, 'version 1.2.0');
     Orion.Print(-1, '-------------+');
 }
 function Autostart() {
