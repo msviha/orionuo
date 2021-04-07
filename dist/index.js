@@ -3695,16 +3695,9 @@ var Scripts;
                 listOfCorpses = Orion.FindType('0x2006', '-1', 'ground', 'fast', 2, 'red');
             }
             var itemsOnGround = Orion.FindList('lootItems', 'ground', 'fast', 4);
-            var serverLagActionsLeft = 4;
-            for (var _a = 0, itemsOnGround_1 = itemsOnGround; _a < itemsOnGround_1.length; _a++) {
-                var itemId = itemsOnGround_1[_a];
-                Orion.MoveItem(itemId, 0, 'myLootBag');
-                Orion.Wait(serverLagActionsLeft > 0 ? 50 : 350);
-                serverLagActionsLeft--;
-            }
+            this.grabItems(itemsOnGround);
         };
         Loot.lootCorpseId = function (corpseId, cut, weapon) {
-            var serverLagActionsLeft = 4;
             Orion.OpenContainer(corpseId, 5000, "Container id " + corpseId + " not found");
             var hasLootBag = Orion.Count('0x0E76', '0x049A', corpseId) > 0;
             if (hasLootBag && cut) {
@@ -3719,12 +3712,16 @@ var Scripts;
             }
             var itemsInCorpse = Orion.FindList('lootItems', corpseId);
             if (itemsInCorpse.length) {
-                for (var _i = 0, itemsInCorpse_2 = itemsInCorpse; _i < itemsInCorpse_2.length; _i++) {
-                    var itemId = itemsInCorpse_2[_i];
-                    Orion.MoveItem(itemId, 0, 'myLootBag');
-                    Orion.Wait(serverLagActionsLeft > 0 ? 150 : 500);
-                    serverLagActionsLeft--;
-                }
+                this.grabItems(itemsInCorpse);
+            }
+        };
+        Loot.grabItems = function (serials) {
+            var serverLagActionsLeft = 4;
+            for (var _i = 0, serials_2 = serials; _i < serials_2.length; _i++) {
+                var serial = serials_2[_i];
+                Orion.MoveItem(serial, 0, 'myLootBag');
+                Orion.Wait(serverLagActionsLeft > 0 ? 150 : 500);
+                serverLagActionsLeft--;
             }
         };
         Loot.getBagSnapshot = function () {
@@ -6356,8 +6353,8 @@ var Scripts;
                 return;
             }
             serials = Orion.FindType(graphic);
-            for (var _i = 0, serials_2 = serials; _i < serials_2.length; _i++) {
-                var s = serials_2[_i];
+            for (var _i = 0, serials_3 = serials; _i < serials_3.length; _i++) {
+                var s = serials_3[_i];
                 Orion.Click(s);
                 Orion.Wait(100);
                 if (Orion.FindObject(s).Name().indexOf(name) === 0) {
@@ -7445,8 +7442,8 @@ var Scripts;
                     if (!serials.length) {
                         continue;
                     }
-                    for (var _b = 0, serials_3 = serials; _b < serials_3.length; _b++) {
-                        var serial = serials_3[_b];
+                    for (var _b = 0, serials_4 = serials; _b < serials_4.length; _b++) {
+                        var serial = serials_4[_b];
                         var oreObject = Orion.FindObject(serial);
                         if (ore.color === oreObject.Color()) {
                             Orion.Drop(serial);

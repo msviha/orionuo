@@ -110,12 +110,7 @@ namespace Scripts {
             }
 
             const itemsOnGround = Orion.FindList('lootItems', 'ground', 'fast', 4);
-            let serverLagActionsLeft = 4;
-            for (const itemId of itemsOnGround) {
-                Orion.MoveItem(itemId, 0, 'myLootBag');
-                Orion.Wait(serverLagActionsLeft > 0 ? 50 : 350);
-                serverLagActionsLeft--;
-            }
+            this.grabItems(itemsOnGround);
         }
 
         /**
@@ -126,7 +121,6 @@ namespace Scripts {
          * @param weapon boolean - pouzivat zbran na rezanie?
          */
         static lootCorpseId(corpseId: string, cut?: boolean, weapon?: boolean) {
-            let serverLagActionsLeft = 4;
             Orion.OpenContainer(corpseId, 5000, `Container id ${corpseId} not found`);
 
             const hasLootBag = Orion.Count('0x0E76', '0x049A', corpseId) > 0;
@@ -143,12 +137,16 @@ namespace Scripts {
 
             const itemsInCorpse = Orion.FindList('lootItems', corpseId);
             if (itemsInCorpse.length) {
-                for (const itemId of itemsInCorpse) {
-                    // TODO doresit prehazeni veci z hlavniho baglu do myLootBag pri lotovani pytliku
-                    Orion.MoveItem(itemId, 0, 'myLootBag');
-                    Orion.Wait(serverLagActionsLeft > 0 ? 150 : 500);
-                    serverLagActionsLeft--;
-                }
+                this.grabItems(itemsInCorpse);
+            }
+        }
+
+        private static grabItems(serials: string[]) {
+            let serverLagActionsLeft = 4;
+            for (const serial of serials) {
+                Orion.MoveItem(serial, 0, 'myLootBag');
+                Orion.Wait(serverLagActionsLeft > 0 ? 150 : 500);
+                serverLagActionsLeft--;
             }
         }
 
