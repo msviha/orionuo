@@ -118,6 +118,7 @@ enum PotionsEnum {
     shrink = 'shrink',
     lavabomb = 'lavabomb',
     invis = 'invis',
+    halucination = 'halucination',
 }
 
 enum NecroScrollEnum {

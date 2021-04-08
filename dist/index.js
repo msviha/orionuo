@@ -1341,7 +1341,9 @@ var gameObject = {
                 color: '0x0003'
             },
             gmMortarSelection: 'Total Mana Refresh (612 Eyes of Newt nebo 306 Blue Eyes of Newt)',
-            alchemySelection: 'Total Mana Refresh'
+            alchemySelection: 'Total Mana Refresh',
+            reagent: 'eyes_of_newt',
+            reagentsCount: 6
         },
         mr: {
             name: 'Mana Refresh Potion',
@@ -1352,7 +1354,9 @@ var gameObject = {
                 graphic: '0x1843',
                 color: '0x0005'
             },
-            alchemySelection: 'Mana Refresh'
+            alchemySelection: 'Mana Refresh',
+            reagent: 'eyes_of_newt',
+            reagentsCount: 3
         },
         gb: {
             name: 'Greater Blood potion',
@@ -1378,7 +1382,9 @@ var gameObject = {
                 color: '0x08A7'
             },
             gmMortarSelection: 'Greater Heal (714 Ginsengs)',
-            alchemySelection: 'Greater Heal'
+            alchemySelection: 'Greater Heal',
+            reagent: 'gi',
+            reagentsCount: 7
         },
         gs: {
             name: 'Greater Strength Potion',
@@ -1394,7 +1400,9 @@ var gameObject = {
                 color: '0x0481'
             },
             gmMortarSelection: 'Greater Strength (612 Mandrake Roots)',
-            alchemySelection: 'Greater Strength'
+            alchemySelection: 'Greater Strength',
+            reagent: 'mr',
+            reagentsCount: 6
         },
         tr: {
             name: 'Total Refresh potion',
@@ -1410,7 +1418,9 @@ var gameObject = {
                 color: '0x014D'
             },
             gmMortarSelection: 'Total Refresh (510 Black Pearls)',
-            alchemySelection: 'Total Refresh'
+            alchemySelection: 'Total Refresh',
+            reagent: 'bp',
+            reagentsCount: 5
         },
         gc: {
             name: 'Greater Cure Potion',
@@ -1426,7 +1436,9 @@ var gameObject = {
                 color: '0x0842'
             },
             gmMortarSelection: 'Greater Cure (612 Garlics)',
-            alchemySelection: 'Greater Cure'
+            alchemySelection: 'Greater Cure',
+            reagent: 'ga',
+            reagentsCount: 6
         },
         dp: {
             name: 'Deathly Poison Potion',
@@ -1442,7 +1454,9 @@ var gameObject = {
                 color: '0x08A2'
             },
             gmMortarSelection: 'Deadly Poison (1020 Nightshades)',
-            alchemySelection: 'Deadly Poison'
+            alchemySelection: 'Deadly Poison',
+            reagent: 'ns',
+            reagentsCount: 10
         },
         lc: {
             graphic: '0x0F07',
@@ -1455,7 +1469,9 @@ var gameObject = {
                 graphic: '0x1843',
                 color: '0x0091'
             },
-            alchemySelection: 'Lesser Cure Potion'
+            alchemySelection: 'Lesser Cure Potion',
+            reagent: 'ga',
+            reagentsCount: 2
         },
         ns: {
             name: 'Nightsight Potion',
@@ -1466,7 +1482,9 @@ var gameObject = {
                 graphic: '0x1843',
                 color: '0x03C4'
             },
-            alchemySelection: 'Nightsight'
+            alchemySelection: 'Nightsight',
+            reagent: 'ss',
+            reagentsCount: 2
         },
         ag: {
             name: 'Agility Potion',
@@ -1477,7 +1495,23 @@ var gameObject = {
                 graphic: '0x1843',
                 color: '0x00BF'
             },
-            alchemySelection: 'Agility Potion'
+            alchemySelection: 'Agility Potion',
+            reagent: 'bm',
+            reagentsCount: 2
+        },
+        ga: {
+            name: 'Greater Agility Potion',
+            graphic: '0x0F08',
+            color: '0x0000',
+            kad: {
+                name: 'Nadoba s Greater Agility',
+                graphic: '0x1843',
+                color: '0x00BF'
+            },
+            gmMortarSelection: 'Greater Agility (306 Blood Mosses)',
+            alchemySelection: 'Greater Agility Potion',
+            reagent: 'bm',
+            reagentsCount: 3
         },
         shrink: {
             name: 'Shrink',
@@ -1493,7 +1527,9 @@ var gameObject = {
                 color: '0x0724'
             },
             gmMortarSelection: 'Shrink (306 Batwings)',
-            alchemySelection: 'Shrink'
+            alchemySelection: 'Shrink',
+            reagent: 'batwing',
+            reagentsCount: 3
         },
         lavabomb: {
             name: 'Lava Bomb',
@@ -1505,7 +1541,9 @@ var gameObject = {
                 color: '0x000E'
             },
             gmMortarSelection: 'Lava Bomb (612 Volcanic Ashes)',
-            alchemySelection: 'Lava Bomb'
+            alchemySelection: 'Lava Bomb',
+            reagent: 'volcanic_ash',
+            reagentsCount: 6
         },
         invis: {
             name: 'Invisibility',
@@ -1516,7 +1554,9 @@ var gameObject = {
                 color: '0x0B77'
             },
             gmMortarSelection: "Invisibility (408 Wyrm's Hearts)",
-            alchemySelection: 'Invisibility'
+            alchemySelection: 'Invisibility',
+            reagent: 'wyrms_heart',
+            reagentsCount: 4
         },
         lp: {
             graphic: '0x0F0A',
@@ -1525,7 +1565,21 @@ var gameObject = {
                 graphic: '0x1843',
                 color: '0x089F'
             },
-            alchemySelection: 'Lesser Poison'
+            alchemySelection: 'Lesser Poison',
+            reagent: 'ns',
+            reagentsCount: 2
+        },
+        halucination: {
+            name: 'Hallucination',
+            graphic: '0x0F06',
+            color: '0x0B90',
+            kad: {
+                graphic: '0x1843',
+                color: '0x0B90'
+            },
+            alchemySelection: 'Hallucination',
+            reagent: 'serpent_scales',
+            reagentsCount: 6
         }
     },
     books: {
@@ -2511,7 +2565,10 @@ function addMount() {
     Scripts.Mount.addMount();
 }
 function alchemy(potionName) {
-    Scripts.Potions.alchemy(potionName);
+    Scripts.Alchemy.mix(potionName);
+}
+function mix(potionName) {
+    Scripts.Alchemy.mix(potionName);
 }
 function attackLast() {
     Orion.Attack(Orion.ClientLastAttack());
@@ -2593,7 +2650,7 @@ function friend() {
     Scripts.Targeting.addFriend();
 }
 function gmMortar(potionName) {
-    Scripts.Potions.gmMortar(potionName);
+    Scripts.Alchemy.gmMortar(potionName);
 }
 function harp(target) {
     Scripts.Music.harp(target);
@@ -3180,6 +3237,23 @@ var Scripts;
                 totalInTarget = Scripts.Utils.countObjectInContainer({ graphic: graphic, color: color }, 'massMoveTargetContainer');
             }
             Scripts.Utils.playerPrint("Mas uz " + totalInTarget + " techto itemu v containeru");
+        };
+        Common.refillReagent = function (reagent, sourceContainerName, count) {
+            if (count === void 0) { count = 100; }
+            Orion.Print(-1, 'Refilling...');
+            Orion.Print(-1, reagent ? 'true' : 'false');
+            var countInSource = Orion.Count(reagent.graphic, -1, sourceContainerName, undefined, false);
+            Orion.Print(-1, countInSource + " left in source");
+            if (countInSource <= count) {
+                Orion.Print(ColorEnum.red, 'Not enough ' + reagent);
+                return false;
+            }
+            var regFound = Orion.FindType(reagent.graphic, -1, sourceContainerName, undefined, undefined, undefined, false);
+            if (regFound.length) {
+                Orion.MoveItem(regFound[0], count, 'backpack');
+                Orion.Wait(250);
+            }
+            return true;
         };
         Common.mysticCounter = function () {
             var _a;
@@ -4939,14 +5013,6 @@ var Scripts;
             }
             return kad;
         };
-        Potions.getMortar = function () {
-            var mortars = Orion.FindType(gameObject.uncategorized.mortar.graphic);
-            if (!mortars.length) {
-                Scripts.Utils.log("Nemas mortar", ColorEnum.red);
-                throw 'Nemas mortar';
-            }
-            return mortars[0];
-        };
         Potions.drinkPotion = function (potionName, switchWarModeWhenNeeded, displayTimers, displayInfo, refillEmptyLimit, displayInvisLongTimer) {
             if (switchWarModeWhenNeeded === void 0) { switchWarModeWhenNeeded = true; }
             if (displayTimers === void 0) { displayTimers = true; }
@@ -5031,89 +5097,6 @@ var Scripts;
                 Scripts.Utils.log('Nenalezena drink hlaska v journalu za posledni vterinu', ColorEnum.red);
             }
             Orion.ClearJournal(succMsg + "|" + failMsg + "|" + paraMsg);
-        };
-        Potions.gmMortar = function (potionName) {
-            if (!isPotionsEnum(potionName)) {
-                return;
-            }
-            var p = gameObject.potions[potionName];
-            var cilovaKadSerial = Scripts.Potions.getKadForPotion(p);
-            var isEmptyKad = Orion.FindType(gameObject.uncategorized.emptyKad.graphic, gameObject.uncategorized.emptyKad.color);
-            if (!isEmptyKad) {
-                Scripts.Utils.log('Nemas praznou kad', ColorEnum.red);
-                return;
-            }
-            Scripts.Utils.playerPrint("Target gmmortar for making \"" + potionName + "\"");
-            Orion.WaitForAddObject('gmMortar', 60000);
-            var _loop_3 = function () {
-                Orion.ClearJournal();
-                Orion.Wait(50);
-                var kadePrevious = Orion.FindType(gameObject.uncategorized.emptyKad.graphic);
-                Scripts.Utils.selectMenu('Vyber typ potionu', [p.gmMortarSelection]);
-                Orion.UseObject('gmMortar');
-                Scripts.Utils.waitWhileSomethingInJournal(['You put the Nadoba', 'Musis mit']);
-                if (Orion.InJournal('Musis mit')) {
-                    Scripts.Utils.log('Dosly regy', ColorEnum.red);
-                    return { value: void 0 };
-                }
-                var kadeNew = Orion.FindType(gameObject.uncategorized.emptyKad.graphic);
-                var michnutaKadSerial = kadeNew.filter(function (i) { return kadePrevious.indexOf(i) === -1; })[0];
-                Orion.ClearJournal();
-                Orion.Wait(50);
-                Orion.WaitTargetObject(cilovaKadSerial);
-                Orion.UseObject(michnutaKadSerial);
-                Scripts.Utils.waitWhileSomethingInJournal(['Prelil jsi']);
-                Orion.ClearJournal();
-                Orion.Wait(responseDelay);
-                var emptyBottle = Scripts.Potions.getEmptyBottle();
-                Orion.WaitTargetObject(emptyBottle);
-                Orion.UseObject(michnutaKadSerial);
-                Scripts.Utils.waitWhileSomethingInJournal(['You put']);
-                Orion.ClearJournal();
-                Orion.Wait(50);
-                Orion.WaitTargetType(p.graphic, p.color);
-                Orion.UseObject(cilovaKadSerial);
-                Scripts.Utils.waitWhileSomethingInJournal(['You put']);
-            };
-            while (true) {
-                var state_2 = _loop_3();
-                if (typeof state_2 === "object")
-                    return state_2.value;
-            }
-        };
-        Potions.alchemy = function (potionName) {
-            if (!isPotionsEnum(potionName)) {
-                return;
-            }
-            var p = gameObject.potions[potionName];
-            var mortar = Scripts.Potions.getMortar();
-            while (true) {
-                Scripts.Utils.worldSaveCheckWait();
-                Orion.ClearJournal();
-                Scripts.Utils.selectMenu('Vyber typ potionu', [p.alchemySelection]);
-                Orion.UseObject(mortar);
-                Scripts.Utils.waitWhileSomethingInJournal(['You completed', 'You toss', 'Nemas dostatecny'], 60000);
-                if (Orion.InJournal('Nemas dostatecny')) {
-                    Scripts.Utils.log('Dosly regy', ColorEnum.red);
-                    return;
-                }
-                if (Orion.InJournal('You toss')) {
-                    continue;
-                }
-                Scripts.Utils.worldSaveCheckWait();
-                Orion.ClearJournal();
-                Orion.UseObject(mortar);
-                Scripts.Utils.waitWhileSomethingInJournal(['You pour'], 60000);
-                Orion.Wait(responseDelay);
-                Scripts.Utils.worldSaveCheckWait();
-                Orion.ClearJournal();
-                var potion = Scripts.Utils.findFirstType(p);
-                var kad = Scripts.Potions.getKadForPotion(p);
-                Orion.WaitTargetObject(potion);
-                Orion.UseObject(kad);
-                Scripts.Utils.waitWhileSomethingInJournal(['You put'], 60000);
-                Orion.Wait(responseDelay);
-            }
         };
         Potions.fillPotion = function (potionName, switchWarModeWhenNeeded, kadSerial, emptyBottleSerial) {
             if (switchWarModeWhenNeeded === void 0) { switchWarModeWhenNeeded = true; }
@@ -6763,6 +6746,125 @@ var Scripts;
 })(Scripts || (Scripts = {}));
 var Scripts;
 (function (Scripts) {
+    var reagentsContainerName = 'alchemy/reagentsContainerName';
+    var Alchemy = (function () {
+        function Alchemy() {
+        }
+        Alchemy.getMortar = function () {
+            var mortars = Orion.FindType(gameObject.uncategorized.mortar.graphic);
+            if (!mortars.length) {
+                Scripts.Utils.log("Nemas mortar", ColorEnum.red);
+                throw 'Nemas mortar';
+            }
+            return mortars[0];
+        };
+        Alchemy.mixOne = function (p) {
+            var potion = typeof p === 'string' ? gameObject.potions[p] : p;
+            var mortar = this.getMortar();
+            var reagent = gameObject.regy[potion.reagent] || gameObject.necroRegy[potion.reagent];
+            Scripts.Utils.worldSaveCheckWait();
+            Orion.ClearJournal();
+            Scripts.Utils.playerPrint("Mixing " + potion.alchemySelection);
+            Scripts.Utils.selectMenu('Vyber typ potionu', [potion.alchemySelection]);
+            Orion.UseObject(mortar);
+            Scripts.Utils.waitWhileSomethingInJournal(['You pur', 'You completed', 'You toss', 'Nemas dostatecny'], 60000);
+            if (Orion.InJournal('Nemas dostatecny')) {
+                Orion.UseObject(reagentsContainerName);
+                Orion.Wait(100);
+                Orion.Print(-1);
+                if (!Scripts.Common.refillReagent(reagent, reagentsContainerName, potion.reagentsCount * 10)) {
+                    Scripts.Utils.log('Dosly regy', ColorEnum.red);
+                    return false;
+                }
+                return false;
+            }
+            if (Orion.InJournal('You toss')) {
+                return false;
+            }
+            Scripts.Utils.worldSaveCheckWait();
+            Orion.ClearJournal();
+            Orion.UseObject(mortar);
+            Scripts.Utils.waitWhileSomethingInJournal(['You pour'], 60000);
+            Orion.Wait(responseDelay);
+            return true;
+        };
+        Alchemy.mix = function (potionName) {
+            if (!isPotionsEnum(potionName)) {
+                return;
+            }
+            Scripts.Utils.createGameObjectSelections([{ ask: 'Kontajner s regmi?', addObject: reagentsContainerName }]);
+            Orion.UseObject(reagentsContainerName);
+            Orion.Wait(100);
+            var p = gameObject.potions[potionName];
+            while (true) {
+                var result = this.mixOne(p);
+                Orion.Wait(responseDelay);
+                if (result) {
+                    Scripts.Utils.worldSaveCheckWait();
+                    Orion.ClearJournal();
+                    var potion = Scripts.Utils.findFirstType(p);
+                    var kad = Scripts.Potions.getKadForPotion(p);
+                    Orion.WaitTargetObject(potion);
+                    Orion.UseObject(kad);
+                    Scripts.Utils.waitWhileSomethingInJournal(['You put'], 60000);
+                }
+            }
+        };
+        Alchemy.gmMortar = function (potionName) {
+            if (!isPotionsEnum(potionName)) {
+                return;
+            }
+            var p = gameObject.potions[potionName];
+            var cilovaKadSerial = Scripts.Potions.getKadForPotion(p);
+            var isEmptyKad = Orion.FindType(gameObject.uncategorized.emptyKad.graphic, gameObject.uncategorized.emptyKad.color);
+            if (!isEmptyKad) {
+                Scripts.Utils.log('Nemas praznou kad', ColorEnum.red);
+                return;
+            }
+            Scripts.Utils.playerPrint("Target gmmortar for making \"" + potionName + "\"");
+            Orion.WaitForAddObject('gmMortar', 60000);
+            var _loop_3 = function () {
+                Orion.ClearJournal();
+                Orion.Wait(50);
+                var kadePrevious = Orion.FindType(gameObject.uncategorized.emptyKad.graphic);
+                Scripts.Utils.selectMenu('Vyber typ potionu', [p.gmMortarSelection]);
+                Orion.UseObject('gmMortar');
+                Scripts.Utils.waitWhileSomethingInJournal(['You put the Nadoba', 'Musis mit']);
+                if (Orion.InJournal('Musis mit')) {
+                    Scripts.Utils.log('Dosly regy', ColorEnum.red);
+                    return { value: void 0 };
+                }
+                var kadeNew = Orion.FindType(gameObject.uncategorized.emptyKad.graphic);
+                var michnutaKadSerial = kadeNew.filter(function (i) { return kadePrevious.indexOf(i) === -1; })[0];
+                Orion.ClearJournal();
+                Orion.Wait(50);
+                Orion.WaitTargetObject(cilovaKadSerial);
+                Orion.UseObject(michnutaKadSerial);
+                Scripts.Utils.waitWhileSomethingInJournal(['Prelil jsi']);
+                Orion.ClearJournal();
+                Orion.Wait(responseDelay);
+                var emptyBottle = Scripts.Potions.getEmptyBottle();
+                Orion.WaitTargetObject(emptyBottle);
+                Orion.UseObject(michnutaKadSerial);
+                Scripts.Utils.waitWhileSomethingInJournal(['You put']);
+                Orion.ClearJournal();
+                Orion.Wait(50);
+                Orion.WaitTargetType(p.graphic, p.color);
+                Orion.UseObject(cilovaKadSerial);
+                Scripts.Utils.waitWhileSomethingInJournal(['You put']);
+            };
+            while (true) {
+                var state_2 = _loop_3();
+                if (typeof state_2 === "object")
+                    return state_2.value;
+            }
+        };
+        return Alchemy;
+    }());
+    Scripts.Alchemy = Alchemy;
+})(Scripts || (Scripts = {}));
+var Scripts;
+(function (Scripts) {
     var Crafting = (function () {
         function Crafting() {
         }
@@ -8024,6 +8126,7 @@ var PotionsEnum;
     PotionsEnum["shrink"] = "shrink";
     PotionsEnum["lavabomb"] = "lavabomb";
     PotionsEnum["invis"] = "invis";
+    PotionsEnum["halucination"] = "halucination";
 })(PotionsEnum || (PotionsEnum = {}));
 var NecroScrollEnum;
 (function (NecroScrollEnum) {

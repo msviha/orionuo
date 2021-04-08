@@ -134,7 +134,17 @@ function addMount() {
  * @example external code `alchemy('tmr');`
  */
 function alchemy(potionName: PotionsEnum) {
-    Scripts.Potions.alchemy(potionName);
+    Scripts.Alchemy.mix(potionName);
+}
+
+/**
+ * Umicha 1 potion pres obyc mortar
+ * @param potionName zkratka potionu
+ * @example in client `_mix tmr`
+ * @example external code `mix('tmr');`
+ */
+function mix(potionName: PotionsEnum) {
+    Scripts.Alchemy.mix(potionName);
 }
 
 /**
@@ -386,7 +396,7 @@ function friend() {
  * @example external code `gmMortar('tmr');`
  */
 function gmMortar(potionName: PotionsEnum) {
-    Scripts.Potions.gmMortar(potionName);
+    Scripts.Alchemy.gmMortar(potionName);
 }
 
 /**

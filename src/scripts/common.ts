@@ -122,6 +122,33 @@ namespace Scripts {
             Scripts.Utils.playerPrint(`Mas uz ${totalInTarget} techto itemu v containeru`);
         }
 
+        static refillReagent(reagent: IMyGameObject, sourceContainerName: string, count = 100) {
+            Orion.Print(-1, 'Refilling...');
+            Orion.Print(-1, reagent ? 'true' : 'false');
+            const countInSource = Orion.Count(reagent.graphic, -1, sourceContainerName, undefined, false);
+            Orion.Print(-1, `${countInSource} left in source`);
+            if (countInSource <= count) {
+                Orion.Print(ColorEnum.red, 'Not enough ' + reagent);
+                return false;
+            }
+
+            const regFound = Orion.FindType(
+                reagent.graphic,
+                -1,
+                sourceContainerName,
+                undefined,
+                undefined,
+                undefined,
+                false,
+            );
+            if (regFound.length) {
+                Orion.MoveItem(regFound[0], count, 'backpack');
+                Orion.Wait(250);
+            }
+
+            return true;
+        }
+
         static mysticCounter() {
             Orion.ClearJournal();
             const recepts = Orion.FindType('0x14ED', '0x06ED'); // recept
