@@ -110,7 +110,7 @@ namespace Scripts {
                 }
                 listOfCorpses = Orion.FindType('0x2006', '-1', 'ground', 'fast', 2, 'red');
             }
-            Scripts.Dress.equip([LHand.Serial(), RHand.Serial()]);
+            Scripts.Dress.equip([LHand?.Serial(), RHand?.Serial()]);
 
             const itemsOnGround = Orion.FindList('lootItems', 'ground', 'fast', 4);
             this.grabItems(itemsOnGround);
