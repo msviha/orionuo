@@ -2416,7 +2416,7 @@ var __assign = (this && this.__assign) || function () {
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 1.1.2');
+    Orion.Print(-1, 'version 1.2.0');
     Orion.Print(-1, '-------------+');
 }
 function Autostart() {
@@ -2630,8 +2630,7 @@ function lockpicking() {
 }
 function loot(cut) {
     if (cut === void 0) { cut = true; }
-    cut = parseParam(cut);
-    Scripts.Loot.lootCorpsesAround(cut);
+    Scripts.Loot.corpses(parseParam(cut));
 }
 function lootAll(delay) {
     if (delay === void 0) { delay = responseDelay; }
@@ -3629,61 +3628,19 @@ var Scripts;
     }());
     Scripts.Klamak = Klamak;
 })(Scripts || (Scripts = {}));
+var LOOT_BAG = 'loot/bag';
 var Scripts;
 (function (Scripts) {
     var Loot = (function () {
         function Loot() {
         }
+        Loot.addLootBag = function () {
+            Scripts.Utils.playerPrint('Target your loot bag');
+            return Orion.WaitForAddObject(LOOT_BAG, 60000);
+        };
         Loot.addCutWeapon = function () {
             Scripts.Utils.playerPrint('Target your cut weapon');
             return Orion.WaitForAddObject('cutWeapon', 60000);
-        };
-        Loot.lootCorpsesAround = function (cut, weapon) {
-            var listOfCorpses = Orion.FindType('0x2006', '-1', 'ground', 'fast', 2, 'red');
-            while (listOfCorpses.length) {
-                for (var _i = 0, listOfCorpses_1 = listOfCorpses; _i < listOfCorpses_1.length; _i++) {
-                    var id = listOfCorpses_1[_i];
-                    if (cut && !Orion.FindObject(id).IsHuman()) {
-                        Orion.UseObject('cutWeapon');
-                        Orion.WaitForTarget(1000);
-                        Orion.TargetObject(id);
-                        if (weapon) {
-                            Orion.UseObject('fightWeapon');
-                            Orion.WaitForTarget(1000) && Orion.CancelTarget();
-                        }
-                    }
-                    Scripts.Loot.lootCorpseId(id);
-                    Orion.Ignore(id);
-                    Orion.Wait(100);
-                }
-                listOfCorpses = Orion.FindType('0x2006', '-1', 'ground', 'fast', 2, 'red');
-            }
-        };
-        Loot.lootCorpseId = function (id) {
-            var serverLagActionsLeft = 4;
-            Orion.OpenContainer(id, 5000, "Container id " + id + " not found");
-            var itemsInCorpse = Orion.FindList('lootItems', id);
-            if (itemsInCorpse.length) {
-                for (var _i = 0, itemsInCorpse_1 = itemsInCorpse; _i < itemsInCorpse_1.length; _i++) {
-                    var itemId = itemsInCorpse_1[_i];
-                    Orion.MoveItem(itemId, 0, 'myLootBag');
-                    Orion.Wait(serverLagActionsLeft ? 50 : 350);
-                    serverLagActionsLeft--;
-                }
-            }
-        };
-        Loot.lootAllFrom = function (delay) {
-            if (delay === void 0) { delay = responseDelay; }
-            Scripts.Utils.targetObjectNotSelf('lootAllContainer', "Target object to loot");
-            Orion.OpenContainer('lootAllContainer', 5000, "Container not found");
-            var itemsInCorpse = Orion.FindType('any', 'any', 'lootAllContainer');
-            if (itemsInCorpse.length) {
-                for (var _i = 0, itemsInCorpse_2 = itemsInCorpse; _i < itemsInCorpse_2.length; _i++) {
-                    var itemId = itemsInCorpse_2[_i];
-                    Orion.MoveItem(itemId, 0, 'myLootBag');
-                    Orion.Wait(delay);
-                }
-            }
         };
         Loot.carveBody = function (carveNearestBodyAutomatically) {
             if (carveNearestBodyAutomatically === void 0) { carveNearestBodyAutomatically = false; }
@@ -3706,6 +3663,167 @@ var Scripts;
                 }
             }
             Orion.UseObject(cutWeapon.Serial());
+        };
+        Loot.corpses = function (cut) {
+            if (cut === void 0) { cut = true; }
+            Orion.ClearJournal('You put the');
+            var snapshot = this.getBagSnapshot();
+            this.lootCorpsesAround(cut);
+            Orion.Wait(350);
+            this.displayLoot();
+            this.moveLootToLootBag(snapshot);
+        };
+        Loot.lootAllFrom = function (delay) {
+            if (delay === void 0) { delay = responseDelay; }
+            Scripts.Utils.targetObjectNotSelf('lootAllContainer', "Target object to loot");
+            Orion.OpenContainer('lootAllContainer', 5000, "Container not found");
+            var itemsInCorpse = Orion.FindType('any', 'any', 'lootAllContainer');
+            if (itemsInCorpse.length) {
+                for (var _i = 0, itemsInCorpse_1 = itemsInCorpse; _i < itemsInCorpse_1.length; _i++) {
+                    var itemId = itemsInCorpse_1[_i];
+                    Orion.MoveItem(itemId, 0, 'myLootBag');
+                    Orion.Wait(delay);
+                }
+            }
+        };
+        Loot.lootCorpsesAround = function (cut) {
+            var listOfCorpses = Orion.FindType('0x2006', '-1', 'ground', 'fast', 2, 'red');
+            var LHand = Orion.ObjAtLayer(1);
+            var RHand = Orion.ObjAtLayer(2);
+            while (listOfCorpses.length) {
+                for (var _i = 0, listOfCorpses_1 = listOfCorpses; _i < listOfCorpses_1.length; _i++) {
+                    var id = listOfCorpses_1[_i];
+                    Scripts.Loot.lootCorpseId(id, cut);
+                    Orion.Ignore(id);
+                    Orion.Wait(100);
+                }
+                listOfCorpses = Orion.FindType('0x2006', '-1', 'ground', 'fast', 2, 'red');
+            }
+            Scripts.Dress.equip([LHand.Serial(), RHand.Serial()]);
+            var itemsOnGround = Orion.FindList('lootItems', 'ground', 'fast', 4);
+            this.grabItems(itemsOnGround);
+        };
+        Loot.lootCorpseId = function (corpseId, cut) {
+            Orion.OpenContainer(corpseId, 5000, "Container id " + corpseId + " not found");
+            var hasLootBag = Orion.Count('0x0E76', '0x049A', corpseId) > 0;
+            if (hasLootBag && cut) {
+                if (Orion.FindObject('cutWeapon')) {
+                    Orion.CancelWaitTarget();
+                    Orion.WaitTargetObject(corpseId);
+                    Orion.UseObject('cutWeapon');
+                }
+                Orion.Wait(250);
+            }
+            var itemsInCorpse = Orion.FindList('lootItems', corpseId);
+            if (itemsInCorpse.length) {
+                this.grabItems(itemsInCorpse);
+            }
+        };
+        Loot.grabItems = function (serials) {
+            var serverLagActionsLeft = 4;
+            for (var _i = 0, serials_2 = serials; _i < serials_2.length; _i++) {
+                var serial = serials_2[_i];
+                Orion.MoveItem(serial, 0, 'myLootBag');
+                Orion.Wait(serverLagActionsLeft > 0 ? 150 : 500);
+                serverLagActionsLeft--;
+            }
+        };
+        Loot.getBagSnapshot = function () {
+            return Orion.FindType(-1, -1, 'backpack', 'item', undefined, undefined, false);
+        };
+        Loot.moveLootToLootBag = function (oldSnapshot) {
+            if (!Orion.FindObject(LOOT_BAG)) {
+                return;
+            }
+            this.getBagSnapshot()
+                .filter(function (serial) { return oldSnapshot.indexOf(serial) < 0; })
+                .forEach(function (serial, i) {
+                Orion.MoveItem(serial, 0, LOOT_BAG);
+                Orion.Wait(i > 4 ? 500 : 250);
+            });
+        };
+        Loot.displayLoot = function () {
+            var excludes = [
+                'Loot',
+                'gold coins',
+                'Black Pearlss',
+                'Ginsengs',
+                'Sulfurous Ashs',
+                'Nightshades',
+                'Garlics',
+                'Blood Mosss',
+                "Spider's Silk",
+                "Spider's Silks",
+                'Mandrake Rootss',
+                "Serpent's Scales",
+                'Brimstones',
+                'Boness',
+                'Eyes of Newts',
+                "Wyrm's Heartss",
+                'Volcanic Ashs',
+                "Executioner's Caps",
+                'Fertile Dirts',
+                'Blackmoors',
+                'Pumices',
+                'Obsidians',
+                'Bloodspawns',
+                'Daemon Bloods',
+                'Daemon Boness',
+                "Serpent's Scaless",
+                'Batwingss',
+                "Dragon's Bloods",
+            ];
+            var aliases = {
+                'Ancient Bone Helmet': '+5 Necro Helm',
+                'Ancient Bone Arms': '+5 Necro Arms',
+                'Ancient Bone Gloves': '+5 Necro Gloves',
+                'Ancient Bone Leggins': '+5 Necro Legs',
+                'Ancient Bone Chest': '+5 Necro Chest',
+                'Ancient Skeleton Helmet': '+15 Necro Helm',
+                'Ancient Skeleton Arms': '+15 Necro Arms',
+                'Ancient Skeleton Gloves': '+15 Necro Gloves',
+                'Ancient Skeleton Leggins': '+15 Necro Legs',
+                'Ancient Skeleton Chest': '+15 Necro Chest',
+                'Ancient Liche Helmet': '+25 Necro Helm',
+                'Ancient Liche Arms': '+25 Necro Arms',
+                'Ancient Liche Gloves': '+25 Necro Gloves',
+                'Ancient Liche Leggins': '+25 Necro Legs',
+                'Ancient Liche Chest': '+25 Necro Chest'
+            };
+            var parseLootItem = function (itemName) {
+                var types = {
+                    'of Ruin': '+1',
+                    'of Might': '+3',
+                    'of Force': '+5',
+                    'of Power': '+7',
+                    'of Vanquishing': '+9',
+                    'of Defense': '+5',
+                    'of Guarding': '+10',
+                    'of Hardening': '+15',
+                    'of Fortification': '+20',
+                    'of Invulnerability': '+25'
+                };
+                for (var suffix in types) {
+                    if (itemName.indexOf(suffix) > 0) {
+                        return types[suffix] + " " + itemName.replace(suffix, '');
+                    }
+                }
+                return itemName;
+            };
+            for (var i = 0; Orion.JournalLine(i); i++) {
+                var lootText = Orion.JournalLine(i).Text();
+                if (lootText.indexOf('You put the') == 0) {
+                    var loot_1 = lootText.replace('You put the ', '').replace(' in your pack.', '');
+                    if (loot_1.length && excludes.indexOf(loot_1) < 0) {
+                        var displayLoot = aliases[loot_1] || parseLootItem(loot_1);
+                        Scripts.Utils.playerPrint(displayLoot, ColorEnum.green);
+                        if (displayLoot === 'Dark Chest of Wonders') {
+                            Orion.UseType('0x0E80', '0x0123');
+                            Orion.Wait(100);
+                        }
+                    }
+                }
+            }
         };
         return Loot;
     }());
@@ -6012,7 +6130,7 @@ var Scripts;
         Utils.playerPrint = function (message, color, fastPrint) {
             if (color === void 0) { color = ColorEnum.none; }
             if (fastPrint === void 0) { fastPrint = false; }
-            Utils.charPrint(Player.Serial(), message, color);
+            Utils.charPrint(Player.Serial(), message, color, fastPrint);
         };
         Utils.charPrint = function (serial, message, color, fastPrint) {
             if (color === void 0) { color = ColorEnum.none; }
@@ -6276,8 +6394,8 @@ var Scripts;
                 return;
             }
             serials = Orion.FindType(graphic);
-            for (var _i = 0, serials_2 = serials; _i < serials_2.length; _i++) {
-                var s = serials_2[_i];
+            for (var _i = 0, serials_3 = serials; _i < serials_3.length; _i++) {
+                var s = serials_3[_i];
                 Orion.Click(s);
                 Orion.Wait(100);
                 if (Orion.FindObject(s).Name().indexOf(name) === 0) {
@@ -7365,8 +7483,8 @@ var Scripts;
                     if (!serials.length) {
                         continue;
                     }
-                    for (var _b = 0, serials_3 = serials; _b < serials_3.length; _b++) {
-                        var serial = serials_3[_b];
+                    for (var _b = 0, serials_4 = serials; _b < serials_4.length; _b++) {
+                        var serial = serials_4[_b];
                         var oreObject = Orion.FindObject(serial);
                         if (ore.color === oreObject.Color()) {
                             Orion.Drop(serial);

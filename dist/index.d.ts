@@ -161,13 +161,20 @@ declare namespace Scripts {
         static useKlamak(lvl: number, useAim?: boolean, priorityList?: string[], ignoreSerials?: string[]): void;
     }
 }
+declare const LOOT_BAG = "loot/bag";
 declare namespace Scripts {
     class Loot {
+        static addLootBag(): number;
         static addCutWeapon(): number;
-        static lootCorpsesAround(cut?: boolean, weapon?: boolean): void;
-        static lootCorpseId(id: string): void;
-        static lootAllFrom(delay?: number): void;
         static carveBody(carveNearestBodyAutomatically?: boolean): void;
+        static corpses(cut?: boolean): void;
+        static lootAllFrom(delay?: number): void;
+        private static lootCorpsesAround;
+        static lootCorpseId(corpseId: string, cut?: boolean): void;
+        private static grabItems;
+        private static getBagSnapshot;
+        private static moveLootToLootBag;
+        private static displayLoot;
     }
 }
 declare namespace Scripts {

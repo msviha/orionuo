@@ -1,7 +1,7 @@
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 1.1.2');
+    Orion.Print(-1, 'version 1.2.0');
     Orion.Print(-1, '-------------+');
 }
 
@@ -500,8 +500,7 @@ function lockpicking() {
  * @example external code `loot(false);`
  */
 function loot(cut = true) {
-    cut = parseParam(cut);
-    Scripts.Loot.lootCorpsesAround(cut);
+    Scripts.Loot.corpses(parseParam(cut));
 }
 
 /**

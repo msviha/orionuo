@@ -220,7 +220,7 @@ namespace Scripts {
         }
 
         static playerPrint(message: string, color: ColorEnum | number | string = ColorEnum.none, fastPrint = false) {
-            Utils.charPrint(Player.Serial(), message, color);
+            Utils.charPrint(Player.Serial(), message, color, fastPrint);
         }
 
         static charPrint(
