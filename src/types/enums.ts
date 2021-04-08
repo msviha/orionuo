@@ -19,23 +19,23 @@ enum TargetEnum {
     laststatus = 'laststatus',
     lasttarget = 'lasttarget',
     /**self ale pokud sem zranen nebo otraven*/
-    selfinjured = "selfinjured",
+    selfinjured = 'selfinjured',
     /**laststatus pokud to neni serial z friendlistu nebo pet*/
-    laststatusenemy = "laststatusenemy",
+    laststatusenemy = 'laststatusenemy',
     /**mount ulozeny pres moutn script*/
-    mount = "mount",
+    mount = 'mount',
     /**nejblizsi zraneny friend, pet nebo mount */
-    nearinjuredalie = "nearinjuredalie",
+    nearinjuredalie = 'nearinjuredalie',
     /**nejblizsi zraneny friend, pet nebo mount s vyuzitim Line of Sight (presne neni znamo jak dobre to funguje) */
-    nearinjuredalielos = "nearinjuredalielos",
+    nearinjuredalielos = 'nearinjuredalielos',
     /**nejvic zraneny friend, pet nebo mount */
-    mostinjuredalie = "mostinjuredalie",
+    mostinjuredalie = 'mostinjuredalie',
     /**nejvic zraneny friend, pet nebo mount s vyuzitim Line of Sight (presne neni znamo jak dobre to funguje) */
-    mostinjuredalielos = "mostinjuredalielos",
+    mostinjuredalielos = 'mostinjuredalielos',
     /**last target pouze pokud je to charakter */
-    lasttargetmobile = "lasttargetmobile" ,
+    lasttargetmobile = 'lasttargetmobile',
     /**charakter nad jehoz CUST zalozkou je zrovna kruzor mysi */
-    hover = "hover"
+    hover = 'hover',
 }
 
 enum CustomStatusBarEnum {

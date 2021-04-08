@@ -3,10 +3,9 @@
  */
 namespace Scripts {
     export class Statusbar {
-
-        static create(o?:GameObject|string, coordinates?:ICoordinates) {
+        static create(o?: GameObject | string, coordinates?: ICoordinates) {
             if (!o) {
-                Scripts.Utils.createGameObjectSelections([{ask: 'Target mobile', addObject: 'lastCustomStatusBar'}]);
+                Scripts.Utils.createGameObjectSelections([{ ask: 'Target mobile', addObject: 'lastCustomStatusBar' }]);
                 o = Orion.FindObject('lastCustomStatusBar');
             } else if (o && typeof o === 'string') {
                 o = Orion.FindObject(o);

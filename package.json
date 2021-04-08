@@ -3,7 +3,7 @@
   "version": "1.2.0",
   "description": "Scripts for OrionUO assistant on Darkparadise.cz",
   "scripts": {
-    "lint": "eslint './**/*.ts' --quiet --fix",
+    "lint": "eslint ./**/*.ts --quiet --fix",
     "build": "tsc",
     "build-all": "tsc && npm run build-config && npm run build-refill",
     "build-config": "tsc -p config",

@@ -289,9 +289,9 @@ export default interface NonCategorized {
 
     ResumeScript(name?: string, exceptScripts?: string);
 
-	/**
+    /**
 	 * 	Get mouse coordinates in game window.
 		Result: class object PositionObject, mouse coordinates in the game window.
 	 */
-	GetMousePosition():ObjectCoordinates
+    GetMousePosition(): ObjectCoordinates;
 }

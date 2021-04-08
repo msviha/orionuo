@@ -161,7 +161,7 @@ export default interface InteractionWithOtherScripts {
      */
     OnOffHotkeys(state);
 
-	/**
+    /**
 	 * Set options for the LoS algorithm.
 
 Arguments:
@@ -182,6 +182,5 @@ Result: does not return a value.
 	 * @param options
 	 */
 
-
-	SetLOSOptions(options:string);
+    SetLOSOptions(options: string);
 }

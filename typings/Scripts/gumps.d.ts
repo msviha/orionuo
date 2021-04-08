@@ -70,14 +70,12 @@ export default interface Gumps {
 
     WaitForContainerGump(delay?: number): boolean;
 
-	/**
-	 * 	Get gump coordinates in client.
-	 *  Result: class object PositionObject, gump coordinates, -1, -1 if there is no gump.
-	 * @param type string, gump type;
-	 * @param serial  string, gump serial number (only needed for interaction with gumps that have a serial number, for example: containers, statusbars, paperdolls, etc.); Default value: 'any';
-	 * @param id string, gump identifier (needed only for interacting with gumps that have an identifier, for example: server gumps, trade gump); Default value: 'any';
-	 */
-	GetGumpPosition(type:string, serial?: string, id?: string):ObjectCoordinates;
+    /**
+     * 	Get gump coordinates in client.
+     *  Result: class object PositionObject, gump coordinates, -1, -1 if there is no gump.
+     * @param type string, gump type;
+     * @param serial  string, gump serial number (only needed for interaction with gumps that have a serial number, for example: containers, statusbars, paperdolls, etc.); Default value: 'any';
+     * @param id string, gump identifier (needed only for interacting with gumps that have an identifier, for example: server gumps, trade gump); Default value: 'any';
+     */
+    GetGumpPosition(type: string, serial?: string, id?: string): ObjectCoordinates;
 }
-
-
