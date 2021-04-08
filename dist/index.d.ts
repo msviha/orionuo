@@ -585,7 +585,8 @@ declare enum PotionsEnum {
     ns = "ns",
     shrink = "shrink",
     lavabomb = "lavabomb",
-    invis = "invis"
+    invis = "invis",
+    halucination = "halucination"
 }
 declare enum NecroScrollEnum {
     vfp = "vfp",

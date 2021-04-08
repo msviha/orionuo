@@ -1274,6 +1274,8 @@ const gameObject: any = {
             },
             gmMortarSelection: 'Total Mana Refresh (612 Eyes of Newt nebo 306 Blue Eyes of Newt)',
             alchemySelection: 'Total Mana Refresh',
+            reagent: 'eyes_of_newt',
+            reagentsCount: 6,
         },
         mr: {
             name: 'Mana Refresh Potion',
@@ -1285,6 +1287,8 @@ const gameObject: any = {
                 color: '0x0005',
             },
             alchemySelection: 'Mana Refresh',
+            reagent: 'eyes_of_newt',
+            reagentsCount: 3,
         },
         gb: {
             name: 'Greater Blood potion',
@@ -1311,6 +1315,8 @@ const gameObject: any = {
             },
             gmMortarSelection: 'Greater Heal (714 Ginsengs)',
             alchemySelection: 'Greater Heal',
+            reagent: 'gi',
+            reagentsCount: 7,
         },
         gs: {
             name: 'Greater Strength Potion',
@@ -1327,6 +1333,8 @@ const gameObject: any = {
             },
             gmMortarSelection: 'Greater Strength (612 Mandrake Roots)',
             alchemySelection: 'Greater Strength',
+            reagent: 'mr',
+            reagentsCount: 6,
         },
         tr: {
             name: 'Total Refresh potion',
@@ -1343,6 +1351,8 @@ const gameObject: any = {
             },
             gmMortarSelection: 'Total Refresh (510 Black Pearls)',
             alchemySelection: 'Total Refresh',
+            reagent: 'bp',
+            reagentsCount: 5,
         },
         gc: {
             name: 'Greater Cure Potion',
@@ -1359,6 +1369,8 @@ const gameObject: any = {
             },
             gmMortarSelection: 'Greater Cure (612 Garlics)',
             alchemySelection: 'Greater Cure',
+            reagent: 'ga',
+            reagentsCount: 6,
         },
         dp: {
             name: 'Deathly Poison Potion',
@@ -1375,6 +1387,8 @@ const gameObject: any = {
             },
             gmMortarSelection: 'Deadly Poison (1020 Nightshades)',
             alchemySelection: 'Deadly Poison',
+            reagent: 'ns',
+            reagentsCount: 10,
         },
         lc: {
             graphic: '0x0F07',
@@ -1388,6 +1402,8 @@ const gameObject: any = {
                 color: '0x0091',
             },
             alchemySelection: 'Lesser Cure Potion',
+            reagent: 'ga',
+            reagentsCount: 2,
         },
         ns: {
             name: 'Nightsight Potion',
@@ -1399,6 +1415,8 @@ const gameObject: any = {
                 color: '0x03C4',
             },
             alchemySelection: 'Nightsight',
+            reagent: 'ss',
+            reagentsCount: 2,
         },
         ag: {
             name: 'Agility Potion',
@@ -1410,6 +1428,22 @@ const gameObject: any = {
                 color: '0x00BF',
             },
             alchemySelection: 'Agility Potion',
+            reagent: 'bm',
+            reagentsCount: 2,
+        },
+        ga: {
+            name: 'Greater Agility Potion',
+            graphic: '0x0F08',
+            color: '0x0000',
+            kad: {
+                name: 'Nadoba s Greater Agility',
+                graphic: '0x1843',
+                color: '0x00BF',
+            },
+            gmMortarSelection: 'Greater Agility (306 Blood Mosses)',
+            alchemySelection: 'Greater Agility Potion',
+            reagent: 'bm',
+            reagentsCount: 3,
         },
         shrink: {
             name: 'Shrink',
@@ -1426,6 +1460,8 @@ const gameObject: any = {
             },
             gmMortarSelection: 'Shrink (306 Batwings)',
             alchemySelection: 'Shrink',
+            reagent: 'batwing',
+            reagentsCount: 3,
         },
         lavabomb: {
             name: 'Lava Bomb',
@@ -1438,6 +1474,8 @@ const gameObject: any = {
             },
             gmMortarSelection: 'Lava Bomb (612 Volcanic Ashes)',
             alchemySelection: 'Lava Bomb',
+            reagent: 'volcanic_ash',
+            reagentsCount: 6,
         },
         invis: {
             name: 'Invisibility',
@@ -1449,6 +1487,8 @@ const gameObject: any = {
             },
             gmMortarSelection: "Invisibility (408 Wyrm's Hearts)",
             alchemySelection: 'Invisibility',
+            reagent: 'wyrms_heart',
+            reagentsCount: 4,
         },
         lp: {
             graphic: '0x0F0A',
@@ -1458,6 +1498,19 @@ const gameObject: any = {
                 color: '0x089F',
             },
             alchemySelection: 'Lesser Poison',
+            reagent: 'ns',
+            reagentsCount: 2,
+        },
+        halucination: {
+            graphic: '0x0F06',
+            color: '0x0B90',
+            kad: {
+                graphic: '0x1843',
+                color: '0x0B90',
+            },
+            alchemySelection: 'Halucination',
+            reagent: 'serpent_scales',
+            reagentsCount: 6,
         },
     },
     books: {

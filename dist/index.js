@@ -1341,7 +1341,9 @@ var gameObject = {
                 color: '0x0003'
             },
             gmMortarSelection: 'Total Mana Refresh (612 Eyes of Newt nebo 306 Blue Eyes of Newt)',
-            alchemySelection: 'Total Mana Refresh'
+            alchemySelection: 'Total Mana Refresh',
+            reagent: 'eyes_of_newt',
+            reagentsCount: 6
         },
         mr: {
             name: 'Mana Refresh Potion',
@@ -1352,7 +1354,9 @@ var gameObject = {
                 graphic: '0x1843',
                 color: '0x0005'
             },
-            alchemySelection: 'Mana Refresh'
+            alchemySelection: 'Mana Refresh',
+            reagent: 'eyes_of_newt',
+            reagentsCount: 3
         },
         gb: {
             name: 'Greater Blood potion',
@@ -1378,7 +1382,9 @@ var gameObject = {
                 color: '0x08A7'
             },
             gmMortarSelection: 'Greater Heal (714 Ginsengs)',
-            alchemySelection: 'Greater Heal'
+            alchemySelection: 'Greater Heal',
+            reagent: 'gi',
+            reagentsCount: 7
         },
         gs: {
             name: 'Greater Strength Potion',
@@ -1394,7 +1400,9 @@ var gameObject = {
                 color: '0x0481'
             },
             gmMortarSelection: 'Greater Strength (612 Mandrake Roots)',
-            alchemySelection: 'Greater Strength'
+            alchemySelection: 'Greater Strength',
+            reagent: 'mr',
+            reagentsCount: 6
         },
         tr: {
             name: 'Total Refresh potion',
@@ -1410,7 +1418,9 @@ var gameObject = {
                 color: '0x014D'
             },
             gmMortarSelection: 'Total Refresh (510 Black Pearls)',
-            alchemySelection: 'Total Refresh'
+            alchemySelection: 'Total Refresh',
+            reagent: 'bp',
+            reagentsCount: 5
         },
         gc: {
             name: 'Greater Cure Potion',
@@ -1426,7 +1436,9 @@ var gameObject = {
                 color: '0x0842'
             },
             gmMortarSelection: 'Greater Cure (612 Garlics)',
-            alchemySelection: 'Greater Cure'
+            alchemySelection: 'Greater Cure',
+            reagent: 'ga',
+            reagentsCount: 6
         },
         dp: {
             name: 'Deathly Poison Potion',
@@ -1442,7 +1454,9 @@ var gameObject = {
                 color: '0x08A2'
             },
             gmMortarSelection: 'Deadly Poison (1020 Nightshades)',
-            alchemySelection: 'Deadly Poison'
+            alchemySelection: 'Deadly Poison',
+            reagent: 'ns',
+            reagentsCount: 10
         },
         lc: {
             graphic: '0x0F07',
@@ -1455,7 +1469,9 @@ var gameObject = {
                 graphic: '0x1843',
                 color: '0x0091'
             },
-            alchemySelection: 'Lesser Cure Potion'
+            alchemySelection: 'Lesser Cure Potion',
+            reagent: 'ga',
+            reagentsCount: 2
         },
         ns: {
             name: 'Nightsight Potion',
@@ -1466,7 +1482,9 @@ var gameObject = {
                 graphic: '0x1843',
                 color: '0x03C4'
             },
-            alchemySelection: 'Nightsight'
+            alchemySelection: 'Nightsight',
+            reagent: 'ss',
+            reagentsCount: 2
         },
         ag: {
             name: 'Agility Potion',
@@ -1477,7 +1495,23 @@ var gameObject = {
                 graphic: '0x1843',
                 color: '0x00BF'
             },
-            alchemySelection: 'Agility Potion'
+            alchemySelection: 'Agility Potion',
+            reagent: 'bm',
+            reagentsCount: 2
+        },
+        ga: {
+            name: 'Greater Agility Potion',
+            graphic: '0x0F08',
+            color: '0x0000',
+            kad: {
+                name: 'Nadoba s Greater Agility',
+                graphic: '0x1843',
+                color: '0x00BF'
+            },
+            gmMortarSelection: 'Greater Agility (306 Blood Mosses)',
+            alchemySelection: 'Greater Agility Potion',
+            reagent: 'bm',
+            reagentsCount: 3
         },
         shrink: {
             name: 'Shrink',
@@ -1493,7 +1527,9 @@ var gameObject = {
                 color: '0x0724'
             },
             gmMortarSelection: 'Shrink (306 Batwings)',
-            alchemySelection: 'Shrink'
+            alchemySelection: 'Shrink',
+            reagent: 'batwing',
+            reagentsCount: 3
         },
         lavabomb: {
             name: 'Lava Bomb',
@@ -1505,7 +1541,9 @@ var gameObject = {
                 color: '0x000E'
             },
             gmMortarSelection: 'Lava Bomb (612 Volcanic Ashes)',
-            alchemySelection: 'Lava Bomb'
+            alchemySelection: 'Lava Bomb',
+            reagent: 'volcanic_ash',
+            reagentsCount: 6
         },
         invis: {
             name: 'Invisibility',
@@ -1516,7 +1554,9 @@ var gameObject = {
                 color: '0x0B77'
             },
             gmMortarSelection: "Invisibility (408 Wyrm's Hearts)",
-            alchemySelection: 'Invisibility'
+            alchemySelection: 'Invisibility',
+            reagent: 'wyrms_heart',
+            reagentsCount: 4
         },
         lp: {
             graphic: '0x0F0A',
@@ -1525,7 +1565,20 @@ var gameObject = {
                 graphic: '0x1843',
                 color: '0x089F'
             },
-            alchemySelection: 'Lesser Poison'
+            alchemySelection: 'Lesser Poison',
+            reagent: 'ns',
+            reagentsCount: 2
+        },
+        halucination: {
+            graphic: '0x0F06',
+            color: '0x0B90',
+            kad: {
+                graphic: '0x1843',
+                color: '0x0B90'
+            },
+            alchemySelection: 'Halucination',
+            reagent: 'serpent_scales',
+            reagentsCount: 6
         }
     },
     books: {
@@ -8024,6 +8077,7 @@ var PotionsEnum;
     PotionsEnum["shrink"] = "shrink";
     PotionsEnum["lavabomb"] = "lavabomb";
     PotionsEnum["invis"] = "invis";
+    PotionsEnum["halucination"] = "halucination";
 })(PotionsEnum || (PotionsEnum = {}));
 var NecroScrollEnum;
 (function (NecroScrollEnum) {
