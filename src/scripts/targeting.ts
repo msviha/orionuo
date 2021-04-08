@@ -170,7 +170,8 @@ namespace Scripts {
                     notoColor,
                     `[${enemy.Name() || 'target'}]: ${enemy.Hits()}/${enemy.MaxHits()}`,
                 );
-            } else {
+            }
+            else {
                 Orion.CharPrint(enemySerial, notoColor, `[${enemy.Hits()}/${enemy.MaxHits()}]`);
             }
 
@@ -240,7 +241,7 @@ namespace Scripts {
                 Shared.RemoveVar('tnm.lastSerial');
                 lastSerial = '';
                 targets = [];
-
+    
                 const noto = notoriety.join('|') || undefined;
                 const friendList = Orion.GetFriendList();
                 const nearCharacters = Orion.FindTypeEx('any', '0xFFFF', 'ground', 'mobile|live|ignoreself', 18, noto)
@@ -312,7 +313,8 @@ namespace Scripts {
                         }
                     }
                 }
-            } else {
+            }
+            else {
                 Utils.playerPrint('[ no targets ]', ColorEnum.green, true);
                 Shared.RemoveVar('tnm.lastSerial');
             }
@@ -335,23 +337,33 @@ namespace Scripts {
         //Todo predelat na gumpy, ulozeny nastaveni pozice a smer generovani statusbaru, zatim experimental
         static showStatusBarOnWrapper(serial: string, statusWrapperOpt) {
             const barObj = Orion.FindObject(serial);
-            const enabled = statusWrapperOpt?.enabled || true;
+            const enabled = statusWrapperOpt?.enabled === true;
 
             if (barObj?.Exists() && barObj.Mobile() && !barObj.Dead() && enabled) {
-                const startX = statusWrapperOpt?.x || 200;
-                const stattY = statusWrapperOpt?.y || 150;
-                const maxCount = statusWrapperOpt?.maxCount || 10;
-                const deltaX = statusWrapperOpt?.deltaX || 30;
-                const deltaY = statusWrapperOpt?.deltaY || 30;
+                const startX = statusWrapperOpt?.x ?? 200;
+                const startY = statusWrapperOpt?.y ?? 150;
+                const maxCount = statusWrapperOpt?.maxCount ?? 10;
+                const deltaX = statusWrapperOpt?.deltaX ?? 30;
+                const deltaY = statusWrapperOpt?.deltaY ?? 30;
+                const custBars = statusWrapperOpt?.useCustBars === true;
                 let count = 0;
 
                 if (TargetingEx.isEnemy(barObj)) {
-                    count = Shared.GetVar('showStatusBarOnWrapper.enemy.count', 0);
-                    Shared.AddVar('showStatusBarOnWrapper.enemy.count', ++count);
-                    Orion.Print(ColorEnum.pureWhite, '' + count);
+                   count = Shared.GetVar("showStatusBarOnWrapper.enemy.count", 0);
+                   Shared.AddVar("showStatusBarOnWrapper.enemy.count", ++count);
                 }
 
-                Orion.ShowStatusbar(serial, startX + deltaX * (count % maxCount), stattY + deltaY * (count % maxCount));
+                if (custBars) {
+                    var e = Shared.GetArray(GlobalEnum.customStatusBars, [])
+                    const exists = e && e.some(s => s.serial === barObj.Serial() && Shared.GetVar(s.serial, true));
+                    Orion.Print(barObj.Serial() + " - " + e.length);
+                    if (!exists) {
+                        Statusbar.create(Orion.FindObject(serial), {x: startX + (deltaX * (count % maxCount)), y: startY + (deltaY * (count % maxCount)) });
+                    }
+                }
+                else {
+                    Orion.ShowStatusbar(serial, startX + deltaX * (count % maxCount), startY + deltaY * (count % maxCount));
+                }
             }
         }
     }
