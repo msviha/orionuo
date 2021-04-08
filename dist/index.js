@@ -3238,6 +3238,23 @@ var Scripts;
             }
             Scripts.Utils.playerPrint("Mas uz " + totalInTarget + " techto itemu v containeru");
         };
+        Common.refillReagent = function (reagent, sourceContainerName, count) {
+            if (count === void 0) { count = 100; }
+            Orion.Print(-1, 'Refilling...');
+            Orion.Print(-1, reagent ? 'true' : 'false');
+            var countInSource = Orion.Count(reagent.graphic, -1, sourceContainerName, undefined, false);
+            Orion.Print(-1, countInSource + " left in source");
+            if (countInSource <= count) {
+                Orion.Print(ColorEnum.red, 'Not enough ' + reagent);
+                return false;
+            }
+            var regFound = Orion.FindType(reagent.graphic, -1, sourceContainerName, undefined, undefined, undefined, false);
+            if (regFound.length) {
+                Orion.MoveItem(regFound[0], count, 'backpack');
+                Orion.Wait(250);
+            }
+            return true;
+        };
         Common.mysticCounter = function () {
             var _a;
             Orion.ClearJournal();
@@ -6727,9 +6744,9 @@ var Scripts;
     }());
     Scripts.Necromancer = Necromancer;
 })(Scripts || (Scripts = {}));
-var reagentsContainerName = 'kandown/alchemy/reagentsContainerName';
 var Scripts;
 (function (Scripts) {
+    var reagentsContainerName = 'alchemy/reagentsContainerName';
     var Alchemy = (function () {
         function Alchemy() {
         }
@@ -6755,7 +6772,7 @@ var Scripts;
                 Orion.UseObject(reagentsContainerName);
                 Orion.Wait(100);
                 Orion.Print(-1);
-                if (!this.refillReagent(reagent, reagentsContainerName, potion.reagentsCount * 10)) {
+                if (!Scripts.Common.refillReagent(reagent, reagentsContainerName, potion.reagentsCount * 10)) {
                     Scripts.Utils.log('Dosly regy', ColorEnum.red);
                     return false;
                 }
@@ -6775,10 +6792,7 @@ var Scripts;
             if (!isPotionsEnum(potionName)) {
                 return;
             }
-            Scripts.Utils.playerPrint('Kontajner s regmi?');
-            if (Orion.WaitForAddObject(reagentsContainerName, 60000) !== 1) {
-                return;
-            }
+            Scripts.Utils.createGameObjectSelections([{ ask: 'Kontajner s regmi?', addObject: reagentsContainerName }]);
             Orion.UseObject(reagentsContainerName);
             Orion.Wait(100);
             var p = gameObject.potions[potionName];
@@ -6795,23 +6809,6 @@ var Scripts;
                     Scripts.Utils.waitWhileSomethingInJournal(['You put'], 60000);
                 }
             }
-        };
-        Alchemy.refillReagent = function (reagent, sourceContainerName, count) {
-            if (count === void 0) { count = 100; }
-            Orion.Print(-1, 'Refilling...');
-            Orion.Print(-1, reagent ? 'true' : 'false');
-            var countInSource = Orion.Count(reagent.graphic, -1, sourceContainerName, undefined, false);
-            Orion.Print(-1, countInSource + " left in source");
-            if (countInSource <= count) {
-                Orion.Print(ColorEnum.red, 'Not enough ' + reagent);
-                return false;
-            }
-            var regFound = Orion.FindType(reagent.graphic, -1, sourceContainerName, undefined, undefined, undefined, false);
-            if (regFound.length) {
-                Orion.MoveItem(regFound[0], count, 'backpack');
-                Orion.Wait(250);
-            }
-            return true;
         };
         Alchemy.gmMortar = function (potionName) {
             if (!isPotionsEnum(potionName)) {

@@ -1,14 +1,13 @@
-const reagentsContainerName = 'kandown/alchemy/reagentsContainerName';
-
-type Potion = {
-    graphic: string;
-    kad: IMyGameObject;
-    reagent: string;
-    alchemySelection: string;
-    reagentsCount: number;
-};
-
 namespace Scripts {
+    type Potion = {
+        graphic: string;
+        kad: IMyGameObject;
+        reagent: string;
+        alchemySelection: string;
+        reagentsCount: number;
+    };
+
+    const reagentsContainerName = 'alchemy/reagentsContainerName';
     export class Alchemy {
         static getMortar(): string {
             const mortars = Orion.FindType(gameObject.uncategorized.mortar.graphic);
@@ -19,7 +18,7 @@ namespace Scripts {
             return mortars[0];
         }
 
-        static mixOne(p: Potion | string) {
+        static mixOne(p: Potion | string): boolean {
             const potion = typeof p === 'string' ? gameObject.potions[p] : p;
             const mortar = this.getMortar();
             const reagent = gameObject.regy[potion.reagent] || gameObject.necroRegy[potion.reagent];
@@ -39,7 +38,7 @@ namespace Scripts {
                 Orion.UseObject(reagentsContainerName);
                 Orion.Wait(100);
                 Orion.Print(-1);
-                if (!this.refillReagent(reagent, reagentsContainerName, potion.reagentsCount * 10)) {
+                if (!Scripts.Common.refillReagent(reagent, reagentsContainerName, potion.reagentsCount * 10)) {
                     Scripts.Utils.log('Dosly regy', ColorEnum.red);
                     return false;
                 }
@@ -65,10 +64,7 @@ namespace Scripts {
                 return;
             }
 
-            Scripts.Utils.playerPrint('Kontajner s regmi?');
-            if (Orion.WaitForAddObject(reagentsContainerName, 60000) !== 1) {
-                return;
-            }
+            Scripts.Utils.createGameObjectSelections([{ ask: 'Kontajner s regmi?', addObject: reagentsContainerName }]);
 
             Orion.UseObject(reagentsContainerName);
             Orion.Wait(100);
@@ -89,33 +85,6 @@ namespace Scripts {
                     Scripts.Utils.waitWhileSomethingInJournal(['You put'], 60000);
                 }
             }
-        }
-
-        static refillReagent(reagent: IMyGameObject, sourceContainerName: string, count = 100) {
-            Orion.Print(-1, 'Refilling...');
-            Orion.Print(-1, reagent ? 'true' : 'false');
-            const countInSource = Orion.Count(reagent.graphic, -1, sourceContainerName, undefined, false);
-            Orion.Print(-1, `${countInSource} left in source`);
-            if (countInSource <= count) {
-                Orion.Print(ColorEnum.red, 'Not enough ' + reagent);
-                return false;
-            }
-
-            const regFound = Orion.FindType(
-                reagent.graphic,
-                -1,
-                sourceContainerName,
-                undefined,
-                undefined,
-                undefined,
-                false,
-            );
-            if (regFound.length) {
-                Orion.MoveItem(regFound[0], count, 'backpack');
-                Orion.Wait(250);
-            }
-
-            return true;
         }
 
         static gmMortar(potionName: PotionsEnum) {

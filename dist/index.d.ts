@@ -127,6 +127,7 @@ declare namespace Scripts {
         static shrinkKad(): void;
         static bandageSelf(minimalCountToWarn?: number, pathToNoBandagesWavFile?: string, failedMessage?: boolean): void;
         static massMove(requiredCountInTarget?: number, onlyType?: boolean): void;
+        static refillReagent(reagent: IMyGameObject, sourceContainerName: string, count?: number): boolean;
         static mysticCounter(): void;
         static hideAll(): void;
         static lavaBomb(): void;
@@ -381,22 +382,21 @@ declare namespace Scripts {
         static necroMystic(msg: string): void;
     }
 }
-declare const reagentsContainerName = "kandown/alchemy/reagentsContainerName";
-declare type Potion = {
-    graphic: string;
-    kad: IMyGameObject;
-    reagent: string;
-    alchemySelection: string;
-    reagentsCount: number;
-};
 declare namespace Scripts {
-    class Alchemy {
+    type Potion = {
+        graphic: string;
+        kad: IMyGameObject;
+        reagent: string;
+        alchemySelection: string;
+        reagentsCount: number;
+    };
+    export class Alchemy {
         static getMortar(): string;
         static mixOne(p: Potion | string): boolean;
         static mix(potionName: PotionsEnum): void;
-        static refillReagent(reagent: IMyGameObject, sourceContainerName: string, count?: number): boolean;
         static gmMortar(potionName: PotionsEnum): void;
     }
+    export {};
 }
 declare namespace Scripts {
     class Crafting {
