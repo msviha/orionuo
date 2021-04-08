@@ -3683,37 +3683,31 @@ var Scripts;
                 }
             }
         };
-        Loot.lootCorpsesAround = function (cut, weapon) {
+        Loot.lootCorpsesAround = function (cut) {
             var listOfCorpses = Orion.FindType('0x2006', '-1', 'ground', 'fast', 2, 'red');
             var LHand = Orion.ObjAtLayer(1);
             var RHand = Orion.ObjAtLayer(2);
             while (listOfCorpses.length) {
                 for (var _i = 0, listOfCorpses_1 = listOfCorpses; _i < listOfCorpses_1.length; _i++) {
                     var id = listOfCorpses_1[_i];
-                    Scripts.Loot.lootCorpseId(id, cut, weapon);
+                    Scripts.Loot.lootCorpseId(id, cut);
                     Orion.Ignore(id);
                     Orion.Wait(100);
                 }
                 listOfCorpses = Orion.FindType('0x2006', '-1', 'ground', 'fast', 2, 'red');
             }
-            if (weapon) {
-                Scripts.Dress.equip([LHand.Serial(), RHand.Serial()]);
-            }
+            Scripts.Dress.equip([LHand.Serial(), RHand.Serial()]);
             var itemsOnGround = Orion.FindList('lootItems', 'ground', 'fast', 4);
             this.grabItems(itemsOnGround);
         };
-        Loot.lootCorpseId = function (corpseId, cut, weapon) {
+        Loot.lootCorpseId = function (corpseId, cut) {
             Orion.OpenContainer(corpseId, 5000, "Container id " + corpseId + " not found");
             var hasLootBag = Orion.Count('0x0E76', '0x049A', corpseId) > 0;
             if (hasLootBag && cut) {
                 if (Orion.FindObject('cutWeapon')) {
+                    Orion.CancelWaitTarget();
+                    Orion.WaitTargetObject(corpseId);
                     Orion.UseObject('cutWeapon');
-                    Orion.WaitForTarget(1000);
-                    Orion.TargetObject(corpseId);
-                }
-                else if (weapon) {
-                    Orion.UseObject('fightWeapon');
-                    Orion.WaitForTarget(1000) && Orion.CancelTarget();
                 }
                 Orion.Wait(250);
             }

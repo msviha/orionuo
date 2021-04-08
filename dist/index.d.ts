@@ -169,7 +169,7 @@ declare namespace Scripts {
         static corpses(cut?: boolean): void;
         static lootAllFrom(delay?: number): void;
         private static lootCorpsesAround;
-        static lootCorpseId(corpseId: string, cut?: boolean, weapon?: boolean): void;
+        static lootCorpseId(corpseId: string, cut?: boolean): void;
         private static grabItems;
         private static getBagSnapshot;
         private static moveLootToLootBag;
