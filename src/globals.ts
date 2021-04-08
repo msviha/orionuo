@@ -1502,13 +1502,14 @@ const gameObject: any = {
             reagentsCount: 2,
         },
         halucination: {
+            name: 'Hallucination',
             graphic: '0x0F06',
             color: '0x0B90',
             kad: {
                 graphic: '0x1843',
                 color: '0x0B90',
             },
-            alchemySelection: 'Halucination',
+            alchemySelection: 'Hallucination',
             reagent: 'serpent_scales',
             reagentsCount: 6,
         },
