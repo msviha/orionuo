@@ -598,6 +598,15 @@ function mount() {
 }
 
 /**
+ * Presun regov z jedneho kontajnera do druheho
+ * @example in client `_moveRegs`
+ * @example external code `moveRegs();`
+ */
+function moveRegs() {
+    Scripts.Utils.moveRegs();
+}
+
+/**
  * Spocita potrebne mystiky podle receptu co mate u sebe
  * @example in client `_mysticCounter`
  * @example external code `mysticCounter();`
