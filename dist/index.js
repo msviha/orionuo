@@ -3699,7 +3699,7 @@ var Scripts;
                 }
                 listOfCorpses = Orion.FindType('0x2006', '-1', 'ground', 'fast', 2, 'red');
             }
-            Scripts.Dress.equip([LHand.Serial(), RHand.Serial()]);
+            Scripts.Dress.equip([LHand === null || LHand === void 0 ? void 0 : LHand.Serial(), RHand === null || RHand === void 0 ? void 0 : RHand.Serial()]);
             var itemsOnGround = Orion.FindList('lootItems', 'ground', 'fast', 4);
             this.grabItems(itemsOnGround);
         };
