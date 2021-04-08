@@ -3,12 +3,15 @@
  */
 namespace Scripts {
     export class Statusbar {
-        static create(targetSerial?: string) {
-            if (targetSerial === undefined) {
-                Scripts.Utils.createGameObjectSelections([{ ask: 'Target mobile', addObject: 'lastCustomStatusBar' }]);
+
+        static create(o?:GameObject|string, coordinates?:ICoordinates) {
+            if (!o) {
+                Scripts.Utils.createGameObjectSelections([{ask: 'Target mobile', addObject: 'lastCustomStatusBar'}]);
+                o = Orion.FindObject('lastCustomStatusBar');
+            } else if (o && typeof o === 'string') {
+                o = Orion.FindObject(o);
             }
 
-            const o = Orion.FindObject(targetSerial ?? 'lastCustomStatusBar');
             const serial = o.Serial();
             const name = o.Name();
             const max = o.MaxHits();
@@ -28,6 +31,13 @@ namespace Scripts {
             Shared.AddArray(GlobalEnum.customStatusBars, statusBars);
 
             const gump = Orion.CreateCustomGump(parseInt(serial, 16));
+
+            if (coordinates) {
+                gump.SetX(coordinates.x);
+                gump.SetY(coordinates.y);
+                gump.Update();
+            }
+
             gump.SetCallback(`customStatusBarCallBack ${serial}`);
 
             Scripts.Statusbar.updateStatusBarGumpForObject(o, s, gump, true);
@@ -55,7 +65,8 @@ namespace Scripts {
         }
 
         static updateStatusBarGumpForObject(o: GameObject, s: any, gump: CustomGumpObject, forceUpdate = false) {
-            const name = o.Name();
+            let name = o.Name();
+            name = name.length > 17 ? name.substr(0, 15) + '..' : name;
             const dead = o.Dead();
             const poisoned = o.Poisoned();
             let hp = o.Hits();
@@ -126,8 +137,10 @@ namespace Scripts {
                 : typeof notoriety === 'number'
                 ? Scripts.Utils.getARGBColorByNotoriety(notoriety)
                 : '#ccffffff';
-            gump.AddColoredPolygone(0, 0, 170, 50, ARGBcolor);
-            gump.AddHitBox(CustomStatusBarEnum.click, 0, 0, 170, 50, 1);
+            gump.AddColoredPolygone(0, 0, 140, 42, '#ff000000');
+            gump.AddColoredPolygone(1, 1, 138, 22, '#ffffffff');
+            gump.AddColoredPolygone(2, 2, 136, 21, ARGBcolor);
+            gump.AddHitBox(CustomStatusBarEnum.click, 0, 0, 140, 42, 1);
         }
 
         static redrawBodyToNoObject(s: any, gump: CustomGumpObject) {
@@ -139,19 +152,18 @@ namespace Scripts {
         }
 
         static drawName(gump: CustomGumpObject, name) {
-            gump.AddText(10, 7, '0', `${name}`, 0, 202);
+            gump.AddText(4, 2, '0', name, 0, 202);
         }
 
         static drawHP(gump: CustomGumpObject, hp: number, max: number, poisoned: boolean) {
-            const lineLength = 70;
+            const lineLength = 138;
             const relative = lineLength / max;
             const current = hp * relative;
             const over = hp > max;
             const currentColor = poisoned ? '#00FF00' : Scripts.Utils.determineHpColorRGB((current * 100) / lineLength);
 
-            gump.AddText(10, 25, '0', `${hp}/${max}`, 0, 201);
-            gump.AddColoredPolygone(89, 35, 72, 10, 'black');
-            gump.AddColoredPolygone(90, 35, over ? lineLength : current, 10, currentColor);
+            gump.AddColoredPolygone(1, 24, over ? lineLength : current, 17, currentColor);
+            gump.AddText(4, 23, ColorEnum.pureWhite, `${hp}/${max}`, 0, 201);
         }
     }
 }
