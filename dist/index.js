@@ -2669,6 +2669,9 @@ function mmc(requiredCountInTarget) {
 function mount() {
     Scripts.Mount.mountAndDismount();
 }
+function moveRegs() {
+    Scripts.Utils.moveRegs();
+}
 function mysticCounter() {
     Scripts.Common.mysticCounter();
 }
@@ -5338,7 +5341,7 @@ var Scripts;
             var over = hp > max;
             var currentColor = poisoned ? '#00FF00' : Scripts.Utils.determineHpColorRGB((current * 100) / lineLength);
             gump.AddText(10, 25, '0', hp + "/" + max, 0, 201);
-            gump.AddColoredPolygone(89, 35, 72, 10, "black");
+            gump.AddColoredPolygone(89, 35, 72, 10, 'black');
             gump.AddColoredPolygone(90, 35, over ? lineLength : current, 10, currentColor);
         };
         return Statusbar;
@@ -6162,6 +6165,43 @@ var Scripts;
                     Orion.PrintFast(serial, diff > 0 ? ColorEnum.green : ColorEnum.red, 0, "" + (diff > 0 ? '+' : '') + diff.toString());
                 if (!((_a = config.autoHandlers) === null || _a === void 0 ? void 0 : _a.printDamageDiffOnly)) {
                     Orion.PrintFast(serial, Scripts.Utils.determineHpColor((hp / max) * 100), 0, "[" + hp + "/" + max + "]");
+                }
+            }
+        };
+        Utils.moveRegs = function (from, to) {
+            if (from === void 0) { from = null; }
+            if (to === void 0) { to = null; }
+            var resolveContainers = function (from, to) {
+                if (!from) {
+                    Scripts.Utils.playerPrint('Odkial presunieme regy?');
+                    Orion.WaitForAddObject('moveRegs/sourceContainerName', 60000);
+                    Orion.Wait(100);
+                }
+                var sourceContainerName = from ? from.Serial() : 'moveRegs/sourceContainerName';
+                if (!to) {
+                    Scripts.Utils.playerPrint('Kam presunieme regy?');
+                    Orion.WaitForAddObject('moveRegs/targetContainerName', 60000);
+                    Orion.Wait(100);
+                }
+                var targetContainerName = to ? to.Serial() : 'moveRegs/targetContainerName';
+                return {
+                    sourceContainerName: sourceContainerName,
+                    targetContainerName: targetContainerName
+                };
+            };
+            var _a = resolveContainers(from, to), sourceContainerName = _a.sourceContainerName, targetContainerName = _a.targetContainerName;
+            for (var reg in gameObject.regy) {
+                var regFound = Orion.FindType(gameObject.regy[reg].graphic, gameObject.regy[reg].color || -1, sourceContainerName, undefined, undefined, undefined, false);
+                if (regFound.length) {
+                    Orion.MoveItem(regFound[0], undefined, targetContainerName);
+                    Orion.Wait(250);
+                }
+            }
+            for (var reg in gameObject.necroRegy) {
+                var regFound = Orion.FindType(gameObject.necroRegy[reg].graphic, gameObject.necroRegy[reg].color || -1, sourceContainerName, undefined, undefined, undefined, false);
+                if (regFound.length) {
+                    Orion.MoveItem(regFound[0], undefined, targetContainerName);
+                    Orion.Wait(250);
                 }
             }
         };

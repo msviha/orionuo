@@ -404,6 +404,65 @@ namespace Scripts {
             }
         }
 
+        static moveRegs(from: GameObject = null, to: GameObject = null) {
+            const resolveContainers = (from: GameObject, to: GameObject) => {
+                if (!from) {
+                    Scripts.Utils.playerPrint('Odkial presunieme regy?');
+                    Orion.WaitForAddObject('moveRegs/sourceContainerName', 60000);
+                    Orion.Wait(100);
+                }
+
+                const sourceContainerName = from ? from.Serial() : 'moveRegs/sourceContainerName';
+
+                if (!to) {
+                    Scripts.Utils.playerPrint('Kam presunieme regy?');
+                    Orion.WaitForAddObject('moveRegs/targetContainerName', 60000);
+                    Orion.Wait(100);
+                }
+
+                const targetContainerName = to ? to.Serial() : 'moveRegs/targetContainerName';
+
+                return {
+                    sourceContainerName,
+                    targetContainerName,
+                };
+            };
+
+            const { sourceContainerName, targetContainerName } = resolveContainers(from, to);
+
+            for (const reg in gameObject.regy) {
+                const regFound = Orion.FindType(
+                    gameObject.regy[reg].graphic,
+                    gameObject.regy[reg].color || -1,
+                    sourceContainerName,
+                    undefined,
+                    undefined,
+                    undefined,
+                    false,
+                );
+                if (regFound.length) {
+                    Orion.MoveItem(regFound[0], undefined, targetContainerName);
+                    Orion.Wait(250);
+                }
+            }
+
+            for (const reg in gameObject.necroRegy) {
+                const regFound = Orion.FindType(
+                    gameObject.necroRegy[reg].graphic,
+                    gameObject.necroRegy[reg].color || -1,
+                    sourceContainerName,
+                    undefined,
+                    undefined,
+                    undefined,
+                    false,
+                );
+                if (regFound.length) {
+                    Orion.MoveItem(regFound[0], undefined, targetContainerName);
+                    Orion.Wait(250);
+                }
+            }
+        }
+
         static use(
             val: IMyGameObject | IMyGameObject[],
             name = '',

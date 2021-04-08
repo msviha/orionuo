@@ -51,6 +51,7 @@ declare function manualTarget(opts?: ITargetNextOpts): void;
 declare function mm(requiredCountInTarget?: number): void;
 declare function mmc(requiredCountInTarget?: number): void;
 declare function mount(): void;
+declare function moveRegs(): void;
 declare function mysticCounter(): void;
 declare function nbRune(): void;
 declare function necroMystic(message: string): void;
@@ -335,6 +336,7 @@ declare namespace Scripts {
         static printColoredHpBar(target: string, percent: number): void;
         static getLivingObjectInDistance(objectSerial: string): GameObject | null;
         static printDamage(serial: string, previousHp: number, force?: boolean): void;
+        static moveRegs(from?: GameObject, to?: GameObject): void;
         static use(val: IMyGameObject | IMyGameObject[], name?: string, minimalCountForWarn?: number, warnWavPath?: string): void;
         static setTargetAlias(targetAliasToSet: string, message?: string): void;
         static findFirstType(myGameObject: IMyGameObject, layer?: number): string | undefined;
