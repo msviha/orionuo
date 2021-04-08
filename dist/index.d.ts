@@ -10,6 +10,7 @@ declare function Autostart(): void;
 declare function addCutWeapon(): void;
 declare function addMount(): void;
 declare function alchemy(potionName: PotionsEnum): void;
+declare function mix(potionName: PotionsEnum): void;
 declare function attackLast(): void;
 declare function bishopToggle(): void;
 declare function bowcraftTrain(): void;
@@ -243,10 +244,7 @@ declare namespace Scripts {
     class Potions {
         static getEmptyBottle(): string;
         static getKadForPotion(potion: IPotion): string;
-        static getMortar(): string;
         static drinkPotion(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean, displayTimers?: boolean, displayInfo?: boolean, refillEmptyLimit?: number, displayInvisLongTimer?: boolean): void;
-        static gmMortar(potionName: PotionsEnum): void;
-        static alchemy(potionName: PotionsEnum): void;
         static fillPotion(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean, kadSerial?: string, emptyBottleSerial?: string): void;
         static potionToKad(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean, kadSerial?: string): void;
     }
@@ -381,6 +379,23 @@ declare namespace Scripts {
 declare namespace Scripts {
     class Necromancer {
         static necroMystic(msg: string): void;
+    }
+}
+declare const reagentsContainerName = "kandown/alchemy/reagentsContainerName";
+declare type Potion = {
+    graphic: string;
+    kad: IMyGameObject;
+    reagent: string;
+    alchemySelection: string;
+    reagentsCount: number;
+};
+declare namespace Scripts {
+    class Alchemy {
+        static getMortar(): string;
+        static mixOne(p: Potion | string): boolean;
+        static mix(potionName: PotionsEnum): void;
+        static refillReagent(reagent: IMyGameObject, sourceContainerName: string, count?: number): boolean;
+        static gmMortar(potionName: PotionsEnum): void;
     }
 }
 declare namespace Scripts {
