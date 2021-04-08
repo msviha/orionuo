@@ -160,4 +160,28 @@ export default interface InteractionWithOtherScripts {
      * Sets hotkeys state.
      */
     OnOffHotkeys(state);
+
+	/**
+	 * Set options for the LoS algorithm.
+
+Arguments:
+options - string, options for the algorithm LoS;
+Available options:
+'sphere' - LoS function for the Sphere emulator;
+'sphereadvanced' - LoS function for Sphere emulator (C and above);
+'runuo' - LoS function for emulator RunUO/ServUO (installed by default);
+'pol' - LoS function for emulator POL;
+'spherecheckcorners' - Option for Sphere emulator only, check angles;
+'polusenoshoot' - Option for POL emulator only, using flag No Shoot;
+'pollosthroughtwindows' - Option only for POL emulator, visible through windows.
+'ignoredestpos' - Option to ignore endpoint when calculating LoS.
+
+Allowed to combine flags: Orion.SetLOSOptions('pol|pollosthroughtwindows');
+
+Result: does not return a value.
+	 * @param options
+	 */
+
+
+	SetLOSOptions(options:string);
 }
