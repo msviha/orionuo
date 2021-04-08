@@ -98,21 +98,19 @@ namespace Scripts {
         /**
          * Loot mrtvol okolo v radiuse 2 policka
          */
-        private static lootCorpsesAround(cut?: boolean, weapon?: boolean) {
+        private static lootCorpsesAround(cut?: boolean) {
             let listOfCorpses = Orion.FindType('0x2006', '-1', 'ground', 'fast', 2, 'red');
             const LHand = Orion.ObjAtLayer(1);
             const RHand = Orion.ObjAtLayer(2);
             while (listOfCorpses.length) {
                 for (const id of listOfCorpses) {
-                    Scripts.Loot.lootCorpseId(id, cut, weapon);
+                    Scripts.Loot.lootCorpseId(id, cut);
                     Orion.Ignore(id);
                     Orion.Wait(100);
                 }
                 listOfCorpses = Orion.FindType('0x2006', '-1', 'ground', 'fast', 2, 'red');
             }
-            if (weapon) {
-                Scripts.Dress.equip([LHand.Serial(), RHand.Serial()]);
-            }
+            Scripts.Dress.equip([LHand.Serial(), RHand.Serial()]);
 
             const itemsOnGround = Orion.FindList('lootItems', 'ground', 'fast', 4);
             this.grabItems(itemsOnGround);
@@ -125,18 +123,15 @@ namespace Scripts {
          * @param cut boolean - rezat?
          * @param weapon boolean - pouzivat zbran na rezanie?
          */
-        static lootCorpseId(corpseId: string, cut?: boolean, weapon?: boolean) {
+        static lootCorpseId(corpseId: string, cut?: boolean) {
             Orion.OpenContainer(corpseId, 5000, `Container id ${corpseId} not found`);
 
             const hasLootBag = Orion.Count('0x0E76', '0x049A', corpseId) > 0;
             if (hasLootBag && cut) {
                 if (Orion.FindObject('cutWeapon')) {
+                    Orion.CancelWaitTarget();
+                    Orion.WaitTargetObject(corpseId);
                     Orion.UseObject('cutWeapon');
-                    Orion.WaitForTarget(1000);
-                    Orion.TargetObject(corpseId);
-                } else if (weapon) {
-                    Orion.UseObject('fightWeapon');
-                    Orion.WaitForTarget(1000) && Orion.CancelTarget();
                 }
                 Orion.Wait(250);
             }
