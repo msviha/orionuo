@@ -11,6 +11,7 @@ namespace Scripts {
             } else if (o && typeof o === 'string') {
                 o = Orion.FindObject(o);
             }
+            o = <GameObject>o;
 
             const serial = o.Serial();
             const name = o.Name();
