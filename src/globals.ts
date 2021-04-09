@@ -1691,7 +1691,7 @@ const gameObject: any = {
             ress: {
                 graphic: '0x1F67',
                 color: '0x0000',
-                mana: 25,
+                minMana: 25,
             },
             recall: {
                 graphic: '0x1F4C',
