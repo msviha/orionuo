@@ -89,3 +89,8 @@ interface IRenamedMob {
     serial: string;
     graphic: string | number;
 }
+
+interface ITargetAlias {
+    alias: TargetEnum|string;
+    maxDistance?: number;
+}
