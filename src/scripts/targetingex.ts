@@ -97,10 +97,16 @@ namespace Scripts {
             return arr;
         }
 
+        static getAlivePetsAndAlies(distance = 18):Array<GameObject> {
+            let arr: Array<GameObject> = this.getAliveAlies(distance);
+            arr.push(...this.getAliveAttackPets(distance));
+            return arr;
+        }
+
         /**
-         * 
-         * @param value 
-         * @returns 
+         * Ze stringove podoby ategetu nebo enumu vytvori objekt TargetAliasu, nebo vyhodi exception... ale to chce dotahnout. Nejak sem nezisjitil zatim jak enumerovat enumy a zjistit zda hodntoa je v TargetEnum
+         * @param value hodnota dle TargetEnum
+         * @returns TargetAlias
          */
         static parseTargetAlias(value:string|TargetEnum):ITargetAlias  {
             if (value) {
@@ -117,16 +123,11 @@ namespace Scripts {
         }
 
         /**
-         *
-         * @param targets rozsirene aliasy zleva doprava odlene |
-         * @param maxDistance max vzdalenost, vyuzivaji jen nektere aliasy a je pretizeno pokud je zadano primo u aliasu. vychozi 20
-         * @returns vraci Traget result, pokud neni nalezeno je prazdny tj. success= false
+         * 
+         * @param targets string obsahujici hodnoty odelene | nebo jeden TargetEnum nebo pole TargetAliasu
+         * @returns kolekce TargetAliasu
          */
-        static getTarget(targets: string|TargetEnum|Array<ITargetAlias>, maxDistance?: number): TargetResult | undefined {
-            TargetingEx.cancelResetTarget();
-            Orion.CancelTarget();
-
-            let result: TargetResult = new Scripts.TargetResult();
+        static getTargetAliases(targets: string|TargetEnum|Array<ITargetAlias>): Array<ITargetAlias> {
             const targetAliases = new Array<ITargetAlias>();
 
             if (targets && typeof targets === 'string') {
@@ -138,101 +139,93 @@ namespace Scripts {
             } else if (targets) {
                 targetAliases.push(TargetingEx.parseTargetAlias(<TargetEnum>targets))
             }
+            return targetAliases;
+        }
+
+        /**
+         * 
+         * @param serial 
+         * @param targetAlias 
+         * @param optCondition 
+         * @returns 
+         */
+        static getTargetResult(serial:string, targetAlias?:ITargetAlias, optCondition?: (a: GameObject) => boolean):TargetResult {
+            const result = new Scripts.TargetResult();
+            const obj = Orion.FindObject(serial);
+            
+            if (obj?.Exists() && obj.Distance() <= (targetAlias?.maxDistance ?? 20) && (!optCondition || optCondition(obj))) {
+                result.gameObject(obj.Serial());
+            }
+            return result;
+        }
+
+                /**
+         * 
+         * @param serial 
+         * @param targetAlias 
+         * @param optCondition 
+         * @returns 
+         */
+        static getTargetResultFromArray(gameObjects:Array<GameObject>, targetAlias?:ITargetAlias, optCondition?: (a: GameObject) => boolean, optSort?: (a: GameObject, b:GameObject) => number):TargetResult {
+            const result = new Scripts.TargetResult();
+            const filtered = gameObjects.filter(obj=> obj.Distance() <= (targetAlias?.maxDistance ?? 20) && (!optCondition || optCondition(obj)));
+            if (optSort)
+            filtered.sort((a, b) => optSort(a, b));
+            if (filtered.length > 0) {
+                result.gameObject(filtered[0].Serial());
+            }         
+            return result;
+        }
+
+        static isMobileInjured(gameObject:GameObject) {
+            return gameObject && !gameObject.Dead() && (gameObject.Hits() < gameObject.MaxHits() || gameObject.Poisoned());
+        }
+
+        /**
+         *
+         * @param targets rozsirene aliasy zleva doprava odlene |
+         * @param maxDistance max vzdalenost, vyuzivaji jen nektere aliasy a je pretizeno pokud je zadano primo u aliasu. vychozi 20
+         * @returns vraci Traget result, pokud neni nalezeno je prazdny tj. success= false
+         */
+        static getTarget(targets: string|TargetEnum|Array<ITargetAlias>, maxDistance?: number): TargetResult | undefined {
+            TargetingEx.cancelResetTarget();
+            Orion.CancelTarget();
+            Orion.SetLOSOptions('sphere|spherecheckcorners');
+
+            let result: TargetResult = new Scripts.TargetResult();
+            const targetAliases = TargetingEx.getTargetAliases(targets);
                
             for (const target of targetAliases) {
-                const maxDisntace = target.maxDistance ?? maxDistance ?? 20;
+                target.maxDistance = target.maxDistance ?? maxDistance ?? 20;
                 result = new Scripts.TargetResult();
 
                 if (target.alias === TargetEnum.self) {
                     result.gameObject(Player.Serial());
-                } else if (
-                    target.alias === TargetEnum.selfinjured &&
-                    !Player.Dead() &&
-                    (Player.Hits() < Player.MaxHits() || Player.Poisoned())
-                ) {
-                    result.gameObject(Player.Serial());
+                } else if (target.alias === TargetEnum.selfinjured) {
+                    result = TargetingEx.getTargetResult(Player.Serial(), target, (obj) => { return TargetingEx.isMobileInjured(obj)});
                 } else if (target.alias === TargetEnum.lasttarget) {
-                    const obj = Orion.FindObject(Orion.ClientLastTarget());
-                    if (obj?.Exists() && obj.Distance() <= maxDisntace) {
-                        result.gameObject(obj.Serial());
-                    }
+                    result = TargetingEx.getTargetResult(Orion.ClientLastTarget(), target);
                 } else if (target.alias === TargetEnum.lasttargetmobile) {
-                    const obj = Orion.FindObject(Orion.ClientLastTarget());
-                    if (obj?.Exists() && obj.Mobile() && obj.Distance() <= maxDisntace) {
-                        result.gameObject(obj.Serial());
-                    }
+                    result = TargetingEx.getTargetResult(Orion.ClientLastTarget(), target, (obj) => { return obj.Mobile() });
                 } else if (target.alias === TargetEnum.laststatus) {
-                    const obj = Orion.FindObject('laststatus');
-                    if (obj?.Exists() && obj.Distance() <= maxDisntace) {
-                        result.gameObject(obj.Serial());
-                    }
+                    result = TargetingEx.getTargetResult('laststatus', target);
                 } else if (target.alias === TargetEnum.lastattack) {
-                    const obj = Orion.FindObject(Orion.ClientLastAttack());
-                    if (obj?.Exists() && obj.Distance() <= maxDisntace) {
-                        result.gameObject(obj.Serial());
-                    }                    
+                    result = TargetingEx.getTargetResult(Orion.ClientLastAttack(), target);
                 } else if (target.alias === TargetEnum.laststatusenemy) {
-                    const obj = Orion.FindObject('laststatus');
-                    if (obj?.Exists() && TargetingEx.isEnemy(obj)) {
-                        result.gameObject(obj.Serial());
-                    }
+                    result = TargetingEx.getTargetResult('laststatus', target, (obj) => { return TargetingEx.isEnemy(obj) });
                 } else if (target.alias === TargetEnum.mount) {
-                    const obj = Orion.FindObject('myMount');
-                    if (obj?.Exists() && obj.Distance() <= maxDisntace) {
-                        result.gameObject(obj.Serial());
-                    }
-                } else if (target.alias === TargetEnum.nearinjuredalie) {
-                    let arr: Array<GameObject> = this.getAliveAlies();
-                    arr.push(...this.getAliveAttackPets());
-
-                    arr = arr
-                        .filter((a) => (a.Hits() < a.MaxHits() || a.Poisoned()) && a.Distance() <= maxDisntace)
-                        .sort((a, b) => a.Distance() - b.Distance());
-                    if (arr.length > 0) {
-                        result.gameObject(arr[0].Serial());
-                    }
-                } else if (target.alias === TargetEnum.nearinjuredalielos) {
-                    Orion.SetLOSOptions('sphere|spherecheckcorners');
-                    let arr: Array<GameObject> = this.getAliveAlies();
-                    arr.push(...this.getAliveAttackPets());
-
-                    arr = arr
-                        .filter(
-                            (a) => (a.Hits() < a.MaxHits() || a.Poisoned()) && a.InLOS() && a.Distance() <= maxDisntace,
-                        )
-                        .sort((a, b) => a.Distance() - b.Distance());
-                    if (arr.length > 0) {
-                        result.gameObject(arr[0].Serial());
-                    }
-                } else if (target.alias === TargetEnum.mostinjuredalie) {
-                    let arr: Array<GameObject> = this.getAliveAlies();
-                    arr.push(...this.getAliveAttackPets());
-
-                    arr = arr
-                        .filter((a) => (a.Hits() < a.MaxHits() || a.Poisoned()) && a.Distance() <= maxDisntace)
-                        .sort((a, b) => a.Hits() - b.Hits());
-                    if (arr.length > 0) {
-                        result.gameObject(arr[0].Serial());
-                    }
-                } else if (target.alias === TargetEnum.mostinjuredalielos) {
-                    Orion.SetLOSOptions('sphere|spherecheckcorners');
-                    let arr: Array<GameObject> = this.getAliveAlies();
-                    arr.push(...this.getAliveAttackPets());
-
-                    arr = arr
-                        .filter(
-                            (a) => (a.Hits() < a.MaxHits() || a.Poisoned()) && a.InLOS() && a.Distance() <= maxDisntace,
-                        )
-                        .sort((a, b) => a.Hits() - b.Hits());
-                    if (arr.length > 0) {
-                        result.gameObject(arr[0].Serial());
-                    }
+                    result = TargetingEx.getTargetResult('myMount', target);
                 } else if (target.alias === TargetEnum.hover) {
-                    const hoverBar = Statusbar.getHoveringStatusBar();
-                    if (hoverBar && Orion.FindObject(hoverBar.serial)?.Distance() <= maxDisntace) {
-                        result.gameObject(hoverBar.serial);
-                    }
-                }
+                    result = TargetingEx.getTargetResult(Statusbar.getHoveringStatusBar()?.serial ?? "", target);
+                } else if (target.alias === TargetEnum.nearinjuredalie) {
+                    result = TargetingEx.getTargetResultFromArray(TargetingEx.getAlivePetsAndAlies(maxDistance), target, TargetingEx.isMobileInjured, (a, b) => a.Distance() - b.Distance());
+                } else if (target.alias === TargetEnum.nearinjuredalielos) {
+                    result = TargetingEx.getTargetResultFromArray(TargetingEx.getAlivePetsAndAlies(maxDistance), target, (obj) => {return TargetingEx.isMobileInjured(obj) && obj.InLOS(); }, (a, b) => a.Distance() - b.Distance());
+                } else if (target.alias === TargetEnum.mostinjuredalie) {
+                    result = TargetingEx.getTargetResultFromArray(TargetingEx.getAlivePetsAndAlies(maxDistance), target, TargetingEx.isMobileInjured, (a, b) => a.Hits() - b.Hits());
+                } else if (target.alias === TargetEnum.mostinjuredalielos) {
+                   result = TargetingEx.getTargetResultFromArray(TargetingEx.getAlivePetsAndAlies(maxDistance), target, (obj) => {return TargetingEx.isMobileInjured(obj) && obj.InLOS(); }, (a, b) => a.Hits() - b.Hits());
+                } 
 
                 if (result.success()) {
                     break;
