@@ -7,8 +7,13 @@ namespace Scripts {
          * @param spell nazev kouzla
          * @param target na koho ma kouzlit
          */
-        static cast(spell: string, target?: TargetEnum | string) {
-            Scripts.Utils.waitTarget(target);
+        static cast(spell: string, target?: string | TargetEnum | Array<ITargetAlias>) {
+            const targetResult = TargetingEx.getTarget(target);
+            if (targetResult.success()) {
+                targetResult.waitTarget();
+            } else if (target) {
+                Utils.log(`Target not found: '${target}'`, ColorEnum.orange);
+            }
             Orion.Cast(spell);
         }
 

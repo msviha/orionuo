@@ -252,7 +252,7 @@ declare namespace Scripts {
 }
 declare namespace Scripts {
     class Spells {
-        static cast(spell: string, target?: TargetEnum | string): void;
+        static cast(spell: string, target?: string | TargetEnum | Array<ITargetAlias>): void;
         static summon(creature: string, target?: TargetEnum | string): void;
         static castScroll(scroll: ScrollEnum, target?: TargetEnum | string, backupHeadCast?: string): void;
         static backupHeadCast(reason: string, spell: string, target?: TargetEnum | string): void;
@@ -264,13 +264,14 @@ declare namespace Scripts {
 }
 declare namespace Scripts {
     class Statusbar {
-        static create(targetSerial?: string): void;
+        static create(mobile?: GameObject | string, coordinates?: ICoordinates): void;
         static updateStatusbars(): void;
-        static updateStatusBarGumpForObject(o: GameObject, s: any, gump: CustomGumpObject, forceUpdate?: boolean): void;
+        static updateStatusBarGumpForObject(mobile: GameObject, statusBar: any, gump: CustomGumpObject, forceUpdate?: boolean): void;
         static drawBody(gump: CustomGumpObject, notoriety?: number, dead?: boolean): void;
         static redrawBodyToNoObject(s: any, gump: CustomGumpObject): void;
         static drawName(gump: CustomGumpObject, name: any): void;
         static drawHP(gump: CustomGumpObject, hp: number, max: number, poisoned: boolean): void;
+        static getHoveringStatusBar(): any;
     }
 }
 declare namespace Scripts {
@@ -294,7 +295,13 @@ declare namespace Scripts {
         static isEnemy(obj: GameObject): boolean;
         static getAliveAlies(distance?: number): Array<GameObject>;
         static getAliveAttackPets(distance?: number): Array<GameObject>;
-        static getTarget(targets: string, distance?: number): TargetResult | undefined;
+        static getAlivePetsAndAlies(distance?: number): Array<GameObject>;
+        static parseTargetAlias(value: string | TargetEnum): ITargetAlias;
+        static getTargetAliases(targets: string | TargetEnum | Array<ITargetAlias>): Array<ITargetAlias>;
+        static getTargetResult(serial: string, targetAlias?: ITargetAlias, optCondition?: (a: GameObject) => boolean): TargetResult;
+        static getTargetResultFromArray(gameObjects: Array<GameObject>, targetAlias?: ITargetAlias, optCondition?: (a: GameObject) => boolean, optSort?: (a: GameObject, b: GameObject) => number): TargetResult;
+        static isMobileInjured(gameObject: GameObject): boolean;
+        static getTarget(targets: string | TargetEnum | Array<ITargetAlias>, maxDistance?: number): TargetResult | undefined;
     }
 }
 declare namespace Scripts {
@@ -509,7 +516,16 @@ declare enum TargetEnum {
     self = "self",
     lastattack = "lastattack",
     laststatus = "laststatus",
-    lasttarget = "lasttarget"
+    lasttarget = "lasttarget",
+    selfinjured = "selfinjured",
+    laststatusenemy = "laststatusenemy",
+    mount = "mount",
+    nearinjuredalie = "nearinjuredalie",
+    nearinjuredalielos = "nearinjuredalielos",
+    mostinjuredalie = "mostinjuredalie",
+    mostinjuredalielos = "mostinjuredalielos",
+    lasttargetmobile = "lasttargetmobile",
+    hover = "hover"
 }
 declare enum CustomStatusBarEnum {
     close = 0,
@@ -638,16 +654,6 @@ declare enum RenameNameType {
     autoName = "autoName",
     nameList = "nameList"
 }
-declare enum TargetExEnum {
-    selfinjured = "selfinjured",
-    laststatusenemy = "laststatusenemy",
-    mount = "mount",
-    nearinjuredalie = "nearinjuredalie",
-    nearinjuredalielos = "nearinjuredalielos",
-    mostinjuredalie = "mostinjuredalie",
-    mostinjuredalielos = "mostinjuredalielos",
-    lasttargetmobile = "lasttargetmobile"
-}
 interface IMyGameObject {
     graphic: string;
     color?: string;
@@ -721,6 +727,10 @@ interface IMenuSelection {
 interface IRenamedMob {
     serial: string;
     graphic: string | number;
+}
+interface ITargetAlias {
+    alias: TargetEnum | string;
+    maxDistance?: number;
 }
 declare function isMyGameObject(val: any): val is IMyGameObject;
 declare function isMakeProps(val: any): val is IMakeProps;

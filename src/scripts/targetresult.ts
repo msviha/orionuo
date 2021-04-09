@@ -22,7 +22,7 @@ namespace Scripts {
         }
 
         public isValid() {
-            return this.serial && Orion.FindObject(this.serial) && Orion.FindObject(this.serial)?.Exists();
+            return this.serial && Orion.FindObject(this.serial)?.Exists();
         }
 
         public isStatic() {

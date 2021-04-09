@@ -9,7 +9,6 @@ namespace Scripts {
          *          *
          */
         static bandageTarget(targes?: string, showTarget = false, minimalCountToWarn = 10) {
-            Scripts.TargetingEx.cancelResetTarget();
             const target = Scripts.TargetingEx.getTarget(targes, 5);
             const bandagesSerials = Orion.FindType(gameObject.uncategorized.bandy.graphic);
 
@@ -45,9 +44,9 @@ namespace Scripts {
                 Scripts.Utils.resetTimer(TimersEnum.bandage);
                 target.waitTarget();
                 Orion.UseObject(bandagesSerials[0]);
-                Orion.PrintFast(target.gameObject().Serial(), ColorEnum.green, 0, 'band..');
+                Utils.charPrint(target.gameObject().Serial(), 'band..', ColorEnum.green, true);
             } else {
-                Orion.Print(ColorEnum.green, "Zadne zraneni v dosahu {-'-}");
+                Utils.playerPrint('[ vsichni ok ]', ColorEnum.green, true);
             }
 
             if (count - 1 <= minimalCountToWarn) {

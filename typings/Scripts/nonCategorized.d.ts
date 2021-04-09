@@ -288,4 +288,10 @@ export default interface NonCategorized {
     PauseScript(name?: string, exceptScripts?: string);
 
     ResumeScript(name?: string, exceptScripts?: string);
+
+    /**
+	 * 	Get mouse coordinates in game window.
+		Result: class object PositionObject, mouse coordinates in the game window.
+	 */
+    GetMousePosition(): ObjectCoordinates;
 }
