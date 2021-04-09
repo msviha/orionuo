@@ -6,14 +6,13 @@ namespace Scripts {
          *
          * @param spell nazev kouzla
          * @param target na koho ma kouzlit
-         * @param forceCastInvalid novy target system v pripadne nevalidniho targetu vzdy vyhodi tercik, pro zachovani puvodniho chovani kouzleni i na waitTarget ktery neexistuje slouzi tento prepinac
          */
-        static cast(spell: string, target?: TargetEnum | string, forceCastInvalid = true) {
+        static cast(spell: string, target?: string|TargetEnum|Array<ITargetAlias>) {
             const targetResult = TargetingEx.getTarget(target);
-            if (!targetResult.isValid() && forceCastInvalid && target) {
-                Scripts.Utils.waitTarget(targetResult.gameObject()?.Serial());
-            } else {
+            if (targetResult.success()) {
                 targetResult.waitTarget();
+            } else if (target) {
+                Utils.log(`Target not found: '${target}'`, ColorEnum.orange);
             }
             Orion.Cast(spell);
         }
