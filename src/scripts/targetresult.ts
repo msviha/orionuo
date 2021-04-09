@@ -10,6 +10,7 @@ namespace Scripts {
         private z?: number;
         private graphic?: string;
 
+
         public success() {
             return this.isValid() || this.isStatic();
         }
@@ -22,7 +23,7 @@ namespace Scripts {
         }
 
         public isValid() {
-            return this.serial && Orion.FindObject(this.serial) && Orion.FindObject(this.serial)?.Exists();
+            return this.serial && Orion.FindObject(this.serial)?.Exists();
         }
 
         public isStatic() {
