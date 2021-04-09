@@ -10,7 +10,6 @@ namespace Scripts {
         private z?: number;
         private graphic?: string;
 
-
         public success() {
             return this.isValid() || this.isStatic();
         }

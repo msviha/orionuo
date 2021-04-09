@@ -7,7 +7,7 @@ namespace Scripts {
          * @param spell nazev kouzla
          * @param target na koho ma kouzlit
          */
-        static cast(spell: string, target?: string|TargetEnum|Array<ITargetAlias>) {
+        static cast(spell: string, target?: string | TargetEnum | Array<ITargetAlias>) {
             const targetResult = TargetingEx.getTarget(target);
             if (targetResult.success()) {
                 targetResult.waitTarget();

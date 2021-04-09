@@ -4,7 +4,6 @@
 namespace Scripts {
     export class Statusbar {
         static create(mobile?: GameObject | string, coordinates?: ICoordinates): void {
-
             if (!mobile) {
                 Scripts.Utils.createGameObjectSelections([{ ask: 'Target mobile', addObject: 'lastCustomStatusBar' }]);
                 mobile = Orion.FindObject('lastCustomStatusBar');
@@ -18,7 +17,8 @@ namespace Scripts {
             const max = mobile.MaxHits();
             const hp = mobile.Hits();
             const statusBars = Shared.GetArray(GlobalEnum.customStatusBars, []);
-            const statusBar = {//Mozna udelat interface?
+            const statusBar = {
+                //Mozna udelat interface?
                 serial,
                 hp,
                 max,
@@ -65,7 +65,12 @@ namespace Scripts {
             Shared.AddArray(GlobalEnum.customStatusBars, statusBars);
         }
 
-        static updateStatusBarGumpForObject(mobile: GameObject, statusBar: any, gump: CustomGumpObject, forceUpdate = false) {
+        static updateStatusBarGumpForObject(
+            mobile: GameObject,
+            statusBar: any,
+            gump: CustomGumpObject,
+            forceUpdate = false,
+        ) {
             let name = mobile.Name();
             name = name.length > 17 ? name.substr(0, 15) + '..' : name;
             const dead = mobile.Dead();
@@ -167,7 +172,7 @@ namespace Scripts {
             gump.AddText(4, 23, ColorEnum.pureWhite, `${hp}/${max}`, 0, 201);
         }
 
-        static getHoveringStatusBar():any {
+        static getHoveringStatusBar(): any {
             const statusBars = Shared.GetArray(GlobalEnum.customStatusBars, []);
             const mousePosition = Orion.GetMousePosition();
 
@@ -182,14 +187,14 @@ namespace Scripts {
                     const position = Orion.GetGumpPosition('custom', statusBar.serial);
 
                     if (
-                        position?.X() > -1 && 
-                        position?.Y() > -1 && 
+                        position?.X() > -1 &&
+                        position?.Y() > -1 &&
                         mouseX - position?.X() >= 0 &&
-                        mouseX - position?.X() <= 140 && 
-                        mouseY - position?.Y() >= 0 && 
+                        mouseX - position?.X() <= 140 &&
+                        mouseY - position?.Y() >= 0 &&
                         mouseY - position?.Y() <= 42 &&
                         Orion.FindObject(statusBar.serial)?.Exists()
-                     ) {
+                    ) {
                         return statusBar;
                     }
                 }

@@ -91,6 +91,6 @@ interface IRenamedMob {
 }
 
 interface ITargetAlias {
-    alias: TargetEnum|string;
+    alias: TargetEnum | string;
     maxDistance?: number;
 }

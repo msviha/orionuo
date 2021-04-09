@@ -1758,7 +1758,8 @@ var gameObject = {
             },
             ress: {
                 graphic: '0x1F67',
-                color: '0x0000'
+                color: '0x0000',
+                minMana: 25
             },
             recall: {
                 graphic: '0x1F4C',
@@ -5150,7 +5151,13 @@ var Scripts;
         function Spells() {
         }
         Spells.cast = function (spell, target) {
-            Scripts.Utils.waitTarget(target);
+            var targetResult = Scripts.TargetingEx.getTarget(target);
+            if (targetResult.success()) {
+                targetResult.waitTarget();
+            }
+            else if (target) {
+                Scripts.Utils.log("Target not found: '" + target + "'", ColorEnum.orange);
+            }
             Orion.Cast(spell);
         };
         Spells.summon = function (creature, target) {
@@ -5320,95 +5327,105 @@ var Scripts;
     var Statusbar = (function () {
         function Statusbar() {
         }
-        Statusbar.create = function (targetSerial) {
-            if (targetSerial === undefined) {
+        Statusbar.create = function (mobile, coordinates) {
+            if (!mobile) {
                 Scripts.Utils.createGameObjectSelections([{ ask: 'Target mobile', addObject: 'lastCustomStatusBar' }]);
+                mobile = Orion.FindObject('lastCustomStatusBar');
             }
-            var o = Orion.FindObject(targetSerial !== null && targetSerial !== void 0 ? targetSerial : 'lastCustomStatusBar');
-            var serial = o.Serial();
-            var name = o.Name();
-            var max = o.MaxHits();
-            var hp = o.Hits();
+            else if (mobile && typeof mobile === 'string') {
+                mobile = Orion.FindObject(mobile);
+            }
+            mobile = mobile;
+            var serial = mobile.Serial();
+            var name = mobile.Name();
+            var max = mobile.MaxHits();
+            var hp = mobile.Hits();
             var statusBars = Shared.GetArray(GlobalEnum.customStatusBars, []);
-            var s = {
+            var statusBar = {
                 serial: serial,
                 hp: hp,
                 max: max,
                 name: name,
-                poisoned: o.Poisoned(),
+                poisoned: mobile.Poisoned(),
                 visible: false,
-                dead: o.Dead()
+                dead: mobile.Dead()
             };
-            statusBars.push(s);
+            statusBars.push(statusBar);
             Shared.AddVar(serial, true);
             Shared.AddArray(GlobalEnum.customStatusBars, statusBars);
             var gump = Orion.CreateCustomGump(parseInt(serial, 16));
+            if (coordinates) {
+                gump.SetX(coordinates.x);
+                gump.SetY(coordinates.y);
+                gump.Update();
+            }
             gump.SetCallback("customStatusBarCallBack " + serial);
-            Scripts.Statusbar.updateStatusBarGumpForObject(o, s, gump, true);
+            Scripts.Statusbar.updateStatusBarGumpForObject(mobile, statusBar, gump, true);
         };
         Statusbar.updateStatusbars = function () {
             var statusBars = Shared.GetArray(GlobalEnum.customStatusBars, []);
             for (var _i = 0, statusBars_1 = statusBars; _i < statusBars_1.length; _i++) {
-                var s = statusBars_1[_i];
-                if (!Shared.GetVar(s.serial, true)) {
+                var statusBar_1 = statusBars_1[_i];
+                if (!Shared.GetVar(statusBar_1.serial, true)) {
                     continue;
                 }
-                var gump = Orion.CreateCustomGump(parseInt(s.serial, 16));
-                var o = Orion.FindObject(s.serial);
-                if (o) {
-                    Scripts.Statusbar.updateStatusBarGumpForObject(o, s, gump);
+                var gump = Orion.CreateCustomGump(parseInt(statusBar_1.serial, 16));
+                var mobile = Orion.FindObject(statusBar_1.serial);
+                if (mobile) {
+                    Scripts.Statusbar.updateStatusBarGumpForObject(mobile, statusBar_1, gump);
                 }
-                else if (s.visible) {
-                    s.visible = false;
-                    Scripts.Statusbar.redrawBodyToNoObject(s, gump);
+                else if (statusBar_1.visible) {
+                    statusBar_1.visible = false;
+                    Scripts.Statusbar.redrawBodyToNoObject(statusBar_1, gump);
                 }
             }
             Shared.AddArray(GlobalEnum.customStatusBars, statusBars);
         };
-        Statusbar.updateStatusBarGumpForObject = function (o, s, gump, forceUpdate) {
+        Statusbar.updateStatusBarGumpForObject = function (mobile, statusBar, gump, forceUpdate) {
             if (forceUpdate === void 0) { forceUpdate = false; }
-            var name = o.Name();
-            var dead = o.Dead();
-            var poisoned = o.Poisoned();
-            var hp = o.Hits();
-            var max = o.MaxHits();
+            var name = mobile.Name();
+            name = name.length > 17 ? name.substr(0, 15) + '..' : name;
+            var dead = mobile.Dead();
+            var poisoned = mobile.Poisoned();
+            var hp = mobile.Hits();
+            var max = mobile.MaxHits();
             if (!forceUpdate &&
-                s.visible &&
-                s.dead === dead &&
-                s.hp === hp &&
-                s.max === max &&
-                s.name === name &&
-                s.poisoned === poisoned) {
+                statusBar.visible &&
+                statusBar.dead === dead &&
+                statusBar.hp === hp &&
+                statusBar.max === max &&
+                statusBar.name === name &&
+                statusBar.poisoned === poisoned) {
                 return;
             }
             var updateText = false;
-            if (s.dead !== dead || (!s.visible && dead)) {
-                s.dead = dead;
-                s.visible = true;
+            if (statusBar.dead !== dead || (!statusBar.visible && dead)) {
+                statusBar.dead = dead;
+                statusBar.visible = true;
                 updateText = true;
                 gump.Clear();
-                var ARGBcolor = Scripts.Utils.getARGBColorByNotoriety(o.Notoriety(), 'cc');
-                Scripts.Statusbar.drawBody(gump, o.Notoriety(), dead);
+                var ARGBcolor = Scripts.Utils.getARGBColorByNotoriety(mobile.Notoriety(), 'cc');
+                Scripts.Statusbar.drawBody(gump, mobile.Notoriety(), dead);
             }
-            if (!s.visible) {
-                s.visible = true;
+            if (!statusBar.visible) {
+                statusBar.visible = true;
                 updateText = true;
                 gump.Clear();
-                Scripts.Statusbar.drawBody(gump, o.Notoriety());
+                Scripts.Statusbar.drawBody(gump, mobile.Notoriety());
             }
-            if (s.name !== name || updateText) {
-                s.name = name;
+            if (statusBar.name !== name || updateText) {
+                statusBar.name = name;
                 Scripts.Statusbar.drawName(gump, name);
             }
-            !max && (max = s.max);
+            !max && (max = statusBar.max);
             hp < 0 && (hp = 0);
-            if (s.hp !== hp || s.max !== max || s.poisoned !== poisoned || updateText) {
-                s.hp = hp;
-                s.max = max;
-                s.poisoned = poisoned;
+            if (statusBar.hp !== hp || statusBar.max !== max || statusBar.poisoned !== poisoned || updateText) {
+                statusBar.hp = hp;
+                statusBar.max = max;
+                statusBar.poisoned = poisoned;
                 if (!updateText) {
                     gump.Clear();
-                    Scripts.Statusbar.drawBody(gump, o.Notoriety());
+                    Scripts.Statusbar.drawBody(gump, mobile.Notoriety());
                     Scripts.Statusbar.drawName(gump, name);
                 }
                 Scripts.Statusbar.drawHP(gump, hp, max, poisoned);
@@ -5422,8 +5439,10 @@ var Scripts;
                 : typeof notoriety === 'number'
                     ? Scripts.Utils.getARGBColorByNotoriety(notoriety)
                     : '#ccffffff';
-            gump.AddColoredPolygone(0, 0, 170, 50, ARGBcolor);
-            gump.AddHitBox(CustomStatusBarEnum.click, 0, 0, 170, 50, 1);
+            gump.AddColoredPolygone(0, 0, 140, 42, '#ff000000');
+            gump.AddColoredPolygone(1, 1, 138, 22, '#ffffffff');
+            gump.AddColoredPolygone(2, 2, 136, 21, ARGBcolor);
+            gump.AddHitBox(CustomStatusBarEnum.click, 0, 0, 140, 42, 1);
         };
         Statusbar.redrawBodyToNoObject = function (s, gump) {
             gump.Clear();
@@ -5433,17 +5452,41 @@ var Scripts;
             gump.Update();
         };
         Statusbar.drawName = function (gump, name) {
-            gump.AddText(10, 7, '0', "" + name, 0, 202);
+            gump.AddText(4, 2, '0', name, 0, 202);
         };
         Statusbar.drawHP = function (gump, hp, max, poisoned) {
-            var lineLength = 70;
+            var lineLength = 138;
             var relative = lineLength / max;
             var current = hp * relative;
             var over = hp > max;
             var currentColor = poisoned ? '#00FF00' : Scripts.Utils.determineHpColorRGB((current * 100) / lineLength);
-            gump.AddText(10, 25, '0', hp + "/" + max, 0, 201);
-            gump.AddColoredPolygone(89, 35, 72, 10, 'black');
-            gump.AddColoredPolygone(90, 35, over ? lineLength : current, 10, currentColor);
+            gump.AddColoredPolygone(1, 24, over ? lineLength : current, 17, currentColor);
+            gump.AddText(4, 23, ColorEnum.pureWhite, hp + "/" + max, 0, 201);
+        };
+        Statusbar.getHoveringStatusBar = function () {
+            var _a;
+            var statusBars = Shared.GetArray(GlobalEnum.customStatusBars, []);
+            var mousePosition = Orion.GetMousePosition();
+            if ((mousePosition === null || mousePosition === void 0 ? void 0 : mousePosition.X()) && (mousePosition === null || mousePosition === void 0 ? void 0 : mousePosition.Y())) {
+                var mouseX = mousePosition === null || mousePosition === void 0 ? void 0 : mousePosition.X();
+                var mouseY = mousePosition === null || mousePosition === void 0 ? void 0 : mousePosition.Y();
+                for (var _i = 0, statusBars_2 = statusBars; _i < statusBars_2.length; _i++) {
+                    var statusBar_2 = statusBars_2[_i];
+                    if (!Shared.GetVar(statusBar_2.serial, true)) {
+                        continue;
+                    }
+                    var position = Orion.GetGumpPosition('custom', statusBar_2.serial);
+                    if ((position === null || position === void 0 ? void 0 : position.X()) > -1 &&
+                        (position === null || position === void 0 ? void 0 : position.Y()) > -1 &&
+                        mouseX - (position === null || position === void 0 ? void 0 : position.X()) >= 0 &&
+                        mouseX - (position === null || position === void 0 ? void 0 : position.X()) <= 140 &&
+                        mouseY - (position === null || position === void 0 ? void 0 : position.Y()) >= 0 &&
+                        mouseY - (position === null || position === void 0 ? void 0 : position.Y()) <= 42 && ((_a = Orion.FindObject(statusBar_2.serial)) === null || _a === void 0 ? void 0 : _a.Exists())) {
+                        return statusBar_2;
+                    }
+                }
+            }
+            return null;
         };
         return Statusbar;
     }());
@@ -5713,21 +5756,34 @@ var Scripts;
             return result;
         };
         Targeting.showStatusBarOnWrapper = function (serial, statusWrapperOpt) {
+            var _a, _b, _c, _d, _e;
             var barObj = Orion.FindObject(serial);
-            var enabled = (statusWrapperOpt === null || statusWrapperOpt === void 0 ? void 0 : statusWrapperOpt.enabled) || true;
+            var enabled = (statusWrapperOpt === null || statusWrapperOpt === void 0 ? void 0 : statusWrapperOpt.enabled) === true;
             if ((barObj === null || barObj === void 0 ? void 0 : barObj.Exists()) && barObj.Mobile() && !barObj.Dead() && enabled) {
-                var startX = (statusWrapperOpt === null || statusWrapperOpt === void 0 ? void 0 : statusWrapperOpt.x) || 200;
-                var stattY = (statusWrapperOpt === null || statusWrapperOpt === void 0 ? void 0 : statusWrapperOpt.y) || 150;
-                var maxCount = (statusWrapperOpt === null || statusWrapperOpt === void 0 ? void 0 : statusWrapperOpt.maxCount) || 10;
-                var deltaX = (statusWrapperOpt === null || statusWrapperOpt === void 0 ? void 0 : statusWrapperOpt.deltaX) || 30;
-                var deltaY = (statusWrapperOpt === null || statusWrapperOpt === void 0 ? void 0 : statusWrapperOpt.deltaY) || 30;
+                var startX = (_a = statusWrapperOpt === null || statusWrapperOpt === void 0 ? void 0 : statusWrapperOpt.x) !== null && _a !== void 0 ? _a : 200;
+                var startY = (_b = statusWrapperOpt === null || statusWrapperOpt === void 0 ? void 0 : statusWrapperOpt.y) !== null && _b !== void 0 ? _b : 150;
+                var maxCount = (_c = statusWrapperOpt === null || statusWrapperOpt === void 0 ? void 0 : statusWrapperOpt.maxCount) !== null && _c !== void 0 ? _c : 10;
+                var deltaX = (_d = statusWrapperOpt === null || statusWrapperOpt === void 0 ? void 0 : statusWrapperOpt.deltaX) !== null && _d !== void 0 ? _d : 30;
+                var deltaY = (_e = statusWrapperOpt === null || statusWrapperOpt === void 0 ? void 0 : statusWrapperOpt.deltaY) !== null && _e !== void 0 ? _e : 30;
+                var custBars = (statusWrapperOpt === null || statusWrapperOpt === void 0 ? void 0 : statusWrapperOpt.useCustBars) === true;
                 var count = 0;
                 if (Scripts.TargetingEx.isEnemy(barObj)) {
                     count = Shared.GetVar('showStatusBarOnWrapper.enemy.count', 0);
                     Shared.AddVar('showStatusBarOnWrapper.enemy.count', ++count);
-                    Orion.Print(ColorEnum.pureWhite, '' + count);
                 }
-                Orion.ShowStatusbar(serial, startX + deltaX * (count % maxCount), stattY + deltaY * (count % maxCount));
+                if (custBars) {
+                    var bars = Shared.GetArray(GlobalEnum.customStatusBars, []);
+                    var exists = bars && bars.some(function (s) { return s.serial === barObj.Serial() && Shared.GetVar(s.serial, true); });
+                    if (!exists) {
+                        Scripts.Statusbar.create(Orion.FindObject(serial), {
+                            x: startX + deltaX * (count % maxCount),
+                            y: startY + deltaY * (count % maxCount)
+                        });
+                    }
+                }
+                else {
+                    Orion.ShowStatusbar(serial, startX + deltaX * (count % maxCount), startY + deltaY * (count % maxCount));
+                }
             }
         };
         return Targeting;
@@ -5797,93 +5853,126 @@ var Scripts;
             }
             return arr;
         };
-        TargetingEx.getTarget = function (targets, distance) {
+        TargetingEx.getAlivePetsAndAlies = function (distance) {
+            if (distance === void 0) { distance = 18; }
+            var arr = this.getAliveAlies(distance);
+            arr.push.apply(arr, this.getAliveAttackPets(distance));
+            return arr;
+        };
+        TargetingEx.parseTargetAlias = function (value) {
+            if (value) {
+                var splitValue = value.split(',');
+                var alias = splitValue[0].trim().toLowerCase();
+                if (splitValue.length > 1 && parseInt(splitValue[1]) > 0) {
+                    return { alias: alias, maxDistance: parseInt(splitValue[1]) };
+                }
+                else {
+                    return { alias: alias };
+                }
+            }
+            throw new Error("Non-exist target alias: " + value);
+        };
+        TargetingEx.getTargetAliases = function (targets) {
+            var targetAliases = new Array();
+            if (targets && typeof targets === 'string') {
+                for (var _i = 0, _a = targets.split('|'); _i < _a.length; _i++) {
+                    var target = _a[_i];
+                    targetAliases.push(TargetingEx.parseTargetAlias(target));
+                }
+            }
+            else if (targets && targets.length) {
+                targetAliases.push.apply(targetAliases, targets);
+            }
+            else if (targets) {
+                targetAliases.push(TargetingEx.parseTargetAlias(targets));
+            }
+            return targetAliases;
+        };
+        TargetingEx.getTargetResult = function (serial, targetAlias, optCondition) {
             var _a;
             var result = new Scripts.TargetResult();
+            var obj = Orion.FindObject(serial);
+            if ((obj === null || obj === void 0 ? void 0 : obj.Exists()) &&
+                obj.Distance() <= ((_a = targetAlias === null || targetAlias === void 0 ? void 0 : targetAlias.maxDistance) !== null && _a !== void 0 ? _a : 20) &&
+                (!optCondition || optCondition(obj))) {
+                result.gameObject(obj.Serial());
+            }
+            return result;
+        };
+        TargetingEx.getTargetResultFromArray = function (gameObjects, targetAlias, optCondition, optSort) {
+            var result = new Scripts.TargetResult();
+            var filtered = gameObjects.filter(function (obj) { var _a; return obj.Distance() <= ((_a = targetAlias === null || targetAlias === void 0 ? void 0 : targetAlias.maxDistance) !== null && _a !== void 0 ? _a : 20) && (!optCondition || optCondition(obj)); });
+            if (optSort)
+                filtered.sort(function (a, b) { return optSort(a, b); });
+            if (filtered.length > 0) {
+                result.gameObject(filtered[0].Serial());
+            }
+            return result;
+        };
+        TargetingEx.isMobileInjured = function (gameObject) {
+            return (gameObject && !gameObject.Dead() && (gameObject.Hits() < gameObject.MaxHits() || gameObject.Poisoned()));
+        };
+        TargetingEx.getTarget = function (targets, maxDistance) {
+            var _a, _b, _c, _d;
             TargetingEx.cancelResetTarget();
-            var maxDisntace = distance || 20;
-            for (var i = 0; i < targets.split('|').length; i++) {
-                var value = targets.split('|')[i].toLocaleLowerCase();
-                if (value.split(',').length > 1 && parseInt(value.split(',')[1]) && parseInt(value.split(',')[1]) > 0) {
-                    maxDisntace = parseInt(value.split(',')[1]);
-                }
+            Orion.CancelTarget();
+            Orion.SetLOSOptions('sphere|spherecheckcorners');
+            var result = new Scripts.TargetResult();
+            var targetAliases = TargetingEx.getTargetAliases(targets);
+            for (var _i = 0, targetAliases_1 = targetAliases; _i < targetAliases_1.length; _i++) {
+                var target = targetAliases_1[_i];
+                target.maxDistance = (_b = (_a = target.maxDistance) !== null && _a !== void 0 ? _a : maxDistance) !== null && _b !== void 0 ? _b : 20;
                 result = new Scripts.TargetResult();
-                if (value === 'self') {
+                if (target.alias === TargetEnum.self) {
                     result.gameObject(Player.Serial());
                 }
-                else if (value === 'selfinjured' &&
-                    !Player.Dead() &&
-                    (Player.Hits() < Player.MaxHits() || Player.Poisoned())) {
-                    result.gameObject(Player.Serial());
+                else if (target.alias === TargetEnum.selfinjured) {
+                    result = TargetingEx.getTargetResult(Player.Serial(), target, function (obj) {
+                        return TargetingEx.isMobileInjured(obj);
+                    });
                 }
-                else if (value === 'lasttarget') {
-                    result.gameObject(Orion.ClientLastTarget());
+                else if (target.alias === TargetEnum.lasttarget) {
+                    result = TargetingEx.getTargetResult(Orion.ClientLastTarget(), target);
                 }
-                else if (value === 'lasttargetmobile') {
-                    var obj = Orion.FindObject(Orion.ClientLastTarget());
-                    if (obj && obj.Exists() && obj.Mobile()) {
-                        result.gameObject(Orion.ClientLastTarget());
-                    }
+                else if (target.alias === TargetEnum.lasttargetmobile) {
+                    result = TargetingEx.getTargetResult(Orion.ClientLastTarget(), target, function (obj) {
+                        return obj.Mobile();
+                    });
                 }
-                else if (value === 'laststatus') {
-                    result.gameObject((_a = Orion.FindObject('laststatus')) === null || _a === void 0 ? void 0 : _a.Serial());
+                else if (target.alias === TargetEnum.laststatus) {
+                    result = TargetingEx.getTargetResult('laststatus', target);
                 }
-                else if (value === 'lastattack') {
-                    result.gameObject(Orion.ClientLastAttack());
+                else if (target.alias === TargetEnum.lastattack) {
+                    result = TargetingEx.getTargetResult(Orion.ClientLastAttack(), target);
                 }
-                else if (value === 'laststatusenemy') {
-                    var obj = Orion.FindObject('laststatus');
-                    if (obj && obj.Exists() && TargetingEx.isEnemy(obj)) {
-                        result.gameObject(obj.Serial());
-                    }
+                else if (target.alias === TargetEnum.laststatusenemy) {
+                    result = TargetingEx.getTargetResult('laststatus', target, function (obj) {
+                        return TargetingEx.isEnemy(obj);
+                    });
                 }
-                else if (value === 'mount') {
-                    var obj = Orion.FindObject('myMount');
-                    if (obj && obj.Exists() && obj.Distance() <= maxDisntace) {
-                        result.gameObject(obj.Serial());
-                    }
+                else if (target.alias === TargetEnum.mount) {
+                    result = TargetingEx.getTargetResult('myMount', target);
                 }
-                else if (value.indexOf('nearinjuredalie') > -1) {
-                    var arr = this.getAliveAlies();
-                    arr.push.apply(arr, this.getAliveAttackPets());
-                    arr = arr
-                        .filter(function (a) { return (a.Hits() < a.MaxHits() || a.Poisoned()) && a.Distance() <= maxDisntace; })
-                        .sort(function (a, b) { return a.Distance() - b.Distance(); });
-                    if (arr.length > 0) {
-                        result.gameObject(arr[0].Serial());
-                    }
+                else if (target.alias === TargetEnum.hover) {
+                    result = TargetingEx.getTargetResult((_d = (_c = Scripts.Statusbar.getHoveringStatusBar()) === null || _c === void 0 ? void 0 : _c.serial) !== null && _d !== void 0 ? _d : '', target);
                 }
-                else if (value.indexOf('nearinjuredalielos') > -1) {
-                    var arr = this.getAliveAlies();
-                    arr.push.apply(arr, this.getAliveAttackPets());
-                    arr = arr
-                        .filter(function (a) { return (a.Hits() < a.MaxHits() || a.Poisoned()) && a.InLOS() && a.Distance() <= maxDisntace; })
-                        .sort(function (a, b) { return a.Distance() - b.Distance(); });
-                    if (arr.length > 0) {
-                        result.gameObject(arr[0].Serial());
-                    }
+                else if (target.alias === TargetEnum.nearinjuredalie) {
+                    result = TargetingEx.getTargetResultFromArray(TargetingEx.getAlivePetsAndAlies(maxDistance), target, TargetingEx.isMobileInjured, function (a, b) { return a.Distance() - b.Distance(); });
                 }
-                else if (value.indexOf('mostinjuredalie') > -1) {
-                    var arr = this.getAliveAlies();
-                    arr.push.apply(arr, this.getAliveAttackPets());
-                    arr = arr
-                        .filter(function (a) { return (a.Hits() < a.MaxHits() || a.Poisoned()) && a.Distance() <= maxDisntace; })
-                        .sort(function (a, b) { return a.Hits() - b.Hits(); });
-                    if (arr.length > 0) {
-                        result.gameObject(arr[0].Serial());
-                    }
+                else if (target.alias === TargetEnum.nearinjuredalielos) {
+                    result = TargetingEx.getTargetResultFromArray(TargetingEx.getAlivePetsAndAlies(maxDistance), target, function (obj) {
+                        return TargetingEx.isMobileInjured(obj) && obj.InLOS();
+                    }, function (a, b) { return a.Distance() - b.Distance(); });
                 }
-                else if (value.indexOf('mostinjuredalielos') > -1) {
-                    var arr = this.getAliveAlies();
-                    arr.push.apply(arr, this.getAliveAttackPets());
-                    arr = arr
-                        .filter(function (a) { return (a.Hits() < a.MaxHits() || a.Poisoned()) && a.InLOS() && a.Distance() <= maxDisntace; })
-                        .sort(function (a, b) { return a.Hits() - b.Hits(); });
-                    if (arr.length > 0) {
-                        result.gameObject(arr[0].Serial());
-                    }
+                else if (target.alias === TargetEnum.mostinjuredalie) {
+                    result = TargetingEx.getTargetResultFromArray(TargetingEx.getAlivePetsAndAlies(maxDistance), target, TargetingEx.isMobileInjured, function (a, b) { return a.Hits() - b.Hits(); });
                 }
-                if ((result.isValid() && result.gameObject().Exists()) || result.isStatic()) {
+                else if (target.alias === TargetEnum.mostinjuredalielos) {
+                    result = TargetingEx.getTargetResultFromArray(TargetingEx.getAlivePetsAndAlies(maxDistance), target, function (obj) {
+                        return TargetingEx.isMobileInjured(obj) && obj.InLOS();
+                    }, function (a, b) { return a.Hits() - b.Hits(); });
+                }
+                if (result.success()) {
                     break;
                 }
             }
@@ -5909,7 +5998,7 @@ var Scripts;
         };
         TargetResult.prototype.isValid = function () {
             var _a;
-            return this.serial && Orion.FindObject(this.serial) && ((_a = Orion.FindObject(this.serial)) === null || _a === void 0 ? void 0 : _a.Exists());
+            return this.serial && ((_a = Orion.FindObject(this.serial)) === null || _a === void 0 ? void 0 : _a.Exists());
         };
         TargetResult.prototype.isStatic = function () {
             return this.x && this.y && this.x >= 0 && this.y >= 0;
@@ -6119,10 +6208,10 @@ var Scripts;
             if (color === void 0) { color = ColorEnum.none; }
             if (fastPrint === void 0) { fastPrint = false; }
             if (fastPrint) {
-                Orion.CharPrint(serial, color, message);
+                Orion.PrintFast(serial, color, 0, message);
             }
             else {
-                Orion.PrintFast(serial, color, 0, message);
+                Orion.CharPrint(serial, color, message);
             }
         };
         Utils.waitTarget = function (target) {
@@ -7146,7 +7235,6 @@ var Scripts;
             var _a;
             if (showTarget === void 0) { showTarget = false; }
             if (minimalCountToWarn === void 0) { minimalCountToWarn = 10; }
-            Scripts.TargetingEx.cancelResetTarget();
             var target = Scripts.TargetingEx.getTarget(targes, 5);
             var bandagesSerials = Orion.FindType(gameObject.uncategorized.bandy.graphic);
             var count = Scripts.Utils.countItemsBySerials(bandagesSerials);
@@ -7168,10 +7256,10 @@ var Scripts;
                 Scripts.Utils.resetTimer(TimersEnum.bandage);
                 target.waitTarget();
                 Orion.UseObject(bandagesSerials[0]);
-                Orion.PrintFast(target.gameObject().Serial(), ColorEnum.green, 0, 'band..');
+                Scripts.Utils.charPrint(target.gameObject().Serial(), 'band..', ColorEnum.green, true);
             }
             else {
-                Orion.Print(ColorEnum.green, "Zadne zraneni v dosahu {-'-}");
+                Scripts.Utils.playerPrint('[ vsichni ok ]', ColorEnum.green, true);
             }
             if (count - 1 <= minimalCountToWarn) {
                 Scripts.Utils.playerPrint("posledni" + (count > 4 ? 'ch' : '') + " " + count + " band" + (count > 4 ? '' : count > 1 ? 'y' : 'a'), ColorEnum.red);
@@ -8026,6 +8114,15 @@ var TargetEnum;
     TargetEnum["lastattack"] = "lastattack";
     TargetEnum["laststatus"] = "laststatus";
     TargetEnum["lasttarget"] = "lasttarget";
+    TargetEnum["selfinjured"] = "selfinjured";
+    TargetEnum["laststatusenemy"] = "laststatusenemy";
+    TargetEnum["mount"] = "mount";
+    TargetEnum["nearinjuredalie"] = "nearinjuredalie";
+    TargetEnum["nearinjuredalielos"] = "nearinjuredalielos";
+    TargetEnum["mostinjuredalie"] = "mostinjuredalie";
+    TargetEnum["mostinjuredalielos"] = "mostinjuredalielos";
+    TargetEnum["lasttargetmobile"] = "lasttargetmobile";
+    TargetEnum["hover"] = "hover";
 })(TargetEnum || (TargetEnum = {}));
 var CustomStatusBarEnum;
 (function (CustomStatusBarEnum) {
@@ -8170,17 +8267,6 @@ var RenameNameType;
     RenameNameType["autoName"] = "autoName";
     RenameNameType["nameList"] = "nameList";
 })(RenameNameType || (RenameNameType = {}));
-var TargetExEnum;
-(function (TargetExEnum) {
-    TargetExEnum["selfinjured"] = "selfinjured";
-    TargetExEnum["laststatusenemy"] = "laststatusenemy";
-    TargetExEnum["mount"] = "mount";
-    TargetExEnum["nearinjuredalie"] = "nearinjuredalie";
-    TargetExEnum["nearinjuredalielos"] = "nearinjuredalielos";
-    TargetExEnum["mostinjuredalie"] = "mostinjuredalie";
-    TargetExEnum["mostinjuredalielos"] = "mostinjuredalielos";
-    TargetExEnum["lasttargetmobile"] = "lasttargetmobile";
-})(TargetExEnum || (TargetExEnum = {}));
 var TARGET_OPTS_DEFAULTS = {
     targetIndication: TargetIndicationEnum.none,
     showStatusBar: false,
