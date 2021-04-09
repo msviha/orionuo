@@ -230,9 +230,9 @@ namespace Scripts {
             fastPrint = false,
         ) {
             if (fastPrint) {
-                Orion.CharPrint(serial, color, message);
-            } else {
                 Orion.PrintFast(serial, color, 0, message);
+            } else {
+                Orion.CharPrint(serial, color, message);
             }
         }
 
