@@ -352,8 +352,8 @@ namespace Scripts {
                 }
 
                 if (custBars) {
-                    const e = Shared.GetArray(GlobalEnum.customStatusBars, []);
-                    const exists = e && e.some((s) => s.serial === barObj.Serial() && Shared.GetVar(s.serial, true));
+                    const bars = Shared.GetArray(GlobalEnum.customStatusBars, []);
+                    const exists = bars && bars.some((s) => s.serial === barObj.Serial() && Shared.GetVar(s.serial, true));
                     if (!exists) {
                         Statusbar.create(Orion.FindObject(serial), {
                             x: startX + deltaX * (count % maxCount),
