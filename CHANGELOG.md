@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 1.2.0
+
+### features
+- `hover` pridan target alias 'hover' fungujici nad custGump zalozkamy viz. [dokumentace](https://github.com/msviha/orionuo/blob/master/docs/enums/targetenum.md)
+
+### enhancements
+- `nove zalozky` redesing custGump zalozek. Zmenseni, preusporadni layoutu prvku, oprava pretekani jmena. 
+- `cast` nove podporuje rosirene aliasy targetovani 'hover|mostinjuredalie' atd. vice viz. [dokumentace](https://github.com/msviha/orionuo/blob/master/docs/globals.md#cast)
+
+### deprecated
+- `castSpell` - bude v dalsich verzich zruseno, pokud nekdo vyuzival prepiste na cast ktery nove podporuje rozsirene aliasy targetovani.
+
 ## 1.1.2
 
 ### features
