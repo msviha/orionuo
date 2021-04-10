@@ -173,15 +173,15 @@
 
 • `Const` **LOOT\_BAG**: \"loot/bag\" = "loot/bag"
 
-*Defined in [scripts/loot.ts:1](https://github.com/msviha/orionuo/blob/253f44f/src/scripts/loot.ts#L1)*
+*Defined in [scripts/loot.ts:1](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts/loot.ts#L1)*
 
 ___
 
 ### config
 
-• `Const` **config**: any = Shared.GetVar('config', { updateRate: 500, mobMaster: { sayColor: '0x00B3', renameNameType: 'autoName', }, autoHandlers: { autoRename: { enabled: false, renameMounts: false, }, printDamageDiffOnly: false, }, targeting: { highlightEnemySilent: false, }, drinkPotion: { timer: { position: 'LeftTop', type: 'Line\|Bar', text: 'Drink', xFromPosition: 0, yFromPosition: 0, textColor: '0x88B', font: 0, backgroundColor: '0x88B', }, gsTimer: { position: 'LeftTop', type: 'Line\|Bar', text: 'GS', xFromPosition: 0, yFromPosition: 55, textColor: '0x88B', font: 0, backgroundColor: '0x88B', }, invisTimer: { position: 'LeftTop', type: 'Line\|Bar', text: 'Invis', xFromPosition: 0, yFromPosition: 110, textColor: '0x88B', font: 0, backgroundColor: '0x88B', }, invisLongTimer: { position: 'LeftTop', type: 'Line\|Bar', text: 'InvisL', xFromPosition: 0, yFromPosition: 165, textColor: '0x88B', font: 0, backgroundColor: '0x88B', }, }, hiding: { timer: { position: 'AboveChar', type: 'bar', text: 'hid', xFromPosition: 0, yFromPosition: 100, textColor: '0x100', font: 0, backgroundColor: 'red', }, showInnerMessages: true, },})
+• `Const` **config**: any = Shared.GetVar('config', { updateRate: 500, mobMaster: { sayColor: '0x00B3', renameNameType: 'autoName', }, autoHandlers: { autoRename: { enabled: false, renameMounts: false, }, printDamageDiffOnly: false, }, targeting: { highlightEnemySilent: false, }, drinkPotion: { timer: { position: 'LeftTop', type: 'Line\|Bar', text: 'Drink', xFromPosition: 0, yFromPosition: 0, textColor: '0x88B', font: 0, backgroundColor: '0x88B', }, gsTimer: { position: 'LeftTop', type: 'Line\|Bar', text: 'GS', xFromPosition: 0, yFromPosition: 55, textColor: '0x88B', font: 0, backgroundColor: '0x88B', }, invisTimer: { position: 'LeftTop', type: 'Line\|Bar', text: 'Invis', xFromPosition: 0, yFromPosition: 110, textColor: '0x88B', font: 0, backgroundColor: '0x88B', }, invisLongTimer: { position: 'LeftTop', type: 'Line\|Bar', text: 'InvisL', xFromPosition: 0, yFromPosition: 165, textColor: '0x88B', font: 0, backgroundColor: '0x88B', }, }, hiding: { timer: { position: 'AboveChar', type: 'bar', text: 'hid', xFromPosition: 0, yFromPosition: 100, textColor: '0x100', font: 0, backgroundColor: 'red', }, showInnerMessages: true, }, })
 
-*Defined in [config.ts:1](https://github.com/msviha/orionuo/blob/253f44f/src/config.ts#L1)*
+*Defined in [config.ts:1](https://github.com/msviha/orionuo/blob/9d14e9f/src/config.ts#L1)*
 
 ## Functions
 
@@ -189,7 +189,7 @@ ___
 
 ▸ **Autostart**(): void
 
-*Defined in [scripts.ts:11](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L11)*
+*Defined in [scripts.ts:11](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L11)*
 
 Zaskrtnete si v Orion Assistantovi Autostart checkbox
 
@@ -201,7 +201,7 @@ ___
 
 ▸ **KPZHpSwitch**(): void
 
-*Defined in [scripts.ts:755](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L755)*
+*Defined in [scripts.ts:759](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L759)*
 
 Medic - Pouziti KPZ - prohozeni hp s cilem
 
@@ -217,7 +217,7 @@ ___
 
 ▸ **KPZJump**(): void
 
-*Defined in [scripts.ts:746](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L746)*
+*Defined in [scripts.ts:750](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L750)*
 
 Medic - Pouziti KPZ - pritahne sebe na cil
 
@@ -233,7 +233,7 @@ ___
 
 ▸ **KPZPull**(): void
 
-*Defined in [scripts.ts:737](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L737)*
+*Defined in [scripts.ts:741](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L741)*
 
 Medic - Pouziti KPZ - pritahne cil k sobe
 
@@ -249,7 +249,7 @@ ___
 
 ▸ **addCutWeapon**(): void
 
-*Defined in [scripts.ts:117](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L117)*
+*Defined in [scripts.ts:117](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L117)*
 
 Nastavi do Orion assistanta `cutWeapon` List Object (napr. pro script na lootovani, nebo samotne rezani tel)
 
@@ -265,7 +265,7 @@ ___
 
 ▸ **addMount**(): void
 
-*Defined in [scripts.ts:126](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L126)*
+*Defined in [scripts.ts:126](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L126)*
 
 Nastavi do Orion assistanta `myMount` List Object (pro nasedani na jezditko)
 
@@ -281,7 +281,7 @@ ___
 
 ▸ **alchemy**(`potionName`: [PotionsEnum](enums/potionsenum.md)): void
 
-*Defined in [scripts.ts:136](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L136)*
+*Defined in [scripts.ts:136](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L136)*
 
 Micha pres obyc mortar
 
@@ -303,7 +303,7 @@ ___
 
 ▸ **attackLast**(): void
 
-*Defined in [scripts.ts:155](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L155)*
+*Defined in [scripts.ts:155](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L155)*
 
 Utoci na lastattack alias
 
@@ -319,9 +319,9 @@ ___
 
 ▸ **attackTarget**(`targets?`: string): void
 
-*Defined in [scripts.ts:1080](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L1080)*
+*Defined in [scripts.ts:1084](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L1084)*
 
-Zjistuje utok, stejne jako Orion.Attack(), jen vyuziva noveho aliasovani. V bude vyuizovat i kotvy na zalozky tj automaticke vyhazovani
+Zjistuje utok, stejne jako Orion.Attack(), jen vyuziva noveho aliasovani.
 
 **`example`** external code `attackTarget('lastattack|laststatusenemy')`
 
@@ -339,7 +339,7 @@ ___
 
 ▸ **bandageSelf**(`minimalCountForWarn`: number, `failedMessage`: boolean): void
 
-*Defined in [scripts.ts:185](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L185)*
+*Defined in [scripts.ts:185](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L185)*
 
 Da si bandu, pokud dosli tak prehraje zvuk z C:\critical.wav
 Poslednich 10 band hlasi nad hracem
@@ -365,7 +365,7 @@ ___
 
 ▸ **bandageTarget**(`targets?`: string, `showTarget?`: boolean, `minimalCountToWarn?`: number): void
 
-*Defined in [scripts.ts:1113](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L1113)*
+*Defined in [scripts.ts:1117](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L1117)*
 
 **`exports`** 
 Banduje zvoleny target, ukaze timer bandaze oznaci printfastem bandeni target a pokud je potreba vyhodi tercik
@@ -392,7 +392,7 @@ ___
 
 ▸ **bishopToggle**(): void
 
-*Defined in [scripts.ts:163](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L163)*
+*Defined in [scripts.ts:163](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L163)*
 
 Prepina mezi bishopkou a druhou helmou
 
@@ -406,7 +406,7 @@ ___
 
 ▸ **bowcraftTrain**(): void
 
-*Defined in [scripts.ts:172](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L172)*
+*Defined in [scripts.ts:172](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L172)*
 
 Trenink Bowcraft
 
@@ -422,7 +422,7 @@ ___
 
 ▸ **carveBody**(`carveNearestBodyAutomatically`: boolean): void
 
-*Defined in [scripts.ts:196](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L196)*
+*Defined in [scripts.ts:196](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L196)*
 
 Hodi do ruky cutWeapon a pripadne rovnou rizne nejblizsi mrtvolku pokud je povolen parametr
 
@@ -444,9 +444,9 @@ ___
 
 ### cast
 
-▸ **cast**(`spell`: string, `target?`: [TargetEnum](enums/targetenum.md)): void
+▸ **cast**(`spell`: string, `target?`: string \| [TargetEnum](enums/targetenum.md) \| Array\<[ITargetAlias](interfaces/itargetalias.md)>): void
 
-*Defined in [scripts.ts:205](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L205)*
+*Defined in [scripts.ts:209](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L209)*
 
 Kouzli na pozadovany target, pokud je uveden
 
@@ -454,12 +454,18 @@ Kouzli na pozadovany target, pokud je uveden
 
 **`example`** external code `cast("Magic Reflection", "self");`
 
+**`example`** external code `cast("Bless", "hover|self");` - vice targetu zadano pres text, oddelovac hodnot je svislitko |
+
+**`example`** external code `cast("Bless", [ { alias: "hover" }, { alias: "self" } ]);` - vice targetu zadano pres objekt ITargetAlias, podporuje rozsirene vlastnosti napr. maxDistance.
+
+**`example`** external code `cast("Heal", [ { alias: "hover" }, { alias: "mostinjuredalielos", maxDistance: 10 }, { alias: "selfinjured" } ]);` V tomto priklade, bude vyhodnocen alias "mostinjuredalielos" pouze pokud je zaroven 10 policek a blize.
+
 #### Parameters:
 
-Name | Type |
------- | ------ |
-`spell` | string |
-`target?` | [TargetEnum](enums/targetenum.md) |
+Name | Type | Description |
+------ | ------ | ------ |
+`spell` | string | - |
+`target?` | string \| [TargetEnum](enums/targetenum.md) \| Array\<[ITargetAlias](interfaces/itargetalias.md)> | rozsireno o novy target system, ktery umoznuje zadavani vice targetu, ktere se vyhodnocuji zleva do prava a v pripade ze target neexistuje, je vyhozen tercik. |
 
 **Returns:** void
 
@@ -469,7 +475,7 @@ ___
 
 ▸ **castNecroScroll**(`scroll`: [NecroScrollEnum](enums/necroscrollenum.md), `target?`: [TargetEnum](enums/targetenum.md)): void
 
-*Defined in [scripts.ts:214](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L214)*
+*Defined in [scripts.ts:218](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L218)*
 
 Kouzli svitek z NecroScrollEnum na pozadovany target, pokud je uveden
 
@@ -492,7 +498,7 @@ ___
 
 ▸ **castScroll**(`scroll`: [ScrollEnum](enums/scrollenum.md), `target?`: [TargetEnum](enums/targetenum.md), `backupHeadCast?`: string): void
 
-*Defined in [scripts.ts:223](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L223)*
+*Defined in [scripts.ts:227](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L227)*
 
 Kouzli svitek na pozadovany target, pokud je uveden, pokud neni timer na svitek zakouzli z hlavy backupHeadCast
 
@@ -516,7 +522,7 @@ ___
 
 ▸ **castSpell**(`spellName`: string, `targets?`: string): void
 
-*Defined in [scripts.ts:1089](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L1089)*
+*Defined in [scripts.ts:1093](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L1093)*
 
 Sesle kouzlo, vyuziva rozsirene targetovani, do budoucna bude resit i svitky jako ve fene
 
@@ -535,7 +541,7 @@ ___
 
 ▸ **cestovniKniha**(`selection`: [PortBookOptionsEnum](enums/portbookoptionsenum.md)): void
 
-*Defined in [scripts.ts:235](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L235)*
+*Defined in [scripts.ts:239](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L239)*
 
 Pouzije cestovni knihu s pozadovanou volbou
 
@@ -561,7 +567,7 @@ ___
 
 ▸ **cleanObjectInBag**(`object`: any, `objectName?`: string): void
 
-*Defined in [scripts.ts:248](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L248)*
+*Defined in [scripts.ts:252](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L252)*
 
 Uklizi bagl !! Pozor pokud davate souradnice, nad/pod bagl tak je treba mit v Clientovi nastavene "Dont fix item positions in container" !!
 
@@ -587,7 +593,7 @@ ___
 
 ▸ **craftNext**(): void
 
-*Defined in [scripts.ts:256](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L256)*
+*Defined in [scripts.ts:260](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L260)*
 
 Zobrazi/prepina nabidku na crafteni
 
@@ -601,7 +607,7 @@ ___
 
 ▸ **craftSelect**(): void
 
-*Defined in [scripts.ts:264](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L264)*
+*Defined in [scripts.ts:268](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L268)*
 
 Vybira z nabidky na crafteni
 
@@ -615,7 +621,7 @@ ___
 
 ▸ **drink**(`potionName`: [PotionsEnum](enums/potionsenum.md), `switchWarModeWhenNeeded`: boolean, `displayTimers`: boolean, `refillEmptyLimit`: number, `displayInvisLongTimer`: boolean): void
 
-*Defined in [scripts.ts:277](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L277)*
+*Defined in [scripts.ts:281](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L281)*
 
 Chlasta lahvicky
 
@@ -641,7 +647,7 @@ ___
 
 ▸ **drinkFill**(`potionName`: [PotionsEnum](enums/potionsenum.md), `switchWarModeWhenNeeded`: boolean, `displayTimers`: boolean, `refillEmptyLimit`: number, `displayInvisLongTimer`: boolean): void
 
-*Defined in [scripts.ts:303](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L303)*
+*Defined in [scripts.ts:307](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L307)*
 
 Chlasta lahvicky a doliva kdyz nemuze pit
 
@@ -667,7 +673,7 @@ ___
 
 ▸ **drum**(`target?`: [TargetEnum](enums/targetenum.md)): void
 
-*Defined in [scripts.ts:328](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L328)*
+*Defined in [scripts.ts:332](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L332)*
 
 Pouzije buben na protekci
 
@@ -693,7 +699,7 @@ ___
 
 ▸ **ef**(`self`: boolean, `scroll`: boolean, `timer`: number): void
 
-*Defined in [scripts.ts:340](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L340)*
+*Defined in [scripts.ts:344](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L344)*
 
 Kouzli Energy field stenu na ktere se zobrazuje timer
 
@@ -717,7 +723,7 @@ ___
 
 ▸ **enemy**(): void
 
-*Defined in [scripts.ts:349](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L349)*
+*Defined in [scripts.ts:353](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L353)*
 
 Prida enemy do enemylistu (dobre pouziti s targetNext)
 
@@ -733,7 +739,7 @@ ___
 
 ▸ **equip**(): void
 
-*Defined in [scripts.ts:358](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L358)*
+*Defined in [scripts.ts:362](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L362)*
 
 Oblikne si equip ktery je ulozeny v pameti (automaticky se vam uklada po loginu, nebo pouzitim funkce saveEquip())
 
@@ -749,7 +755,7 @@ ___
 
 ▸ **fillPotion**(`potionName`: [PotionsEnum](enums/potionsenum.md), `switchWarModeWhenNeeded`: boolean): void
 
-*Defined in [scripts.ts:369](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L369)*
+*Defined in [scripts.ts:373](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L373)*
 
 Docepne lahvicku z kade
 
@@ -772,7 +778,7 @@ ___
 
 ▸ **fishTrain**(`walkingCoordinates?`: [ICoordinates](interfaces/icoordinates.md)[]): void
 
-*Defined in [scripts.ts:379](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L379)*
+*Defined in [scripts.ts:383](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L383)*
 
 Hazi prutem okolo sebe a chyta ryby.. nebere je, nereze je..
 
@@ -794,7 +800,7 @@ ___
 
 ▸ **friend**(): void
 
-*Defined in [scripts.ts:388](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L388)*
+*Defined in [scripts.ts:392](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L392)*
 
 Prida frienda do friendlistu (dobre pouziti s targetNext)
 
@@ -810,7 +816,7 @@ ___
 
 ▸ **gmMortar**(`potionName`: [PotionsEnum](enums/potionsenum.md)): void
 
-*Defined in [scripts.ts:398](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L398)*
+*Defined in [scripts.ts:402](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L402)*
 
 Micha na gm mortaru
 
@@ -832,7 +838,7 @@ ___
 
 ▸ **harp**(`target?`: [TargetEnum](enums/targetenum.md)): void
 
-*Defined in [scripts.ts:410](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L410)*
+*Defined in [scripts.ts:414](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L414)*
 
 Pouzije harfu
 
@@ -858,7 +864,7 @@ ___
 
 ▸ **healPets**(): void
 
-*Defined in [scripts.ts:419](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L419)*
+*Defined in [scripts.ts:423](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L423)*
 
 Zacne lecit pety (vlastni!) okolo sebe. Pri opakovanem volani prestane lecit, stejne jako pokud se od petu vzdalite
 
@@ -874,7 +880,7 @@ ___
 
 ▸ **hideAll**(): void
 
-*Defined in [scripts.ts:428](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L428)*
+*Defined in [scripts.ts:432](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L432)*
 
 Prepina mezi dvema stavy - hiduje hrace v okruhu 15ti policek a dalsi volani dava resync/resend. Nevidim na cudlik protoze mi tam nekdo stoji atd.
 
@@ -890,7 +896,7 @@ ___
 
 ▸ **hiding**(): void
 
-*Defined in [scripts.ts:437](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L437)*
+*Defined in [scripts.ts:441](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L441)*
 
 Hidne hrace
 
@@ -906,7 +912,7 @@ ___
 
 ▸ **inscription**(`circle`: number, `spell`: string, `quantity`: number): void
 
-*Defined in [scripts.ts:448](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L448)*
+*Defined in [scripts.ts:452](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L452)*
 
 pise svitky
 
@@ -928,7 +934,7 @@ ___
 
 ▸ **isArray**(`val`: any): val is any[]
 
-*Defined in [types/typeguards.ts:55](https://github.com/msviha/orionuo/blob/253f44f/src/types/typeguards.ts#L55)*
+*Defined in [types/typeguards.ts:55](https://github.com/msviha/orionuo/blob/9d14e9f/src/types/typeguards.ts#L55)*
 
 #### Parameters:
 
@@ -944,7 +950,7 @@ ___
 
 ▸ **isBagDestination**(`val`: any): val is IBagDestination
 
-*Defined in [types/typeguards.ts:49](https://github.com/msviha/orionuo/blob/253f44f/src/types/typeguards.ts#L49)*
+*Defined in [types/typeguards.ts:49](https://github.com/msviha/orionuo/blob/9d14e9f/src/types/typeguards.ts#L49)*
 
 #### Parameters:
 
@@ -960,7 +966,7 @@ ___
 
 ▸ **isIPotion**(`val`: any): val is IPotion
 
-*Defined in [types/typeguards.ts:67](https://github.com/msviha/orionuo/blob/253f44f/src/types/typeguards.ts#L67)*
+*Defined in [types/typeguards.ts:67](https://github.com/msviha/orionuo/blob/9d14e9f/src/types/typeguards.ts#L67)*
 
 #### Parameters:
 
@@ -976,7 +982,7 @@ ___
 
 ▸ **isMakeProps**(`val`: any): val is IMakeProps
 
-*Defined in [types/typeguards.ts:5](https://github.com/msviha/orionuo/blob/253f44f/src/types/typeguards.ts#L5)*
+*Defined in [types/typeguards.ts:5](https://github.com/msviha/orionuo/blob/9d14e9f/src/types/typeguards.ts#L5)*
 
 #### Parameters:
 
@@ -992,7 +998,7 @@ ___
 
 ▸ **isMyGameObject**(`val`: any): val is IMyGameObject
 
-*Defined in [types/typeguards.ts:1](https://github.com/msviha/orionuo/blob/253f44f/src/types/typeguards.ts#L1)*
+*Defined in [types/typeguards.ts:1](https://github.com/msviha/orionuo/blob/9d14e9f/src/types/typeguards.ts#L1)*
 
 #### Parameters:
 
@@ -1008,7 +1014,7 @@ ___
 
 ▸ **isPotionsEnum**(`val`: any): val is PotionsEnum
 
-*Defined in [types/typeguards.ts:40](https://github.com/msviha/orionuo/blob/253f44f/src/types/typeguards.ts#L40)*
+*Defined in [types/typeguards.ts:40](https://github.com/msviha/orionuo/blob/9d14e9f/src/types/typeguards.ts#L40)*
 
 #### Parameters:
 
@@ -1024,7 +1030,7 @@ ___
 
 ▸ **isRefillItem**(`val`: any): val is IRefillItem
 
-*Defined in [types/typeguards.ts:34](https://github.com/msviha/orionuo/blob/253f44f/src/types/typeguards.ts#L34)*
+*Defined in [types/typeguards.ts:34](https://github.com/msviha/orionuo/blob/9d14e9f/src/types/typeguards.ts#L34)*
 
 #### Parameters:
 
@@ -1040,7 +1046,7 @@ ___
 
 ▸ **isRefillProps**(`val`: any): val is IRefillProps
 
-*Defined in [types/typeguards.ts:19](https://github.com/msviha/orionuo/blob/253f44f/src/types/typeguards.ts#L19)*
+*Defined in [types/typeguards.ts:19](https://github.com/msviha/orionuo/blob/9d14e9f/src/types/typeguards.ts#L19)*
 
 #### Parameters:
 
@@ -1056,7 +1062,7 @@ ___
 
 ▸ **isStringArray**(`val`: any): val is string[]
 
-*Defined in [types/typeguards.ts:59](https://github.com/msviha/orionuo/blob/253f44f/src/types/typeguards.ts#L59)*
+*Defined in [types/typeguards.ts:59](https://github.com/msviha/orionuo/blob/9d14e9f/src/types/typeguards.ts#L59)*
 
 #### Parameters:
 
@@ -1072,7 +1078,7 @@ ___
 
 ▸ **killAll**(): void
 
-*Defined in [scripts.ts:457](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L457)*
+*Defined in [scripts.ts:461](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L461)*
 
 Prejmenuje vsechny summony a posle na lastattack
 
@@ -1088,7 +1094,7 @@ ___
 
 ▸ **killTarget**(): void
 
-*Defined in [scripts.ts:466](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L466)*
+*Defined in [scripts.ts:470](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L470)*
 
 Prejmenuje summa a zarve s nim kill a necha vyhozenej target. Dobre na posilani summu na ruzne targety (toci je to)
 
@@ -1104,7 +1110,7 @@ ___
 
 ▸ **lavaBomb**(): void
 
-*Defined in [scripts.ts:476](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L476)*
+*Defined in [scripts.ts:480](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L480)*
 
 Hodi na zem a veme + odpali lavabombu - vyhodi target na koho ji chces pouzit
 pokud nemas cepnutou tak cepne a odpali lavabombu - vyhodi target na koho ji chces pouzit
@@ -1121,7 +1127,7 @@ ___
 
 ▸ **light**(`shouldCast`: boolean): void
 
-*Defined in [scripts.ts:487](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L487)*
+*Defined in [scripts.ts:491](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L491)*
 
 Hodi svetlo z kade, pokud kad neni, tak hodi z hlavy (pokud za to nenapisete false)
 
@@ -1145,7 +1151,7 @@ ___
 
 ▸ **lockpicking**(): void
 
-*Defined in [scripts.ts:497](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L497)*
+*Defined in [scripts.ts:501](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L501)*
 
 Trenuje lockpicking pomoci bedynky a klice (rozbaleny lockpicking training kit)
 
@@ -1161,7 +1167,7 @@ ___
 
 ▸ **loot**(`cut`: boolean): void
 
-*Defined in [scripts.ts:512](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L512)*
+*Defined in [scripts.ts:516](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L516)*
 
 Lotuje vse (vcetne hracu) v dosahu.
 Vyzaduje nastaveni Objects a Find v Orion assistantovi v zalozce Lists
@@ -1190,7 +1196,7 @@ ___
 
 ▸ **lootAll**(`delay`: number): void
 
-*Defined in [scripts.ts:524](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L524)*
+*Defined in [scripts.ts:528](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L528)*
 
 Zameri target a premisti z nej vse do backpacku
 
@@ -1216,7 +1222,7 @@ ___
 
 ▸ **lumber**(): void
 
-*Defined in [scripts.ts:533](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L533)*
+*Defined in [scripts.ts:537](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L537)*
 
 Obycejny lumber script co si chodi po lese, tezi jen magicke drevo a snazi se vyhnout enemy
 
@@ -1232,7 +1238,7 @@ ___
 
 ▸ **lute**(`target?`: [TargetEnum](enums/targetenum.md)): void
 
-*Defined in [scripts.ts:545](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L545)*
+*Defined in [scripts.ts:549](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L549)*
 
 Pouzije loutnu
 
@@ -1258,7 +1264,7 @@ ___
 
 ▸ **make**(`count`: number, `objectAsString`: string, `setInputs`: boolean): void
 
-*Defined in [scripts.ts:555](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L555)*
+*Defined in [scripts.ts:559](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L559)*
 
 Vyrabi s craftem
 
@@ -1282,7 +1288,7 @@ ___
 
 ▸ **manualTarget**(`opts`: [ITargetNextOpts](interfaces/itargetnextopts.md)): void
 
-*Defined in [scripts.ts:567](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L567)*
+*Defined in [scripts.ts:571](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L571)*
 
 Zobrazi zamerovac pro zamereni cile, ktery se ulozi pod lastattack
 Cil je tim padem zbarven a jsou vypsany jeho zivoty
@@ -1307,7 +1313,7 @@ ___
 
 ▸ **mix**(`potionName`: [PotionsEnum](enums/potionsenum.md)): void
 
-*Defined in [scripts.ts:146](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L146)*
+*Defined in [scripts.ts:146](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L146)*
 
 Umicha 1 potion pres obyc mortar
 
@@ -1329,7 +1335,7 @@ ___
 
 ▸ **mm**(`requiredCountInTarget?`: number): void
 
-*Defined in [scripts.ts:578](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L578)*
+*Defined in [scripts.ts:582](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L582)*
 
 Mass move checkuje jen graphic a presouva i itemy s rozdilnou barvou, pokud se item stackuje tak se zepta po kolika kusech to budes prehazovat
 
@@ -1351,7 +1357,7 @@ ___
 
 ▸ **mmc**(`requiredCountInTarget?`: number): void
 
-*Defined in [scripts.ts:592](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L592)*
+*Defined in [scripts.ts:596](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L596)*
 
 Mass move checkuje graphic i color, pokud se item stackuje tak se zepta po kolika kusech to budes prehazovat
 
@@ -1373,7 +1379,7 @@ ___
 
 ▸ **mobCome**(): void
 
-*Defined in [scripts.ts:1063](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L1063)*
+*Defined in [scripts.ts:1067](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L1067)*
 
 vola "all come" - navic resetuje target mobkill a posleniho suma v mobGo (nefunkcni +-)
 
@@ -1387,7 +1393,7 @@ ___
 
 ▸ **mobGo**(): void
 
-*Defined in [scripts.ts:1055](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L1055)*
+*Defined in [scripts.ts:1059](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L1059)*
 
 Vola "all go", pripadne go pro konkretniho peta podle laststatus tj. toho ktereho posleniho vytahnu.
 
@@ -1401,7 +1407,7 @@ ___
 
 ▸ **mobKill**(`targets?`: string, `useSavedTarget?`: boolean): void
 
-*Defined in [scripts.ts:1035](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L1035)*
+*Defined in [scripts.ts:1039](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L1039)*
 
 Vola po jednon vsechny pety, jedno volani = jedno jmeno na vybrany target, nebo vyhodi tercik
 
@@ -1424,7 +1430,7 @@ ___
 
 ▸ **mobKillAll**(`targets?`: string, `useSavedTarget?`: boolean): void
 
-*Defined in [scripts.ts:1047](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L1047)*
+*Defined in [scripts.ts:1051](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L1051)*
 
 Vola najednou vsechny pety, jmeno na vybrany target
 
@@ -1447,7 +1453,7 @@ ___
 
 ▸ **mobStop**(): void
 
-*Defined in [scripts.ts:1071](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L1071)*
+*Defined in [scripts.ts:1075](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L1075)*
 
 vola "all stop" - navic resetuje target mobkill a posleniho suma v mobGo (nefunkcni +-)
 
@@ -1461,7 +1467,7 @@ ___
 
 ▸ **mount**(): void
 
-*Defined in [scripts.ts:605](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L605)*
+*Defined in [scripts.ts:609](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L609)*
 
 Naseda a seseda z jezditka. Pokud Vam jezditko umre, nebo mate nasetovane nejake ktere neni v dosahu, zobrazi se zamereni jezditka
 
@@ -1477,7 +1483,7 @@ ___
 
 ▸ **moveRegs**(): void
 
-*Defined in [scripts.ts:614](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L614)*
+*Defined in [scripts.ts:618](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L618)*
 
 Presun regov z jedneho kontajnera do druheho
 
@@ -1493,7 +1499,7 @@ ___
 
 ▸ **mysticCounter**(): void
 
-*Defined in [scripts.ts:623](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L623)*
+*Defined in [scripts.ts:627](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L627)*
 
 Spocita potrebne mystiky podle receptu co mate u sebe
 
@@ -1509,7 +1515,7 @@ ___
 
 ▸ **nbRune**(): void
 
-*Defined in [scripts.ts:632](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L632)*
+*Defined in [scripts.ts:636](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L636)*
 
 Kopne pres NB runu
 
@@ -1525,7 +1531,7 @@ ___
 
 ▸ **necroMystic**(`message`: string): void
 
-*Defined in [scripts.ts:641](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L641)*
+*Defined in [scripts.ts:645](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L645)*
 
 Pouzije necro mystic (sleze z jezditka a vrati se zpet + vrati predchozi helmu zpet)
 
@@ -1545,7 +1551,7 @@ ___
 
 ▸ **nextWeapon**(`showName`: boolean): void
 
-*Defined in [scripts.ts:652](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L652)*
+*Defined in [scripts.ts:656](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L656)*
 
 Prepne na dalsi zbran
 (zbrane si nasetujte pomoci resetWeapons)
@@ -1568,7 +1574,7 @@ ___
 
 ▸ **ocaruj**(`dusty`: [OcarovaniEnum](enums/ocarovanienum.md)): void
 
-*Defined in [scripts.ts:663](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L663)*
+*Defined in [scripts.ts:667](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L667)*
 
 Ocaruje pytel v mrtvolce mytheril dustem
 Zepta se na target, zamerite mrtvolku a pokud jste daleko tak vam vypise 5ti vterinovy timer kdy musite k mrtvole dojit aby ji ocaroval
@@ -1591,7 +1597,7 @@ ___
 
 ▸ **openContainer**(): void
 
-*Defined in [scripts.ts:672](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L672)*
+*Defined in [scripts.ts:676](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L676)*
 
 Otevira containery (hlavne pomaha s bezpecnyma truhlama a pretahavanim klicku)
 exaxmple in client `_openContainer`
@@ -1605,7 +1611,7 @@ ___
 
 ▸ **poisonLastAttack**(): void
 
-*Defined in [scripts.ts:690](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L690)*
+*Defined in [scripts.ts:694](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L694)*
 
 Poisne trenink kitem `lastattack` target;
 
@@ -1619,7 +1625,7 @@ ___
 
 ▸ **poisonTrain**(`keepRunning`: boolean): void
 
-*Defined in [scripts.ts:682](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L682)*
+*Defined in [scripts.ts:686](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L686)*
 
 Poisne trenink kitem nejblizsim enemy monstrum jakmile k nejakemu dobehnes (netreni na tech co maji human grafiku);
 
@@ -1641,7 +1647,7 @@ ___
 
 ▸ **previousWeapon**(`showName`: boolean): void
 
-*Defined in [scripts.ts:701](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L701)*
+*Defined in [scripts.ts:705](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L705)*
 
 Prepne na predchozi zbran
 (zbrane si nasetujte pomoci resetWeapons)
@@ -1664,7 +1670,7 @@ ___
 
 ▸ **resetEnemies**(): void
 
-*Defined in [scripts.ts:710](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L710)*
+*Defined in [scripts.ts:714](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L714)*
 
 Resetuje cely enemylistu a ocekava naklikani noveho
 
@@ -1680,7 +1686,7 @@ ___
 
 ▸ **resetFriends**(): void
 
-*Defined in [scripts.ts:719](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L719)*
+*Defined in [scripts.ts:723](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L723)*
 
 Resetuje cely friendlist a ocekava naklikani noveho
 
@@ -1696,7 +1702,7 @@ ___
 
 ▸ **resetStats**(): void
 
-*Defined in [scripts.ts:728](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L728)*
+*Defined in [scripts.ts:732](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L732)*
 
 Resetuje staty pomoci Travel Book
 
@@ -1712,7 +1718,7 @@ ___
 
 ▸ **resetWeapons**(): void
 
-*Defined in [scripts.ts:764](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L764)*
+*Defined in [scripts.ts:768](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L768)*
 
 Resetuje zbrane a stit ( nasledne vyuziti u funkci nextWeapon a previousWeapon )
 
@@ -1728,7 +1734,7 @@ ___
 
 ▸ **rozbij**(`ingy`: [OcarovaniEnum](enums/ocarovanienum.md), `kolik`: number): void
 
-*Defined in [scripts.ts:774](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L774)*
+*Defined in [scripts.ts:778](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L778)*
 
 Rozbiji ingy na dusty
 
@@ -1749,7 +1755,7 @@ ___
 
 ▸ **saveEquip**(): void
 
-*Defined in [scripts.ts:783](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L783)*
+*Defined in [scripts.ts:787](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L787)*
 
 Ulozi si do pameti equip co mate zrovna na sobe - vhodne v kombinaci s funkci equip() (napriklad po dmg od chameleon birda)
 
@@ -1765,7 +1771,7 @@ ___
 
 ▸ **shrinkAll**(): void
 
-*Defined in [scripts.ts:792](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L792)*
+*Defined in [scripts.ts:796](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L796)*
 
 Shrinkne vsechny klamaky v okoli 2 policek
 
@@ -1781,7 +1787,7 @@ ___
 
 ▸ **shrinkOne**(): void
 
-*Defined in [scripts.ts:1099](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L1099)*
+*Defined in [scripts.ts:1103](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L1103)*
 
 Shrinkne nejzranenejsiho peta v okoli, pamatuje si summy a zveda ze zeme pokud jde o klamak ktery zustava na zemi.
 Druhotna funcnost je zvedani shrnk klamaku ze zeme, takze i kdyz neni co shrinkovat lze pouzit jako rychle zvednuti napr na Skyhawkovi.
@@ -1797,7 +1803,7 @@ ___
 
 ▸ **sortBackpackCaleb**(): void
 
-*Defined in [scripts.ts:1023](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L1023)*
+*Defined in [scripts.ts:1027](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L1027)*
 
 Setridi veci v baglu zhruba stejne jako z sorbasicbackpack z feny
 
@@ -1811,7 +1817,7 @@ ___
 
 ▸ **statusBar**(): void
 
-*Defined in [scripts.ts:801](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L801)*
+*Defined in [scripts.ts:805](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L805)*
 
 Vytvori zalozku s hpckama
 
@@ -1827,7 +1833,7 @@ ___
 
 ▸ **summon**(`creature`: string, `target?`: [TargetEnum](enums/targetenum.md)): void
 
-*Defined in [scripts.ts:810](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L810)*
+*Defined in [scripts.ts:814](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L814)*
 
 Kouzli summona (jmeno je treba zadat tak jak je v nabidce summonu) na pozadovany target, pokud je uveden
 
@@ -1850,7 +1856,7 @@ ___
 
 ▸ **taming**(`allAround`: boolean, `opts`: [ITamingOptions](interfaces/itamingoptions.md)): void
 
-*Defined in [scripts.ts:822](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L822)*
+*Defined in [scripts.ts:826](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L826)*
 
 Zacilis co chces tamnout a po tamnuti hodi do baglu
 
@@ -1875,7 +1881,7 @@ ___
 
 ▸ **tamingTrain**(`robeOfDruids`: boolean): void
 
-*Defined in [scripts.ts:833](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L833)*
+*Defined in [scripts.ts:837](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L837)*
 
 Treni taming na celem stadu v tvem okoli, co netamne, zabije
 
@@ -1899,7 +1905,7 @@ ___
 
 ▸ **targetNext**(`timeToStorePreviousTargets`: number, `additionalFlags?`: [FlagsEnum](enums/flagsenum.md)[], `notoriety?`: [NotorietyEnum](enums/notorietyenum.md)[], `opts`: [ITargetNextOpts](interfaces/itargetnextopts.md)): void
 
-*Defined in [scripts.ts:849](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L849)*
+*Defined in [scripts.ts:853](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L853)*
 
 Targeti zive jednotky okolo tebe. Uchovava list targetu po dobu 2,5 vteriny pro pouziti s `targetPrevious`.
 Vybrany target ma rovnou status `attackLast` (ale neutocis to na nej, jen mas zaply war) takze je mozne na nej kouzlit
@@ -1930,7 +1936,7 @@ ___
 
 ▸ **targetPrevious**(`timeToStorePreviousTargets`: number, `additionalFlags?`: string[], `notoriety?`: string[], `opts`: [ITargetNextOpts](interfaces/itargetnextopts.md)): void
 
-*Defined in [scripts.ts:871](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L871)*
+*Defined in [scripts.ts:875](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L875)*
 
 Targeti zive jednotky okolo tebe. Uchovava list targetu po dobu 2,5 vteriny pro pouziti s `targetNext`
 Vybrany target ma rovnou status `attackLast` (ale neutocis to na nej, jen mas zaply war) takze je mozne na nej kouzlit
@@ -1961,7 +1967,7 @@ ___
 
 ▸ **terminateAll**(): void
 
-*Defined in [scripts.ts:884](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L884)*
+*Defined in [scripts.ts:888](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L888)*
 
 Killne vsechny bezici scripty (s vyjimkou Autostart a userAutostart funkce)
 
@@ -1973,7 +1979,7 @@ ___
 
 ▸ **tracking**(`who`: string): void
 
-*Defined in [scripts.ts:896](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L896)*
+*Defined in [scripts.ts:900](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L900)*
 
 Trackuje hrace nebo pozadovanou volbu z menu
 
@@ -1999,7 +2005,7 @@ ___
 
 ▸ **travelBook**(`selection`: [PortBookOptionsEnum](enums/portbookoptionsenum.md)): void
 
-*Defined in [scripts.ts:908](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L908)*
+*Defined in [scripts.ts:912](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L912)*
 
 Pouzije travel book s pozadovanou volbou
 
@@ -2025,7 +2031,7 @@ ___
 
 ▸ **turboRess**(`bandageAfterRess`: boolean): void
 
-*Defined in [scripts.ts:917](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L917)*
+*Defined in [scripts.ts:921](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L921)*
 
 Ozivi ducha v okruhu 1 policka
 
@@ -2045,7 +2051,7 @@ ___
 
 ▸ **turboRessFull**(): void
 
-*Defined in [scripts.ts:925](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L925)*
+*Defined in [scripts.ts:929](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L929)*
 
 Ozivi ducha v okruhu 1 policka do plnych hp (krvavou bandou - Medic)
 
@@ -2059,7 +2065,7 @@ ___
 
 ▸ **unlock**(): void
 
-*Defined in [scripts.ts:934](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L934)*
+*Defined in [scripts.ts:938](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L938)*
 
 Lockpickuje zamcenou bednu, dokud ji neotevre (nebo nedojdou locky)
 
@@ -2075,7 +2081,7 @@ ___
 
 ▸ **use**(`object`: [IMyGameObject](interfaces/imygameobject.md) \| [IMyGameObject](interfaces/imygameobject.md)[], `name`: string, `minimalCountForWarn?`: number): void
 
-*Defined in [scripts.ts:946](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L946)*
+*Defined in [scripts.ts:950](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L950)*
 
 Pouzije objekt ktery ma nadefinovany graphic a color a upozorni v pripade nizkeho poctu
 
@@ -2099,7 +2105,7 @@ ___
 
 ▸ **useGGR**(): void
 
-*Defined in [scripts.ts:955](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L955)*
+*Defined in [scripts.ts:959](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L959)*
 
 Pouzije Great Gold Ring
 
@@ -2115,7 +2121,7 @@ ___
 
 ▸ **useKlamak**(`lvl`: number, `useAim`: boolean, `priorityList?`: string[], `ignoreSerials?`: string[]): void
 
-*Defined in [scripts.ts:969](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L969)*
+*Defined in [scripts.ts:973](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L973)*
 
 Vyhodi klamaka
 
@@ -2142,7 +2148,7 @@ ___
 
 ▸ **useRR**(): void
 
-*Defined in [scripts.ts:978](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L978)*
+*Defined in [scripts.ts:982](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L982)*
 
 Pouzije Reflex Ring nebo Great Reflex Ring
 
@@ -2158,7 +2164,7 @@ ___
 
 ▸ **useShrinkKad**(): void
 
-*Defined in [scripts.ts:987](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L987)*
+*Defined in [scripts.ts:991](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L991)*
 
 Pouzije shrink kad
 
@@ -2174,7 +2180,7 @@ ___
 
 ▸ **version**(): void
 
-*Defined in [scripts.ts:1](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L1)*
+*Defined in [scripts.ts:1](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L1)*
 
 **Returns:** void
 
@@ -2184,7 +2190,7 @@ ___
 
 ▸ **webDestroyer**(): void
 
-*Defined in [scripts.ts:995](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L995)*
+*Defined in [scripts.ts:999](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L999)*
 
 Znici vsechny pavucinky okolo hrace
 
@@ -2198,7 +2204,7 @@ ___
 
 ▸ **wos**(`scroll`: boolean, `timer`: number): void
 
-*Defined in [scripts.ts:1015](https://github.com/msviha/orionuo/blob/253f44f/src/scripts.ts#L1015)*
+*Defined in [scripts.ts:1019](https://github.com/msviha/orionuo/blob/9d14e9f/src/scripts.ts#L1019)*
 
 Kouzli Wall of stones na ktere se zobrazuje timer
 
@@ -2221,7 +2227,7 @@ Name | Type | Default value | Description |
 
 ▪ `Const` **TAMING\_OPTS\_DEFAULTS**: object
 
-*Defined in [types/interfaces.ts:36](https://github.com/msviha/orionuo/blob/253f44f/src/types/interfaces.ts#L36)*
+*Defined in [types/interfaces.ts:36](https://github.com/msviha/orionuo/blob/9d14e9f/src/types/interfaces.ts#L36)*
 
 #### Properties:
 
@@ -2236,7 +2242,7 @@ ___
 
 ▪ `Const` **TARGET\_OPTS\_DEFAULTS**: object
 
-*Defined in [types/interfaces.ts:23](https://github.com/msviha/orionuo/blob/253f44f/src/types/interfaces.ts#L23)*
+*Defined in [types/interfaces.ts:23](https://github.com/msviha/orionuo/blob/9d14e9f/src/types/interfaces.ts#L23)*
 
 #### Properties:
 
@@ -2252,14 +2258,14 @@ ___
 
 ▪ `Const` **gameObject**: object
 
-*Defined in [globals.ts:6](https://github.com/msviha/orionuo/blob/253f44f/src/globals.ts#L6)*
+*Defined in [globals.ts:6](https://github.com/msviha/orionuo/blob/9d14e9f/src/globals.ts#L6)*
 
 #### Properties:
 
 Name | Type | Value |
 ------ | ------ | ------ |
 `books` | object | { bookOfDead: { color: string = "0x0455"; graphic: string = "0x0EFA"; bag: { x: number = 132; y: number = 5 }  } ; cestovniKniha: { color: string = "0x0000"; graphic: string = "0x22C5"; bag: { x: number = 117; y: number = 5 }  } ; highMagicSpellBook: { color: string = "0x0021"; graphic: string = "0x0EFA"; bag: { x: number = 142; y: number = 5 }  } ; runeBook: { color: string = "0x08A5"; graphic: string = "0x0FF0"; bag: { x: number = 112; y: number = 5 }  } ; travelBook: { color: string = "0x0482"; graphic: string = "0x0FEF"; bag: { x: number = 122; y: number = 5 }  } ; unholySpellbook: { color: string = "0x0413"; graphic: string = "0x0EFA"; bag: { x: number = 142; y: number = 5 }  }  } |
-`crafting` | object | { blacksmithing: { ironWeapons: { swordsAndBlades: { dagger: { color: string = "0x0000"; graphic: string = "0x0F51"; make: { tool: string = "gameObject.tools.silverHammer"; toolTarget: string = "gameObject.resources.ingots.iron"; menu: { name: string = "Blacksmithing"; selections: (string \\| { item: string = "Swords & Blades"; menu: string = "Iron Swords & Blades" })[] = [                                     'Iron Weapons',                                     { item: 'Swords & Blades', menu: 'Iron Swords & Blades' },                                     'Dagger',                                 ] } ; refill: { resources: { count: number = 1; item: string = "gameObject.resources.ingots.iron" }[] = [{ item: 'gameObject.resources.ingots.iron', count: 1 }] }  }  }  }  } ; tools: { blackSphere: { color: string = "0x0B15"; graphic: string = "0x0E2D"; make: { tool: string = "gameObject.tools.silverHammer"; toolTarget: string = "gameObject.resources.ingots.iron"; menu: { name: string = "Blacksmithing"; selections: string[] = ['Tools', 'Black Rock Sphere'] } ; refill: { crafting: { count: number = 15; item: string = "gameObject.crafting.tinkering.wires.shadow" }[] = [                                 { item: 'gameObject.crafting.tinkering.wires.shadow', count: 15 },                                 { item: 'gameObject.crafting.tinkering.wires.black', count: 15 },                             ]; resources: { count: number = 5; item: string = "gameObject.resources.ingots.iron" }[] = [                                 { item: 'gameObject.resources.ingots.iron', count: 5 },                                 { item: 'gameObject.resources.fairyDust', count: 1 },                             ] }  }  } ; bloodSphere: { color: string = "0x0846"; graphic: string = "0x0E2D"; make: { tool: string = "gameObject.tools.silverHammer"; toolTarget: string = "gameObject.resources.ingots.iron"; menu: { name: string = "Blacksmithing"; selections: string[] = ['Tools', 'Blood Rock Sphere'] } ; refill: { crafting: { count: number = 15; item: string = "gameObject.crafting.tinkering.wires.rose" }[] = [                                 { item: 'gameObject.crafting.tinkering.wires.rose', count: 15 },                                 { item: 'gameObject.crafting.tinkering.wires.blood', count: 15 },                             ]; resources: { count: number = 5; item: string = "gameObject.resources.ingots.iron" }[] = [                                 { item: 'gameObject.resources.ingots.iron', count: 5 },                                 { item: 'gameObject.resources.fairyDust', count: 1 },                             ] }  }  } ; krumpac: { color: string = "0x0000"; graphic: string = "0x0E85"; make: { tool: string = "gameObject.tools.silverHammer"; toolTarget: string = "gameObject.resources.ingots.iron"; menu: { name: string = "Blacksmithing"; selections: string[] = ['Tools', 'Pick axe'] } ; refill: { resources: { count: number = 4; item: string = "gameObject.resources.ingots.iron" }[] = [                                 { item: 'gameObject.resources.ingots.iron', count: 4 },                                 { item: 'gameObject.resources.logs', count: 1 },                             ] }  }  } ; mytherilSphere: { color: string = "0x0B8A"; graphic: string = "0x0E2D"; make: { tool: string = "gameObject.tools.silverHammer"; toolTarget: string = "gameObject.resources.ingots.iron"; menu: { name: string = "Blacksmithing"; selections: string[] = ['Tools', 'Mytheril Sphere'] } ; refill: { crafting: { count: number = 15; item: string = "gameObject.crafting.tinkering.wires.gold" }[] = [                                 { item: 'gameObject.crafting.tinkering.wires.gold', count: 15 },                                 { item: 'gameObject.crafting.tinkering.wires.mytheril', count: 15 },                             ]; resources: { count: number = 5; item: string = "gameObject.resources.ingots.iron" }[] = [                                 { item: 'gameObject.resources.ingots.iron', count: 5 },                                 { item: 'gameObject.resources.fairyDust', count: 1 },                                 { item: 'gameObject.resources.soulShard', count: 1 },                             ] }  }  } ; petardCauldron: { color: string = "0x04B1"; graphic: string = "0x0990"; make: { tool: string = "gameObject.tools.silverHammer"; toolTarget: string = "gameObject.resources.ingots.iron"; menu: { name: string = "Blacksmithing"; selections: string[] = ['Tools', 'Petard Cauldron'] } ; refill: { crafting: { count: number = 5; item: string = "gameObject.crafting.tinkering.wires.iron" }[] = [{ item: 'gameObject.crafting.tinkering.wires.iron', count: 5 }]; resources: { count: number = 10; item: string = "gameObject.resources.ingots.iron" }[] = [                                 { item: 'gameObject.resources.ingots.iron', count: 10 },                                 { item: 'gameObject.resources.ingots.rose', count: 6 },                                 { item: 'gameObject.resources.ingots.blood', count: 1 },                             ] }  }  } ; sekera: { color: string = "0x0000"; graphic: string = "0x0F43"; make: { tool: string = "gameObject.tools.silverHammer"; toolTarget: string = "gameObject.resources.ingots.iron"; menu: { name: string = "Blacksmithing"; selections: string[] = ['Tools', 'Hatchet'] } ; refill: { resources: { count: number = 4; item: string = "gameObject.resources.ingots.iron" }[] = [                                 { item: 'gameObject.resources.ingots.iron', count: 4 },                                 { item: 'gameObject.resources.logs', count: 1 },                             ] }  }  }  }  } ; carpentry: { containersAndParts: { barrelLid: { color: string = "0x0000"; graphic: string = "0x1DB8"; make: { tool: string = "gameObject.tools.saw"; menu: { name: string = "Carpentry"; selections: string[] = ['Containers & Cont. parts', 'Barrel Lid'] } ; refill: { crafting: { count: number = 2; item: string = "gameObject.crafting.carpentry.miscellaneous.boards" }[] = [{ item: 'gameObject.crafting.carpentry.miscellaneous.boards', count: 2 }]; resources: { count: number = 1; item: string = "gameObject.resources.logs" }[] = [{ item: 'gameObject.resources.logs', count: 1 }] }  }  } ; barrelStaves: { color: string = "0x0000"; graphic: string = "0x1EB1"; make: { tool: string = "gameObject.tools.saw"; menu: { name: string = "Carpentry"; selections: string[] = ['Containers & Cont. parts', 'Barrel Staves'] } ; refill: { resources: { count: number = 3; item: string = "gameObject.resources.logs" }[] = [{ item: 'gameObject.resources.logs', count: 3 }] }  }  } ; formaNaLahve: { color: string = "0x0909"; graphic: string = "0x0E7F"; make: { tool: string = "gameObject.tools.saw"; menu: { name: string = "Carpentry"; selections: string[] = ['Containers & Cont. parts', 'Forma na lahve'] } ; refill: { crafting: { count: number = 2; item: string = "gameObject.crafting.carpentry.containersAndParts.barrelLid" }[] = [                                 { item: 'gameObject.crafting.carpentry.containersAndParts.barrelLid', count: 2 },                                 { item: 'gameObject.crafting.carpentry.containersAndParts.barrelStaves', count: 2 },                             ]; resources: { count: number = 1; item: string = "gameObject.resources.logs" }[] = [{ item: 'gameObject.resources.logs', count: 1 }] }  }  } ; washBasin: { color: string = "0x0000"; graphic: string = "0x1008"; make: { tool: string = "gameObject.tools.saw"; menu: { name: string = "Carpentry"; selections: string[] = ['Containers & Cont. parts', 'Wash Basin'] } ; refill: { crafting: { count: number = 2; item: string = "gameObject.crafting.carpentry.miscellaneous.boards" }[] = [                                 { item: 'gameObject.crafting.carpentry.miscellaneous.boards', count: 2 },                                 { item: 'gameObject.crafting.tinkering.parts.nails', count: 2 },                             ]; resources: { count: number = 1; item: string = "gameObject.resources.logs" }[] = [                                 { item: 'gameObject.resources.logs', count: 1 },                                 { item: 'gameObject.resources.ingots.iron', count: 2 },                                 { item: 'gameObject.resources.pitcherOfWater', count: 1 },                             ] }  }  } ; woodenBox: { color: string = "0x0000"; graphic: string = "0x0E7D"; make: { tool: string = "gameObject.tools.saw"; menu: { name: string = "Carpentry"; selections: string[] = ['Containers & Cont. parts', 'Wooden Box'] } ; refill: { crafting: { count: number = 2; item: string = "gameObject.crafting.tinkering.parts.hinge" }[] = [                                 { item: 'gameObject.crafting.tinkering.parts.hinge', count: 2 },                                 { item: 'gameObject.crafting.tinkering.parts.nails', count: 1 },                             ]; resources: { count: number = 4; item: string = "gameObject.resources.logs" }[] = [{ item: 'gameObject.resources.logs', count: 4 }] }  }  }  } ; deedToShips: { deedToSmallShip: { color: string = "0x0000"; graphic: string = "0x14F1"; make: { tool: string = "gameObject.tools.saw"; menu: { name: string = "Carpentry"; selections: string[] = ['Deeds to Ships', 'Deed to a small ship'] } ; refill: { crafting: { count: number = 20; item: string = "gameObject.crafting.tinkering.parts.hinge" }[] = [                                 { item: 'gameObject.crafting.tinkering.parts.hinge', count: 20 },                                 { item: 'gameObject.crafting.tinkering.parts.nails', count: 35 },                                 { item: 'gameObject.crafting.carpentry.miscellaneous.boards', count: 250 },                             ]; resources: { count: number = 30; item: string = "gameObject.resources.logs" }[] = [                                 { item: 'gameObject.resources.logs', count: 30 },                                 { item: 'gameObject.resources.foldedCloth', count: 20 },                             ] }  }  }  } ; miscellaneous: { boards: { color: string = "0x0000"; graphic: string = "0x1BD7"; make: { outputCount: number = 3; tool: string = "gameObject.tools.saw"; menu: { name: string = "Carpentry"; selections: string[] = ['Miscellaneous', 'Boards'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.logs" }[] = [{ item: 'gameObject.resources.logs', count: 2 }] }  }  } ; krabiceKadi: { color: string = "0x07E0"; graphic: string = "0x185E"; make: { tool: string = "gameObject.tools.saw"; menu: { name: string = "Carpentry"; selections: string[] = ['Miscellaneous', 'Krabice kadi'] } ; refill: { crafting: { count: number = 20; item: string = "gameObject.crafting.tinkering.containers.kadNaPotiony" }[] = [{ item: 'gameObject.crafting.tinkering.containers.kadNaPotiony', count: 20 }]; resources: { count: number = 2; item: string = "gameObject.resources.logs" }[] = [{ item: 'gameObject.resources.logs', count: 2 }] }  }  }  }  } ; tailoring: { footwear: { sandals: { color: string = "0x0000"; graphic: string = "0x170D"; make: { tool: string = "gameObject.tools.sewingKit"; toolTarget: string = "gameObject.resources.pilesOfHides"; menu: { name: string = "Leather"; selections: string[] = ['Footwear', 'Sandals'] } ; refill: { resources: { count: number = 4; item: string = "gameObject.resources.pilesOfHides" }[] = [{ item: 'gameObject.resources.pilesOfHides', count: 4 }] }  }  }  } ; headwear: { bandana: { color: string = "0x0000"; graphic: string = "0x153F"; make: { tool: string = "gameObject.tools.sewingKit"; toolTarget: string = "gameObject.resources.foldedCloth"; menu: { name: string = "Cloth"; selections: string[] = ['Headwear', 'Bandana'] } ; refill: { resources: { count: number = 1; item: string = "gameObject.resources.foldedCloth" }[] = [{ item: 'gameObject.resources.foldedCloth', count: 1 }] }  }  }  }  } ; tinkering: { containers: { animalBox: { color: string = "0x051E"; graphic: string = "0x09A8"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Animal Box'] } ; refill: { crafting: { count: number = 1; item: string = "gameObject.crafting.tinkering.containers.goldenBoxW" }[] = [{ item: 'gameObject.crafting.tinkering.containers.goldenBoxW', count: 1 }]; resources: { count: number = 5; item: string = "gameObject.resources.logs" }[] = [                                 { item: 'gameObject.resources.logs', count: 5 },                                 { item: 'gameObject.resources.furs', count: 5 },                             ] }  }  } ; bottle: { color: string = "0x0000"; graphic: string = "0x0F0E"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Bottle'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.logs" }[] = [                                 { item: 'gameObject.resources.logs', count: 2 },                                 { item: 'gameObject.resources.ore.anyOre', count: 5 },                             ] }  }  } ; doubleSecureChestN: { color: string = "0x0000"; graphic: string = "0x14F0"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Double Secure Chest'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.logs" }[] = [                                 { item: 'gameObject.resources.logs', count: 2 },                                 { item: 'gameObject.resources.ingots.gold', count: 5 },                                 { item: 'gameObject.resources.ingots.iron', count: 15 },                                 { item: 'gameObject.resources.stones.diamonds', count: 2 },                                 { item: 'gameObject.resources.stones.rubies', count: 4 },                             ] }  }  } ; doubleSecureChestW: { color: string = "0x0000"; graphic: string = "0x14F0"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Double Secure Chest'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.logs" }[] = [                                 { item: 'gameObject.resources.logs', count: 2 },                                 { item: 'gameObject.resources.ingots.gold', count: 5 },                                 { item: 'gameObject.resources.ingots.iron', count: 15 },                                 { item: 'gameObject.resources.stones.diamonds', count: 2 },                                 { item: 'gameObject.resources.stones.rubies', count: 4 },                             ] }  }  } ; goldChest: { color: string = "0x0000"; graphic: string = "0x0E40"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Gold Chest'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.logs" }[] = [                                 { item: 'gameObject.resources.logs', count: 2 },                                 { item: 'gameObject.resources.ingots.gold', count: 5 },                                 { item: 'gameObject.resources.ingots.iron', count: 15 },                             ] }  }  } ; goldenBoxN: { color: string = "0x0000"; graphic: string = "0x09A8"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Golden Box (N)'] } ; refill: { resources: { count: number = 5; item: string = "gameObject.resources.logs" }[] = [                                 { item: 'gameObject.resources.logs', count: 5 },                                 { item: 'gameObject.resources.ingots.gold', count: 5 },                             ] }  }  } ; goldenBoxW: { color: string = "0x0000"; graphic: string = "0x0E80"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Golden Box (W)'] } ; refill: { resources: { count: number = 5; item: string = "gameObject.resources.logs" }[] = [                                 { item: 'gameObject.resources.logs', count: 5 },                                 { item: 'gameObject.resources.ingots.gold', count: 5 },                             ] }  }  } ; guildSecureChestW: { color: string = "0x0000"; graphic: string = "0x14F0"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Guild Secure Chest'] } ; refill: { resources: { count: number = 5; item: string = "gameObject.resources.logs" }[] = [                                 { item: 'gameObject.resources.logs', count: 5 },                                 { item: 'gameObject.resources.ingots.gold', count: 5 },                                 { item: 'gameObject.resources.ingots.copper', count: 10 },                                 { item: 'gameObject.resources.ingots.iron', count: 15 },                                 { item: 'gameObject.resources.ingots.mytheril', count: 1 },                                 { item: 'gameObject.resources.stones.diamonds', count: 1 },                                 { item: 'gameObject.resources.stones.citrines', count: 2 },                             ] }  }  } ; kadNaPotiony: { color: string = "0x0000"; graphic: string = "0x1843"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Kad na potiony'] } ; refill: { crafting: { count: number = 1; item: string = "gameObject.crafting.carpentry.containersAndParts.formaNaLahve" }[] = [                                 { item: 'gameObject.crafting.carpentry.containersAndParts.formaNaLahve', count: 1 },                             ]; resources: { count: number = 2; item: string = "gameObject.resources.logs" }[] = [                                 { item: 'gameObject.resources.logs', count: 2 },                                 { item: 'gameObject.resources.ore.iron', count: 2 },                                 { item: 'gameObject.resources.ingots.bronze', count: 1 },                                 { item: 'gameObject.resources.ingots.iron', count: 1 },                             ] }  }  } ; metalchest: { color: string = "0x0000"; graphic: string = "0x09AB"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Metal Chest'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.logs" }[] = [                                 { item: 'gameObject.resources.logs', count: 2 },                                 { item: 'gameObject.resources.ingots.shadow', count: 20 },                             ] }  }  } ; secureChestN: { color: string = "0x0000"; graphic: string = "0x14F0"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Secure Chest (N)'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.logs" }[] = [                                 { item: 'gameObject.resources.logs', count: 2 },                                 { item: 'gameObject.resources.ingots.gold', count: 5 },                                 { item: 'gameObject.resources.ingots.iron', count: 15 },                                 { item: 'gameObject.resources.stones.diamonds', count: 2 },                                 { item: 'gameObject.resources.stones.tourmalines', count: 2 },                             ] }  }  } ; secureChestW: { color: string = "0x0000"; graphic: string = "0x14F0"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Secure Chest (W)'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.logs" }[] = [                                 { item: 'gameObject.resources.logs', count: 2 },                                 { item: 'gameObject.resources.ingots.gold', count: 5 },                                 { item: 'gameObject.resources.ingots.iron', count: 15 },                                 { item: 'gameObject.resources.stones.diamonds', count: 2 },                                 { item: 'gameObject.resources.stones.tourmalines', count: 2 },                             ] }  }  } ; univerzalAnimalBox: { color: string = "0x0000"; graphic: string = "0x09A8"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Univerzal Animal Box'] } ; refill: { crafting: { count: number = 1; item: string = "gameObject.crafting.tinkering.containers.animalBox" }[] = [{ item: 'gameObject.crafting.tinkering.containers.animalBox', count: 1 }]; resources: { count: number = 5; item: string = "gameObject.resources.logs" }[] = [                                 { item: 'gameObject.resources.logs', count: 5 },                                 { item: 'gameObject.resources.furs', count: 5 },                             ] }  }  }  } ; keys: { magicKey: { color: string = "0x0000"; graphic: string = "0x1837"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Keys', 'Magic Key'] } ; refill: { resources: { count: number = 5; item: string = "gameObject.resources.ingots.copper" }[] = [                                 { item: 'gameObject.resources.ingots.copper', count: 5 },                                 { item: 'gameObject.resources.ingots.gold', count: 5 },                                 { item: 'gameObject.resources.ingots.silver', count: 5 },                             ] }  }  }  } ; parts: { barrelHoops: { color: string = "0x0000"; graphic: string = "0x10E1"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Parts', 'Barrel Hoops'] } ; refill: { resources: { count: number = 1; item: string = "gameObject.resources.ingots.copper" }[] = [                                 { item: 'gameObject.resources.ingots.copper', count: 1 },                                 { item: 'gameObject.resources.ingots.iron', count: 1 },                             ] }  }  } ; gears: { color: string = "0x0000"; graphic: string = "0x1053"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Parts', 'Gears'] } ; refill: { resources: { count: number = 1; item: string = "gameObject.resources.ingots.iron" }[] = [{ item: 'gameObject.resources.ingots.iron', count: 1 }] }  }  } ; hinge: { color: string = "0x0000"; graphic: string = "0x1055"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Parts', 'Hinge'] } ; refill: { resources: { count: number = 1; item: string = "gameObject.resources.ingots.iron" }[] = [{ item: 'gameObject.resources.ingots.iron', count: 1 }] }  }  } ; nails: { color: string = "0x0000"; graphic: string = "0x102E"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Parts', 'Nails'] } ; refill: { resources: { count: number = 1; item: string = "gameObject.resources.ingots.iron" }[] = [{ item: 'gameObject.resources.ingots.iron', count: 1 }] }  }  } ; springs: { color: string = "0x0000"; graphic: string = "0x105D"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Parts', 'Springs'] } ; refill: { resources: { count: number = 1; item: string = "gameObject.resources.ingots.iron" }[] = [{ item: 'gameObject.resources.ingots.iron', count: 1 }] }  }  }  } ; specialItems: { magicBall: { color: string = "0x0B86"; graphic: string = "0x0E2D"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Special Items', 'Magic Ball (10 charges)'] } ; refill: { crafting: { count: number = 2; item: string = "gameObject.crafting.tinkering.parts.springs" }[] = [                                 { item: 'gameObject.crafting.tinkering.parts.springs', count: 2 },                                 { item: 'gameObject.crafting.tinkering.wires.copper', count: 5 },                             ]; resources: { count: number = 1; item: string = "gameObject.resources.ingots.gold" }[] = [                                 { item: 'gameObject.resources.ingots.gold', count: 1 },                                 { item: 'gameObject.resources.ingots.iron', count: 1 },                                 { item: 'gameObject.resources.stones.pieceOfAmber', count: 1 },                                 { item: 'gameObject.resources.stones.starSapphire', count: 3 },                             ] }  }  } ; rechargeCrystal1: { color: string = "0x0000"; graphic: string = "0x1F1C"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Special Items', 'Recharge Crystal +1'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.ingots.gold" }[] = [                                 { item: 'gameObject.resources.ingots.gold', count: 2 },                                 { item: 'gameObject.resources.stones.amethyst', count: 2 },                             ] }  }  } ; rechargeCrystal3: { color: string = "0x0000"; graphic: string = "0x1F1C"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Special Items', 'Recharge Crystal +3'] } ; refill: { resources: { count: number = 3; item: string = "gameObject.resources.ingots.gold" }[] = [                                 { item: 'gameObject.resources.ingots.gold', count: 3 },                                 { item: 'gameObject.resources.stones.citrines', count: 3 },                             ] }  }  } ; rechargeCrystal5: { color: string = "0x0000"; graphic: string = "0x1F1C"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Special Items', 'Recharge Crystal +5'] } ; refill: { resources: { count: number = 5; item: string = "gameObject.resources.ingots.gold" }[] = [                                 { item: 'gameObject.resources.ingots.gold', count: 5 },                                 { item: 'gameObject.resources.stones.diamonds', count: 5 },                             ] }  }  }  } ; tools: { apprenticesPoisoningKit: { color: string = "0x0000"; graphic: string = "0x1837"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Tools', "Apprentice's Poisoning Kit (trenink)"] } ; refill: { resources: { count: number = 5; item: string = "gameObject.resources.ingots.mytheril" }[] = [                                 { item: 'gameObject.resources.ingots.mytheril', count: 5 },                                 { item: 'gameObject.resources.stones.citrines', count: 5 },                                 { item: 'gameObject.resources.stones.diamonds', count: 5 },                                 { item: 'gameObject.resources.stones.sapphires', count: 5 },                             ] }  }  } ; lockpickX50: { color: string = "0x0000"; graphic: string = "0x14FB"; make: { outputCount: number = 50; tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Tools', '50x Lockpick'] } ; refill: { resources: { count: number = 1; item: string = "gameObject.resources.ingots.iron" }[] = [                                 { item: 'gameObject.resources.ingots.iron', count: 1 },                                 { item: 'gameObject.resources.ingots.bronze', count: 50 },                             ] }  }  }  } ; wires: { black: { color: string = "0x0455"; graphic: string = "0x1876"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Black Rock Wire'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.ingots.black" }[] = [                                 { item: 'gameObject.resources.ingots.black', count: 2 },                                 { item: 'gameObject.resources.ingots.iron', count: 2 },                             ] }  }  } ; blood: { color: string = "0x04C2"; graphic: string = "0x1876"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Blood Rock Wire'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.ingots.blood" }[] = [                                 { item: 'gameObject.resources.ingots.blood', count: 2 },                                 { item: 'gameObject.resources.ingots.iron', count: 2 },                             ] }  }  } ; copper: { color: string = "0x0000"; graphic: string = "0x1879"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Copper Wire'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.ingots.copper" }[] = [                                 { item: 'gameObject.resources.ingots.copper', count: 2 },                                 { item: 'gameObject.resources.ingots.iron', count: 2 },                             ] }  }  } ; gold: { color: string = "0x0000"; graphic: string = "0x1878"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Gold Wire'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.ingots.gold" }[] = [                                 { item: 'gameObject.resources.ingots.gold', count: 2 },                                 { item: 'gameObject.resources.ingots.iron', count: 2 },                             ] }  }  } ; iron: { color: string = "0x0000"; graphic: string = "0x1876"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Iron Wire'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.ingots.iron" }[] = [{ item: 'gameObject.resources.ingots.iron', count: 2 }] }  }  } ; ironString: { color: string = "0x0000"; graphic: string = "0x1420"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Iron String'] } ; refill: { crafting: { count: number = 1; item: string = "gameObject.crafting.tinkering.wires.iron" }[] = [{ item: 'gameObject.crafting.tinkering.wires.iron', count: 1 }]; resources: { count: number = 1; item: string = "gameObject.resources.ingots.iron" }[] = [{ item: 'gameObject.resources.ingots.iron', count: 1 }] }  }  } ; mytheril: { color: string = "0x052D"; graphic: string = "0x1876"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Mytheril Wire'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.ingots.mytheril" }[] = [                                 { item: 'gameObject.resources.ingots.mytheril', count: 2 },                                 { item: 'gameObject.resources.ingots.iron', count: 2 },                             ] }  }  } ; rose: { color: string = "0x0665"; graphic: string = "0x1876"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Rose Wire'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.ingots.rose" }[] = [                                 { item: 'gameObject.resources.ingots.rose', count: 2 },                                 { item: 'gameObject.resources.ingots.iron', count: 2 },                             ] }  }  } ; shadow: { color: string = "0x0770"; graphic: string = "0x1876"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Shadow Wire'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.ingots.shadow" }[] = [                                 { item: 'gameObject.resources.ingots.shadow', count: 2 },                                 { item: 'gameObject.resources.ingots.iron', count: 2 },                             ] }  }  } ; silver: { color: string = "0x0000"; graphic: string = "0x1877"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Silver Wire'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.ingots.silver" }[] = [                                 { item: 'gameObject.resources.ingots.silver', count: 2 },                                 { item: 'gameObject.resources.ingots.iron', count: 2 },                             ] }  }  } ; vlasec: { color: string = "0x02B3"; graphic: string = "0x0FA0"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Vlasec'] } ; refill: { crafting: { count: number = 2; item: string = "gameObject.crafting.tinkering.wires.ironString" }[] = [{ item: 'gameObject.crafting.tinkering.wires.ironString', count: 2 }]; resources: { count: number = 1; item: string = "gameObject.resources.ingots.iron" }[] = [                                 { item: 'gameObject.resources.ingots.iron', count: 1 },                                 { item: 'gameObject.resources.thread', count: 4 },                             ] }  }  }  }  }  } |
+`crafting` | object | { blacksmithing: { ironWeapons: { swordsAndBlades: { dagger: { color: string = "0x0000"; graphic: string = "0x0F51"; make: { tool: string = "gameObject.tools.silverHammer"; toolTarget: string = "gameObject.resources.ingots.iron"; menu: { name: string = "Blacksmithing"; selections: (string \\| { item: string = "Swords & Blades"; menu: string = "Iron Swords & Blades" })[] = [                                      'Iron Weapons',                                      { item: 'Swords & Blades', menu: 'Iron Swords & Blades' },                                      'Dagger',                                  ] } ; refill: { resources: { count: number = 1; item: string = "gameObject.resources.ingots.iron" }[] = [{ item: 'gameObject.resources.ingots.iron', count: 1 }] }  }  }  }  } ; tools: { blackSphere: { color: string = "0x0B15"; graphic: string = "0x0E2D"; make: { tool: string = "gameObject.tools.silverHammer"; toolTarget: string = "gameObject.resources.ingots.iron"; menu: { name: string = "Blacksmithing"; selections: string[] = ['Tools', 'Black Rock Sphere'] } ; refill: { crafting: { count: number = 15; item: string = "gameObject.crafting.tinkering.wires.shadow" }[] = [                                  { item: 'gameObject.crafting.tinkering.wires.shadow', count: 15 },                                  { item: 'gameObject.crafting.tinkering.wires.black', count: 15 },                              ]; resources: { count: number = 5; item: string = "gameObject.resources.ingots.iron" }[] = [                                  { item: 'gameObject.resources.ingots.iron', count: 5 },                                  { item: 'gameObject.resources.fairyDust', count: 1 },                              ] }  }  } ; bloodSphere: { color: string = "0x0846"; graphic: string = "0x0E2D"; make: { tool: string = "gameObject.tools.silverHammer"; toolTarget: string = "gameObject.resources.ingots.iron"; menu: { name: string = "Blacksmithing"; selections: string[] = ['Tools', 'Blood Rock Sphere'] } ; refill: { crafting: { count: number = 15; item: string = "gameObject.crafting.tinkering.wires.rose" }[] = [                                  { item: 'gameObject.crafting.tinkering.wires.rose', count: 15 },                                  { item: 'gameObject.crafting.tinkering.wires.blood', count: 15 },                              ]; resources: { count: number = 5; item: string = "gameObject.resources.ingots.iron" }[] = [                                  { item: 'gameObject.resources.ingots.iron', count: 5 },                                  { item: 'gameObject.resources.fairyDust', count: 1 },                              ] }  }  } ; krumpac: { color: string = "0x0000"; graphic: string = "0x0E85"; make: { tool: string = "gameObject.tools.silverHammer"; toolTarget: string = "gameObject.resources.ingots.iron"; menu: { name: string = "Blacksmithing"; selections: string[] = ['Tools', 'Pick axe'] } ; refill: { resources: { count: number = 4; item: string = "gameObject.resources.ingots.iron" }[] = [                                  { item: 'gameObject.resources.ingots.iron', count: 4 },                                  { item: 'gameObject.resources.logs', count: 1 },                              ] }  }  } ; mytherilSphere: { color: string = "0x0B8A"; graphic: string = "0x0E2D"; make: { tool: string = "gameObject.tools.silverHammer"; toolTarget: string = "gameObject.resources.ingots.iron"; menu: { name: string = "Blacksmithing"; selections: string[] = ['Tools', 'Mytheril Sphere'] } ; refill: { crafting: { count: number = 15; item: string = "gameObject.crafting.tinkering.wires.gold" }[] = [                                  { item: 'gameObject.crafting.tinkering.wires.gold', count: 15 },                                  { item: 'gameObject.crafting.tinkering.wires.mytheril', count: 15 },                              ]; resources: { count: number = 5; item: string = "gameObject.resources.ingots.iron" }[] = [                                  { item: 'gameObject.resources.ingots.iron', count: 5 },                                  { item: 'gameObject.resources.fairyDust', count: 1 },                                  { item: 'gameObject.resources.soulShard', count: 1 },                              ] }  }  } ; petardCauldron: { color: string = "0x04B1"; graphic: string = "0x0990"; make: { tool: string = "gameObject.tools.silverHammer"; toolTarget: string = "gameObject.resources.ingots.iron"; menu: { name: string = "Blacksmithing"; selections: string[] = ['Tools', 'Petard Cauldron'] } ; refill: { crafting: { count: number = 5; item: string = "gameObject.crafting.tinkering.wires.iron" }[] = [{ item: 'gameObject.crafting.tinkering.wires.iron', count: 5 }]; resources: { count: number = 10; item: string = "gameObject.resources.ingots.iron" }[] = [                                  { item: 'gameObject.resources.ingots.iron', count: 10 },                                  { item: 'gameObject.resources.ingots.rose', count: 6 },                                  { item: 'gameObject.resources.ingots.blood', count: 1 },                              ] }  }  } ; sekera: { color: string = "0x0000"; graphic: string = "0x0F43"; make: { tool: string = "gameObject.tools.silverHammer"; toolTarget: string = "gameObject.resources.ingots.iron"; menu: { name: string = "Blacksmithing"; selections: string[] = ['Tools', 'Hatchet'] } ; refill: { resources: { count: number = 4; item: string = "gameObject.resources.ingots.iron" }[] = [                                  { item: 'gameObject.resources.ingots.iron', count: 4 },                                  { item: 'gameObject.resources.logs', count: 1 },                              ] }  }  }  }  } ; carpentry: { containersAndParts: { barrelLid: { color: string = "0x0000"; graphic: string = "0x1DB8"; make: { tool: string = "gameObject.tools.saw"; menu: { name: string = "Carpentry"; selections: string[] = ['Containers & Cont. parts', 'Barrel Lid'] } ; refill: { crafting: { count: number = 2; item: string = "gameObject.crafting.carpentry.miscellaneous.boards" }[] = [{ item: 'gameObject.crafting.carpentry.miscellaneous.boards', count: 2 }]; resources: { count: number = 1; item: string = "gameObject.resources.logs" }[] = [{ item: 'gameObject.resources.logs', count: 1 }] }  }  } ; barrelStaves: { color: string = "0x0000"; graphic: string = "0x1EB1"; make: { tool: string = "gameObject.tools.saw"; menu: { name: string = "Carpentry"; selections: string[] = ['Containers & Cont. parts', 'Barrel Staves'] } ; refill: { resources: { count: number = 3; item: string = "gameObject.resources.logs" }[] = [{ item: 'gameObject.resources.logs', count: 3 }] }  }  } ; formaNaLahve: { color: string = "0x0909"; graphic: string = "0x0E7F"; make: { tool: string = "gameObject.tools.saw"; menu: { name: string = "Carpentry"; selections: string[] = ['Containers & Cont. parts', 'Forma na lahve'] } ; refill: { crafting: { count: number = 2; item: string = "gameObject.crafting.carpentry.containersAndParts.barrelLid" }[] = [                                  { item: 'gameObject.crafting.carpentry.containersAndParts.barrelLid', count: 2 },                                  { item: 'gameObject.crafting.carpentry.containersAndParts.barrelStaves', count: 2 },                              ]; resources: { count: number = 1; item: string = "gameObject.resources.logs" }[] = [{ item: 'gameObject.resources.logs', count: 1 }] }  }  } ; washBasin: { color: string = "0x0000"; graphic: string = "0x1008"; make: { tool: string = "gameObject.tools.saw"; menu: { name: string = "Carpentry"; selections: string[] = ['Containers & Cont. parts', 'Wash Basin'] } ; refill: { crafting: { count: number = 2; item: string = "gameObject.crafting.carpentry.miscellaneous.boards" }[] = [                                  { item: 'gameObject.crafting.carpentry.miscellaneous.boards', count: 2 },                                  { item: 'gameObject.crafting.tinkering.parts.nails', count: 2 },                              ]; resources: { count: number = 1; item: string = "gameObject.resources.logs" }[] = [                                  { item: 'gameObject.resources.logs', count: 1 },                                  { item: 'gameObject.resources.ingots.iron', count: 2 },                                  { item: 'gameObject.resources.pitcherOfWater', count: 1 },                              ] }  }  } ; woodenBox: { color: string = "0x0000"; graphic: string = "0x0E7D"; make: { tool: string = "gameObject.tools.saw"; menu: { name: string = "Carpentry"; selections: string[] = ['Containers & Cont. parts', 'Wooden Box'] } ; refill: { crafting: { count: number = 2; item: string = "gameObject.crafting.tinkering.parts.hinge" }[] = [                                  { item: 'gameObject.crafting.tinkering.parts.hinge', count: 2 },                                  { item: 'gameObject.crafting.tinkering.parts.nails', count: 1 },                              ]; resources: { count: number = 4; item: string = "gameObject.resources.logs" }[] = [{ item: 'gameObject.resources.logs', count: 4 }] }  }  }  } ; deedToShips: { deedToSmallShip: { color: string = "0x0000"; graphic: string = "0x14F1"; make: { tool: string = "gameObject.tools.saw"; menu: { name: string = "Carpentry"; selections: string[] = ['Deeds to Ships', 'Deed to a small ship'] } ; refill: { crafting: { count: number = 20; item: string = "gameObject.crafting.tinkering.parts.hinge" }[] = [                                  { item: 'gameObject.crafting.tinkering.parts.hinge', count: 20 },                                  { item: 'gameObject.crafting.tinkering.parts.nails', count: 35 },                                  { item: 'gameObject.crafting.carpentry.miscellaneous.boards', count: 250 },                              ]; resources: { count: number = 30; item: string = "gameObject.resources.logs" }[] = [                                  { item: 'gameObject.resources.logs', count: 30 },                                  { item: 'gameObject.resources.foldedCloth', count: 20 },                              ] }  }  }  } ; miscellaneous: { boards: { color: string = "0x0000"; graphic: string = "0x1BD7"; make: { outputCount: number = 3; tool: string = "gameObject.tools.saw"; menu: { name: string = "Carpentry"; selections: string[] = ['Miscellaneous', 'Boards'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.logs" }[] = [{ item: 'gameObject.resources.logs', count: 2 }] }  }  } ; krabiceKadi: { color: string = "0x07E0"; graphic: string = "0x185E"; make: { tool: string = "gameObject.tools.saw"; menu: { name: string = "Carpentry"; selections: string[] = ['Miscellaneous', 'Krabice kadi'] } ; refill: { crafting: { count: number = 20; item: string = "gameObject.crafting.tinkering.containers.kadNaPotiony" }[] = [{ item: 'gameObject.crafting.tinkering.containers.kadNaPotiony', count: 20 }]; resources: { count: number = 2; item: string = "gameObject.resources.logs" }[] = [{ item: 'gameObject.resources.logs', count: 2 }] }  }  }  }  } ; tailoring: { footwear: { sandals: { color: string = "0x0000"; graphic: string = "0x170D"; make: { tool: string = "gameObject.tools.sewingKit"; toolTarget: string = "gameObject.resources.pilesOfHides"; menu: { name: string = "Leather"; selections: string[] = ['Footwear', 'Sandals'] } ; refill: { resources: { count: number = 4; item: string = "gameObject.resources.pilesOfHides" }[] = [{ item: 'gameObject.resources.pilesOfHides', count: 4 }] }  }  }  } ; headwear: { bandana: { color: string = "0x0000"; graphic: string = "0x153F"; make: { tool: string = "gameObject.tools.sewingKit"; toolTarget: string = "gameObject.resources.foldedCloth"; menu: { name: string = "Cloth"; selections: string[] = ['Headwear', 'Bandana'] } ; refill: { resources: { count: number = 1; item: string = "gameObject.resources.foldedCloth" }[] = [{ item: 'gameObject.resources.foldedCloth', count: 1 }] }  }  }  }  } ; tinkering: { containers: { animalBox: { color: string = "0x051E"; graphic: string = "0x09A8"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Animal Box'] } ; refill: { crafting: { count: number = 1; item: string = "gameObject.crafting.tinkering.containers.goldenBoxW" }[] = [{ item: 'gameObject.crafting.tinkering.containers.goldenBoxW', count: 1 }]; resources: { count: number = 5; item: string = "gameObject.resources.logs" }[] = [                                  { item: 'gameObject.resources.logs', count: 5 },                                  { item: 'gameObject.resources.furs', count: 5 },                              ] }  }  } ; bottle: { color: string = "0x0000"; graphic: string = "0x0F0E"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Bottle'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.logs" }[] = [                                  { item: 'gameObject.resources.logs', count: 2 },                                  { item: 'gameObject.resources.ore.anyOre', count: 5 },                              ] }  }  } ; doubleSecureChestN: { color: string = "0x0000"; graphic: string = "0x14F0"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Double Secure Chest'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.logs" }[] = [                                  { item: 'gameObject.resources.logs', count: 2 },                                  { item: 'gameObject.resources.ingots.gold', count: 5 },                                  { item: 'gameObject.resources.ingots.iron', count: 15 },                                  { item: 'gameObject.resources.stones.diamonds', count: 2 },                                  { item: 'gameObject.resources.stones.rubies', count: 4 },                              ] }  }  } ; doubleSecureChestW: { color: string = "0x0000"; graphic: string = "0x14F0"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Double Secure Chest'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.logs" }[] = [                                  { item: 'gameObject.resources.logs', count: 2 },                                  { item: 'gameObject.resources.ingots.gold', count: 5 },                                  { item: 'gameObject.resources.ingots.iron', count: 15 },                                  { item: 'gameObject.resources.stones.diamonds', count: 2 },                                  { item: 'gameObject.resources.stones.rubies', count: 4 },                              ] }  }  } ; goldChest: { color: string = "0x0000"; graphic: string = "0x0E40"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Gold Chest'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.logs" }[] = [                                  { item: 'gameObject.resources.logs', count: 2 },                                  { item: 'gameObject.resources.ingots.gold', count: 5 },                                  { item: 'gameObject.resources.ingots.iron', count: 15 },                              ] }  }  } ; goldenBoxN: { color: string = "0x0000"; graphic: string = "0x09A8"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Golden Box (N)'] } ; refill: { resources: { count: number = 5; item: string = "gameObject.resources.logs" }[] = [                                  { item: 'gameObject.resources.logs', count: 5 },                                  { item: 'gameObject.resources.ingots.gold', count: 5 },                              ] }  }  } ; goldenBoxW: { color: string = "0x0000"; graphic: string = "0x0E80"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Golden Box (W)'] } ; refill: { resources: { count: number = 5; item: string = "gameObject.resources.logs" }[] = [                                  { item: 'gameObject.resources.logs', count: 5 },                                  { item: 'gameObject.resources.ingots.gold', count: 5 },                              ] }  }  } ; guildSecureChestW: { color: string = "0x0000"; graphic: string = "0x14F0"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Guild Secure Chest'] } ; refill: { resources: { count: number = 5; item: string = "gameObject.resources.logs" }[] = [                                  { item: 'gameObject.resources.logs', count: 5 },                                  { item: 'gameObject.resources.ingots.gold', count: 5 },                                  { item: 'gameObject.resources.ingots.copper', count: 10 },                                  { item: 'gameObject.resources.ingots.iron', count: 15 },                                  { item: 'gameObject.resources.ingots.mytheril', count: 1 },                                  { item: 'gameObject.resources.stones.diamonds', count: 1 },                                  { item: 'gameObject.resources.stones.citrines', count: 2 },                              ] }  }  } ; kadNaPotiony: { color: string = "0x0000"; graphic: string = "0x1843"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Kad na potiony'] } ; refill: { crafting: { count: number = 1; item: string = "gameObject.crafting.carpentry.containersAndParts.formaNaLahve" }[] = [                                  { item: 'gameObject.crafting.carpentry.containersAndParts.formaNaLahve', count: 1 },                              ]; resources: { count: number = 2; item: string = "gameObject.resources.logs" }[] = [                                  { item: 'gameObject.resources.logs', count: 2 },                                  { item: 'gameObject.resources.ore.iron', count: 2 },                                  { item: 'gameObject.resources.ingots.bronze', count: 1 },                                  { item: 'gameObject.resources.ingots.iron', count: 1 },                              ] }  }  } ; metalchest: { color: string = "0x0000"; graphic: string = "0x09AB"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Metal Chest'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.logs" }[] = [                                  { item: 'gameObject.resources.logs', count: 2 },                                  { item: 'gameObject.resources.ingots.shadow', count: 20 },                              ] }  }  } ; secureChestN: { color: string = "0x0000"; graphic: string = "0x14F0"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Secure Chest (N)'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.logs" }[] = [                                  { item: 'gameObject.resources.logs', count: 2 },                                  { item: 'gameObject.resources.ingots.gold', count: 5 },                                  { item: 'gameObject.resources.ingots.iron', count: 15 },                                  { item: 'gameObject.resources.stones.diamonds', count: 2 },                                  { item: 'gameObject.resources.stones.tourmalines', count: 2 },                              ] }  }  } ; secureChestW: { color: string = "0x0000"; graphic: string = "0x14F0"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Secure Chest (W)'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.logs" }[] = [                                  { item: 'gameObject.resources.logs', count: 2 },                                  { item: 'gameObject.resources.ingots.gold', count: 5 },                                  { item: 'gameObject.resources.ingots.iron', count: 15 },                                  { item: 'gameObject.resources.stones.diamonds', count: 2 },                                  { item: 'gameObject.resources.stones.tourmalines', count: 2 },                              ] }  }  } ; univerzalAnimalBox: { color: string = "0x0000"; graphic: string = "0x09A8"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Containers', 'Univerzal Animal Box'] } ; refill: { crafting: { count: number = 1; item: string = "gameObject.crafting.tinkering.containers.animalBox" }[] = [{ item: 'gameObject.crafting.tinkering.containers.animalBox', count: 1 }]; resources: { count: number = 5; item: string = "gameObject.resources.logs" }[] = [                                  { item: 'gameObject.resources.logs', count: 5 },                                  { item: 'gameObject.resources.furs', count: 5 },                              ] }  }  }  } ; keys: { magicKey: { color: string = "0x0000"; graphic: string = "0x1837"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Keys', 'Magic Key'] } ; refill: { resources: { count: number = 5; item: string = "gameObject.resources.ingots.copper" }[] = [                                  { item: 'gameObject.resources.ingots.copper', count: 5 },                                  { item: 'gameObject.resources.ingots.gold', count: 5 },                                  { item: 'gameObject.resources.ingots.silver', count: 5 },                              ] }  }  }  } ; parts: { barrelHoops: { color: string = "0x0000"; graphic: string = "0x10E1"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Parts', 'Barrel Hoops'] } ; refill: { resources: { count: number = 1; item: string = "gameObject.resources.ingots.copper" }[] = [                                  { item: 'gameObject.resources.ingots.copper', count: 1 },                                  { item: 'gameObject.resources.ingots.iron', count: 1 },                              ] }  }  } ; gears: { color: string = "0x0000"; graphic: string = "0x1053"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Parts', 'Gears'] } ; refill: { resources: { count: number = 1; item: string = "gameObject.resources.ingots.iron" }[] = [{ item: 'gameObject.resources.ingots.iron', count: 1 }] }  }  } ; hinge: { color: string = "0x0000"; graphic: string = "0x1055"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Parts', 'Hinge'] } ; refill: { resources: { count: number = 1; item: string = "gameObject.resources.ingots.iron" }[] = [{ item: 'gameObject.resources.ingots.iron', count: 1 }] }  }  } ; nails: { color: string = "0x0000"; graphic: string = "0x102E"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Parts', 'Nails'] } ; refill: { resources: { count: number = 1; item: string = "gameObject.resources.ingots.iron" }[] = [{ item: 'gameObject.resources.ingots.iron', count: 1 }] }  }  } ; springs: { color: string = "0x0000"; graphic: string = "0x105D"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Parts', 'Springs'] } ; refill: { resources: { count: number = 1; item: string = "gameObject.resources.ingots.iron" }[] = [{ item: 'gameObject.resources.ingots.iron', count: 1 }] }  }  }  } ; specialItems: { magicBall: { color: string = "0x0B86"; graphic: string = "0x0E2D"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Special Items', 'Magic Ball (10 charges)'] } ; refill: { crafting: { count: number = 2; item: string = "gameObject.crafting.tinkering.parts.springs" }[] = [                                  { item: 'gameObject.crafting.tinkering.parts.springs', count: 2 },                                  { item: 'gameObject.crafting.tinkering.wires.copper', count: 5 },                              ]; resources: { count: number = 1; item: string = "gameObject.resources.ingots.gold" }[] = [                                  { item: 'gameObject.resources.ingots.gold', count: 1 },                                  { item: 'gameObject.resources.ingots.iron', count: 1 },                                  { item: 'gameObject.resources.stones.pieceOfAmber', count: 1 },                                  { item: 'gameObject.resources.stones.starSapphire', count: 3 },                              ] }  }  } ; rechargeCrystal1: { color: string = "0x0000"; graphic: string = "0x1F1C"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Special Items', 'Recharge Crystal +1'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.ingots.gold" }[] = [                                  { item: 'gameObject.resources.ingots.gold', count: 2 },                                  { item: 'gameObject.resources.stones.amethyst', count: 2 },                              ] }  }  } ; rechargeCrystal3: { color: string = "0x0000"; graphic: string = "0x1F1C"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Special Items', 'Recharge Crystal +3'] } ; refill: { resources: { count: number = 3; item: string = "gameObject.resources.ingots.gold" }[] = [                                  { item: 'gameObject.resources.ingots.gold', count: 3 },                                  { item: 'gameObject.resources.stones.citrines', count: 3 },                              ] }  }  } ; rechargeCrystal5: { color: string = "0x0000"; graphic: string = "0x1F1C"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Special Items', 'Recharge Crystal +5'] } ; refill: { resources: { count: number = 5; item: string = "gameObject.resources.ingots.gold" }[] = [                                  { item: 'gameObject.resources.ingots.gold', count: 5 },                                  { item: 'gameObject.resources.stones.diamonds', count: 5 },                              ] }  }  }  } ; tools: { apprenticesPoisoningKit: { color: string = "0x0000"; graphic: string = "0x1837"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Tools', "Apprentice's Poisoning Kit (trenink)"] } ; refill: { resources: { count: number = 5; item: string = "gameObject.resources.ingots.mytheril" }[] = [                                  { item: 'gameObject.resources.ingots.mytheril', count: 5 },                                  { item: 'gameObject.resources.stones.citrines', count: 5 },                                  { item: 'gameObject.resources.stones.diamonds', count: 5 },                                  { item: 'gameObject.resources.stones.sapphires', count: 5 },                              ] }  }  } ; lockpickX50: { color: string = "0x0000"; graphic: string = "0x14FB"; make: { outputCount: number = 50; tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Tools', '50x Lockpick'] } ; refill: { resources: { count: number = 1; item: string = "gameObject.resources.ingots.iron" }[] = [                                  { item: 'gameObject.resources.ingots.iron', count: 1 },                                  { item: 'gameObject.resources.ingots.bronze', count: 50 },                              ] }  }  }  } ; wires: { black: { color: string = "0x0455"; graphic: string = "0x1876"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Black Rock Wire'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.ingots.black" }[] = [                                  { item: 'gameObject.resources.ingots.black', count: 2 },                                  { item: 'gameObject.resources.ingots.iron', count: 2 },                              ] }  }  } ; blood: { color: string = "0x04C2"; graphic: string = "0x1876"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Blood Rock Wire'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.ingots.blood" }[] = [                                  { item: 'gameObject.resources.ingots.blood', count: 2 },                                  { item: 'gameObject.resources.ingots.iron', count: 2 },                              ] }  }  } ; copper: { color: string = "0x0000"; graphic: string = "0x1879"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Copper Wire'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.ingots.copper" }[] = [                                  { item: 'gameObject.resources.ingots.copper', count: 2 },                                  { item: 'gameObject.resources.ingots.iron', count: 2 },                              ] }  }  } ; gold: { color: string = "0x0000"; graphic: string = "0x1878"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Gold Wire'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.ingots.gold" }[] = [                                  { item: 'gameObject.resources.ingots.gold', count: 2 },                                  { item: 'gameObject.resources.ingots.iron', count: 2 },                              ] }  }  } ; iron: { color: string = "0x0000"; graphic: string = "0x1876"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Iron Wire'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.ingots.iron" }[] = [{ item: 'gameObject.resources.ingots.iron', count: 2 }] }  }  } ; ironString: { color: string = "0x0000"; graphic: string = "0x1420"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Iron String'] } ; refill: { crafting: { count: number = 1; item: string = "gameObject.crafting.tinkering.wires.iron" }[] = [{ item: 'gameObject.crafting.tinkering.wires.iron', count: 1 }]; resources: { count: number = 1; item: string = "gameObject.resources.ingots.iron" }[] = [{ item: 'gameObject.resources.ingots.iron', count: 1 }] }  }  } ; mytheril: { color: string = "0x052D"; graphic: string = "0x1876"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Mytheril Wire'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.ingots.mytheril" }[] = [                                  { item: 'gameObject.resources.ingots.mytheril', count: 2 },                                  { item: 'gameObject.resources.ingots.iron', count: 2 },                              ] }  }  } ; rose: { color: string = "0x0665"; graphic: string = "0x1876"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Rose Wire'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.ingots.rose" }[] = [                                  { item: 'gameObject.resources.ingots.rose', count: 2 },                                  { item: 'gameObject.resources.ingots.iron', count: 2 },                              ] }  }  } ; shadow: { color: string = "0x0770"; graphic: string = "0x1876"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Shadow Wire'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.ingots.shadow" }[] = [                                  { item: 'gameObject.resources.ingots.shadow', count: 2 },                                  { item: 'gameObject.resources.ingots.iron', count: 2 },                              ] }  }  } ; silver: { color: string = "0x0000"; graphic: string = "0x1877"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Silver Wire'] } ; refill: { resources: { count: number = 2; item: string = "gameObject.resources.ingots.silver" }[] = [                                  { item: 'gameObject.resources.ingots.silver', count: 2 },                                  { item: 'gameObject.resources.ingots.iron', count: 2 },                              ] }  }  } ; vlasec: { color: string = "0x02B3"; graphic: string = "0x0FA0"; make: { tool: string = "gameObject.tools.tinkerTools"; menu: { name: string = "Tinkering"; selections: string[] = ['Wires', 'Vlasec'] } ; refill: { crafting: { count: number = 2; item: string = "gameObject.crafting.tinkering.wires.ironString" }[] = [{ item: 'gameObject.crafting.tinkering.wires.ironString', count: 2 }]; resources: { count: number = 1; item: string = "gameObject.resources.ingots.iron" }[] = [                                  { item: 'gameObject.resources.ingots.iron', count: 1 },                                  { item: 'gameObject.resources.thread', count: 4 },                              ] }  }  }  }  }  } |
 `fish` | object | { modra: { color: string = "0x084C"; graphic: string = "0x09CD" }  } |
 `klamak` | object | { lvl1: { bird: { color: string = "0xFFFF"; graphic: string = "0x20EE" } ; chicken: { color: string = "0xFFFF"; graphic: string = "0x20D1" } ; giantRat: { color: string = "0xFFFF"; graphic: string = "0x20D0" } ; rabbit: { color: string = "0x090C"; graphic: string = "0x2125" } ; rat: { color: string = "0xFFFF"; graphic: string = "0x2123" }  } ; lvl2: { boar: { color: string = "0xFFFF"; graphic: string = "0x2101" } ; bullFrog: { color: string = "0xFFFF"; graphic: string = "0x2130" } ; cat: { color: string = "0xFFFF"; graphic: string = "0x211B" } ; dog: { color: string = "0xFFFF"; graphic: string = "0x211C" } ; goat: { color: string = "0xFFFF"; gHeight: number = 36; gWidth: number = 41; graphic: string = "0x2108" } ; jackRabbit: { color: string = "0x01BB"; graphic: string = "0x2125" } ; squirrel: { color: string = "0xFFFF"; graphic: string = "0x2D97" } ; wolf: { color: string = "0xFFFF"; graphic: string = "0x20EA" }  } ; lvl3: { blackBear: { color: string = "0xFFFF"; graphic: string = "0x2118" } ; brownBear: { color: string = "0xFFFF"; graphic: string = "0x20CF" } ; bull: { color: string = "0xFFFF"; graphic: string = "0x20EF" } ; cow: { color: string = "0xFFFF"; graphic: string = "0x2103" } ; gorilla: { color: string = "0xFFFF"; graphic: string = "0x20F5" } ; hart: { color: string = "0xFFFF"; graphic: string = "0x20D4" } ; hind: { color: string = "0xFFFF"; graphic: string = "0x20D4" } ; sheep: { color: string = "0xFFFF"; graphic: string = "0x20EB" }  } ; lvl4: { cougar: { color: string = "0xFFFF"; graphic: string = "0x2119" } ; eagle: { color: string = "0xFFFF"; graphic: string = "0x211D" } ; panther: { color: string = "0xFFFF"; graphic: string = "0x2119" } ; timberWolf: { color: string = "0xFFFF"; graphic: string = "0x20EA" }  } ; lvl5: { alligator: { color: string = "0xFFFF"; graphic: string = "0x2131" } ; grizzly: { color: string = "0xFFFF"; graphic: string = "0x211E" } ; leopard: { color: string = "0xFFFF"; graphic: string = "0x2119" } ; polar: { color: string = "0xFFFF"; graphic: string = "0x20E1" } ; snake: { color: string = "0xFFFF"; graphic: string = "0x20FC" }  }  } |
 `medic` | object | { kpz: { color: string = "0x0493"; graphic: string = "0x09B0" } ; kpzActive: { color: string = "0x0494"; graphic: string = "0x09B0" }  } |
@@ -2285,7 +2291,7 @@ ___
 
 ▪ `Const` **trackingFilter**: object
 
-*Defined in [globals.ts:2331](https://github.com/msviha/orionuo/blob/253f44f/src/globals.ts#L2331)*
+*Defined in [globals.ts:2331](https://github.com/msviha/orionuo/blob/9d14e9f/src/globals.ts#L2331)*
 
 #### Properties:
 
