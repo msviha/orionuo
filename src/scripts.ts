@@ -199,10 +199,14 @@ function carveBody(carveNearestBodyAutomatically = false) {
 
 /**
  * Kouzli na pozadovany target, pokud je uveden
+ * @param target rozsireno o novy target system, ktery umoznuje zadavani vice targetu, ktere se vyhodnocuji zleva do prava a v pripade ze target neexistuje, je vyhozen tercik.
  * @example external code `cast("Harm", "lastattack");`
  * @example external code `cast("Magic Reflection", "self");`
+ * @example external code `cast("Bless", "hover|self");` - vice targetu zadano pres text, oddelovac hodnot je svislitko |
+ * @example external code `cast("Bless", [ { alias: "hover" }, { alias: "self" } ]);` - vice targetu zadano pres objekt ITargetAlias, podporuje rozsirene vlastnosti napr. maxDistance.
+ * @example external code `cast("Heal", [ { alias: "hover" }, { alias: "mostinjuredalielos", maxDistance: 10 }, { alias: "selfinjured" } ]);` V tomto priklade, bude vyhodnocen alias "mostinjuredalielos" pouze pokud je zaroven 10 policek a blize.
  */
-function cast(spell: string, target?: TargetEnum) {
+function cast(spell: string, target?: string | TargetEnum | Array<ITargetAlias>) {
     Scripts.Spells.cast(spell, target);
 }
 
@@ -1073,10 +1077,10 @@ function mobStop() {
 }
 
 /**
- * Zjistuje utok, stejne jako Orion.Attack(), jen vyuziva noveho aliasovani. V bude vyuizovat i kotvy na zalozky tj automaticke vyhazovani
+ * Zjistuje utok, stejne jako Orion.Attack(), jen vyuziva noveho aliasovani.
  * @param targets - rozsirene targetovani.
  * @example  external code `attackTarget('lastattack|laststatusenemy')`
- */
+*/
 function attackTarget(targets?: string) {
     Scripts.TargetingEx.attack(targets);
 }
