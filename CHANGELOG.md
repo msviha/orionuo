@@ -1,13 +1,24 @@
 # CHANGELOG
 
+## 1.2.1
+
+### fix
+- `targeting` - opraveno aby novy trageting, pouzity u `cast` umel pouzivat i vlastni aliasy v object listu napr. 'mujNejdulezitejsiMag' (viz. orion assist)  nebo primy serial napr. Player.Serial()  
+- `_addLootBag` - nebyl public a neslo ho primo volat, uz by mel byt dostupny pres _addLootBag neb external code addLootBag();
+
 ## 1.2.0
 
 ### features
 - `hover` pridan target alias 'hover' fungujici nad custGump zalozkamy viz. [dokumentace](https://github.com/msviha/orionuo/blob/master/docs/enums/targetenum.md)
+- `_mix` {potionName}, ktorý umieša jeden daný potion.. napr _mix tr alebo _mix lc používam na necrovi bežne keď sa niekde šmudrchám na sólo
+- `_addLootBag` na nastavenie loot pytlika
+- `_moveregs` - Presun regov z jedneho kontajnera do druheho
 
 ### enhancements
 - `nove zalozky` redesing custGump zalozek. Zmenseni, preusporadni layoutu prvku, oprava pretekani jmena. 
 - `cast` nove podporuje rosirene aliasy targetovani 'hover|mostinjuredalie' atd. vice viz. [dokumentace](https://github.com/msviha/orionuo/blob/master/docs/globals.md#cast)
+- `loot` presun lootu do lootbagu na základe snapshotov batohu, už by nemal rezať mrtvoly hráčov.. mrtvolu reže len v prípade, že sa v nej nenachádza oranžový pytlík s lootom. Loot zo zeme (elementi, humani po kuchnutí, ...), v prípade, že niečo lootnete (okrem regov, gp, ...), tak to nad hlavou vypíše a nemusíte to hľadať v system message
+-  `_alchemy {potionName}` odteraz sa bude pýtať, odkiaľ má brať regy a sám si zásobuje aby som u seba nemusel mať 10k regov napr.
 
 ### deprecated
 - `castSpell` - bude v dalsich verzich zruseno, pokud nekdo vyuzival prepiste na 'cast' ktery nove podporuje rozsirene aliasy targetovani.
