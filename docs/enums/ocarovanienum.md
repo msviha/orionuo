@@ -18,7 +18,7 @@
 
 •  **black**:  = "black"
 
-*Defined in [types/enums.ts:48](https://github.com/msviha/orionuo/blob/253f44f/src/types/enums.ts#L48)*
+*Defined in [types/enums.ts:48](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L48)*
 
 ___
 
@@ -26,7 +26,7 @@ ___
 
 •  **blood**:  = "blood"
 
-*Defined in [types/enums.ts:49](https://github.com/msviha/orionuo/blob/253f44f/src/types/enums.ts#L49)*
+*Defined in [types/enums.ts:49](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L49)*
 
 ___
 
@@ -34,4 +34,4 @@ ___
 
 •  **mytheril**:  = "mytheril"
 
-*Defined in [types/enums.ts:47](https://github.com/msviha/orionuo/blob/253f44f/src/types/enums.ts#L47)*
+*Defined in [types/enums.ts:47](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L47)*
