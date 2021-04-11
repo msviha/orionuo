@@ -3,13 +3,13 @@ namespace Scripts {
         /**
          * @exports
          * Banduje zvoleny target, ukaze timer bandaze oznaci printfastem bandeni target a pokud je potreba vyhodi tercik
-         * @param targes - rozsirene targetovani, zleva do prava aliasy targetu odelene '|'
+         * @param targets - rozsirene targetovani, zleva do prava aliasy targetu odelene '|'
          * @param showTarget - pokud targets nejsou zadany nebo zadny z nich neni nalezen vyhodi tercik. terick na vybrer ceka 4s
          * @param minimalCountToWarn - pokud mate mene nebo rovno bandazi, zobrazi se hlaska s poctem zbyvajicich
          *          *
          */
-        static bandageTarget(targes?: string, showTarget = false, minimalCountToWarn = 10) {
-            const target = Scripts.TargetingEx.getTarget(targes, 5);
+        static bandageTarget(targets?: string | TargetEnum | Array<ITargetAlias>, showTarget = false, minimalCountToWarn = 10) {
+            const target = Scripts.TargetingEx.getTarget(targets, 5);
             const bandagesSerials = Orion.FindType(gameObject.uncategorized.bandy.graphic);
 
             const count = Scripts.Utils.countItemsBySerials(bandagesSerials);
@@ -18,7 +18,7 @@ namespace Scripts {
                 return;
             }
             const bandTimer = config?.bandage?.bandageTimer;
-            if (!target.isValid() && (showTarget || !targes)) {
+            if (!target.isValid() && (showTarget || !targets)) {
                 Orion.RemoveTimer(TimersEnum.bandage);
                 Orion.CharPrint(Player.Serial(), ColorEnum.green, '[ band > ? ]');
                 const resultObj = Orion.WaitForAddObject('LastBandageChar', 4000);

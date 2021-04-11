@@ -73,7 +73,7 @@ namespace Scripts {
             return config?.mobMaster.sayColor || '0x00B3';
         }
 
-        private static resolveMobkillTarget(targets?: string, useSavedTarget = true): TargetResult {
+        private static resolveMobkillTarget(targets?: string | TargetEnum | Array<ITargetAlias>, useSavedTarget = true): TargetResult {
             let target = new TargetResult();
             if (useSavedTarget) {
                 const storedSerial = Shared.GetVar('mobkill.target');
@@ -132,7 +132,7 @@ namespace Scripts {
          * @param useSavedTarget - uklada pri prvnim volani nalezeny target dle aliasu, zajistuje ze pri zmene tohoto targetu napr. hrac pouziva lastattack a zautoci v prubehu boje na jineho mob,
          * tak summy si porad drzi puvodni target. Dokud neni zresetovani pri volani mobStop(), mobCome()
          */
-        static mobKillAll(targets?: string, useSavedTarget = true) {
+        static mobKillAll(targets?: string | TargetEnum | Array<ITargetAlias>, useSavedTarget = true) {
             const target = MobMaster.resolveMobkillTarget(targets, useSavedTarget);
             const storedPets = MobMaster.resolveMobkillPets(target);
 
@@ -179,7 +179,7 @@ namespace Scripts {
          * @param useSavedTarget - uklada pri prvnim volani nalezeny target dle aliasu, zajistuje ze pri zmene tohoto targetu napr. hrac pouziva lastattack a zautoci v prubehu boje na jineho mob,
          * tak summy si porad drzi puvodni target. Dokud neni zresetovani pri volani mobStop(), mobCome()
          */
-        static mobKill(targets?: string, useSavedTarget = true) {
+        static mobKill(targets?: string | TargetEnum | Array<ITargetAlias>, useSavedTarget = true) {
             const target = MobMaster.resolveMobkillTarget(targets, useSavedTarget);
             const storedPets = MobMaster.resolveMobkillPets(target);
             let lastSerial = Shared.GetVar('mobkill.lastSerial', '');
