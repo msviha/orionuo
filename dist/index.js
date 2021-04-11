@@ -2471,7 +2471,7 @@ var __assign = (this && this.__assign) || function () {
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 1.2.0');
+    Orion.Print(-1, 'version 1.2.1');
     Orion.Print(-1, '-------------+');
 }
 function Autostart() {
@@ -5974,6 +5974,9 @@ var Scripts;
                     result = TargetingEx.getTargetResultFromArray(TargetingEx.getAlivePetsAndAlies(maxDistance), target, function (obj) {
                         return TargetingEx.isMobileInjured(obj) && obj.InLOS();
                     }, function (a, b) { return a.Hits() - b.Hits(); });
+                }
+                else if (target.alias) {
+                    result = TargetingEx.getTargetResult(target.alias, target);
                 }
                 if (result.success()) {
                     break;

@@ -21,7 +21,7 @@
 
 •  **bandage**:  = "bandage"
 
-*Defined in [types/enums.ts:154](https://github.com/msviha/orionuo/blob/253f44f/src/types/enums.ts#L154)*
+*Defined in [types/enums.ts:154](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L154)*
 
 ___
 
@@ -29,7 +29,7 @@ ___
 
 •  **drink**:  = "drink"
 
-*Defined in [types/enums.ts:149](https://github.com/msviha/orionuo/blob/253f44f/src/types/enums.ts#L149)*
+*Defined in [types/enums.ts:149](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L149)*
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 •  **gs**:  = "gs"
 
-*Defined in [types/enums.ts:150](https://github.com/msviha/orionuo/blob/253f44f/src/types/enums.ts#L150)*
+*Defined in [types/enums.ts:150](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L150)*
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 •  **hiding**:  = "hiding"
 
-*Defined in [types/enums.ts:151](https://github.com/msviha/orionuo/blob/253f44f/src/types/enums.ts#L151)*
+*Defined in [types/enums.ts:151](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L151)*
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 •  **invis**:  = "invis"
 
-*Defined in [types/enums.ts:152](https://github.com/msviha/orionuo/blob/253f44f/src/types/enums.ts#L152)*
+*Defined in [types/enums.ts:152](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L152)*
 
 ___
 
@@ -61,4 +61,4 @@ ___
 
 •  **invisLong**:  = "invisLong"
 
-*Defined in [types/enums.ts:153](https://github.com/msviha/orionuo/blob/253f44f/src/types/enums.ts#L153)*
+*Defined in [types/enums.ts:153](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L153)*
