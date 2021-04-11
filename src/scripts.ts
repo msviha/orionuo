@@ -119,6 +119,15 @@ function addCutWeapon() {
 }
 
 /**
+ * Prida lootovaci pytlik
+ * @example in client `_addLootBag`
+ * @example external code `addLootBag();`
+ */
+function addLootBag() {
+    Scripts.Loot.addLootBag();
+}
+
+/**
  * Nastavi do Orion assistanta `myMount` List Object (pro nasedani na jezditko)
  * @example in client `_addMount`
  * @example external code `addMount();`
@@ -1080,7 +1089,7 @@ function mobStop() {
  * Zjistuje utok, stejne jako Orion.Attack(), jen vyuziva noveho aliasovani.
  * @param targets - rozsirene targetovani.
  * @example  external code `attackTarget('lastattack|laststatusenemy')`
-*/
+ */
 function attackTarget(targets?: string) {
     Scripts.TargetingEx.attack(targets);
 }

@@ -2562,6 +2562,9 @@ function Autostart() {
 function addCutWeapon() {
     Scripts.Loot.addCutWeapon();
 }
+function addLootBag() {
+    Scripts.Loot.addLootBag();
+}
 function addMount() {
     Scripts.Mount.addMount();
 }
