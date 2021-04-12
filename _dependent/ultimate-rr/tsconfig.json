@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "module": "none",
+        "noImplicitAny": false,
+        "removeComments": true,
+        "outFile": "../../dist/ultimate-rr.js",
+        "types": [
+            "../../typings",
+            "../../dist"
+        ],
+        "typeRoots": [
+            "../../typings",
+            "../../dist"
+        ],
+        "sourceMap": false
+    },
+    "include": [
+		"../../typings/**/*",
+        "../../dist/**/*",
+        "ultimate-rr.ts"
+    ]
+}
