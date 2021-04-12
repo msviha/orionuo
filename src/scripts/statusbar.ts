@@ -25,7 +25,7 @@ namespace Scripts {
                 name,
                 poisoned: mobile.Poisoned(),
                 visible: false,
-                dead: mobile.Dead(),
+                dead: mobile.Dead()
             };
             statusBars.push(statusBar);
             Shared.AddVar(serial, true);
@@ -45,6 +45,7 @@ namespace Scripts {
         }
 
         static updateStatusbars() {
+
             const statusBars = Shared.GetArray(GlobalEnum.customStatusBars, []);
 
             for (const statusBar of statusBars) {
@@ -53,12 +54,36 @@ namespace Scripts {
                 }
                 const gump = Orion.CreateCustomGump(parseInt(statusBar.serial, 16));
                 const mobile = Orion.FindObject(statusBar.serial);
+                const mobileKey = `${TimersEnum.statusBarTimer}_${statusBar.serial}`;
 
                 if (mobile) {
                     Scripts.Statusbar.updateStatusBarGumpForObject(mobile, statusBar, gump);
-                } else if (statusBar.visible) {
-                    statusBar.visible = false;
-                    Scripts.Statusbar.redrawBodyToNoObject(statusBar, gump);
+                } else  {
+                    const autoCloseTimer = config?.statusBar?.autoCloseTimer ?? 10000;
+
+                    if (autoCloseTimer > 0) {
+                        const friendList = Orion.GetFriendList();
+                        const enemyList = Orion.GetEnemyList();
+                        let allwaysKeep = friendList.some((f) => f === statusBar.serial) || enemyList.some((f) => f === statusBar.serial);
+                    
+                        if (!allwaysKeep) {
+                            const timerExists = Orion.TimerExists(mobileKey);
+                            if (!timerExists) {
+                                Orion.SetTimer(mobileKey);
+                            } else if (Orion.Timer(mobileKey) > autoCloseTimer) {
+                                Orion.RemoveTimer(mobileKey);
+                                Shared.AddVar(statusBar.serial, false);
+                                gump.Clear();
+                                gump.Close();
+                                continue;
+                            }
+                        }
+                    }
+                        
+                    if (statusBar.visible) {
+                        statusBar.visible = false;
+                        Scripts.Statusbar.redrawBodyToNoObject(statusBar, gump);
+                    }
                 }
             }
 
@@ -85,13 +110,13 @@ namespace Scripts {
                 statusBar.hp === hp &&
                 statusBar.max === max &&
                 statusBar.name === name &&
-                statusBar.poisoned === poisoned
+                statusBar.poisoned === poisoned 
             ) {
                 return;
             }
 
             let updateText = false;
-
+   
             // dead change state (ressurection)
             // visible ghost (turning warmode on)
             if (statusBar.dead !== dead || (!statusBar.visible && dead)) {
@@ -133,16 +158,16 @@ namespace Scripts {
                 }
                 Scripts.Statusbar.drawHP(gump, hp, max, poisoned);
             }
-
             gump.Update();
         }
 
-        static drawBody(gump: CustomGumpObject, notoriety?: number, dead = false) {
+        static drawBody(gump: CustomGumpObject, notoriety?: number, dead = false, selected = false) {
             const ARGBcolor = dead
                 ? '#ffff4dff'
                 : typeof notoriety === 'number'
                 ? Scripts.Utils.getARGBColorByNotoriety(notoriety)
                 : '#ccffffff';
+              
             gump.AddColoredPolygone(0, 0, 140, 42, '#ff000000');
             gump.AddColoredPolygone(1, 1, 138, 22, '#ffffffff');
             gump.AddColoredPolygone(2, 2, 136, 21, ARGBcolor);
@@ -151,7 +176,7 @@ namespace Scripts {
 
         static redrawBodyToNoObject(s: any, gump: CustomGumpObject) {
             gump.Clear();
-            Scripts.Statusbar.drawBody(gump);
+            Scripts.Statusbar.drawBody(gump, undefined, s.dead, s.selected);
             Scripts.Statusbar.drawName(gump, s.name);
             Scripts.Statusbar.drawHP(gump, s.hp, s.max, s.poisoned);
             gump.Update();

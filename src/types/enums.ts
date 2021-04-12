@@ -152,6 +152,7 @@ enum TimersEnum {
     invis = 'invis',
     invisLong = 'invisLong',
     bandage = 'bandage',
+    statusBarTimer = 'statusBarTimer'
 }
 
 enum GlobalEnum {

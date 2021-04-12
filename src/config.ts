@@ -1,3 +1,6 @@
+
+
+
 const config = Shared.GetVar('config', {
     updateRate: 500,
     mobMaster: {
@@ -13,6 +16,9 @@ const config = Shared.GetVar('config', {
     },
     targeting: {
         highlightEnemySilent: false,
+    },
+    statusBar: {
+        autoCloseTimer: 10000
     },
     drinkPotion: {
         timer: {
