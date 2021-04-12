@@ -21,7 +21,7 @@ namespace Scripts {
          * Zjistuje utok, stejne jako Orion.Attack(), jen vyuziva noveho aliasovani. V bude vyuizovat i kotvy na zalozky tj automaticke vyhazovani
          * @param targets - rozsirene targetovani.
          */
-        static attack(targets: string) {
+        static attack(targets?: string | TargetEnum | Array<ITargetAlias>) {
             const target = TargetingEx.getTarget(targets);
             if (target.isValid()) {
                 Orion.GetStatus(target.gameObject().Serial());

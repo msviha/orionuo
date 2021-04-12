@@ -223,8 +223,9 @@ function cast(spell: string, target?: string | TargetEnum | Array<ITargetAlias>)
  * Kouzli svitek z NecroScrollEnum na pozadovany target, pokud je uveden
  * @example external code `castNecroScroll("kalnox", "self");`
  * @example external code `castNecroScroll("vfp", "lastattack");`
+ * @example external code `castNecroScroll("vfp", [{ alias: 'lastattack' }, { alias: 'lasttarget' }], );`
  */
-function castNecroScroll(scroll: NecroScrollEnum, target?: TargetEnum) {
+function castNecroScroll(scroll: NecroScrollEnum, target?: string | TargetEnum | Array<ITargetAlias>) {
     Scripts.Spells.castNecroScroll(scroll, target);
 }
 
@@ -232,8 +233,9 @@ function castNecroScroll(scroll: NecroScrollEnum, target?: TargetEnum) {
  * Kouzli svitek na pozadovany target, pokud je uveden, pokud neni timer na svitek zakouzli z hlavy backupHeadCast
  * @example external code `castScroll("ijs", "self", "Magic Reflection");`
  * @example external code `castScroll("pog", "lastattack");`
+ * @example external code `castScroll("pog", [{ alias: 'lastattack' }, { alias: 'lasttarget' }], );`
  */
-function castScroll(scroll: ScrollEnum, target?: TargetEnum, backupHeadCast?: string) {
+function castScroll(scroll: ScrollEnum, target?: string | TargetEnum | Array<ITargetAlias>, backupHeadCast?: string) {
     Scripts.Spells.castScroll(scroll, target, backupHeadCast);
 }
 
@@ -818,9 +820,11 @@ function statusBar() {
 /**
  * Kouzli summona (jmeno je treba zadat tak jak je v nabidce summonu) na pozadovany target, pokud je uveden
  * @example external code `summon("Horse", "self");`
+ * @example external code `summon("Horse", "hover|self");`
+ * @example external code `summon("Horse", [{ alias: "hover" });` 
  * @example external code `summon("Giant Viper");`
  */
-function summon(creature: string, target?: TargetEnum) {
+function summon(creature: string, target?: string | TargetEnum | Array<ITargetAlias>) {
     Scripts.Spells.summon(creature, target);
 }
 
@@ -1044,8 +1048,9 @@ function sortBackpackCaleb() {
  * tak summy si porad drzi puvodni target. Dokud neni zresetovani pri volani mobStop(), mobCome()
  * @example external code `mobKill('lastattack|laststatusenemy')` - uklada target
  * @example external code `mobKill('lastattack', 'false')` - NEuklada target
+ * @example external code `mobKill([ { alias: 'lastattack' }], 'false')` - NEuklada target 
  */
-function mobKill(targets?: string, useSavedTarget?: boolean) {
+function mobKill(targets?: string | TargetEnum | Array<ITargetAlias>, useSavedTarget?: boolean) {
     Scripts.MobMaster.mobKill(targets, useSavedTarget);
 }
 
@@ -1056,8 +1061,9 @@ function mobKill(targets?: string, useSavedTarget?: boolean) {
  * tak summy si porad drzi puvodni target. Dokud neni zresetovani pri volani mobStop(), mobCome()
  * @example external code `mobKill('lastattack|laststatusenemy')` - uklada target
  * @example external code `mobKill('lastattack', 'false')` - NEuklada target
+ * @example external code `mobKill([ { alias: 'lastattack' }], 'false')` - NEuklada target 
  */
-function mobKillAll(targets?: string, useSavedTarget?: boolean) {
+function mobKillAll(targets?: string | TargetEnum | Array<ITargetAlias>, useSavedTarget?: boolean) {
     Scripts.MobMaster.mobKillAll(targets, useSavedTarget);
 }
 
@@ -1089,18 +1095,10 @@ function mobStop() {
  * Zjistuje utok, stejne jako Orion.Attack(), jen vyuziva noveho aliasovani.
  * @param targets - rozsirene targetovani.
  * @example  external code `attackTarget('lastattack|laststatusenemy')`
+ * @example  external code `attackTarget([ { alias: 'lastattack' }, { alias: 'laststatusenemy' }])`
  */
-function attackTarget(targets?: string) {
+function attackTarget(targets?: string | TargetEnum | Array<ITargetAlias>) {
     Scripts.TargetingEx.attack(targets);
-}
-
-/**
- * Sesle kouzlo, vyuziva rozsirene targetovani, do budoucna bude resit i svitky jako ve fene
- * @param spellName - standardni nazev kouzla
- * @param targets - rozsirene targetovani, zleva do prava aliasy targetu odelene '|'
- */
-function castSpell(spellName: string, targets?: string) {
-    Scripts.Magery.castSpell(spellName, targets);
 }
 
 /**
@@ -1115,14 +1113,15 @@ function shrinkOne() {
 
 /**
  * @exports
- * Banduje zvoleny target, ukaze timer bandaze oznaci printfastem bandeni target a pokud je potreba vyhodi tercik
+ * Banduje zvoleny target, ukaze timer bandaze oznaci printfastem bandeni target a pokud je potreba vyhodi tercik. Defaultni max vzdalenost je 5 a mene policek.
  * @param targes - rozsirene targetovani, zleva do prava aliasy targetu odelene '|'
  * @param showTarget - pokud targets nejsou zadany nebo zadny z nich neni nalezen vyhodi tercik. terick na vybrer ceka 4s
  * @param minimalCountToWarn - pokud mate mene nebo rovno bandazi, zobrazi se hlaska s poctem zbyvajicich
  * @example  external code `bandageTarget('selfinjured|mostinjuredalielos')`
  * @example  external code `bandageTarget('selfinjured|mostinjuredalielos', false)`
  * @example  external code `bandageTarget('selfinjured|mostinjuredalielos', false, 50)`
+ * @example  external code `bandageTarget([{ alias: 'hover' }, { alias: 'selfinjured' }, { alias: 'mostinjuredalielos', maxDistance: 3 }], false, 50)`
  */
-function bandageTarget(targets?: string, showTarget?: boolean, minimalCountToWarn?: number) {
+function bandageTarget(targets?: string | TargetEnum | Array<ITargetAlias>, showTarget?: boolean, minimalCountToWarn?: number) {
     Scripts.Healing.bandageTarget(targets, showTarget, minimalCountToWarn);
 }

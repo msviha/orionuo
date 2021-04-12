@@ -22,7 +22,7 @@ namespace Scripts {
          *
          * vykouzli summona
          */
-        static summon(creature: string, target?: TargetEnum | string) {
+        static summon(creature: string, target?: string | TargetEnum | Array<ITargetAlias>) {
             Orion.CancelWaitMenu();
             Orion.WaitMenu('What do you want to summon', creature);
             Scripts.Spells.cast('Summ. Creature', target);
@@ -40,7 +40,7 @@ namespace Scripts {
          * CastScroll(ScrollEnum.port)
          * CastScroll('port')
          */
-        static castScroll(scroll: ScrollEnum, target?: TargetEnum | string, backupHeadCast?: string) {
+        static castScroll(scroll: ScrollEnum, target?: string | TargetEnum | Array<ITargetAlias>, backupHeadCast?: string) {
             const s = gameObject.scrolls['standard'][scroll];
 
             if (s.minMana > Player.Mana()) {
@@ -57,7 +57,7 @@ namespace Scripts {
             }
 
             Orion.ClearJournal();
-            Scripts.Utils.waitTarget(target);
+            TargetingEx.getTarget(target).waitTarget();
             Orion.UseType(s.graphic);
             Scripts.Utils.waitWhileSomethingInJournal(['Select Target', "You can't cast"]);
 
@@ -72,8 +72,10 @@ namespace Scripts {
             }
         }
 
-        static backupHeadCast(reason: string, spell: string, target?: TargetEnum | string) {
-            Scripts.Utils.playerPrint(reason + ' - backup cast', ColorEnum.orange);
+        static backupHeadCast(reason: string, spell: string, target?: string | TargetEnum | Array<ITargetAlias>, silent:boolean = true) {
+            if (!silent) {
+                Scripts.Utils.playerPrint(reason + ' - backup cast', ColorEnum.orange);
+            }
             Scripts.Spells.cast(spell, target);
         }
 
@@ -82,7 +84,7 @@ namespace Scripts {
          * CastScroll('vfp', 'lastattack')
          * CastScroll('kalnox')
          */
-        static castNecroScroll(scroll: NecroScrollEnum, target?: TargetEnum | string) {
+        static castNecroScroll(scroll: NecroScrollEnum, target?: string | TargetEnum | Array<ITargetAlias>) {
             const s = gameObject.scrolls['necro'][scroll];
 
             if (s.minMana > Player.Mana()) {
@@ -97,7 +99,7 @@ namespace Scripts {
             }
 
             Orion.ClearJournal();
-            Scripts.Utils.waitTarget(target);
+            TargetingEx.getTarget(target).waitTarget();
             Orion.UseObject(scrollSerial);
             Scripts.Utils.waitWhileSomethingInJournal(['Select Target', "You can't cast"]);
 
