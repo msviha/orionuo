@@ -192,28 +192,23 @@ namespace Scripts {
         }
 
         static drawBody(gump: CustomGumpObject, notoriety?: number, dead = false) {
-            const opacityPerc:number = config?.statusBar?.opacity ?? 100;
-            const opacityStr = Math.floor(256 * (opacityPerc / 100)).toString(16);
-            const opactiyLowStr = Math.floor(256 * (opacityPerc / 100) * 0.8).toString(16); 
-            const borderColor = config?.statusBar?.borderColor ?? `#${opacityStr}3f3f3f`;
+            const borderColor = config?.statusBar?.borderColor ?? `#ff3f3f3f`;
 
             const ARGBcolor = dead
-                ? `#${opacityStr}ff4dff`
+                ? `#ffff4dff`
                 : typeof notoriety === 'number'
-                ? Scripts.Utils.getARGBColorByNotoriety(notoriety, opacityStr)
-                : `#${opactiyLowStr}ffffff`;
+                ? Scripts.Utils.getARGBColorByNotoriety(notoriety)
+                : `#ccffffff`;
 
                 gump.AddColoredPolygone(0, 0, 140, 42, borderColor);
-                gump.AddColoredPolygone(1, 1, 138, 40, `#${opacityStr}000000`);
-                gump.AddColoredPolygone(1, 1, 138, 22, `#${opacityStr}a0a0a0`);
+                gump.AddColoredPolygone(1, 1, 138, 40, `#ff000000`);
+                gump.AddColoredPolygone(1, 1, 138, 22, `#ffa0a0a0`);
                 gump.AddColoredPolygone(2, 2, 136, 21, ARGBcolor);                
                 gump.AddHitBox(CustomStatusBarEnum.click, 0, 0, 140, 42, 1);
         }
 
         static drawFlags(gump: CustomGumpObject, flags:any[]) {
             let y = 3;
-
-
             for (const flag of flags) {
                 Scripts.Statusbar.drawFlag(gump, 140, y, flag.color);
                 y+=6; 
