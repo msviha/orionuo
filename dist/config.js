@@ -16,8 +16,9 @@ var config = Shared.AddVar('config', {
     },
     statusBar: {
         autoCloseTimer: 10000,
-        selectedColor: '#ffFF4500',
-        opacity: 100
+        opacity: 100,
+        scale: 100,
+        borderColor: undefined
     },
     drinkPotion: {
         timer: {
