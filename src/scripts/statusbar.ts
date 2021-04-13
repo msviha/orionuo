@@ -167,7 +167,7 @@ namespace Scripts {
             const opacityPerc:number = config?.statusBar?.opacity ?? 100;
             const opacityStr = Math.floor(256 * (opacityPerc / 100)).toString(16);
             const opactiyLowStr = Math.floor(256 * (opacityPerc / 100) * 0.8).toString(16); 
-            const selectedColor = config?.statusBar?.selectedColor ?? `#${opacityStr}FF4500`;
+            const selectedColor = config?.statusBar?.selectedColor ?? `#${opacityStr}7cfc00`;
 
             const ARGBcolor = dead
                 ? `#${opacityStr}ff4dff`
@@ -178,6 +178,7 @@ namespace Scripts {
             gump.AddColoredPolygone(0, 0, 140, 42, selected ? selectedColor : `#${opacityStr}000000`);
             gump.AddColoredPolygone(1, 1, 138, 22, selected ? `#${opacityStr}000000` : `#${opacityStr}ffffff`);
             gump.AddColoredPolygone(2, 2, 136, 21, ARGBcolor);
+            gump.AddLine(1, 24, 139, 24, `#${opacityStr}000000`);
             gump.AddColoredPolygone(1, 24, 138, 17, `#${opacityStr}000000`);
             gump.AddHitBox(CustomStatusBarEnum.click, 0, 0, 140, 42, 1);
         }
