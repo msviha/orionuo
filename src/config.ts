@@ -17,8 +17,10 @@ const config = Shared.GetVar('config', {
     targeting: {
         highlightEnemySilent: false,
     },
-    statusBar: {
+    statusBarWrapper: {
         autoCloseTimer: 10000,
+    },
+    statusBar: {
         scale: 100,
         borderColor: '#ff3f3f3f', 
         targetIndicators: [

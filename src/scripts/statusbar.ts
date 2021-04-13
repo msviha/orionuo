@@ -3,7 +3,7 @@
  */
 namespace Scripts {
     export class Statusbar {
-        static create(mobile?: GameObject | string, coordinates?: ICoordinates): void {
+        static create(mobile?: GameObject | string, coordinates?: ICoordinates, autoCloseTimer?:number): void {
             if (!mobile) {
                 Scripts.Utils.createGameObjectSelections([{ ask: 'Target mobile', addObject: 'lastCustomStatusBar' }]);
                 mobile = Orion.FindObject('lastCustomStatusBar');
@@ -26,7 +26,8 @@ namespace Scripts {
                 poisoned: mobile.Poisoned(),
                 visible: false,
                 dead: mobile.Dead(),
-                targetIndicators: Statusbar.resolveIndicators(mobile)
+                targetIndicators: Statusbar.resolveIndicators(mobile),
+                autoCloseTimer: autoCloseTimer
             };
             statusBars.push(statusBar);
             Shared.AddVar(serial, true);
@@ -57,29 +58,26 @@ namespace Scripts {
                 const mobileKey = `${TimersEnum.statusBarTimer}_${statusBar.serial}`;
 
                 if (mobile) {
+                    const timerExists = Orion.TimerExists(mobileKey);
+                    if (timerExists) {
+                        Orion.RemoveTimer(mobileKey);
+                    }
                     Scripts.Statusbar.updateStatusBarGumpForObject(mobile, statusBar, gump);
                 } else  {
-                    const autoCloseTimer = config?.statusBar?.autoCloseTimer ?? 10000;
 
-                    if (autoCloseTimer > 0) {
-                        const friendList = Orion.GetFriendList();
-                        const enemyList = Orion.GetEnemyList();
-                        let allwaysKeep = friendList.some((f) => f === statusBar.serial) || enemyList.some((f) => f === statusBar.serial);
-                    
-                        if (!allwaysKeep) {
-                            const timerExists = Orion.TimerExists(mobileKey);
-                            if (!timerExists) {
-                                Orion.SetTimer(mobileKey);
-                            } else if (Orion.Timer(mobileKey) > autoCloseTimer) {
-                                Orion.RemoveTimer(mobileKey);
-                                Shared.AddVar(statusBar.serial, false);
-                                gump.Clear();
-                                gump.Close();
-                                continue;
-                            }
+                    if (statusBar.autoCloseTimer && statusBar.autoCloseTimer > 0) {
+                        const timerExists = Orion.TimerExists(mobileKey);
+                        if (!timerExists) {
+                            Orion.SetTimer(mobileKey);
+                        } else if (Orion.Timer(mobileKey) > statusBar.autoCloseTimer) {
+                            Orion.RemoveTimer(mobileKey);
+                            Shared.AddVar(statusBar.serial, false);
+                            gump.Clear();
+                            gump.Close();
+                            continue;
                         }
                     }
-                        
+                    
                     if (statusBar.visible) {
                         statusBar.visible = false;
                         Scripts.Statusbar.redrawBodyToNoObject(statusBar, gump);
