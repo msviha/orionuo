@@ -211,6 +211,17 @@ namespace Scripts {
             Orion.CancelTarget();
             Orion.SetLOSOptions('sphere|spherecheckcorners');
 
+            return TargetingEx.resolveTraget(targets, maxDistance);
+        }
+
+        /**
+         *
+         * @param targets rozsirene aliasy zleva doprava odlene |
+         * @param maxDistance max vzdalenost, vyuzivaji jen nektere aliasy a je pretizeno pokud je zadano primo u aliasu. vychozi 20
+         * @returns vraci Traget result, pokud neni nalezeno je prazdny tj. success= false
+         */        
+        static resolveTraget(targets: string | TargetEnum | Array<ITargetAlias>,
+            maxDistance?: number): TargetResult | undefined {
             let result: TargetResult = new Scripts.TargetResult();
             const targetAliases = TargetingEx.getTargetAliases(targets);
 

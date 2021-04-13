@@ -26,9 +26,7 @@ namespace Scripts {
                 poisoned: mobile.Poisoned(),
                 visible: false,
                 dead: mobile.Dead(),
-                isLastAttack: mobile.Serial() === Orion.ClientLastAttack(),
-                isLastTarget: mobile.Serial() === Orion.ClientLastTarget(),
-                isLastStatus: mobile.Serial() === Orion.FindObject('laststatus')?.Serial()
+                targetIndicators: Statusbar.resolveIndicators(mobile)
             };
             statusBars.push(statusBar);
             Shared.AddVar(serial, true);
@@ -92,20 +90,26 @@ namespace Scripts {
             Shared.AddArray(GlobalEnum.customStatusBars, statusBars);
         }
 
-        static resolveActiveFlags(statusBar:any):any[]  { 
+        static resolveIndicators(mobile:GameObject):any[]  { 
+            const targetIndicators = config?.statusBar?.targetIndicators ?? [];
+            for (const indicator of targetIndicators) {
+                indicator.active = mobile.Serial() === TargetingEx.resolveTraget([ <ITargetAlias>indicator.targetAlias ]).gameObject()?.Serial();
+            }
+            return targetIndicators;
+        }        
+
+        static resolveActiveIndicators(statusBar:any):any[]  { 
             const result = [];
-
-            if (statusBar.isLastAttack) {
-                result.push({ color: '#ffe62a00' });
+            for (const indicator of statusBar.targetIndicators) {
+                if (indicator.active) {
+                    result.push(indicator);
+                }
             }
-            if (statusBar.isLastTarget) {
-                result.push({ color: '#ff4169E1' });
-            }
-            if (statusBar.isLastStatus) {
-                result.push({ color: '#ffFFD700' });
-            }
-
             return result;
+        }
+
+        static indicatorChanged(statusBar:any, indicators:any[]):boolean {
+            return statusBar.targetIndicators.some(a=>indicators.some(b=>b.targetAlias.alias===a.targetAlias.alias && b.active !== a.active));
         }
 
         static updateStatusBarGumpForObject(
@@ -120,9 +124,8 @@ namespace Scripts {
             const poisoned = mobile.Poisoned();
             let hp = mobile.Hits();
             let max = mobile.MaxHits();
-            const isLastAttack = mobile.Serial() === Orion.ClientLastAttack();
-            const isLastTarget = mobile.Serial() === Orion.ClientLastTarget();
-            const isLastStatus = mobile.Serial() === Orion.FindObject('laststatus')?.Serial();     
+            const currentIndicators = Statusbar.resolveIndicators(mobile);
+            const indicatorsChanged = Statusbar.indicatorChanged(statusBar, currentIndicators);
 
             if (
                 !forceUpdate &&
@@ -131,30 +134,25 @@ namespace Scripts {
                 statusBar.hp === hp &&
                 statusBar.max === max &&
                 statusBar.name === name &&
-                statusBar.poisoned === poisoned && 
-                statusBar.isLastAttack === isLastAttack &&
-                statusBar.isLastTarget === isLastTarget && 
-                statusBar.isLastStatus === isLastStatus
+                statusBar.poisoned === poisoned &&  
+                !indicatorsChanged
             ) {
                 return;
             }
 
             let updateText = false;
-            const flagsChanged = statusBar.isLastAttack !== isLastAttack || statusBar.isLastTarget !== isLastTarget || statusBar.isLastStatus !== isLastStatus;
    
             // dead change state (ressurection)
             // visible ghost (turning warmode on)
             // flags change
-            if (statusBar.dead !== dead || (!statusBar.visible && dead) || flagsChanged) {
+            if (statusBar.dead !== dead || (!statusBar.visible && dead) || indicatorsChanged) {
                 statusBar.dead = dead;
-                statusBar.isLastAttack = isLastAttack;
-                statusBar.isLastTarget = isLastTarget;
-                statusBar.isLastStatus = isLastStatus;
+                statusBar.targetIndicators = currentIndicators;
                 statusBar.visible = true;
                 updateText = true;
                 gump.Clear();
                 Scripts.Statusbar.drawBody(gump, mobile.Notoriety(), dead);
-                Scripts.Statusbar.drawFlags(gump, Statusbar.resolveActiveFlags(statusBar));
+                Scripts.Statusbar.drawIndicators(gump, Statusbar.resolveActiveIndicators(statusBar));
             }
 
             // FindObject returns something (object revealed / in range)
@@ -163,7 +161,7 @@ namespace Scripts {
                 updateText = true;
                 gump.Clear();
                 Scripts.Statusbar.drawBody(gump, mobile.Notoriety(), dead);
-                Scripts.Statusbar.drawFlags(gump, Statusbar.resolveActiveFlags(statusBar));
+                Scripts.Statusbar.drawIndicators(gump, Statusbar.resolveActiveIndicators(statusBar));
             }
 
             // Update name
@@ -183,7 +181,7 @@ namespace Scripts {
                 if (!updateText) {
                     gump.Clear();
                     Scripts.Statusbar.drawBody(gump, mobile.Notoriety(), dead);
-                    Scripts.Statusbar.drawFlags(gump, Statusbar.resolveActiveFlags(statusBar));
+                    Scripts.Statusbar.drawIndicators(gump, Statusbar.resolveActiveIndicators(statusBar));
                     Scripts.Statusbar.drawName(gump, name);
                 }
                 Scripts.Statusbar.drawHP(gump, hp, max, poisoned);
@@ -207,15 +205,15 @@ namespace Scripts {
                 gump.AddHitBox(CustomStatusBarEnum.click, 0, 0, 140, 42, 1);
         }
 
-        static drawFlags(gump: CustomGumpObject, flags:any[]) {
+        static drawIndicators(gump: CustomGumpObject, flags:any[]) {
             let y = 3;
             for (const flag of flags) {
-                Scripts.Statusbar.drawFlag(gump, 140, y, flag.color);
+                Scripts.Statusbar.drawIndicator(gump, 140, y, flag.color);
                 y+=6; 
             }
         } 
 
-        static drawFlag(gump: CustomGumpObject, x:number, y:number, color:string) {
+        static drawIndicator(gump: CustomGumpObject, x:number, y:number, color:string) {
             const borderColor = config?.statusBar?.borderColor ?? `#ff3f3f3f`;
             gump.AddColoredPolygone(x, y, 6, 6, borderColor);
             gump.AddColoredPolygone(x, y + 1, 5, 5, color);
