@@ -25,7 +25,8 @@ namespace Scripts {
                 name,
                 poisoned: mobile.Poisoned(),
                 visible: false,
-                dead: mobile.Dead()
+                dead: mobile.Dead(),
+                selected: mobile.Serial() === Orion.ClientLastAttack()
             };
             statusBars.push(statusBar);
             Shared.AddVar(serial, true);
@@ -45,7 +46,6 @@ namespace Scripts {
         }
 
         static updateStatusbars() {
-
             const statusBars = Shared.GetArray(GlobalEnum.customStatusBars, []);
 
             for (const statusBar of statusBars) {
@@ -102,6 +102,7 @@ namespace Scripts {
             const poisoned = mobile.Poisoned();
             let hp = mobile.Hits();
             let max = mobile.MaxHits();
+            const selected = mobile.Serial() === Orion.ClientLastAttack();
 
             if (
                 !forceUpdate &&
@@ -110,7 +111,8 @@ namespace Scripts {
                 statusBar.hp === hp &&
                 statusBar.max === max &&
                 statusBar.name === name &&
-                statusBar.poisoned === poisoned 
+                statusBar.poisoned === poisoned && 
+                statusBar.selected === selected
             ) {
                 return;
             }
@@ -119,14 +121,14 @@ namespace Scripts {
    
             // dead change state (ressurection)
             // visible ghost (turning warmode on)
-            if (statusBar.dead !== dead || (!statusBar.visible && dead)) {
+            // selected change
+            if (statusBar.dead !== dead || (!statusBar.visible && dead) || statusBar.selected !== selected) {
                 statusBar.dead = dead;
+                statusBar.selected = selected;
                 statusBar.visible = true;
                 updateText = true;
                 gump.Clear();
-
-                const ARGBcolor = Scripts.Utils.getARGBColorByNotoriety(mobile.Notoriety(), 'cc');
-                Scripts.Statusbar.drawBody(gump, mobile.Notoriety(), dead);
+                Scripts.Statusbar.drawBody(gump, mobile.Notoriety(), dead, selected);
             }
 
             // FindObject returns something (object revealed / in range)
@@ -134,7 +136,7 @@ namespace Scripts {
                 statusBar.visible = true;
                 updateText = true;
                 gump.Clear();
-                Scripts.Statusbar.drawBody(gump, mobile.Notoriety());
+                Scripts.Statusbar.drawBody(gump, mobile.Notoriety(), dead, selected);
             }
 
             // Update name
@@ -153,7 +155,7 @@ namespace Scripts {
                 statusBar.poisoned = poisoned;
                 if (!updateText) {
                     gump.Clear();
-                    Scripts.Statusbar.drawBody(gump, mobile.Notoriety());
+                    Scripts.Statusbar.drawBody(gump, mobile.Notoriety(), dead, selected);
                     Scripts.Statusbar.drawName(gump, name);
                 }
                 Scripts.Statusbar.drawHP(gump, hp, max, poisoned);
@@ -162,15 +164,21 @@ namespace Scripts {
         }
 
         static drawBody(gump: CustomGumpObject, notoriety?: number, dead = false, selected = false) {
+            const opacityPerc:number = config?.statusBar?.opacity ?? 100;
+            const opacityStr = Math.floor(256 * (opacityPerc / 100)).toString(16);
+            const opactiyLowStr = Math.floor(256 * (opacityPerc / 100) * 0.8).toString(16); 
+            const selectedColor = config?.statusBar?.selectedColor ?? `#${opacityStr}FF4500`;
+
             const ARGBcolor = dead
-                ? '#ffff4dff'
+                ? `#${opacityStr}ff4dff`
                 : typeof notoriety === 'number'
-                ? Scripts.Utils.getARGBColorByNotoriety(notoriety)
-                : '#ccffffff';
-              
-            gump.AddColoredPolygone(0, 0, 140, 42, '#ff000000');
-            gump.AddColoredPolygone(1, 1, 138, 22, '#ffffffff');
+                ? Scripts.Utils.getARGBColorByNotoriety(notoriety, opacityStr)
+                : `#${opactiyLowStr}ffffff`;
+
+            gump.AddColoredPolygone(0, 0, 140, 42, selected ? selectedColor : `#${opacityStr}000000`);
+            gump.AddColoredPolygone(1, 1, 138, 22, selected ? `#${opacityStr}000000` : `#${opacityStr}ffffff`);
             gump.AddColoredPolygone(2, 2, 136, 21, ARGBcolor);
+            gump.AddColoredPolygone(1, 24, 138, 17, `#${opacityStr}000000`);
             gump.AddHitBox(CustomStatusBarEnum.click, 0, 0, 140, 42, 1);
         }
 
