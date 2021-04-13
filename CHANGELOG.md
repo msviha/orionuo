@@ -1,10 +1,26 @@
 # CHANGELOG
 
+## 1.2.2
+
+### enhancements
+- `custStatusBars` automaticke mizeni zalozek neexistujicich objektu, ktere nejsou ve friend nebo enemy listu. Pridani zvyrazneni pro objekt figurujici jako 'lastattack'. Moznost nastaveni opacity. viz. nize config.
+
+### config
+- `statusBar.autoCloseTimer` - cas v ms za ktery bude zalozka odstranena, pokud objekt neexistuje. Vychozi hodnota 10000ms (10s). Vypnuti = -1 (chci aby vsechny zalozky zustavali)
+- `statusBar.selectedColor` - barva ohraniceni pro zalokzku ktera je aktualne v 'lastattack'. Barva je uvadena v argb hexa hodnote napr. #ff8a2be2. Prvni dvojcilsi uvadi alpha hodnotu tj. prusvitnost. Staci si tedy najit libovolnout barvu ktera se pouziva pro html #dd00ff a rozsirit ji o alfa slozku #ffdd00ff. [barvy prikad](https://www.w3schools.com/colors/colors_names.asp), [barvy converter](https://www.w3schools.com/colors/colors_converter.asp)
+- `opacity` - nastaveni hodnoty pruhlednosti v %, cele cislo od 0-100. Aplikuje se na vse krome barvu ohraniceni, healbar a pismo. Vychozi = 
+        autoCloseTimer: 10000,
+        selectedColor: '#ffFF4500',
+        opacity: 100
+
 ## 1.2.1
 
 ### fix
 - `targeting` - opraveno aby novy trageting, pouzity u `cast` umel pouzivat i vlastni aliasy v object listu napr. 'mujNejdulezitejsiMag' (viz. orion assist)  nebo primy serial napr. Player.Serial()  
 - `_addLootBag` - nebyl public a neslo ho primo volat, uz by mel byt dostupny pres _addLootBag neb external code addLootBag();
+- `castScroll`, `summon`, `bandageTarget`, `attackTarget` plnohodnotna podpora noveho target systemu (hover atd.), vcetne zadavani pres pole objektu alias [ { alias: 'hover' }, { alias: 'mostinjuredalie', maxDistance: 5 } ]
+
+
 
 ## 1.2.0
 
