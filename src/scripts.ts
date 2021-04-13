@@ -93,26 +93,11 @@ function Autostart() {
                     ) {
                         continue;
                     }
-
-                    const opt = {
-                        x: 1564, 
-                        y: 123,
-                        maxCount: 15,
-                        deltaX: 0,
-                        deltaY: 42,
-                        useCustBars: true,
-                        enabled: true
-
-                    }
-
                     if (Scripts.MobMaster.rename(char)) {
                         const doneItem: IRenamedMob = { graphic: char.Graphic(), serial: char.Serial() };
                         doneList.push(doneItem);
                         Shared.AddArray('autoHandlers.autoRename.doneList', doneList);
-                        Scripts.Targeting.showStatusBarOnWrapper(char.Serial(), opt);
                         break;
-                    } else if (char.CanChangeName()) {
-                        Scripts.Targeting.showStatusBarOnWrapper(char.Serial(), opt);
                     }
                 }
             }
