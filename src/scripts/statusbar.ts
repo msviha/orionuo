@@ -91,7 +91,8 @@ namespace Scripts {
         static resolveIndicators(mobile:GameObject):any[]  { 
             const targetIndicators = config?.statusBar?.targetIndicators ?? [];
             for (const indicator of targetIndicators) {
-                indicator.active = mobile.Serial() === TargetingEx.resolveTraget([ <ITargetAlias>indicator.targetAlias ]).gameObject()?.Serial();
+                const targetResult = TargetingEx.resolveTraget([ <ITargetAlias>indicator.targetAlias ]);
+                indicator.active = mobile && mobile.Serial() && targetResult.isValid() && mobile.Serial() === targetResult.gameObject()?.Serial();
             }
             return targetIndicators;
         }        
