@@ -19,7 +19,8 @@ const config = Shared.GetVar('config', {
     },
     statusBar: {
         autoCloseTimer: 10000,
-        selectedColor: '#ffFF4500'
+        selectedColor: '#ffFF4500',
+        opacity: 100
     },
     drinkPotion: {
         timer: {

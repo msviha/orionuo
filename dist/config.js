@@ -14,6 +14,11 @@ var config = Shared.AddVar('config', {
     targeting: {
         highlightEnemySilent: false
     },
+    statusBar: {
+        autoCloseTimer: 10000,
+        selectedColor: '#ffFF4500',
+        opacity: 100
+    },
     drinkPotion: {
         timer: {
             position: 'LeftTop',
