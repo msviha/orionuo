@@ -5,9 +5,10 @@
   "scripts": {
     "lint": "eslint ./**/*.ts --quiet --fix",
     "build": "tsc",
-    "build-all": "tsc && npm run build-config && npm run build-refill",
+    "build-all": "tsc && npm run build-config && npm run build-refill && npm run build-ultimate-rr",
     "build-config": "tsc -p config",
     "build-refill": "tsc -p _dependent/refill-manager",
+    "build-ultimate-rr": "tsc -p _dependent/ultimate-rr",
     "watch": "tsc -w",
     "doc": "typedoc --out docs src --includeDeclarations --stripInternal --excludeExternals --ignoreCompilerErrors --mode file --plugin typedoc-plugin-markdown --exclude \"src/+(utils|typeguards|private-exec).ts\""
   },
