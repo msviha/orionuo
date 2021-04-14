@@ -55,37 +55,41 @@ namespace Scripts {
                 }
                 const gump = Orion.CreateCustomGump(parseInt(statusBar.serial, 16));
                 const mobile = Orion.FindObject(statusBar.serial);
-                const mobileKey = `${TimersEnum.statusBarTimer}_${statusBar.serial}`;
+
+                if (Scripts.Statusbar.resolveAutoClose(statusBar, gump)) {
+                    continue;
+                }
 
                 if (mobile) {
-                    const timerExists = Orion.TimerExists(mobileKey);
-                    if (timerExists) {
-                        Orion.RemoveTimer(mobileKey);
-                    }
                     Scripts.Statusbar.updateStatusBarGumpForObject(mobile, statusBar, gump);
-                } else  {
-
-                    if (statusBar.autoCloseTimer && statusBar.autoCloseTimer > 0) {
-                        const timerExists = Orion.TimerExists(mobileKey);
-                        if (!timerExists) {
-                            Orion.SetTimer(mobileKey);
-                        } else if (Orion.Timer(mobileKey) > statusBar.autoCloseTimer) {
-                            Orion.RemoveTimer(mobileKey);
-                            Shared.AddVar(statusBar.serial, false);
-                            gump.Clear();
-                            gump.Close();
-                            continue;
-                        }
-                    }
-                    
-                    if (statusBar.visible) {
-                        statusBar.visible = false;
-                        Scripts.Statusbar.redrawBodyToNoObject(statusBar, gump);
-                    }
+                } else if (statusBar.visible) {
+                    statusBar.visible = false;
+                    Scripts.Statusbar.redrawBodyToNoObject(statusBar, gump);
                 }
             }
 
             Shared.AddArray(GlobalEnum.customStatusBars, statusBars);
+        }
+
+        static resolveAutoClose(statusBar:any, gump:CustomGumpObject):boolean {
+            const mobile = Orion.FindObject(statusBar.serial);
+            const mobileKey = `${TimersEnum.statusBarTimer}_${statusBar.serial}`;
+            const timerExists = Orion.TimerExists(mobileKey);
+
+            if (statusBar.autoCloseTimer && !mobile) {
+                if (!timerExists) {
+                    Orion.SetTimer(mobileKey);
+                } else if (Orion.Timer(mobileKey) > statusBar.autoCloseTimer) {
+                    Orion.RemoveTimer(mobileKey);
+                    Shared.AddVar(statusBar.serial, false);
+                    gump.Clear();
+                    gump.Close();
+                    return true;
+                }
+            } else if (timerExists) {
+                Orion.RemoveTimer(mobileKey);
+            }   
+            return false;
         }
 
         static resolveIndicators(mobile:GameObject):any[]  { 
