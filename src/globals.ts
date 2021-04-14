@@ -1702,6 +1702,38 @@ const gameObject: any = {
                 color: '0x0000',
                 minMana: 3,
             },
+            react: {
+                graphic: '0x1F2D',
+                color: '0x0000',
+            },
+            str: {
+                graphic: '0x1F3C',
+                color: '0x0000',
+            },
+            bless: {
+                graphic: '0x1F3D',
+                color: '0x0000',
+            },
+            pf: {
+                graphic: '0x1F5B',
+                color: '0x0000',
+            },
+            dispel: {
+                graphic: '0x1F55',
+                color: '0x0000',
+            },
+            bs: {
+                graphic: '0x1F4D',
+                color: '0x0000',
+            },
+            protect: {
+                graphic: '0x1F3B',
+                color: '0x0000',
+            },
+            eelm: {
+                graphic: '0x1F6A',
+                color: '0x0000',
+            },
         },
         necro: {
             vfp: {

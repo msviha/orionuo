@@ -285,8 +285,7 @@ namespace Scripts {
                         },
                         (a, b) => a.Hits() - b.Hits(),
                     );
-                }
-                else if (target.alias) {
+                } else if (target.alias) {
                     result = TargetingEx.getTargetResult(target.alias, target);
                 }
 

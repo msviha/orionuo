@@ -62,6 +62,14 @@ enum ScrollEnum {
     ress = 'ress',
     recall = 'recall',
     heal = 'heal',
+    str = 'str',
+    react = 'react',
+    bless = 'bless',
+    pf = 'pf',
+    dispel = 'dispel',
+    bs = 'bs',
+    protect = 'protect',
+    eelm = 'eelm',
 }
 
 enum TargetIndicationEnum {
@@ -152,7 +160,7 @@ enum TimersEnum {
     invis = 'invis',
     invisLong = 'invisLong',
     bandage = 'bandage',
-    statusBarTimer = 'statusBarTimer'
+    statusBarTimer = 'statusBarTimer',
 }
 
 enum GlobalEnum {

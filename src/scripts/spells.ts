@@ -40,7 +40,11 @@ namespace Scripts {
          * CastScroll(ScrollEnum.port)
          * CastScroll('port')
          */
-        static castScroll(scroll: ScrollEnum, target?: string | TargetEnum | Array<ITargetAlias>, backupHeadCast?: string) {
+        static castScroll(
+            scroll: ScrollEnum,
+            target?: string | TargetEnum | Array<ITargetAlias>,
+            backupHeadCast?: string,
+        ) {
             const s = gameObject.scrolls['standard'][scroll];
 
             if (s.minMana > Player.Mana()) {
@@ -72,7 +76,12 @@ namespace Scripts {
             }
         }
 
-        static backupHeadCast(reason: string, spell: string, target?: string | TargetEnum | Array<ITargetAlias>, silent:boolean = true) {
+        static backupHeadCast(
+            reason: string,
+            spell: string,
+            target?: string | TargetEnum | Array<ITargetAlias>,
+            silent = true,
+        ) {
             if (!silent) {
                 Scripts.Utils.playerPrint(reason + ' - backup cast', ColorEnum.orange);
             }

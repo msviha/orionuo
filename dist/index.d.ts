@@ -18,8 +18,8 @@ declare function bowcraftTrain(): void;
 declare function bandageSelf(minimalCountForWarn?: number, failedMessage?: boolean): void;
 declare function carveBody(carveNearestBodyAutomatically?: boolean): void;
 declare function cast(spell: string, target?: string | TargetEnum | Array<ITargetAlias>): void;
-declare function castNecroScroll(scroll: NecroScrollEnum, target?: TargetEnum): void;
-declare function castScroll(scroll: ScrollEnum, target?: TargetEnum, backupHeadCast?: string): void;
+declare function castNecroScroll(scroll: NecroScrollEnum, target?: string | TargetEnum | Array<ITargetAlias>): void;
+declare function castScroll(scroll: ScrollEnum, target?: string | TargetEnum | Array<ITargetAlias>, backupHeadCast?: string): void;
 declare function cestovniKniha(selection?: PortBookOptionsEnum): void;
 declare function cleanObjectInBag(object: any, objectName?: string): void;
 declare function craftNext(): void;
@@ -74,7 +74,7 @@ declare function rozbij(ingy?: OcarovaniEnum, kolik?: number): void;
 declare function saveEquip(): void;
 declare function shrinkAll(): void;
 declare function statusBar(): void;
-declare function summon(creature: string, target?: TargetEnum): void;
+declare function summon(creature: string, target?: string | TargetEnum | Array<ITargetAlias>): void;
 declare function taming(allAround?: boolean, opts?: ITamingOptions): void;
 declare function tamingTrain(robeOfDruids?: boolean): void;
 declare function targetNext(timeToStorePreviousTargets?: number, additionalFlags?: FlagsEnum[], notoriety?: NotorietyEnum[], opts?: ITargetNextOpts): void;
@@ -93,15 +93,14 @@ declare function useShrinkKad(): void;
 declare function webDestroyer(): void;
 declare function wos(scroll?: boolean, timer?: number): void;
 declare function sortBackpackCaleb(): void;
-declare function mobKill(targets?: string, useSavedTarget?: boolean): void;
-declare function mobKillAll(targets?: string, useSavedTarget?: boolean): void;
+declare function mobKill(targets?: string | TargetEnum | Array<ITargetAlias>, useSavedTarget?: boolean): void;
+declare function mobKillAll(targets?: string | TargetEnum | Array<ITargetAlias>, useSavedTarget?: boolean): void;
 declare function mobGo(): void;
 declare function mobCome(): void;
 declare function mobStop(): void;
-declare function attackTarget(targets?: string): void;
-declare function castSpell(spellName: string, targets?: string): void;
+declare function attackTarget(targets?: string | TargetEnum | Array<ITargetAlias>): void;
 declare function shrinkOne(): void;
-declare function bandageTarget(targets?: string, showTarget?: boolean, minimalCountToWarn?: number): void;
+declare function bandageTarget(targets?: string | TargetEnum | Array<ITargetAlias>, showTarget?: boolean, minimalCountToWarn?: number): void;
 declare function parseParam(param: any): any;
 declare namespace Scripts {
     class Auto {
@@ -187,8 +186,8 @@ declare namespace Scripts {
         private static resolveSayColor;
         private static resolveMobkillTarget;
         private static resolveMobkillPets;
-        static mobKillAll(targets?: string, useSavedTarget?: boolean): void;
-        static mobKill(targets?: string, useSavedTarget?: boolean): void;
+        static mobKillAll(targets?: string | TargetEnum | Array<ITargetAlias>, useSavedTarget?: boolean): void;
+        static mobKill(targets?: string | TargetEnum | Array<ITargetAlias>, useSavedTarget?: boolean): void;
         static shrinkOne(): void;
         static useShrinkKad(): void;
         static mobCome(): void;
@@ -254,10 +253,10 @@ declare namespace Scripts {
 declare namespace Scripts {
     class Spells {
         static cast(spell: string, target?: string | TargetEnum | Array<ITargetAlias>): void;
-        static summon(creature: string, target?: TargetEnum | string): void;
-        static castScroll(scroll: ScrollEnum, target?: TargetEnum | string, backupHeadCast?: string): void;
-        static backupHeadCast(reason: string, spell: string, target?: TargetEnum | string): void;
-        static castNecroScroll(scroll: NecroScrollEnum, target?: TargetEnum | string): void;
+        static summon(creature: string, target?: string | TargetEnum | Array<ITargetAlias>): void;
+        static castScroll(scroll: ScrollEnum, target?: string | TargetEnum | Array<ITargetAlias>, backupHeadCast?: string): void;
+        static backupHeadCast(reason: string, spell: string, target?: string | TargetEnum | Array<ITargetAlias>, silent?: boolean): void;
+        static castNecroScroll(scroll: NecroScrollEnum, target?: string | TargetEnum | Array<ITargetAlias>): void;
         static castUntilSuccess(spell: string, target: TargetEnum, castTime: number): void;
         static wos(scroll?: boolean, timer?: number): void;
         static ef(self?: boolean, scroll?: boolean, timer?: number): void;
@@ -265,10 +264,16 @@ declare namespace Scripts {
 }
 declare namespace Scripts {
     class Statusbar {
-        static create(mobile?: GameObject | string, coordinates?: ICoordinates): void;
+        static create(mobile?: GameObject | string, coordinates?: ICoordinates, autoCloseTimer?: number): void;
         static updateStatusbars(): void;
+        static resolveAutoClose(statusBar: any, gump: CustomGumpObject): boolean;
+        static resolveIndicators(mobile: GameObject): any[];
+        static resolveActiveIndicators(statusBar: any): any[];
+        static indicatorChanged(statusBar: any, indicators: any[]): boolean;
         static updateStatusBarGumpForObject(mobile: GameObject, statusBar: any, gump: CustomGumpObject, forceUpdate?: boolean): void;
         static drawBody(gump: CustomGumpObject, notoriety?: number, dead?: boolean): void;
+        static drawIndicators(gump: CustomGumpObject, flags: any[]): void;
+        static drawIndicator(gump: CustomGumpObject, x: number, y: number, color: string): void;
         static redrawBodyToNoObject(s: any, gump: CustomGumpObject): void;
         static drawName(gump: CustomGumpObject, name: any): void;
         static drawHP(gump: CustomGumpObject, hp: number, max: number, poisoned: boolean): void;
@@ -292,7 +297,7 @@ declare namespace Scripts {
 declare namespace Scripts {
     class TargetingEx {
         static cancelResetTarget(): void;
-        static attack(targets: string): void;
+        static attack(targets?: string | TargetEnum | Array<ITargetAlias>): void;
         static isEnemy(obj: GameObject): boolean;
         static getAliveAlies(distance?: number): Array<GameObject>;
         static getAliveAttackPets(distance?: number): Array<GameObject>;
@@ -303,6 +308,7 @@ declare namespace Scripts {
         static getTargetResultFromArray(gameObjects: Array<GameObject>, targetAlias?: ITargetAlias, optCondition?: (a: GameObject) => boolean, optSort?: (a: GameObject, b: GameObject) => number): TargetResult;
         static isMobileInjured(gameObject: GameObject): boolean;
         static getTarget(targets: string | TargetEnum | Array<ITargetAlias>, maxDistance?: number): TargetResult | undefined;
+        static resolveTraget(targets: string | TargetEnum | Array<ITargetAlias>, maxDistance?: number): TargetResult | undefined;
     }
 }
 declare namespace Scripts {
@@ -426,7 +432,7 @@ declare namespace Scripts {
 }
 declare namespace Scripts {
     class Healing {
-        static bandageTarget(targes?: string, showTarget?: boolean, minimalCountToWarn?: number): void;
+        static bandageTarget(targets?: string | TargetEnum | Array<ITargetAlias>, showTarget?: boolean, minimalCountToWarn?: number): void;
     }
 }
 declare namespace Scripts {
@@ -549,7 +555,15 @@ declare enum ScrollEnum {
     ivm = "ivm",
     ress = "ress",
     recall = "recall",
-    heal = "heal"
+    heal = "heal",
+    str = "str",
+    react = "react",
+    bless = "bless",
+    pf = "pf",
+    dispel = "dispel",
+    bs = "bs",
+    protect = "protect",
+    eelm = "eelm"
 }
 declare enum TargetIndicationEnum {
     none = "none",
@@ -631,7 +645,8 @@ declare enum TimersEnum {
     hiding = "hiding",
     invis = "invis",
     invisLong = "invisLong",
-    bandage = "bandage"
+    bandage = "bandage",
+    statusBarTimer = "statusBarTimer"
 }
 declare enum GlobalEnum {
     customStatusBars = "customStatusBars"
