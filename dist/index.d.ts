@@ -264,10 +264,16 @@ declare namespace Scripts {
 }
 declare namespace Scripts {
     class Statusbar {
-        static create(mobile?: GameObject | string, coordinates?: ICoordinates): void;
+        static create(mobile?: GameObject | string, coordinates?: ICoordinates, autoCloseTimer?: number): void;
         static updateStatusbars(): void;
+        static resolveAutoClose(statusBar: any, gump: CustomGumpObject): boolean;
+        static resolveIndicators(mobile: GameObject): any[];
+        static resolveActiveIndicators(statusBar: any): any[];
+        static indicatorChanged(statusBar: any, indicators: any[]): boolean;
         static updateStatusBarGumpForObject(mobile: GameObject, statusBar: any, gump: CustomGumpObject, forceUpdate?: boolean): void;
         static drawBody(gump: CustomGumpObject, notoriety?: number, dead?: boolean): void;
+        static drawIndicators(gump: CustomGumpObject, flags: any[]): void;
+        static drawIndicator(gump: CustomGumpObject, x: number, y: number, color: string): void;
         static redrawBodyToNoObject(s: any, gump: CustomGumpObject): void;
         static drawName(gump: CustomGumpObject, name: any): void;
         static drawHP(gump: CustomGumpObject, hp: number, max: number, poisoned: boolean): void;
@@ -302,6 +308,7 @@ declare namespace Scripts {
         static getTargetResultFromArray(gameObjects: Array<GameObject>, targetAlias?: ITargetAlias, optCondition?: (a: GameObject) => boolean, optSort?: (a: GameObject, b: GameObject) => number): TargetResult;
         static isMobileInjured(gameObject: GameObject): boolean;
         static getTarget(targets: string | TargetEnum | Array<ITargetAlias>, maxDistance?: number): TargetResult | undefined;
+        static resolveTraget(targets: string | TargetEnum | Array<ITargetAlias>, maxDistance?: number): TargetResult | undefined;
     }
 }
 declare namespace Scripts {
