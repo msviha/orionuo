@@ -2,6 +2,21 @@ function ultimateRR() {
     UltimateRR.ultimateRR();
 }
 
+function displayRRInfoReady(remainingTime:string) {
+    let wait = parseFloat(remainingTime);
+    while (true) {
+        Orion.Wait(250);
+        wait -= 250;
+        if (wait <= 0) {
+            Scripts.Utils.playerPrint(`[ RR READY ]`, ColorEnum.pureWhite);
+            break;
+        }
+    }
+}
+
+const RR_lastRRTimer = 'lastRRTimer';
+const RR_displayRR = 'displayRR';
+
 class UltimateRR {
     static ultimateRR() {
         UltimateRR.moveRingToBackpack();
@@ -75,7 +90,7 @@ class UltimateRR {
             // nenalezena -> obcas se to stane a vetsinou by to melo znamenat ze se ring pouzil
             if (result === 1 || result === -1) {
                 Scripts.Utils.resetTimer(ring);
-                Scripts.Utils.resetTimer(TimersEnum.lastRRTimer);
+                Scripts.Utils.resetTimer(RR_lastRRTimer);
                 UltimateRR.moveRingToBackpack();
                 UltimateRR.showTimeForNextRR(ringsToCheckTimer, true);
                 return;
@@ -113,7 +128,7 @@ class UltimateRR {
     static showTimeForNextRR(rings: string[], justUsed = false) {
         const ONE_RR_TIME = 198000; // toto je cca cas pro otoceni jednoho RRka
         const PLAYER_RR_TIME = 23000; // toto je minimalni cas pro toceni dvou prstynku (cas po ktery nemuze hrac hodit jiny prsten)
-        const lastRRTimer = Orion.Timer(TimersEnum.lastRRTimer); // cas od posledniho pouziti RRka
+        const lastRRTimer = Orion.Timer(RR_lastRRTimer); // cas od posledniho pouziti RRka
         const remainingTimeByPlayer = PLAYER_RR_TIME - lastRRTimer > 0 ? PLAYER_RR_TIME - lastRRTimer : 0; // aktual cas hrace na prsten
 
         let nearestRemainingTime = ONE_RR_TIME;
@@ -148,7 +163,7 @@ class UltimateRR {
 
         if (justUsed) {
             Orion.AddDisplayTimer(
-                TimersEnum.displayRR,
+                RR_displayRR,
                 nearestRemainingTime,
                 'LeftTop',
                 'Line|Bar',

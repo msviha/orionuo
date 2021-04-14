@@ -8,6 +8,19 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
 function ultimateRR() {
     UltimateRR.ultimateRR();
 }
+function displayRRInfoReady(remainingTime) {
+    var wait = parseFloat(remainingTime);
+    while (true) {
+        Orion.Wait(250);
+        wait -= 250;
+        if (wait <= 0) {
+            Scripts.Utils.playerPrint("[ RR READY ]", ColorEnum.pureWhite);
+            break;
+        }
+    }
+}
+var RR_lastRRTimer = 'lastRRTimer';
+var RR_displayRR = 'displayRR';
 var UltimateRR = (function () {
     function UltimateRR() {
     }
@@ -67,7 +80,7 @@ var UltimateRR = (function () {
             Orion.ClearJournal(timerMsg + "|" + successMsg + "|" + paraMsg + "|" + emptyMsg);
             if (result === 1 || result === -1) {
                 Scripts.Utils.resetTimer(ring);
-                Scripts.Utils.resetTimer(TimersEnum.lastRRTimer);
+                Scripts.Utils.resetTimer(RR_lastRRTimer);
                 UltimateRR.moveRingToBackpack();
                 UltimateRR.showTimeForNextRR(ringsToCheckTimer, true);
                 return;
@@ -92,7 +105,7 @@ var UltimateRR = (function () {
         if (justUsed === void 0) { justUsed = false; }
         var ONE_RR_TIME = 198000;
         var PLAYER_RR_TIME = 23000;
-        var lastRRTimer = Orion.Timer(TimersEnum.lastRRTimer);
+        var lastRRTimer = Orion.Timer(RR_lastRRTimer);
         var remainingTimeByPlayer = PLAYER_RR_TIME - lastRRTimer > 0 ? PLAYER_RR_TIME - lastRRTimer : 0;
         var nearestRemainingTime = ONE_RR_TIME;
         var anyChargedRR = false;
@@ -121,7 +134,7 @@ var UltimateRR = (function () {
             }
         }
         if (justUsed) {
-            Orion.AddDisplayTimer(TimersEnum.displayRR, nearestRemainingTime, 'LeftTop', 'Line|Bar', 'RR', 0, 110, '0x88B', -1, '0x88B');
+            Orion.AddDisplayTimer(RR_displayRR, nearestRemainingTime, 'LeftTop', 'Line|Bar', 'RR', 0, 110, '0x88B', -1, '0x88B');
             Orion.Exec('displayRRInfoReady', true, [nearestRemainingTime.toString()]);
         }
         else if (anyChargedRR) {
