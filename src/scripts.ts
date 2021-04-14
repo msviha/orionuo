@@ -1,7 +1,7 @@
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 1.2.1');
+    Orion.Print(-1, 'version 1.2.2');
     Orion.Print(-1, '-------------+');
 }
 
@@ -93,7 +93,6 @@ function Autostart() {
                     ) {
                         continue;
                     }
-
                     if (Scripts.MobMaster.rename(char)) {
                         const doneItem: IRenamedMob = { graphic: char.Graphic(), serial: char.Serial() };
                         doneList.push(doneItem);

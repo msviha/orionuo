@@ -14,6 +14,18 @@ var config = Shared.AddVar('config', {
     targeting: {
         highlightEnemySilent: false
     },
+    statusBarWrapper: {
+        autoCloseTimer: 10000
+    },
+    statusBar: {
+        scale: 100,
+        borderColor: '#ff3f3f3f',
+        targetIndicators: [
+            { targetAlias: { alias: 'lastattack' }, color: '#ffe62a00', active: false },
+            { targetAlias: { alias: 'laststatus' }, color: '#ffFFD700', active: false },
+            { targetAlias: { alias: 'lasttarget' }, color: '#ff4169E1', active: false }
+        ]
+    },
     drinkPotion: {
         timer: {
             position: 'LeftTop',

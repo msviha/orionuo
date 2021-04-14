@@ -3,7 +3,7 @@
  */
 namespace Scripts {
     export class Statusbar {
-        static create(mobile?: GameObject | string, coordinates?: ICoordinates): void {
+        static create(mobile?: GameObject | string, coordinates?: ICoordinates, autoCloseTimer?:number): void {
             if (!mobile) {
                 Scripts.Utils.createGameObjectSelections([{ ask: 'Target mobile', addObject: 'lastCustomStatusBar' }]);
                 mobile = Orion.FindObject('lastCustomStatusBar');
@@ -26,6 +26,8 @@ namespace Scripts {
                 poisoned: mobile.Poisoned(),
                 visible: false,
                 dead: mobile.Dead(),
+                targetIndicators: Statusbar.resolveIndicators(mobile),
+                autoCloseTimer: autoCloseTimer
             };
             statusBars.push(statusBar);
             Shared.AddVar(serial, true);
@@ -54,6 +56,10 @@ namespace Scripts {
                 const gump = Orion.CreateCustomGump(parseInt(statusBar.serial, 16));
                 const mobile = Orion.FindObject(statusBar.serial);
 
+                if (Scripts.Statusbar.resolveAutoClose(statusBar, gump)) {
+                    continue;
+                }
+
                 if (mobile) {
                     Scripts.Statusbar.updateStatusBarGumpForObject(mobile, statusBar, gump);
                 } else if (statusBar.visible) {
@@ -63,6 +69,50 @@ namespace Scripts {
             }
 
             Shared.AddArray(GlobalEnum.customStatusBars, statusBars);
+        }
+
+        static resolveAutoClose(statusBar:any, gump:CustomGumpObject):boolean {
+            const mobile = Orion.FindObject(statusBar.serial);
+            const mobileKey = `${TimersEnum.statusBarTimer}_${statusBar.serial}`;
+            const timerExists = Orion.TimerExists(mobileKey);
+
+            if (statusBar.autoCloseTimer && !mobile) {
+                if (!timerExists) {
+                    Orion.SetTimer(mobileKey);
+                } else if (Orion.Timer(mobileKey) > statusBar.autoCloseTimer) {
+                    Orion.RemoveTimer(mobileKey);
+                    Shared.AddVar(statusBar.serial, false);
+                    gump.Clear();
+                    gump.Close();
+                    return true;
+                }
+            } else if (timerExists) {
+                Orion.RemoveTimer(mobileKey);
+            }   
+            return false;
+        }
+
+        static resolveIndicators(mobile:GameObject):any[]  { 
+            const targetIndicators = config?.statusBar?.targetIndicators ?? [];
+            for (const indicator of targetIndicators) {
+                const targetResult = TargetingEx.resolveTraget([ <ITargetAlias>indicator.targetAlias ]);
+                indicator.active = mobile && mobile.Serial() && targetResult.isValid() && mobile.Serial() === targetResult.gameObject()?.Serial();
+            }
+            return targetIndicators;
+        }        
+
+        static resolveActiveIndicators(statusBar:any):any[]  { 
+            const result = [];
+            for (const indicator of statusBar.targetIndicators) {
+                if (indicator.active) {
+                    result.push(indicator);
+                }
+            }
+            return result;
+        }
+
+        static indicatorChanged(statusBar:any, indicators:any[]):boolean {
+            return statusBar.targetIndicators.some(a=>indicators.some(b=>b.targetAlias.alias===a.targetAlias.alias && b.active !== a.active));
         }
 
         static updateStatusBarGumpForObject(
@@ -77,6 +127,8 @@ namespace Scripts {
             const poisoned = mobile.Poisoned();
             let hp = mobile.Hits();
             let max = mobile.MaxHits();
+            const currentIndicators = Statusbar.resolveIndicators(mobile);
+            const indicatorsChanged = Statusbar.indicatorChanged(statusBar, currentIndicators);
 
             if (
                 !forceUpdate &&
@@ -85,23 +137,25 @@ namespace Scripts {
                 statusBar.hp === hp &&
                 statusBar.max === max &&
                 statusBar.name === name &&
-                statusBar.poisoned === poisoned
+                statusBar.poisoned === poisoned &&  
+                !indicatorsChanged
             ) {
                 return;
             }
 
             let updateText = false;
-
+   
             // dead change state (ressurection)
             // visible ghost (turning warmode on)
-            if (statusBar.dead !== dead || (!statusBar.visible && dead)) {
+            // flags change
+            if (statusBar.dead !== dead || (!statusBar.visible && dead) || indicatorsChanged) {
                 statusBar.dead = dead;
+                statusBar.targetIndicators = currentIndicators;
                 statusBar.visible = true;
                 updateText = true;
                 gump.Clear();
-
-                const ARGBcolor = Scripts.Utils.getARGBColorByNotoriety(mobile.Notoriety(), 'cc');
                 Scripts.Statusbar.drawBody(gump, mobile.Notoriety(), dead);
+                Scripts.Statusbar.drawIndicators(gump, Statusbar.resolveActiveIndicators(statusBar));
             }
 
             // FindObject returns something (object revealed / in range)
@@ -109,7 +163,8 @@ namespace Scripts {
                 statusBar.visible = true;
                 updateText = true;
                 gump.Clear();
-                Scripts.Statusbar.drawBody(gump, mobile.Notoriety());
+                Scripts.Statusbar.drawBody(gump, mobile.Notoriety(), dead);
+                Scripts.Statusbar.drawIndicators(gump, Statusbar.resolveActiveIndicators(statusBar));
             }
 
             // Update name
@@ -128,30 +183,48 @@ namespace Scripts {
                 statusBar.poisoned = poisoned;
                 if (!updateText) {
                     gump.Clear();
-                    Scripts.Statusbar.drawBody(gump, mobile.Notoriety());
+                    Scripts.Statusbar.drawBody(gump, mobile.Notoriety(), dead);
+                    Scripts.Statusbar.drawIndicators(gump, Statusbar.resolveActiveIndicators(statusBar));
                     Scripts.Statusbar.drawName(gump, name);
                 }
                 Scripts.Statusbar.drawHP(gump, hp, max, poisoned);
             }
-
             gump.Update();
         }
 
         static drawBody(gump: CustomGumpObject, notoriety?: number, dead = false) {
+            const borderColor = config?.statusBar?.borderColor ?? `#ff3f3f3f`;
+
             const ARGBcolor = dead
-                ? '#ffff4dff'
+                ? `#ffff4dff`
                 : typeof notoriety === 'number'
                 ? Scripts.Utils.getARGBColorByNotoriety(notoriety)
-                : '#ccffffff';
-            gump.AddColoredPolygone(0, 0, 140, 42, '#ff000000');
-            gump.AddColoredPolygone(1, 1, 138, 22, '#ffffffff');
-            gump.AddColoredPolygone(2, 2, 136, 21, ARGBcolor);
-            gump.AddHitBox(CustomStatusBarEnum.click, 0, 0, 140, 42, 1);
+                : `#ccffffff`;
+
+                gump.AddColoredPolygone(0, 0, 140, 42, borderColor);
+                gump.AddColoredPolygone(1, 1, 138, 40, `#ff000000`);
+                gump.AddColoredPolygone(1, 1, 138, 22, `#ffa0a0a0`);
+                gump.AddColoredPolygone(2, 2, 136, 21, ARGBcolor);                
+                gump.AddHitBox(CustomStatusBarEnum.click, 0, 0, 140, 42, 1);
         }
+
+        static drawIndicators(gump: CustomGumpObject, flags:any[]) {
+            let y = 3;
+            for (const flag of flags) {
+                Scripts.Statusbar.drawIndicator(gump, 140, y, flag.color);
+                y+=6; 
+            }
+        } 
+
+        static drawIndicator(gump: CustomGumpObject, x:number, y:number, color:string) {
+            const borderColor = config?.statusBar?.borderColor ?? `#ff3f3f3f`;
+            gump.AddColoredPolygone(x, y, 6, 6, borderColor);
+            gump.AddColoredPolygone(x, y + 1, 5, 5, color);
+        }         
 
         static redrawBodyToNoObject(s: any, gump: CustomGumpObject) {
             gump.Clear();
-            Scripts.Statusbar.drawBody(gump);
+            Scripts.Statusbar.drawBody(gump, undefined, s.dead);
             Scripts.Statusbar.drawName(gump, s.name);
             Scripts.Statusbar.drawHP(gump, s.hp, s.max, s.poisoned);
             gump.Update();
@@ -185,14 +258,14 @@ namespace Scripts {
                         continue;
                     }
                     const position = Orion.GetGumpPosition('custom', statusBar.serial);
-
+                    const scale = (config?.statusBar?.scale ?? 100) / 100;
                     if (
                         position?.X() > -1 &&
                         position?.Y() > -1 &&
                         mouseX - position?.X() >= 0 &&
-                        mouseX - position?.X() <= 140 &&
+                        mouseX - position?.X() <= 140 * scale &&
                         mouseY - position?.Y() >= 0 &&
-                        mouseY - position?.Y() <= 42 &&
+                        mouseY - position?.Y() <= 42 * scale &&
                         Orion.FindObject(statusBar.serial)?.Exists()
                     ) {
                         return statusBar;
