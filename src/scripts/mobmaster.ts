@@ -73,7 +73,10 @@ namespace Scripts {
             return config?.mobMaster.sayColor || '0x00B3';
         }
 
-        private static resolveMobkillTarget(targets?: string | TargetEnum | Array<ITargetAlias>, useSavedTarget = true): TargetResult {
+        private static resolveMobkillTarget(
+            targets?: string | TargetEnum | Array<ITargetAlias>,
+            useSavedTarget = true,
+        ): TargetResult {
             let target = new TargetResult();
             if (useSavedTarget) {
                 const storedSerial = Shared.GetVar('mobkill.target');

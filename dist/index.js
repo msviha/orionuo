@@ -1769,6 +1769,38 @@ var gameObject = {
                 graphic: '0x1F31',
                 color: '0x0000',
                 minMana: 3
+            },
+            react: {
+                graphic: '0x1F2D',
+                color: '0x0000'
+            },
+            str: {
+                graphic: '0x1F3C',
+                color: '0x0000'
+            },
+            bless: {
+                graphic: '0x1F3D',
+                color: '0x0000'
+            },
+            pf: {
+                graphic: '0x1F5B',
+                color: '0x0000'
+            },
+            dispel: {
+                graphic: '0x1F55',
+                color: '0x0000'
+            },
+            bs: {
+                graphic: '0x1F4D',
+                color: '0x0000'
+            },
+            protect: {
+                graphic: '0x1F3B',
+                color: '0x0000'
+            },
+            eelm: {
+                graphic: '0x1F6A',
+                color: '0x0000'
             }
         },
         necro: {
@@ -2889,9 +2921,6 @@ function mobStop() {
 }
 function attackTarget(targets) {
     Scripts.TargetingEx.attack(targets);
-}
-function castSpell(spellName, targets) {
-    Scripts.Magery.castSpell(spellName, targets);
 }
 function shrinkOne() {
     Scripts.MobMaster.shrinkOne();
@@ -5182,7 +5211,7 @@ var Scripts;
                 return;
             }
             Orion.ClearJournal();
-            Scripts.Utils.waitTarget(target);
+            Scripts.TargetingEx.getTarget(target).waitTarget();
             Orion.UseType(s.graphic);
             Scripts.Utils.waitWhileSomethingInJournal(['Select Target', "You can't cast"]);
             if (Orion.InJournal('Select Target')) {
@@ -5196,8 +5225,11 @@ var Scripts;
                     : Scripts.Utils.playerPrint(reason, ColorEnum.red);
             }
         };
-        Spells.backupHeadCast = function (reason, spell, target) {
-            Scripts.Utils.playerPrint(reason + ' - backup cast', ColorEnum.orange);
+        Spells.backupHeadCast = function (reason, spell, target, silent) {
+            if (silent === void 0) { silent = true; }
+            if (!silent) {
+                Scripts.Utils.playerPrint(reason + ' - backup cast', ColorEnum.orange);
+            }
             Scripts.Spells.cast(spell, target);
         };
         Spells.castNecroScroll = function (scroll, target) {
@@ -5212,7 +5244,7 @@ var Scripts;
                 return;
             }
             Orion.ClearJournal();
-            Scripts.Utils.waitTarget(target);
+            Scripts.TargetingEx.getTarget(target).waitTarget();
             Orion.UseObject(scrollSerial);
             Scripts.Utils.waitWhileSomethingInJournal(['Select Target', "You can't cast"]);
             if (Orion.InJournal('Select Target')) {
@@ -7237,11 +7269,11 @@ var Scripts;
     var Healing = (function () {
         function Healing() {
         }
-        Healing.bandageTarget = function (targes, showTarget, minimalCountToWarn) {
+        Healing.bandageTarget = function (targets, showTarget, minimalCountToWarn) {
             var _a;
             if (showTarget === void 0) { showTarget = false; }
             if (minimalCountToWarn === void 0) { minimalCountToWarn = 10; }
-            var target = Scripts.TargetingEx.getTarget(targes, 5);
+            var target = Scripts.TargetingEx.getTarget(targets, 5);
             var bandagesSerials = Orion.FindType(gameObject.uncategorized.bandy.graphic);
             var count = Scripts.Utils.countItemsBySerials(bandagesSerials);
             if (!count) {
@@ -7249,7 +7281,7 @@ var Scripts;
                 return;
             }
             var bandTimer = (_a = config === null || config === void 0 ? void 0 : config.bandage) === null || _a === void 0 ? void 0 : _a.bandageTimer;
-            if (!target.isValid() && (showTarget || !targes)) {
+            if (!target.isValid() && (showTarget || !targets)) {
                 Orion.RemoveTimer(TimersEnum.bandage);
                 Orion.CharPrint(Player.Serial(), ColorEnum.green, '[ band > ? ]');
                 var resultObj = Orion.WaitForAddObject('LastBandageChar', 4000);
@@ -8155,6 +8187,14 @@ var ScrollEnum;
     ScrollEnum["ress"] = "ress";
     ScrollEnum["recall"] = "recall";
     ScrollEnum["heal"] = "heal";
+    ScrollEnum["str"] = "str";
+    ScrollEnum["react"] = "react";
+    ScrollEnum["bless"] = "bless";
+    ScrollEnum["pf"] = "pf";
+    ScrollEnum["dispel"] = "dispel";
+    ScrollEnum["bs"] = "bs";
+    ScrollEnum["protect"] = "protect";
+    ScrollEnum["eelm"] = "eelm";
 })(ScrollEnum || (ScrollEnum = {}));
 var TargetIndicationEnum;
 (function (TargetIndicationEnum) {
@@ -8245,6 +8285,7 @@ var TimersEnum;
     TimersEnum["invis"] = "invis";
     TimersEnum["invisLong"] = "invisLong";
     TimersEnum["bandage"] = "bandage";
+    TimersEnum["statusBarTimer"] = "statusBarTimer";
 })(TimersEnum || (TimersEnum = {}));
 var GlobalEnum;
 (function (GlobalEnum) {

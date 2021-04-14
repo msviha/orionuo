@@ -8,7 +8,11 @@ namespace Scripts {
          * @param minimalCountToWarn - pokud mate mene nebo rovno bandazi, zobrazi se hlaska s poctem zbyvajicich
          *          *
          */
-        static bandageTarget(targets?: string | TargetEnum | Array<ITargetAlias>, showTarget = false, minimalCountToWarn = 10) {
+        static bandageTarget(
+            targets?: string | TargetEnum | Array<ITargetAlias>,
+            showTarget = false,
+            minimalCountToWarn = 10,
+        ) {
             const target = Scripts.TargetingEx.getTarget(targets, 5);
             const bandagesSerials = Orion.FindType(gameObject.uncategorized.bandy.graphic);
 

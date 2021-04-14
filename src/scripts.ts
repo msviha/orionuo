@@ -820,7 +820,7 @@ function statusBar() {
  * Kouzli summona (jmeno je treba zadat tak jak je v nabidce summonu) na pozadovany target, pokud je uveden
  * @example external code `summon("Horse", "self");`
  * @example external code `summon("Horse", "hover|self");`
- * @example external code `summon("Horse", [{ alias: "hover" });` 
+ * @example external code `summon("Horse", [{ alias: "hover" });`
  * @example external code `summon("Giant Viper");`
  */
 function summon(creature: string, target?: string | TargetEnum | Array<ITargetAlias>) {
@@ -1047,7 +1047,7 @@ function sortBackpackCaleb() {
  * tak summy si porad drzi puvodni target. Dokud neni zresetovani pri volani mobStop(), mobCome()
  * @example external code `mobKill('lastattack|laststatusenemy')` - uklada target
  * @example external code `mobKill('lastattack', 'false')` - NEuklada target
- * @example external code `mobKill([ { alias: 'lastattack' }], 'false')` - NEuklada target 
+ * @example external code `mobKill([ { alias: 'lastattack' }], 'false')` - NEuklada target
  */
 function mobKill(targets?: string | TargetEnum | Array<ITargetAlias>, useSavedTarget?: boolean) {
     Scripts.MobMaster.mobKill(targets, useSavedTarget);
@@ -1060,7 +1060,7 @@ function mobKill(targets?: string | TargetEnum | Array<ITargetAlias>, useSavedTa
  * tak summy si porad drzi puvodni target. Dokud neni zresetovani pri volani mobStop(), mobCome()
  * @example external code `mobKill('lastattack|laststatusenemy')` - uklada target
  * @example external code `mobKill('lastattack', 'false')` - NEuklada target
- * @example external code `mobKill([ { alias: 'lastattack' }], 'false')` - NEuklada target 
+ * @example external code `mobKill([ { alias: 'lastattack' }], 'false')` - NEuklada target
  */
 function mobKillAll(targets?: string | TargetEnum | Array<ITargetAlias>, useSavedTarget?: boolean) {
     Scripts.MobMaster.mobKillAll(targets, useSavedTarget);
@@ -1121,6 +1121,10 @@ function shrinkOne() {
  * @example  external code `bandageTarget('selfinjured|mostinjuredalielos', false, 50)`
  * @example  external code `bandageTarget([{ alias: 'hover' }, { alias: 'selfinjured' }, { alias: 'mostinjuredalielos', maxDistance: 3 }], false, 50)`
  */
-function bandageTarget(targets?: string | TargetEnum | Array<ITargetAlias>, showTarget?: boolean, minimalCountToWarn?: number) {
+function bandageTarget(
+    targets?: string | TargetEnum | Array<ITargetAlias>,
+    showTarget?: boolean,
+    minimalCountToWarn?: number,
+) {
     Scripts.Healing.bandageTarget(targets, showTarget, minimalCountToWarn);
 }
