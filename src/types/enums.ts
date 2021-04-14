@@ -62,6 +62,14 @@ enum ScrollEnum {
     ress = 'ress',
     recall = 'recall',
     heal = 'heal',
+    str = 'str',
+    react = 'react',
+    bless = 'bless',
+    pf = 'pf',
+    dispel = 'dispel',
+    bs = 'bs',
+    protect = 'protect',
+    eelm = 'eelm'                     
 }
 
 enum TargetIndicationEnum {
