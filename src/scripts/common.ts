@@ -53,27 +53,12 @@ namespace Scripts {
                 return;
             }
 
-            Orion.ClearJournal(
-                'You put the bloody|You apply|Chces vytvorit|reach that|Targeting Cancelled|reach the target',
-            );
+            const pattern = 'You put the bloody|You apply|Chces vytvorit|reach that|Targeting Cancelled|reach the target';
+            Orion.ClearJournal(pattern);
             Orion.BandageSelf();
             Orion.Wait(responseDelay); // ClearJournal safe wait
 
-            let wait = 3000;
-            while (
-                !Orion.InJournal('Targeting Cancelled') &&
-                !Orion.InJournal('reach that') &&
-                !Orion.InJournal('You put the bloody') &&
-                !Orion.InJournal('You apply') &&
-                !Orion.InJournal('reach the target') &&
-                !Orion.InJournal('Chces vytvorit')
-            ) {
-                Orion.Wait(200);
-                wait -= 200;
-                if (wait <= 0) {
-                    break;
-                }
-            }
+            Scripts.Utils.waitWhileSomethingInJournal([pattern], 3000);
             Orion.InJournal('You apply') && Orion.PrintFast(Player.Serial(), ColorEnum.red, 0, `bandage failed`);
             count--;
 
