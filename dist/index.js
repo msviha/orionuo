@@ -3231,11 +3231,18 @@ var Scripts;
                 Scripts.Utils.playerPrint('!! NEMAS BANDY !!', ColorEnum.red);
                 return;
             }
-            var pattern = 'You put the bloody|You apply|Chces vytvorit|reach that|Targeting Cancelled|reach the target';
-            Orion.ClearJournal(pattern);
+            var pattern = [
+                'You put the bloody',
+                'You apply',
+                'Chces vytvorit',
+                'reach that',
+                'Targeting Cancelled',
+                'reach the target',
+            ];
+            Orion.ClearJournal(pattern.join('|'));
             Orion.BandageSelf();
             Orion.Wait(responseDelay);
-            Scripts.Utils.waitWhileSomethingInJournal([pattern], 3000);
+            Scripts.Utils.waitWhileSomethingInJournal(pattern, 3000);
             Orion.InJournal('You apply') && Orion.PrintFast(Player.Serial(), ColorEnum.red, 0, "bandage failed");
             count--;
             if (count <= minimalCountToWarn) {
