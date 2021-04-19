@@ -548,7 +548,7 @@ namespace Scripts {
 
             serials = Orion.FindType(graphic);
             for (const s of serials) {
-                if (Orion.FindObject(s)?.Name() === "") {
+                if (Orion.FindObject(s)?.Name() === '') {
                     Orion.Click(s);
                     Orion.Wait(100);
                 }
@@ -559,10 +559,10 @@ namespace Scripts {
 
             if (layer !== undefined) {
                 const l = Orion.ObjAtLayer(layer);
-                if (Orion.FindObject(l?.Serial())?.Name() === "") {
+                if (Orion.FindObject(l?.Serial())?.Name() === '') {
                     Orion.Click(l.Serial());
                     Orion.Wait(100);
-                }                
+                }
                 if (l && l.Graphic() === graphic && l.Name() === name) {
                     return l.Serial();
                 }

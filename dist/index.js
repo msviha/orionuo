@@ -23,7 +23,7 @@ var config = Shared.GetVar('config', {
         targetIndicators: [
             { targetAlias: { alias: 'lastattack' }, color: '#ffe62a00', active: false },
             { targetAlias: { alias: 'laststatus' }, color: '#ffFFD700', active: false },
-            { targetAlias: { alias: 'lasttarget' }, color: '#ff4169E1', active: false }
+            { targetAlias: { alias: 'lasttarget' }, color: '#ff4169E1', active: false },
         ]
     },
     drinkPotion: {
@@ -2515,7 +2515,7 @@ var __assign = (this && this.__assign) || function () {
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 1.2.2');
+    Orion.Print(-1, 'version 1.2.3');
     Orion.Print(-1, '-------------+');
 }
 function Autostart() {
@@ -3231,10 +3231,21 @@ var Scripts;
                 Scripts.Utils.playerPrint('!! NEMAS BANDY !!', ColorEnum.red);
                 return;
             }
-            Orion.ClearJournal('You put the bloody|You apply|Chces vytvorit');
+            Orion.ClearJournal('You put the bloody|You apply|Chces vytvorit|reach that|Targeting Cancelled|reach the target');
             Orion.BandageSelf();
-            while (!Orion.InJournal('You put') && !Orion.InJournal('You apply') && !Orion.InJournal('Chces vytvorit')) {
+            Orion.Wait(responseDelay);
+            var wait = 3000;
+            while (!Orion.InJournal('Targeting Cancelled') &&
+                !Orion.InJournal('reach that') &&
+                !Orion.InJournal('You put the bloody') &&
+                !Orion.InJournal('You apply') &&
+                !Orion.InJournal('reach the target') &&
+                !Orion.InJournal('Chces vytvorit')) {
                 Orion.Wait(200);
+                wait -= 200;
+                if (wait <= 0) {
+                    break;
+                }
             }
             Orion.InJournal('You apply') && Orion.PrintFast(Player.Serial(), ColorEnum.red, 0, "bandage failed");
             count--;
@@ -5460,7 +5471,11 @@ var Scripts;
             for (var _i = 0, targetIndicators_1 = targetIndicators; _i < targetIndicators_1.length; _i++) {
                 var indicator = targetIndicators_1[_i];
                 var targetResult = Scripts.TargetingEx.resolveTraget([indicator.targetAlias]);
-                indicator.active = mobile && mobile.Serial() && targetResult.isValid() && mobile.Serial() === ((_c = targetResult.gameObject()) === null || _c === void 0 ? void 0 : _c.Serial());
+                indicator.active =
+                    mobile &&
+                        mobile.Serial() &&
+                        targetResult.isValid() &&
+                        mobile.Serial() === ((_c = targetResult.gameObject()) === null || _c === void 0 ? void 0 : _c.Serial());
             }
             return targetIndicators;
         };
@@ -5475,7 +5490,9 @@ var Scripts;
             return result;
         };
         Statusbar.indicatorChanged = function (statusBar, indicators) {
-            return statusBar.targetIndicators.some(function (a) { return indicators.some(function (b) { return b.targetAlias.alias === a.targetAlias.alias && b.active !== a.active; }); });
+            return statusBar.targetIndicators.some(function (a) {
+                return indicators.some(function (b) { return b.targetAlias.alias === a.targetAlias.alias && b.active !== a.active; });
+            });
         };
         Statusbar.updateStatusBarGumpForObject = function (mobile, statusBar, gump, forceUpdate) {
             if (forceUpdate === void 0) { forceUpdate = false; }
@@ -6595,7 +6612,7 @@ var Scripts;
             serials = Orion.FindType(graphic);
             for (var _i = 0, serials_3 = serials; _i < serials_3.length; _i++) {
                 var s = serials_3[_i];
-                if (((_a = Orion.FindObject(s)) === null || _a === void 0 ? void 0 : _a.Name()) === "") {
+                if (((_a = Orion.FindObject(s)) === null || _a === void 0 ? void 0 : _a.Name()) === '') {
                     Orion.Click(s);
                     Orion.Wait(100);
                 }
@@ -6605,7 +6622,7 @@ var Scripts;
             }
             if (layer !== undefined) {
                 var l = Orion.ObjAtLayer(layer);
-                if (((_b = Orion.FindObject(l === null || l === void 0 ? void 0 : l.Serial())) === null || _b === void 0 ? void 0 : _b.Name()) === "") {
+                if (((_b = Orion.FindObject(l === null || l === void 0 ? void 0 : l.Serial())) === null || _b === void 0 ? void 0 : _b.Name()) === '') {
                     Orion.Click(l.Serial());
                     Orion.Wait(100);
                 }

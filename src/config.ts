@@ -1,6 +1,3 @@
-
-
-
 const config = Shared.GetVar('config', {
     updateRate: 500,
     mobMaster: {
@@ -22,12 +19,12 @@ const config = Shared.GetVar('config', {
     },
     statusBar: {
         scale: 100,
-        borderColor: '#ff3f3f3f', 
+        borderColor: '#ff3f3f3f',
         targetIndicators: [
-            { targetAlias: { alias: 'lastattack' }, color: '#ffe62a00', active: false }, 
-            { targetAlias: { alias: 'laststatus' }, color: '#ffFFD700', active: false }, 
-            { targetAlias: { alias: 'lasttarget' }, color: '#ff4169E1', active: false } 
-        ]
+            { targetAlias: { alias: 'lastattack' }, color: '#ffe62a00', active: false },
+            { targetAlias: { alias: 'laststatus' }, color: '#ffFFD700', active: false },
+            { targetAlias: { alias: 'lasttarget' }, color: '#ff4169E1', active: false },
+        ],
     },
     drinkPotion: {
         timer: {
