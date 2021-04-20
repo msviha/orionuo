@@ -46,6 +46,30 @@ namespace Scripts {
             Scripts.Statusbar.updateStatusBarGumpForObject(mobile, statusBar, gump, true);
         }
 
+        static close(serial:string, gump?:CustomGumpObject) {
+            const statusBars = Shared.GetArray(GlobalEnum.customStatusBars, []);
+            const mobileKey = `${TimersEnum.statusBarTimer}_${serial}`;
+            Shared.AddVar(serial, false);
+            Orion.RemoveTimer(mobileKey);
+
+            gump = gump ?? Orion.CreateCustomGump(parseInt(serial, 16));
+            gump?.Clear();
+            gump?.Close();
+
+            for (let i = statusBars.length - 1; i > -1; i--) {
+                if (statusBars[i].serial === serial) {
+                    statusBars.splice(i, 1);
+                }
+            }
+            Shared.AddArray(GlobalEnum.customStatusBars, statusBars);
+        }
+
+        static exists(serial:string) {
+            const statusBars = Shared.GetArray(GlobalEnum.customStatusBars, []);
+            const exists = Shared.GetVar(serial, false)
+            return exists && statusBars.some(a=>a.serial === serial);
+        }
+
         static updateStatusbars() {
             const statusBars = Shared.GetArray(GlobalEnum.customStatusBars, []);
 
@@ -67,7 +91,6 @@ namespace Scripts {
                     Scripts.Statusbar.redrawBodyToNoObject(statusBar, gump);
                 }
             }
-
             Shared.AddArray(GlobalEnum.customStatusBars, statusBars);
         }
 
@@ -76,14 +99,11 @@ namespace Scripts {
             const mobileKey = `${TimersEnum.statusBarTimer}_${statusBar.serial}`;
             const timerExists = Orion.TimerExists(mobileKey);
 
-            if (statusBar.autoCloseTimer && !mobile) {
+            if (statusBar.autoCloseTimer && statusBar.autoCloseTimer > 0 && !mobile) {
                 if (!timerExists) {
                     Orion.SetTimer(mobileKey);
                 } else if (Orion.Timer(mobileKey) > statusBar.autoCloseTimer) {
-                    Orion.RemoveTimer(mobileKey);
-                    Shared.AddVar(statusBar.serial, false);
-                    gump.Clear();
-                    gump.Close();
+                    Scripts.Statusbar.close(statusBar.serial, gump);
                     return true;
                 }
             } else if (timerExists) {
@@ -94,11 +114,15 @@ namespace Scripts {
 
         static resolveIndicators(mobile:GameObject):any[]  { 
             const targetIndicators = config?.statusBar?.targetIndicators ?? [];
+            const result = [];
             for (const indicator of targetIndicators) {
+                let clone =  { targetAlias: { alias: indicator.targetAlias?.alias }, color: indicator.color, active: false  };
                 const targetResult = TargetingEx.resolveTraget([ <ITargetAlias>indicator.targetAlias ]);
-                indicator.active = mobile && mobile.Serial() && targetResult.isValid() && mobile.Serial() === targetResult.gameObject()?.Serial();
+
+                clone.active = mobile && mobile.Serial() && targetResult.isValid() && mobile.Serial() === targetResult.gameObject()?.Serial();
+                result.push(clone);
             }
-            return targetIndicators;
+            return result;
         }        
 
         static resolveActiveIndicators(statusBar:any):any[]  { 
@@ -112,6 +136,9 @@ namespace Scripts {
         }
 
         static indicatorChanged(statusBar:any, indicators:any[]):boolean {
+            if (!indicators || indicators.length <= 0) {
+                return true;
+            }
             return statusBar.targetIndicators.some(a=>indicators.some(b=>b.targetAlias.alias===a.targetAlias.alias && b.active !== a.active));
         }
 

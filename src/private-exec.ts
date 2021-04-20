@@ -43,7 +43,7 @@ function customStatusBarCallBack(s: string) {
     const code = CustomGumpResponse.ReturnCode();
     const serial: string = <string>(<any>s.toString)(16);
     if (code === CustomStatusBarEnum.close) {
-        Shared.AddVar(s, false);
+        Scripts.Statusbar.close(serial);
     } else if (code === CustomStatusBarEnum.click) {
         if (Orion.HaveTarget()) {
             Orion.TargetObject(serial);

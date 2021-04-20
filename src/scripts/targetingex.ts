@@ -24,8 +24,8 @@ namespace Scripts {
         static attack(targets?: string | TargetEnum | Array<ITargetAlias>) {
             const target = TargetingEx.getTarget(targets);
             if (target.isValid()) {
-                Orion.GetStatus(target.gameObject().Serial());
-                Orion.Attack(target.gameObject().Serial());
+                Orion.GetStatus(target.gameObject()?.Serial());
+                Orion.Attack(target.gameObject()?.Serial());
             } else {
                 Scripts.Utils.playerPrint('[ no target ]', ColorEnum.green);
             }
@@ -43,7 +43,7 @@ namespace Scripts {
             if (
                 obj &&
                 !obj.CanChangeName() &&
-                friendList.indexOf(obj.Serial()) == -1 &&
+                friendList.indexOf(obj?.Serial()) == -1 &&
                 (obj.Notoriety() === NotorietyNum.criminal ||
                     obj.Notoriety() === NotorietyNum.gray ||
                     obj.Notoriety() === NotorietyNum.red ||
@@ -162,7 +162,7 @@ namespace Scripts {
                 obj.Distance() <= (targetAlias?.maxDistance ?? 20) &&
                 (!optCondition || optCondition(obj))
             ) {
-                result.gameObject(obj.Serial());
+                result.gameObject(obj?.Serial());
             }
             return result;
         }
@@ -186,7 +186,7 @@ namespace Scripts {
             );
             if (optSort) filtered.sort((a, b) => optSort(a, b));
             if (filtered.length > 0) {
-                result.gameObject(filtered[0].Serial());
+                result.gameObject(filtered[0]?.Serial());
             }
             return result;
         }

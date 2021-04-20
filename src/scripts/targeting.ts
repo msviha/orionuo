@@ -352,11 +352,9 @@ namespace Scripts {
                 }
 
                 if (custBars) {
-                    const bars = Shared.GetArray(GlobalEnum.customStatusBars, []);
-                    const exists =
-                        bars && bars.some((s) => s.serial === barObj.Serial() && Shared.GetVar(s.serial, true));
+                    const exists = Scripts.Statusbar.exists(serial);
                     if (!exists) {
-                        Statusbar.create(Orion.FindObject(serial), {
+                        Statusbar.create(serial, {
                             x: startX + deltaX * (count % maxCount),
                             y: startY + deltaY * (count % maxCount),
                         }, config?.statusBarWrapper?.autoCloseTimer);
