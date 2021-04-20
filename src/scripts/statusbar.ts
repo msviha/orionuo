@@ -51,7 +51,6 @@ namespace Scripts {
             const mobileKey = `${TimersEnum.statusBarTimer}_${serial}`;
             Shared.AddVar(serial, false);
             Orion.RemoveTimer(mobileKey);
-            Shared.AddVar(serial, false);
 
             gump = gump ?? Orion.CreateCustomGump(parseInt(serial, 16));
             gump?.Clear();
