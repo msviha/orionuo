@@ -2,15 +2,15 @@ namespace Scripts {
     export class MobMaster {
         static rename(mob: GameObject) {
             const chars = 'abcdefghijklmnopqrstuvwxyz1234567890';
-            const mobSerial = mob.Serial();
-            const canRename = mob.CanChangeName();
-            let mobName = mob.Name();
+            const mobSerial = mob?.Serial();
+            const canRename = mob?.CanChangeName();
+            let mobName = mob?.Name();
 
             if (canRename) {
                 if (!mobName || mobName.length === 0) {
                     Orion.GetStatus(mobSerial);
                     Orion.RequestName(mobSerial);
-                    mobName = mob.Name();
+                    mobName = mob?.Name();
                 }
 
                 if (!MobMaster.isRenamedByPlayer(mobName)) {
@@ -38,7 +38,7 @@ namespace Scripts {
                         Orion.Wait(100);
                         const mobObj = Orion.FindObject(mobSerial);
                         if (mobObj) {
-                            newName = mobObj.Name();
+                            newName = mobObj?.Name();
                         } else {
                             break;
                         }
