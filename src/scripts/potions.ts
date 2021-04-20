@@ -41,8 +41,18 @@ namespace Scripts {
                 return;
             }
 
+            let potion = null;
             const p = gameObject.potions[potionName];
-            let potion = Scripts.Utils.findFirstType(p);
+            const kad = Scripts.Utils.findFirstType(p.kad);
+            
+            if (kad) {
+                const types = Orion.FindType(p.graphic, p.color);
+                if (types && types.length > 0) {
+                    potion = types[0];
+                }
+            } else {
+                potion = Scripts.Utils.findFirstType(p);
+            }
 
             if (!potion) {
                 // docepnuti
