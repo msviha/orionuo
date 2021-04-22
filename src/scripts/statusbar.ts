@@ -3,7 +3,7 @@
  */
 namespace Scripts {
     export class Statusbar {
-        static create(mobile?: GameObject | string, coordinates?: ICoordinates, autoCloseTimer?:number): void {
+        static create(mobile?: GameObject | string, coordinates?: ICoordinates, autoCloseTimer?: number): void {
             if (!mobile) {
                 Scripts.Utils.createGameObjectSelections([{ ask: 'Target mobile', addObject: 'lastCustomStatusBar' }]);
                 mobile = Orion.FindObject('lastCustomStatusBar');
@@ -27,7 +27,7 @@ namespace Scripts {
                 visible: false,
                 dead: mobile.Dead(),
                 targetIndicators: Statusbar.resolveIndicators(mobile),
-                autoCloseTimer: autoCloseTimer
+                autoCloseTimer: autoCloseTimer,
             };
             statusBars.push(statusBar);
             Shared.AddVar(serial, true);
@@ -46,7 +46,7 @@ namespace Scripts {
             Scripts.Statusbar.updateStatusBarGumpForObject(mobile, statusBar, gump, true);
         }
 
-        static close(serial:string, gump?:CustomGumpObject) {
+        static close(serial: string, gump?: CustomGumpObject) {
             const statusBars = Shared.GetArray(GlobalEnum.customStatusBars, []);
             const mobileKey = `${TimersEnum.statusBarTimer}_${serial}`;
             Shared.AddVar(serial, false);
@@ -64,10 +64,10 @@ namespace Scripts {
             Shared.AddArray(GlobalEnum.customStatusBars, statusBars);
         }
 
-        static exists(serial:string) {
+        static exists(serial: string) {
             const statusBars = Shared.GetArray(GlobalEnum.customStatusBars, []);
-            const exists = Shared.GetVar(serial, false)
-            return exists && statusBars.some(a=>a.serial === serial);
+            const exists = Shared.GetVar(serial, false);
+            return exists && statusBars.some((a) => a.serial === serial);
         }
 
         static updateStatusbars() {
@@ -94,7 +94,7 @@ namespace Scripts {
             Shared.AddArray(GlobalEnum.customStatusBars, statusBars);
         }
 
-        static resolveAutoClose(statusBar:any, gump:CustomGumpObject):boolean {
+        static resolveAutoClose(statusBar: any, gump: CustomGumpObject): boolean {
             const mobile = Orion.FindObject(statusBar.serial);
             const mobileKey = `${TimersEnum.statusBarTimer}_${statusBar.serial}`;
             const timerExists = Orion.TimerExists(mobileKey);
@@ -108,24 +108,32 @@ namespace Scripts {
                 }
             } else if (timerExists) {
                 Orion.RemoveTimer(mobileKey);
-            }   
+            }
             return false;
         }
 
-        static resolveIndicators(mobile:GameObject):any[]  { 
+        static resolveIndicators(mobile: GameObject): any[] {
             const targetIndicators = config?.statusBar?.targetIndicators ?? [];
             const result = [];
             for (const indicator of targetIndicators) {
-                let clone =  { targetAlias: { alias: indicator.targetAlias?.alias }, color: indicator.color, active: false  };
-                const targetResult = TargetingEx.resolveTraget([ <ITargetAlias>indicator.targetAlias ]);
+                const clone = {
+                    targetAlias: { alias: indicator.targetAlias?.alias },
+                    color: indicator.color,
+                    active: false,
+                };
+                const targetResult = TargetingEx.resolveTraget([<ITargetAlias>indicator.targetAlias]);
 
-                clone.active = mobile && mobile.Serial() && targetResult.isValid() && mobile.Serial() === targetResult.gameObject()?.Serial();
+                clone.active =
+                    mobile &&
+                    mobile.Serial() &&
+                    targetResult.isValid() &&
+                    mobile.Serial() === targetResult.gameObject()?.Serial();
                 result.push(clone);
             }
             return result;
-        }        
+        }
 
-        static resolveActiveIndicators(statusBar:any):any[]  { 
+        static resolveActiveIndicators(statusBar: any): any[] {
             const result = [];
             for (const indicator of statusBar.targetIndicators) {
                 if (indicator.active) {
@@ -135,11 +143,13 @@ namespace Scripts {
             return result;
         }
 
-        static indicatorChanged(statusBar:any, indicators:any[]):boolean {
+        static indicatorChanged(statusBar: any, indicators: any[]): boolean {
             if (!indicators || indicators.length <= 0) {
                 return true;
             }
-            return statusBar.targetIndicators.some(a=>indicators.some(b=>b.targetAlias.alias===a.targetAlias.alias && b.active !== a.active));
+            return statusBar.targetIndicators.some((a) =>
+                indicators.some((b) => b.targetAlias.alias === a.targetAlias.alias && b.active !== a.active),
+            );
         }
 
         static updateStatusBarGumpForObject(
@@ -164,14 +174,14 @@ namespace Scripts {
                 statusBar.hp === hp &&
                 statusBar.max === max &&
                 statusBar.name === name &&
-                statusBar.poisoned === poisoned &&  
+                statusBar.poisoned === poisoned &&
                 !indicatorsChanged
             ) {
                 return;
             }
 
             let updateText = false;
-   
+
             // dead change state (ressurection)
             // visible ghost (turning warmode on)
             // flags change
@@ -228,26 +238,26 @@ namespace Scripts {
                 ? Scripts.Utils.getARGBColorByNotoriety(notoriety)
                 : `#ccffffff`;
 
-                gump.AddColoredPolygone(0, 0, 140, 42, borderColor);
-                gump.AddColoredPolygone(1, 1, 138, 40, `#ff000000`);
-                gump.AddColoredPolygone(1, 1, 138, 22, `#ffa0a0a0`);
-                gump.AddColoredPolygone(2, 2, 136, 21, ARGBcolor);                
-                gump.AddHitBox(CustomStatusBarEnum.click, 0, 0, 140, 42, 1);
+            gump.AddColoredPolygone(0, 0, 140, 42, borderColor);
+            gump.AddColoredPolygone(1, 1, 138, 40, `#ff000000`);
+            gump.AddColoredPolygone(1, 1, 138, 22, `#ffa0a0a0`);
+            gump.AddColoredPolygone(2, 2, 136, 21, ARGBcolor);
+            gump.AddHitBox(CustomStatusBarEnum.click, 0, 0, 140, 42, 1);
         }
 
-        static drawIndicators(gump: CustomGumpObject, flags:any[]) {
+        static drawIndicators(gump: CustomGumpObject, flags: any[]) {
             let y = 3;
             for (const flag of flags) {
                 Scripts.Statusbar.drawIndicator(gump, 140, y, flag.color);
-                y+=6; 
+                y += 6;
             }
-        } 
+        }
 
-        static drawIndicator(gump: CustomGumpObject, x:number, y:number, color:string) {
+        static drawIndicator(gump: CustomGumpObject, x: number, y: number, color: string) {
             const borderColor = config?.statusBar?.borderColor ?? `#ff3f3f3f`;
             gump.AddColoredPolygone(x, y, 6, 6, borderColor);
             gump.AddColoredPolygone(x, y + 1, 5, 5, color);
-        }         
+        }
 
         static redrawBodyToNoObject(s: any, gump: CustomGumpObject) {
             gump.Clear();

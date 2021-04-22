@@ -265,6 +265,8 @@ declare namespace Scripts {
 declare namespace Scripts {
     class Statusbar {
         static create(mobile?: GameObject | string, coordinates?: ICoordinates, autoCloseTimer?: number): void;
+        static close(serial: string, gump?: CustomGumpObject): void;
+        static exists(serial: string): boolean;
         static updateStatusbars(): void;
         static resolveAutoClose(statusBar: any, gump: CustomGumpObject): boolean;
         static resolveIndicators(mobile: GameObject): any[];

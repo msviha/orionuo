@@ -22,7 +22,7 @@
 
 •  **blue**:  = 1
 
-*Defined in [types/enums.ts:114](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L114)*
+*Defined in [types/enums.ts:122](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L122)*
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 •  **criminal**:  = 4
 
-*Defined in [types/enums.ts:117](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L117)*
+*Defined in [types/enums.ts:125](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L125)*
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 •  **gray**:  = 3
 
-*Defined in [types/enums.ts:116](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L116)*
+*Defined in [types/enums.ts:124](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L124)*
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 •  **green**:  = 2
 
-*Defined in [types/enums.ts:115](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L115)*
+*Defined in [types/enums.ts:123](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L123)*
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 •  **orange**:  = 5
 
-*Defined in [types/enums.ts:118](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L118)*
+*Defined in [types/enums.ts:126](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L126)*
 
 ___
 
@@ -62,7 +62,7 @@ ___
 
 •  **red**:  = 6
 
-*Defined in [types/enums.ts:119](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L119)*
+*Defined in [types/enums.ts:127](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L127)*
 
 ___
 
@@ -70,4 +70,4 @@ ___
 
 •  **yellow**:  = 7
 
-*Defined in [types/enums.ts:120](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L120)*
+*Defined in [types/enums.ts:128](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L128)*

@@ -44,7 +44,7 @@ namespace Scripts {
             let potion = null;
             const p = gameObject.potions[potionName];
             const kad = Scripts.Utils.findFirstType(p.kad);
-            
+
             if (kad) {
                 const types = Orion.FindType(p.graphic, p.color);
                 if (types && types.length > 0) {

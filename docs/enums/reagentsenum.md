@@ -23,7 +23,7 @@
 
 •  **bm**:  = "bm"
 
-*Defined in [types/enums.ts:75](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L75)*
+*Defined in [types/enums.ts:83](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L83)*
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 •  **bp**:  = "bp"
 
-*Defined in [types/enums.ts:76](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L76)*
+*Defined in [types/enums.ts:84](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L84)*
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 •  **ga**:  = "ga"
 
-*Defined in [types/enums.ts:77](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L77)*
+*Defined in [types/enums.ts:85](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L85)*
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 •  **gi**:  = "gi"
 
-*Defined in [types/enums.ts:78](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L78)*
+*Defined in [types/enums.ts:86](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L86)*
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 •  **mr**:  = "mr"
 
-*Defined in [types/enums.ts:73](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L73)*
+*Defined in [types/enums.ts:81](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L81)*
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 •  **ns**:  = "ns"
 
-*Defined in [types/enums.ts:79](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L79)*
+*Defined in [types/enums.ts:87](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L87)*
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 •  **sa**:  = "sa"
 
-*Defined in [types/enums.ts:80](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L80)*
+*Defined in [types/enums.ts:88](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L88)*
 
 ___
 
@@ -79,4 +79,4 @@ ___
 
 •  **ss**:  = "ss"
 
-*Defined in [types/enums.ts:74](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L74)*
+*Defined in [types/enums.ts:82](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L82)*
