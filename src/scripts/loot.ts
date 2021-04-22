@@ -145,7 +145,7 @@ namespace Scripts {
         private static grabItems(serials: string[]) {
             let serverLagActionsLeft = 4;
             for (const serial of serials) {
-                Orion.MoveItem(serial, 0, 'myLootBag');
+                Orion.MoveItem(serial, 0);
                 Orion.Wait(serverLagActionsLeft > 0 ? 150 : 500);
                 serverLagActionsLeft--;
             }
@@ -156,7 +156,7 @@ namespace Scripts {
          *
          * @returns string[]
          */
-        private static getBagSnapshot(): string[] {
+        static getBagSnapshot(): string[] {
             return Orion.FindType(-1, -1, 'backpack', 'item', undefined, undefined, false);
         }
 
@@ -165,15 +165,15 @@ namespace Scripts {
          *
          * @param oldSnapshot - array serialov na ignorovanie
          */
-        private static moveLootToLootBag(oldSnapshot: string[]) {
-            if (!Orion.FindObject(LOOT_BAG)) {
+        static moveLootToLootBag(oldSnapshot: string[], lootBag = LOOT_BAG) {
+            if (!Orion.FindObject(lootBag)) {
                 return;
             }
 
             this.getBagSnapshot()
                 .filter((serial) => oldSnapshot.indexOf(serial) < 0)
                 .forEach((serial, i) => {
-                    Orion.MoveItem(serial, 0, LOOT_BAG);
+                    Orion.MoveItem(serial, 0, lootBag);
                     Orion.Wait(i > 4 ? 500 : 250);
                 });
         }
