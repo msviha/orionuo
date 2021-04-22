@@ -3849,7 +3849,7 @@ var Scripts;
             var serverLagActionsLeft = 4;
             for (var _i = 0, serials_2 = serials; _i < serials_2.length; _i++) {
                 var serial = serials_2[_i];
-                Orion.MoveItem(serial, 0, 'myLootBag');
+                Orion.MoveItem(serial, 0);
                 Orion.Wait(serverLagActionsLeft > 0 ? 150 : 500);
                 serverLagActionsLeft--;
             }
@@ -3857,14 +3857,15 @@ var Scripts;
         Loot.getBagSnapshot = function () {
             return Orion.FindType(-1, -1, 'backpack', 'item', undefined, undefined, false);
         };
-        Loot.moveLootToLootBag = function (oldSnapshot) {
-            if (!Orion.FindObject(LOOT_BAG)) {
+        Loot.moveLootToLootBag = function (oldSnapshot, lootBag) {
+            if (lootBag === void 0) { lootBag = LOOT_BAG; }
+            if (!Orion.FindObject(lootBag)) {
                 return;
             }
             this.getBagSnapshot()
                 .filter(function (serial) { return oldSnapshot.indexOf(serial) < 0; })
                 .forEach(function (serial, i) {
-                Orion.MoveItem(serial, 0, LOOT_BAG);
+                Orion.MoveItem(serial, 0, lootBag);
                 Orion.Wait(i > 4 ? 500 : 250);
             });
         };
