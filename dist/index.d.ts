@@ -174,8 +174,8 @@ declare namespace Scripts {
         private static lootCorpsesAround;
         static lootCorpseId(corpseId: string, cut?: boolean): void;
         private static grabItems;
-        private static getBagSnapshot;
-        private static moveLootToLootBag;
+        static getBagSnapshot(): string[];
+        static moveLootToLootBag(oldSnapshot: string[], lootBag?: string): void;
         private static displayLoot;
     }
 }
