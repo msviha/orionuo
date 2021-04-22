@@ -354,10 +354,14 @@ namespace Scripts {
                 if (custBars) {
                     const exists = Scripts.Statusbar.exists(serial);
                     if (!exists) {
-                        Statusbar.create(serial, {
-                            x: startX + deltaX * (count % maxCount),
-                            y: startY + deltaY * (count % maxCount),
-                        }, config?.statusBarWrapper?.autoCloseTimer);
+                        Statusbar.create(
+                            serial,
+                            {
+                                x: startX + deltaX * (count % maxCount),
+                                y: startY + deltaY * (count % maxCount),
+                            },
+                            config?.statusBarWrapper?.autoCloseTimer,
+                        );
                     }
                 } else {
                     Orion.ShowStatusbar(

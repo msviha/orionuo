@@ -46,7 +46,7 @@ namespace Scripts {
             Scripts.Statusbar.updateStatusBarGumpForObject(mobile, statusBar, gump, true);
         }
 
-        static close(serial:string, gump?:CustomGumpObject) {
+        static close(serial: string, gump?: CustomGumpObject) {
             const statusBars = Shared.GetArray(GlobalEnum.customStatusBars, []);
             const mobileKey = `${TimersEnum.statusBarTimer}_${serial}`;
             Shared.AddVar(serial, false);
@@ -64,10 +64,10 @@ namespace Scripts {
             Shared.AddArray(GlobalEnum.customStatusBars, statusBars);
         }
 
-        static exists(serial:string) {
+        static exists(serial: string) {
             const statusBars = Shared.GetArray(GlobalEnum.customStatusBars, []);
-            const exists = Shared.GetVar(serial, false)
-            return exists && statusBars.some(a=>a.serial === serial);
+            const exists = Shared.GetVar(serial, false);
+            return exists && statusBars.some((a) => a.serial === serial);
         }
 
         static updateStatusbars() {
@@ -116,14 +116,22 @@ namespace Scripts {
             const targetIndicators = config?.statusBar?.targetIndicators ?? [];
             const result = [];
             for (const indicator of targetIndicators) {
-                let clone =  { targetAlias: { alias: indicator.targetAlias?.alias }, color: indicator.color, active: false  };
-                const targetResult = TargetingEx.resolveTraget([ <ITargetAlias>indicator.targetAlias ]);
+                const clone = {
+                    targetAlias: { alias: indicator.targetAlias?.alias },
+                    color: indicator.color,
+                    active: false,
+                };
+                const targetResult = TargetingEx.resolveTraget([<ITargetAlias>indicator.targetAlias]);
 
-                clone.active = mobile && mobile.Serial() && targetResult.isValid() && mobile.Serial() === targetResult.gameObject()?.Serial();
+                clone.active =
+                    mobile &&
+                    mobile.Serial() &&
+                    targetResult.isValid() &&
+                    mobile.Serial() === targetResult.gameObject()?.Serial();
                 result.push(clone);
             }
             return result;
-        }        
+        }
 
         static resolveActiveIndicators(statusBar: any): any[] {
             const result = [];
@@ -135,11 +143,13 @@ namespace Scripts {
             return result;
         }
 
-        static indicatorChanged(statusBar:any, indicators:any[]):boolean {
+        static indicatorChanged(statusBar: any, indicators: any[]): boolean {
             if (!indicators || indicators.length <= 0) {
                 return true;
             }
-            return statusBar.targetIndicators.some(a=>indicators.some(b=>b.targetAlias.alias===a.targetAlias.alias && b.active !== a.active));
+            return statusBar.targetIndicators.some((a) =>
+                indicators.some((b) => b.targetAlias.alias === a.targetAlias.alias && b.active !== a.active),
+            );
         }
 
         static updateStatusBarGumpForObject(

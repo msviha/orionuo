@@ -31,7 +31,7 @@
 
 •  **dp**:  = "dp"
 
-*Defined in [types/enums.ts:134](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L134)*
+*Defined in [types/enums.ts:142](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L142)*
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 •  **ga**:  = "ga"
 
-*Defined in [types/enums.ts:128](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L128)*
+*Defined in [types/enums.ts:136](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L136)*
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 •  **gb**:  = "gb"
 
-*Defined in [types/enums.ts:129](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L129)*
+*Defined in [types/enums.ts:137](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L137)*
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 •  **gc**:  = "gc"
 
-*Defined in [types/enums.ts:131](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L131)*
+*Defined in [types/enums.ts:139](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L139)*
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 •  **gh**:  = "gh"
 
-*Defined in [types/enums.ts:126](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L126)*
+*Defined in [types/enums.ts:134](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L134)*
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 •  **gs**:  = "gs"
 
-*Defined in [types/enums.ts:127](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L127)*
+*Defined in [types/enums.ts:135](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L135)*
 
 ___
 
@@ -79,7 +79,7 @@ ___
 
 •  **halucination**:  = "halucination"
 
-*Defined in [types/enums.ts:139](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L139)*
+*Defined in [types/enums.ts:147](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L147)*
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 •  **invis**:  = "invis"
 
-*Defined in [types/enums.ts:138](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L138)*
+*Defined in [types/enums.ts:146](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L146)*
 
 ___
 
@@ -95,7 +95,7 @@ ___
 
 •  **lavabomb**:  = "lavabomb"
 
-*Defined in [types/enums.ts:137](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L137)*
+*Defined in [types/enums.ts:145](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L145)*
 
 ___
 
@@ -103,7 +103,7 @@ ___
 
 •  **lc**:  = "lc"
 
-*Defined in [types/enums.ts:132](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L132)*
+*Defined in [types/enums.ts:140](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L140)*
 
 ___
 
@@ -111,7 +111,7 @@ ___
 
 •  **lp**:  = "lp"
 
-*Defined in [types/enums.ts:133](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L133)*
+*Defined in [types/enums.ts:141](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L141)*
 
 ___
 
@@ -119,7 +119,7 @@ ___
 
 •  **mr**:  = "mr"
 
-*Defined in [types/enums.ts:125](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L125)*
+*Defined in [types/enums.ts:133](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L133)*
 
 ___
 
@@ -127,7 +127,7 @@ ___
 
 •  **ns**:  = "ns"
 
-*Defined in [types/enums.ts:135](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L135)*
+*Defined in [types/enums.ts:143](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L143)*
 
 ___
 
@@ -135,7 +135,7 @@ ___
 
 •  **shrink**:  = "shrink"
 
-*Defined in [types/enums.ts:136](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L136)*
+*Defined in [types/enums.ts:144](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L144)*
 
 ___
 
@@ -143,7 +143,7 @@ ___
 
 •  **tmr**:  = "tmr"
 
-*Defined in [types/enums.ts:124](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L124)*
+*Defined in [types/enums.ts:132](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L132)*
 
 ___
 
@@ -151,4 +151,4 @@ ___
 
 •  **tr**:  = "tr"
 
-*Defined in [types/enums.ts:130](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L130)*
+*Defined in [types/enums.ts:138](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L138)*

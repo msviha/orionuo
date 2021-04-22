@@ -14,6 +14,7 @@
 * [hiding](timersenum.md#hiding)
 * [invis](timersenum.md#invis)
 * [invisLong](timersenum.md#invislong)
+* [statusBarTimer](timersenum.md#statusbartimer)
 
 ## Enumeration members
 
@@ -21,7 +22,7 @@
 
 •  **bandage**:  = "bandage"
 
-*Defined in [types/enums.ts:154](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L154)*
+*Defined in [types/enums.ts:162](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L162)*
 
 ___
 
@@ -29,7 +30,7 @@ ___
 
 •  **drink**:  = "drink"
 
-*Defined in [types/enums.ts:149](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L149)*
+*Defined in [types/enums.ts:157](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L157)*
 
 ___
 
@@ -37,7 +38,7 @@ ___
 
 •  **gs**:  = "gs"
 
-*Defined in [types/enums.ts:150](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L150)*
+*Defined in [types/enums.ts:158](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L158)*
 
 ___
 
@@ -45,7 +46,7 @@ ___
 
 •  **hiding**:  = "hiding"
 
-*Defined in [types/enums.ts:151](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L151)*
+*Defined in [types/enums.ts:159](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L159)*
 
 ___
 
@@ -53,7 +54,7 @@ ___
 
 •  **invis**:  = "invis"
 
-*Defined in [types/enums.ts:152](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L152)*
+*Defined in [types/enums.ts:160](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L160)*
 
 ___
 
@@ -61,4 +62,12 @@ ___
 
 •  **invisLong**:  = "invisLong"
 
-*Defined in [types/enums.ts:153](https://github.com/msviha/orionuo/blob/9bdc691/src/types/enums.ts#L153)*
+*Defined in [types/enums.ts:161](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L161)*
+
+___
+
+### statusBarTimer
+
+•  **statusBarTimer**:  = "statusBarTimer"
+
+*Defined in [types/enums.ts:163](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L163)*

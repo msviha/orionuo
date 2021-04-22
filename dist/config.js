@@ -23,7 +23,7 @@ var config = Shared.AddVar('config', {
         targetIndicators: [
             { targetAlias: { alias: 'lastattack' }, color: '#ffe62a00', active: false },
             { targetAlias: { alias: 'laststatus' }, color: '#ffFFD700', active: false },
-            { targetAlias: { alias: 'lasttarget' }, color: '#ff4169E1', active: false }
+            { targetAlias: { alias: 'lasttarget' }, color: '#ff4169E1', active: false },
         ]
     },
     drinkPotion: {
