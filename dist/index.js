@@ -2616,7 +2616,7 @@ function alchemy(potionName) {
     Scripts.Alchemy.mix(potionName);
 }
 function mix(potionName) {
-    Scripts.Alchemy.mix(potionName);
+    Scripts.Alchemy.mixOne(potionName);
 }
 function attackLast() {
     Orion.Attack(Orion.ClientLastAttack());
