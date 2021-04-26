@@ -152,7 +152,7 @@ function alchemy(potionName: PotionsEnum) {
  * @example external code `mix('tmr');`
  */
 function mix(potionName: PotionsEnum) {
-    Scripts.Alchemy.mix(potionName);
+    Scripts.Alchemy.mixOne(potionName);
 }
 
 /**
