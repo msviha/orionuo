@@ -142,8 +142,8 @@ namespace Scripts {
             if (
                 storedPets?.length &&
                 target?.isValid() &&
-                target?.gameObject().Mobile() &&
-                !target?.gameObject().Dead()
+                target?.gameObject()?.Mobile() &&
+                !target?.gameObject()?.Dead()
             ) {
                 for (const pet of storedPets) {
                     let sayColor = MobMaster.resolveSayColor();
@@ -152,16 +152,16 @@ namespace Scripts {
 
                     const fastTimer = Orion.Timer('mobkill.fastprintsufix');
                     const hitColor = MobMaster.getPrintEnemyColorByHits(
-                        target.gameObject().Hits(),
-                        target.gameObject().MaxHits(),
+                        target.gameObject()?.Hits(),
+                        target.gameObject()?.MaxHits(),
                     );
                     sayColor = hitColor;
                     if (fastTimer > 3000) {
                         Orion.PrintFast(
-                            target.gameObject().Serial(),
+                            target.gameObject()?.Serial(),
                             hitColor,
                             0,
-                            `[${target.gameObject().Hits()}/${target.gameObject().MaxHits()}]`,
+                            `[${target.gameObject()?.Hits()}/${target.gameObject()?.MaxHits()}]`,
                         );
                         Orion.SetTimer('mobkill.fastprintsufix');
                     } else if (fastTimer < 0) {
@@ -173,7 +173,7 @@ namespace Scripts {
                     const success = Orion.WaitForTarget(1000);
                 }
             } else {
-                Utils.playerPrint(ColorEnum.orange, '[ no pets target ] ');
+                Utils.playerPrint('[ no pets target ]', ColorEnum.orange);
             }
         }
         /**
@@ -216,16 +216,16 @@ namespace Scripts {
                     if (target?.isValid() && target?.gameObject().Mobile() && !target?.gameObject().Dead()) {
                         const fastTimer = Orion.Timer('mobkill.fastprintsufix');
                         const hitColor = MobMaster.getPrintEnemyColorByHits(
-                            target.gameObject().Hits(),
-                            target.gameObject().MaxHits(),
+                            target.gameObject()?.Hits(),
+                            target.gameObject()?.MaxHits(),
                         );
                         sayColor = hitColor;
                         if (fastTimer > 3000) {
                             Orion.PrintFast(
-                                target.gameObject().Serial(),
+                                target.gameObject()?.Serial(),
                                 hitColor,
                                 0,
-                                `[${target.gameObject().Hits()}/${target.gameObject().MaxHits()}]`,
+                                `[${target.gameObject()?.Hits()}/${target.gameObject()?.MaxHits()}]`,
                             );
                             Orion.SetTimer('mobkill.fastprintsufix');
                         } else if (fastTimer < 0) {
