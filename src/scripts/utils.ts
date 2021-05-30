@@ -278,13 +278,40 @@ namespace Scripts {
             return nextCoordinates;
         }
 
-        static getSerialsFromMyGameObject(type: IMyGameObject): string[] {
-            if (type.color) {
-                return Orion.FindType(type.graphic, type.color);
-            } else {
-                return Orion.FindType(type.graphic);
+        static getSerialsFromMyGameObject(type: IMyGameObject, recuseSearch: boolean=true, layers?: string[]): string[] {
+            const list:string[] = [];
+
+            if (layers) {
+                for (const layer of layers) {
+                    const objAtLayer = Orion.ObjAtLayer(layer);
+                    if (objAtLayer && objAtLayer.Graphic && objAtLayer?.Graphic() === type.graphic && (!type.color || type.color === "any" || type.color?.toLowerCase() === "0xffff" || objAtLayer?.Color() === type.color)) {
+                        list.push(objAtLayer.Serial());
+                    }
+                }
             }
+
+            if (type.color) {
+                list.push(...Orion.FindType(type.graphic, type.color, 'backpack', '', '' ,'', recuseSearch));
+            } else {
+                list.push(...Orion.FindType(type.graphic, 'any', 'backpack' ,'' ,'' ,'' , recuseSearch));
+            }
+            return list;
         }
+
+        static getSerialsFromMyGameObjects(object: any, recuseSearch:boolean=true, layers?: string[]): Array<string> {
+            let list = new Array<string>();
+            if (isMyGameObject(object)) {
+                const findList = Utils.getSerialsFromMyGameObject(object, recuseSearch, layers);
+                if (findList) {
+                    list = list.concat(findList);
+                }
+            } else {
+                for (const key in object) {
+                    list = list.concat(Utils.getSerialsFromMyGameObjects(object[key], recuseSearch, layers));
+                }
+            }
+            return list;
+        } 
 
         static findMyDefinitionForGameObject(gameObject: GameObject, obj?: any): IMyGameObject | undefined {
             const graphic = gameObject.Graphic().toUpperCase();
@@ -707,6 +734,25 @@ namespace Scripts {
                 result = obj.Name();
             }
             return result;
+        }
+
+        /**
+         * jednoduchy while dokud neni splena podminka funkce condFce nebo vyprsi timeout. True v pripade ze je podminka splna, false pokud vyprsi timeout
+         * @param condFce funkce s navratovou hodnotou typu boolean
+         * @param timeout Sychr timeout, min inkrement je 25ms
+         * @returns 
+         */
+        public static waitForCond(condFce:Function, timeout:number):boolean {
+            let counter = 0;
+            while (condFce() !== true && counter < timeout) {
+                counter+=25;
+                Orion.Wait(25);
+            }
+
+            if (counter >= timeout) {
+                return false;
+            }
+            return true;
         }
     }
 }
