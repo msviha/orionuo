@@ -1128,3 +1128,38 @@ function bandageTarget(
 ) {
     Scripts.Healing.bandageTarget(targets, showTarget, minimalCountToWarn);
 }
+
+/**
+ * Nahazuje zvolenou zbran, uklada ji do prislusneho "slotu" pres kod, pokud existuje tento serial bere se on, jinak pres my object hleda typ/barvu, pripadne vyhodi tercik dle nastaveni options
+ * @param slotCode - sufix pod kterym bude ulozena zbran v globalnich promenych, napr. Secondary, IJSFork atd.
+ * @param type - objekt typu IMyGameObject, viz definice typu.
+ * @param options - objekt, mozne atributy: 
+ * recuseSearch - true/false (vychozi false), prepinac rekurzivniho prohledavani kontejneru. 
+ * ensureShield - true/false (vychozi true), prepinac zajistuje nahozeni stitu u jednorucnich zbrani.
+ * add - true/false (vychozi false), prepinac zajistuje vyhozeni terciku a urceni nove zbrane do slotu pokud ulozeny serial neexistuje.
+ * printColor - string (vychozi null), barva hlasky nahozene slot zbrane dle ColorEnum.
+ */
+function equipSlotWeapon(slotCode:string, type:IMyGameObject, options?:any) {
+    Scripts.Combat.equipSlotWeapon(slotCode, type, options);
+}
+
+/**
+ * Prepina stity ktere mate u sebe, pri vychozim nastaveni jen v zakladnim batuzku. Vybrany stit je ulozen od globalni promene __LastShield, kterou pouzivaji switchWeapon a equipSlotWeapon
+ * @param options - objekt, mozne atributy: 
+ * recuseSearch - true/false (vychozi false), prepinac rekurzivniho prohledavani kontejneru. 
+ * @returns 
+ */
+function switchShield(options?:any) {
+    Scripts.Combat.switchShield(options);
+}
+
+/**
+ * Prepina zbrane ktere mate u sebe, ve vychozim nastaveni jen v zakladnim batuzku. Vybrana zbran je ulozena do globalni promene __LastWeapon.
+ * @param options - objekt, mozne atributy: 
+ * recuseSearch - true/false (vychozi false), prepinac rekurzivniho prohledavani kontejneru. 
+ * ensureShield - true/false (vychozi true), prepinac zajistuje nahozeni stitu u jednorucnich zbrani.
+ * @returns 
+ */ 
+function switchWeapon(options?:any) {
+    Scripts.Combat.switchWeapon(options);
+}
