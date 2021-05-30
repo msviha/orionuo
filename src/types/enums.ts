@@ -189,3 +189,9 @@ enum RenameNameType {
     autoName = 'autoName',
     nameList = 'nameList',
 }
+
+enum CoffinMenuSelection {
+    low = 'Sila odpocinku (-1 nabiti)',
+    medium = 'Sila spanku (-2 nabiti)',
+    high = 'Sila hlubokeho spanku (-3 nabiti)',
+}

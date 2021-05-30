@@ -1128,3 +1128,24 @@ function bandageTarget(
 ) {
     Scripts.Healing.bandageTarget(targets, showTarget, minimalCountToWarn);
 }
+
+/**
+*low = 'Sila odpocinku (-1 nabiti)',
+*/
+function vampRakevLow() {
+    Vampire.coffin(CoffinMenuSelection.low);
+ }
+ 
+ /**
+ * medium = 'Sila spanku (-2 nabiti)',
+ */
+ function vampRakevMedium() {
+    Vampire.coffin(CoffinMenuSelection.medium);
+ }
+ 
+ /**
+ * high = 'Sila hlubokeho spanku (-3 nabiti)',
+ */
+ function vampRakevHigh() {
+    Vampire.coffin(CoffinMenuSelection.high);
+ }
