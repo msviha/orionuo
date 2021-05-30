@@ -91,6 +91,11 @@ function Autostart() {
                             .split('|')
                             .indexOf(char.Graphic()) > -1
                     ) {
+                        if (!char?.CanChangeName()) {
+                            Orion.GetStatus(char?.Serial());
+                            Orion.RequestName(char?.Serial());
+                            Scripts.Utils.waitForCond(()=> { return char?.CanChangeName(); }, 150);
+                        }
                         continue;
                     }
                     if (Scripts.MobMaster.rename(char)) {
