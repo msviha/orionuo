@@ -1168,3 +1168,24 @@ function switchShield(options?:any) {
 function switchWeapon(options?:any) {
     Scripts.Combat.switchWeapon(options);
 }
+
+/**
+ *low = 'Sila odpocinku (-1 nabiti)',
+ */
+function vampRakevLow() {
+    Vampire.coffin(CoffinMenuSelection.low);
+ }
+ 
+ /**
+  * medium = 'Sila spanku (-2 nabiti)',
+  */
+ function vampRakevMedium() {
+    Vampire.coffin(CoffinMenuSelection.medium);
+ }
+ 
+ /**
+  * high = 'Sila hlubokeho spanku (-3 nabiti)',
+  */
+ function vampRakevHigh() {
+    Vampire.coffin(CoffinMenuSelection.high);
+ }
