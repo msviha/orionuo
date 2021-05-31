@@ -91,6 +91,11 @@ function Autostart() {
                             .split('|')
                             .indexOf(char.Graphic()) > -1
                     ) {
+                        if (!char?.CanChangeName()) {
+                            Orion.GetStatus(char?.Serial());
+                            Orion.RequestName(char?.Serial());
+                            Scripts.Utils.waitForCond(()=> { return char?.CanChangeName(); }, 150);
+                        }
                         continue;
                     }
                     if (Scripts.MobMaster.rename(char)) {
@@ -1130,22 +1135,57 @@ function bandageTarget(
 }
 
 /**
-*low = 'Sila odpocinku (-1 nabiti)',
-*/
+ * Nahazuje zvolenou zbran, uklada ji do prislusneho "slotu" pres kod, pokud existuje tento serial bere se on, jinak pres my object hleda typ/barvu, pripadne vyhodi tercik dle nastaveni options
+ * @param slotCode - sufix pod kterym bude ulozena zbran v globalnich promenych, napr. Secondary, IJSFork atd.
+ * @param type - objekt typu IMyGameObject, viz definice typu.
+ * @param options - objekt, mozne atributy: 
+ * recuseSearch - true/false (vychozi false), prepinac rekurzivniho prohledavani kontejneru. 
+ * ensureShield - true/false (vychozi true), prepinac zajistuje nahozeni stitu u jednorucnich zbrani.
+ * add - true/false (vychozi false), prepinac zajistuje vyhozeni terciku a urceni nove zbrane do slotu pokud ulozeny serial neexistuje.
+ * printColor - string (vychozi null), barva hlasky nahozene slot zbrane dle ColorEnum.
+ */
+function equipSlotWeapon(slotCode:string, type:IMyGameObject, options?:any) {
+    Scripts.Combat.equipSlotWeapon(slotCode, type, options);
+}
+
+/**
+ * Prepina stity ktere mate u sebe, pri vychozim nastaveni jen v zakladnim batuzku. Vybrany stit je ulozen od globalni promene __LastShield, kterou pouzivaji switchWeapon a equipSlotWeapon
+ * @param options - objekt, mozne atributy: 
+ * recuseSearch - true/false (vychozi false), prepinac rekurzivniho prohledavani kontejneru. 
+ * @returns 
+ */
+function switchShield(options?:any) {
+    Scripts.Combat.switchShield(options);
+}
+
+/**
+ * Prepina zbrane ktere mate u sebe, ve vychozim nastaveni jen v zakladnim batuzku. Vybrana zbran je ulozena do globalni promene __LastWeapon.
+ * @param options - objekt, mozne atributy: 
+ * recuseSearch - true/false (vychozi false), prepinac rekurzivniho prohledavani kontejneru. 
+ * ensureShield - true/false (vychozi true), prepinac zajistuje nahozeni stitu u jednorucnich zbrani.
+ * @returns 
+ */ 
+function switchWeapon(options?:any) {
+    Scripts.Combat.switchWeapon(options);
+}
+
+/**
+ *low = 'Sila odpocinku (-1 nabiti)',
+ */
 function vampRakevLow() {
     Vampire.coffin(CoffinMenuSelection.low);
  }
  
  /**
- * medium = 'Sila spanku (-2 nabiti)',
- */
+  * medium = 'Sila spanku (-2 nabiti)',
+  */
  function vampRakevMedium() {
     Vampire.coffin(CoffinMenuSelection.medium);
  }
  
  /**
- * high = 'Sila hlubokeho spanku (-3 nabiti)',
- */
+  * high = 'Sila hlubokeho spanku (-3 nabiti)',
+  */
  function vampRakevHigh() {
     Vampire.coffin(CoffinMenuSelection.high);
  }

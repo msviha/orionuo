@@ -3,8 +3,19 @@ namespace Scripts {
         static rename(mob: GameObject) {
             const chars = 'abcdefghijklmnopqrstuvwxyz1234567890';
             const mobSerial = mob?.Serial();
-            const canRename = mob?.CanChangeName();
+            let canRename = mob?.CanChangeName() 
             let mobName = mob?.Name();
+
+            if (!canRename && Targeting.isFriendlyTargetType(mob?.Graphic(), mob?.Color(), null)) {
+                Orion.GetStatus(mobSerial);
+                Orion.RequestName(mobSerial);
+                if (Utils.waitForCond(()=> { 
+                    return mob?.CanChangeName();
+                }, 125)) {
+                    mobName = mob?.Name();
+                    canRename = mob?.CanChangeName()
+                }
+            }
 
             if (canRename) {
                 if (!mobName || mobName.length === 0) {
