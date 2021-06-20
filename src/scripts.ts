@@ -1189,3 +1189,10 @@ function vampRakevLow() {
  function vampRakevHigh() {
     Vampire.coffin(CoffinMenuSelection.high);
  }
+
+ /**
+  * Mystik na crafta
+  */
+ function craftBandana() {
+    Scripts.Craft.bandana();     
+ }

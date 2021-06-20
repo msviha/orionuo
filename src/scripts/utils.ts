@@ -564,7 +564,7 @@ namespace Scripts {
 
             if (layer !== undefined) {
                 const l = Orion.ObjAtLayer(layer);
-                if (l && l.Graphic() === graphic && l.Color() === color) {
+                if (l && l.Graphic() === graphic && (l.Color() === color || color === undefined || color.toLowerCase() === "0xffff")) {
                     return l.Serial();
                 }
             }

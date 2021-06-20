@@ -71,5 +71,35 @@ namespace Scripts {
                 Orion.MoveItem(dusty[0]);
             }
         }
+
+        static bandana() {
+            const bandana = Orion.FindObject(Scripts.Utils.findFirstType({ graphic: "0x153F", color: "0xffff" }, 6));
+            const helmet = Orion.ObjAtLayer("Helmet");
+            const checkWeight = Player.Weight() <= Player.MaxWeight();
+            
+            if (checkWeight) {
+                if (bandana) {
+
+                    if (bandana.Layer() === 6) {
+                        Orion.Unequip("Helmet");
+                        Orion.Wait(200);
+                    } 
+                    Orion.UseObject(bandana.Serial());
+                    if (helmet && bandana.Serial() !== helmet.Serial()) {
+                        Orion.Wait(200);
+                        Orion.UseObject(helmet.Serial());
+                    }
+    
+                } else {
+                    Orion.CharPrint(Player.Serial(), ColorEnum.red, "Nemas bandanu");
+                }
+            } else {
+                if (bandana && bandana.Exists()) {
+                    Orion.UseObject(bandana.Serial());
+                }
+                Orion.CharPrint(Player.Serial(), ColorEnum.red, "Overweight");
+            }
+
+        }
     }
 }
