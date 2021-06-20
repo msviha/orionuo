@@ -2155,7 +2155,7 @@ const gameObject: any = {
         },
         other: {
             metalKiteShield: {
-                graphic: '0x0F4F',
+                graphic: '0x1B74',
                 color: '0xFFFF',
             },
             heaterShield: {
@@ -2169,7 +2169,7 @@ const gameObject: any = {
             lucerna: {
                 graphic: '0x0A15',
                 color: '0xFFFF',
-            },
+            }
         },
     },
     weapons: {
