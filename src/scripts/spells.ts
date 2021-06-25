@@ -7,12 +7,14 @@ namespace Scripts {
          * @param spell nazev kouzla
          * @param target na koho ma kouzlit
          */
-        static cast(spell: string, target?: string | TargetEnum | Array<ITargetAlias>) {
-            const targetResult = TargetingEx.getTarget(target);
-            if (targetResult.success()) {
-                targetResult.waitTarget();
-            } else if (target) {
-                Utils.log(`Target not found: '${target}'`, ColorEnum.orange);
+        static cast(spell: string, target?: string | TargetEnum | Array<ITargetAlias>, existingWaitTargetHook = false) {
+            if (!existingWaitTargetHook) {
+                const targetResult = TargetingEx.getTarget(target);
+                if (targetResult.success()) {
+                    targetResult.waitTarget();
+                } else if (target) {
+                    Utils.log(`Target not found: '${target}'`, ColorEnum.orange);
+                }
             }
             Orion.Cast(spell);
         }
@@ -44,6 +46,7 @@ namespace Scripts {
             scroll: ScrollEnum,
             target?: string | TargetEnum | Array<ITargetAlias>,
             backupHeadCast?: string,
+            existingWaitTargetHook = false
         ) {
             const s = gameObject.scrolls['standard'][scroll];
 
@@ -61,7 +64,7 @@ namespace Scripts {
             }
 
             Orion.ClearJournal();
-            TargetingEx.getTarget(target).waitTarget();
+            !existingWaitTargetHook && TargetingEx.getTarget(target).waitTarget();
             Orion.UseType(s.graphic);
             Scripts.Utils.waitWhileSomethingInJournal(['Select Target', "You can't cast"]);
 
@@ -143,7 +146,7 @@ namespace Scripts {
                 return;
             }
 
-            scroll ? Scripts.Spells.castScroll(ScrollEnum.wos) : Scripts.Spells.cast('Wall of Stone');
+            scroll ? Scripts.Spells.castScroll(ScrollEnum.wos) : Scripts.Spells.cast('Wall of Stone', undefined, true);
             Orion.ClearJournal('Target is not in line of sight|The spell fizzles');
             const castResult = Scripts.Utils.waitWhileSomethingInJournal(
                 ['Target is not in line of sight', 'The spell fizzles'],
@@ -188,7 +191,7 @@ namespace Scripts {
         static ef(self = false, scroll = false, timer = 70000) {
             let target: any = {};
             self ? Orion.WaitTargetObject('self') : (target = Scripts.Utils.waitTargetTileOrObject());
-            scroll ? Scripts.Spells.castScroll(ScrollEnum.ef) : Scripts.Spells.cast('Energy Field');
+            scroll ? Scripts.Spells.castScroll(ScrollEnum.ef) : Scripts.Spells.cast('Energy Field', undefined, true);
 
             let timerObjectSerial = '';
             if (self) {
