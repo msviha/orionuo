@@ -53,6 +53,13 @@ namespace Scripts {
                 return;
             }
 
+            //harving protection
+            const res = Scripts.Utils.waitWhileSomethingInJournal(['Obvazal jsi'], 10, responseDelay * 2);
+            if (res === 0) {
+                Scripts.Utils.log('Uz si hazes bandu, musis pockat az dojde');
+                return;
+            };
+
             const pattern = [
                 'You put the bloody',
                 'You apply',

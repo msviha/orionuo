@@ -20,7 +20,7 @@ export default interface Collections {
     /**
      * Add Fake map object
      */
-    AddFakeMapObject(serial: string, graphic: string, color: string, x: number, y: number, z: number): void;
+    AddFakeMapObject(serial: string|number, graphic: string, color: string, x: number, y: number, z: number): void;
 
     AddFakeMapObject(
         serial: string,
@@ -46,7 +46,7 @@ export default interface Collections {
     /**
      * Remove Fake map object
      */
-    RemoveFakeMapObject(serial: string): void;
+    RemoveFakeMapObject(serial: string|number): void;
 
     /**
      * Delete the previous alias of the object, call the scope to specify a new one manually and wait for the selection (or timeout).
