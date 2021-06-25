@@ -68,8 +68,14 @@ namespace Scripts {
                 if (!s) {
                     continue;
                 }
-                Orion.Equip(s);
-                Orion.Wait(200);
+                if (Player.Weight() <= Player.MaxWeight()) {
+                    Orion.Equip(s);
+                    Orion.Wait(200);
+                } else {
+                    Scripts.Utils.log('EQUIP NEBUDE SPUSTEN SI PODHOZEN', ColorEnum.red);
+                    return;
+                } 
+
             }
         }
 
