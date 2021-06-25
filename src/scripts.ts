@@ -250,9 +250,10 @@ function castScroll(scroll: ScrollEnum, target?: string | TargetEnum | Array<ITa
  * @example in client `_cestovniKniha mark` markne vlastni misto
  * @example external code `cestovniKniha()` kopne na vlastni misto
  * @example external code `cestovniKniha(PortBookOptionsEnum.mark);` markne vlastni misto
+ * @example external code `cestovniKniha(PortBookOptionsEnum.kop, PortBookDestinationsEnum.vesper);` kopne do vesperu
  */
-function cestovniKniha(selection = PortBookOptionsEnum.kop) {
-    Scripts.Port.cestovniKniha(selection);
+function cestovniKniha(selection = PortBookOptionsEnum.kop, destination?:PortBookDestinationsEnum) {
+    Scripts.Port.cestovniKniha(selection, destination);
 }
 
 /**
@@ -1138,8 +1139,8 @@ function bandageTarget(
  * Nahazuje zvolenou zbran, uklada ji do prislusneho "slotu" pres kod, pokud existuje tento serial bere se on, jinak pres my object hleda typ/barvu, pripadne vyhodi tercik dle nastaveni options
  * @param slotCode - sufix pod kterym bude ulozena zbran v globalnich promenych, napr. Secondary, IJSFork atd.
  * @param type - objekt typu IMyGameObject, viz definice typu.
- * @param options - objekt, mozne atributy: 
- * recuseSearch - true/false (vychozi false), prepinac rekurzivniho prohledavani kontejneru. 
+ * @param options - objekt, mozne atributy:
+ * recuseSearch - true/false (vychozi false), prepinac rekurzivniho prohledavani kontejneru.
  * ensureShield - true/false (vychozi true), prepinac zajistuje nahozeni stitu u jednorucnich zbrani.
  * add - true/false (vychozi false), prepinac zajistuje vyhozeni terciku a urceni nove zbrane do slotu pokud ulozeny serial neexistuje.
  * printColor - string (vychozi null), barva hlasky nahozene slot zbrane dle ColorEnum.
@@ -1150,9 +1151,9 @@ function equipSlotWeapon(slotCode:string, type:IMyGameObject, options?:any) {
 
 /**
  * Prepina stity ktere mate u sebe, pri vychozim nastaveni jen v zakladnim batuzku. Vybrany stit je ulozen od globalni promene __LastShield, kterou pouzivaji switchWeapon a equipSlotWeapon
- * @param options - objekt, mozne atributy: 
- * recuseSearch - true/false (vychozi false), prepinac rekurzivniho prohledavani kontejneru. 
- * @returns 
+ * @param options - objekt, mozne atributy:
+ * recuseSearch - true/false (vychozi false), prepinac rekurzivniho prohledavani kontejneru.
+ * @returns
  */
 function switchShield(options?:any) {
     Scripts.Combat.switchShield(options);
@@ -1160,11 +1161,11 @@ function switchShield(options?:any) {
 
 /**
  * Prepina zbrane ktere mate u sebe, ve vychozim nastaveni jen v zakladnim batuzku. Vybrana zbran je ulozena do globalni promene __LastWeapon.
- * @param options - objekt, mozne atributy: 
- * recuseSearch - true/false (vychozi false), prepinac rekurzivniho prohledavani kontejneru. 
+ * @param options - objekt, mozne atributy:
+ * recuseSearch - true/false (vychozi false), prepinac rekurzivniho prohledavani kontejneru.
  * ensureShield - true/false (vychozi true), prepinac zajistuje nahozeni stitu u jednorucnich zbrani.
- * @returns 
- */ 
+ * @returns
+ */
 function switchWeapon(options?:any) {
     Scripts.Combat.switchWeapon(options);
 }
@@ -1175,14 +1176,14 @@ function switchWeapon(options?:any) {
 function vampRakevLow() {
     Vampire.coffin(CoffinMenuSelection.low);
  }
- 
+
  /**
   * medium = 'Sila spanku (-2 nabiti)',
   */
  function vampRakevMedium() {
     Vampire.coffin(CoffinMenuSelection.medium);
  }
- 
+
  /**
   * high = 'Sila hlubokeho spanku (-3 nabiti)',
   */
@@ -1194,5 +1195,5 @@ function vampRakevLow() {
   * Mystik na crafta
   */
  function craftBandana() {
-    Scripts.Craft.bandana();     
+    Scripts.Craft.bandana();
  }
