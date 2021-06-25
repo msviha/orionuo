@@ -11,6 +11,8 @@ enum ColorEnum {
     green = '0x0044',
     orange = '0x002c',
     pureWhite = '0x0B1D',
+    yellow = '0x0034',
+    blue = '0x0002'
 }
 
 enum TargetEnum {
@@ -47,6 +49,35 @@ enum OcarovaniEnum {
     mytheril = 'mytheril',
     black = 'black',
     blood = 'blood',
+}
+
+enum PortBookDestinationsEnum {
+    charge = 1,
+    staty = 2,
+    brit = 3,
+    cech = 4,
+    custom = 5,
+    customGate = 6,
+    customMark = 7,
+    jhelom = 8,
+    vesper = 9,
+    yew = 10,
+    minoc = 11,
+    scara = 12,
+    magin = 13,
+    trinsic = 14,
+    nujelm = 15,
+    trh = 16,
+    cove = 17,
+    occlo = 18,
+    moonglow = 19,
+    templar = 20,
+    nara = 21,
+    homare = 22,
+    zento = 23,
+    luna = 24,
+    umbra = 25,
+    serpents = 26,
 }
 
 enum ScrollEnum {
@@ -145,6 +176,9 @@ enum PotionsEnum {
     lavabomb = 'lavabomb',
     invis = 'invis',
     halucination = 'halucination',
+    jabara = 'jabara',
+    cinchona = 'cinchona',
+    esenceRefresh = 'esenceRefresh',
 }
 
 enum NecroScrollEnum {

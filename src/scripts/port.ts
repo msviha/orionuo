@@ -96,7 +96,7 @@ namespace Scripts {
             }
         }
 
-        static cestovniKniha(selection = PortBookOptionsEnum.kop) {
+        static cestovniKniha(selection = PortBookOptionsEnum.kop, destination?:PortBookDestinationsEnum) {
             let selections: ISelect[];
             switch (selection) {
                 case PortBookOptionsEnum.opravaStats:
@@ -123,7 +123,7 @@ namespace Scripts {
                     selections = [
                         {
                             type: SelectionTypeEnum.gump,
-                            selection: 5,
+                            selection: destination ? destination : 5,
                         },
                     ];
             }

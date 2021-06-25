@@ -1513,6 +1513,38 @@ const gameObject: any = {
             reagent: 'serpent_scales',
             reagentsCount: 6,
         },
+        esenceRefresh: {
+            graphic: '0x0EFE',
+            color: '0x005B',
+            bag: {
+                x: 0,
+                y: 0
+            }
+        },
+        jabara: {
+            graphic: '0x0F01',
+            color: '0x005B',
+            kad: {
+                graphic: '0x0C67',
+                color: '0x049B'
+            },
+            bag: {
+                x: 5,
+                y: 0
+            }
+        },
+        cinchona: {
+            graphic: '0x0F02',
+            color: '0x0835',
+            kad: {
+                graphic: '0x0C41',
+                color: '0x0BA9'
+            },
+            bag: {
+                x: 10,
+                y: 0
+            }
+        },
     },
     books: {
         unholySpellbook: {
