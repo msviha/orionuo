@@ -1,7 +1,7 @@
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 1.2.3');
+    Orion.Print(-1, 'version 1.2.4');
     Orion.Print(-1, '-------------+');
 }
 
@@ -359,6 +359,17 @@ function drum(target?: TargetEnum) {
  */
 function ef(self = false, scroll = false, timer = 70000) {
     Scripts.Spells.ef(self, scroll, timer);
+}
+
+/**
+ * Kouzli Energy field stenu na ktere se zobrazuje timer na tve jezditko (sesedne pokud na nem jedes)
+ * @param scroll {boolean} pokud date true tak bude kouzlit ze svitku, v pripade ze date false tak z hlavy
+ * @param timer {number} cas odpoctu na zdi v milisekundach
+ * @example external code `ef(false, 60000);` vykouzli EF z hlavy na jezditko a ukaze se na ni odpocet jedne minuty
+ * @example external code `ef(true, 60000);` vykouzli EF ze svitku na jezditko a ukaze se na ni odpocet jedne minuty
+ */
+function efMount(scroll, timer) {
+    Scripts.Spells.efMount(scroll, timer);
 }
 
 /**

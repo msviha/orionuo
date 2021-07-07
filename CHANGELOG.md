@@ -1,5 +1,29 @@
 # CHANGELOG
 
+## 1.2.4
+
+### fixes
+- `ef` - vyzadovalo pro kouzleni 2x target
+- `wos` - vyzadovalo pro kouzleni 2x target
+- `gameObject`
+    - metalKiteShield graphic
+    - craftBandana
+    - kocici objekty
+- cerveny grizzly - automaticke prejmenovani
+- `mobKillAll` - crash pri chybejicim targetu
+
+### enhancements
+- `equip` pokud je po oprave stats hrac pretizen, tak nebude equipovat (hazet veci pod sebe)
+
+### features
+- `vampRakevLow` - Sila odpocinku (-1 nabiti)
+- `vampRakevMedium` - Sila spanku (-2 nabiti)
+- `vampRakevHigh` - Sila hlubokeho spanku (-3 nabiti)
+- `equipSlotWeapon` - Nahazuje zvolenou zbran, uklada ji do prislusneho "slotu" pres kod, pokud existuje tento serial bere se on, jinak pres my object hleda typ/barvu, pripadne vyhodi tercik dle nastaveni options
+- `switchShield` - Prepina stity ktere mate u sebe, pri vychozim nastaveni jen v zakladnim batuzku. Vybrany stit je ulozen od globalni promene __LastShield, kterou pouzivaji switchWeapon a equipSlotWeapon
+- `switchWeapon` - Prepina zbrane ktere mate u sebe, ve vychozim nastaveni jen v zakladnim batuzku. Vybrana zbran je ulozena do globalni promene __LastWeapon.
+- `efMount` - kouzli EF na vlastni jezditko
+        
 ## 1.2.2
 
 ### enhancements

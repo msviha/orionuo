@@ -311,7 +311,7 @@ namespace Scripts {
                 }
             }
             return list;
-        } 
+        }
 
         static findMyDefinitionForGameObject(gameObject: GameObject, obj?: any): IMyGameObject | undefined {
             const graphic = gameObject.Graphic().toUpperCase();
@@ -688,7 +688,7 @@ namespace Scripts {
             return count;
         }
 
-        static waitTargetTileOrObject(): ICoordinates | undefined {
+        static waitTargetTileOrObject(): ITargetCoordinates | undefined {
             const target: any = {};
             const selection = Orion.WaitForAddObject('wosTarget');
             if (selection === 0) {
@@ -699,6 +699,7 @@ namespace Scripts {
                 target.x = targetGameObject.X();
                 target.y = targetGameObject.Y();
                 target.z = targetGameObject.Z();
+                target.mobile = targetGameObject.Mobile();
                 Orion.WaitTargetObject('wosTarget');
             } else {
                 target.x = SelectedTile.X();
@@ -740,7 +741,7 @@ namespace Scripts {
          * jednoduchy while dokud neni splena podminka funkce condFce nebo vyprsi timeout. True v pripade ze je podminka splna, false pokud vyprsi timeout
          * @param condFce funkce s navratovou hodnotou typu boolean
          * @param timeout Sychr timeout, min inkrement je 25ms
-         * @returns 
+         * @returns
          */
         public static waitForCond(condFce:Function, timeout:number):boolean {
             let counter = 0;

@@ -140,42 +140,50 @@ namespace Scripts {
             Orion.WarMode(true);
         }
 
-        static wos(scroll = false, timer = 70000) {
+        static wos(scroll = false, displayTimer = 70000) {
             const target = Scripts.Utils.waitTargetTileOrObject();
             if (!target) {
                 return;
             }
 
             scroll ? Scripts.Spells.castScroll(ScrollEnum.wos) : Scripts.Spells.cast('Wall of Stone', undefined, true);
+
+            if (target.mobile) {
+                // nebudu slozite handlovat kde se ma zobrazit timer kdyz tam bude dira ve zdi a nechci aby byl nad hracem/mobile
+                return;
+            }
+
             Orion.ClearJournal('Target is not in line of sight|The spell fizzles');
-            const castResult = Scripts.Utils.waitWhileSomethingInJournal(
-                ['Target is not in line of sight', 'The spell fizzles'],
-                2500,
-            );
-
-            if (castResult === 0 || castResult === 1) {
-                return;
-            }
-
-            // najdi stred zdi
+            const existingWalls = Orion.FindType('0x0080', '0x0000', 'ground', undefined, 18);
+            let keepChecking = true;
+            let timer = 2500;
+            const wait = 20;
             let timerObjectSerial = '';
-            const walls = Orion.FindType('0x0080', '0x0000', 'ground', undefined, 18);
-            let found = false;
-            for (const serial of walls) {
-                const o = Orion.FindObject(serial);
-                if (o.X() === target.x && o.Y() === target.y) {
-                    timerObjectSerial = serial;
-                    found = true;
-                    break;
+            while (keepChecking && timer) {
+                Orion.ClearJournal('Target is not in line of sight|The spell fizzles');
+                if (Orion.InJournal('Target is not in line of sight|The spell fizzles')) {
+                    keepChecking = false;
                 }
+                const walls = Orion.FindType('0x0080', '0x0000', 'ground', undefined, 18);
+                const newWalls = walls.filter((i) => existingWalls.indexOf(i) === -1)
+                let found = false;
+                for (const serial of newWalls) {
+                    const o = Orion.FindObject(serial);
+                    if (o.X() === target.x && o.Y() === target.y) {
+                        timerObjectSerial = serial;
+                        found = true;
+                        keepChecking = false;
+                        break;
+                    }
+                }
+                Orion.Wait(wait);
+                timer -= wait;
             }
-            if (!found) {
-                return;
-            }
+
             const id = Math.random().toString();
             Orion.AddDisplayTimer(
                 id,
-                timer,
+                displayTimer,
                 'AboveChar',
                 'Rectangle',
                 undefined,
@@ -188,10 +196,47 @@ namespace Scripts {
             Orion.DisplayTimerSetObject(id, timerObjectSerial);
         }
 
-        static ef(self = false, scroll = false, timer = 70000) {
-            let target: any = {};
-            self ? Orion.WaitTargetObject('self') : (target = Scripts.Utils.waitTargetTileOrObject());
-            scroll ? Scripts.Spells.castScroll(ScrollEnum.ef) : Scripts.Spells.cast('Energy Field', undefined, true);
+        static efMount(scroll = false, timer = 70000) {
+            if (Orion.ObjAtLayer('Mount')) {
+                Orion.UseObject('self');
+                Orion.Wait(100);
+            }
+            const targetGameObject = Orion.FindObject('myMount');
+
+            if (!targetGameObject) {
+                Scripts.Utils.log('nemas zaregistrovane jezditko', ColorEnum.red);
+                return;
+            }
+
+            Scripts.Spells.ef(false, scroll, timer, 'myMount');
+        }
+
+        static ef(self = false, scroll = false, timer = 70000, targetSerial?:string) {
+            let target :any = {};
+            if (targetSerial) {
+                Orion.WaitTargetObject(targetSerial);
+                const targetObject = Orion.FindObject(targetSerial);
+                target = {
+                    x: targetObject.X(),
+                    y: targetObject.Y(),
+                    z: targetObject.Z(),
+                    mobile: targetObject.Mobile()
+                }
+            }
+            else {
+                if (self) {
+                    Orion.WaitTargetObject('self');
+                } else {
+                    target = Scripts.Utils.waitTargetTileOrObject();
+                    if (!target) {
+                        return;
+                    }
+                }
+            }
+
+            scroll ?
+                Scripts.Spells.castScroll(ScrollEnum.ef, undefined, undefined, true) :
+                Scripts.Spells.cast('Energy Field', undefined, true);
 
             let timerObjectSerial = '';
             if (self) {
@@ -212,6 +257,7 @@ namespace Scripts {
                     timer -= wait;
                 }
             } else {
+                const existingWalls = Orion.FindType('0x3947|0x3956', '0x0000', 'ground', undefined, 18);
                 let keepChecking = true;
                 let timer = 4500;
                 const wait = 20;
@@ -220,9 +266,10 @@ namespace Scripts {
                     if (Orion.InJournal('Target is not in line of sight|The spell fizzles')) {
                         keepChecking = false;
                     }
-                    const walls = Orion.FindType('0x3947', '0x0000', 'ground', undefined, 18);
+                    const walls = Orion.FindType('0x3947|0x3956', '0x0000', 'ground', undefined, 18);
+                    const newWalls = walls.filter((i) => existingWalls.indexOf(i) === -1)
                     let found = false;
-                    for (const serial of walls) {
+                    for (const serial of newWalls) {
                         const o = Orion.FindObject(serial);
                         if (o.X() === target.x && o.Y() === target.y) {
                             timerObjectSerial = serial;

@@ -20,7 +20,7 @@ declare function carveBody(carveNearestBodyAutomatically?: boolean): void;
 declare function cast(spell: string, target?: string | TargetEnum | Array<ITargetAlias>): void;
 declare function castNecroScroll(scroll: NecroScrollEnum, target?: string | TargetEnum | Array<ITargetAlias>): void;
 declare function castScroll(scroll: ScrollEnum, target?: string | TargetEnum | Array<ITargetAlias>, backupHeadCast?: string): void;
-declare function cestovniKniha(selection?: PortBookOptionsEnum): void;
+declare function cestovniKniha(selection?: PortBookOptionsEnum, destination?: PortBookDestinationsEnum): void;
 declare function cleanObjectInBag(object: any, objectName?: string): void;
 declare function craftNext(): void;
 declare function craftSelect(): void;
@@ -28,6 +28,7 @@ declare function drink(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolea
 declare function drinkFill(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean, displayTimers?: boolean, refillEmptyLimit?: number, displayInvisLongTimer?: boolean): void;
 declare function drum(target?: TargetEnum): void;
 declare function ef(self?: boolean, scroll?: boolean, timer?: number): void;
+declare function efMount(scroll: any, timer: any): void;
 declare function enemy(): void;
 declare function equip(): void;
 declare function fillPotion(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean): void;
@@ -101,6 +102,13 @@ declare function mobStop(): void;
 declare function attackTarget(targets?: string | TargetEnum | Array<ITargetAlias>): void;
 declare function shrinkOne(): void;
 declare function bandageTarget(targets?: string | TargetEnum | Array<ITargetAlias>, showTarget?: boolean, minimalCountToWarn?: number): void;
+declare function equipSlotWeapon(slotCode: string, type: IMyGameObject, options?: any): void;
+declare function switchShield(options?: any): void;
+declare function switchWeapon(options?: any): void;
+declare function vampRakevLow(): void;
+declare function vampRakevMedium(): void;
+declare function vampRakevHigh(): void;
+declare function craftBandana(): void;
 declare function parseParam(param: any): any;
 declare namespace Scripts {
     class Auto {
@@ -119,6 +127,16 @@ declare namespace Scripts {
         static findUniqueGameObjects(object: any): Array<IMyGameObject>;
         static getGameObjectList(object: any): Array<IMyGameObject>;
         static sortBackpackCaleb(): void;
+    }
+}
+declare namespace Scripts {
+    class Combat {
+        static switchShield(options?: any): void;
+        static switchWeapon(options?: any): void;
+        static ensureShield(): void;
+        static equipSlotWeapon(slotCode: string, type?: IMyGameObject, options?: any): void;
+        static currentWeapon(): GameObject;
+        static checkDenyEquip(): boolean;
     }
 }
 declare namespace Scripts {
@@ -238,7 +256,7 @@ declare namespace Scripts {
         static nbRune(waitForKop?: boolean): void;
         static rune(runeSerial: string, waitForKop?: boolean): void;
         static travelBook(selection?: PortBookOptionsEnum, waitForKop?: boolean): void;
-        static cestovniKniha(selection?: PortBookOptionsEnum): void;
+        static cestovniKniha(selection?: PortBookOptionsEnum, destination?: PortBookDestinationsEnum): void;
     }
 }
 declare namespace Scripts {
@@ -252,14 +270,15 @@ declare namespace Scripts {
 }
 declare namespace Scripts {
     class Spells {
-        static cast(spell: string, target?: string | TargetEnum | Array<ITargetAlias>): void;
+        static cast(spell: string, target?: string | TargetEnum | Array<ITargetAlias>, existingWaitTargetHook?: boolean): void;
         static summon(creature: string, target?: string | TargetEnum | Array<ITargetAlias>): void;
-        static castScroll(scroll: ScrollEnum, target?: string | TargetEnum | Array<ITargetAlias>, backupHeadCast?: string): void;
+        static castScroll(scroll: ScrollEnum, target?: string | TargetEnum | Array<ITargetAlias>, backupHeadCast?: string, existingWaitTargetHook?: boolean): void;
         static backupHeadCast(reason: string, spell: string, target?: string | TargetEnum | Array<ITargetAlias>, silent?: boolean): void;
         static castNecroScroll(scroll: NecroScrollEnum, target?: string | TargetEnum | Array<ITargetAlias>): void;
         static castUntilSuccess(spell: string, target: TargetEnum, castTime: number): void;
-        static wos(scroll?: boolean, timer?: number): void;
-        static ef(self?: boolean, scroll?: boolean, timer?: number): void;
+        static wos(scroll?: boolean, displayTimer?: number): void;
+        static efMount(scroll?: boolean, timer?: number): void;
+        static ef(self?: boolean, scroll?: boolean, timer?: number, targetSerial?: string): void;
     }
 }
 declare namespace Scripts {
@@ -348,7 +367,8 @@ declare namespace Scripts {
         static resetTimer(timer: string): void;
         static waitWhileTargeting(): void;
         static getCoordinatesForDirection(direction: any): ICoordinates;
-        static getSerialsFromMyGameObject(type: IMyGameObject): string[];
+        static getSerialsFromMyGameObject(type: IMyGameObject, recuseSearch?: boolean, layers?: string[]): string[];
+        static getSerialsFromMyGameObjects(object: any, recuseSearch?: boolean, layers?: string[]): Array<string>;
         static findMyDefinitionForGameObject(gameObject: GameObject, obj?: any): IMyGameObject | undefined;
         static parseObject(objectAsString: string): IMyGameObject;
         static updateCurrentStatusBar(newSerial: string, position: ICoordinates): void;
@@ -371,9 +391,10 @@ declare namespace Scripts {
         static openContainer(s: string, maxWaitingTime?: number): void;
         static isItemStackable(serial: string): boolean;
         static askForCount(): number;
-        static waitTargetTileOrObject(): ICoordinates | undefined;
+        static waitTargetTileOrObject(): ITargetCoordinates | undefined;
         static sayWithColor(text: any, color: any): void;
         static ensureName(obj: GameObject | PlayerCharacter): string;
+        static waitForCond(condFce: Function, timeout: number): boolean;
     }
 }
 declare namespace Scripts {
@@ -391,12 +412,16 @@ declare namespace Scripts {
     class Craft {
         static ocaruj(dusty?: OcarovaniEnum, loot?: boolean): void;
         static rozbij(ingy?: OcarovaniEnum, count?: number): void;
+        static bandana(): void;
     }
 }
 declare namespace Scripts {
     class Necromancer {
         static necroMystic(msg: string): void;
     }
+}
+declare class Vampire {
+    static coffin(menuSelection: CoffinMenuSelection): void;
 }
 declare namespace Scripts {
     type Potion = {
@@ -519,7 +544,9 @@ declare enum ColorEnum {
     red = "0x0021",
     green = "0x0044",
     orange = "0x002c",
-    pureWhite = "0x0B1D"
+    pureWhite = "0x0B1D",
+    yellow = "0x0034",
+    blue = "0x0002"
 }
 declare enum TargetEnum {
     self = "self",
@@ -544,6 +571,34 @@ declare enum OcarovaniEnum {
     mytheril = "mytheril",
     black = "black",
     blood = "blood"
+}
+declare enum PortBookDestinationsEnum {
+    charge = 1,
+    staty = 2,
+    brit = 3,
+    cech = 4,
+    custom = 5,
+    customGate = 6,
+    customMark = 7,
+    jhelom = 8,
+    vesper = 9,
+    yew = 10,
+    minoc = 11,
+    scara = 12,
+    magin = 13,
+    trinsic = 14,
+    nujelm = 15,
+    trh = 16,
+    cove = 17,
+    occlo = 18,
+    moonglow = 19,
+    templar = 20,
+    nara = 21,
+    homare = 22,
+    zento = 23,
+    luna = 24,
+    umbra = 25,
+    serpents = 26
 }
 declare enum ScrollEnum {
     kvf = "kvf",
@@ -634,7 +689,10 @@ declare enum PotionsEnum {
     shrink = "shrink",
     lavabomb = "lavabomb",
     invis = "invis",
-    halucination = "halucination"
+    halucination = "halucination",
+    jabara = "jabara",
+    cinchona = "cinchona",
+    esenceRefresh = "esenceRefresh"
 }
 declare enum NecroScrollEnum {
     vfp = "vfp",
@@ -671,6 +729,11 @@ declare enum MedicActionsEnum {
 declare enum RenameNameType {
     autoName = "autoName",
     nameList = "nameList"
+}
+declare enum CoffinMenuSelection {
+    low = "Sila odpocinku (-1 nabiti)",
+    medium = "Sila spanku (-2 nabiti)",
+    high = "Sila hlubokeho spanku (-3 nabiti)"
 }
 interface IMyGameObject {
     graphic: string;
@@ -733,6 +796,10 @@ interface IMenuWithSelections {
 interface ICoordinates {
     x: number;
     y: number;
+}
+interface ITargetCoordinates extends ICoordinates {
+    mobile?: boolean;
+    player?: boolean;
 }
 interface ISelect {
     type: SelectionTypeEnum;

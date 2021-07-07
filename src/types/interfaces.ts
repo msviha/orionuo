@@ -75,6 +75,11 @@ interface ICoordinates {
     y: number;
 }
 
+interface ITargetCoordinates extends ICoordinates {
+    mobile?: boolean;
+    player?: boolean;
+}
+
 interface ISelect {
     type: SelectionTypeEnum;
     selection: number | IMenuSelection;
