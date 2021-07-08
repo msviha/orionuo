@@ -36,6 +36,7 @@ enum TargetEnum {
     lasttargetmobile = 'lasttargetmobile',
     /**charakter nad jehoz CUST zalozkou je zrovna kruzor mysi */
     hover = 'hover',
+    manual = 'manual'
 }
 
 enum CustomStatusBarEnum {
@@ -151,6 +152,19 @@ enum NecroScrollEnum {
     vfp = 'vfp',
     kalnox = 'kalnox',
     haluze = 'haluze',
+}
+
+enum NecromancySpell
+{
+  Invalid = 0,
+  SummonUndead = 1,
+  AnimateDead = 2,
+  NecroArmor = 3,
+  Dark = 4,
+  FireBolt = 5,
+  Hallucination = 6,
+  Clumsy = 7,
+  Curse = 8
 }
 
 enum TimersEnum {

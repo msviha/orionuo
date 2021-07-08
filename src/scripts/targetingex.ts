@@ -197,6 +197,20 @@ namespace Scripts {
             );
         }
 
+        static resolveTragetManual(target:ITargetAlias):TargetResult {
+            let result = new Scripts.TargetResult();
+            const selection = Orion.WaitForAddObject('TargetResult_Manual');
+            if (selection === 0) {
+                return;
+            }
+            if (selection === 1) {
+                result = TargetingEx.getTargetResult('TargetResult_Manual', target);//getTargetResult.gameObject(targetGameObject?.Serial());
+            } else {
+                result.selectedTile(SelectedTile);
+            }
+            return result;
+        }
+
         /**
          *
          * @param targets rozsirene aliasy zleva doprava odlene |
@@ -231,7 +245,9 @@ namespace Scripts {
                 target.maxDistance = target.maxDistance ?? maxDistance ?? 20;
                 result = new Scripts.TargetResult();
 
-                if (target.alias === TargetEnum.self) {
+                if (target.alias === TargetEnum.manual) {
+                    result = TargetingEx.resolveTragetManual(target);
+                } else if (target.alias === TargetEnum.self) {
                     result.gameObject(Player.Serial());
                 } else if (target.alias === TargetEnum.selfinjured) {
                     result = TargetingEx.getTargetResult(Player.Serial(), target, (obj) => {
