@@ -227,7 +227,7 @@ namespace Scripts {
                 'Beltpouch 2',
             );
             Scripts.Clean.cleanObjectInBag(
-                { graphic: '0x09A8', color: '0x0000', bag: { x: 180, y: 140 } },
+                { graphic: '0x09A8', color: '0x049B', bag: { x: 180, y: 140 } },
                 'Gold bedna',
             );
             Scripts.Clean.cleanObjectInBag({ graphic: '0x1F14', color: '0x0B1D', bag: { x: 165, y: 170 } }, 'NbRuna');
