@@ -6,13 +6,13 @@ const config = Shared.AddVar('config', {
     },
     autoHandlers: {
         autoRename: {
-            enabled: false,
+            enabled: true,
             renameMounts: false,
         },
-        printDamageDiffOnly: false,
+        printDamageDiffOnly: true
     },
     targeting: {
-        highlightEnemySilent: false,
+        highlightEnemySilent: true
     },
     statusBarWrapper: {
         autoCloseTimer: 10000,
