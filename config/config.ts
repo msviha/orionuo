@@ -9,7 +9,7 @@ const config = Shared.AddVar('config', {
             enabled: true,
             renameMounts: false,
         },
-        printDamageDiffOnly: true
+        printDamageDiffOnly: false
     },
     targeting: {
         highlightEnemySilent: true
