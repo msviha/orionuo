@@ -18,7 +18,13 @@ namespace Scripts {
                 Orion.WaitTargetObject('self');
                 Orion.UseObject(kad[0]);
             } else if (shouldCast) {
-                Scripts.Spells.cast('Night Sight', TargetEnum.self);
+                if (Player.Hidden()) {
+                    Scripts.Utils.playerPrint('Odhidni pro svetlo z hlavy', ColorEnum.orange);
+                }
+                else
+                {
+                    Scripts.Spells.cast('Night Sight', TargetEnum.self);
+                }
             }
         }
 

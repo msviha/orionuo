@@ -755,5 +755,24 @@ namespace Scripts {
             }
             return true;
         }
+
+        static getNotorietyNumberFromEnum(notoriety:NotorietyEnum):number {
+            switch (notoriety) {
+                case NotorietyEnum.blue:
+                    return 1;
+                case NotorietyEnum.green:
+                    return 2;
+                case NotorietyEnum.gray:
+                    return 3;
+                case NotorietyEnum.criminal:
+                    return 4;
+                case NotorietyEnum.orange:
+                    return 5;
+                case NotorietyEnum.red:
+                    return 6;
+                case NotorietyEnum.yellow:
+                    return 7;
+            }
+        }
     }
 }

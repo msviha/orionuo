@@ -207,6 +207,7 @@ enum TimersEnum {
     hiding = 'hiding',
     invis = 'invis',
     invisLong = 'invisLong',
+    klamak = 'klamak',
     bandage = 'bandage',
     statusBarTimer = 'statusBarTimer',
 }

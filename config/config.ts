@@ -26,6 +26,17 @@ const config = Shared.AddVar('config', {
             { targetAlias: { alias: 'lasttarget' }, color: '#ff4169E1', active: false },
         ],
     },
+    klamak: {
+        showReadyMessage: true,
+        position: 'LeftTop',
+        type: 'Line|Bar',
+        text: 'Drink',
+        xFromPosition: 0,
+        yFromPosition: 215,
+        textColor: '0x88B',
+        font: 0,
+        backgroundColor: '0x88B',
+    },
     drinkPotion: {
         timer: {
             position: 'LeftTop',

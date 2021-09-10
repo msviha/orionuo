@@ -7,10 +7,12 @@ declare function scheduleClick(s: string): void;
 declare function customStatusBarCallBack(s: string): void;
 declare function version(): void;
 declare function Autostart(): void;
+declare function autoStealing(autoheal: boolean): void;
 declare function addCutWeapon(): void;
 declare function addLootBag(): void;
 declare function addMount(): void;
 declare function alchemy(potionName: PotionsEnum): void;
+declare function autoAmmoRefill(): void;
 declare function mix(potionName: PotionsEnum): void;
 declare function attackLast(): void;
 declare function bishopToggle(): void;
@@ -22,6 +24,7 @@ declare function castNecroScroll(scroll: NecroScrollEnum, target?: string | Targ
 declare function castScroll(scroll: ScrollEnum, target?: string | TargetEnum | Array<ITargetAlias>, backupHeadCast?: string): void;
 declare function cestovniKniha(selection?: PortBookOptionsEnum, destination?: PortBookDestinationsEnum): void;
 declare function cleanObjectInBag(object: any, objectName?: string): void;
+declare function closeStandardStatusBars(notoriety?: NotorietyEnum[], closeInactiveOnly?: boolean): void;
 declare function craftNext(): void;
 declare function craftSelect(): void;
 declare function drink(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean, displayTimers?: boolean, refillEmptyLimit?: number, displayInvisLongTimer?: boolean): void;
@@ -51,6 +54,7 @@ declare function lumber(): void;
 declare function lute(target?: TargetEnum): void;
 declare function make(count: number, objectAsString: string, setInputs?: boolean): void;
 declare function manualTarget(opts?: ITargetNextOpts): void;
+declare function medikHiding(): void;
 declare function mm(requiredCountInTarget?: number): void;
 declare function mmc(requiredCountInTarget?: number): void;
 declare function mount(): void;
@@ -74,8 +78,11 @@ declare function resetWeapons(): void;
 declare function rozbij(ingy?: OcarovaniEnum, kolik?: number): void;
 declare function saveEquip(): void;
 declare function shrinkAll(): void;
+declare function statusAll(notoriery?: NotorietyEnum[], position?: string, id?: number, alwaysClear?: boolean, offset?: number, shiftX?: number, shiftY?: number): void;
 declare function statusBar(): void;
+declare function stealing(): void;
 declare function summon(creature: string, target?: string | TargetEnum | Array<ITargetAlias>): void;
+declare function tailoringTrain(): void;
 declare function taming(allAround?: boolean, opts?: ITamingOptions): void;
 declare function tamingTrain(robeOfDruids?: boolean): void;
 declare function targetNext(timeToStorePreviousTargets?: number, additionalFlags?: FlagsEnum[], notoriety?: NotorietyEnum[], opts?: ITargetNextOpts): void;
@@ -175,10 +182,14 @@ declare namespace Scripts {
         static useGGR(): void;
     }
 }
+declare function displayKlamakInfo(): void;
 declare namespace Scripts {
     class Klamak {
         static next(): void;
         static useKlamak(lvl: number, useAim?: boolean, priorityList?: string[], ignoreSerials?: string[]): void;
+        static klamakCooldown(): void;
+        static displayKlamakTimer(timer?: number): void;
+        static getKlamakTimerByAnimalLoreSkill(): number;
     }
 }
 declare const LOOT_BAG = "loot/bag";
@@ -299,6 +310,9 @@ declare namespace Scripts {
         static drawName(gump: CustomGumpObject, name: any): void;
         static drawHP(gump: CustomGumpObject, hp: number, max: number, poisoned: boolean): void;
         static getHoveringStatusBar(): any;
+        static setMobileArray(nearCharactersUpdate: GameObject[]): void;
+        static closeStandardStatusBars(notoriety?: NotorietyEnum[], closeInactiveOnly?: boolean): void;
+        static statusAll(notoriery?: NotorietyEnum[], position?: string, id?: number, alwaysClear?: boolean, offset?: number, shiftX?: number, shiftY?: number): void;
     }
 }
 declare namespace Scripts {
@@ -328,6 +342,7 @@ declare namespace Scripts {
         static getTargetResult(serial: string, targetAlias?: ITargetAlias, optCondition?: (a: GameObject) => boolean): TargetResult;
         static getTargetResultFromArray(gameObjects: Array<GameObject>, targetAlias?: ITargetAlias, optCondition?: (a: GameObject) => boolean, optSort?: (a: GameObject, b: GameObject) => number): TargetResult;
         static isMobileInjured(gameObject: GameObject): boolean;
+        static resolveTragetManual(target: ITargetAlias): TargetResult;
         static getTarget(targets: string | TargetEnum | Array<ITargetAlias>, maxDistance?: number): TargetResult | undefined;
         static resolveTraget(targets: string | TargetEnum | Array<ITargetAlias>, maxDistance?: number): TargetResult | undefined;
     }
@@ -336,14 +351,15 @@ declare namespace Scripts {
     class TargetResult {
         private serial?;
         private object?;
-        private x?;
-        private y?;
-        private z?;
-        private graphic?;
+        private tile?;
         success(): boolean;
         gameObject(serial?: string): GameObject;
+        selectedTile(selectedTile?: SelectedTile): SelectedTile | undefined;
         isValid(): boolean;
         isStatic(): boolean;
+        X(): number | undefined;
+        Y(): number;
+        Z(): number;
         waitTarget(): void;
     }
 }
@@ -395,6 +411,7 @@ declare namespace Scripts {
         static sayWithColor(text: any, color: any): void;
         static ensureName(obj: GameObject | PlayerCharacter): string;
         static waitForCond(condFce: Function, timeout: number): boolean;
+        static getNotorietyNumberFromEnum(notoriety: NotorietyEnum): number;
     }
 }
 declare namespace Scripts {
@@ -406,6 +423,7 @@ declare namespace Scripts {
         static KPZJump(): void;
         static KPZHpSwitch(): void;
         static useKPZ(cb: Function): boolean;
+        static medikHiding(): void;
     }
 }
 declare namespace Scripts {
@@ -418,6 +436,13 @@ declare namespace Scripts {
 declare namespace Scripts {
     class Necromancer {
         static necroMystic(msg: string): void;
+    }
+}
+declare function _autoAmmoRefill(): void;
+declare namespace Scripts {
+    class Rang {
+        static autoAmmoRefill(): void;
+        static checkAndRefillAmmo(hasAmmoInQuiver: boolean, quiverGameObject: IMyGameObject, ammoGameObject: IMyGameObject, type: string): boolean;
     }
 }
 declare class Vampire {
@@ -450,6 +475,7 @@ declare namespace Scripts {
         static listMakeMenu(): void;
         static confirmMakeMenu(): void;
         static bowcraftTrain(): void;
+        static tailoringTrain(): void;
     }
 }
 declare namespace Scripts {
@@ -515,6 +541,18 @@ declare namespace Scripts {
     }
 }
 declare namespace Scripts {
+    class Stealing {
+        static getStealingIgnoreList(): {
+            name: string;
+            graphic: string;
+            color: string;
+        }[];
+        static getStealingTarget(): string | undefined;
+        static autoStealing(autoheal: boolean): void;
+        static stealing(): void;
+    }
+}
+declare namespace Scripts {
     class Taming {
         static useTrainingTamingStaff(targetSerial: string): boolean;
         static waitOnTaming(animalSerial: string, walkTo?: boolean): string | undefined;
@@ -561,7 +599,8 @@ declare enum TargetEnum {
     mostinjuredalie = "mostinjuredalie",
     mostinjuredalielos = "mostinjuredalielos",
     lasttargetmobile = "lasttargetmobile",
-    hover = "hover"
+    hover = "hover",
+    manual = "manual"
 }
 declare enum CustomStatusBarEnum {
     close = 0,
@@ -699,12 +738,24 @@ declare enum NecroScrollEnum {
     kalnox = "kalnox",
     haluze = "haluze"
 }
+declare enum NecromancySpell {
+    Invalid = 0,
+    SummonUndead = 1,
+    AnimateDead = 2,
+    NecroArmor = 3,
+    Dark = 4,
+    FireBolt = 5,
+    Hallucination = 6,
+    Clumsy = 7,
+    Curse = 8
+}
 declare enum TimersEnum {
     drink = "drink",
     gs = "gs",
     hiding = "hiding",
     invis = "invis",
     invisLong = "invisLong",
+    klamak = "klamak",
     bandage = "bandage",
     statusBarTimer = "statusBarTimer"
 }
@@ -816,6 +867,10 @@ interface IRenamedMob {
 interface ITargetAlias {
     alias: TargetEnum | string;
     maxDistance?: number;
+}
+interface IMobile {
+    serial: string;
+    notoriety: number;
 }
 declare function isMyGameObject(val: any): val is IMyGameObject;
 declare function isMakeProps(val: any): val is IMakeProps;

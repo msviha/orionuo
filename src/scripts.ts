@@ -1,7 +1,7 @@
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 1.2.4');
+    Orion.Print(-1, 'version 1.3.0');
     Orion.Print(-1, '-------------+');
 }
 
@@ -59,9 +59,10 @@ function Autostart() {
             Shared.AddVar('ws', false);
         }
 
-        if (autoHandlers) {
-            const nearCharacters = Orion.FindTypeEx('any', '0xFFFF', 'ground', 'live', autoDinstance);
+        const nearCharacters = Orion.FindTypeEx('any', '0xFFFF', 'ground', 'live', autoDinstance);
+        Scripts.Statusbar.setMobileArray(nearCharacters);
 
+        if (autoHandlers) {
             if (autoRename) {
                 const doneList: Array<IRenamedMob> = Shared.GetArray(
                     'autoHandlers.autoRename.doneList',
@@ -114,6 +115,17 @@ function Autostart() {
 }
 
 /**
+ * Bezi stale a okrada monstra s moznosti automatickeho leceni
+ * @param autoheal - true = moznost automatickeho leceni do plna
+ * @example in client `_autoStealing`
+ * @example external code `autoStealing();`
+ * @example external code `autoStealing(true);`
+ */
+function autoStealing(autoheal:boolean) {
+    Scripts.Stealing.autoStealing(autoheal);
+}
+
+/**
  * Nastavi do Orion assistanta `cutWeapon` List Object (napr. pro script na lootovani, nebo samotne rezani tel)
  * @example in client `_addCutWeapon`
  * @example external code `addCutWeapon();`
@@ -148,6 +160,15 @@ function addMount() {
  */
 function alchemy(potionName: PotionsEnum) {
     Scripts.Alchemy.mix(potionName);
+}
+
+/**
+ * Bezi na pozadi, hlida a doplnuje strelivo z toulcu
+ * @example in client `_autoAmmoRefill`
+ * @example external code `autoAmmoRefill();`
+ */
+function autoAmmoRefill() {
+    Scripts.Rang.autoAmmoRefill();
 }
 
 /**
@@ -267,6 +288,18 @@ function cestovniKniha(selection = PortBookOptionsEnum.kop, destination?:PortBoo
  */
 function cleanObjectInBag(object: any, objectName?: string) {
     Scripts.Clean.cleanObjectInBag(object, objectName);
+}
+
+/**
+ * Zavre standardni statusbary (defaultne jen ty co jsou neaktivni)
+ * @param notoriety - jake statusbary zavirat
+ * @param closeInactiveOnly - default true - zavira jen neaktivni statusbary v zavislosti na uvedene notoriety
+ * @example external code `closeStandardStatusBars(); - zavre vsechny neaktivni statusbary`
+ * @example external code `closeStandardStatusBars([NotorietyEnum.gray, NotorietyEnum.red]]); - zavre vsechny neaktivni statusbary co patrili sedym a cervenym jednotkam`
+ * @example external code `closeStandardStatusBars([NotorietyEnum.gray, NotorietyEnum.red]], false); - zavre vsechny statusbary co patrili sedym a cervenym jednotkam`
+ */
+function closeStandardStatusBars(notoriety?:NotorietyEnum[], closeInactiveOnly = true) {
+    Scripts.Statusbar.closeStandardStatusBars(notoriety, closeInactiveOnly);
 }
 
 /**
@@ -601,6 +634,14 @@ function manualTarget(opts: ITargetNextOpts = TARGET_OPTS_DEFAULTS) {
 }
 
 /**
+ * Hiduje s Medicem s lucernou
+ * @example external code `medikHiding;`
+ */
+function medikHiding() {
+    Scripts.Clerik.medikHiding();
+}
+
+/**
  * Mass move checkuje jen graphic a presouva i itemy s rozdilnou barvou, pokud se item stackuje tak se zepta po kolika kusech to budes prehazovat
  * @param requiredCountInTarget {number} kolik toho ma byt celkem v cilovem kontejneru
  * @example in client `_mm` vyhodi zamerovac co chces presunout a kam
@@ -825,12 +866,45 @@ function shrinkAll() {
 }
 
 /**
+ * Otevre usporadane custom status bary viditelnych jednotek v okoli
+ * @param notoriery - pole barvicek pro jake jednotky chceme statusbary otevrit
+ * @param position - 'LeftTop' / 'RightTop' / 'TopLeft' / 'BottomLeft'
+ * @param id - ciselna identifikace statusbaru (pokud budu volat na dvou ruznych hotkeys pro pratele a enemy, aby se neprepisovali)
+ * @param alwaysClear - pred otevrenim statusbaru, zrusi predchozi
+ * @param offset ciselna hodnota rozestupu mezi statusbary
+ * @param shiftX ciselna hodnota posunu celeho sloupce po ose x
+ * @param shiftY ciselna hodnota posunu celeho sloupce po ose y
+ * @example external code `statusAll([NotorietyEnum.blue, NotorietyEnum.green], 'TopLeft', false, 1, 5, 0, 0)`
+ * @example external code `statusAll([NotorietyEnum.red], 'LeftTop', true, 2, 5, 0, 0)`
+ */
+function statusAll(
+    notoriery:NotorietyEnum[] = [],
+    position = 'RightTop',
+    id = 0,
+    alwaysClear = false,
+    offset = 5,
+    shiftX = 0,
+    shiftY = 0
+) {
+    Scripts.Statusbar.statusAll(notoriery, position, id, alwaysClear, offset, shiftX, shiftY);
+}
+
+/**
  * Vytvori zalozku s hpckama
  * @example in client `_statusBar`
  * @example external code `statusBar()`
  */
 function statusBar() {
     Scripts.Statusbar.create();
+}
+
+/**
+ * Okradani monster
+ * @example in client `_stealing`
+ * @example external code `stealing()`
+ */
+function stealing() {
+    Scripts.Stealing.stealing();
 }
 
 /**
@@ -842,6 +916,15 @@ function statusBar() {
  */
 function summon(creature: string, target?: string | TargetEnum | Array<ITargetAlias>) {
     Scripts.Spells.summon(creature, target);
+}
+
+/**
+ * trenink tailoringu
+ * @example in client `_tailoringTrain`
+ * @example external code `tailoringTrain()`
+ */
+function tailoringTrain() {
+    Scripts.Crafting.tailoringTrain();
 }
 
 /**

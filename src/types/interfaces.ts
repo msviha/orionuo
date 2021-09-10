@@ -99,3 +99,8 @@ interface ITargetAlias {
     alias: TargetEnum | string;
     maxDistance?: number;
 }
+
+interface IMobile {
+    serial: string;
+    notoriety: number;
+}

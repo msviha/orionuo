@@ -33,6 +33,28 @@ const gameObject: any = {
             graphic: '0x0E20',
             color: '0x0000',
         },
+        sipy: {
+            name: 'arrow',
+            graphic: '0x0F3F',
+            color: '0x0000'
+        },
+        sipky: {
+            name: 'crossbow bolt',
+            graphic: '0x1BFB',
+            color: '0x0000'
+        },
+        sipyToulec: {
+            graphic: '0x1EA0',
+            color: '0x0747'
+        },
+        sipkyToulec: {
+            graphic: '0x1EA0',
+            color: '0x083A'
+        },
+        kapsarskeNaradicko: {
+            graphic: '0x1EB8',
+            color: '0x0749'
+        },
         salat: {
             name: 'Ginseng Salad',
             graphic: '0x09EC',
@@ -1015,6 +1037,26 @@ const gameObject: any = {
                         menu: {
                             name: 'Tinkering',
                             selections: ['Special Items', 'Magic Ball (10 charges)'],
+                        },
+                    },
+                },
+                crystalBall: {
+                    graphic: '0x0E2D',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.gold', count: 5 },
+                                { item: 'gameObject.resources.ingots.iron', count: 1 }
+                            ],
+                            crafting: [
+                                { item: 'gameObject.crafting.tinkering.wires.silver', count: 5 }
+                            ],
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Special Items', 'Crystal Ball (1 charge)'],
                         },
                     },
                 },

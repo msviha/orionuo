@@ -1,5 +1,25 @@
 # CHANGELOG
 
+## 1.3.0
+
+### fixes
+- `wos` - vyzadovalo 2x target pro casteni ze svitku a ukazovalo spatne timer
+
+### enhancements
+- `light` - pokud jste v hidu, tak nekouzli svetlo z hlavy
+- `hiding` - nehiduje znovu, pokud uz jste v hidu
+- `inscription` - pridana meditace do drink timeru
+- `useKlamak` & `mount` - pri odshrinknuti peta zobrazuje timer - s moznosti nastaveni umisteni a vypnuti upozorneni KLAMAK READY skrze config
+
+### features
+- `autoAmmoRefill` - script co vam automaticky doplnuje strelivo
+- `autoStealing` - script co vam automaticky doplnuje strelivo
+- `closeStandardStatusBars` - zavre standardni statusbary (defaultne jen ty co jsou neaktivni)
+- `medikHiding` - hidovani medika s lucernou
+- `statusAll` - otevre usporadane custom status bary viditelnych jednotek v okoli
+- `stealing` - okradani monster
+- `tailoringTrain` - prvni verze treninku tailoringu
+
 ## 1.2.4
 
 ### fixes

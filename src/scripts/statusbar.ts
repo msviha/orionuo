@@ -10,6 +10,11 @@ namespace Scripts {
             } else if (mobile && typeof mobile === 'string') {
                 mobile = Orion.FindObject(mobile);
             }
+
+            if (!mobile) {
+                return;
+            }
+
             mobile = <GameObject>mobile;
 
             const serial = mobile.Serial();
@@ -310,6 +315,125 @@ namespace Scripts {
                 }
             }
             return null;
+        }
+
+        static setMobileArray(nearCharactersUpdate:GameObject[]) {
+            let mobileArray:IMobile[] = Shared.GetArray('mobileArray', []);
+
+            nearCharactersUpdate.forEach((gameObject) => {
+                let found = false;
+                mobileArray.forEach((mobile) => {
+                    if (mobile.serial === gameObject.Serial()) {
+                        mobile = {
+                            serial: gameObject.Serial(),
+                            notoriety: gameObject.Notoriety()
+                        }
+                        found = true;
+                        return;
+                    }
+                });
+                if (!found) {
+                    mobileArray.push({
+                        serial: gameObject.Serial(),
+                        notoriety: gameObject.Notoriety()
+                    });
+                }
+            });
+            Shared.AddArray('mobileArray', mobileArray);
+        }
+
+        static closeStandardStatusBars(notoriety?:NotorietyEnum[], closeInactiveOnly = true) {
+            let mobileArray:IMobile[] = Shared.GetArray('mobileArray', []);
+
+            if (notoriety) {
+                notoriety.forEach((n) => {
+                    const notorietyNum = Scripts.Utils.getNotorietyNumberFromEnum(n);
+                    mobileArray = mobileArray.filter((m) => {
+                        return m.notoriety === notorietyNum
+                    });
+                });
+            }
+
+            if (closeInactiveOnly) {
+                mobileArray = mobileArray.filter((m) => {
+                    return !Orion.ObjectExists(m.serial);
+                });
+            }
+
+            mobileArray.forEach((m) => {
+                m.serial !== Player.Serial() && Orion.CloseStatusbar(m.serial);
+            });
+        }
+
+        static statusAll(
+            notoriery:NotorietyEnum[] = [],
+            position = 'RightTop',
+            id = 0,
+            alwaysClear = false,
+            offset = 5,
+            shiftX = 0,
+            shiftY = 0
+        ) {
+            const scale = (config?.statusBar?.scale ?? 100) / 100;
+            const barHeight = 42 * scale;
+            const barWidth = 140 * scale;
+            const notorieties = notoriery.join('|');
+            const nearCharacters = Orion.FindTypeEx('any', '0xFFFF', 'ground', 'mobile|ignoreself', 18, notorieties);
+            const gameWindowX = Orion.ClientOptionGet('GameWindowX');
+            const gameWindowY = Orion.ClientOptionGet('GameWindowY');
+            const gameWindowWidth = Orion.ClientOptionGet('GameWindowWidth');
+            const gameWindowHeight = Orion.ClientOptionGet('GameWindowHeight');
+
+            let statusAllStatusBars = Shared.GetArray(`statusAllStatusBars${id}`, []);
+            // clearing the previously opened statusBars if it is enabled
+            if (alwaysClear) {
+                for (const serial of statusAllStatusBars) {
+                    Scripts.Statusbar.close(serial);
+                }
+                statusAllStatusBars = [];
+            }
+
+            for (const char of nearCharacters) {
+                statusAllStatusBars.indexOf(char.Serial()) === -1 && statusAllStatusBars.push(char.Serial());
+            }
+
+            let positionId = 0
+            for (const serial of statusAllStatusBars) {
+                if (!Scripts.Statusbar.exists(serial) && !Orion.FindObject(serial)) {
+                    continue;
+                }
+
+                let x = 0;
+                let y = 0;
+                switch (position) {
+                    case 'RightTop':
+                        x = gameWindowX + gameWindowWidth + shiftX;
+                        y = (gameWindowY + shiftY) + ((barHeight + offset) * positionId);
+                        break;
+                    case 'LeftTop':
+                        x = gameWindowX - barWidth + shiftX;
+                        y = (gameWindowY + shiftY) + ((barHeight + offset) * positionId);
+                        break;
+                    case 'TopLeft':
+                        x = gameWindowX + shiftX  + ((barWidth + offset) * positionId);
+                        y = gameWindowY - barHeight + shiftY;
+                        break;
+                    case 'BottomLeft':
+                        x = gameWindowX + shiftX  + ((barWidth + offset) * positionId);
+                        y = gameWindowY + gameWindowHeight + shiftY;
+                        break;
+                    default:
+                        break;
+                }
+
+                !Scripts.Statusbar.exists(serial) && Scripts.Statusbar.create(serial, {x, y});
+                const gump = Orion.CreateCustomGump(parseInt(serial, 16));
+                gump.SetX(x);
+                gump.SetY(y);
+                gump.Update();
+                positionId++;
+            }
+            Shared.AddArray(`statusAllStatusBars${id}`, statusAllStatusBars);
         }
     }
 }

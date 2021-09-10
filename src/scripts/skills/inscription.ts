@@ -50,7 +50,8 @@ namespace Scripts {
                 if (Player.Mana() + 70 < Player.Int()) {
                     const isDrinkTimerSet = Orion.Timer(TimersEnum.drink) !== -1;
                     while (isDrinkTimerSet && Orion.Timer(TimersEnum.drink) < 18000) {
-                        Orion.Wait(200);
+                        Orion.UseSkill('Meditation');
+                        Orion.Wait(3050);
                     }
                     Scripts.Potions.drinkPotion(PotionsEnum.tmr);
                 }

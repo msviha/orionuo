@@ -121,5 +121,32 @@ namespace Scripts {
                 cb();
             }
         }
+
+        static medikHiding() {
+            if (Player.Hidden()) {
+                Scripts.Utils.playerPrint('V hidu uz jsi.');
+                return;
+            }
+
+            Orion.ClearJournal();
+            Orion.Print(ColorEnum.none, 'Start Medik Hiding');
+            var headerStit = Orion.FindType('0x1B76');
+            if (headerStit.length) {
+                Orion.UseType('0x1B76');
+            }
+            else
+            {
+                Orion.Disarm();
+            }
+            Orion.UseSkill('Hiding');
+            Orion.Wait(100);
+            if (Orion.InJournal('You must wait')) {
+                Orion.ClearJournal('You must wait');
+                return;
+            }
+            Orion.Wait(100);
+            Orion.UseType('0x0A15'); // lucerna ?
+            Orion.Exec('_hidingPreoccupiedCheck', true);
+        }
     }
 }

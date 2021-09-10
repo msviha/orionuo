@@ -279,5 +279,51 @@ namespace Scripts {
                 Orion.Wait(responseDelay);
             }
         }
+
+        static tailoringTrain() {
+            Scripts.Utils.createGameObjectSelections([
+                { ask: 'Target container with folded cloth', addObject: 'clothContainer' }
+            ]);
+
+            const kitO = {graphic: '0x0F9D', color: '0x0000'};
+            const kit = Scripts.Utils.findFirstType(kitO);
+            const scissorsO = {graphic: '0x0F9E', color: '0x0000'};
+            const scissors = Scripts.Utils.findFirstType(scissorsO);
+            if (!kit) {
+                Scripts.Utils.log('nemas sewing kit', ColorEnum.red);
+            }
+            if (!scissors) {
+                Scripts.Utils.log('nemas scissors', ColorEnum.red);
+            }
+
+            while (true) {
+                Orion.ClearJournal();
+                Orion.Wait(50);
+
+                Scripts.Utils.refill(gameObject.resources.foldedCloth, 'clothContainer', 20, undefined, true, 'folded cloth');
+                const c = Scripts.Utils.findFirstType(gameObject.resources.foldedCloth);
+                Orion.MoveItem(c, 1, 'backpack', 20, 20);
+                Orion.Wait(responseDelay);
+
+                Scripts.Utils.selectMenu('Cloth', ['Headwear', 'Bandana']);
+                Orion.WaitTargetObject(c);
+                Orion.UseObject(kit);
+
+                Scripts.Utils.waitWhileSomethingInJournal(['Tailoring failed', 'You put the bandana']);
+                let bandana = Orion.FindType('0x153F', '0x0000');
+                while (bandana.length) {
+                    Orion.WaitTargetObject(bandana[0]);
+                    Orion.UseType('0x0F9E');
+                    Orion.Wait(responseDelay);
+                    bandana = Orion.FindType('0x153F', '0x0000');
+                }
+                Orion.Wait(100);
+                const bandage = Orion.FindType('0x0E21', '0x0000');
+                if (bandage.length) {
+                    Orion.MoveItem(bandage[0], undefined, 'clothContainer');
+                }
+                Orion.Wait(responseDelay);
+            }
+        }
     }
 }

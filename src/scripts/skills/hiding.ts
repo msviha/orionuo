@@ -13,6 +13,11 @@ namespace Scripts {
  * @internal
  */
 function _hiding() {
+    if (Player.Hidden()) {
+        Scripts.Utils.playerPrint('V hidu uz jsi.');
+        return;
+    }
+
     Orion.ClearJournal();
     Orion.Print(ColorEnum.none, 'Start Hiding');
     Orion.UseSkill('Hiding');

@@ -1,3 +1,21 @@
+/**
+ * @internal
+ */
+function displayKlamakInfo() {
+    const klamakTimer = Scripts.Klamak.getKlamakTimerByAnimalLoreSkill();
+    let time = 1000;
+    Orion.Wait(time);
+    while (Orion.Timer(TimersEnum.klamak) >= 1000) {
+        if (time >= klamakTimer) {
+            Scripts.Utils.playerPrint(`[ KLAMAK READY ]`, ColorEnum.pureWhite);
+            break;
+        }
+        const addTime = 250;
+        Orion.Wait(addTime);
+        time += addTime;
+    }
+}
+
 namespace Scripts {
     // todo work in progress
     export class Klamak {
@@ -88,7 +106,61 @@ namespace Scripts {
             }
             Orion.WarMode(true);
             Orion.Wait(100);
+            Orion.ClearJournal('You cannot unshrink creature');
             Orion.UseObject(findSerial);
+
+            const unshrinkSuccess = Scripts.Utils.waitWhileSomethingInJournal(['You cannot unshrink creature'], 100, 5) !== 0;
+            unshrinkSuccess && Scripts.Klamak.klamakCooldown();
+        }
+
+        static klamakCooldown() {
+            const petCoolDown = Scripts.Klamak.getKlamakTimerByAnimalLoreSkill();
+            Scripts.Klamak.displayKlamakTimer(petCoolDown);
+            config?.klamak.showReadyMessage && Orion.Exec('displayKlamakInfo', false);
+        }
+
+        static displayKlamakTimer(timer = 0) {
+            if (timer <= 0) {
+                return;
+            }
+
+            const klamakTimerConfig = config?.klamak.timer;
+            Orion.AddDisplayTimer(
+                TimersEnum.klamak,
+                timer,
+                klamakTimerConfig?.position || 'LeftTop',
+                klamakTimerConfig?.type || 'Line|Bar',
+                klamakTimerConfig?.text || 'Klamak',
+                klamakTimerConfig?.xFromPosition || 0,
+                klamakTimerConfig?.yFromPosition || 215,
+                klamakTimerConfig?.textColor || '0x88B',
+                klamakTimerConfig?.font || 0,
+                klamakTimerConfig?.backgroundColor || '0x88B',
+            );
+            Scripts.Utils.resetTimer(TimersEnum.klamak);
+        }
+
+        static getKlamakTimerByAnimalLoreSkill():number {
+            const animalLoreSkill = Orion.SkillValue('Animal Lore');
+            let klamakTimer = 0;
+
+            if (animalLoreSkill >= 1100) {
+                klamakTimer = 2000;
+            }
+            else if (animalLoreSkill >= 1000) {
+                klamakTimer = 7000;
+            }
+            else if (animalLoreSkill >= 900) {
+                klamakTimer = 18000;
+            }
+            else if (animalLoreSkill >= 600) {
+                klamakTimer = 42000;
+            }
+            else if (animalLoreSkill >= 500) {
+                klamakTimer = 49000;
+            }
+
+            return klamakTimer;
         }
     }
 }

@@ -146,7 +146,9 @@ namespace Scripts {
                 return;
             }
 
-            scroll ? Scripts.Spells.castScroll(ScrollEnum.wos) : Scripts.Spells.cast('Wall of Stone', undefined, true);
+            scroll ?
+                Scripts.Spells.castScroll(ScrollEnum.wos, undefined, undefined, true) :
+                Scripts.Spells.cast('Wall of Stone', undefined, true);
 
             if (target.mobile) {
                 // nebudu slozite handlovat kde se ma zobrazit timer kdyz tam bude dira ve zdi a nechci aby byl nad hracem/mobile
