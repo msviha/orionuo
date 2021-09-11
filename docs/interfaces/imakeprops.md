@@ -24,7 +24,7 @@
 
 •  **menu**: [IMenuWithSelections](imenuwithselections.md)
 
-*Defined in [types/interfaces.ts:49](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/interfaces.ts#L49)*
+*Defined in [types/interfaces.ts:49](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/interfaces.ts#L49)*
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 • `Optional` **outputCount**: number
 
-*Defined in [types/interfaces.ts:50](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/interfaces.ts#L50)*
+*Defined in [types/interfaces.ts:50](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/interfaces.ts#L50)*
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 • `Optional` **refill**: [IRefillProps](irefillprops.md)
 
-*Defined in [types/interfaces.ts:48](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/interfaces.ts#L48)*
+*Defined in [types/interfaces.ts:48](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/interfaces.ts#L48)*
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 •  **tool**: string
 
-*Defined in [types/interfaces.ts:46](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/interfaces.ts#L46)*
+*Defined in [types/interfaces.ts:46](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/interfaces.ts#L46)*
 
 ___
 
@@ -56,4 +56,4 @@ ___
 
 • `Optional` **toolTarget**: string
 
-*Defined in [types/interfaces.ts:47](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/interfaces.ts#L47)*
+*Defined in [types/interfaces.ts:47](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/interfaces.ts#L47)*

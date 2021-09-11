@@ -14,6 +14,7 @@
 * [hiding](timersenum.md#hiding)
 * [invis](timersenum.md#invis)
 * [invisLong](timersenum.md#invislong)
+* [klamak](timersenum.md#klamak)
 * [statusBarTimer](timersenum.md#statusbartimer)
 
 ## Enumeration members
@@ -22,7 +23,7 @@
 
 •  **bandage**:  = "bandage"
 
-*Defined in [types/enums.ts:162](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L162)*
+*Defined in [types/enums.ts:211](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/enums.ts#L211)*
 
 ___
 
@@ -30,7 +31,7 @@ ___
 
 •  **drink**:  = "drink"
 
-*Defined in [types/enums.ts:157](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L157)*
+*Defined in [types/enums.ts:205](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/enums.ts#L205)*
 
 ___
 
@@ -38,7 +39,7 @@ ___
 
 •  **gs**:  = "gs"
 
-*Defined in [types/enums.ts:158](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L158)*
+*Defined in [types/enums.ts:206](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/enums.ts#L206)*
 
 ___
 
@@ -46,7 +47,7 @@ ___
 
 •  **hiding**:  = "hiding"
 
-*Defined in [types/enums.ts:159](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L159)*
+*Defined in [types/enums.ts:207](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/enums.ts#L207)*
 
 ___
 
@@ -54,7 +55,7 @@ ___
 
 •  **invis**:  = "invis"
 
-*Defined in [types/enums.ts:160](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L160)*
+*Defined in [types/enums.ts:208](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/enums.ts#L208)*
 
 ___
 
@@ -62,7 +63,15 @@ ___
 
 •  **invisLong**:  = "invisLong"
 
-*Defined in [types/enums.ts:161](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L161)*
+*Defined in [types/enums.ts:209](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/enums.ts#L209)*
+
+___
+
+### klamak
+
+•  **klamak**:  = "klamak"
+
+*Defined in [types/enums.ts:210](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/enums.ts#L210)*
 
 ___
 
@@ -70,4 +79,4 @@ ___
 
 •  **statusBarTimer**:  = "statusBarTimer"
 
-*Defined in [types/enums.ts:163](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L163)*
+*Defined in [types/enums.ts:212](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/enums.ts#L212)*

@@ -17,7 +17,7 @@
 
 •  **click**:  = 666
 
-*Defined in [types/enums.ts:43](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L43)*
+*Defined in [types/enums.ts:46](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/enums.ts#L46)*
 
 ___
 
@@ -25,4 +25,4 @@ ___
 
 •  **close**:  = 0
 
-*Defined in [types/enums.ts:42](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L42)*
+*Defined in [types/enums.ts:45](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/enums.ts#L45)*

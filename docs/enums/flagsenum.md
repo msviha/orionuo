@@ -32,7 +32,7 @@
 
 •  **dead**:  = "dead"
 
-*Defined in [types/enums.ts:99](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L99)*
+*Defined in [types/enums.ts:131](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/enums.ts#L131)*
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 •  **fast**:  = "fast"
 
-*Defined in [types/enums.ts:92](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L92)*
+*Defined in [types/enums.ts:124](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/enums.ts#L124)*
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 •  **human**:  = "human"
 
-*Defined in [types/enums.ts:96](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L96)*
+*Defined in [types/enums.ts:128](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/enums.ts#L128)*
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 •  **ignoreenemies**:  = "ignoreenemies"
 
-*Defined in [types/enums.ts:104](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L104)*
+*Defined in [types/enums.ts:136](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/enums.ts#L136)*
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 •  **ignorefriendlytypes**:  = "ignorefriendlytypes"
 
-*Defined in [types/enums.ts:103](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L103)*
+*Defined in [types/enums.ts:135](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/enums.ts#L135)*
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 •  **ignorefriends**:  = "ignorefriends"
 
-*Defined in [types/enums.ts:102](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L102)*
+*Defined in [types/enums.ts:134](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/enums.ts#L134)*
 
 ___
 
@@ -80,7 +80,7 @@ ___
 
 •  **ignoreself**:  = "ignoreself"
 
-*Defined in [types/enums.ts:105](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L105)*
+*Defined in [types/enums.ts:137](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/enums.ts#L137)*
 
 ___
 
@@ -88,7 +88,7 @@ ___
 
 •  **injured**:  = "injured"
 
-*Defined in [types/enums.ts:100](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L100)*
+*Defined in [types/enums.ts:132](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/enums.ts#L132)*
 
 ___
 
@@ -96,7 +96,7 @@ ___
 
 •  **inlos**:  = "inlos"
 
-*Defined in [types/enums.ts:106](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L106)*
+*Defined in [types/enums.ts:138](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/enums.ts#L138)*
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 •  **item**:  = "item"
 
-*Defined in [types/enums.ts:95](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L95)*
+*Defined in [types/enums.ts:127](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/enums.ts#L127)*
 
 ___
 
@@ -112,7 +112,7 @@ ___
 
 •  **live**:  = "live"
 
-*Defined in [types/enums.ts:98](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L98)*
+*Defined in [types/enums.ts:130](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/enums.ts#L130)*
 
 ___
 
@@ -120,7 +120,7 @@ ___
 
 •  **mobile**:  = "mobile"
 
-*Defined in [types/enums.ts:94](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L94)*
+*Defined in [types/enums.ts:126](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/enums.ts#L126)*
 
 ___
 
@@ -128,7 +128,7 @@ ___
 
 •  **near**:  = "near"
 
-*Defined in [types/enums.ts:93](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L93)*
+*Defined in [types/enums.ts:125](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/enums.ts#L125)*
 
 ___
 
@@ -136,7 +136,7 @@ ___
 
 •  **nearmouse**:  = "nearmouse"
 
-*Defined in [types/enums.ts:107](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L107)*
+*Defined in [types/enums.ts:139](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/enums.ts#L139)*
 
 ___
 
@@ -144,7 +144,7 @@ ___
 
 •  **next**:  = "next"
 
-*Defined in [types/enums.ts:101](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L101)*
+*Defined in [types/enums.ts:133](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/enums.ts#L133)*
 
 ___
 
@@ -152,7 +152,7 @@ ___
 
 •  **nothuman**:  = "nothuman"
 
-*Defined in [types/enums.ts:97](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L97)*
+*Defined in [types/enums.ts:129](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/enums.ts#L129)*
 
 ___
 
@@ -160,4 +160,4 @@ ___
 
 •  **recurse**:  = "recurse"
 
-*Defined in [types/enums.ts:108](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L108)*
+*Defined in [types/enums.ts:140](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/enums.ts#L140)*

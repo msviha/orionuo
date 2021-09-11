@@ -874,8 +874,8 @@ function shrinkAll() {
  * @param offset ciselna hodnota rozestupu mezi statusbary
  * @param shiftX ciselna hodnota posunu celeho sloupce po ose x
  * @param shiftY ciselna hodnota posunu celeho sloupce po ose y
- * @example external code `statusAll([NotorietyEnum.blue, NotorietyEnum.green], 'TopLeft', false, 1, 5, 0, 0)`
- * @example external code `statusAll([NotorietyEnum.red], 'LeftTop', true, 2, 5, 0, 0)`
+ * @example external code `statusAll([NotorietyEnum.blue, NotorietyEnum.green], 'TopLeft', 1, false, 1, 5, 0, 0)`
+ * @example external code `statusAll([NotorietyEnum.red], 'LeftTop', 2, true, 1, 5, 0, 0)`
  */
 function statusAll(
     notoriery:NotorietyEnum[] = [],

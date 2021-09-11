@@ -17,7 +17,7 @@
 
 •  **autoName**:  = "autoName"
 
-*Defined in [types/enums.ts:189](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L189)*
+*Defined in [types/enums.ts:238](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/enums.ts#L238)*
 
 ___
 
@@ -25,4 +25,4 @@ ___
 
 •  **nameList**:  = "nameList"
 
-*Defined in [types/enums.ts:190](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L190)*
+*Defined in [types/enums.ts:239](https://github.com/msviha/orionuo/blob/6aeb0e0/src/types/enums.ts#L239)*
