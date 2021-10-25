@@ -3,18 +3,25 @@
  */
 namespace Scripts {
     export class Hiding {
-        static hiding() {
-            Orion.Exec('_hiding', true);
+        static hiding(allowRehid = true, doubleTapToRehid = false) {
+            const allowRehidString = allowRehid === true ? '1' : '';
+            const doubleTapToRehidString = doubleTapToRehid === true ? '1' : '';
+            Orion.Exec('_hiding', true, [allowRehidString, doubleTapToRehidString]);
         }
     }
 }
 
 /**
  * @internal
+ * string '' or '1' to translate boolean
  */
-function _hiding() {
+function _hiding(allowRehid:string, doubleTapToRehid:string) {
     if (Player.Hidden()) {
-        if (!Orion.TimerExists('hidingTimer') || Orion.Timer('hidingTimer') > 200) {
+        if (!allowRehid) {
+            Scripts.Utils.playerPrint('V hidu uz jsi.');
+            return;
+        }
+        else if (doubleTapToRehid && (!Orion.TimerExists('hidingTimer') || Orion.Timer('hidingTimer') > 200)) {
             Scripts.Utils.playerPrint('V hidu uz jsi.');
             Orion.SetTimer('hidingTimer');
             return;
@@ -29,13 +36,13 @@ function _hiding() {
         Orion.ClearJournal('You must wait');
         return;
     }
-    Orion.Exec('_hidingPreoccupiedCheck', true);
+    Orion.Exec('_hidingPreoccupiedCheck', true, [allowRehid, doubleTapToRehid]);
 }
 
 /**
  * @internal
  */
-function _hidingPreoccupiedCheck() {
+function _hidingPreoccupiedCheck(allowRehid:string, doubleTapToRehid:string) {
     const hidTimer = config?.hiding?.timer;
     Orion.AddDisplayTimer(
         TimersEnum.hiding,
@@ -63,6 +70,6 @@ function _hidingPreoccupiedCheck() {
         Orion.WarMode(true);
         Orion.Wait(100);
         Orion.Print(ColorEnum.none, 'preoccupied - trying to hide again');
-        Orion.Exec('_hiding', true);
+        Orion.Exec('_hiding', true, [allowRehid, doubleTapToRehid]);
     }
 }

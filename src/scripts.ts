@@ -497,9 +497,11 @@ function hideAll() {
  * Hidne hrace
  * @example [_hiding](../examples/hiding.gif)
  * @example external code `hiding();`
+ * @example external code `hiding(false);` znemozni hidnout pokud uz jsi v hidu
+ * @example external code `hiding(false, true);` umozni hidnout pokud uz jsi v hidu jen pomoci rychleho zavolani 2x
  */
-function hiding() {
-    Scripts.Hiding.hiding();
+function hiding(allowRehid = true, doubleTapToRehid = false) {
+    Scripts.Hiding.hiding(allowRehid, doubleTapToRehid);
 }
 
 /**
