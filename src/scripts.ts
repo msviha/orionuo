@@ -507,10 +507,11 @@ function hiding() {
  * @param circle {number} cislo kruhu kouzel ve kterem se kouzlo nachazi
  * @param spell {string} nazev kouzla (z nabidky ktera vyskoci kdyz vyberete kruh kouzel)
  * @param quantity {number} pocet svitku k napsani (0 je default a znamena, ze pise dokud nedojde spotrebak)
+ * @param useManaRef {boolean} pouzivani malych mana ref potionu
  * @example external code `inscription(2, 'Resurrection', 20);`
  */
-function inscription(circle: number, spell: string, quantity = 0) {
-    Scripts.Inscription.inscription(circle, spell, quantity);
+function inscription(circle: number, spell: string, quantity = 0, useManaRef = false) {
+    Scripts.Inscription.inscription(circle, spell, quantity, useManaRef);
 }
 
 /**

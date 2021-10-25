@@ -1,6 +1,6 @@
 namespace Scripts {
     export class Inscription {
-        static inscription(circle: number, spell: string, quantity = 0) {
+        static inscription(circle: number, spell: string, quantity = 0, useManaRef = false) {
             const menuName = 'Spell Circles';
             const spellCircle = `Spell Circle ${circle}`;
             const blank = gameObject.scrolls.blank;
@@ -47,13 +47,13 @@ namespace Scripts {
                 totalTries++;
                 Scripts.Utils.log(`napsano ${finishedCount} / ${totalTries}`);
 
-                if (Player.Mana() + 70 < Player.Int()) {
+                if (Player.Mana() + (useManaRef ? 35 : 70) < Player.Int()) {
                     const isDrinkTimerSet = Orion.Timer(TimersEnum.drink) !== -1;
                     while (isDrinkTimerSet && Orion.Timer(TimersEnum.drink) < 18000) {
                         Orion.UseSkill('Meditation');
                         Orion.Wait(3050);
                     }
-                    Scripts.Potions.drinkPotion(PotionsEnum.tmr);
+                    Scripts.Potions.drinkPotion(useManaRef ? PotionsEnum.mr : PotionsEnum.tmr);
                 }
             }
         }
