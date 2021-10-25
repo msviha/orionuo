@@ -14,8 +14,11 @@ namespace Scripts {
  */
 function _hiding() {
     if (Player.Hidden()) {
-        Scripts.Utils.playerPrint('V hidu uz jsi.');
-        return;
+        if (!Orion.TimerExists('hidingTimer') || Orion.Timer('hidingTimer') > 200) {
+            Scripts.Utils.playerPrint('V hidu uz jsi.');
+            Orion.SetTimer('hidingTimer');
+            return;
+        }
     }
 
     Orion.ClearJournal();
