@@ -500,13 +500,8 @@ function hideAll() {
  * @example external code `hiding(false);` znemozni hidnout pokud uz jsi v hidu
  * @example external code `hiding(false, true);` umozni hidnout pokud uz jsi v hidu jen pomoci rychleho zavolani 2x
  */
-<<<<<<< HEAD
- function hiding(dumbCheck:boolean = false) {
-    Scripts.Hiding.hiding(dumbCheck);
-=======
 function hiding(allowRehid = true, doubleTapToRehid = false) {
     Scripts.Hiding.hiding(allowRehid, doubleTapToRehid);
->>>>>>> 7e1849a4b928301347c36508336249bf0cef024e
 }
 
 /**

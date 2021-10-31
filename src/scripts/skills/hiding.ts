@@ -3,15 +3,10 @@
  */
 namespace Scripts {
     export class Hiding {
-<<<<<<< HEAD
-        static hiding(dumbCheck:boolean = false) {
-            Orion.Exec('_hiding', true,[ dumbCheck + "" ]);
-=======
         static hiding(allowRehid = true, doubleTapToRehid = false) {
             const allowRehidString = allowRehid === true ? '1' : '';
             const doubleTapToRehidString = doubleTapToRehid === true ? '1' : '';
             Orion.Exec('_hiding', true, [allowRehidString, doubleTapToRehidString]);
->>>>>>> 7e1849a4b928301347c36508336249bf0cef024e
         }
     }
 }
@@ -20,12 +15,6 @@ namespace Scripts {
  * @internal
  * string '' or '1' to translate boolean
  */
-<<<<<<< HEAD
-function _hiding(dumbCheck:boolean = false) {
-    if (Player.Hidden() && dumbCheck) {
-        Scripts.Utils.playerPrint('V hidu uz jsi.');
-        return;
-=======
 function _hiding(allowRehid:string, doubleTapToRehid:string) {
     if (Player.Hidden()) {
         if (!allowRehid) {
@@ -37,7 +26,6 @@ function _hiding(allowRehid:string, doubleTapToRehid:string) {
             Orion.SetTimer('hidingTimer');
             return;
         }
->>>>>>> 7e1849a4b928301347c36508336249bf0cef024e
     }
 
     Orion.ClearJournal();
