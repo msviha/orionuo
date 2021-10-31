@@ -117,7 +117,6 @@ namespace Scripts {
             const enemySerial = store[currentIndex].serial;
             const enemy = Orion.FindObject(enemySerial);
             if (enemy) {
-                Orion.ShowStatusbar(enemySerial, 300, 300);
                 Scripts.Targeting.highlightEnemy(
                     enemySerial,
                     enemy,

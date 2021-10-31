@@ -497,9 +497,16 @@ function hideAll() {
  * Hidne hrace
  * @example [_hiding](../examples/hiding.gif)
  * @example external code `hiding();`
+ * @example external code `hiding(false);` znemozni hidnout pokud uz jsi v hidu
+ * @example external code `hiding(false, true);` umozni hidnout pokud uz jsi v hidu jen pomoci rychleho zavolani 2x
  */
+<<<<<<< HEAD
  function hiding(dumbCheck:boolean = false) {
     Scripts.Hiding.hiding(dumbCheck);
+=======
+function hiding(allowRehid = true, doubleTapToRehid = false) {
+    Scripts.Hiding.hiding(allowRehid, doubleTapToRehid);
+>>>>>>> 7e1849a4b928301347c36508336249bf0cef024e
 }
 
 /**
@@ -507,10 +514,11 @@ function hideAll() {
  * @param circle {number} cislo kruhu kouzel ve kterem se kouzlo nachazi
  * @param spell {string} nazev kouzla (z nabidky ktera vyskoci kdyz vyberete kruh kouzel)
  * @param quantity {number} pocet svitku k napsani (0 je default a znamena, ze pise dokud nedojde spotrebak)
+ * @param useManaRef {boolean} pouzivani malych mana ref potionu
  * @example external code `inscription(2, 'Resurrection', 20);`
  */
-function inscription(circle: number, spell: string, quantity = 0) {
-    Scripts.Inscription.inscription(circle, spell, quantity);
+function inscription(circle: number, spell: string, quantity = 0, useManaRef = false) {
+    Scripts.Inscription.inscription(circle, spell, quantity, useManaRef);
 }
 
 /**
@@ -874,8 +882,8 @@ function shrinkAll() {
  * @param offset ciselna hodnota rozestupu mezi statusbary
  * @param shiftX ciselna hodnota posunu celeho sloupce po ose x
  * @param shiftY ciselna hodnota posunu celeho sloupce po ose y
- * @example external code `statusAll([NotorietyEnum.blue, NotorietyEnum.green], 'TopLeft', false, 1, 5, 0, 0)`
- * @example external code `statusAll([NotorietyEnum.red], 'LeftTop', true, 2, 5, 0, 0)`
+ * @example external code `statusAll([NotorietyEnum.blue, NotorietyEnum.green], 'TopLeft', 1, false, 1, 5, 0, 0)`
+ * @example external code `statusAll([NotorietyEnum.red], 'LeftTop', 2, true, 1, 5, 0, 0)`
  */
 function statusAll(
     notoriery:NotorietyEnum[] = [],

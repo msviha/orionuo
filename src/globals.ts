@@ -299,6 +299,10 @@ const gameObject: any = {
             graphic: '0x0FC4',
             color: '0x0498',
         },
+        magicCoins: {
+            graphic: '0x0EED',
+            color: '0x0B81'
+        }
     },
     crafting: {
         carpentry: {
@@ -995,6 +999,60 @@ const gameObject: any = {
                         outputCount: 50,
                     },
                 },
+                lockpickX1: {
+                    graphic: '0x14FB',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.iron', count: 1 },
+                                { item: 'gameObject.resources.ingots.bronze', count: 2 },
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Tools', 'Lockpick']
+                        },
+                        outputCount: 1
+                    }
+                },
+                spulkaDratu: {
+                    graphic: '0x1420',
+                    color: '0x08B0',
+                    make: {
+                        tool: 'gameObject.tools.silverHammer',
+                        toolTarget: 'gameObject.resources.ingots.iron',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.iron', count: 2 },
+                            ],
+                            crafting: [{ item: 'gameObject.crafting.tinkering.wires.ironString', count: 25 }]
+                        },
+                        menu: {
+                            name: 'Blacksmithing',
+                            selections: ['Tools', 'Spulka dratu']
+                        }
+                    }
+                },
+                velkaSpulkaDratu: {
+                    graphic: '0x1420',
+                    color: '0x0B49',
+                    make: {
+                        tool: 'gameObject.tools.silverHammer',
+                        toolTarget: 'gameObject.resources.ingots.iron',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.iron', count: 2 },
+                            ],
+                            crafting: [{ item: 'gameObject.crafting.blacksmithing.tools.spulkaDratu', count: 10 }]
+                        },
+                        menu: {
+                            name: 'Blacksmithing',
+                            selections: ['Tools', 'Velka spulka dratu']
+                        }
+                    }
+                }
             },
             keys: {
                 magicKey: {
@@ -1111,6 +1169,29 @@ const gameObject: any = {
                         },
                     },
                 },
+                starStoneWeaponForm: {
+                    graphic: '0x183A',
+                    color: '0x00FE',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.gold', count: 10 },
+                                { item: 'gameObject.resources.ingots.silver', count: 10 },
+                                { item: 'gameObject.resources.ingots.iron', count: 2 },
+                                { item: 'gameObject.resources.magicCoins', count: 500 }
+
+                            ],
+                            crafting: [
+                                { item: 'gameObject.crafting.tinkering.wires.gold', count: 10 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Special Items','Star Stone Weapon Form']
+                        }
+                    }
+                }
             },
         },
         tailoring: {
@@ -1298,6 +1379,32 @@ const gameObject: any = {
                     },
                 },
             },
+            veriteWeapons: {
+                veriteSpearsAndForks: {
+                    veriteSpear: {
+                        graphic: '0x0F62',
+                        color: '0x08A1',
+                        make: {
+                            tool: 'gameObject.tools.silverHammer',
+                            toolTarget: 'gameObject.resources.ingots.iron',
+                            refill: {
+                                resources: [
+                                    { item: 'gameObject.resources.ingots.iron', count: 2 },
+                                    { item: 'gameObject.resources.ingots.verite', count: 12 }
+                                ]
+                            },
+                            menu: {
+                                name: 'Blacksmithing',
+                                selections: [
+                                    'Verite Weapons',
+                                    { item: 'Verite Spears & Forks', menu: 'Verite Spears & Forks' },
+                                    'Verite Spear',
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
         },
     },
     potions: {
