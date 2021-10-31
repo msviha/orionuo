@@ -22,7 +22,9 @@ namespace Scripts {
 
             const previousHelmet = Orion.ObjAtLayer('Helmet');
             Orion.UseObject(mysticSerial);
-            Orion.Say(msg);
+            if (!Player.Hidden()) {
+                Orion.Say(msg);
+            }
             if (previousHelmet && previousHelmet.Serial() !== mysticSerial) {
                 Orion.Wait(responseDelay);
                 Orion.UseObject(previousHelmet.Serial());

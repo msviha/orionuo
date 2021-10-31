@@ -498,8 +498,8 @@ function hideAll() {
  * @example [_hiding](../examples/hiding.gif)
  * @example external code `hiding();`
  */
-function hiding() {
-    Scripts.Hiding.hiding();
+ function hiding(dumbCheck:boolean = false) {
+    Scripts.Hiding.hiding(dumbCheck);
 }
 
 /**
@@ -1082,8 +1082,8 @@ function useGGR() {
  * @example external code `useKlamak(1, true)` zobrazi zamerovatko a pak vyhodi klamaka level 1 na target
  * @example external code `useKlamak(3, false, ['Bull', 'Cow'])`vyhodi pod vas Bulla, pokud ho nemate, tak Kravu a pokud ani tu nemate tak zkusi vyhodit jiny lvl 3 klamak
  */
-function useKlamak(lvl: number, useAim = false, priorityList?: string[], ignoreSerials?: string[]) {
-    Scripts.Klamak.useKlamak(lvl, useAim, priorityList, ignoreSerials);
+function useKlamak(lvl: number, useAim = false, priorityList?: string[], ignoreSerials?: string[]):boolean {
+   return Scripts.Klamak.useKlamak(lvl, useAim, priorityList, ignoreSerials);
 }
 
 /**

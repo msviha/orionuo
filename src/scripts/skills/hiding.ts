@@ -3,8 +3,8 @@
  */
 namespace Scripts {
     export class Hiding {
-        static hiding() {
-            Orion.Exec('_hiding', true);
+        static hiding(dumbCheck:boolean = false) {
+            Orion.Exec('_hiding', true,[ dumbCheck + "" ]);
         }
     }
 }
@@ -12,8 +12,8 @@ namespace Scripts {
 /**
  * @internal
  */
-function _hiding() {
-    if (Player.Hidden()) {
+function _hiding(dumbCheck:boolean = false) {
+    if (Player.Hidden() && dumbCheck) {
         Scripts.Utils.playerPrint('V hidu uz jsi.');
         return;
     }

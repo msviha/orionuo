@@ -2087,7 +2087,7 @@ const gameObject: any = {
             },
             jackRabbit: {
                 graphic: '0x2125',
-                color: '0x01BB',
+                color: '0x0FFFF',
             },
             wolf: {
                 graphic: '0x20EA',

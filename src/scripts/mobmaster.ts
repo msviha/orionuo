@@ -1,7 +1,7 @@
 namespace Scripts {
     export class MobMaster {
         static rename(mob: GameObject) {
-            const chars = 'abcdefghijklmnopqrstuvwxyz1234567890';
+            const chars = 'abcdefghijklmnopqrstuvwxyz';//1234567890';
             const mobSerial = mob?.Serial();
             let canRename = mob?.CanChangeName() 
             let mobName = mob?.Name();

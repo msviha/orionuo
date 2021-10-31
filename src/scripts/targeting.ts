@@ -20,7 +20,7 @@ namespace Scripts {
             }
 
             const enemy = Orion.FindObject('lastAddedEnemy');
-            Orion.AddFriend(enemy.Name(), enemy.Serial());
+            Orion.AddEnemy(enemy.Name(), enemy.Serial());
             return enemy.Serial();
         }
 

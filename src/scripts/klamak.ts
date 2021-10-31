@@ -41,7 +41,7 @@ namespace Scripts {
             Scripts.Utils.playerPrint(nextList);
         }
 
-        static useKlamak(lvl: number, useAim = false, priorityList: string[] = [], ignoreSerials: string[] = []) {
+        static useKlamak(lvl: number, useAim = false, priorityList: string[] = [], ignoreSerials: string[] = []):boolean {
             const level = gameObject.klamak['lvl' + lvl];
 
             let findSerial = '';
@@ -80,14 +80,14 @@ namespace Scripts {
             }
 
             if (findSerial === '') {
-                Scripts.Utils.playerPrint(`[ nemas pety ]`, ColorEnum.red);
-                return;
+                Scripts.Utils.playerPrint(`[ nemas pety ${lvl} ]`, ColorEnum.red);
+                return false;
             }
 
             if (useAim) {
                 const selection = Orion.WaitForAddObject('klamakTarget');
                 if (selection === 0) {
-                    return;
+                    return false;
                 }
                 const target: any = {};
 
@@ -111,6 +111,7 @@ namespace Scripts {
 
             const unshrinkSuccess = Scripts.Utils.waitWhileSomethingInJournal(['You cannot unshrink creature'], 100, 5) !== 0;
             unshrinkSuccess && Scripts.Klamak.klamakCooldown();
+            return true;
         }
 
         static klamakCooldown() {
