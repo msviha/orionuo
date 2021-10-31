@@ -389,6 +389,10 @@ var gameObject = {
         soulShard: {
             graphic: '0x0FC4',
             color: '0x0498'
+        },
+        magicCoins: {
+            graphic: '0x0EED',
+            color: '0x0B81'
         }
     },
     crafting: {
@@ -1085,6 +1089,60 @@ var gameObject = {
                         },
                         outputCount: 50
                     }
+                },
+                lockpickX1: {
+                    graphic: '0x14FB',
+                    color: '0x0000',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.iron', count: 1 },
+                                { item: 'gameObject.resources.ingots.bronze', count: 2 },
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Tools', 'Lockpick']
+                        },
+                        outputCount: 1
+                    }
+                },
+                spulkaDratu: {
+                    graphic: '0x1420',
+                    color: '0x08B0',
+                    make: {
+                        tool: 'gameObject.tools.silverHammer',
+                        toolTarget: 'gameObject.resources.ingots.iron',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.iron', count: 2 },
+                            ],
+                            crafting: [{ item: 'gameObject.crafting.tinkering.wires.ironString', count: 25 }]
+                        },
+                        menu: {
+                            name: 'Blacksmithing',
+                            selections: ['Tools', 'Spulka dratu']
+                        }
+                    }
+                },
+                velkaSpulkaDratu: {
+                    graphic: '0x1420',
+                    color: '0x0B49',
+                    make: {
+                        tool: 'gameObject.tools.silverHammer',
+                        toolTarget: 'gameObject.resources.ingots.iron',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.iron', count: 2 },
+                            ],
+                            crafting: [{ item: 'gameObject.crafting.blacksmithing.tools.spulkaDratu', count: 10 }]
+                        },
+                        menu: {
+                            name: 'Blacksmithing',
+                            selections: ['Tools', 'Velka spulka dratu']
+                        }
+                    }
                 }
             },
             keys: {
@@ -1199,6 +1257,28 @@ var gameObject = {
                         menu: {
                             name: 'Tinkering',
                             selections: ['Special Items', 'Recharge Crystal +5']
+                        }
+                    }
+                },
+                starStoneWeaponForm: {
+                    graphic: '0x183A',
+                    color: '0x00FE',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.gold', count: 10 },
+                                { item: 'gameObject.resources.ingots.silver', count: 10 },
+                                { item: 'gameObject.resources.ingots.iron', count: 2 },
+                                { item: 'gameObject.resources.magicCoins', count: 500 }
+                            ],
+                            crafting: [
+                                { item: 'gameObject.crafting.tinkering.wires.gold', count: 10 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Special Items', 'Star Stone Weapon Form']
                         }
                     }
                 }
@@ -1383,6 +1463,32 @@ var gameObject = {
                                     'Iron Weapons',
                                     { item: 'Swords & Blades', menu: 'Iron Swords & Blades' },
                                     'Dagger',
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            veriteWeapons: {
+                veriteSpearsAndForks: {
+                    veriteSpear: {
+                        graphic: '0x0F62',
+                        color: '0x08A1',
+                        make: {
+                            tool: 'gameObject.tools.silverHammer',
+                            toolTarget: 'gameObject.resources.ingots.iron',
+                            refill: {
+                                resources: [
+                                    { item: 'gameObject.resources.ingots.iron', count: 2 },
+                                    { item: 'gameObject.resources.ingots.verite', count: 12 }
+                                ]
+                            },
+                            menu: {
+                                name: 'Blacksmithing',
+                                selections: [
+                                    'Verite Weapons',
+                                    { item: 'Verite Spears & Forks', menu: 'Verite Spears & Forks' },
+                                    'Verite Spear',
                                 ]
                             }
                         }
@@ -2178,7 +2284,7 @@ var gameObject = {
             },
             jackRabbit: {
                 graphic: '0x2125',
-                color: '0x01BB'
+                color: '0x0FFFF'
             },
             wolf: {
                 graphic: '0x20EA',
@@ -2813,12 +2919,15 @@ function healPets() {
 function hideAll() {
     Scripts.Common.hideAll();
 }
-function hiding() {
-    Scripts.Hiding.hiding();
+function hiding(allowRehid, doubleTapToRehid) {
+    if (allowRehid === void 0) { allowRehid = true; }
+    if (doubleTapToRehid === void 0) { doubleTapToRehid = false; }
+    Scripts.Hiding.hiding(allowRehid, doubleTapToRehid);
 }
-function inscription(circle, spell, quantity) {
+function inscription(circle, spell, quantity, useManaRef) {
     if (quantity === void 0) { quantity = 0; }
-    Scripts.Inscription.inscription(circle, spell, quantity);
+    if (useManaRef === void 0) { useManaRef = false; }
+    Scripts.Inscription.inscription(circle, spell, quantity, useManaRef);
 }
 function killAll() {
     Scripts.PetCommander.killAll();
@@ -3020,7 +3129,7 @@ function useGGR() {
 }
 function useKlamak(lvl, useAim, priorityList, ignoreSerials) {
     if (useAim === void 0) { useAim = false; }
-    Scripts.Klamak.useKlamak(lvl, useAim, priorityList, ignoreSerials);
+    return Scripts.Klamak.useKlamak(lvl, useAim, priorityList, ignoreSerials);
 }
 function useRR() {
     Scripts.Jewelry.useRR();
@@ -4033,13 +4142,13 @@ var Scripts;
                 }
             }
             if (findSerial === '') {
-                Scripts.Utils.playerPrint("[ nemas pety ]", ColorEnum.red);
-                return;
+                Scripts.Utils.playerPrint("[ nemas pety " + lvl + " ]", ColorEnum.red);
+                return false;
             }
             if (useAim) {
                 var selection = Orion.WaitForAddObject('klamakTarget');
                 if (selection === 0) {
-                    return;
+                    return false;
                 }
                 var target = {};
                 if (selection === 1) {
@@ -4062,6 +4171,7 @@ var Scripts;
             Orion.UseObject(findSerial);
             var unshrinkSuccess = Scripts.Utils.waitWhileSomethingInJournal(['You cannot unshrink creature'], 100, 5) !== 0;
             unshrinkSuccess && Scripts.Klamak.klamakCooldown();
+            return true;
         };
         Klamak.klamakCooldown = function () {
             var petCoolDown = Scripts.Klamak.getKlamakTimerByAnimalLoreSkill();
@@ -4309,7 +4419,7 @@ var Scripts;
         function MobMaster() {
         }
         MobMaster.rename = function (mob) {
-            var chars = 'abcdefghijklmnopqrstuvwxyz1234567890';
+            var chars = 'abcdefghijklmnopqrstuvwxyz';
             var mobSerial = mob === null || mob === void 0 ? void 0 : mob.Serial();
             var canRename = mob === null || mob === void 0 ? void 0 : mob.CanChangeName();
             var mobName = mob === null || mob === void 0 ? void 0 : mob.Name();
@@ -6214,7 +6324,7 @@ var Scripts;
                 throw 'e';
             }
             var enemy = Orion.FindObject('lastAddedEnemy');
-            Orion.AddFriend(enemy.Name(), enemy.Serial());
+            Orion.AddEnemy(enemy.Name(), enemy.Serial());
             return enemy.Serial();
         };
         Targeting.resetFriends = function () {
@@ -6291,7 +6401,6 @@ var Scripts;
             var enemySerial = store[currentIndex].serial;
             var enemy = Orion.FindObject(enemySerial);
             if (enemy) {
-                Orion.ShowStatusbar(enemySerial, 300, 300);
                 Scripts.Targeting.highlightEnemy(enemySerial, enemy, opts.showStatusBar, opts.targetIndication, opts.statusBarPosition);
             }
             else {
@@ -7697,7 +7806,9 @@ var Scripts;
             }
             var previousHelmet = Orion.ObjAtLayer('Helmet');
             Orion.UseObject(mysticSerial);
-            Orion.Say(msg);
+            if (!Player.Hidden()) {
+                Orion.Say(msg);
+            }
             if (previousHelmet && previousHelmet.Serial() !== mysticSerial) {
                 Orion.Wait(responseDelay);
                 Orion.UseObject(previousHelmet.Serial());
@@ -8266,17 +8377,28 @@ var Scripts;
     var Hiding = (function () {
         function Hiding() {
         }
-        Hiding.hiding = function () {
-            Orion.Exec('_hiding', true);
+        Hiding.hiding = function (allowRehid, doubleTapToRehid) {
+            if (allowRehid === void 0) { allowRehid = true; }
+            if (doubleTapToRehid === void 0) { doubleTapToRehid = false; }
+            var allowRehidString = allowRehid === true ? '1' : '';
+            var doubleTapToRehidString = doubleTapToRehid === true ? '1' : '';
+            Orion.Exec('_hiding', true, [allowRehidString, doubleTapToRehidString]);
         };
         return Hiding;
     }());
     Scripts.Hiding = Hiding;
 })(Scripts || (Scripts = {}));
-function _hiding() {
+function _hiding(allowRehid, doubleTapToRehid) {
     if (Player.Hidden()) {
-        Scripts.Utils.playerPrint('V hidu uz jsi.');
-        return;
+        if (!allowRehid) {
+            Scripts.Utils.playerPrint('V hidu uz jsi.');
+            return;
+        }
+        else if (doubleTapToRehid && (!Orion.TimerExists('hidingTimer') || Orion.Timer('hidingTimer') > 200)) {
+            Scripts.Utils.playerPrint('V hidu uz jsi.');
+            Orion.SetTimer('hidingTimer');
+            return;
+        }
     }
     Orion.ClearJournal();
     Orion.Print(ColorEnum.none, 'Start Hiding');
@@ -8286,9 +8408,9 @@ function _hiding() {
         Orion.ClearJournal('You must wait');
         return;
     }
-    Orion.Exec('_hidingPreoccupiedCheck', true);
+    Orion.Exec('_hidingPreoccupiedCheck', true, [allowRehid, doubleTapToRehid]);
 }
-function _hidingPreoccupiedCheck() {
+function _hidingPreoccupiedCheck(allowRehid, doubleTapToRehid) {
     var _a, _b;
     var hidTimer = (_a = config === null || config === void 0 ? void 0 : config.hiding) === null || _a === void 0 ? void 0 : _a.timer;
     Orion.AddDisplayTimer(TimersEnum.hiding, 2000, (hidTimer === null || hidTimer === void 0 ? void 0 : hidTimer.position) || 'AboveChar', (hidTimer === null || hidTimer === void 0 ? void 0 : hidTimer.type) || 'bar', (hidTimer === null || hidTimer === void 0 ? void 0 : hidTimer.text) || 'Hiding', (hidTimer === null || hidTimer === void 0 ? void 0 : hidTimer.xFromPosition) || 0, (hidTimer === null || hidTimer === void 0 ? void 0 : hidTimer.yFromPosition) || 100, (hidTimer === null || hidTimer === void 0 ? void 0 : hidTimer.textColor) || '0x100', (hidTimer === null || hidTimer === void 0 ? void 0 : hidTimer.font) || 0, (hidTimer === null || hidTimer === void 0 ? void 0 : hidTimer.backgroundColor) || 'red');
@@ -8305,7 +8427,7 @@ function _hidingPreoccupiedCheck() {
         Orion.WarMode(true);
         Orion.Wait(100);
         Orion.Print(ColorEnum.none, 'preoccupied - trying to hide again');
-        Orion.Exec('_hiding', true);
+        Orion.Exec('_hiding', true, [allowRehid, doubleTapToRehid]);
     }
 }
 var Scripts;
@@ -8313,8 +8435,9 @@ var Scripts;
     var Inscription = (function () {
         function Inscription() {
         }
-        Inscription.inscription = function (circle, spell, quantity) {
+        Inscription.inscription = function (circle, spell, quantity, useManaRef) {
             if (quantity === void 0) { quantity = 0; }
+            if (useManaRef === void 0) { useManaRef = false; }
             var menuName = 'Spell Circles';
             var spellCircle = "Spell Circle " + circle;
             var blank = gameObject.scrolls.blank;
@@ -8350,13 +8473,13 @@ var Scripts;
                 }
                 totalTries++;
                 Scripts.Utils.log("napsano " + finishedCount + " / " + totalTries);
-                if (Player.Mana() + 70 < Player.Int()) {
+                if (Player.Mana() + (useManaRef ? 35 : 70) < Player.Int()) {
                     var isDrinkTimerSet = Orion.Timer(TimersEnum.drink) !== -1;
                     while (isDrinkTimerSet && Orion.Timer(TimersEnum.drink) < 18000) {
                         Orion.UseSkill('Meditation');
                         Orion.Wait(3050);
                     }
-                    Scripts.Potions.drinkPotion(PotionsEnum.tmr);
+                    Scripts.Potions.drinkPotion(useManaRef ? PotionsEnum.mr : PotionsEnum.tmr);
                 }
             }
         };

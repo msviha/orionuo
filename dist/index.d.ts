@@ -41,8 +41,8 @@ declare function gmMortar(potionName: PotionsEnum): void;
 declare function harp(target?: TargetEnum): void;
 declare function healPets(): void;
 declare function hideAll(): void;
-declare function hiding(): void;
-declare function inscription(circle: number, spell: string, quantity?: number): void;
+declare function hiding(allowRehid?: boolean, doubleTapToRehid?: boolean): void;
+declare function inscription(circle: number, spell: string, quantity?: number, useManaRef?: boolean): void;
 declare function killAll(): void;
 declare function killTarget(): void;
 declare function lavaBomb(): void;
@@ -95,7 +95,7 @@ declare function turboRessFull(): void;
 declare function unlock(): void;
 declare function use(object: IMyGameObject | IMyGameObject[], name?: string, minimalCountForWarn?: number): void;
 declare function useGGR(): void;
-declare function useKlamak(lvl: number, useAim?: boolean, priorityList?: string[], ignoreSerials?: string[]): void;
+declare function useKlamak(lvl: number, useAim?: boolean, priorityList?: string[], ignoreSerials?: string[]): boolean;
 declare function useRR(): void;
 declare function useShrinkKad(): void;
 declare function webDestroyer(): void;
@@ -186,7 +186,7 @@ declare function displayKlamakInfo(): void;
 declare namespace Scripts {
     class Klamak {
         static next(): void;
-        static useKlamak(lvl: number, useAim?: boolean, priorityList?: string[], ignoreSerials?: string[]): void;
+        static useKlamak(lvl: number, useAim?: boolean, priorityList?: string[], ignoreSerials?: string[]): boolean;
         static klamakCooldown(): void;
         static displayKlamakTimer(timer?: number): void;
         static getKlamakTimerByAnimalLoreSkill(): number;
@@ -490,14 +490,14 @@ declare namespace Scripts {
 }
 declare namespace Scripts {
     class Hiding {
-        static hiding(): void;
+        static hiding(allowRehid?: boolean, doubleTapToRehid?: boolean): void;
     }
 }
-declare function _hiding(): void;
-declare function _hidingPreoccupiedCheck(): void;
+declare function _hiding(allowRehid: string, doubleTapToRehid: string): void;
+declare function _hidingPreoccupiedCheck(allowRehid: string, doubleTapToRehid: string): void;
 declare namespace Scripts {
     class Inscription {
-        static inscription(circle: number, spell: string, quantity?: number): void;
+        static inscription(circle: number, spell: string, quantity?: number, useManaRef?: boolean): void;
     }
 }
 declare namespace Scripts {

@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 1.3.1
+
+- `mobmaster-rename` - oprava nevalidniho jmena, odstraneny cisla
+- `useKlamak` - zmena navratoveho typu z void na boolean, lze v hoteky retezit vice zasebou a vyhodit tak dle potreby na jednu hotky jakykoliv level. 
+- `addEnemy` - oprava, interne se pouzivalo addFriend
+
+
 ## 1.3.0
 
 ### fixes
