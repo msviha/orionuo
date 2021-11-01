@@ -7589,6 +7589,7 @@ var Scripts;
             if ((closestGhosts === null || closestGhosts === void 0 ? void 0 : closestGhosts.length) < 1) {
                 return Scripts.Utils.playerPrint('Nevidis zadneho ducha k oziveni');
             }
+            Orion.ClearJournal('ozivuje ducha');
             Orion.UseType(gameObject.uncategorized.bandy.graphic);
             Orion.WaitForTarget(5000);
             Orion.TargetObject(closestGhosts[0]);
@@ -7615,6 +7616,7 @@ var Scripts;
             }
             var bloodyBandageGraphic = getBloodyBandageGraphic();
             if (bloodyBandageGraphic) {
+                Orion.ClearJournal('ozivuje ducha');
                 Orion.UseType(bloodyBandageGraphic);
                 Orion.WaitForTarget(5000);
                 Orion.TargetObject(closestGhosts[0]);

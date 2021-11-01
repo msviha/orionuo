@@ -42,6 +42,7 @@ namespace Scripts {
                 return Scripts.Utils.playerPrint('Nevidis zadneho ducha k oziveni');
             }
 
+            Orion.ClearJournal('ozivuje ducha');
             Orion.UseType(gameObject.uncategorized.bandy.graphic);
             Orion.WaitForTarget(5000);
             Orion.TargetObject(closestGhosts[0]);
@@ -73,6 +74,7 @@ namespace Scripts {
 
             const bloodyBandageGraphic = getBloodyBandageGraphic();
             if (bloodyBandageGraphic) {
+                Orion.ClearJournal('ozivuje ducha');
                 Orion.UseType(bloodyBandageGraphic);
                 Orion.WaitForTarget(5000);
                 Orion.TargetObject(closestGhosts[0]);
