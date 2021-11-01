@@ -7589,12 +7589,14 @@ var Scripts;
             if ((closestGhosts === null || closestGhosts === void 0 ? void 0 : closestGhosts.length) < 1) {
                 return Scripts.Utils.playerPrint('Nevidis zadneho ducha k oziveni');
             }
-            Orion.WaitTargetObject(closestGhosts[0]);
             Orion.UseType(gameObject.uncategorized.bandy.graphic);
-            Orion.Wait(100);
+            Orion.WaitForTarget(5000);
+            Orion.TargetObject(closestGhosts[0]);
+            Scripts.Utils.waitWhileSomethingInJournal(['ozivuje ducha']);
             if (bandageAfterRess) {
-                Orion.WaitTargetObject(closestGhosts[0]);
                 Orion.UseType(gameObject.uncategorized.bandy.graphic);
+                Orion.WaitForTarget(5000);
+                Orion.TargetObject(closestGhosts[0]);
             }
         };
         Clerik.turboRessFull = function () {
@@ -7613,13 +7615,16 @@ var Scripts;
             }
             var bloodyBandageGraphic = getBloodyBandageGraphic();
             if (bloodyBandageGraphic) {
-                Orion.WaitTargetObject(closestGhosts[0]);
                 Orion.UseType(bloodyBandageGraphic);
-                Orion.Wait(100);
-                Orion.WaitTargetObject(closestGhosts[0]);
+                Orion.WaitForTarget(5000);
+                Orion.TargetObject(closestGhosts[0]);
+                Scripts.Utils.waitWhileSomethingInJournal(['ozivuje ducha']);
                 Orion.UseType(gameObject.uncategorized.bandy.graphic);
+                Orion.WaitForTarget(5000);
+                Orion.TargetObject(closestGhosts[0]);
             }
             else {
+                Scripts.Utils.playerPrint('Nemam krvave bandy');
                 Scripts.Clerik.turboRess(true);
             }
         };
