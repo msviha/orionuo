@@ -96,6 +96,14 @@ var config = Shared.GetVar('config', {
 var responseDelay = 350;
 var gameObject = {
     uncategorized: {
+        atlas: {
+            graphic: '0x0FBE',
+            color: '0x0B98'
+        },
+        mapa: {
+            graphic: '0x14EB',
+            color: '0x0000'
+        },
         emptyBottles: {
             name: 'empty bottles',
             graphic: '0x0F0E',
@@ -8014,6 +8022,59 @@ var Scripts;
         return Alchemy;
     }());
     Scripts.Alchemy = Alchemy;
+})(Scripts || (Scripts = {}));
+var Scripts;
+(function (Scripts) {
+    var Cartography = (function () {
+        function Cartography() {
+        }
+        Cartography.cartography = function () {
+            Scripts.Utils.playerPrint('Target atlas with maps');
+            Orion.WaitForAddObject('atlasResourse', 60000);
+            var atlasResourse = Orion.FindObject('atlasResourse');
+            if (!atlasResourse ||
+                atlasResourse.Graphic() !== gameObject.uncategorized.atlas.graphic ||
+                atlasResourse.Color() !== gameObject.uncategorized.atlas.color) {
+                Scripts.Utils.log('Musis vybrat atlas !!!', ColorEnum.red);
+                return;
+            }
+            Scripts.Utils.playerPrint('Target atlas to recycle maps');
+            Orion.WaitForAddObject('atlasRecycle', 60000);
+            var atlasRecycle = Orion.FindObject('atlasRecycle');
+            if (!atlasRecycle ||
+                atlasRecycle.Graphic() !== gameObject.uncategorized.atlas.graphic ||
+                atlasRecycle.Color() !== gameObject.uncategorized.atlas.color) {
+                Scripts.Utils.log('Musis vybrat atlas !!!', ColorEnum.red);
+                return;
+            }
+            var menuName = 'What sort of map do you want to draw ?';
+            while (true) {
+                Scripts.Utils.log('while');
+                Scripts.Utils.worldSaveCheckWait();
+                Orion.ClearJournal();
+                Orion.CancelWaitTarget();
+                Orion.WaitTargetObject('self');
+                Orion.UseObject(atlasResourse.Serial());
+                Scripts.Utils.waitWhileSomethingInJournal(['Vyjmul jsi mapu z atlasu']);
+                Orion.ClearJournal('You put the map');
+                var mapa = Scripts.Utils.findFirstType(gameObject.uncategorized.mapa);
+                Scripts.Utils.log(mapa);
+                Scripts.Utils.selectMenu(menuName, ['Regional Map']);
+                Orion.Wait(responseDelay);
+                Orion.UseObject(mapa);
+                if (!Scripts.Utils.waitWhileSomethingInJournal(['an unusable map', 'You put the map'])) {
+                    Scripts.Utils.log('continue');
+                    continue;
+                }
+                mapa = Scripts.Utils.findFirstType(gameObject.uncategorized.mapa);
+                Orion.WaitTargetObject(mapa);
+                Orion.UseObject(atlasRecycle.Serial());
+                Orion.Wait(responseDelay);
+            }
+        };
+        return Cartography;
+    }());
+    Scripts.Cartography = Cartography;
 })(Scripts || (Scripts = {}));
 var Scripts;
 (function (Scripts) {

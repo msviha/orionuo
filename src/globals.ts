@@ -5,6 +5,14 @@ const responseDelay = 350;
 
 const gameObject: any = {
     uncategorized: {
+        atlas: {
+            graphic: '0x0FBE',
+            color: '0x0B98',
+        },
+        mapa: {
+            graphic: '0x14EB',
+            color: '0x0000',
+        },
         emptyBottles: {
             name: 'empty bottles',
             graphic: '0x0F0E',

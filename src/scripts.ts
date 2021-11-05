@@ -221,6 +221,15 @@ function bandageSelf(minimalCountForWarn = 10, failedMessage = true) {
 }
 
 /**
+ * Treni cartography
+ * @example in client `_cartography`
+ * @example external code `cartography();`
+ */
+function cartography() {
+    Scripts.Cartography.cartography();
+}
+
+/**
  * Hodi do ruky cutWeapon a pripadne rovnou rizne nejblizsi mrtvolku pokud je povolen parametr
  * @param carveNearestBodyAutomatically {boolean} default je false, pokud se da true tak rizne samo nejblizsi pokud je v dosahu
  * @example in client `_carveBody`

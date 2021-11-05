@@ -465,6 +465,11 @@ declare namespace Scripts {
     export {};
 }
 declare namespace Scripts {
+    class Cartography {
+        static cartography(): void;
+    }
+}
+declare namespace Scripts {
     class Crafting {
         static setInputs(itemName: string): void;
         static makeProgress(): boolean;
