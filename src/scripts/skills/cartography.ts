@@ -28,7 +28,6 @@ namespace Scripts {
             const menuName = 'What sort of map do you want to draw ?';
 
             while (true) { //neznam hlasku ze nejsou mapy v atlasu
-                Scripts.Utils.log('while');
                 Scripts.Utils.worldSaveCheckWait();
                 Orion.ClearJournal();
                 Orion.CancelWaitTarget();
@@ -39,21 +38,19 @@ namespace Scripts {
                 Orion.ClearJournal('You put the map');
 
                 let mapa = Scripts.Utils.findFirstType(gameObject.uncategorized.mapa);
-                Scripts.Utils.log(mapa);
 
                 Scripts.Utils.selectMenu(menuName, ['Regional Map']);
                 Orion.Wait(responseDelay);
                 Orion.UseObject(mapa);
 
                 if (!Scripts.Utils.waitWhileSomethingInJournal(['an unusable map', 'You put the map'])) {
-                    Scripts.Utils.log('continue');
                     continue;
                 }
 
                 mapa = Scripts.Utils.findFirstType(gameObject.uncategorized.mapa);
                 Orion.WaitTargetObject(mapa);
                 Orion.UseObject(atlasRecycle.Serial());
-                Orion.Wait(responseDelay);
+                Scripts.Utils.waitWhileSomethingInJournal(['Zrecykloval jsi mapu', 'Uschoval jsi mapu']);
             }
         }
     }
