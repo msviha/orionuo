@@ -1,30 +1,39 @@
 **[orionuo](../README.md)**
 
-> [Globals](../globals.md) / IBagDestination
+> [Globals](../globals.md) / ITargetCoordinates
 
-# Interface: IBagDestination
+# Interface: ITargetCoordinates
 
 ## Hierarchy
 
 * [ICoordinates](icoordinates.md)
 
-  ↳ **IBagDestination**
+  ↳ **ITargetCoordinates**
 
 ## Index
 
 ### Properties
 
-* [objectAlias](ibagdestination.md#objectalias)
-* [x](ibagdestination.md#x)
-* [y](ibagdestination.md#y)
+* [mobile](itargetcoordinates.md#mobile)
+* [player](itargetcoordinates.md#player)
+* [x](itargetcoordinates.md#x)
+* [y](itargetcoordinates.md#y)
 
 ## Properties
 
-### objectAlias
+### mobile
 
-• `Optional` **objectAlias**: string
+• `Optional` **mobile**: boolean
 
-*Defined in [types/interfaces.ts:42](https://github.com/msviha/orionuo/blob/5345ecb/src/types/interfaces.ts#L42)*
+*Defined in [types/interfaces.ts:79](https://github.com/msviha/orionuo/blob/5345ecb/src/types/interfaces.ts#L79)*
+
+___
+
+### player
+
+• `Optional` **player**: boolean
+
+*Defined in [types/interfaces.ts:80](https://github.com/msviha/orionuo/blob/5345ecb/src/types/interfaces.ts#L80)*
 
 ___
 

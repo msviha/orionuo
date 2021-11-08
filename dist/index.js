@@ -1533,7 +1533,7 @@ var gameObject = {
                 graphic: '0x1843',
                 color: '0x0005'
             },
-            alchemySelection: 'Mana Refresh',
+            alchemySelection: 'Mana Refresh Potion',
             reagent: 'eyes_of_newt',
             reagentsCount: 3
         },
@@ -2726,7 +2726,7 @@ var __assign = (this && this.__assign) || function () {
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 1.3.0');
+    Orion.Print(-1, 'version 1.4.0');
     Orion.Print(-1, '-------------+');
 }
 function Autostart() {

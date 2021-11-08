@@ -8,19 +8,29 @@
 
 ### Enumeration members
 
+* [blue](colorenum.md#blue)
 * [green](colorenum.md#green)
 * [none](colorenum.md#none)
 * [orange](colorenum.md#orange)
 * [pureWhite](colorenum.md#purewhite)
 * [red](colorenum.md#red)
+* [yellow](colorenum.md#yellow)
 
 ## Enumeration members
+
+### blue
+
+•  **blue**:  = "0x0002"
+
+*Defined in [types/enums.ts:15](https://github.com/msviha/orionuo/blob/5345ecb/src/types/enums.ts#L15)*
+
+___
 
 ### green
 
 •  **green**:  = "0x0044"
 
-*Defined in [types/enums.ts:11](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L11)*
+*Defined in [types/enums.ts:11](https://github.com/msviha/orionuo/blob/5345ecb/src/types/enums.ts#L11)*
 
 ___
 
@@ -28,7 +38,7 @@ ___
 
 •  **none**:  = "0xffff"
 
-*Defined in [types/enums.ts:9](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L9)*
+*Defined in [types/enums.ts:9](https://github.com/msviha/orionuo/blob/5345ecb/src/types/enums.ts#L9)*
 
 ___
 
@@ -36,7 +46,7 @@ ___
 
 •  **orange**:  = "0x002c"
 
-*Defined in [types/enums.ts:12](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L12)*
+*Defined in [types/enums.ts:12](https://github.com/msviha/orionuo/blob/5345ecb/src/types/enums.ts#L12)*
 
 ___
 
@@ -44,7 +54,7 @@ ___
 
 •  **pureWhite**:  = "0x0B1D"
 
-*Defined in [types/enums.ts:13](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L13)*
+*Defined in [types/enums.ts:13](https://github.com/msviha/orionuo/blob/5345ecb/src/types/enums.ts#L13)*
 
 ___
 
@@ -52,4 +62,12 @@ ___
 
 •  **red**:  = "0x0021"
 
-*Defined in [types/enums.ts:10](https://github.com/msviha/orionuo/blob/c96a2eb/src/types/enums.ts#L10)*
+*Defined in [types/enums.ts:10](https://github.com/msviha/orionuo/blob/5345ecb/src/types/enums.ts#L10)*
+
+___
+
+### yellow
+
+•  **yellow**:  = "0x0034"
+
+*Defined in [types/enums.ts:14](https://github.com/msviha/orionuo/blob/5345ecb/src/types/enums.ts#L14)*
