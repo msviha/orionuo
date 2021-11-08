@@ -1,11 +1,24 @@
 # CHANGELOG
 
+## 1.4.0
+
+### fixes
+- `turboRess` - obcas nereslo ducha krvavymi bandami
+- `necroMystik` - msg se nebude odesilat do hry pokud je hrac v hidu
+- `config` - defaulty (bez includu configu) se narovnali na stejne hodnoty jako config co je includovany
+
+### enhancements
+- `hiding` - nyni umoznuje rehidnout (v minule verzi neumoznoval) - nastaveni se da zmenit a to tak ze rehid jde zakazat, nebo povolit jen dvojklikem hotkeye viz. `hiding(true, true)`
+
+### features
+- `cartography` - trenink cartografky
+- `tbGump` - gump pro TBcka 
+
 ## 1.3.1
 
 - `mobmaster-rename` - oprava nevalidniho jmena, odstraneny cisla
 - `useKlamak` - zmena navratoveho typu z void na boolean, lze v hoteky retezit vice zasebou a vyhodit tak dle potreby na jednu hotky jakykoliv level. 
 - `addEnemy` - oprava, interne se pouzivalo addFriend
-
 
 ## 1.3.0
 
