@@ -6,13 +6,13 @@ var config = Shared.GetVar('config', {
     },
     autoHandlers: {
         autoRename: {
-            enabled: false,
+            enabled: true,
             renameMounts: false
         },
         printDamageDiffOnly: false
     },
     targeting: {
-        highlightEnemySilent: false
+        highlightEnemySilent: true
     },
     statusBarWrapper: {
         autoCloseTimer: 10000
@@ -2700,6 +2700,18 @@ function customStatusBarCallBack(s) {
         }
     }
 }
+function tbGumpUpdateLoop() {
+    while (true) {
+        Scripts.TbGump.searchTextAndUpdateGump();
+        Orion.Wait(500);
+    }
+}
+function tbCustomGumpCallBack() {
+    var code = CustomGumpResponse.ReturnCode();
+    if (code === 0) {
+        Orion.Terminate('tbGumpUpdateLoop');
+    }
+}
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -2842,6 +2854,9 @@ function bandageSelf(minimalCountForWarn, failedMessage) {
     if (minimalCountForWarn === void 0) { minimalCountForWarn = 10; }
     if (failedMessage === void 0) { failedMessage = true; }
     Scripts.Common.bandageSelf(minimalCountForWarn, undefined, failedMessage);
+}
+function cartography() {
+    Scripts.Cartography.cartography();
 }
 function carveBody(carveNearestBodyAutomatically) {
     if (carveNearestBodyAutomatically === void 0) { carveNearestBodyAutomatically = false; }
@@ -3106,6 +3121,9 @@ function targetPrevious(timeToStorePreviousTargets, additionalFlags, notoriety, 
     if (opts === void 0) { opts = TARGET_OPTS_DEFAULTS; }
     opts = __assign(__assign({}, TARGET_OPTS_DEFAULTS), opts);
     Scripts.Targeting.targetNext(true, timeToStorePreviousTargets, additionalFlags, notoriety, opts);
+}
+function tbGump() {
+    Scripts.TbGump.main();
 }
 function terminateAll() {
     Orion.Terminate('all', 'Autostart|userAutostart');
@@ -7906,6 +7924,125 @@ var Vampire = (function () {
 }());
 var Scripts;
 (function (Scripts) {
+    var TbGump = (function () {
+        function TbGump() {
+        }
+        TbGump.main = function () {
+            TbGump.resetJournalAndScores();
+            TbGump.updateGump();
+            Orion.Exec('tbGumpUpdateLoop', true);
+        };
+        TbGump.updateGump = function () {
+            var gump = Orion.CreateCustomGump(TbGumpEnum.tbCustomGumpSerial);
+            gump.Clear();
+            TbGump.drawBox(gump);
+            TbGump.drawText(gump);
+            gump.Update();
+        };
+        TbGump.resetJournalAndScores = function () {
+            Orion.ClearJournal(TbGumpEnum.kotaPattern + "|" + TbGumpEnum.scorePattern + "|" + TbGumpEnum.sysScorePattern);
+            Shared.AddArray(TbGumpEnum.sharedArrayKoty, []);
+            Shared.AddVar(TbGumpEnum.sharedVarOrderScore, '0');
+            Shared.AddVar(TbGumpEnum.sharedVarChaosScore, '0');
+        };
+        TbGump.searchTextAndUpdateGump = function () {
+            var kotaPattern = 'je nyni pod kontrolou';
+            var scorePattern = '--- SKORE ---';
+            var sysScorePattern = '<SCORES>';
+            var kotaMsg = Orion.InJournal(kotaPattern);
+            if (kotaMsg) {
+                var text = kotaMsg.Text();
+                if (text) {
+                    var koty = Shared.GetArray(TbGumpEnum.sharedArrayKoty, []);
+                    var match = text.match(/(.*)\s\(.*kontrolou\s(.*)/);
+                    var name_2 = match[1];
+                    name_2 = name_2.length > 7 ? name_2.substring(0, 7) + '...' : name_2;
+                    var order = match[2] === 'Orderu';
+                    var found = false;
+                    for (var i = 0; i < koty.length; i++) {
+                        var kota = koty[i];
+                        if (kota.name === name_2) {
+                            kota.order = order;
+                            found = true;
+                            break;
+                        }
+                    }
+                    !found && koty.push({ name: name_2, order: order });
+                    Shared.AddArray(TbGumpEnum.sharedArrayKoty, koty);
+                }
+                Orion.ClearJournal(kotaPattern);
+            }
+            var scoreMsg = Orion.InJournal(scorePattern);
+            if (scoreMsg) {
+                Orion.ClearJournal(scorePattern);
+                var text = scoreMsg.Text();
+                if (text) {
+                    var match = text.match(/(.*):/);
+                    var kota = match[1];
+                    var orderMsg = Orion.InJournal(kota + ": Order");
+                    var chaosMsg = Orion.InJournal(kota + ": Chaos");
+                    if (orderMsg) {
+                        var orderScoreText = orderMsg.Text();
+                        Shared.AddVar(TbGumpEnum.sharedVarOrderScore, orderScoreText.match(/Order:\s(\d*)/)[1]);
+                        Orion.ClearJournal(kota + ": Order");
+                    }
+                    if (chaosMsg) {
+                        var chaosScoreText = chaosMsg.Text();
+                        Shared.AddVar(TbGumpEnum.sharedVarChaosScore, chaosScoreText.match(/Chaos:\s(\d*)/)[1]);
+                        Orion.ClearJournal(kota + ": Chaos");
+                    }
+                }
+            }
+            var sysScoreMsg = Orion.InJournal(sysScorePattern);
+            if (sysScoreMsg) {
+                var text = sysScoreMsg.Text();
+                if (text) {
+                    var match = text.match(/\d+/g);
+                    Shared.AddVar(TbGumpEnum.sharedVarOrderScore, match[0]);
+                    Shared.AddVar(TbGumpEnum.sharedVarChaosScore, match[1]);
+                }
+                Orion.ClearJournal(sysScorePattern);
+            }
+            if (kotaMsg || scoreMsg || sysScoreMsg) {
+                TbGump.updateGump();
+            }
+        };
+        TbGump.drawBox = function (gump) {
+            var width = 160;
+            var height = 80;
+            var padding = 1;
+            var borderColor = '#ff3f3f3f';
+            var backgroundColor = '#ff000000';
+            gump.AddColoredPolygone(0, 0, width, height, borderColor);
+            gump.AddColoredPolygone(padding, padding, width - 2 * padding, height - 2 * padding, backgroundColor);
+            gump.SetCallback("tbCustomGumpCallBack");
+            gump.AddHitBox(TbGumpEnum.tbCustomGumpSerial, 0, 0, width, height, 1);
+            gump.AddTilePic(-5, 7, '0x1BC4', '0x0B77');
+            gump.AddTilePic(0, 47, '0x1BC3', '0x0B77');
+        };
+        TbGump.drawText = function (gump) {
+            var koty = Shared.GetArray(TbGumpEnum.sharedArrayKoty, []);
+            var orderScore = Shared.GetVar(TbGumpEnum.sharedVarOrderScore, '0');
+            var chaosScore = Shared.GetVar(TbGumpEnum.sharedVarChaosScore, '0');
+            var textSerial = 3000;
+            gump.AddText(43, 12, '0x0BAF', orderScore, 0, textSerial++);
+            gump.AddText(43, 47, '0x0BAF', chaosScore, 0, textSerial++);
+            var kotaCounter = 0;
+            for (var _i = 0, koty_1 = koty; _i < koty_1.length; _i++) {
+                var kota = koty_1[_i];
+                var y = 20 * kotaCounter;
+                var color = kota.order ? '#ff0000ff' : '#ffff0000';
+                gump.AddColoredPolygone(80, y + 3, 8, 14, color);
+                gump.AddText(90, y + 1, '0x0837', kota.name, 0, textSerial++);
+                kotaCounter++;
+            }
+        };
+        return TbGump;
+    }());
+    Scripts.TbGump = TbGump;
+})(Scripts || (Scripts = {}));
+var Scripts;
+(function (Scripts) {
     var reagentsContainerName = 'alchemy/reagentsContainerName';
     var Alchemy = (function () {
         function Alchemy() {
@@ -8049,7 +8186,6 @@ var Scripts;
             }
             var menuName = 'What sort of map do you want to draw ?';
             while (true) {
-                Scripts.Utils.log('while');
                 Scripts.Utils.worldSaveCheckWait();
                 Orion.ClearJournal();
                 Orion.CancelWaitTarget();
@@ -8058,18 +8194,16 @@ var Scripts;
                 Scripts.Utils.waitWhileSomethingInJournal(['Vyjmul jsi mapu z atlasu']);
                 Orion.ClearJournal('You put the map');
                 var mapa = Scripts.Utils.findFirstType(gameObject.uncategorized.mapa);
-                Scripts.Utils.log(mapa);
                 Scripts.Utils.selectMenu(menuName, ['Regional Map']);
                 Orion.Wait(responseDelay);
                 Orion.UseObject(mapa);
                 if (!Scripts.Utils.waitWhileSomethingInJournal(['an unusable map', 'You put the map'])) {
-                    Scripts.Utils.log('continue');
                     continue;
                 }
                 mapa = Scripts.Utils.findFirstType(gameObject.uncategorized.mapa);
                 Orion.WaitTargetObject(mapa);
                 Orion.UseObject(atlasRecycle.Serial());
-                Orion.Wait(responseDelay);
+                Scripts.Utils.waitWhileSomethingInJournal(['Zrecykloval jsi mapu', 'Uschoval jsi mapu']);
             }
         };
         return Cartography;
@@ -9689,6 +9823,16 @@ var CoffinMenuSelection;
     CoffinMenuSelection["medium"] = "Sila spanku (-2 nabiti)";
     CoffinMenuSelection["high"] = "Sila hlubokeho spanku (-3 nabiti)";
 })(CoffinMenuSelection || (CoffinMenuSelection = {}));
+var TbGumpEnum;
+(function (TbGumpEnum) {
+    TbGumpEnum["kotaPattern"] = "je nyni pod kontrolou";
+    TbGumpEnum["scorePattern"] = "--- SKORE ---";
+    TbGumpEnum["sysScorePattern"] = "<SCORES>";
+    TbGumpEnum["sharedArrayKoty"] = "koty";
+    TbGumpEnum["sharedVarOrderScore"] = "orderScore";
+    TbGumpEnum["sharedVarChaosScore"] = "chaosScore";
+    TbGumpEnum[TbGumpEnum["tbCustomGumpSerial"] = 786] = "tbCustomGumpSerial";
+})(TbGumpEnum || (TbGumpEnum = {}));
 var TARGET_OPTS_DEFAULTS = {
     targetIndication: TargetIndicationEnum.none,
     showStatusBar: false,

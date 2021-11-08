@@ -1007,6 +1007,15 @@ function targetPrevious(
 }
 
 /**
+ * Zobrazi gump pro pocitani skore a zobrazovani kot na TBcku
+ * @example in client `_tbGump`
+ * @example external code `tbGump();`
+ */
+function tbGump() {
+    Scripts.TbGump.main();
+}
+
+/**
  * Killne vsechny bezici scripty (s vyjimkou Autostart a userAutostart funkce)
  */
 function terminateAll() {

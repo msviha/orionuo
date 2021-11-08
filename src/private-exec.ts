@@ -63,3 +63,23 @@ function customStatusBarCallBack(s: string) {
         }
     }
 }
+
+/**
+ * @internal
+ */
+function tbGumpUpdateLoop() {
+    while (true) {
+        Scripts.TbGump.searchTextAndUpdateGump();
+        Orion.Wait(500);
+    }
+}
+
+/**
+ * @internal
+ */
+function tbCustomGumpCallBack() {
+    const code = CustomGumpResponse.ReturnCode();
+    if (code === 0) {
+        Orion.Terminate('tbGumpUpdateLoop');
+    }
+}

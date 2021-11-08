@@ -244,3 +244,13 @@ enum CoffinMenuSelection {
     medium = 'Sila spanku (-2 nabiti)',
     high = 'Sila hlubokeho spanku (-3 nabiti)',
 }
+
+enum TbGumpEnum {
+    kotaPattern = 'je nyni pod kontrolou',
+    scorePattern = '--- SKORE ---',
+    sysScorePattern = '<SCORES>',
+    sharedArrayKoty = 'koty',
+    sharedVarOrderScore = 'orderScore',
+    sharedVarChaosScore = 'chaosScore',
+    tbCustomGumpSerial = 786
+}

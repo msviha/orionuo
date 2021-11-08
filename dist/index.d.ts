@@ -5,6 +5,8 @@ declare const trackingFilter: any;
 declare function displayDrinkInfo(potionName: PotionsEnum): void;
 declare function scheduleClick(s: string): void;
 declare function customStatusBarCallBack(s: string): void;
+declare function tbGumpUpdateLoop(): void;
+declare function tbCustomGumpCallBack(): void;
 declare function version(): void;
 declare function Autostart(): void;
 declare function autoStealing(autoheal: boolean): void;
@@ -18,6 +20,7 @@ declare function attackLast(): void;
 declare function bishopToggle(): void;
 declare function bowcraftTrain(): void;
 declare function bandageSelf(minimalCountForWarn?: number, failedMessage?: boolean): void;
+declare function cartography(): void;
 declare function carveBody(carveNearestBodyAutomatically?: boolean): void;
 declare function cast(spell: string, target?: string | TargetEnum | Array<ITargetAlias>): void;
 declare function castNecroScroll(scroll: NecroScrollEnum, target?: string | TargetEnum | Array<ITargetAlias>): void;
@@ -87,6 +90,7 @@ declare function taming(allAround?: boolean, opts?: ITamingOptions): void;
 declare function tamingTrain(robeOfDruids?: boolean): void;
 declare function targetNext(timeToStorePreviousTargets?: number, additionalFlags?: FlagsEnum[], notoriety?: NotorietyEnum[], opts?: ITargetNextOpts): void;
 declare function targetPrevious(timeToStorePreviousTargets?: number, additionalFlags?: string[], notoriety?: string[], opts?: ITargetNextOpts): void;
+declare function tbGump(): void;
 declare function terminateAll(): void;
 declare function tracking(who?: string): void;
 declare function travelBook(selection?: PortBookOptionsEnum): void;
@@ -449,6 +453,16 @@ declare class Vampire {
     static coffin(menuSelection: CoffinMenuSelection): void;
 }
 declare namespace Scripts {
+    class TbGump {
+        static main(): void;
+        static updateGump(): void;
+        static resetJournalAndScores(): void;
+        static searchTextAndUpdateGump(): void;
+        static drawBox(gump: CustomGumpObject): void;
+        static drawText(gump: CustomGumpObject): void;
+    }
+}
+declare namespace Scripts {
     type Potion = {
         graphic: string;
         kad: IMyGameObject;
@@ -790,6 +804,15 @@ declare enum CoffinMenuSelection {
     low = "Sila odpocinku (-1 nabiti)",
     medium = "Sila spanku (-2 nabiti)",
     high = "Sila hlubokeho spanku (-3 nabiti)"
+}
+declare enum TbGumpEnum {
+    kotaPattern = "je nyni pod kontrolou",
+    scorePattern = "--- SKORE ---",
+    sysScorePattern = "<SCORES>",
+    sharedArrayKoty = "koty",
+    sharedVarOrderScore = "orderScore",
+    sharedVarChaosScore = "chaosScore",
+    tbCustomGumpSerial = 786
 }
 interface IMyGameObject {
     graphic: string;
