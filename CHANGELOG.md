@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.4.1
+
+### fixes
+- `tbGump` - uprava paternu (systemova hlaska podobne jako You see: se neda zachytit) pro update skore
+
 ## 1.4.0
 
 ### fixes

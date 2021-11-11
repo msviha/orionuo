@@ -458,6 +458,7 @@ declare namespace Scripts {
         static updateGump(): void;
         static resetJournalAndScores(): void;
         static searchTextAndUpdateGump(): void;
+        static parseAndSetScore(msg: JournalMessage, order?: boolean): void;
         static drawBox(gump: CustomGumpObject): void;
         static drawText(gump: CustomGumpObject): void;
     }

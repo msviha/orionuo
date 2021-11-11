@@ -25,8 +25,8 @@ namespace Scripts {
 
         static searchTextAndUpdateGump() {
             const kotaPattern = 'je nyni pod kontrolou';
-            const scorePattern = '--- SKORE ---';
-            const sysScorePattern = '<SCORES>';
+            const orderScorePattern = 'Order:|ORDER:';
+            const chaosScorePattern = 'Chaos:|CHAOS:';
 
             const kotaMsg = Orion.InJournal(kotaPattern);
             if (kotaMsg) {
@@ -50,46 +50,34 @@ namespace Scripts {
                     !found && koty.push({name, order});
                     Shared.AddArray(TbGumpEnum.sharedArrayKoty, koty);
                 }
-                Orion.ClearJournal(kotaPattern);
-            }
-            const scoreMsg = Orion.InJournal(scorePattern);
-            if (scoreMsg) {
-                //04.11.2021 21:27:16.928: Molo: --- SKORE ---
-                // 04.11.2021 21:27:16.928: Molo: Order: 1009
-                // 04.11.2021 21:27:16.928: Molo: Chaos: 748
-                Orion.ClearJournal(scorePattern);
-                const text = scoreMsg.Text();
-                if (text) {
-                    const match = text.match(/(.*):/);
-                    const kota = match[1];
-                    const orderMsg = Orion.InJournal(`${kota}: Order`);
-                    const chaosMsg = Orion.InJournal(`${kota}: Chaos`);
-                    if (orderMsg) {
-                        const orderScoreText = orderMsg.Text();
-                        Shared.AddVar(TbGumpEnum.sharedVarOrderScore, orderScoreText.match(/Order:\s(\d*)/)[1]);
-                        Orion.ClearJournal(`${kota}: Order`);
-                    }
-                    if (chaosMsg) {
-                        const chaosScoreText = chaosMsg.Text();
-                        Shared.AddVar(TbGumpEnum.sharedVarChaosScore, chaosScoreText.match(/Chaos:\s(\d*)/)[1]);
-                        Orion.ClearJournal(`${kota}: Chaos`);
-                    }
-                }
-            }
-            const sysScoreMsg = Orion.InJournal(sysScorePattern);
-            if (sysScoreMsg) {
-                // <SCORES> ORDER: [1598] CHAOS: [558]
-                const text = sysScoreMsg.Text();
-                if (text) {
-                    const match = text.match(/\d+/g);
-                    Shared.AddVar(TbGumpEnum.sharedVarOrderScore, match[0]);
-                    Shared.AddVar(TbGumpEnum.sharedVarChaosScore, match[1]);
-                }
-                Orion.ClearJournal(sysScorePattern);
             }
 
-            if (kotaMsg || scoreMsg || sysScoreMsg) {
+            const orderScoreMsg = Orion.InJournal(orderScorePattern);
+            orderScoreMsg && TbGump.parseAndSetScore(orderScoreMsg);
+            const chaosScoreMsg = Orion.InJournal(chaosScorePattern);
+            chaosScoreMsg && TbGump.parseAndSetScore(chaosScoreMsg, false);
+
+            if (kotaMsg || orderScoreMsg || chaosScoreMsg) {
+                kotaMsg && Orion.ClearJournal(kotaPattern);
+                orderScoreMsg && Orion.ClearJournal(orderScorePattern);
+                chaosScoreMsg && Orion.ClearJournal(chaosScorePattern);
                 TbGump.updateGump();
+            }
+        }
+
+        static parseAndSetScore(msg:JournalMessage, order = true) {
+            // <SCORES> ORDER: [1598] CHAOS: [558]
+            // Molo: Order: 1009
+            // Molo: Chaos: 748
+            const text = msg.Text();
+            if (!text) {
+                return;
+            }
+            const re = order ? /order:[^\d]*(\d+)/i : /chaos:[^\d]*(\d+)/i;
+            const varName = order ? TbGumpEnum.sharedVarOrderScore : TbGumpEnum.sharedVarChaosScore;
+            const match = text.match(re);
+            if (match && match.length && match[1] && typeof match[1] === 'string') {
+                Shared.AddVar(varName, match[1]);
             }
         }
 

@@ -2726,7 +2726,7 @@ var __assign = (this && this.__assign) || function () {
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 1.4.0');
+    Orion.Print(-1, 'version 1.4.1');
     Orion.Print(-1, '-------------+');
 }
 function Autostart() {
@@ -7954,8 +7954,8 @@ var Scripts;
         };
         TbGump.searchTextAndUpdateGump = function () {
             var kotaPattern = 'je nyni pod kontrolou';
-            var scorePattern = '--- SKORE ---';
-            var sysScorePattern = '<SCORES>';
+            var orderScorePattern = 'Order:|ORDER:';
+            var chaosScorePattern = 'Chaos:|CHAOS:';
             var kotaMsg = Orion.InJournal(kotaPattern);
             if (kotaMsg) {
                 var text = kotaMsg.Text();
@@ -7977,41 +7977,29 @@ var Scripts;
                     !found && koty.push({ name: name_2, order: order });
                     Shared.AddArray(TbGumpEnum.sharedArrayKoty, koty);
                 }
-                Orion.ClearJournal(kotaPattern);
             }
-            var scoreMsg = Orion.InJournal(scorePattern);
-            if (scoreMsg) {
-                Orion.ClearJournal(scorePattern);
-                var text = scoreMsg.Text();
-                if (text) {
-                    var match = text.match(/(.*):/);
-                    var kota = match[1];
-                    var orderMsg = Orion.InJournal(kota + ": Order");
-                    var chaosMsg = Orion.InJournal(kota + ": Chaos");
-                    if (orderMsg) {
-                        var orderScoreText = orderMsg.Text();
-                        Shared.AddVar(TbGumpEnum.sharedVarOrderScore, orderScoreText.match(/Order:\s(\d*)/)[1]);
-                        Orion.ClearJournal(kota + ": Order");
-                    }
-                    if (chaosMsg) {
-                        var chaosScoreText = chaosMsg.Text();
-                        Shared.AddVar(TbGumpEnum.sharedVarChaosScore, chaosScoreText.match(/Chaos:\s(\d*)/)[1]);
-                        Orion.ClearJournal(kota + ": Chaos");
-                    }
-                }
-            }
-            var sysScoreMsg = Orion.InJournal(sysScorePattern);
-            if (sysScoreMsg) {
-                var text = sysScoreMsg.Text();
-                if (text) {
-                    var match = text.match(/\d+/g);
-                    Shared.AddVar(TbGumpEnum.sharedVarOrderScore, match[0]);
-                    Shared.AddVar(TbGumpEnum.sharedVarChaosScore, match[1]);
-                }
-                Orion.ClearJournal(sysScorePattern);
-            }
-            if (kotaMsg || scoreMsg || sysScoreMsg) {
+            var orderScoreMsg = Orion.InJournal(orderScorePattern);
+            orderScoreMsg && TbGump.parseAndSetScore(orderScoreMsg);
+            var chaosScoreMsg = Orion.InJournal(chaosScorePattern);
+            chaosScoreMsg && TbGump.parseAndSetScore(chaosScoreMsg, false);
+            if (kotaMsg || orderScoreMsg || chaosScoreMsg) {
+                kotaMsg && Orion.ClearJournal(kotaPattern);
+                orderScoreMsg && Orion.ClearJournal(orderScorePattern);
+                chaosScoreMsg && Orion.ClearJournal(chaosScorePattern);
                 TbGump.updateGump();
+            }
+        };
+        TbGump.parseAndSetScore = function (msg, order) {
+            if (order === void 0) { order = true; }
+            var text = msg.Text();
+            if (!text) {
+                return;
+            }
+            var re = order ? /order:[^\d]*(\d+)/i : /chaos:[^\d]*(\d+)/i;
+            var varName = order ? TbGumpEnum.sharedVarOrderScore : TbGumpEnum.sharedVarChaosScore;
+            var match = text.match(re);
+            if (match && match.length && match[1] && typeof match[1] === 'string') {
+                Shared.AddVar(varName, match[1]);
             }
         };
         TbGump.drawBox = function (gump) {
