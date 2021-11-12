@@ -366,5 +366,10 @@ namespace Scripts {
 
             Orion.OpenContainer('openContainer');
         }
+
+        static useShrinkKad() {
+            const kad = gameObject.potions.shrink.kad;
+            Orion.UseType(kad.graphic, kad.color);
+        }
     }
 }

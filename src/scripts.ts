@@ -1123,7 +1123,7 @@ function useRR() {
  * @example external code `useShrinkKad()`
  */
 function useShrinkKad() {
-    Scripts.Taming.useShrinkKad();
+    Scripts.Common.useShrinkKad();
 }
 
 /**

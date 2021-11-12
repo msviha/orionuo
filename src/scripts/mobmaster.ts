@@ -3,13 +3,13 @@ namespace Scripts {
         static rename(mob: GameObject) {
             const chars = 'abcdefghijklmnopqrstuvwxyz';//1234567890';
             const mobSerial = mob?.Serial();
-            let canRename = mob?.CanChangeName() 
+            let canRename = mob?.CanChangeName()
             let mobName = mob?.Name();
 
             if (!canRename && Targeting.isFriendlyTargetType(mob?.Graphic(), mob?.Color(), null)) {
                 Scripts.MobMaster.getStatus(mobSerial);
                 Orion.RequestName(mobSerial);
-                if (Utils.waitForCond(()=> { 
+                if (Utils.waitForCond(()=> {
                     return mob?.CanChangeName();
                 }, 125)) {
                     mobName = mob?.Name();
@@ -287,7 +287,7 @@ namespace Scripts {
 
                     Orion.PrintFast(pet.Serial(), ColorEnum.green, 0, 'pet');
                     Orion.WaitTargetObject(pet.Serial());
-                    this.useShrinkKad();
+                    useShrinkKad();
                     const resultIndex = Scripts.Utils.waitWhileSomethingInJournal(
                         ['Ale co to delas?', 'Bez bliz', 'Zviratko bylo shrinknuto'],
                         500,
@@ -324,11 +324,6 @@ namespace Scripts {
                     }
                 }
             }
-        }
-
-        static useShrinkKad() {
-            const kad = gameObject.potions.shrink.kad;
-            Orion.UseType(kad.graphic, kad.color);
         }
 
         static mobCome() {

@@ -164,11 +164,6 @@ namespace Scripts {
             }
         }
 
-        static useShrinkKad() {
-            const kad = gameObject.potions.shrink.kad;
-            Orion.UseType(kad.graphic, kad.color);
-        }
-
         static taming(opts: ITamingOptions, animalSerial?: string) {
             const loadedStaff = gameObject.taming.staffs.tamingShrink;
             let loadedStaffSerial = Scripts.Utils.findFirstType(loadedStaff, 2);
@@ -268,7 +263,7 @@ namespace Scripts {
 
             availablePets.forEach((pet) => {
                 Orion.WaitTargetObject(pet);
-                this.useShrinkKad();
+                useShrinkKad();
                 Orion.Wait(250);
             });
         }
