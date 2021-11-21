@@ -215,6 +215,7 @@ declare namespace Scripts {
 declare namespace Scripts {
     class MobMaster {
         static rename(mob: GameObject): boolean;
+        static getStatus(serial: string, timeout?: number): void;
         static resetMobCommands(): void;
         private static resolveSayColor;
         private static resolveMobkillTarget;

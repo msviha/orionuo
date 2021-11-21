@@ -93,7 +93,8 @@ function Autostart() {
                             .indexOf(char.Graphic()) > -1
                     ) {
                         if (!char?.CanChangeName()) {
-                            Orion.GetStatus(char?.Serial());
+                            //Orion.GetStatus(char?.Serial());
+                            Scripts.MobMaster.getStatus(char?.Serial());
                             Orion.RequestName(char?.Serial());
                             Scripts.Utils.waitForCond(()=> { return char?.CanChangeName(); }, 150);
                         }

@@ -7,7 +7,7 @@ namespace Scripts {
             let mobName = mob?.Name();
 
             if (!canRename && Targeting.isFriendlyTargetType(mob?.Graphic(), mob?.Color(), null)) {
-                Orion.GetStatus(mobSerial);
+                Scripts.MobMaster.getStatus(mobSerial);
                 Orion.RequestName(mobSerial);
                 if (Utils.waitForCond(()=> { 
                     return mob?.CanChangeName();
@@ -19,7 +19,7 @@ namespace Scripts {
 
             if (canRename) {
                 if (!mobName || mobName.length === 0) {
-                    Orion.GetStatus(mobSerial);
+                    Scripts.MobMaster.getStatus(mobSerial);
                     Orion.RequestName(mobSerial);
                     mobName = mob?.Name();
                 }
@@ -44,7 +44,7 @@ namespace Scripts {
                     let newName = mobName;
 
                     while (newName === mobName && sychr < 400) {
-                        Orion.GetStatus(mobSerial);
+                        Scripts.MobMaster.getStatus(mobSerial);
                         Orion.RequestName(mobSerial);
                         Orion.Wait(100);
                         const mobObj = Orion.FindObject(mobSerial);
@@ -72,6 +72,21 @@ namespace Scripts {
                 }
             }
             return false;
+        }
+
+        static getStatus(serial:string, timeout = 200) {
+            var tmp = Orion.FindObject('laststatus');
+            Orion.GetStatus(serial);
+            if (tmp && tmp.Serial()) {
+                var current = Orion.FindObject('laststatus');
+                var time = 0;
+                while (time < timeout && current && current?.Serial() === tmp?.Serial()) {
+                    current = Orion.FindObject('laststatus');
+                    Orion.Wait(5);
+                    time += 5;
+                }
+                Orion.AddObject('laststatus', tmp.Serial());
+            }     
         }
 
         static resetMobCommands() {
