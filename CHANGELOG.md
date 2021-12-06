@@ -10,6 +10,7 @@
 - `taming` - oprava dvojiho hidnuti
 - `lockpicking` - fix pauzy (odpojovani od serveru)
 - `gmmortar` - fix pauzy (odpojovani od serveru)
+- `cartography` - fix hledani jedne hlasky na ktere skoncil script
 
 ### enhancements
 - timery na svitky - pridany timery na nektere dalsi svitky (res, teleport, ivm) + pridan vypocet timeru podle magery + pro teleport scroll zobrazuje timer i podle toho jestli se hrac pohne (by Nait)
@@ -21,6 +22,9 @@
 
 ### features
 - `transparency` - prepinaci funkce na circle of transparency (pripadne s parametrem prepina transparency na vsech statikach)
+
+### experimental
+- `hoverCheck` - script ktery checkuje zda mate kurzor nad nejakou custom zalozkou a podbarvi ve hre character (spoustite samostatne jen jednou, neotestovana performance/narocnost)
 
 ### gameObject added
 - vampMystic
