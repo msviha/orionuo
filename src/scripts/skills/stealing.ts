@@ -18,14 +18,14 @@ namespace Scripts {
                     color: '0x0712'
                 },
                 {
-                    name : 'Giant Viper',
+                    name: 'Giant Viper',
                     graphic: '0x0015',
-                    color: '0x0712'
+                    color: '0x0757'
                 },
                 {
-                    name : 'Giant Spider',
+                    name: 'Giant Spider',
                     graphic: '0x001C',
-                    color: '0x0712'
+                    color: '0x0751'
                 },
                 {
                     name : 'Death Vortex',
@@ -78,18 +78,22 @@ namespace Scripts {
 
             const stealingIgnoreList = Scripts.Stealing.getStealingIgnoreList();
 
-            const globalStealChars = Orion.GetGlobal('stolenFromChars');
+            const globalStealChars = Shared.GetVar('stolenFromChars');
             if (!globalStealChars) {
                 return targets[0].Serial();
             }
-
+            let toBeIgnored = false;
             const stolenFromChars = globalStealChars.split('|');
             for (const target of targets) {
                 if (target.Serial() && stolenFromChars.indexOf(target.Serial()) === -1) {
                     for (const ignore of stealingIgnoreList) {
-                        if (ignore.color !== target.Color() || ignore.graphic !== target.Graphic()) {
-                            return target.Serial();
-                        }
+                        if (ignore.color === target.Color() && ignore.graphic === target.Graphic()) {
+                            toBeIgnored = true;
+                            break;
+                         }
+                    }
+                    if (!toBeIgnored) {
+                        return target.Serial();
                     }
                 }
             }
@@ -120,9 +124,9 @@ namespace Scripts {
         }
 
         static stealing() {
-            let stealingStartSkill = parseInt(Orion.GetGlobal('stealingStartSkill', ));
+            let stealingStartSkill = parseInt(Shared.GetVar('stealingStartSkill', ));
             if (!stealingStartSkill) {
-                Orion.SetGlobal('stealingStartSkill', Orion.SkillValue('Stealing'));
+                Shared.AddVar('stealingStartSkill', Orion.SkillValue('Stealing'));
                 stealingStartSkill = Orion.SkillValue('Stealing');
             }
 
@@ -137,7 +141,7 @@ namespace Scripts {
             }
             const px = Player.X();
             const py = Player.Y();
-
+            Orion.ClearJournal('Okradeni se nepovedlo|To chces krast na takovou dalku|Krast musis v klidu|ukradl|vsimla|silna|Tohle nejde okrast|To nejde');
             Orion.UseObject(kapsarskeNaradicko);
             Orion.Wait(1150);
             let target = '';
@@ -162,14 +166,15 @@ namespace Scripts {
             if (!attempted) {
                 Orion.CancelTarget();
                 Scripts.Utils.playerPrint('Stealing zrusen - pohyb/ubrano/target');
+                return;
             }
 
-            Orion.Wait(150);
+            Orion.Wait(200);
 
             if (Orion.InJournal('ukradl|vsimla|silna|Tohle nejde okrast|To nejde') && target) {
-                const globalStealChars = Orion.GetGlobal('stolenFromChars');
-                Orion.SetGlobal('stolenFromChars', `${globalStealChars}|${target}`);
-                Orion.ClearJournal();
+                Orion.ClearJournal('ukradl|vsimla|silna|Tohle nejde okrast|To nejde');
+                const globalStealChars = Shared.GetVar('stolenFromChars');
+                Shared.AddVar('stolenFromChars', `${globalStealChars}|${target}`);
                 const currentPoisonSkill = Orion.SkillValue('Stealing');
                 if (stealingStartSkill !== currentPoisonSkill) {
                     const gainSkill = (currentPoisonSkill - stealingStartSkill) / 10;
@@ -177,7 +182,7 @@ namespace Scripts {
                 }
             }
             if (Orion.InJournal('Okradeni se nepovedlo|To chces krast na takovou dalku|Krast musis v klidu')) {
-                Orion.ClearJournal();
+                Orion.ClearJournal('Okradeni se nepovedlo|To chces krast na takovou dalku|Krast musis v klidu');
                 Scripts.Stealing.stealing();
             }
         }

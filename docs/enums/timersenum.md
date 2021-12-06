@@ -23,7 +23,7 @@
 
 •  **bandage**:  = "bandage"
 
-*Defined in [types/enums.ts:211](https://github.com/msviha/orionuo/blob/ff1a9e9/src/types/enums.ts#L211)*
+*Defined in [types/enums.ts:211](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L211)*
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 •  **drink**:  = "drink"
 
-*Defined in [types/enums.ts:205](https://github.com/msviha/orionuo/blob/ff1a9e9/src/types/enums.ts#L205)*
+*Defined in [types/enums.ts:205](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L205)*
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 •  **gs**:  = "gs"
 
-*Defined in [types/enums.ts:206](https://github.com/msviha/orionuo/blob/ff1a9e9/src/types/enums.ts#L206)*
+*Defined in [types/enums.ts:206](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L206)*
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 •  **hiding**:  = "hiding"
 
-*Defined in [types/enums.ts:207](https://github.com/msviha/orionuo/blob/ff1a9e9/src/types/enums.ts#L207)*
+*Defined in [types/enums.ts:207](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L207)*
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 •  **invis**:  = "invis"
 
-*Defined in [types/enums.ts:208](https://github.com/msviha/orionuo/blob/ff1a9e9/src/types/enums.ts#L208)*
+*Defined in [types/enums.ts:208](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L208)*
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 •  **invisLong**:  = "invisLong"
 
-*Defined in [types/enums.ts:209](https://github.com/msviha/orionuo/blob/ff1a9e9/src/types/enums.ts#L209)*
+*Defined in [types/enums.ts:209](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L209)*
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 •  **klamak**:  = "klamak"
 
-*Defined in [types/enums.ts:210](https://github.com/msviha/orionuo/blob/ff1a9e9/src/types/enums.ts#L210)*
+*Defined in [types/enums.ts:210](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L210)*
 
 ___
 
@@ -79,4 +79,4 @@ ___
 
 •  **statusBarTimer**:  = "statusBarTimer"
 
-*Defined in [types/enums.ts:212](https://github.com/msviha/orionuo/blob/ff1a9e9/src/types/enums.ts#L212)*
+*Defined in [types/enums.ts:212](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L212)*

@@ -774,5 +774,15 @@ namespace Scripts {
                     return 7;
             }
         }
+
+        static determineCharacter():CharactersEnum|undefined {
+            for (const key in gameObject.books) {
+                const book = gameObject.books[key];
+                if (Orion.FindType(book.graphic, book.color).length && book.character) {
+                    return book.character;
+                }
+            }
+            return;
+        }
     }
 }

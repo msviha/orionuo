@@ -1,5 +1,34 @@
 # CHANGELOG
 
+## 1.5.0
+
+### fixes
+- `autostealing` - viper, spider - color fix (ignorelist)
+- `useKpz` - fix pohnuti aktivni kpzkou
+- `klamak` - oprava textu u timeru
+- `bandageself` - oprava nevyuzivaneho parametru failedMessage (nyni lze vypnout zobrazeni hlasky failed)
+- `taming` - oprava dvojiho hidnuti
+- `lockpicking` - fix pauzy (odpojovani od serveru)
+- `gmmortar` - fix pauzy (odpojovani od serveru)
+
+### enhancements
+- timery na svitky - pridany timery na nektere dalsi svitky (res, teleport, ivm) + pridan vypocet timeru podle magery + pro teleport scroll zobrazuje timer i podle toho jestli se hrac pohne (by Nait)
+- `inscription` - pridan parametr pro moznost piti malych mana refu
+- `medikHiding` - pridan parametr pro moznost rehidnuti
+- `shrinkAll` - pridan parametr autotake (bere skyhawka a packy po shrinku ze zeme)
+- `statusAll` - vylepsene srovnavani - po presouvani zalozek se snazi zarovnat presunute zalozky a otevrit nove
+- `gmmortar` - automaticky hleda gm mortar na zemi
+
+### features
+- `transparency` - prepinaci funkce na circle of transparency (pripadne s parametrem prepina transparency na vsech statikach)
+
+### gameObject added
+- vampMystic
+- teleporter
+- books based on characters
+- walrus
+- gmMortar
+
 ## 1.4.1
 
 ### fixes

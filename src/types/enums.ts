@@ -254,3 +254,18 @@ enum TbGumpEnum {
     sharedVarChaosScore = 'chaosScore',
     tbCustomGumpSerial = 786
 }
+
+enum CharactersEnum {
+    necromancer = 'necromancer',
+    mage = 'mage',
+    gangrel = 'gangrel',
+    craftsman = 'craftsman',
+    medic = 'medic',
+    sharpshooter = 'sharpshooter',
+    paladin = 'paladin',
+    warrior = 'warrior',
+    brujah = 'brujah',
+    druid = 'druid',
+    cleric = 'cleric',
+    shaman = 'shaman'
+}

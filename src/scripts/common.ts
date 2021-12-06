@@ -79,7 +79,7 @@ namespace Scripts {
             Orion.Wait(responseDelay); // ClearJournal safe wait
 
             Scripts.Utils.waitWhileSomethingInJournal(pattern, 3000);
-            Orion.InJournal('You apply') && Orion.PrintFast(Player.Serial(), ColorEnum.red, 0, `bandage failed`);
+            failedMessage && Orion.InJournal('You apply') && Orion.PrintFast(Player.Serial(), ColorEnum.red, 0, `bandage failed`);
             count--;
 
             if (count <= minimalCountToWarn) {
@@ -370,6 +370,13 @@ namespace Scripts {
         static useShrinkKad() {
             const kad = gameObject.potions.shrink.kad;
             Orion.UseType(kad.graphic, kad.color);
+        }
+
+        static transparency(allStatic = false) {
+            const option = allStatic ? 'AllStaticTransparent' : 'UseCircleTrans';
+            const newState = !Orion.ClientOptionGet(option);
+            Orion.ClientOptionSet(option, newState ? 1 : 0);
+            Scripts.Utils.log(`Transparency set to ${newState.toString()}`);
         }
     }
 }

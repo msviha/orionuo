@@ -43,9 +43,7 @@ namespace Scripts {
                 Orion.Wait(responseDelay);
                 Orion.UseObject(mapa);
 
-                if (!Scripts.Utils.waitWhileSomethingInJournal(['an unusable map', 'You put the map'])) {
-                    continue;
-                }
+                Scripts.Utils.waitWhileSomethingInJournal(['an unusable map', 'You put the map']);
 
                 mapa = Scripts.Utils.findFirstType(gameObject.uncategorized.mapa);
                 Orion.WaitTargetObject(mapa);

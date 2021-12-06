@@ -99,6 +99,10 @@ const gameObject: any = {
                 y: 24,
             },
         },
+        gmMortar: {
+            graphic: '0x0E9B',
+            color: '0x0058',
+        },
         lockpicks: {
             graphic: '0x14FB',
             color: '0x0000',
@@ -140,6 +144,14 @@ const gameObject: any = {
         necroMystic: {
             graphic: '0x1F0B',
             color: '0x0485',
+        },
+        vampMystic: {
+            graphic: '0x1402',
+            color: '0x0B40',
+        },
+        teleporter: {
+            graphic: '0x1AE4',
+            color: '0x0846',
         },
     },
     tools: {
@@ -1443,7 +1455,7 @@ const gameObject: any = {
                 graphic: '0x1843',
                 color: '0x0005',
             },
-            alchemySelection: 'Mana Refresh Potion',
+            alchemySelection: 'Mana Refresh',
             reagent: 'eyes_of_newt',
             reagentsCount: 3,
         },
@@ -1707,6 +1719,7 @@ const gameObject: any = {
         unholySpellbook: {
             graphic: '0x0EFA',
             color: '0x0413',
+            character: 'necromancer',
             bag: {
                 x: 142,
                 y: 5,
@@ -1715,6 +1728,124 @@ const gameObject: any = {
         highMagicSpellBook: {
             graphic: '0x0EFA',
             color: '0x0021',
+            character: 'mage',
+            bag: {
+                x: 142,
+                y: 5,
+            },
+        },
+        gangrelSpellBook: {
+            graphic: '0x0EFA',
+            color: '0x0B88',
+            character: 'gangrel',
+            bag: {
+                x: 142,
+                y: 5,
+            },
+        },
+        craftsmanSpellBook: {
+            graphic: '0x0EFA',
+            color: '0x016F',
+            character: 'craftman',
+            bag: {
+                x: 142,
+                y: 5,
+            },
+        },
+        firstAidSpellBook: {
+            graphic: '0x0EFA',
+            color: '0x07D0',
+            character: 'medic',
+            bag: {
+                x: 142,
+                y: 5,
+            },
+        },
+        sharpshooterSpellBook: {
+            graphic: '0x0EFA',
+            color: '0x0856',
+            character: 'sharpshooter',
+            bag: {
+                x: 142,
+                y: 5,
+            },
+        },
+        glorySpellBook: {
+            graphic: '0x0EFA',
+            color: '0x00BD',
+            character: 'paladin',
+            bag: {
+                x: 142,
+                y: 5,
+            },
+        },
+        warriorsSpellBook: {
+            graphic: '0x0EFA',
+            color: '0x0037',
+            character: 'warrior',
+            bag: {
+                x: 142,
+                y: 5,
+            },
+        },
+        brujahSpellBook: {
+            graphic: '0x0EFA',
+            color: '0x0B89',
+            character: 'brujah',
+            bag: {
+                x: 142,
+                y: 5,
+            },
+        },
+        druidSpellBook: {
+            graphic: '0x0EFA',
+            color: '0x0B78',
+            character: 'druid',
+            bag: {
+                x: 142,
+                y: 5,
+            },
+        },
+        holySpellBook: {
+            graphic: '0x0EFA',
+            color: '0x0835',
+            character: 'cleric',
+            bag: {
+                x: 142,
+                y: 5,
+            },
+        },
+        deepForestSpellBook: {
+            graphic: '0x0EFA',
+            color: '0x08A1',
+            character: 'shaman',
+            bag: {
+                x: 142,
+                y: 5,
+            },
+        },
+        grizzlyRawSpellBook: {
+            graphic: '0x0EFA',
+            color: '0x0B7C',
+            character: 'shaman',
+            bag: {
+                x: 142,
+                y: 5,
+            },
+        },
+        deerRawSpellBook: {
+            graphic: '0x0EFA',
+            color: '0x0799',
+            character: 'shaman',
+            bag: {
+                x: 142,
+                y: 5,
+            },
+        },
+        deerBottleSpellBook: {
+            graphic: '0x0EFA',
+            color: '0x0B43',
+            character: 'shaman',
             bag: {
                 x: 142,
                 y: 5,
@@ -1858,6 +1989,8 @@ const gameObject: any = {
             port: {
                 graphic: '0x1F42',
                 color: '0x0000',
+                minMana: 4,
+                timerType: 'teleport',
             },
             ef: {
                 graphic: '0x1F5E',
@@ -1876,11 +2009,14 @@ const gameObject: any = {
             ivm: {
                 graphic: '0x1F49',
                 color: '0x0000',
+                minMana: 5,
+                timerType: 'ivm',
             },
             ress: {
                 graphic: '0x1F67',
                 color: '0x0000',
                 minMana: 25,
+                timerType: 'regular',
             },
             recall: {
                 graphic: '0x1F4C',
@@ -1914,6 +2050,7 @@ const gameObject: any = {
             bs: {
                 graphic: '0x1F4D',
                 color: '0x0000',
+                timerType: 'bladeSpirit',
             },
             protect: {
                 graphic: '0x1F3B',
@@ -2259,6 +2396,10 @@ const gameObject: any = {
             brownBear: {
                 graphic: '0x20CF',
                 color: '0xFFFF',
+            },
+            walrus: {
+                graphic: '0x20F7',
+                color: '0x0000',
             },
         },
         lvl4: {

@@ -83,3 +83,27 @@ function tbCustomGumpCallBack() {
         Orion.Terminate('tbGumpUpdateLoop');
     }
 }
+
+/**
+ * @internal
+ */
+function overwriteTeleportTimerWhenPlayerMoves(movementTimer:number, standingTimer:number) {
+    const tickRate = 500;
+    const startPlayerX =  Player.X();
+    const startPlayerY =  Player.Y();
+
+    let elapsedTime = 0;
+    while (standingTimer > 0) {
+        Orion.Wait(tickRate);
+        standingTimer -= tickRate;
+        elapsedTime += tickRate;
+        if (startPlayerX != Player.X() || startPlayerY != Player.Y()) {
+            const newTimer = movementTimer - elapsedTime;
+            Orion.RemoveDisplayTimer('teleport');
+            Orion.AddDisplayTimer('teleport', newTimer, 'RightTop', 'Line|Bar', 'Teleport', 0, 265, '0x88B', 0, '0x88B');
+            return true;
+        }
+    }
+    return false;
+
+}

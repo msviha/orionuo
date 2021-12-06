@@ -7,6 +7,7 @@ declare function scheduleClick(s: string): void;
 declare function customStatusBarCallBack(s: string): void;
 declare function tbGumpUpdateLoop(): void;
 declare function tbCustomGumpCallBack(): void;
+declare function overwriteTeleportTimerWhenPlayerMoves(movementTimer: number, standingTimer: number): boolean;
 declare function version(): void;
 declare function Autostart(): void;
 declare function autoStealing(autoheal: boolean): void;
@@ -45,6 +46,7 @@ declare function harp(target?: TargetEnum): void;
 declare function healPets(): void;
 declare function hideAll(): void;
 declare function hiding(allowRehid?: boolean, doubleTapToRehid?: boolean): void;
+declare function hoverCheck(): void;
 declare function inscription(circle: number, spell: string, quantity?: number, useManaRef?: boolean): void;
 declare function killAll(): void;
 declare function killTarget(): void;
@@ -57,7 +59,7 @@ declare function lumber(): void;
 declare function lute(target?: TargetEnum): void;
 declare function make(count: number, objectAsString: string, setInputs?: boolean): void;
 declare function manualTarget(opts?: ITargetNextOpts): void;
-declare function medikHiding(): void;
+declare function medikHiding(forced: boolean): void;
 declare function mm(requiredCountInTarget?: number): void;
 declare function mmc(requiredCountInTarget?: number): void;
 declare function mount(): void;
@@ -80,7 +82,7 @@ declare function KPZHpSwitch(): void;
 declare function resetWeapons(): void;
 declare function rozbij(ingy?: OcarovaniEnum, kolik?: number): void;
 declare function saveEquip(): void;
-declare function shrinkAll(): void;
+declare function shrinkAll(autotake?: boolean): void;
 declare function statusAll(notoriery?: NotorietyEnum[], position?: string, id?: number, alwaysClear?: boolean, offset?: number, shiftX?: number, shiftY?: number): void;
 declare function statusBar(): void;
 declare function stealing(): void;
@@ -116,6 +118,7 @@ declare function bandageTarget(targets?: string | TargetEnum | Array<ITargetAlia
 declare function equipSlotWeapon(slotCode: string, type: IMyGameObject, options?: any): void;
 declare function switchShield(options?: any): void;
 declare function switchWeapon(options?: any): void;
+declare function transparency(allStatic?: boolean): void;
 declare function vampRakevLow(): void;
 declare function vampRakevMedium(): void;
 declare function vampRakevHigh(): void;
@@ -166,6 +169,8 @@ declare namespace Scripts {
         static poisonTrainAuto(): void;
         static openBank(): boolean;
         static openContainer(): void;
+        static useShrinkKad(): void;
+        static transparency(allStatic?: boolean): void;
     }
 }
 declare namespace Scripts {
@@ -223,7 +228,6 @@ declare namespace Scripts {
         static mobKillAll(targets?: string | TargetEnum | Array<ITargetAlias>, useSavedTarget?: boolean): void;
         static mobKill(targets?: string | TargetEnum | Array<ITargetAlias>, useSavedTarget?: boolean): void;
         static shrinkOne(): void;
-        static useShrinkKad(): void;
         static mobCome(): void;
         static mobStop(): void;
         static mobGo(): void;
@@ -284,6 +288,32 @@ declare namespace Scripts {
         static potionToKad(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean, kadSerial?: string): void;
     }
 }
+interface IScrollTimers {
+    ivm: IScrollTimersMagery;
+    regular: IScrollTimersMagery;
+    bladeSpirit: IScrollTimersMagery;
+    teleport: ITeleportTimerByChar;
+}
+interface IScrollTimersMagery {
+    [key: number]: number;
+}
+interface ITeleportTimerByChar {
+    [key: string]: ITeleportTimerType;
+}
+interface ITeleportTimerType extends ITeleportTimerMoving {
+    bonus?: ITeleportTimerMoving;
+}
+interface ITeleportTimerMoving {
+    moving: number;
+    standing: number;
+}
+declare enum ScrollTimerType {
+    ivm = "ivm",
+    regular = "regular",
+    bladeSpirit = "bladeSpirit",
+    teleport = "teleport"
+}
+declare const strollTimers: IScrollTimers;
 declare namespace Scripts {
     class Spells {
         static cast(spell: string, target?: string | TargetEnum | Array<ITargetAlias>, existingWaitTargetHook?: boolean): void;
@@ -295,6 +325,7 @@ declare namespace Scripts {
         static wos(scroll?: boolean, displayTimer?: number): void;
         static efMount(scroll?: boolean, timer?: number): void;
         static ef(self?: boolean, scroll?: boolean, timer?: number, targetSerial?: string): void;
+        static getScrollTimer(timerType: ScrollTimerType): number;
     }
 }
 declare namespace Scripts {
@@ -318,6 +349,12 @@ declare namespace Scripts {
         static setMobileArray(nearCharactersUpdate: GameObject[]): void;
         static closeStandardStatusBars(notoriety?: NotorietyEnum[], closeInactiveOnly?: boolean): void;
         static statusAll(notoriery?: NotorietyEnum[], position?: string, id?: number, alwaysClear?: boolean, offset?: number, shiftX?: number, shiftY?: number): void;
+        static moveCustomGump(serial: string, x: number, y: number): void;
+        static getCoordinatesForStatusBar(position: string, positionId: number, shiftX: number, shiftY: number, offset: number): {
+            x: number;
+            y: number;
+        };
+        static hoverCheck(): void;
     }
 }
 declare namespace Scripts {
@@ -417,6 +454,7 @@ declare namespace Scripts {
         static ensureName(obj: GameObject | PlayerCharacter): string;
         static waitForCond(condFce: Function, timeout: number): boolean;
         static getNotorietyNumberFromEnum(notoriety: NotorietyEnum): number;
+        static determineCharacter(): CharactersEnum | undefined;
     }
 }
 declare namespace Scripts {
@@ -428,7 +466,7 @@ declare namespace Scripts {
         static KPZJump(): void;
         static KPZHpSwitch(): void;
         static useKPZ(cb: Function): boolean;
-        static medikHiding(): void;
+        static medikHiding(forced: boolean): void;
     }
 }
 declare namespace Scripts {
@@ -582,9 +620,8 @@ declare namespace Scripts {
         static trainOnAnimal(animalSerial: string, ranger?: boolean): boolean | undefined;
         static trainOnAnimalsAround(ranger?: boolean): void;
         static tameAnimalsAround(opts: ITamingOptions): void;
-        static useShrinkKad(): void;
         static taming(opts: ITamingOptions, animalSerial?: string): void;
-        static shrinkAll(): void;
+        static shrinkAll(autotake?: boolean): void;
     }
 }
 declare namespace Scripts {
@@ -815,6 +852,20 @@ declare enum TbGumpEnum {
     sharedVarOrderScore = "orderScore",
     sharedVarChaosScore = "chaosScore",
     tbCustomGumpSerial = 786
+}
+declare enum CharactersEnum {
+    necromancer = "necromancer",
+    mage = "mage",
+    gangrel = "gangrel",
+    craftsman = "craftsman",
+    medic = "medic",
+    sharpshooter = "sharpshooter",
+    paladin = "paladin",
+    warrior = "warrior",
+    brujah = "brujah",
+    druid = "druid",
+    cleric = "cleric",
+    shaman = "shaman"
 }
 interface IMyGameObject {
     graphic: string;

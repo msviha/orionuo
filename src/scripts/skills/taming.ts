@@ -215,10 +215,6 @@ namespace Scripts {
                     Orion.WalkTo(target.X(), target.Y(), target.Z(), 1);
                     Orion.Wait(responseDelay);
                 }
-                if (opts.hiding) {
-                    Scripts.Hiding.hiding();
-                    Orion.Wait(responseDelay);
-                }
                 Orion.WaitTargetObject('tamingTarget');
                 Orion.UseObject(loadedStaffSerial);
                 Orion.Wait(responseDelay);
@@ -244,7 +240,7 @@ namespace Scripts {
             }
         }
 
-        static shrinkAll() {
+        static shrinkAll(autotake = true) {
             let petsAround = Orion.FindType('!0x0190|!0x0191', '0xFFFF', 'ground', 'live', 2);
             const availablePets = [];
             while (petsAround.length) {
@@ -265,6 +261,13 @@ namespace Scripts {
                 Orion.WaitTargetObject(pet);
                 useShrinkKad();
                 Orion.Wait(250);
+                if (autotake) {
+                    // packs / skyhawk
+                    let newGroundPackSerials = Orion.FindType('0x2126|0x2127|0x211D', 'any', 'ground', 'item', 3);
+                    if (newGroundPackSerials) {
+                       Orion.MoveItem(newGroundPackSerials[0]);
+                    }
+                }
             });
         }
     }

@@ -57,14 +57,14 @@ function _hidingPreoccupiedCheck(allowRehid:string, doubleTapToRehid:string) {
         hidTimer?.backgroundColor || 'red',
     );
     Scripts.Utils.waitWhileSomethingInJournal(
-        ['You have hidden yourself well', 't seem to hide here', 'preoccupied'],
+        ['You have hidden yourself well', 't seem to hide here', 'preoccupied', 'too well lit'],
         3000,
     );
     Orion.RemoveDisplayTimer(TimersEnum.hiding);
     const showMsg = config?.hiding?.showInnerMessages;
     if (Orion.InJournal('You have hidden yourself well') && showMsg) {
         Orion.CharPrint(Player.Serial(), ColorEnum.green, '[ Hidden ]');
-    } else if (Orion.InJournal('t seem to hide here') && showMsg) {
+    } else if (Orion.InJournal('t seem to hide here|too well lit') && showMsg) {
         Orion.CharPrint(Player.Serial(), ColorEnum.red, '[ FAILED ]');
     } else if (Orion.InJournal('preoccupied')) {
         Orion.WarMode(true);

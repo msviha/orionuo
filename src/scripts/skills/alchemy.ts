@@ -104,8 +104,16 @@ namespace Scripts {
                 return;
             }
 
-            Scripts.Utils.playerPrint(`Target gmmortar for making "${potionName}"`);
-            Orion.WaitForAddObject('gmMortar', 60000);
+            const gmMortarObj = gameObject.uncategorized.gmMortar;
+            const gmMortars = Orion.FindType(gmMortarObj.graphic, gmMortarObj.color, 'ground', '', 18);
+            if (!gmMortars.length) {
+                Scripts.Utils.createGameObjectSelections([{ask: `Target gmmortar for making "${potionName}"`, addObject: 'gmMortar'}]);
+            }
+            else {
+                const gmMortar = Orion.FindObject(gmMortars[0]);
+                Orion.WalkTo(gmMortar.X(), gmMortar.Y(), Player.Z(), 1);
+                Orion.AddObject('gmMortar', gmMortar.Serial());
+            }
 
             while (true) {
                 Orion.ClearJournal();
@@ -125,20 +133,20 @@ namespace Scripts {
                 const michnutaKadSerial = kadeNew.filter((i) => kadePrevious.indexOf(i) === -1)[0];
 
                 Orion.ClearJournal();
-                Orion.Wait(50);
+                Orion.Wait(250);
                 Orion.WaitTargetObject(cilovaKadSerial);
                 Orion.UseObject(michnutaKadSerial);
                 Scripts.Utils.waitWhileSomethingInJournal(['Prelil jsi']);
 
                 Orion.ClearJournal();
-                Orion.Wait(responseDelay);
+                Orion.Wait(250);
                 const emptyBottle = Scripts.Potions.getEmptyBottle();
                 Orion.WaitTargetObject(emptyBottle);
                 Orion.UseObject(michnutaKadSerial);
                 Scripts.Utils.waitWhileSomethingInJournal(['You put']);
 
                 Orion.ClearJournal();
-                Orion.Wait(50);
+                Orion.Wait(250);
                 Orion.WaitTargetType(p.graphic, p.color);
                 Orion.UseObject(cilovaKadSerial);
                 Scripts.Utils.waitWhileSomethingInJournal(['You put']);

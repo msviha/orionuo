@@ -1,4 +1,5 @@
 export default interface ClientOptions {
+    ClientOptionSet(option: string, newState: string|number): number;
     ClientOptionGet(option: string): number;
     /**
      * bool Orion.OptionSound();

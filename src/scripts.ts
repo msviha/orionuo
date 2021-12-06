@@ -1,7 +1,7 @@
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 1.4.1');
+    Orion.Print(-1, 'version 1.5.0');
     Orion.Print(-1, '-------------+');
 }
 
@@ -93,7 +93,6 @@ function Autostart() {
                             .indexOf(char.Graphic()) > -1
                     ) {
                         if (!char?.CanChangeName()) {
-                            //Orion.GetStatus(char?.Serial());
                             Scripts.MobMaster.getStatus(char?.Serial());
                             Orion.RequestName(char?.Serial());
                             Scripts.Utils.waitForCond(()=> { return char?.CanChangeName(); }, 150);
@@ -515,6 +514,13 @@ function hiding(allowRehid = true, doubleTapToRehid = false) {
 }
 
 /**
+ * experimental - spusti smycku ktera kontroluje nad kterou zalozkou mate kurzor a podbarvi hrace v pripade ze je v dosahu
+ */
+function hoverCheck() {
+    Scripts.Statusbar.hoverCheck();
+}
+
+/**
  * pise svitky
  * @param circle {number} cislo kruhu kouzel ve kterem se kouzlo nachazi
  * @param spell {string} nazev kouzla (z nabidky ktera vyskoci kdyz vyberete kruh kouzel)
@@ -648,10 +654,11 @@ function manualTarget(opts: ITargetNextOpts = TARGET_OPTS_DEFAULTS) {
 
 /**
  * Hiduje s Medicem s lucernou
- * @example external code `medikHiding;`
+ * @example external code `medikHiding; - hidne pokud nejste v hidu`
+ * @example external code `medikHiding(true); - pokusi se hidnout i kdyz uz hidu jste`
  */
-function medikHiding() {
-    Scripts.Clerik.medikHiding();
+function medikHiding(forced:boolean) {
+    Scripts.Clerik.medikHiding(forced);
 }
 
 /**
@@ -871,11 +878,13 @@ function saveEquip() {
 
 /**
  * Shrinkne vsechny klamaky v okoli 2 policek
+ * @param autotake - nastavte false pokud nechcete automaticky sbirat pack kone/lamy nebo skyhawka ze zeme po shrinknuti
  * @example in client `_shrinkAll`
  * @example external code `shrinkAll()`
+ * @example external code `shrinkAll(false)` nesebere ze zeme pety co se standardne nehazou do baglu (packy, skyhawk)
  */
-function shrinkAll() {
-    Scripts.Taming.shrinkAll();
+function shrinkAll(autotake = true) {
+    Scripts.Taming.shrinkAll(autotake);
 }
 
 /**
@@ -1256,10 +1265,11 @@ function bandageTarget(
  * @param slotCode - sufix pod kterym bude ulozena zbran v globalnich promenych, napr. Secondary, IJSFork atd.
  * @param type - objekt typu IMyGameObject, viz definice typu.
  * @param options - objekt, mozne atributy:
- * recuseSearch - true/false (vychozi false), prepinac rekurzivniho prohledavani kontejneru.
- * ensureShield - true/false (vychozi true), prepinac zajistuje nahozeni stitu u jednorucnich zbrani.
- * add - true/false (vychozi false), prepinac zajistuje vyhozeni terciku a urceni nove zbrane do slotu pokud ulozeny serial neexistuje.
- * printColor - string (vychozi null), barva hlasky nahozene slot zbrane dle ColorEnum.
+ * @param recuseSearch - true/false (vychozi false), prepinac rekurzivniho prohledavani kontejneru.
+ * @param ensureShield - true/false (vychozi true), prepinac zajistuje nahozeni stitu u jednorucnich zbrani.
+ * @param add - true/false (vychozi false), prepinac zajistuje vyhozeni terciku a urceni nove zbrane do slotu pokud ulozeny serial neexistuje.
+ * @param printColor - string (vychozi null), barva hlasky nahozene slot zbrane dle ColorEnum.
+ * @example external code `equipSlotWeapon()`
  */
 function equipSlotWeapon(slotCode:string, type:IMyGameObject, options?:any) {
     Scripts.Combat.equipSlotWeapon(slotCode, type, options);
@@ -1268,8 +1278,8 @@ function equipSlotWeapon(slotCode:string, type:IMyGameObject, options?:any) {
 /**
  * Prepina stity ktere mate u sebe, pri vychozim nastaveni jen v zakladnim batuzku. Vybrany stit je ulozen od globalni promene __LastShield, kterou pouzivaji switchWeapon a equipSlotWeapon
  * @param options - objekt, mozne atributy:
- * recuseSearch - true/false (vychozi false), prepinac rekurzivniho prohledavani kontejneru.
- * @returns
+ * @param recuseSearch - true/false (vychozi false), prepinac rekurzivniho prohledavani kontejneru.
+ * @example external code `switchShield()`
  */
 function switchShield(options?:any) {
     Scripts.Combat.switchShield(options);
@@ -1278,30 +1288,42 @@ function switchShield(options?:any) {
 /**
  * Prepina zbrane ktere mate u sebe, ve vychozim nastaveni jen v zakladnim batuzku. Vybrana zbran je ulozena do globalni promene __LastWeapon.
  * @param options - objekt, mozne atributy:
- * recuseSearch - true/false (vychozi false), prepinac rekurzivniho prohledavani kontejneru.
- * ensureShield - true/false (vychozi true), prepinac zajistuje nahozeni stitu u jednorucnich zbrani.
- * @returns
+ * @param recuseSearch - true/false (vychozi false), prepinac rekurzivniho prohledavani kontejneru.
+ * @param ensureShield - true/false (vychozi true), prepinac zajistuje nahozeni stitu u jednorucnich zbrani.
+ * @example external code `switchWeapon()`
  */
 function switchWeapon(options?:any) {
     Scripts.Combat.switchWeapon(options);
 }
 
 /**
- *low = 'Sila odpocinku (-1 nabiti)',
+ * Zapina/Vypina transparency (circle nebo vsechny statiky)
+ * @example  external code `transparency()` - prepina option Use Circle Of Transparency
+ * @example  external code `transparency(true)` - prepina option All Static Transparent
+ */
+function transparency(allStatic = false) {
+    Scripts.Common.transparency(allStatic);
+}
+
+/**
+ * low = 'Sila odpocinku (-1 nabiti)'
+ * @example  external code `vampRakevLow()`
  */
 function vampRakevLow() {
     Vampire.coffin(CoffinMenuSelection.low);
  }
 
  /**
-  * medium = 'Sila spanku (-2 nabiti)',
+  * medium = 'Sila spanku (-2 nabiti)'
+  * @example  external code `vampRakevMedium()`
   */
  function vampRakevMedium() {
     Vampire.coffin(CoffinMenuSelection.medium);
  }
 
  /**
-  * high = 'Sila hlubokeho spanku (-3 nabiti)',
+  * high = 'Sila hlubokeho spanku (-3 nabiti)'
+  * @example  external code `vampRakevHigh()`
   */
  function vampRakevHigh() {
     Vampire.coffin(CoffinMenuSelection.high);

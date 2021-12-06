@@ -112,9 +112,14 @@ namespace Scripts {
         }
 
         static useKPZ(cb: Function): boolean {
+            let kpzActiveList = Orion.FindType(gameObject.medic.kpzActive.graphic, gameObject.medic.kpzActive.color, 'backpack');
+            let kpzActive = kpzActiveList.length > 0 ? kpzActiveList[0] : null;
+            if (kpzActive) {
+                Orion.MoveItem(kpzActive, 1, 'backpack');
+                Orion.Wait(100);
+            }
             const kpzList = Orion.FindType(gameObject.medic.kpz.graphic, gameObject.medic.kpz.color, 'backpack');
             const kpz = kpzList.length > 0 ? kpzList[0] : null;
-
             Orion.ClearJournal();
 
             if (!kpz) {
@@ -133,20 +138,15 @@ namespace Scripts {
             }
         }
 
-        static medikHiding() {
-            if (Player.Hidden()) {
+        static medikHiding(forced:boolean) {
+            if (Player.Hidden() && !forced) {
                 Scripts.Utils.playerPrint('V hidu uz jsi.');
                 return;
             }
 
             Orion.ClearJournal();
             Orion.Print(ColorEnum.none, 'Start Medik Hiding');
-            var headerStit = Orion.FindType('0x1B76');
-            if (headerStit.length) {
-                Orion.UseType('0x1B76');
-            } else {
-                Orion.Disarm();
-            }
+            Orion.Unequip('LeftHand');
             Orion.UseSkill('Hiding');
             Orion.Wait(100);
             if (Orion.InJournal('You must wait')) {

@@ -1,7 +1,7 @@
 namespace Scripts {
     export class MobMaster {
         static rename(mob: GameObject) {
-            const chars = 'abcdefghijklmnopqrstuvwxyz';//1234567890';
+            const chars = 'abcdefghijklmnopqrstuvwxyz';
             const mobSerial = mob?.Serial();
             let canRename = mob?.CanChangeName()
             let mobName = mob?.Name();
@@ -86,7 +86,7 @@ namespace Scripts {
                     time += 5;
                 }
                 Orion.AddObject('laststatus', tmp.Serial());
-            }     
+            }
         }
 
         static resetMobCommands() {

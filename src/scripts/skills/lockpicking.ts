@@ -16,8 +16,9 @@ namespace Scripts {
 
             let unlocked = false;
             while (lockpicks.length && !unlocked) {
-                Orion.ClearJournal();
+                Orion.ClearJournal('You fail|cannot be');
                 const timer = Orion.Timer('unlockTimer');
+                Orion.Wait(50);
                 if (timer < 500) {
                     Orion.Wait(500 - timer);
                     Scripts.Utils.resetTimer('unlockTimer');

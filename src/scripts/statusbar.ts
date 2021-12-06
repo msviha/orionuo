@@ -40,11 +40,7 @@ namespace Scripts {
 
             const gump = Orion.CreateCustomGump(parseInt(serial, 16));
 
-            if (coordinates) {
-                gump.SetX(coordinates.x);
-                gump.SetY(coordinates.y);
-                gump.Update();
-            }
+            coordinates && Scripts.Statusbar.moveCustomGump(serial, coordinates.x, coordinates.y);
 
             gump.SetCallback(`customStatusBarCallBack ${serial}`);
 
@@ -374,66 +370,152 @@ namespace Scripts {
             shiftX = 0,
             shiftY = 0
         ) {
+            const notorieties = notoriery.join('|');
+            const nearCharacters = Orion.FindTypeEx('any', '0xFFFF', 'ground', 'mobile|ignoreself', 18, notorieties);
+
+            let statusAllStatusBars = Shared.GetArray(`statusAllStatusBars${id}`, []);
+
+            // clear the serials which was closed or all statusbars
+            for (let i = statusAllStatusBars.length - 1; i >= 0; i--) {
+                const serial = statusAllStatusBars[i];
+                alwaysClear && Scripts.Statusbar.close(serial);
+                !Scripts.Statusbar.exists(serial) && statusAllStatusBars.splice(i, 1);
+            }
+            alwaysClear && (statusAllStatusBars = []);
+
+            // add the new characters around
+            for (const char of nearCharacters) {
+                statusAllStatusBars.indexOf(char.Serial()) === -1 && statusAllStatusBars.push(char.Serial());
+            }
+
+            const opened = [];
+            const notOpened = [];
+            let positionId = 0;
+
+            // iterate the possible number of opened statusbars to sort the opened first
+            // duplicate the array to know which statusbars still need to resolve their position
+            const unresolvedStatusBars = [...statusAllStatusBars];
+            for (let i = 0; i < statusAllStatusBars.length; i++) {
+                const {x, y} = Scripts.Statusbar.getCoordinatesForStatusBar(position, positionId, shiftX, shiftY, offset);
+
+
+                // find the opened and check which one is closest to next x,y coordinates
+                let nearestStatusBarDistance = 999999; // big number
+                let nearestStatusBarSerial:string;
+                for (let j = 0; j < unresolvedStatusBars.length; j++) {
+                    const serial = unresolvedStatusBars[j];
+                    if (Scripts.Statusbar.exists(serial)) {
+                        const position = Orion.GetGumpPosition('custom', serial);
+                        if (position) {
+                            const kotvaDistance = x + y;
+                            const statusbarDistance = position.X() + position.Y();
+                            const distance = kotvaDistance > statusbarDistance ? kotvaDistance - statusbarDistance : statusbarDistance - kotvaDistance;
+                            if (distance < nearestStatusBarDistance) {
+                                nearestStatusBarSerial = serial;
+                                nearestStatusBarDistance = distance;
+                            }
+                        }
+                    }
+                }
+
+                if (!nearestStatusBarSerial) {
+                    notOpened.push(statusAllStatusBars[i]);
+                    continue;
+                }
+
+                // else
+                opened.push(nearestStatusBarSerial);
+
+                const indexToRemove = unresolvedStatusBars.indexOf(nearestStatusBarSerial);
+                indexToRemove > -1 && unresolvedStatusBars.splice(indexToRemove, 1);
+
+                Scripts.Statusbar.moveCustomGump(nearestStatusBarSerial, x, y);
+                positionId++; // increment just for opened statusbars
+            }
+
+            const newlyOpened = [];
+            for (const serial of notOpened) {
+                if (!Scripts.Statusbar.exists(serial) && !Orion.FindObject(serial)) {
+                    continue;
+                }
+                const {x, y} = Scripts.Statusbar.getCoordinatesForStatusBar(position, positionId, shiftX, shiftY, offset);
+
+                !Scripts.Statusbar.exists(serial) && Scripts.Statusbar.create(serial, {x, y});
+                newlyOpened.push(serial);
+                const gump = Orion.CreateCustomGump(parseInt(serial, 16));
+                Scripts.Statusbar.moveCustomGump(serial, x, y);
+                positionId++;
+            }
+
+            let openedStatusBars = [...opened, ...newlyOpened];
+            Shared.AddArray(`statusAllStatusBars${id}`, openedStatusBars);
+            const statusBars = Shared.GetArray(GlobalEnum.customStatusBars, []);
+        }
+
+        static moveCustomGump(serial:string, x:number, y:number) {
+            const gump = Orion.CreateCustomGump(parseInt(serial, 16));
+            gump.SetX(x);
+            gump.SetY(y);
+            gump.Update();
+        }
+
+        static getCoordinatesForStatusBar(position:string, positionId:number, shiftX:number, shiftY:number, offset:number) {
             const scale = (config?.statusBar?.scale ?? 100) / 100;
             const barHeight = 42 * scale;
             const barWidth = 140 * scale;
-            const notorieties = notoriery.join('|');
-            const nearCharacters = Orion.FindTypeEx('any', '0xFFFF', 'ground', 'mobile|ignoreself', 18, notorieties);
             const gameWindowX = Orion.ClientOptionGet('GameWindowX');
             const gameWindowY = Orion.ClientOptionGet('GameWindowY');
             const gameWindowWidth = Orion.ClientOptionGet('GameWindowWidth');
             const gameWindowHeight = Orion.ClientOptionGet('GameWindowHeight');
 
-            let statusAllStatusBars = Shared.GetArray(`statusAllStatusBars${id}`, []);
-            // clearing the previously opened statusBars if it is enabled
-            if (alwaysClear) {
-                for (const serial of statusAllStatusBars) {
-                    Scripts.Statusbar.close(serial);
-                }
-                statusAllStatusBars = [];
+            let x = 0;
+            let y = 0;
+            switch (position) {
+                case 'RightTop':
+                    x = gameWindowX + gameWindowWidth + shiftX;
+                    y = (gameWindowY + shiftY) + ((barHeight + offset) * positionId);
+                    break;
+                case 'LeftTop':
+                    x = gameWindowX - barWidth + shiftX;
+                    y = (gameWindowY + shiftY) + ((barHeight + offset) * positionId);
+                    break;
+                case 'TopLeft':
+                    x = gameWindowX + shiftX  + ((barWidth + offset) * positionId);
+                    y = gameWindowY - barHeight + shiftY;
+                    break;
+                case 'BottomLeft':
+                    x = gameWindowX + shiftX  + ((barWidth + offset) * positionId);
+                    y = gameWindowY + gameWindowHeight + shiftY;
+                    break;
+                default:
+                    break;
             }
+            return {x, y};
+        }
 
-            for (const char of nearCharacters) {
-                statusAllStatusBars.indexOf(char.Serial()) === -1 && statusAllStatusBars.push(char.Serial());
-            }
-
-            let positionId = 0
-            for (const serial of statusAllStatusBars) {
-                if (!Scripts.Statusbar.exists(serial) && !Orion.FindObject(serial)) {
+        static hoverCheck() {
+            while (true) {
+                Orion.Wait(50);
+                const statusBar = Scripts.Statusbar.getHoveringStatusBar();
+                if (!statusBar) {
+                    Shared.AddVar('lastHighlightedStatusBar', undefined);
+                    Orion.ClearHighlightCharacters();
                     continue;
                 }
-
-                let x = 0;
-                let y = 0;
-                switch (position) {
-                    case 'RightTop':
-                        x = gameWindowX + gameWindowWidth + shiftX;
-                        y = (gameWindowY + shiftY) + ((barHeight + offset) * positionId);
-                        break;
-                    case 'LeftTop':
-                        x = gameWindowX - barWidth + shiftX;
-                        y = (gameWindowY + shiftY) + ((barHeight + offset) * positionId);
-                        break;
-                    case 'TopLeft':
-                        x = gameWindowX + shiftX  + ((barWidth + offset) * positionId);
-                        y = gameWindowY - barHeight + shiftY;
-                        break;
-                    case 'BottomLeft':
-                        x = gameWindowX + shiftX  + ((barWidth + offset) * positionId);
-                        y = gameWindowY + gameWindowHeight + shiftY;
-                        break;
-                    default:
-                        break;
+                const serial = statusBar.serial;
+                const obj = Orion.FindObject(serial);
+                if (!obj) {
+                    continue;
                 }
-
-                !Scripts.Statusbar.exists(serial) && Scripts.Statusbar.create(serial, {x, y});
-                const gump = Orion.CreateCustomGump(parseInt(serial, 16));
-                gump.SetX(x);
-                gump.SetY(y);
-                gump.Update();
-                positionId++;
+                const last = Shared.GetVar('lastHighlightedStatusBar', undefined);
+                if (last !== serial) {
+                    Orion.Print(serial);
+                    Orion.ClearHighlightCharacters();
+                    Shared.AddVar('lastHighlightedStatusBar', serial);
+                    Orion.AddObject('highlightedStatusBar', serial);
+                    Orion.AddHighlightCharacter(serial, Scripts.Utils.getColorByNotoriety(obj.Notoriety()));
+                }
             }
-            Shared.AddArray(`statusAllStatusBars${id}`, statusAllStatusBars);
         }
     }
 }

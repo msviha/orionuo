@@ -22,7 +22,7 @@
 
 •  **kotaPattern**:  = "je nyni pod kontrolou"
 
-*Defined in [types/enums.ts:249](https://github.com/msviha/orionuo/blob/ff1a9e9/src/types/enums.ts#L249)*
+*Defined in [types/enums.ts:249](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L249)*
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 •  **scorePattern**:  = "--- SKORE ---"
 
-*Defined in [types/enums.ts:250](https://github.com/msviha/orionuo/blob/ff1a9e9/src/types/enums.ts#L250)*
+*Defined in [types/enums.ts:250](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L250)*
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 •  **sharedArrayKoty**:  = "koty"
 
-*Defined in [types/enums.ts:252](https://github.com/msviha/orionuo/blob/ff1a9e9/src/types/enums.ts#L252)*
+*Defined in [types/enums.ts:252](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L252)*
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 •  **sharedVarChaosScore**:  = "chaosScore"
 
-*Defined in [types/enums.ts:254](https://github.com/msviha/orionuo/blob/ff1a9e9/src/types/enums.ts#L254)*
+*Defined in [types/enums.ts:254](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L254)*
 
 ___
 
@@ -54,7 +54,7 @@ ___
 
 •  **sharedVarOrderScore**:  = "orderScore"
 
-*Defined in [types/enums.ts:253](https://github.com/msviha/orionuo/blob/ff1a9e9/src/types/enums.ts#L253)*
+*Defined in [types/enums.ts:253](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L253)*
 
 ___
 
@@ -62,7 +62,7 @@ ___
 
 •  **sysScorePattern**:  = "\<SCORES>"
 
-*Defined in [types/enums.ts:251](https://github.com/msviha/orionuo/blob/ff1a9e9/src/types/enums.ts#L251)*
+*Defined in [types/enums.ts:251](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L251)*
 
 ___
 
@@ -70,4 +70,4 @@ ___
 
 •  **tbCustomGumpSerial**:  = 786
 
-*Defined in [types/enums.ts:255](https://github.com/msviha/orionuo/blob/ff1a9e9/src/types/enums.ts#L255)*
+*Defined in [types/enums.ts:255](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L255)*
