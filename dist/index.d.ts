@@ -122,6 +122,8 @@ declare function transparency(allStatic?: boolean): void;
 declare function vampRakevLow(): void;
 declare function vampRakevMedium(): void;
 declare function vampRakevHigh(): void;
+declare function vendorBuy(): void;
+declare function vendorSell(): void;
 declare function craftBandana(): void;
 declare function parseParam(param: any): any;
 declare namespace Scripts {
@@ -171,6 +173,7 @@ declare namespace Scripts {
         static openContainer(): void;
         static useShrinkKad(): void;
         static transparency(allStatic?: boolean): void;
+        static vendor(keyWord: string): void;
     }
 }
 declare namespace Scripts {

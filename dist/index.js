@@ -1684,6 +1684,7 @@ var gameObject = {
                 graphic: '0x1843',
                 color: '0x03C4'
             },
+            gmMortarSelection: "Nightsight (204 Spider's Silk)",
             alchemySelection: 'Nightsight',
             reagent: 'ss',
             reagentsCount: 2
@@ -3394,6 +3395,12 @@ function vampRakevMedium() {
 function vampRakevHigh() {
     Vampire.coffin(CoffinMenuSelection.high);
 }
+function vendorBuy() {
+    Scripts.Common.vendor('buy');
+}
+function vendorSell() {
+    Scripts.Common.vendor('sell');
+}
 function craftBandana() {
     Scripts.Craft.bandana();
 }
@@ -4091,6 +4098,13 @@ var Scripts;
             var newState = !Orion.ClientOptionGet(option);
             Orion.ClientOptionSet(option, newState ? 1 : 0);
             Scripts.Utils.log("Transparency set to " + newState.toString());
+        };
+        Common.vendor = function (keyWord) {
+            Scripts.Utils.createGameObjectSelections([
+                { ask: 'Target vendor', addObject: 'lastVendor' },
+            ]);
+            var vendor = Orion.FindObject('lastVendor');
+            vendor && Orion.Say(vendor.Name() + " " + keyWord);
         };
         return Common;
     }());

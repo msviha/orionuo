@@ -378,5 +378,13 @@ namespace Scripts {
             Orion.ClientOptionSet(option, newState ? 1 : 0);
             Scripts.Utils.log(`Transparency set to ${newState.toString()}`);
         }
+
+        static vendor(keyWord:string) {
+            Scripts.Utils.createGameObjectSelections([
+                { ask: 'Target vendor', addObject: 'lastVendor' },
+            ]);
+            const vendor = Orion.FindObject('lastVendor');
+            vendor && Orion.Say(`${vendor.Name()} ${keyWord}`);
+        }
     }
 }

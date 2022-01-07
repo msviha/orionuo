@@ -1329,7 +1329,25 @@ function vampRakevLow() {
     Vampire.coffin(CoffinMenuSelection.high);
  }
 
- /**
+/**
+ * nakup u vendora
+ * @example in client `_vendorBuy`
+ * @example external code `vendorBuy()`
+ */
+function vendorBuy() {
+    Scripts.Common.vendor('buy');
+}
+
+/**
+ * prodej u vendora
+ * @example in client `_vendorSell`
+ * @example external code `vendorSell()`
+ */
+function vendorSell() {
+    Scripts.Common.vendor('sell');
+}
+
+/**
   * Mystik na crafta
   */
  function craftBandana() {
