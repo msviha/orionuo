@@ -1583,6 +1583,7 @@ const gameObject: any = {
                 graphic: '0x1843',
                 color: '0x03C4',
             },
+            gmMortarSelection: "Nightsight (204 Spider's Silk)",
             alchemySelection: 'Nightsight',
             reagent: 'ss',
             reagentsCount: 2,
