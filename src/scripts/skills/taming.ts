@@ -215,6 +215,12 @@ namespace Scripts {
                     Orion.WalkTo(target.X(), target.Y(), target.Z(), 1);
                     Orion.Wait(responseDelay);
                 }
+                if (opts.hiding) {
+                    Orion.ClearJournal('Select char to inspect');
+                    Orion.UseSkill('Evaluating Intelligence');
+                    Scripts.Utils.waitWhileSomethingInJournal(['Select char to inspect']);
+                    Orion.CancelTarget();
+                }
                 Orion.WaitTargetObject('tamingTarget');
                 Orion.UseObject(loadedStaffSerial);
                 Orion.Wait(responseDelay);
