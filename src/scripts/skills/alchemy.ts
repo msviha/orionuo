@@ -95,11 +95,11 @@ namespace Scripts {
             const p = gameObject.potions[potionName];
             const cilovaKadSerial = Scripts.Potions.getKadForPotion(p);
 
-            const isEmptyKad = Orion.FindType(
+            const emptyKad = Orion.FindType(
                 gameObject.uncategorized.emptyKad.graphic,
                 gameObject.uncategorized.emptyKad.color,
             );
-            if (!isEmptyKad) {
+            if (!emptyKad.length) {
                 Scripts.Utils.log('Nemas praznou kad', ColorEnum.red);
                 return;
             }
@@ -115,10 +115,10 @@ namespace Scripts {
                 Orion.AddObject('gmMortar', gmMortar.Serial());
             }
 
-            while (true) {
-                Orion.ClearJournal();
-                Orion.Wait(50);
+            Orion.ClearJournal();
+            Orion.Wait(50);
 
+            while (true) {
                 const kadePrevious = Orion.FindType(gameObject.uncategorized.emptyKad.graphic);
 
                 Scripts.Utils.selectMenu('Vyber typ potionu', [p.gmMortarSelection]);
@@ -128,28 +128,33 @@ namespace Scripts {
                     Scripts.Utils.log('Dosly regy', ColorEnum.red);
                     return;
                 }
+                Orion.ClearJournal('You put the Nadoba');
+                Orion.Wait(250); // pockej na kad v baglu
 
                 const kadeNew = Orion.FindType(gameObject.uncategorized.emptyKad.graphic);
                 const michnutaKadSerial = kadeNew.filter((i) => kadePrevious.indexOf(i) === -1)[0];
 
-                Orion.ClearJournal();
-                Orion.Wait(250);
-                Orion.WaitTargetObject(cilovaKadSerial);
                 Orion.UseObject(michnutaKadSerial);
+                Orion.WaitForTarget(2000);
+                Orion.TargetObject(cilovaKadSerial);
                 Scripts.Utils.waitWhileSomethingInJournal(['Prelil jsi']);
-
-                Orion.ClearJournal();
+                Orion.ClearJournal('Prelil jsi');
                 Orion.Wait(250);
+
                 const emptyBottle = Scripts.Potions.getEmptyBottle();
-                Orion.WaitTargetObject(emptyBottle);
                 Orion.UseObject(michnutaKadSerial);
-                Scripts.Utils.waitWhileSomethingInJournal(['You put']);
-
-                Orion.ClearJournal();
+                Orion.WaitForTarget(2000);
+                Orion.TargetObject(emptyBottle);
+                Scripts.Utils.waitWhileSomethingInJournal(['You put the Kad na potiony']);
+                Orion.ClearJournal('You put the Kad na potiony');
                 Orion.Wait(250);
-                Orion.WaitTargetType(p.graphic, p.color);
+
                 Orion.UseObject(cilovaKadSerial);
-                Scripts.Utils.waitWhileSomethingInJournal(['You put']);
+                Orion.WaitForTarget(2000);
+                Orion.TargetType(p.graphic, p.color);
+                Scripts.Utils.waitWhileSomethingInJournal(['You put the empty bottles']);
+                Orion.ClearJournal('You put the empty bottles');
+                Orion.Wait(250);
             }
         }
     }
