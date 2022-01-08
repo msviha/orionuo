@@ -2,9 +2,8 @@ namespace Scripts {
     export class Dress {
         /**
          * Scripts.Dress.resetStats()
-         * stability beta
          *
-         * resetuje staty pomoci travel booku
+         * resetuje staty pomoci travel booku / cestovni knihy
          */
         static resetStats() {
             const currentEquip = Scripts.Dress.getSerialsFromCurrentEquip();
@@ -64,6 +63,17 @@ namespace Scripts {
             if (!eq) {
                 eq = Shared.GetArray('savedEquip');
             }
+
+            Orion.AddObject('equipTempDrop', undefined);
+            if (true) {
+                Scripts.Utils.playerPrint('Nelze spustit equip, chces neco docasne polozit na zem ?');
+                Orion.WaitForAddObject('equipTempDrop', 60000);
+
+                const drop = Orion.FindObject('equipTempDrop');
+                drop && Orion.MoveItem(drop.Serial());
+                Orion.Wait(responseDelay);
+            }
+
             for (const s of eq) {
                 if (!s) {
                     continue;
@@ -74,9 +84,12 @@ namespace Scripts {
                 } else {
                     Scripts.Utils.log('EQUIP NEBUDE SPUSTEN SI PODHOZEN', ColorEnum.red);
                     return;
-                } 
+                }
 
             }
+
+            const drop = Orion.FindObject('equipTempDrop');
+            drop && Orion.MoveItem(drop.Serial());
         }
 
         static nextWeapon(showName = false, previous = false) {
