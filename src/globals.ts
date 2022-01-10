@@ -1961,6 +1961,10 @@ const gameObject: any = {
                 x: 64,
                 y: 35,
             },
+        },
+        taming: {
+            graphic: '0x1088',
+            color: '0x0B18',
         }
     },
     scrolls: {

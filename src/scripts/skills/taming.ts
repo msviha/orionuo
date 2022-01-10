@@ -161,6 +161,7 @@ namespace Scripts {
                 Orion.Ignore(monstersAround[0]);
                 Scripts.Taming.taming(opts, monstersAround[0]);
                 monstersAround = Orion.FindType('!0x0190|!0x0191', '-1', 'ground', 'nothuman|live|near', 22, 'gray');
+                Orion.Wait(responseDelay);
             }
         }
 
@@ -169,6 +170,9 @@ namespace Scripts {
             let loadedStaffSerial = Scripts.Utils.findFirstType(loadedStaff, 2);
             const staff = gameObject.taming.staffs.taming;
             const staffSerial = Scripts.Utils.findFirstType(staff, 2);
+            const krk = Orion.ObjAtLayer(10, 'self')?.Serial();
+            const tamingNecklace = Scripts.Utils.findFirstType(gameObject.neklances.taming, 10);
+            tamingNecklace && Orion.UseObject(tamingNecklace);
 
             if (!loadedStaffSerial && staffSerial) {
                 const shrink = gameObject.potions.shrink;
@@ -190,6 +194,7 @@ namespace Scripts {
             loadedStaffSerial = Scripts.Utils.findFirstType(loadedStaff, 2);
             if (!loadedStaffSerial) {
                 Scripts.Utils.playerPrint('Nemas potrebne vybaveni na taming', ColorEnum.red);
+                Orion.UseObject(krk);
                 return;
             }
 
@@ -199,6 +204,7 @@ namespace Scripts {
                 Scripts.Utils.playerPrint('Co chces tamnout ?');
                 const selection = Orion.WaitForAddObject('tamingTarget');
                 if (selection !== 1) {
+                    Orion.UseObject(krk);
                     return;
                 }
             } else {
@@ -244,6 +250,8 @@ namespace Scripts {
                 }
                 Orion.ClearJournal();
             }
+
+            Orion.UseObject(krk);
         }
 
         static shrinkAll(autotake = true) {
