@@ -70,7 +70,7 @@ namespace Scripts {
                 Orion.WaitForAddObject('equipTempDrop', 60000);
 
                 const drop = Orion.FindObject('equipTempDrop');
-                drop && Orion.MoveItem(drop.Serial());
+                drop && Orion.MoveItem(drop.Serial(), 0);
                 Orion.Wait(responseDelay);
             }
 
