@@ -191,6 +191,19 @@ function attackLast() {
 }
 
 /**
+ * Da si bandu, pokud dosli tak prehraje zvuk z C:\critical.wav
+ * Poslednich 10 band hlasi nad hracem
+ * @param minimalCountForWarn zobrazi varovani pokud budes mit tento pocet band (a mene)
+ * @param failedMessage nechcete-li videt text pri neuspecne bande tak dejte false
+ * @example in client `_bandageSelf`
+ * @example external code `bandageSelf();`
+ * @example external code `bandageSelf(10);`
+ */
+function bandageSelf(minimalCountForWarn = 10, failedMessage = true) {
+    Scripts.Common.bandageSelf(minimalCountForWarn, undefined, failedMessage);
+}
+
+/**
  * Prepina mezi bishopkou a druhou helmou
  * @example external code `bishopToggle();`
  */
@@ -208,16 +221,12 @@ function bowcraftTrain() {
 }
 
 /**
- * Da si bandu, pokud dosli tak prehraje zvuk z C:\critical.wav
- * Poslednich 10 band hlasi nad hracem
- * @param minimalCountForWarn zobrazi varovani pokud budes mit tento pocet band (a mene)
- * @param failedMessage nechcete-li videt text pri neuspecne bande tak dejte false
- * @example in client `_bandageSelf`
- * @example external code `bandageSelf();`
- * @example external code `bandageSelf(10);`
+ * trenink blacksmithy
+ * @example in client `_blacksmithyTrain`
+ * @example external code `blacksmithyTrain()`
  */
-function bandageSelf(minimalCountForWarn = 10, failedMessage = true) {
-    Scripts.Common.bandageSelf(minimalCountForWarn, undefined, failedMessage);
+function blacksmithyTrain() {
+    Scripts.Crafting.blacksmithyTrain();
 }
 
 /**

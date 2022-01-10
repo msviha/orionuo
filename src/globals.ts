@@ -167,6 +167,10 @@ const gameObject: any = {
             graphic: '0x13E3',
             color: '0x0B87',
         },
+        hammer: {
+            graphic: '0x13E4',
+            color: '0x0000',
+        },
         tinkerTools: {
             graphic: '0x1EBC',
             color: '0x0000',
@@ -1957,7 +1961,7 @@ const gameObject: any = {
                 x: 64,
                 y: 35,
             },
-        },
+        }
     },
     scrolls: {
         blank: {
