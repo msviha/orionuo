@@ -256,7 +256,7 @@ namespace Scripts {
                 Scripts.Utils.log('nemas dagger', ColorEnum.red);
             }
 
-            while (true) {
+            while (!Player.Dead()) {
                 Orion.ClearJournal();
                 Orion.Wait(50);
                 const logs = Scripts.Utils.findFirstType(gameObject.resources.logs);
@@ -296,7 +296,7 @@ namespace Scripts {
                 Scripts.Utils.log('nemas scissors', ColorEnum.red);
             }
 
-            while (true) {
+            while (!Player.Dead()) {
                 Orion.ClearJournal();
                 Orion.Wait(50);
 
@@ -323,6 +323,48 @@ namespace Scripts {
                     Orion.MoveItem(bandage[0], undefined, 'clothContainer');
                 }
                 Orion.Wait(responseDelay);
+            }
+        }
+
+        static blacksmithyTrain() {
+            Scripts.Utils.createGameObjectSelections([
+                { ask: 'Target container with iron ingots', addObject: 'ironContainer' }
+            ]);
+
+            const hammer = Scripts.Utils.findFirstType(gameObject.tools.hammer, 1);
+            if (!hammer) {
+                Scripts.Utils.log('nemas kladivko', ColorEnum.red);
+                return;
+            }
+
+            const bsTrainer = Orion.FindType('0x0FB1', '0x0161', 'ground', '', 3);
+            if (!bsTrainer.length) {
+                Scripts.Utils.log('nemas pobliz BS Trainer', ColorEnum.red);
+                return;
+            }
+            const bsTrainerSerial = bsTrainer[0];
+
+            while (!Player.Dead()) {
+                Orion.ClearJournal();
+                Orion.Wait(50);
+
+                let ing = Scripts.Utils.findFirstType(gameObject.resources.ingots.iron);
+                if (!ing) {
+                    Scripts.Utils.refill(gameObject.resources.ingots.iron, 'ironContainer', 20, undefined, true, 'iron ingot');
+                    Orion.Wait(responseDelay);
+                    ing = Scripts.Utils.findFirstType(gameObject.resources.ingots.iron);
+                }
+
+                Scripts.Utils.selectMenu('Blacksmithing', ['Iron Weapons', 'Swords & Blades', 'Dagger']);
+                Orion.WaitTargetObject(ing);
+                Orion.UseObject(hammer);
+
+                Scripts.Utils.waitWhileSomethingInJournal(['You have failed', 'You put the dagger']);
+                const dagger = Orion.FindType('0x0F51', '0x0000');
+                if (dagger.length >= 10) {
+                    Orion.UseObject(bsTrainerSerial);
+                    Orion.Wait(responseDelay);
+                }
             }
         }
     }
