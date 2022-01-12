@@ -1,7 +1,7 @@
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 1.5.0');
+    Orion.Print(-1, 'version 1.6.0');
     Orion.Print(-1, '-------------+');
 }
 

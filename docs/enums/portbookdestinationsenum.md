@@ -41,7 +41,7 @@
 
 •  **brit**:  = 3
 
-*Defined in [types/enums.ts:58](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L58)*
+*Defined in [types/enums.ts:58](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L58)*
 
 ___
 
@@ -49,7 +49,7 @@ ___
 
 •  **cech**:  = 4
 
-*Defined in [types/enums.ts:59](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L59)*
+*Defined in [types/enums.ts:59](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L59)*
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 •  **charge**:  = 1
 
-*Defined in [types/enums.ts:56](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L56)*
+*Defined in [types/enums.ts:56](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L56)*
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 •  **cove**:  = 17
 
-*Defined in [types/enums.ts:72](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L72)*
+*Defined in [types/enums.ts:72](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L72)*
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 •  **custom**:  = 5
 
-*Defined in [types/enums.ts:60](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L60)*
+*Defined in [types/enums.ts:60](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L60)*
 
 ___
 
@@ -81,7 +81,7 @@ ___
 
 •  **customGate**:  = 6
 
-*Defined in [types/enums.ts:61](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L61)*
+*Defined in [types/enums.ts:61](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L61)*
 
 ___
 
@@ -89,7 +89,7 @@ ___
 
 •  **customMark**:  = 7
 
-*Defined in [types/enums.ts:62](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L62)*
+*Defined in [types/enums.ts:62](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L62)*
 
 ___
 
@@ -97,7 +97,7 @@ ___
 
 •  **homare**:  = 22
 
-*Defined in [types/enums.ts:77](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L77)*
+*Defined in [types/enums.ts:77](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L77)*
 
 ___
 
@@ -105,7 +105,7 @@ ___
 
 •  **jhelom**:  = 8
 
-*Defined in [types/enums.ts:63](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L63)*
+*Defined in [types/enums.ts:63](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L63)*
 
 ___
 
@@ -113,7 +113,7 @@ ___
 
 •  **luna**:  = 24
 
-*Defined in [types/enums.ts:79](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L79)*
+*Defined in [types/enums.ts:79](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L79)*
 
 ___
 
@@ -121,7 +121,7 @@ ___
 
 •  **magin**:  = 13
 
-*Defined in [types/enums.ts:68](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L68)*
+*Defined in [types/enums.ts:68](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L68)*
 
 ___
 
@@ -129,7 +129,7 @@ ___
 
 •  **minoc**:  = 11
 
-*Defined in [types/enums.ts:66](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L66)*
+*Defined in [types/enums.ts:66](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L66)*
 
 ___
 
@@ -137,7 +137,7 @@ ___
 
 •  **moonglow**:  = 19
 
-*Defined in [types/enums.ts:74](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L74)*
+*Defined in [types/enums.ts:74](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L74)*
 
 ___
 
@@ -145,7 +145,7 @@ ___
 
 •  **nara**:  = 21
 
-*Defined in [types/enums.ts:76](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L76)*
+*Defined in [types/enums.ts:76](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L76)*
 
 ___
 
@@ -153,7 +153,7 @@ ___
 
 •  **nujelm**:  = 15
 
-*Defined in [types/enums.ts:70](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L70)*
+*Defined in [types/enums.ts:70](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L70)*
 
 ___
 
@@ -161,7 +161,7 @@ ___
 
 •  **occlo**:  = 18
 
-*Defined in [types/enums.ts:73](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L73)*
+*Defined in [types/enums.ts:73](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L73)*
 
 ___
 
@@ -169,7 +169,7 @@ ___
 
 •  **scara**:  = 12
 
-*Defined in [types/enums.ts:67](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L67)*
+*Defined in [types/enums.ts:67](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L67)*
 
 ___
 
@@ -177,7 +177,7 @@ ___
 
 •  **serpents**:  = 26
 
-*Defined in [types/enums.ts:81](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L81)*
+*Defined in [types/enums.ts:81](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L81)*
 
 ___
 
@@ -185,7 +185,7 @@ ___
 
 •  **staty**:  = 2
 
-*Defined in [types/enums.ts:57](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L57)*
+*Defined in [types/enums.ts:57](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L57)*
 
 ___
 
@@ -193,7 +193,7 @@ ___
 
 •  **templar**:  = 20
 
-*Defined in [types/enums.ts:75](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L75)*
+*Defined in [types/enums.ts:75](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L75)*
 
 ___
 
@@ -201,7 +201,7 @@ ___
 
 •  **trh**:  = 16
 
-*Defined in [types/enums.ts:71](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L71)*
+*Defined in [types/enums.ts:71](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L71)*
 
 ___
 
@@ -209,7 +209,7 @@ ___
 
 •  **trinsic**:  = 14
 
-*Defined in [types/enums.ts:69](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L69)*
+*Defined in [types/enums.ts:69](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L69)*
 
 ___
 
@@ -217,7 +217,7 @@ ___
 
 •  **umbra**:  = 25
 
-*Defined in [types/enums.ts:80](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L80)*
+*Defined in [types/enums.ts:80](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L80)*
 
 ___
 
@@ -225,7 +225,7 @@ ___
 
 •  **vesper**:  = 9
 
-*Defined in [types/enums.ts:64](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L64)*
+*Defined in [types/enums.ts:64](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L64)*
 
 ___
 
@@ -233,7 +233,7 @@ ___
 
 •  **yew**:  = 10
 
-*Defined in [types/enums.ts:65](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L65)*
+*Defined in [types/enums.ts:65](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L65)*
 
 ___
 
@@ -241,4 +241,4 @@ ___
 
 •  **zento**:  = 23
 
-*Defined in [types/enums.ts:78](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L78)*
+*Defined in [types/enums.ts:78](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L78)*

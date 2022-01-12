@@ -29,7 +29,7 @@
 
 •  **hover**:  = "hover"
 
-*Defined in [types/enums.ts:40](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L40)*
+*Defined in [types/enums.ts:40](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L40)*
 
 charakter nad jehoz CUST zalozkou je zrovna kruzor mysi
 
@@ -39,7 +39,7 @@ ___
 
 •  **lastattack**:  = "lastattack"
 
-*Defined in [types/enums.ts:20](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L20)*
+*Defined in [types/enums.ts:20](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L20)*
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 •  **laststatus**:  = "laststatus"
 
-*Defined in [types/enums.ts:21](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L21)*
+*Defined in [types/enums.ts:21](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L21)*
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 •  **laststatusenemy**:  = "laststatusenemy"
 
-*Defined in [types/enums.ts:26](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L26)*
+*Defined in [types/enums.ts:26](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L26)*
 
 laststatus pokud to neni serial z friendlistu nebo pet
 
@@ -65,7 +65,7 @@ ___
 
 •  **lasttarget**:  = "lasttarget"
 
-*Defined in [types/enums.ts:22](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L22)*
+*Defined in [types/enums.ts:22](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L22)*
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 •  **lasttargetmobile**:  = "lasttargetmobile"
 
-*Defined in [types/enums.ts:38](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L38)*
+*Defined in [types/enums.ts:38](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L38)*
 
 last target pouze pokud je to charakter
 
@@ -83,7 +83,7 @@ ___
 
 •  **manual**:  = "manual"
 
-*Defined in [types/enums.ts:41](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L41)*
+*Defined in [types/enums.ts:41](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L41)*
 
 ___
 
@@ -91,7 +91,7 @@ ___
 
 •  **mostinjuredalie**:  = "mostinjuredalie"
 
-*Defined in [types/enums.ts:34](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L34)*
+*Defined in [types/enums.ts:34](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L34)*
 
 nejvic zraneny friend, pet nebo mount
 
@@ -101,7 +101,7 @@ ___
 
 •  **mostinjuredalielos**:  = "mostinjuredalielos"
 
-*Defined in [types/enums.ts:36](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L36)*
+*Defined in [types/enums.ts:36](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L36)*
 
 nejvic zraneny friend, pet nebo mount s vyuzitim Line of Sight (presne neni znamo jak dobre to funguje)
 
@@ -111,7 +111,7 @@ ___
 
 •  **mount**:  = "mount"
 
-*Defined in [types/enums.ts:28](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L28)*
+*Defined in [types/enums.ts:28](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L28)*
 
 mount ulozeny pres moutn script
 
@@ -121,7 +121,7 @@ ___
 
 •  **nearinjuredalie**:  = "nearinjuredalie"
 
-*Defined in [types/enums.ts:30](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L30)*
+*Defined in [types/enums.ts:30](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L30)*
 
 nejblizsi zraneny friend, pet nebo mount
 
@@ -131,7 +131,7 @@ ___
 
 •  **nearinjuredalielos**:  = "nearinjuredalielos"
 
-*Defined in [types/enums.ts:32](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L32)*
+*Defined in [types/enums.ts:32](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L32)*
 
 nejblizsi zraneny friend, pet nebo mount s vyuzitim Line of Sight (presne neni znamo jak dobre to funguje)
 
@@ -141,7 +141,7 @@ ___
 
 •  **self**:  = "self"
 
-*Defined in [types/enums.ts:19](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L19)*
+*Defined in [types/enums.ts:19](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L19)*
 
 ___
 
@@ -149,6 +149,6 @@ ___
 
 •  **selfinjured**:  = "selfinjured"
 
-*Defined in [types/enums.ts:24](https://github.com/msviha/orionuo/blob/029a15d/src/types/enums.ts#L24)*
+*Defined in [types/enums.ts:24](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L24)*
 
 self ale pokud sem zranen nebo otraven

@@ -1,5 +1,39 @@
 # CHANGELOG
 
+## 1.6.0
+
+### config
+* moznost konfigurovat zobrazeni/vypnuti a umisteni timeru
+    - klamak
+    - drinkPotion
+    - gs
+    - inviska / dlouha inviska (invisLongTimer)
+    - hiding
+    - castScroll
+    - teleport
+- `friendlyTargetType` - pouziva se napr. pro `targetNextMonster` nebo `targetNext` (s pouzitim flagu `ignorefriendlytypes`)
+- `renamePacks` - moznost vypnout automaticke prejmenovani packu
+
+### fixes
+- `gmMortar` - pauzy a odpojovani od serveru
+- `lockpicking` - pauzy a odpojovani od serveru
+- `taming` - hidovani u tamingu
+- configurace umisteni timeru
+
+### enhancements
+- `gmmortar` - michani NS
+- `taming` - nahazuje neklak a vraci puvodni krk po tamnuti
+- `resetstats`/`equip` - po resetovani statu pokud mate vetsi vahu nez unesete (klasicky nedrzite itemy do STR) se vas to zepta jestli chcete neco polozit a zvednout po equipu (treba ref bednu)
+
+### features
+- `vendorBuy` - target na buy u konkretniho vendora
+- `vendorBuy` - target na sell u konkretniho vendora
+- `blacksmithyTrain` - trenink blacksmithy
+
+### gameObject added
+- taming neklak
+- hammer
+
 ## 1.5.0
 
 ### fixes

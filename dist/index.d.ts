@@ -1,3 +1,12 @@
+declare namespace Scripts {
+    class Autostart {
+        static updatePlayerHp(): void;
+        static updateLastAttackHp(): void;
+        static autoRename(nearCharacters: GameObject[]): void;
+        static ensureCanChangeName(char: GameObject): void;
+        static checkWorldSave(): void;
+    }
+}
 declare const config: any;
 declare const responseDelay = 350;
 declare const gameObject: any;
@@ -18,9 +27,10 @@ declare function alchemy(potionName: PotionsEnum): void;
 declare function autoAmmoRefill(): void;
 declare function mix(potionName: PotionsEnum): void;
 declare function attackLast(): void;
+declare function bandageSelf(minimalCountForWarn?: number, failedMessage?: boolean): void;
 declare function bishopToggle(): void;
 declare function bowcraftTrain(): void;
-declare function bandageSelf(minimalCountForWarn?: number, failedMessage?: boolean): void;
+declare function blacksmithyTrain(): void;
 declare function cartography(): void;
 declare function carveBody(carveNearestBodyAutomatically?: boolean): void;
 declare function cast(spell: string, target?: string | TargetEnum | Array<ITargetAlias>): void;
@@ -538,6 +548,7 @@ declare namespace Scripts {
         static confirmMakeMenu(): void;
         static bowcraftTrain(): void;
         static tailoringTrain(): void;
+        static blacksmithyTrain(): void;
     }
 }
 declare namespace Scripts {
@@ -817,6 +828,8 @@ declare enum TimersEnum {
     invis = "invis",
     invisLong = "invisLong",
     klamak = "klamak",
+    scroll = "scroll",
+    teleport = "teleport",
     bandage = "bandage",
     statusBarTimer = "statusBarTimer"
 }
@@ -955,6 +968,11 @@ interface ITargetAlias {
 interface IMobile {
     serial: string;
     notoriety: number;
+}
+interface IFriendlyMonster {
+    graphic: string;
+    color: string;
+    exceptionNames?: string[];
 }
 declare function isMyGameObject(val: any): val is IMyGameObject;
 declare function isMakeProps(val: any): val is IMakeProps;
