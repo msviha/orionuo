@@ -8,6 +8,7 @@ const config = Shared.GetVar('config', {
         autoRename: {
             enabled: true,
             renameMounts: false,
+            renamePacks: false
         },
         printDamageDiffOnly: false,
     },

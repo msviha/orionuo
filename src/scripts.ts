@@ -17,97 +17,18 @@ function Autostart() {
     const autoHandlers = autoRename;
     const autoDinstance = 20; //TODO konfig
 
-    let previousLastAttackSerial: string;
-    let previousLastAttackHp: number;
     let previousPlayerHp: number;
 
     Scripts.Dress.saveEquip();
     Orion.Exec('userAutostart');
     while (true) {
-        Scripts.Utils.printDamage(Player.Serial(), previousPlayerHp);
-        previousPlayerHp = Player.Hits();
-
-        const lastAttackSerial = Orion.ClientLastAttack();
-        const lastAttack = Scripts.Utils.getLivingObjectInDistance(lastAttackSerial);
-        if (lastAttack) {
-            if (previousLastAttackSerial !== lastAttackSerial) {
-                previousLastAttackHp = lastAttack.Hits();
-                Scripts.Utils.printDamage(lastAttackSerial, previousLastAttackHp, true);
-            } else {
-                Scripts.Utils.printDamage(lastAttackSerial, previousLastAttackHp);
-                previousLastAttackHp = lastAttack.Hits();
-            }
-            previousLastAttackSerial = lastAttackSerial;
-        }
-        if (Orion.InJournal('World save has been initiated.', 'sys')) {
-            Shared.AddVar('ws', true);
-            Scripts.Utils.playerPrint(`World save !!!`, ColorEnum.red);
-            Orion.ClearJournal('World save has been initiated.', 'sys');
-            Orion.Wait(5000);
-            Orion.Click(Player.Serial());
-
-            const time = Orion.Now() + 20000;
-            while (
-                !(Orion.InJournal(Player.Name(), 'my', Player.Serial())?.Text().indexOf(Player.Name()) > -1) &&
-                Orion.Now() < time &&
-                !Player.Dead()
-            ) {
-                Orion.Wait(50);
-            }
-            Scripts.Utils.playerPrint(`World save DONE`, ColorEnum.green);
-            Orion.Wait(1500);
-            Shared.AddVar('ws', false);
-        }
+        Scripts.Autostart.updatePlayerHp();
+        Scripts.Autostart.updateLastAttackHp();
+        Scripts.Autostart.checkWorldSave();
 
         const nearCharacters = Orion.FindTypeEx('any', '0xFFFF', 'ground', 'live', autoDinstance);
         Scripts.Statusbar.setMobileArray(nearCharacters);
-
-        if (autoHandlers) {
-            if (autoRename) {
-                const doneList: Array<IRenamedMob> = Shared.GetArray(
-                    'autoHandlers.autoRename.doneList',
-                    new Array<IRenamedMob>(),
-                );
-                const renameMounts = config?.autoHandlers.autoRename.renameMounts;
-
-                for (let i = 0; i < nearCharacters.length; i++) {
-                    const char = nearCharacters[i];
-                    if (char.Serial() === Player.Serial()) {
-                        continue;
-                    }
-
-                    //Serialy se na serveru recykluji celkem casto, takze pro overeni i grafika, uvidime.
-                    if (
-                        doneList.some((o) => {
-                            o.serial === char.Serial() && o.graphic === char.Graphic();
-                        })
-                    ) {
-                        continue;
-                    }
-
-                    //Jezda
-                    if (
-                        !renameMounts &&
-                        '0x00DF|0x00DC|0x00DA|0x00E2|0x00CC|0x00E4|0x00D2|0x00DB|0x00C8'
-                            .split('|')
-                            .indexOf(char.Graphic()) > -1
-                    ) {
-                        if (!char?.CanChangeName()) {
-                            Scripts.MobMaster.getStatus(char?.Serial());
-                            Orion.RequestName(char?.Serial());
-                            Scripts.Utils.waitForCond(()=> { return char?.CanChangeName(); }, 150);
-                        }
-                        continue;
-                    }
-                    if (Scripts.MobMaster.rename(char)) {
-                        const doneItem: IRenamedMob = { graphic: char.Graphic(), serial: char.Serial() };
-                        doneList.push(doneItem);
-                        Shared.AddArray('autoHandlers.autoRename.doneList', doneList);
-                        break;
-                    }
-                }
-            }
-        }
+        autoHandlers && autoRename && Scripts.Autostart.autoRename(nearCharacters);
 
         Scripts.Statusbar.updateStatusbars();
         Orion.Wait(config?.updateRate || 500);
