@@ -177,7 +177,6 @@ namespace Scripts {
 
         /**
          * Scripts.Spells.CastScroll
-         * stability beta
          *
          * examples - with/without target
          * CastScroll(NecroScrollEnum.vfp, TargetEnum.lastattack)
@@ -217,11 +216,34 @@ namespace Scripts {
 
             if (journal) {
                 if (s.timerType != 'teleport') {
-                    scrollTimer &&
-                    Orion.AddDisplayTimer('scroll', scrollTimer, 'AboveChar', 'bar', '', 0, 75, '0x100', 1, 'yellow');
+                    const timerConfig = config?.castScroll?.timer;
+                    scrollTimer && timerConfig?.displayTimer && Orion.AddDisplayTimer(
+                        TimersEnum.scroll,
+                        scrollTimer,
+                        timerConfig?.position || 'AboveChar',
+                        timerConfig?.type || 'bar',
+                        timerConfig?.text || '',
+                        timerConfig?.xFromPosition || 0,
+                        timerConfig?.yFromPosition || 75,
+                        timerConfig?.textColor || '0x100',
+                        timerConfig?.font || 1,
+                        timerConfig?.backgroundColor || 'yellow',
+                    );
                 }
                 else {
-                   Orion.AddDisplayTimer('teleport', scrollTimer, 'RightTop', 'Line|Bar', 'Teleport', 0, 265, '0x88B', 0, '0x88B');
+                    const timerConfig = config?.teleportTimer?.timer;
+                    timerConfig?.displayTimer && Orion.AddDisplayTimer(
+                        TimersEnum.teleport,
+                        scrollTimer,
+                        timerConfig?.position ||  'RightTop',
+                        timerConfig?.type || 'Line|Bar',
+                        timerConfig?.text || 'Teleport',
+                        timerConfig?.xFromPosition || 0,
+                        timerConfig?.yFromPosition || 265,
+                        timerConfig?.textColor || '0x88B',
+                        timerConfig?.font || 0,
+                        timerConfig?.backgroundColor || '0x88B'
+                    );
                 }
             }
             else {

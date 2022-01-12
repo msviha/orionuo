@@ -7,7 +7,8 @@ var config = Shared.AddVar('config', {
     autoHandlers: {
         autoRename: {
             enabled: true,
-            renameMounts: false
+            renameMounts: false,
+            renamePacks: false
         },
         printDamageDiffOnly: false
     },
@@ -28,17 +29,21 @@ var config = Shared.AddVar('config', {
     },
     klamak: {
         showReadyMessage: true,
-        position: 'LeftTop',
-        type: 'Line|Bar',
-        text: 'Drink',
-        xFromPosition: 0,
-        yFromPosition: 215,
-        textColor: '0x88B',
-        font: 0,
-        backgroundColor: '0x88B'
+        timer: {
+            displayTimer: true,
+            position: 'LeftTop',
+            type: 'Line|Bar',
+            text: 'Klamak',
+            xFromPosition: 0,
+            yFromPosition: 215,
+            textColor: '0x88B',
+            font: 0,
+            backgroundColor: '0x88B'
+        }
     },
     drinkPotion: {
         timer: {
+            displayTimer: true,
             position: 'LeftTop',
             type: 'Line|Bar',
             text: 'Drink',
@@ -49,6 +54,7 @@ var config = Shared.AddVar('config', {
             backgroundColor: '0x88B'
         },
         gsTimer: {
+            displayTimer: true,
             position: 'LeftTop',
             type: 'Line|Bar',
             text: 'GS',
@@ -59,6 +65,7 @@ var config = Shared.AddVar('config', {
             backgroundColor: '0x88B'
         },
         invisTimer: {
+            displayTimer: true,
             position: 'LeftTop',
             type: 'Line|Bar',
             text: 'Invis',
@@ -69,6 +76,7 @@ var config = Shared.AddVar('config', {
             backgroundColor: '0x88B'
         },
         invisLongTimer: {
+            displayTimer: true,
             position: 'LeftTop',
             type: 'Line|Bar',
             text: 'InvisL',
@@ -81,6 +89,7 @@ var config = Shared.AddVar('config', {
     },
     hiding: {
         timer: {
+            displayTimer: true,
             position: 'AboveChar',
             type: 'bar',
             text: 'hid',
@@ -91,5 +100,31 @@ var config = Shared.AddVar('config', {
             backgroundColor: 'red'
         },
         showInnerMessages: true
+    },
+    castScroll: {
+        timer: {
+            displayTimer: true,
+            position: 'AboveChar',
+            type: 'bar',
+            text: '',
+            xFromPosition: 0,
+            yFromPosition: 75,
+            textColor: '0x100',
+            font: 1,
+            backgroundColor: 'yellow'
+        }
+    },
+    teleportTimer: {
+        timer: {
+            displayTimer: true,
+            position:  'RightTop',
+            type: 'Line|Bar',
+            text: 'Teleport',
+            xFromPosition: 0,
+            yFromPosition: 265,
+            textColor: '0x88B',
+            font: 0,
+            backgroundColor: '0x88B'
+        }
     }
 });

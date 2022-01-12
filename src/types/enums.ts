@@ -208,6 +208,8 @@ enum TimersEnum {
     invis = 'invis',
     invisLong = 'invisLong',
     klamak = 'klamak',
+    scroll = 'scroll',
+    teleport = 'teleport',
     bandage = 'bandage',
     statusBarTimer = 'statusBarTimer',
 }

@@ -78,8 +78,8 @@ namespace Scripts {
 
             if (m === 0) {
                 const potionTimer = config?.drinkPotion.timer;
-                displayTimers &&
-                    Orion.AddDisplayTimer(
+                displayTimers && potionTimer?.displayTimer &&
+                Orion.AddDisplayTimer(
                         TimersEnum.drink,
                         drinkTimer,
                         potionTimer?.position || 'LeftTop',
@@ -99,7 +99,7 @@ namespace Scripts {
                 );
                 if (potionName === PotionsEnum.gs) {
                     const gsPotionTimer = config?.drinkPotion.gsTimer;
-                    displayTimers &&
+                    displayTimers && gsPotionTimer?.displayTimer &&
                         Orion.AddDisplayTimer(
                             TimersEnum.gs,
                             gsTimer,
@@ -122,7 +122,7 @@ namespace Scripts {
                         const id = TimersEnum.invis + '_' + a;
                         if (Orion.DisplayTimerExists(id)) continue;
 
-                        displayTimers &&
+                        displayTimers && invisPotionTimer?.displayTimer &&
                             Orion.AddDisplayTimer(
                                 id,
                                 invisTimer,
@@ -143,7 +143,7 @@ namespace Scripts {
                             const id = TimersEnum.invisLong + '_' + a;
                             if (Orion.DisplayTimerExists(id)) continue;
 
-                            displayTimers &&
+                            displayTimers && invisLongPotionTimer?.displayTimer &&
                                 Orion.AddDisplayTimer(
                                     id,
                                     invisLongTimer,

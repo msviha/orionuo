@@ -116,7 +116,7 @@ namespace Scripts {
 
         static klamakCooldown() {
             const petCoolDown = Scripts.Klamak.getKlamakTimerByAnimalLoreSkill();
-            Scripts.Klamak.displayKlamakTimer(petCoolDown);
+            config?.klamak?.timer?.displayTimer && Scripts.Klamak.displayKlamakTimer(petCoolDown);
             config?.klamak.showReadyMessage && Orion.Exec('displayKlamakInfo', false);
         }
 
