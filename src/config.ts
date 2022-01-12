@@ -13,6 +13,10 @@ const config = Shared.GetVar('config', {
     },
     targeting: {
         highlightEnemySilent: true,
+        friendlyTargetTypes: [
+            { graphic: '0x000E', color: '0x0000', exceptionNames: ['Summoner', 'Matriarch', 'Firestarter'] },
+            { graphic: '0x000D', color: '0x0B77', exceptionNames: ['Vortex'] }
+        ]
     },
     statusBarWrapper: {
         autoCloseTimer: 10000,

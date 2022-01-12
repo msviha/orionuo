@@ -104,3 +104,9 @@ interface IMobile {
     serial: string;
     notoriety: number;
 }
+
+interface IFriendlyMonster {
+    graphic:string;
+    color:string;
+    exceptionNames?:string[]
+}

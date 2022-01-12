@@ -183,7 +183,8 @@ namespace Scripts {
         }
 
         static isFriendlyTargetType(graphic: string, color: string, name: string): boolean {
-            const friendly = [
+            const friendlyConfig = config?.targeting?.friendlyTargetTypes;
+            let friendly:IFriendlyMonster[] = [
                 { graphic: '0x000E', color: '0x0000', exceptionNames: ['Earth Elemental'] },
                 { graphic: '0x000D', color: '0x0B77' }, // death vortex
                 { graphic: '0x0039', color: '0x0835' }, // skeleton warrior
@@ -205,13 +206,28 @@ namespace Scripts {
                 { graphic: '0x0027', color: '0x0966' }, // Dark Vampire
             ];
 
+            if (friendlyConfig) {
+                // take out same graphic and colors from friendly
+                friendly = friendly.filter((f) => {
+                    return !friendlyConfig.filter((c) => {
+                        return c.graphic === f.graphic && c.color === f.color
+                    }).length
+                });
+                // and merge the friendlyConfig
+                friendly = [...friendly, ...friendlyConfig];
+            }
+
+
             for (const f of friendly) {
-                if (
-                    f.graphic === graphic &&
-                    f.color === color &&
-                    (!f.exceptionNames || f.exceptionNames.indexOf(name) === -1)
-                ) {
-                    return true;
+                if (f.graphic === graphic && f.color === color) {
+                    if (!f.exceptionNames) {
+                        return true;
+                    }
+
+                    const matchingExceptions = f.exceptionNames.filter((n) => {
+                        return name.indexOf(n) > -1
+                    });
+                    return !matchingExceptions.length
                 }
             }
             return false;
