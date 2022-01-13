@@ -64,12 +64,15 @@ namespace Scripts {
                 eq = Shared.GetArray('savedEquip');
             }
 
-            Orion.AddObject('equipTempDrop', undefined);
-            if (true) {
+            let dropObj:{x, y, container}|undefined;
+
+            Orion.Wait(100);
+            if (Player.Weight() > Player.MaxWeight()) {
                 Scripts.Utils.playerPrint('Nelze spustit equip, chces neco docasne polozit na zem ?');
                 Orion.WaitForAddObject('equipTempDrop', 60000);
 
                 const drop = Orion.FindObject('equipTempDrop');
+                dropObj = {x: drop.X(), y: drop.Y(), container: drop.Container()};
                 drop && Orion.MoveItem(drop.Serial(), 0);
                 Orion.Wait(responseDelay);
             }
@@ -89,7 +92,7 @@ namespace Scripts {
             }
 
             const drop = Orion.FindObject('equipTempDrop');
-            drop && Orion.MoveItem(drop.Serial());
+            dropObj && drop && Orion.MoveItem(drop.Serial(), 0, dropObj.container, dropObj.x, dropObj.y);
         }
 
         static nextWeapon(showName = false, previous = false) {

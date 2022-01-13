@@ -4230,11 +4230,13 @@ var Scripts;
             if (!eq) {
                 eq = Shared.GetArray('savedEquip');
             }
-            Orion.AddObject('equipTempDrop', undefined);
-            if (true) {
+            var dropObj;
+            Orion.Wait(100);
+            if (Player.Weight() > Player.MaxWeight()) {
                 Scripts.Utils.playerPrint('Nelze spustit equip, chces neco docasne polozit na zem ?');
                 Orion.WaitForAddObject('equipTempDrop', 60000);
                 var drop_1 = Orion.FindObject('equipTempDrop');
+                dropObj = { x: drop_1.X(), y: drop_1.Y(), container: drop_1.Container() };
                 drop_1 && Orion.MoveItem(drop_1.Serial(), 0);
                 Orion.Wait(responseDelay);
             }
@@ -4253,7 +4255,7 @@ var Scripts;
                 }
             }
             var drop = Orion.FindObject('equipTempDrop');
-            drop && Orion.MoveItem(drop.Serial());
+            dropObj && drop && Orion.MoveItem(drop.Serial(), 0, dropObj.container, dropObj.x, dropObj.y);
         };
         Dress.nextWeapon = function (showName, previous) {
             if (showName === void 0) { showName = false; }

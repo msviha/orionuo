@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.6.1
+
+### fixes
+- `resetstats`/`equip` - po resetovani statu nevyskakuje stale targetovani bedny na odlehceni, ale jen kdyz opravdu vazite vice nez unesete
+
 ## 1.6.0
 
 ### config
