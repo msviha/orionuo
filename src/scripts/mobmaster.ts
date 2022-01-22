@@ -6,7 +6,7 @@ namespace Scripts {
             let canRename = mob?.CanChangeName()
             let mobName = mob?.Name();
 
-            if (!canRename && Targeting.isFriendlyTargetType(mob?.Graphic(), mob?.Color(), null)) {
+            if (!canRename && Targeting.isFriendlyTargetType(mob?.Graphic(), mob?.Color(), mobName, mobSerial)) {
                 Scripts.MobMaster.getStatus(mobSerial);
                 Orion.RequestName(mobSerial);
                 if (Utils.waitForCond(()=> {

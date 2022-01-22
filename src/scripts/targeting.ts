@@ -83,7 +83,7 @@ namespace Scripts {
                 let resolved = false;
                 while (!resolved && nearestNewTarget?.length && flags.indexOf('ignorefriendlytypes') !== -1) {
                     const t = Orion.FindObject(nearestNewTarget[0]);
-                    const isFriendly = Scripts.Targeting.isFriendlyTargetType(t.Graphic(), t.Color(), t.Name());
+                    const isFriendly = Scripts.Targeting.isFriendlyTargetType(t.Graphic(), t.Color(), t.Name(), t.Serial());
                     if (!isFriendly) {
                         resolved = true;
                     } else {
@@ -182,7 +182,7 @@ namespace Scripts {
             Orion.AddHighlightCharacter(enemySerial, Scripts.Utils.getColorByNotoriety(enemy.Notoriety()));
         }
 
-        static isFriendlyTargetType(graphic: string, color: string, name: string): boolean {
+        static isFriendlyTargetType(graphic: string, color: string, name: string, serial: string): boolean {
             const friendlyConfig = config?.targeting?.friendlyTargetTypes;
             let friendly:IFriendlyMonster[] = [
                 { graphic: '0x000E', color: '0x0000', exceptionNames: ['Earth Elemental'] },
@@ -222,6 +222,14 @@ namespace Scripts {
                 if (f.graphic === graphic && f.color === color) {
                     if (!f.exceptionNames) {
                         return true;
+                    }
+
+                    if (!name || name.length === 0) {
+                        Scripts.MobMaster.getStatus(serial);
+                        name = Orion.RequestName(serial);
+                        if (!name) {
+                            return true;
+                        }
                     }
 
                     const matchingExceptions = f.exceptionNames.filter((n) => {
@@ -271,7 +279,7 @@ namespace Scripts {
                             char.Name()[0].toLowerCase() === char.Name()[0] &&
                             char.Name()[char.Name().length - 1].toUpperCase() ===
                                 char.Name()[char.Name().length - 1]) ||
-                        Targeting.isFriendlyTargetType(char.Graphic(), char.Color(), char.Name())
+                        Targeting.isFriendlyTargetType(char.Graphic(), char.Color(), char.Name(), char.Serial())
                     ) {
                         continue;
                     }
