@@ -379,7 +379,7 @@ declare namespace Scripts {
         static targetNext(reverse: boolean, timeToStorePreviousTargets: number, additionalFlags: string[], notoriety: string[], opts: ITargetNextOpts): void;
         static manualTarget(opts: ITargetNextOpts): void;
         static highlightEnemy(enemySerial: string, enemy: GameObject, showStatusBar: boolean, targetIndicationEnum: TargetIndicationEnum, statusBarPosition: ICoordinates): void;
-        static isFriendlyTargetType(graphic: string, color: string, name: string): boolean;
+        static isFriendlyTargetType(graphic: string, color: string, name: string, serial: string): boolean;
         static targetNextMonster(reverse: boolean, timeToStorePreviousTargets: number, notoriety: string[], statusWrapperOpt: any): TargetResult;
         static showStatusBarOnWrapper(serial: string, statusWrapperOpt: any): void;
     }
