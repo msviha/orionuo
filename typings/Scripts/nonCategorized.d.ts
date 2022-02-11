@@ -8,6 +8,10 @@ export default interface NonCategorized {
     OAOptionGet(option: string): string;
     OAOptionSet(option: string, val: string): void;
 
+    InLOS(serial: string): boolean;
+
+    TestItemColor(serial:string, color: string);
+
     AddHighlightCharacter(serial: string, color: string | number, priorityHighlight?: boolean);
 
     ClearHighlightCharacters(priorityHighlight?: boolean);
