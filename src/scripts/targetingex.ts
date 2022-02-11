@@ -85,10 +85,19 @@ namespace Scripts {
          */
         static getAliveAttackPets(distance = 18): Array<GameObject> {
             const arr: Array<GameObject> = new Array<GameObject>();
-            const nearCharacters = Orion.FindTypeEx('0x00D6|0x0005', '0xFFFF', 'ground', 'live', 6); //hawk, pardi //TODO zost
-            if (nearCharacters && nearCharacters.length) {
-                for (let i = 0; i < nearCharacters.length; i++) {
-                    const friend = nearCharacters[i];
+            const nearPards = Orion.FindTypeEx('0x00D6', '0xFFFF', 'ground', 'live', 6);
+            if (nearPards && nearPards.length) {
+                for (let i = 0; i < nearPards.length; i++) {
+                    const friend = nearPards[i];
+                    if (friend && !friend.Dead() && friend.Exists() && friend.Distance() <= distance) {
+                        arr.push(friend);
+                    }
+                }
+            }
+            const nearSkyhawks = Orion.FindTypeEx('0x0005', '0x0847', 'ground', 'live', 6);
+            if (nearSkyhawks && nearSkyhawks.length) {
+                for (let i = 0; i < nearSkyhawks.length; i++) {
+                    const friend = nearSkyhawks[i];
                     if (friend && !friend.Dead() && friend.Exists() && friend.Distance() <= distance) {
                         arr.push(friend);
                     }
@@ -271,16 +280,48 @@ namespace Scripts {
                     result = TargetingEx.getTargetResult('myMount', target);
                 } else if (target.alias === TargetEnum.hover) {
                     result = TargetingEx.getTargetResult(Statusbar.getHoveringStatusBar()?.serial ?? '', target);
+                } else if (target.alias === TargetEnum.nearinjuredpet) {
+                    result = TargetingEx.getTargetResultFromArray(
+                        TargetingEx.getAliveAttackPets(maxDistance),
+                        target,
+                        TargetingEx.isMobileInjured,
+                        (a, b) => a.Distance() - b.Distance(),
+                    );
+                } else if (target.alias === TargetEnum.nearinjuredpetlos) {
+                    result = TargetingEx.getTargetResultFromArray(
+                        TargetingEx.getAliveAttackPets(maxDistance),
+                        target,
+                        (obj) => {
+                            return TargetingEx.isMobileInjured(obj) && obj.InLOS();
+                        },
+                        (a, b) => a.Distance() - b.Distance(),
+                    );
+                } else if (target.alias === TargetEnum.mostinjuredpet) {
+                    result = TargetingEx.getTargetResultFromArray(
+                        TargetingEx.getAliveAttackPets(maxDistance),
+                        target,
+                        TargetingEx.isMobileInjured,
+                        (a, b) => a.Hits() - b.Hits(),
+                    );
+                } else if (target.alias === TargetEnum.mostinjuredpetlos) {
+                    result = TargetingEx.getTargetResultFromArray(
+                        TargetingEx.getAliveAttackPets(maxDistance),
+                        target,
+                        (obj) => {
+                            return TargetingEx.isMobileInjured(obj) && obj.InLOS();
+                        },
+                        (a, b) => a.Hits() - b.Hits(),
+                    );
                 } else if (target.alias === TargetEnum.nearinjuredalie) {
                     result = TargetingEx.getTargetResultFromArray(
-                        TargetingEx.getAlivePetsAndAlies(maxDistance),
+                        TargetingEx.getAliveAlies(maxDistance),
                         target,
                         TargetingEx.isMobileInjured,
                         (a, b) => a.Distance() - b.Distance(),
                     );
                 } else if (target.alias === TargetEnum.nearinjuredalielos) {
                     result = TargetingEx.getTargetResultFromArray(
-                        TargetingEx.getAlivePetsAndAlies(maxDistance),
+                        TargetingEx.getAliveAlies(maxDistance),
                         target,
                         (obj) => {
                             return TargetingEx.isMobileInjured(obj) && obj.InLOS();
@@ -289,14 +330,14 @@ namespace Scripts {
                     );
                 } else if (target.alias === TargetEnum.mostinjuredalie) {
                     result = TargetingEx.getTargetResultFromArray(
-                        TargetingEx.getAlivePetsAndAlies(maxDistance),
+                        TargetingEx.getAliveAlies(maxDistance),
                         target,
                         TargetingEx.isMobileInjured,
                         (a, b) => a.Hits() - b.Hits(),
                     );
                 } else if (target.alias === TargetEnum.mostinjuredalielos) {
                     result = TargetingEx.getTargetResultFromArray(
-                        TargetingEx.getAlivePetsAndAlies(maxDistance),
+                        TargetingEx.getAliveAlies(maxDistance),
                         target,
                         (obj) => {
                             return TargetingEx.isMobileInjured(obj) && obj.InLOS();

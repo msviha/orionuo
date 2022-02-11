@@ -28,12 +28,20 @@ enum TargetEnum {
     mount = 'mount',
     /**nejblizsi zraneny friend, pet nebo mount */
     nearinjuredalie = 'nearinjuredalie',
-    /**nejblizsi zraneny friend, pet nebo mount s vyuzitim Line of Sight (presne neni znamo jak dobre to funguje) */
+    /**nejblizsi zraneny pet nebo mount */
+    nearinjuredpet = 'nearinjuredpet',
+    /**nejblizsi zraneny friend s vyuzitim Line of Sight (presne neni znamo jak dobre to funguje) */
     nearinjuredalielos = 'nearinjuredalielos',
+    /**nejblizsi zraneny pet nebo mount s vyuzitim Line of Sight (presne neni znamo jak dobre to funguje) */
+    nearinjuredpetlos = 'nearinjuredpetlos',
     /**nejvic zraneny friend, pet nebo mount */
     mostinjuredalie = 'mostinjuredalie',
-    /**nejvic zraneny friend, pet nebo mount s vyuzitim Line of Sight (presne neni znamo jak dobre to funguje) */
+    /**nejvic zraneny pet nebo mount */
+    mostinjuredpet = 'mostinjuredpet',
+    /**nejvic zraneny friend s vyuzitim Line of Sight (presne neni znamo jak dobre to funguje) */
     mostinjuredalielos = 'mostinjuredalielos',
+    /**nejvic zraneny pet nebo mount s vyuzitim Line of Sight (presne neni znamo jak dobre to funguje) */
+    mostinjuredpetlos = 'mostinjuredpetlos',
     /**last target pouze pokud je to charakter */
     lasttargetmobile = 'lasttargetmobile',
     /**charakter nad jehoz CUST zalozkou je zrovna kruzor mysi */
