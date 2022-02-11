@@ -1467,7 +1467,7 @@ const gameObject: any = {
                 graphic: '0x1843',
                 color: '0x0005',
             },
-            alchemySelection: 'Mana Refresh',
+            alchemySelection: 'Mana Refresh Potion',
             reagent: 'eyes_of_newt',
             reagentsCount: 3,
         },
