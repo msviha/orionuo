@@ -213,7 +213,7 @@ namespace Scripts {
 
             let tamnuto = false;
             while (!tamnuto) {
-                Orion.WarMode(true);
+                opts.handleWarMode && Orion.WarMode(true);
                 Orion.Wait(100);
                 const target = Orion.FindObject('tamingTarget');
 

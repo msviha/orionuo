@@ -32,10 +32,12 @@ const TARGET_OPTS_DEFAULTS = {
 interface ITamingOptions {
     walkTo?: boolean;
     hiding?: boolean;
+    handleWarMode?: boolean;
 }
 const TAMING_OPTS_DEFAULTS: ITamingOptions = {
     walkTo: true,
     hiding: false,
+    handleWarMode: true
 };
 
 interface IBagDestination extends ICoordinates {
