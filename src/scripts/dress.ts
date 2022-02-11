@@ -59,7 +59,7 @@ namespace Scripts {
             Scripts.Utils.playerPrint('ULOZEN EQUIP');
         }
 
-        static equip(eq?: Array<string | undefined>) {
+        static equip(eq?: Array<string | undefined>, wait = 500) {
             if (!eq) {
                 eq = Shared.GetArray('savedEquip');
             }
@@ -74,7 +74,7 @@ namespace Scripts {
                 const drop = Orion.FindObject('equipTempDrop');
                 dropObj = {x: drop.X(), y: drop.Y(), container: drop.Container()};
                 drop && Orion.MoveItem(drop.Serial(), 0);
-                Orion.Wait(responseDelay);
+                Orion.Wait(wait);
             }
 
             for (const s of eq) {
@@ -83,7 +83,7 @@ namespace Scripts {
                 }
                 if (Player.Weight() <= Player.MaxWeight()) {
                     Orion.Equip(s);
-                    Orion.Wait(200);
+                    Orion.Wait(wait);
                 } else {
                     Scripts.Utils.log('EQUIP NEBUDE SPUSTEN SI PODHOZEN', ColorEnum.red);
                     return;
