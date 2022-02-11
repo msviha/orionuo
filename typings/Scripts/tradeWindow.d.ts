@@ -11,7 +11,7 @@ export default interface TradeWindow {
      * @param container - Window identifier, right ('right' or '1') or left ('left' or '0').
      * Result: serial of the container.
      */
-    TradeContainer(index: string, container: string);
+    TradeContainer(index: string, container: string|number);
 
     /**
      * String Orion.TradeOpponent('index');
@@ -33,7 +33,7 @@ export default interface TradeWindow {
      * @param container - Window identifier, right ('right' or '1') or left ('left' or '0').
      * Result: the status of the checkbox is true / false.
      */
-    TradeCheckState(index: string, container: string);
+    TradeCheckState(index: string, container: string|number);
 
     /**
      * void Orion.TradeCheck('index', state);
