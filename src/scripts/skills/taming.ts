@@ -222,10 +222,11 @@ namespace Scripts {
                     Orion.Wait(responseDelay);
                 }
                 if (opts.hiding) {
-                    Orion.ClearJournal('Select char to inspect');
+                    Orion.ClearJournal('Select char to inspect|Targeting Cancelled');
                     Orion.UseSkill('Evaluating Intelligence');
                     Scripts.Utils.waitWhileSomethingInJournal(['Select char to inspect']);
                     Orion.CancelTarget();
+                    Scripts.Utils.waitWhileSomethingInJournal(['Targeting Cancelled']);
                 }
                 Orion.WaitTargetObject('tamingTarget');
                 Orion.UseObject(loadedStaffSerial);
