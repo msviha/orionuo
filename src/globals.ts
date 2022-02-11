@@ -153,6 +153,10 @@ const gameObject: any = {
             graphic: '0x1AE4',
             color: '0x0846',
         },
+        gp: {
+            graphic: '0x0EED',
+            color: '0x0000'
+        }
     },
     tools: {
         saw: {
@@ -175,6 +179,10 @@ const gameObject: any = {
             graphic: '0x1EBC',
             color: '0x0000',
         },
+        repairKit: {
+            graphic: '0x1EBA',
+            color: '0x0000'
+        }
     },
     resources: {
         logs: {
