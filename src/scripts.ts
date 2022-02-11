@@ -1,7 +1,7 @@
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 1.6.2');
+    Orion.Print(-1, 'version 1.6.3');
     Orion.Print(-1, '-------------+');
 }
 
@@ -242,6 +242,13 @@ function closeStandardStatusBars(notoriety?:NotorietyEnum[], closeInactiveOnly =
 }
 
 /**
+ * Mystik na crafta
+ */
+function craftBandana() {
+    Scripts.Craft.bandana();
+}
+
+/**
  * Zobrazi/prepina nabidku na crafteni
  * @example external code `craftNext();`
  */
@@ -428,8 +435,8 @@ function healPets() {
  * @example in client `_hideAll`
  * @example external code `hideAll();`
  */
-function hideAll() {
-    Scripts.Common.hideAll();
+function hideAll(toggleResend = true) {
+    Scripts.Common.hideAll(toggleResend);
 }
 
 /**
@@ -1243,21 +1250,21 @@ function vampRakevLow() {
     Vampire.coffin(CoffinMenuSelection.low);
  }
 
- /**
-  * medium = 'Sila spanku (-2 nabiti)'
-  * @example  external code `vampRakevMedium()`
-  */
- function vampRakevMedium() {
+/**
+* medium = 'Sila spanku (-2 nabiti)'
+* @example  external code `vampRakevMedium()`
+*/
+function vampRakevMedium() {
     Vampire.coffin(CoffinMenuSelection.medium);
- }
+}
 
- /**
-  * high = 'Sila hlubokeho spanku (-3 nabiti)'
-  * @example  external code `vampRakevHigh()`
-  */
- function vampRakevHigh() {
+/**
+* high = 'Sila hlubokeho spanku (-3 nabiti)'
+* @example  external code `vampRakevHigh()`
+*/
+function vampRakevHigh() {
     Vampire.coffin(CoffinMenuSelection.high);
- }
+}
 
 /**
  * nakup u vendora
@@ -1276,10 +1283,3 @@ function vendorBuy() {
 function vendorSell() {
     Scripts.Common.vendor('sell');
 }
-
-/**
-  * Mystik na crafta
-  */
- function craftBandana() {
-    Scripts.Craft.bandana();
- }

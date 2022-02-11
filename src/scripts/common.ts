@@ -198,17 +198,26 @@ namespace Scripts {
             Orion.Print(-1, '*****************');
         }
 
-        static hideAll() {
+        static hideAll(toggleResend = true) {
+            const hideFn = () => {
+                const mobiles = Orion.FindType('any', 'any', 'ground', 'mobile', 15);
+                for (const m of mobiles) {
+                    Orion.Hide(m);
+                }
+            }
+
+            if (!toggleResend) {
+                hideFn();
+                return;
+            }
+
             Orion.Timer('resendTime') === -1 && Orion.SetTimer('resendTime', 10000);
             !Orion.GetGlobal('hideAll') && Orion.SetGlobal('hideAll', '0');
             const hidden = !!parseInt(Orion.GetGlobal('hideAll'));
             const timer = Orion.Timer('resendTime');
 
             if (!hidden) {
-                const mobiles = Orion.FindType('any', 'any', 'ground', 'mobile', 15);
-                for (const m of mobiles) {
-                    Orion.Hide(m);
-                }
+                hideFn();
                 Orion.SetGlobal('hideAll', '1');
             } else if (timer >= 10000) {
                 Scripts.Utils.resetTimer('resendTime');
