@@ -11,13 +11,12 @@ namespace Scripts {
                 return false;
             }
 
-            Orion.WaitTargetObject(targetSerial);
+            Orion.CancelWaitTarget();
+            Orion.CancelTarget();
+            Orion.Wait(500);
             Orion.UseObject(staff);
-            while (!Orion.InJournal('What do you want to use this on')) {
-                Orion.Wait(500);
-                Orion.WaitTargetObject(targetSerial);
-                Orion.UseObject(staff);
-            }
+            Orion.WaitForTarget();
+            Orion.TargetObject(targetSerial);
             return true;
         }
 
