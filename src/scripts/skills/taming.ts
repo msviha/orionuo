@@ -224,6 +224,7 @@ namespace Scripts {
                     Orion.ClearJournal('Select char to inspect|Targeting Cancelled');
                     Orion.UseSkill('Evaluating Intelligence');
                     Scripts.Utils.waitWhileSomethingInJournal(['Select char to inspect']);
+                    Orion.WaitForTarget();
                     Orion.CancelTarget();
                     Scripts.Utils.waitWhileSomethingInJournal(['Targeting Cancelled']);
                 }
