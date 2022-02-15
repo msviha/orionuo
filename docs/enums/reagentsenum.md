@@ -23,7 +23,7 @@
 
 •  **bm**:  = "bm"
 
-*Defined in [types/enums.ts:115](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L115)*
+*Defined in [types/enums.ts:123](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L123)*
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 •  **bp**:  = "bp"
 
-*Defined in [types/enums.ts:116](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L116)*
+*Defined in [types/enums.ts:124](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L124)*
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 •  **ga**:  = "ga"
 
-*Defined in [types/enums.ts:117](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L117)*
+*Defined in [types/enums.ts:125](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L125)*
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 •  **gi**:  = "gi"
 
-*Defined in [types/enums.ts:118](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L118)*
+*Defined in [types/enums.ts:126](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L126)*
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 •  **mr**:  = "mr"
 
-*Defined in [types/enums.ts:113](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L113)*
+*Defined in [types/enums.ts:121](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L121)*
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 •  **ns**:  = "ns"
 
-*Defined in [types/enums.ts:119](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L119)*
+*Defined in [types/enums.ts:127](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L127)*
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 •  **sa**:  = "sa"
 
-*Defined in [types/enums.ts:120](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L120)*
+*Defined in [types/enums.ts:128](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L128)*
 
 ___
 
@@ -79,4 +79,4 @@ ___
 
 •  **ss**:  = "ss"
 
-*Defined in [types/enums.ts:114](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L114)*
+*Defined in [types/enums.ts:122](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L122)*

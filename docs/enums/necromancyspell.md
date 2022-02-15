@@ -24,7 +24,7 @@
 
 •  **AnimateDead**:  = 2
 
-*Defined in [types/enums.ts:195](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L195)*
+*Defined in [types/enums.ts:203](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L203)*
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 •  **Clumsy**:  = 7
 
-*Defined in [types/enums.ts:200](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L200)*
+*Defined in [types/enums.ts:208](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L208)*
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 •  **Curse**:  = 8
 
-*Defined in [types/enums.ts:201](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L201)*
+*Defined in [types/enums.ts:209](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L209)*
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 •  **Dark**:  = 4
 
-*Defined in [types/enums.ts:197](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L197)*
+*Defined in [types/enums.ts:205](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L205)*
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 •  **FireBolt**:  = 5
 
-*Defined in [types/enums.ts:198](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L198)*
+*Defined in [types/enums.ts:206](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L206)*
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 •  **Hallucination**:  = 6
 
-*Defined in [types/enums.ts:199](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L199)*
+*Defined in [types/enums.ts:207](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L207)*
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 •  **Invalid**:  = 0
 
-*Defined in [types/enums.ts:193](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L193)*
+*Defined in [types/enums.ts:201](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L201)*
 
 ___
 
@@ -80,7 +80,7 @@ ___
 
 •  **NecroArmor**:  = 3
 
-*Defined in [types/enums.ts:196](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L196)*
+*Defined in [types/enums.ts:204](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L204)*
 
 ___
 
@@ -88,4 +88,4 @@ ___
 
 •  **SummonUndead**:  = 1
 
-*Defined in [types/enums.ts:194](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/enums.ts#L194)*
+*Defined in [types/enums.ts:202](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L202)*

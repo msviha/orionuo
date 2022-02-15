@@ -21,7 +21,7 @@
 
 • `Optional` **crafting**: [IRefillItem](irefillitem.md)[]
 
-*Defined in [types/interfaces.ts:60](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/interfaces.ts#L60)*
+*Defined in [types/interfaces.ts:62](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/interfaces.ts#L62)*
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 • `Optional` **resources**: [IRefillItem](irefillitem.md)[]
 
-*Defined in [types/interfaces.ts:59](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/interfaces.ts#L59)*
+*Defined in [types/interfaces.ts:61](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/interfaces.ts#L61)*

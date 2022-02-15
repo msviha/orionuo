@@ -25,7 +25,7 @@
 
 • `Optional` **mobile**: boolean
 
-*Defined in [types/interfaces.ts:79](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/interfaces.ts#L79)*
+*Defined in [types/interfaces.ts:81](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/interfaces.ts#L81)*
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 • `Optional` **player**: boolean
 
-*Defined in [types/interfaces.ts:80](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/interfaces.ts#L80)*
+*Defined in [types/interfaces.ts:82](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/interfaces.ts#L82)*
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 *Inherited from [IBagDestination](ibagdestination.md).[x](ibagdestination.md#x)*
 
-*Defined in [types/interfaces.ts:74](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/interfaces.ts#L74)*
+*Defined in [types/interfaces.ts:76](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/interfaces.ts#L76)*
 
 ___
 
@@ -53,4 +53,4 @@ ___
 
 *Inherited from [IBagDestination](ibagdestination.md).[y](ibagdestination.md#y)*
 
-*Defined in [types/interfaces.ts:75](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/interfaces.ts#L75)*
+*Defined in [types/interfaces.ts:77](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/interfaces.ts#L77)*

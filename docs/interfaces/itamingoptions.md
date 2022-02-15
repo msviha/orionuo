@@ -12,16 +12,25 @@
 
 ### Properties
 
+* [handleWarMode](itamingoptions.md#handlewarmode)
 * [hiding](itamingoptions.md#hiding)
 * [walkTo](itamingoptions.md#walkto)
 
 ## Properties
 
+### handleWarMode
+
+• `Optional` **handleWarMode**: boolean
+
+*Defined in [types/interfaces.ts:35](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/interfaces.ts#L35)*
+
+___
+
 ### hiding
 
 • `Optional` **hiding**: boolean
 
-*Defined in [types/interfaces.ts:34](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/interfaces.ts#L34)*
+*Defined in [types/interfaces.ts:34](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/interfaces.ts#L34)*
 
 ___
 
@@ -29,4 +38,4 @@ ___
 
 • `Optional` **walkTo**: boolean
 
-*Defined in [types/interfaces.ts:33](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/interfaces.ts#L33)*
+*Defined in [types/interfaces.ts:33](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/interfaces.ts#L33)*

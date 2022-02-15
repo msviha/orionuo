@@ -22,7 +22,7 @@
 
 •  **color**: string
 
-*Defined in [types/interfaces.ts:110](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/interfaces.ts#L110)*
+*Defined in [types/interfaces.ts:112](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/interfaces.ts#L112)*
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 • `Optional` **exceptionNames**: string[]
 
-*Defined in [types/interfaces.ts:111](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/interfaces.ts#L111)*
+*Defined in [types/interfaces.ts:113](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/interfaces.ts#L113)*
 
 ___
 
@@ -38,4 +38,4 @@ ___
 
 •  **graphic**: string
 
-*Defined in [types/interfaces.ts:109](https://github.com/msviha/orionuo/blob/8a6e7bf/src/types/interfaces.ts#L109)*
+*Defined in [types/interfaces.ts:111](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/interfaces.ts#L111)*
