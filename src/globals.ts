@@ -182,6 +182,10 @@ const gameObject: any = {
         repairKit: {
             graphic: '0x1EBA',
             color: '0x0000'
+        },
+        poisonKit: {
+            graphic: '0x185B',
+            color: '0x0B8B'
         }
     },
     resources: {
