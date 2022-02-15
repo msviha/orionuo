@@ -703,13 +703,22 @@ function openContainer() {
 }
 
 /**
+ * Poisnuje verite zbrane z vybraneho containeru
+ * @example external code `poisonGuns()`
+ * @example in client `_poisonGuns`
+ */
+function poisonGuns() {
+    Scripts.Poisoning.poisonGuns();
+}
+
+/**
  * Poisne trenink kitem nejblizsim enemy monstrum jakmile k nejakemu dobehnes (netreni na tech co maji human grafiku);
  * @param keepRunning pokud date true, tak vam to po jednom spusteni pobezi stale na pozadi a bude poisnovat kdyz okolo neceho probehnete
  * @example external code `poisonTrain()` ceka az se priblizis k monstru a pak jednorazove poisne a skonci
  * @example external code `poisonTrain(true)` nekonecny cyklus kdy staci jen behat okolo monster a poisnis to
  */
 function poisonTrain(keepRunning = false) {
-    keepRunning ? Scripts.Common.poisonTrainAuto() : Scripts.Common.poisonTrain();
+    keepRunning ? Scripts.Poisoning.poisonTrainAuto() : Scripts.Poisoning.poisonTrain();
 }
 
 /**
@@ -717,7 +726,7 @@ function poisonTrain(keepRunning = false) {
  * @example external code `poisonLastAttack()`
  */
 function poisonLastAttack() {
-    Scripts.Common.poisonLastAttack();
+    Scripts.Poisoning.poisonLastAttack();
 }
 
 /**
