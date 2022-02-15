@@ -1,7 +1,7 @@
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 1.6.3');
+    Orion.Print(-1, 'version 1.7.0');
     Orion.Print(-1, '-------------+');
 }
 
@@ -783,6 +783,18 @@ function KPZJump() {
  */
 function KPZHpSwitch() {
     Scripts.Clerik.KPZHpSwitch();
+}
+
+function repair() {
+    Scripts.Repair.repair();
+}
+
+function repairTrade() {
+    Scripts.Repair.repairTrade();
+}
+
+function repairPlease() {
+    Scripts.Repair.repairPlease();
 }
 
 /**
