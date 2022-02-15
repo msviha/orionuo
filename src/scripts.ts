@@ -1003,6 +1003,18 @@ function tracking(who = 'Players') {
 }
 
 /**
+ * Vypisuje seznam tracknutych objektu
+ * Pokud si nastavite nekoho do parametru tak to bude vypisovat nad vami (napriklad nejake jmena PKcek)
+ * Par jmen to hlida automaticky (Evangela, tydlidrdla atp.)
+ * @example in client `_trackingRadar`
+ * @example external code `trackingRadar()`
+ * @example external code `trackingRadar([{name: 'Bugged', color: 0x0025, msg: '[ PK ]'}]);` trackuje vse, ale kdyz trackne Buggeda tak vam to vypise i nad hlavou
+ */
+function trackingRadar(userFilter:ITrackingFilter[] = [{name: 'Bugged', color: 0x0025, msg: '[ PK ]'}]) {
+    Scripts.Tracking.radar(userFilter);
+}
+
+/**
  * Pouzije travel book s pozadovanou volbou
  * @param selection {PortBookOptionsEnum} volba z knizky
  * @example in client `_travelBook` kopne na vlastni misto
