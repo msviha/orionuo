@@ -112,3 +112,9 @@ interface IFriendlyMonster {
     color:string;
     exceptionNames?:string[]
 }
+
+interface ITrackingFilter {
+    name:string;
+    msg?:string;
+    color?:number;
+}
