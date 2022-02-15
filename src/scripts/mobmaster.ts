@@ -275,6 +275,7 @@ namespace Scripts {
          * Do 2 policek!
          */
         static shrinkOne() {
+            Orion.IgnoreReset();
             let pets = Orion.FindTypeEx('!0x0190|!0x0191', '0xFFFF', 'ground', 'live', 2);
             const ignoreList: Array<string> = Shared.GetArray('mobmaster.shrinkOne.ignoreList', Array<string>());
             Orion.ClearJournal('Ale co to delas?|Bez bliz|Zviratko bylo shrinknuto');
