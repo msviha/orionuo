@@ -217,7 +217,7 @@ namespace Scripts {
             if (journal) {
                 if (s.timerType != 'teleport') {
                     const timerConfig = config?.castScroll?.timer;
-                    scrollTimer && timerConfig?.displayTimer && Orion.AddDisplayTimer(
+                    scrollTimer && timerConfig?.displayTimer !== false && Orion.AddDisplayTimer(
                         TimersEnum.scroll,
                         scrollTimer,
                         timerConfig?.position || 'AboveChar',
@@ -232,7 +232,7 @@ namespace Scripts {
                 }
                 else {
                     const timerConfig = config?.teleportTimer?.timer;
-                    timerConfig?.displayTimer && Orion.AddDisplayTimer(
+                    timerConfig?.displayTimer !== false && Orion.AddDisplayTimer(
                         TimersEnum.teleport,
                         scrollTimer,
                         timerConfig?.position ||  'RightTop',
@@ -505,7 +505,8 @@ namespace Scripts {
                 const standingTimer = hasBonusItem ? characterTimers.bonus.standing : characterTimers.standing;
                 const movementTimer = hasBonusItem ? characterTimers.bonus.moving: characterTimers.moving;
 
-                Orion.Exec('overwriteTeleportTimerWhenPlayerMoves', true, [movementTimer.toString(), standingTimer.toString()]);
+                const timerConfig = config?.teleportTimer?.timer;
+                timerConfig?.displayTimer !== false && Orion.Exec('overwriteTeleportTimerWhenPlayerMoves', true, [movementTimer.toString(), standingTimer.toString()]);
                 return standingTimer;
             }
             return 0;

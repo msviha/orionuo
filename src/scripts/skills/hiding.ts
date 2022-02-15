@@ -44,7 +44,7 @@ function _hiding(allowRehid:string, doubleTapToRehid:string) {
  */
 function _hidingPreoccupiedCheck(allowRehid:string, doubleTapToRehid:string) {
     const hidTimer = config?.hiding?.timer;
-    hidTimer.displayTimer && Orion.AddDisplayTimer(
+    hidTimer.displayTimer !== false && Orion.AddDisplayTimer(
         TimersEnum.hiding,
         2000,
         hidTimer?.position || 'AboveChar',
