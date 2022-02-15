@@ -1,5 +1,40 @@
 # CHANGELOG
 
+## 1.7.0
+
+### fixes
+- `dress` - zvetseni pauzy pri oblekani na 500ms
+- aliasy `nearinjuredalie, nearinjuredalielos, mostinjuredalie, mostinjuredalielos` jiz neleci leopardy a grafiky orlu/phoenixu/talonu
+- `taming` - dalsi fix preruseni scriptu pri hidovani
+- `alchemy` - fix michani malych manarefu
+- `tamingTrain` - odstraneni dvojiho pouziti hole
+- `shrinkOne` - pridan reset ignore listu (obcas neshrinkovalo klamaky)
+- zakazany timer pro teleport se ukazoval po pohnuti hrace
+
+### enhancements
+- `hideAll` - pridan parametr ktery nekombinuje volani steneho hotkeye s resendem (napr. chces zdit a skoci ti nekde summon a chces ho stejnou hotkou hidnout, ale bez parametru ti to hodi resend/resync)
+- `taming` - pridan option `handleWarMode` - umoznuje vypnout prepinani warmodu behem tamovani (nefizzovat kouzla/bandy kdyz tamujete)
+- `tracking` - pridano automaticke zavirani predchozich menu (pri vicenasobnem pouziti se nebudou menu stackovat)
+
+### features
+- nove aliasy `nearinjuredpet, nearinjuredpetlos, mostinjuredpet, mostinjuredpetlos` pro healeni leopardu a skyhawka (prozatim)
+- `repair` - opravi veci v konkretnim containeru
+- `repairTrade` - opravi veci v aktivnim trade okne
+- `repairPlease` - nahaze veci ze sebe do trade okna
+- `poisonGuns` - poisonuje verite zbrane v pytliku
+- `trackingRadar` - hlasi co je na tracku a pocet
+
+### gameObject added
+- repairKit
+- hammer
+- gp
+- poisonKit
+
+## 1.6.2
+
+### fixes
+- crash autostartu
+
 ## 1.6.1
 
 ### fixes
