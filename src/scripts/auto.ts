@@ -104,7 +104,7 @@ namespace Scripts {
             const run = Player.MaxStam() - 30 < Player.Stam() ? 1 : 0;
             lagProtection && Scripts.Auto.lagProtection(enemy, run);
             Scripts.Auto.getToDistanceIfNeeded(enemy, distance, run);
-            poisonTrain && distance <= 1 && Scripts.Common.poisonTrain(serialToKill);
+            poisonTrain && distance <= 1 && Scripts.Poisoning.poisonTrain(serialToKill);
             Orion.Wait(responseDelay);
             if (!kill) {
                 Orion.Ignore(enemy.Serial());
