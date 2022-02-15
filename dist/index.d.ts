@@ -39,6 +39,7 @@ declare function castScroll(scroll: ScrollEnum, target?: string | TargetEnum | A
 declare function cestovniKniha(selection?: PortBookOptionsEnum, destination?: PortBookDestinationsEnum): void;
 declare function cleanObjectInBag(object: any, objectName?: string): void;
 declare function closeStandardStatusBars(notoriety?: NotorietyEnum[], closeInactiveOnly?: boolean): void;
+declare function craftBandana(): void;
 declare function craftNext(): void;
 declare function craftSelect(): void;
 declare function drink(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean, displayTimers?: boolean, refillEmptyLimit?: number, displayInvisLongTimer?: boolean): void;
@@ -54,7 +55,7 @@ declare function friend(): void;
 declare function gmMortar(potionName: PotionsEnum): void;
 declare function harp(target?: TargetEnum): void;
 declare function healPets(): void;
-declare function hideAll(): void;
+declare function hideAll(toggleResend?: boolean): void;
 declare function hiding(allowRehid?: boolean, doubleTapToRehid?: boolean): void;
 declare function hoverCheck(): void;
 declare function inscription(circle: number, spell: string, quantity?: number, useManaRef?: boolean): void;
@@ -80,6 +81,7 @@ declare function necroMystic(message: string): void;
 declare function nextWeapon(showName?: boolean): void;
 declare function ocaruj(dusty?: OcarovaniEnum): void;
 declare function openContainer(): void;
+declare function poisonGuns(): void;
 declare function poisonTrain(keepRunning?: boolean): void;
 declare function poisonLastAttack(): void;
 declare function previousWeapon(showName?: boolean): void;
@@ -89,6 +91,9 @@ declare function resetStats(): void;
 declare function KPZPull(): void;
 declare function KPZJump(): void;
 declare function KPZHpSwitch(): void;
+declare function repair(): void;
+declare function repairTrade(): void;
+declare function repairPlease(): void;
 declare function resetWeapons(): void;
 declare function rozbij(ingy?: OcarovaniEnum, kolik?: number): void;
 declare function saveEquip(): void;
@@ -105,6 +110,7 @@ declare function targetPrevious(timeToStorePreviousTargets?: number, additionalF
 declare function tbGump(): void;
 declare function terminateAll(): void;
 declare function tracking(who?: string): void;
+declare function trackingRadar(userFilter?: ITrackingFilter[]): void;
 declare function travelBook(selection?: PortBookOptionsEnum): void;
 declare function turboRess(bandageAfterRess?: boolean): void;
 declare function turboRessFull(): void;
@@ -134,7 +140,6 @@ declare function vampRakevMedium(): void;
 declare function vampRakevHigh(): void;
 declare function vendorBuy(): void;
 declare function vendorSell(): void;
-declare function craftBandana(): void;
 declare function parseParam(param: any): any;
 declare namespace Scripts {
     class Auto {
@@ -173,12 +178,9 @@ declare namespace Scripts {
         static massMove(requiredCountInTarget?: number, onlyType?: boolean): void;
         static refillReagent(reagent: IMyGameObject, sourceContainerName: string, count?: number): boolean;
         static mysticCounter(): void;
-        static hideAll(): void;
+        static hideAll(toggleResend?: boolean): void;
         static lavaBomb(): void;
         static webDestroyer(): void;
-        static poisonLastAttack(): void;
-        static poisonTrain(serialToPoison?: string): void;
-        static poisonTrainAuto(): void;
         static openBank(): boolean;
         static openContainer(): void;
         static useShrinkKad(): void;
@@ -614,6 +616,45 @@ declare namespace Scripts {
     }
 }
 declare namespace Scripts {
+    class Poisoning {
+        static getPoisonKitSerialFromBackpack(): string;
+        static getDeadlyKadSerialFromBackpack(): string;
+        static poisonGuns(): void;
+        static poisonGunSerial(gun: string): any;
+        static poisonLastAttack(): void;
+        static poisonTrain(serialToPoison?: string): void;
+        static poisonTrainAuto(): void;
+    }
+}
+interface IRepairItem {
+    serial: string;
+    count: number;
+    name: any;
+    x?: number;
+    y?: number;
+}
+declare enum RepairResultEnum {
+    cant = 0,
+    progress = 1,
+    fully = 2
+}
+declare namespace Scripts {
+    class Repair {
+        static toolCheck(): boolean;
+        static equipDagger(): boolean;
+        static equipHammer(): boolean;
+        static repairPlease(): void;
+        static repairTrade(): void;
+        static repair(): void;
+        static fixItemsInContainer(container: string, moveToBackpackAndReturn?: boolean): void;
+        static repairItem(item: IRepairItem): RepairResultEnum;
+        static getItemsFromContainer(container: string): IRepairItem[];
+        static fixLoop(cenaNaradi?: number): void;
+        static welcomeTrade(name: string): void;
+        static randomPrupovidka(): void;
+    }
+}
+declare namespace Scripts {
     class Stealing {
         static getStealingIgnoreList(): {
             name: string;
@@ -641,6 +682,7 @@ declare namespace Scripts {
 declare namespace Scripts {
     class Tracking {
         static tracking(who?: string): void;
+        static radar(userFilter?: ITrackingFilter[]): void;
     }
 }
 declare enum DirectionEnum {
@@ -667,9 +709,13 @@ declare enum TargetEnum {
     laststatusenemy = "laststatusenemy",
     mount = "mount",
     nearinjuredalie = "nearinjuredalie",
+    nearinjuredpet = "nearinjuredpet",
     nearinjuredalielos = "nearinjuredalielos",
+    nearinjuredpetlos = "nearinjuredpetlos",
     mostinjuredalie = "mostinjuredalie",
+    mostinjuredpet = "mostinjuredpet",
     mostinjuredalielos = "mostinjuredalielos",
+    mostinjuredpetlos = "mostinjuredpetlos",
     lasttargetmobile = "lasttargetmobile",
     hover = "hover",
     manual = "manual"
@@ -913,6 +959,7 @@ declare const TARGET_OPTS_DEFAULTS: {
 interface ITamingOptions {
     walkTo?: boolean;
     hiding?: boolean;
+    handleWarMode?: boolean;
 }
 declare const TAMING_OPTS_DEFAULTS: ITamingOptions;
 interface IBagDestination extends ICoordinates {
@@ -973,6 +1020,11 @@ interface IFriendlyMonster {
     graphic: string;
     color: string;
     exceptionNames?: string[];
+}
+interface ITrackingFilter {
+    name: string;
+    msg?: string;
+    color?: number;
 }
 declare function isMyGameObject(val: any): val is IMyGameObject;
 declare function isMakeProps(val: any): val is IMakeProps;
