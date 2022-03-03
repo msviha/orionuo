@@ -98,7 +98,7 @@ namespace Scripts {
 
             let itemObject = Orion.FindObject('massMoveItem');
             const stackable = Scripts.Utils.isItemStackable(itemObject.Serial());
-            const count = stackable ? Scripts.Utils.askForCount() : 0;
+            const count = stackable ? Scripts.Utils.askForCount('Po kolika kusech to budes prehazovat ?') : 0;
             itemObject = Orion.FindObject('massMoveItem');
 
             // no recurse.. just from the container where it is targeted

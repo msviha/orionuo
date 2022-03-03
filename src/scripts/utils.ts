@@ -58,7 +58,11 @@ namespace Scripts {
             refillJustWhenIHaveNothing = false,
             itemName?: string,
             sourceContainerIsItemOnGround = false,
+            targetContainerPath?:string[]
         ): number {
+            if (targetContainerPath) {
+                Scripts.Utils.OpenContainerPath(targetContainerPath);
+            }
             const serialsInTargetContainer = Orion.FindType(obj.graphic, obj.color || '0xFFFF', targetContainerId);
             const serialsInSourceContainer = sourceContainerIsItemOnGround
                 ? [sourceContainerId]
@@ -71,7 +75,7 @@ namespace Scripts {
             );
 
             if (itemsInTarget > quantity) {
-                return Scripts.Utils.moveItems(serialsInTargetContainer, sourceContainerId, itemsInTarget - quantity);
+                return Scripts.Utils.moveItems(serialsInTargetContainer, sourceContainerId, itemsInTarget - quantity, obj.bag);
             } else if (itemsInTarget < quantity) {
                 if (refillJustWhenIHaveNothing && itemsInTarget) {
                     return 0;
@@ -83,7 +87,7 @@ namespace Scripts {
                     );
                     return quantity;
                 }
-                return Scripts.Utils.moveItems(serialsInSourceContainer, targetContainerId, quantity - itemsInTarget);
+                return Scripts.Utils.moveItems(serialsInSourceContainer, targetContainerId, quantity - itemsInTarget, obj.bag);
             }
 
             return 0;
@@ -132,7 +136,7 @@ namespace Scripts {
             if (isMyGameObject(obj)) {
                 const count = Scripts.Utils.countObjectInContainer(obj, fromContainer);
                 const serials = Scripts.Utils.getObjSerials(obj, fromContainer);
-                Scripts.Utils.moveItems(serials, targetContainer, count);
+                Scripts.Utils.moveItems(serials, targetContainer, count, obj.bag);
             } else {
                 for (const key in obj) {
                     Scripts.Utils.moveObjectToContainer(obj[key], fromContainer, targetContainer);
@@ -141,7 +145,11 @@ namespace Scripts {
         }
 
         // return missing quantity
-        static moveItems(itemsSerials: string[], targetContainerId: string, quantity: number): number {
+        static moveItems(
+            itemsSerials: string[],
+            targetContainerId: string,
+            quantity: number,
+            coordinates?:ICoordinates): number {
             if (quantity < 1) {
                 return 0;
             }
@@ -149,23 +157,23 @@ namespace Scripts {
             for (const item of itemsSerials) {
                 const itemCount = Orion.FindObject(item).Count();
                 if (needToMove > itemCount) {
-                    Orion.MoveItem(item, itemCount, targetContainerId);
+                    Orion.MoveItem(item, itemCount, targetContainerId, coordinates?.x, coordinates?.y);
                     needToMove -= itemCount;
+                    Orion.Wait(responseDelay);
                 } else {
                     Orion.ClearJournal();
-                    Orion.MoveItem(item, quantity, targetContainerId);
-                    Orion.Wait(responseDelay * 2);
+                    Orion.MoveItem(item, quantity, targetContainerId, coordinates?.x, coordinates?.y);
+                    Orion.Wait(responseDelay);
                     const i = Orion.FindObject(item);
                     if (
                         quantity === 1 &&
                         !Scripts.Utils.countObjectInContainer({ graphic: i.Graphic(), color: i.Color() })
                     ) {
-                        Orion.MoveItem(item, 2, targetContainerId);
+                        Orion.MoveItem(item, 2, targetContainerId, coordinates?.x, coordinates?.y);
                         Orion.Wait(responseDelay);
                     }
                     needToMove = 0;
                 }
-                Orion.Wait(responseDelay);
                 if (needToMove < 1) {
                     break;
                 }
@@ -667,8 +675,8 @@ namespace Scripts {
             return stackable;
         }
 
-        static askForCount(): number {
-            Scripts.Utils.playerPrint('Po kolika kusech to budes prehazovat ?');
+        static askForCount(ask = 'Kolik ?'): number {
+            Scripts.Utils.playerPrint(ask);
             Orion.ClearJournal();
             while (!Orion.InJournal('', 'my')) {
                 Orion.Wait(500);
@@ -783,6 +791,61 @@ namespace Scripts {
                 }
             }
             return;
+        }
+
+        /**
+         * Otevre containery (v poli) postupne
+         * @param path
+         */
+        static OpenContainerPath(path:string[]) {
+            for (const p of path) {
+                if (!Orion.GumpExists('container', p)) {
+                    Orion.OpenContainer(p);
+                    Orion.Wait(responseDelay);
+                }
+            }
+        }
+
+        static isItemInBank(obj:GameObject) {
+            const bankSerial = Player.BankSerial();
+            let objContainer = obj.Container();
+            while (objContainer !== '0xFFFFFFFF' && objContainer !== bankSerial) {
+                const parent = Orion.FindObject(objContainer);
+                objContainer = parent.Container();
+            }
+
+            return objContainer === bankSerial;
+        }
+
+        // todo not tested
+        static findMyGameObject(graphic:string, color?:string, obj?:any):IMyGameObject|undefined {
+            let ret:IMyGameObject|undefined;
+            !obj && (obj = gameObject);
+            for (const prop of obj) {
+                const p = obj[prop];
+                if (p.graphic === graphic) {
+                    if (color) {
+                        if (p.color === color) {
+                            return p;
+                        }
+                        else {
+                            ret = Scripts.Utils.findMyGameObject(graphic, color, p);
+                            if (ret) {
+                                return ret;
+                            }
+                        }
+                    }
+                    else {
+                        return p;
+                    }
+                }
+                else {
+                    ret = Scripts.Utils.findMyGameObject(graphic, color, p);
+                    if (ret) {
+                        return ret;
+                    }
+                }
+            }
         }
     }
 }

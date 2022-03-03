@@ -239,5 +239,14 @@ namespace Scripts {
             Orion.UseObject(potionKad);
             Orion.Wait(responseDelay);
         }
+
+        static getPotionTypeFromKad(kad:IMyGameObject):PotionsEnum|undefined {
+            const pot = gameObject.potions;
+            for (let p in pot) {
+                if (pot[p].kad.graphic === kad.graphic && pot[p].kad.color === kad.color) {
+                    return PotionsEnum[p];
+                }
+            }
+        }
     }
 }

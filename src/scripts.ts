@@ -1,7 +1,7 @@
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 1.7.0');
+    Orion.Print(-1, 'version 1.8.0');
     Orion.Print(-1, '-------------+');
 }
 
@@ -265,6 +265,24 @@ function craftSelect() {
 }
 
 /**
+ * Veme prazdnou kad, naplni a hodi do pozadovaneho kontejneru - Pozor nehlida jestli mate dostatek potionu v kadi
+ * @param emptyKadContainerPath serialy v poli (kazdy odpovida bedne, kdyz se chcete proklikat k prazdne kadi)
+ * @param emptyBottleContainerPath serialy v poli (kazdy odpovida bedne, kdyz se chcete proklikat k prazdne lahvicce)
+ * @param count pocet, ktery je zaokrouhlovan po 50ti
+ * @param refillKadSerial muzete vyplnit kad a nebude se vas to ptat
+ * @param targetContainer muzete vyplnit container a nebude se vas to ptat
+ */
+function createKad(
+    emptyKadContainerPath:string[],
+    emptyBottleContainerPath:string[],
+    count:number, // minimalne 1, pak to cepuje po 50ti
+    refillKadSerial?:string,
+    targetContainer?:string
+) {
+    Scripts.Refill.createKad(emptyKadContainerPath, emptyBottleContainerPath, count, refillKadSerial, targetContainer);
+}
+
+/**
  * Chlasta lahvicky
  * @param potionName zkratka potionu
  * @param switchWarModeWhenNeeded date li 'false' pak neprepina war pokud nejde cepovat, tak necepne
@@ -507,6 +525,13 @@ function lavaBomb() {
 function light(shouldCast = true) {
     shouldCast = parseParam(shouldCast);
     Scripts.Common.svetlo(shouldCast);
+}
+
+/**
+ * Quest na drticku - checkuje co rika socha a otaci se
+ */
+function lilith() {
+    Scripts.Drticka.lilith();
 }
 
 /**
@@ -794,6 +819,33 @@ function KPZHpSwitch() {
     Scripts.Clerik.KPZHpSwitch();
 }
 
+/**
+ * Refuje itemy z definovanych containeru
+ * @param stuff co se bude doplnovat (nebo odhazovat zpatky do beden)
+ * @param containerPathsToSearch 2d pole serialu, skrz ktere je potreba se doklikat k itemum, ktere se refuji
+ * @param clean flag ktery urcuje, zda se ma v batuzku item uklidit na pozici dle configu
+ * @example external code je k dispozici na discordu v navodech
+ */
+function refill(
+    stuff: Array<{ item: string; total: number }>,
+    containerPathsToSearch?: Array<string[]> | string[],
+    clean = true
+) {
+    Scripts.Refill.manager(stuff, containerPathsToSearch, clean);
+}
+
+/**
+ * Prehodi urceny pocet standardnich regu mezi dvema containery
+ * @param count
+ */
+function regy(count?:number) {
+    if (count) {
+        const parsedParam = parseParam(count);
+        count = typeof parsedParam === 'number' ? parsedParam : 0;
+    }
+    Scripts.Refill.regy(count);
+}
+
 function repair() {
     Scripts.Repair.repair();
 }
@@ -1041,6 +1093,24 @@ function turboRess(bandageAfterRess = false) {
  */
 function turboRessFull() {
     Scripts.Clerik.turboRessFull();
+}
+
+/**
+ * Uklizi do vybrane bedny (tu je nejprve alespon jednou potreba nacist pomoci scriptu `uklizeno()`)
+ * @example in client `_uklid`
+ * @example external code `uklid();`
+ */
+function uklid() {
+    Scripts.Cleaner.uklid();
+}
+
+/**
+ * Nacte si kontejner do seznamu uklizenych veci (je potreba mit na disku vytvoreny adresar C:\0git) do souboru clean.json
+ * @example in client `_uklizeno`
+ * @example external code `uklizeno();`
+ */
+function uklizeno() {
+    Scripts.Cleaner.nactiUklizenouBednu();
 }
 
 /**

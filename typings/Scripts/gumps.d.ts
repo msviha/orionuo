@@ -33,6 +33,12 @@ export default interface Gumps {
     CancelWaitGump(): void;
 
     /**
+     * void Orion.CloseGump('container');
+     * Close the open container in the client.
+     */
+    CloseGump(type: string, serial?:string, id?:string): void;
+
+    /**
      * int Orion.GumpCount();
      * Returns the amount of opened gumps from OA memory.
      */

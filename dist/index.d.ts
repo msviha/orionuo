@@ -42,6 +42,7 @@ declare function closeStandardStatusBars(notoriety?: NotorietyEnum[], closeInact
 declare function craftBandana(): void;
 declare function craftNext(): void;
 declare function craftSelect(): void;
+declare function createKad(emptyKadContainerPath: string[], emptyBottleContainerPath: string[], count: number, refillKadSerial?: string, targetContainer?: string): void;
 declare function drink(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean, displayTimers?: boolean, refillEmptyLimit?: number, displayInvisLongTimer?: boolean): void;
 declare function drinkFill(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean, displayTimers?: boolean, refillEmptyLimit?: number, displayInvisLongTimer?: boolean): void;
 declare function drum(target?: TargetEnum): void;
@@ -63,6 +64,7 @@ declare function killAll(): void;
 declare function killTarget(): void;
 declare function lavaBomb(): void;
 declare function light(shouldCast?: boolean): void;
+declare function lilith(): void;
 declare function lockpicking(): void;
 declare function loot(cut?: boolean): void;
 declare function lootAll(delay?: number): void;
@@ -91,6 +93,11 @@ declare function resetStats(): void;
 declare function KPZPull(): void;
 declare function KPZJump(): void;
 declare function KPZHpSwitch(): void;
+declare function refill(stuff: Array<{
+    item: string;
+    total: number;
+}>, containerPathsToSearch?: Array<string[]> | string[], clean?: boolean): void;
+declare function regy(count?: number): void;
 declare function repair(): void;
 declare function repairTrade(): void;
 declare function repairPlease(): void;
@@ -114,6 +121,8 @@ declare function trackingRadar(userFilter?: ITrackingFilter[]): void;
 declare function travelBook(selection?: PortBookOptionsEnum): void;
 declare function turboRess(bandageAfterRess?: boolean): void;
 declare function turboRessFull(): void;
+declare function uklid(): void;
+declare function uklizeno(): void;
 declare function unlock(): void;
 declare function use(object: IMyGameObject | IMyGameObject[], name?: string, minimalCountForWarn?: number): void;
 declare function useGGR(): void;
@@ -160,6 +169,43 @@ declare namespace Scripts {
         static sortBackpackCaleb(): void;
     }
 }
+declare function _startUpdateContainerItemsProgress(): void;
+declare function _stopUpdateContainerItemsProgress(): void;
+declare namespace Scripts {
+    interface ICleanerItem {
+        serial: string;
+        graphic: string;
+        color: string;
+        name: string;
+        container: string;
+        nestedItems?: ICleanerItem[];
+    }
+    export class Cleaner {
+        static nactiUklizenouBednu(): void;
+        static uklid(): void;
+        static loadMessContainer(messContainerSerial: string): ICleanerItem;
+        static cleanItems(messItems: ICleanerItem[], cleanItem: ICleanerItem): void;
+        static findSameItemInContainer(findItem: ICleanerItem, cleanItem: ICleanerItem): {
+            item: ICleanerItem;
+            parent: ICleanerItem;
+            path: string[];
+        } | undefined;
+        static moveItem(item: ICleanerItem, target: ICleanerItem): void;
+        static loadItemsFromFile(): ICleanerItem[];
+        static saveItemsToFile(structure: ICleanerItem[]): void;
+        static getContainerDefinitions(): IMyGameObject[];
+        static isContainer(item: ICleanerItem): boolean;
+        static findNestedContainerBySerial(structure: ICleanerItem[], targetContainerSerial: any): ICleanerItem | undefined;
+        static createStructureForContainer(itemStructure: ICleanerItem): ICleanerItem;
+        static updateContainerItemsWithProgress(container: ICleanerItem): void;
+        static updateContainerItems(container: ICleanerItem, recurse?: boolean): void;
+        static getAllItemsSerialsFromContainer(container: string): string[];
+        static createBasicItemStructure(itemSerial: string): ICleanerItem;
+        static getObjectName(itemObject: GameObject): string;
+        static truncateName(name: string): string;
+    }
+    export {};
+}
 declare namespace Scripts {
     class Combat {
         static switchShield(options?: any): void;
@@ -198,6 +244,12 @@ declare namespace Scripts {
         static addWeapon(index: number): boolean;
         static addShield(): boolean;
         static resetWeaponsArray(): void;
+    }
+}
+declare namespace Scripts {
+    class File {
+        static loadFile(defaultFilePath: string, configFilePath?: string): string;
+        static saveFile(data: string, defaultFilePath: string, configFilePath?: string): void;
     }
 }
 declare namespace Scripts {
@@ -301,6 +353,19 @@ declare namespace Scripts {
         static drinkPotion(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean, displayTimers?: boolean, displayInfo?: boolean, refillEmptyLimit?: number, displayInvisLongTimer?: boolean): void;
         static fillPotion(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean, kadSerial?: string, emptyBottleSerial?: string): void;
         static potionToKad(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean, kadSerial?: string): void;
+        static getPotionTypeFromKad(kad: IMyGameObject): PotionsEnum | undefined;
+    }
+}
+declare namespace Scripts {
+    class Refill {
+        static manager(stuff: Array<{
+            item: string;
+            total: number;
+        }>, containerPathsToSearch?: Array<string[]> | string[], clean?: boolean): void;
+        static universalRefill(gameObjectAsString: string, total: number, canTakeFromBank?: boolean, containerPathsToSearch?: Array<string[]> | string[]): void;
+        static refillPotions(potionName: PotionsEnum, total: number, kadSerial: string, needToTakeKadToBackpack?: boolean, emptyBottleSerial?: string): void;
+        static createKad(emptyKadContainerPath: string[], emptyBottleContainerPath: string[], count: number, refillKadSerial?: string, targetContainer?: string): string;
+        static regy(count?: number): void;
     }
 }
 interface IScrollTimers {
@@ -424,13 +489,13 @@ declare namespace Scripts {
     class Utils {
         static selectMenu(menuName: string | ISpecialSelection, selections: Array<string | ISpecialSelection>, firstCall?: boolean): void;
         static useAndSelect(serial: string, selections: ISelect[], use?: boolean): void;
-        static refill(obj: IMyGameObject, sourceContainerId: string, quantity?: number, targetContainerId?: string, refillJustWhenIHaveNothing?: boolean, itemName?: string, sourceContainerIsItemOnGround?: boolean): number;
+        static refill(obj: IMyGameObject, sourceContainerId: string, quantity?: number, targetContainerId?: string, refillJustWhenIHaveNothing?: boolean, itemName?: string, sourceContainerIsItemOnGround?: boolean, targetContainerPath?: string[]): number;
         static getObjSerials(obj: IMyGameObject, container?: string): string[];
         static getColorByNotoriety(notoriety?: number): number;
         static countObjectInContainer(obj: IMyGameObject, container?: string, containerIsObjItemOnGround?: boolean): number;
         static countItemsBySerials(itemsSerials: string[]): number;
         static moveObjectToContainer(obj: any, fromContainer: string, targetContainer: string): void;
-        static moveItems(itemsSerials: string[], targetContainerId: string, quantity: number): number;
+        static moveItems(itemsSerials: string[], targetContainerId: string, quantity: number, coordinates?: ICoordinates): number;
         static waitWhileSomethingInJournal(messages: string[], wait?: number, timeAhead?: number, flags?: string): number;
         static worldSaveCheckWait(): void;
         static log(message: string, color?: ColorEnum): void;
@@ -463,13 +528,16 @@ declare namespace Scripts {
         }>): void;
         static openContainer(s: string, maxWaitingTime?: number): void;
         static isItemStackable(serial: string): boolean;
-        static askForCount(): number;
+        static askForCount(ask?: string): number;
         static waitTargetTileOrObject(): ITargetCoordinates | undefined;
         static sayWithColor(text: any, color: any): void;
         static ensureName(obj: GameObject | PlayerCharacter): string;
         static waitForCond(condFce: Function, timeout: number): boolean;
         static getNotorietyNumberFromEnum(notoriety: NotorietyEnum): number;
         static determineCharacter(): CharactersEnum | undefined;
+        static OpenContainerPath(path: string[]): void;
+        static isItemInBank(obj: GameObject): boolean;
+        static findMyGameObject(graphic: string, color?: string, obj?: any): IMyGameObject | undefined;
     }
 }
 declare namespace Scripts {
@@ -518,6 +586,11 @@ declare namespace Scripts {
     }
 }
 declare namespace Scripts {
+    class Drticka {
+        static lilith(): void;
+    }
+}
+declare namespace Scripts {
     type Potion = {
         graphic: string;
         kad: IMyGameObject;
@@ -551,6 +624,7 @@ declare namespace Scripts {
         static bowcraftTrain(): void;
         static tailoringTrain(): void;
         static blacksmithyTrain(): void;
+        static petardy(): void;
     }
 }
 declare namespace Scripts {

@@ -3141,6 +3141,9 @@ function craftNext() {
 function craftSelect() {
     Scripts.Crafting.confirmMakeMenu();
 }
+function createKad(emptyKadContainerPath, emptyBottleContainerPath, count, refillKadSerial, targetContainer) {
+    Scripts.Refill.createKad(emptyKadContainerPath, emptyBottleContainerPath, count, refillKadSerial, targetContainer);
+}
 function drink(potionName, switchWarModeWhenNeeded, displayTimers, refillEmptyLimit, displayInvisLongTimer) {
     if (switchWarModeWhenNeeded === void 0) { switchWarModeWhenNeeded = true; }
     if (displayTimers === void 0) { displayTimers = true; }
@@ -3222,6 +3225,9 @@ function light(shouldCast) {
     if (shouldCast === void 0) { shouldCast = true; }
     shouldCast = parseParam(shouldCast);
     Scripts.Common.svetlo(shouldCast);
+}
+function lilith() {
+    Scripts.Drticka.lilith();
 }
 function lockpicking() {
     Scripts.Lockpicking.lockpicking();
@@ -3324,6 +3330,17 @@ function KPZJump() {
 function KPZHpSwitch() {
     Scripts.Clerik.KPZHpSwitch();
 }
+function refill(stuff, containerPathsToSearch, clean) {
+    if (clean === void 0) { clean = true; }
+    Scripts.Refill.manager(stuff, containerPathsToSearch, clean);
+}
+function regy(count) {
+    if (count) {
+        var parsedParam = parseParam(count);
+        count = typeof parsedParam === 'number' ? parsedParam : 0;
+    }
+    Scripts.Refill.regy(count);
+}
 function repair() {
     Scripts.Repair.repair();
 }
@@ -3416,6 +3433,12 @@ function turboRess(bandageAfterRess) {
 }
 function turboRessFull() {
     Scripts.Clerik.turboRessFull();
+}
+function uklid() {
+    Scripts.Cleaner.uklid();
+}
+function uklizeno() {
+    Scripts.Cleaner.nactiUklizenouBednu();
 }
 function unlock() {
     Scripts.Lockpicking.unlock();
@@ -3753,6 +3776,257 @@ var Scripts;
     }());
     Scripts.Clean = Clean;
 })(Scripts || (Scripts = {}));
+function _startUpdateContainerItemsProgress() {
+    var isUpdateRunning = Shared.GetVar('updateContainerItemsProgress', false);
+    if (isUpdateRunning) {
+        return;
+    }
+    Shared.AddVar('updateContainerItemsProgress', true);
+    while (Shared.GetVar('updateContainerItemsProgress')) {
+        Orion.AddDisplayTimer('updateContainerItemsProgress', 1500, 'AboveChar', 'bar', 'Loading Container Items', 0, 100, '0x100', 0, 'white');
+        Orion.Wait(1500);
+    }
+}
+function _stopUpdateContainerItemsProgress() {
+    Shared.AddVar('updateContainerItemsProgress', false);
+    Orion.RemoveDisplayTimer('updateContainerItemsProgress');
+}
+var Scripts;
+(function (Scripts) {
+    var BORDEL = 'bordelContainer';
+    var UKLID = 'uklidContainer';
+    var Cleaner = (function () {
+        function Cleaner() {
+        }
+        Cleaner.nactiUklizenouBednu = function () {
+            var structure = Scripts.Cleaner.loadItemsFromFile();
+            Scripts.Utils.createGameObjectSelections([
+                { ask: 'Vyber kontejner s uklizenou bednou/containerem', addObject: UKLID }
+            ]);
+            if (!Orion.GumpExists('container', UKLID)) {
+                Orion.OpenContainer(UKLID);
+                Orion.Wait(responseDelay);
+            }
+            var cleanContainerSerial = Orion.FindObject(UKLID).Serial();
+            var cleanContainer = Scripts.Cleaner.findNestedContainerBySerial(structure, cleanContainerSerial);
+            if (!cleanContainer) {
+                cleanContainer = Scripts.Cleaner.createBasicItemStructure(cleanContainerSerial);
+                var fullItemStructure = Scripts.Cleaner.createStructureForContainer(cleanContainer);
+                structure.push(fullItemStructure);
+            }
+            if (!Scripts.Cleaner.isContainer(cleanContainer)) {
+                Scripts.Utils.log('item neni container', ColorEnum.red);
+                throw 'e';
+            }
+            Scripts.Cleaner.updateContainerItemsWithProgress(cleanContainer);
+            Scripts.Cleaner.saveItemsToFile(structure);
+        };
+        Cleaner.uklid = function () {
+            var structure = Scripts.Cleaner.loadItemsFromFile();
+            Scripts.Utils.createGameObjectSelections([
+                { ask: 'Vyber kontejner s bordelem', addObject: BORDEL },
+                { ask: 'Vyber kontejner kam uklizet veci', addObject: UKLID }
+            ]);
+            var cleanContainerSerial = Orion.FindObject(UKLID).Serial();
+            var messContainerSerial = Orion.FindObject(BORDEL).Serial();
+            var cleanContainer = Scripts.Cleaner.findNestedContainerBySerial(structure, cleanContainerSerial);
+            if (!cleanContainer) {
+                Scripts.Utils.log('Nejprve by sis mel tuto bednu nacist pomoci _nactiUklizenouBednu');
+                return;
+            }
+            var messContainer = Scripts.Cleaner.loadMessContainer(messContainerSerial);
+            Scripts.Cleaner.cleanItems(messContainer.nestedItems, cleanContainer);
+            Scripts.Cleaner.saveItemsToFile(structure);
+        };
+        Cleaner.loadMessContainer = function (messContainerSerial) {
+            var messContainer = Scripts.Cleaner.createBasicItemStructure(messContainerSerial);
+            Scripts.Cleaner.updateContainerItemsWithProgress(messContainer);
+            return messContainer;
+        };
+        Cleaner.cleanItems = function (messItems, cleanItem) {
+            for (var _i = 0, messItems_1 = messItems; _i < messItems_1.length; _i++) {
+                var item = messItems_1[_i];
+                if (item.nestedItems) {
+                    Scripts.Cleaner.cleanItems(item.nestedItems, cleanItem);
+                }
+                else {
+                    var result = Scripts.Cleaner.findSameItemInContainer(item, cleanItem);
+                    if (!result) {
+                        continue;
+                    }
+                    Scripts.Utils.OpenContainerPath(result.path);
+                    Scripts.Cleaner.moveItem(item, result.item);
+                    Scripts.Cleaner.updateContainerItems(result.parent, false);
+                }
+            }
+        };
+        Cleaner.findSameItemInContainer = function (findItem, cleanItem) {
+            for (var _i = 0, _a = cleanItem.nestedItems; _i < _a.length; _i++) {
+                var target = _a[_i];
+                if (target.nestedItems) {
+                    var item = Scripts.Cleaner.findSameItemInContainer(findItem, target);
+                    if (item) {
+                        item.path.unshift(cleanItem.serial);
+                        return item;
+                    }
+                }
+                else {
+                    if (target.graphic === findItem.graphic && target.color === findItem.color && target.name === findItem.name) {
+                        return { item: target, parent: cleanItem, path: [cleanItem.serial] };
+                    }
+                }
+            }
+        };
+        Cleaner.moveItem = function (item, target) {
+            Orion.MoveItem(item.serial, 0, target.serial);
+            Orion.Wait(500);
+        };
+        Cleaner.loadItemsFromFile = function () {
+            var data = Scripts.File.loadFile('C:/0git/cleaner.json', config.cleanerFile);
+            if (!data) {
+                data = '[]';
+            }
+            var items = JSON.parse(data);
+            return items;
+        };
+        Cleaner.saveItemsToFile = function (structure) {
+            var data = JSON.stringify(structure, null, 2);
+            Scripts.File.saveFile(data, 'C:/0git/cleaner.json', config.cleanerFile);
+        };
+        Cleaner.getContainerDefinitions = function () {
+            return [
+                { graphic: '0x0E76', color: '0xFFFF' },
+                { graphic: '0x0E79', color: '0xFFFF' },
+                { graphic: '0x09B0', color: '!0x0BA6' },
+                { graphic: '0x0E75|0x09B2', color: '0xFFFF' },
+                { graphic: '0x0E40|0x0E41', color: '0x0000|0x0B1C' },
+                { graphic: '0x0E42|0x0E43', color: '0x0000' },
+                { graphic: '0x0E7C|0x09AB', color: '0x0000' },
+                { graphic: '0x0E80', color: '0x0000' },
+                { graphic: '0x09A8', color: '0x049B' },
+                { graphic: '0x0E7D|0x09AA', color: '0x0000' },
+                { graphic: '0x0E3C|0x0E3D|0x0E3E|0x0E3F|0x0E7E|0x09A9', color: '0x0000' },
+                { graphic: '0x09AC|0x09B1', color: '0x0000' },
+                { graphic: '0x0E77|0x0E83|0x0E7F', color: '0x0000' }
+            ];
+        };
+        Cleaner.isContainer = function (item) {
+            var containerDefinitions = Scripts.Cleaner.getContainerDefinitions();
+            for (var _i = 0, containerDefinitions_1 = containerDefinitions; _i < containerDefinitions_1.length; _i++) {
+                var def = containerDefinitions_1[_i];
+                var containerSerials = Orion.FindType(def.graphic, def.color, item.container, undefined, undefined, undefined, false);
+                if (containerSerials.indexOf(item.serial) > -1) {
+                    return true;
+                }
+            }
+            return false;
+        };
+        Cleaner.findNestedContainerBySerial = function (structure, targetContainerSerial) {
+            for (var _i = 0, structure_1 = structure; _i < structure_1.length; _i++) {
+                var item = structure_1[_i];
+                if (item.serial === targetContainerSerial) {
+                    return item;
+                }
+                else if (item.nestedItems) {
+                    var itemStructure = Scripts.Cleaner.findNestedContainerBySerial(item.nestedItems, targetContainerSerial);
+                    if (itemStructure) {
+                        return itemStructure;
+                    }
+                }
+            }
+        };
+        Cleaner.createStructureForContainer = function (itemStructure) {
+            var ground = '0xFFFFFFFF';
+            var bank = Player.BankSerial();
+            var parent = itemStructure.container;
+            while (parent !== ground && parent !== bank) {
+                var parentObj = Orion.FindObject(parent);
+                var nestedItems = [];
+                nestedItems.push(itemStructure);
+                itemStructure = {
+                    graphic: parentObj.Graphic(),
+                    color: parentObj.Color(),
+                    serial: parentObj.Serial(),
+                    name: Scripts.Cleaner.getObjectName(parentObj),
+                    container: parentObj.Container(),
+                    nestedItems: nestedItems
+                };
+                parent = itemStructure.container;
+            }
+            return itemStructure;
+        };
+        Cleaner.updateContainerItemsWithProgress = function (container) {
+            Orion.Exec('_stopUpdateContainerItemsProgress', false);
+            Orion.Exec('_startUpdateContainerItemsProgress', false);
+            Scripts.Cleaner.updateContainerItems(container);
+            Orion.Exec('_stopUpdateContainerItemsProgress', false);
+        };
+        Cleaner.updateContainerItems = function (container, recurse) {
+            if (recurse === void 0) { recurse = true; }
+            var isContainer = Scripts.Cleaner.isContainer(container);
+            if (!isContainer) {
+                return;
+            }
+            !container.nestedItems && (container.nestedItems = []);
+            var allItemsSerials = Scripts.Cleaner.getAllItemsSerialsFromContainer(container.serial);
+            container.nestedItems = container.nestedItems.filter(function (i) {
+                return allItemsSerials.indexOf(i.serial) > -1;
+            });
+            var itemsSerialsToCreate = allItemsSerials.filter(function (serial) {
+                return !container.nestedItems.some(function (i) { return i.serial === serial; });
+            });
+            for (var _i = 0, itemsSerialsToCreate_1 = itemsSerialsToCreate; _i < itemsSerialsToCreate_1.length; _i++) {
+                var serial = itemsSerialsToCreate_1[_i];
+                container.nestedItems.push(Scripts.Cleaner.createBasicItemStructure(serial));
+            }
+            if (recurse) {
+                for (var _a = 0, _b = container.nestedItems; _a < _b.length; _a++) {
+                    var nestedItem = _b[_a];
+                    Scripts.Cleaner.updateContainerItems(nestedItem);
+                }
+            }
+            if (Orion.GumpExists('container', container.serial)) {
+                Orion.CloseGump('container', container.serial);
+                Orion.Wait(responseDelay);
+            }
+        };
+        Cleaner.getAllItemsSerialsFromContainer = function (container) {
+            if (!Orion.GumpExists('container', container)) {
+                Orion.OpenContainer(container);
+                Orion.Wait(responseDelay);
+            }
+            return Orion.FindType('0xFFFF', '0xFFFF', container, undefined, undefined, undefined, false);
+        };
+        Cleaner.createBasicItemStructure = function (itemSerial) {
+            var itemObj = Orion.FindObject(itemSerial);
+            var itemStructure = {
+                graphic: itemObj.Graphic(),
+                color: itemObj.Color(),
+                serial: itemObj.Serial(),
+                name: Scripts.Cleaner.getObjectName(itemObj),
+                container: itemObj.Container()
+            };
+            return itemStructure;
+        };
+        Cleaner.getObjectName = function (itemObject) {
+            if (!itemObject.Name()) {
+                Orion.Click(itemObject.Serial());
+                Orion.Wait(200);
+                while (!itemObject.Name()) {
+                    Orion.Wait(200);
+                }
+            }
+            return Scripts.Cleaner.truncateName(itemObject.Name());
+        };
+        Cleaner.truncateName = function (name) {
+            name = name.replace(/^\d*\s*/, '');
+            name = name.replace(/\s\(.*\)$/, '');
+            return name;
+        };
+        return Cleaner;
+    }());
+    Scripts.Cleaner = Cleaner;
+})(Scripts || (Scripts = {}));
 var Scripts;
 (function (Scripts) {
     var Combat = (function () {
@@ -3964,7 +4238,7 @@ var Scripts;
             ]);
             var itemObject = Orion.FindObject('massMoveItem');
             var stackable = Scripts.Utils.isItemStackable(itemObject.Serial());
-            var count = stackable ? Scripts.Utils.askForCount() : 0;
+            var count = stackable ? Scripts.Utils.askForCount('Po kolika kusech to budes prehazovat ?') : 0;
             itemObject = Orion.FindObject('massMoveItem');
             var graphic = itemObject.Graphic();
             var color = onlyType ? '0xFFFF' : itemObject.Color();
@@ -4314,6 +4588,34 @@ var Scripts;
         return Dress;
     }());
     Scripts.Dress = Dress;
+})(Scripts || (Scripts = {}));
+var Scripts;
+(function (Scripts) {
+    var File = (function () {
+        function File() {
+        }
+        File.loadFile = function (defaultFilePath, configFilePath) {
+            var path = configFilePath || defaultFilePath;
+            var file = Orion.NewFile();
+            if (!file.Open(path)) {
+                Scripts.Utils.log("cannot open file: " + path, ColorEnum.red);
+                throw 'e';
+            }
+            var result = file.ReadAll();
+            file.Close();
+            return result;
+        };
+        File.saveFile = function (data, defaultFilePath, configFilePath) {
+            var path = configFilePath || defaultFilePath;
+            var file = Orion.NewFile();
+            file.Remove(path);
+            file.Open(path);
+            file.Write(data);
+            file.Close();
+        };
+        return File;
+    }());
+    Scripts.File = File;
 })(Scripts || (Scripts = {}));
 var __spreadArrays = (this && this.__spreadArrays) || function () {
     for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
@@ -5987,9 +6289,224 @@ var Scripts;
             Orion.UseObject(potionKad);
             Orion.Wait(responseDelay);
         };
+        Potions.getPotionTypeFromKad = function (kad) {
+            var pot = gameObject.potions;
+            for (var p in pot) {
+                if (pot[p].kad.graphic === kad.graphic && pot[p].kad.color === kad.color) {
+                    return PotionsEnum[p];
+                }
+            }
+        };
         return Potions;
     }());
     Scripts.Potions = Potions;
+})(Scripts || (Scripts = {}));
+var Scripts;
+(function (Scripts) {
+    var Refill = (function () {
+        function Refill() {
+        }
+        Refill.manager = function (stuff, containerPathsToSearch, clean) {
+            if (clean === void 0) { clean = true; }
+            var canTakeFromBank = Scripts.Common.openBank();
+            for (var _i = 0, stuff_1 = stuff; _i < stuff_1.length; _i++) {
+                var i = stuff_1[_i];
+                Refill.universalRefill(i.item, i.total, canTakeFromBank, containerPathsToSearch);
+                clean && Scripts.Clean.cleanObjectInBag(Scripts.Utils.parseObject(i.item));
+            }
+            Scripts.Utils.playerPrint("vazis: " + Player.Weight() + "/" + Player.MaxWeight());
+        };
+        Refill.universalRefill = function (gameObjectAsString, total, canTakeFromBank, containerPathsToSearch) {
+            if (canTakeFromBank === void 0) { canTakeFromBank = false; }
+            var item = Scripts.Utils.parseObject(gameObjectAsString);
+            if (Scripts.Utils.countObjectInContainer(item) === total) {
+                return;
+            }
+            var name = gameObjectAsString.split('.')[gameObjectAsString.split('.').length - 1];
+            var allowedDistance = 5;
+            var itemToFind = isIPotion(item) ? item.kad : item;
+            if (!containerPathsToSearch) {
+                containerPathsToSearch = [];
+            }
+            else if (isStringArray(containerPathsToSearch)) {
+                containerPathsToSearch = [__spreadArrays(containerPathsToSearch)];
+            }
+            var containerPaths = containerPathsToSearch;
+            var itemSerial;
+            var lastContainerSerial;
+            var needToTakeToBackpack = false;
+            if (containerPaths.length) {
+                for (var _i = 0, containerPaths_1 = containerPaths; _i < containerPaths_1.length; _i++) {
+                    var path = containerPaths_1[_i];
+                    if (!path.length) {
+                        return;
+                    }
+                    var firstContainer = Orion.FindObject(path[0]);
+                    if (!firstContainer) {
+                        continue;
+                    }
+                    if (firstContainer.Container() === Player.BankSerial()) {
+                        if (!canTakeFromBank) {
+                            continue;
+                        }
+                    }
+                    else {
+                        Orion.WalkTo(firstContainer.X(), firstContainer.Y(), firstContainer.Z(), 1);
+                        isIPotion(item) && (needToTakeToBackpack = true);
+                    }
+                    for (var _a = 0, path_1 = path; _a < path_1.length; _a++) {
+                        var container = path_1[_a];
+                        if (!Orion.GumpExists('container', container)) {
+                            Orion.OpenContainer(container);
+                            Orion.Wait(responseDelay);
+                        }
+                    }
+                    lastContainerSerial = path[path.length - 1];
+                    var items = Orion.FindType(itemToFind.graphic, itemToFind.color || '0xFFFF', lastContainerSerial, 'item', undefined, undefined, false);
+                    if (items.length) {
+                        itemSerial = items[0];
+                    }
+                    if (itemSerial) {
+                        break;
+                    }
+                }
+            }
+            if (!itemSerial) {
+                needToTakeToBackpack = false;
+                var items = Orion.FindType(itemToFind.graphic, itemToFind.color || '0xFFFF', 'ground', 'item', allowedDistance);
+                if (items.length) {
+                    itemSerial = items[0];
+                    lastContainerSerial = itemSerial;
+                }
+                else if (canTakeFromBank) {
+                    lastContainerSerial = Player.BankSerial();
+                    var items_1 = Orion.FindType(itemToFind.graphic, itemToFind.color || '0xFFFF', Player.BankSerial(), 'item', undefined, undefined, false);
+                    items_1.length && (itemSerial = items_1[0]);
+                }
+            }
+            if (itemSerial) {
+                if (isIPotion(item)) {
+                    var eb = gameObject.uncategorized.emptyBottles;
+                    var emptyBottleSerials = Orion.FindType(eb.graphic, eb.color, lastContainerSerial === itemSerial ? 'ground' : lastContainerSerial, 'near|item', 3);
+                    var emptyBottleSerial = emptyBottleSerials.length ? emptyBottleSerials[0] : undefined;
+                    Refill.refillPotions(name, total, itemSerial, needToTakeToBackpack, emptyBottleSerial);
+                }
+                else {
+                    Scripts.Utils.refill(item, lastContainerSerial, total, undefined, undefined, undefined, lastContainerSerial === itemSerial);
+                }
+            }
+            else {
+                Scripts.Utils.playerPrint("nenalezen item \"" + name + "\"", ColorEnum.red);
+            }
+        };
+        Refill.refillPotions = function (potionName, total, kadSerial, needToTakeKadToBackpack, emptyBottleSerial) {
+            if (needToTakeKadToBackpack === void 0) { needToTakeKadToBackpack = false; }
+            var kad = Orion.FindObject(kadSerial);
+            var kadPosition = { x: kad.X(), y: kad.Y() };
+            var kadContainer = kad.Container();
+            var potion = gameObject.potions[potionName];
+            var refillCount = total - Scripts.Utils.countObjectInContainer(potion);
+            if (refillCount === 0) {
+                return;
+            }
+            if (needToTakeKadToBackpack) {
+                Orion.MoveItem(kadSerial, 0, 'backpack');
+                Orion.Wait(responseDelay);
+            }
+            while (refillCount > 0 || refillCount < 0) {
+                if (refillCount > 0) {
+                    Scripts.Potions.fillPotion(potionName, true, kadSerial, emptyBottleSerial);
+                    refillCount--;
+                }
+                else {
+                    Scripts.Potions.potionToKad(potionName, true, kadSerial);
+                    refillCount++;
+                }
+            }
+            if (needToTakeKadToBackpack) {
+                Orion.Wait(responseDelay);
+                Orion.MoveItem(kadSerial, 0, kadContainer, kadPosition.x, kadPosition.y);
+            }
+        };
+        Refill.createKad = function (emptyKadContainerPath, emptyBottleContainerPath, count, refillKadSerial, targetContainer) {
+            Orion.Print(typeof emptyKadContainerPath);
+            Orion.Print(JSON.stringify(emptyKadContainerPath));
+            !refillKadSerial && Scripts.Utils.createGameObjectSelections([
+                { ask: 'Vyber kad ze ktere chces cepovat', addObject: 'refillKadSerial' }
+            ]);
+            refillKadSerial = 'refillKadSerial';
+            !targetContainer && Scripts.Utils.createGameObjectSelections([
+                { ask: 'Vyber bednu kam das hotovou kad', addObject: 'refillKadTarget' }
+            ]);
+            !targetContainer && (targetContainer = 'refillKadTarget');
+            var refillKad = Orion.FindObject(refillKadSerial);
+            var potionType = Scripts.Potions.getPotionTypeFromKad({ graphic: refillKad.Graphic(), color: refillKad.Color() });
+            if (!potionType) {
+                Scripts.Utils.log('Nebyla vybrana kad', ColorEnum.red);
+                throw 'e';
+            }
+            var refillKadObj = Orion.FindObject(refillKadSerial);
+            var refillKadPosition = { x: refillKadObj.X(), y: refillKadObj.Y(), z: refillKadObj.Z() };
+            var refillKadContainer = refillKadObj.Container();
+            var kadDef = gameObject.crafting.tinkering.containers.kadNaPotiony;
+            Scripts.Utils.refill(kadDef, emptyKadContainerPath[emptyKadContainerPath.length - 1], 1, 'backpack', false, 'prazdna kad', false, emptyKadContainerPath);
+            var bottleDef = gameObject.uncategorized.emptyBottles;
+            Scripts.Utils.refill(bottleDef, emptyBottleContainerPath[emptyBottleContainerPath.length - 1], 1, 'backpack', false, 'empty bottle', false, emptyBottleContainerPath);
+            var emptyKad = Scripts.Utils.findFirstType(kadDef);
+            var emptyBottle = Scripts.Utils.findFirstType(bottleDef);
+            var lzeCepovatPrimo = Scripts.Utils.isItemInBank(refillKadObj) || refillKadObj.Container() === '0xFFFFFFFF';
+            if (!lzeCepovatPrimo) {
+                Orion.MoveItem(refillKadSerial, 0, 'backpack');
+                Orion.Wait(500);
+            }
+            var kad = gameObject.potions[potionType].kad;
+            var kadeNaKtereNesaham = Orion.FindType(kad.graphic, kad.color);
+            kadeNaKtereNesaham.push(refillKadSerial);
+            Orion.UseObject(refillKadSerial);
+            Orion.WaitForTarget();
+            Orion.TargetObject(emptyBottle);
+            Orion.Wait(500);
+            var cepnutaFlaska = Scripts.Utils.findFirstType(gameObject.potions[potionType]);
+            Orion.UseObject(emptyKad);
+            Orion.WaitForTarget();
+            Orion.TargetObject(cepnutaFlaska);
+            Orion.Wait(500);
+            var cepnutaKad = Orion.FindType(kad.graphic, kad.color).filter(function (k) { return kadeNaKtereNesaham.indexOf(k) === -1; })[0];
+            var times = Math.floor(count / 50) + (((count / 50) % 1) >= 0.5 ? 1 : 0);
+            Orion.Print(times);
+            for (times; times > 0; times--) {
+                Orion.UseObject(refillKadSerial);
+                Orion.WaitForTarget();
+                Orion.TargetObject(cepnutaKad);
+                Orion.Wait(500);
+            }
+            if (!lzeCepovatPrimo) {
+                Orion.MoveItem(refillKadSerial, 0, refillKadContainer, refillKadPosition.x, refillKadPosition.y, refillKadPosition.z);
+                Orion.Wait(500);
+            }
+            if (targetContainer !== 'backpack') {
+                Orion.MoveItem(cepnutaKad, 0, targetContainer);
+                Orion.Wait(500);
+            }
+            return cepnutaKad;
+        };
+        Refill.regy = function (count) {
+            var source = 'refillRegySource';
+            var target = 'refillRegyTarget';
+            Scripts.Utils.createGameObjectSelections([
+                { ask: 'Odkud presuneme regy ?', addObject: source },
+                { ask: 'Kam presuneme regy ?', addObject: target }
+            ]);
+            typeof count !== 'number' && (count = Scripts.Utils.askForCount());
+            var regs = gameObject.regy;
+            for (var r in regs) {
+                var reg = regs[r];
+                Scripts.Utils.refill(reg, source, count, target, false, r);
+            }
+        };
+        return Refill;
+    }());
+    Scripts.Refill = Refill;
 })(Scripts || (Scripts = {}));
 var ScrollTimerType;
 (function (ScrollTimerType) {
@@ -7511,11 +8028,14 @@ var Scripts;
                 Scripts.Utils.useAndSelect(serial, selectionsDupe, false);
             }
         };
-        Utils.refill = function (obj, sourceContainerId, quantity, targetContainerId, refillJustWhenIHaveNothing, itemName, sourceContainerIsItemOnGround) {
+        Utils.refill = function (obj, sourceContainerId, quantity, targetContainerId, refillJustWhenIHaveNothing, itemName, sourceContainerIsItemOnGround, targetContainerPath) {
             if (quantity === void 0) { quantity = 1; }
             if (targetContainerId === void 0) { targetContainerId = 'backpack'; }
             if (refillJustWhenIHaveNothing === void 0) { refillJustWhenIHaveNothing = false; }
             if (sourceContainerIsItemOnGround === void 0) { sourceContainerIsItemOnGround = false; }
+            if (targetContainerPath) {
+                Scripts.Utils.OpenContainerPath(targetContainerPath);
+            }
             var serialsInTargetContainer = Orion.FindType(obj.graphic, obj.color || '0xFFFF', targetContainerId);
             var serialsInSourceContainer = sourceContainerIsItemOnGround
                 ? [sourceContainerId]
@@ -7523,7 +8043,7 @@ var Scripts;
             var itemsInTarget = Scripts.Utils.countObjectInContainer(obj, targetContainerId);
             var itemsInSource = Scripts.Utils.countObjectInContainer(obj, sourceContainerId, sourceContainerIsItemOnGround);
             if (itemsInTarget > quantity) {
-                return Scripts.Utils.moveItems(serialsInTargetContainer, sourceContainerId, itemsInTarget - quantity);
+                return Scripts.Utils.moveItems(serialsInTargetContainer, sourceContainerId, itemsInTarget - quantity, obj.bag);
             }
             else if (itemsInTarget < quantity) {
                 if (refillJustWhenIHaveNothing && itemsInTarget) {
@@ -7533,7 +8053,7 @@ var Scripts;
                     Scripts.Utils.log("Nemas dostatek " + (itemName ? itemName : obj.graphic) + " pro doplneni", ColorEnum.orange);
                     return quantity;
                 }
-                return Scripts.Utils.moveItems(serialsInSourceContainer, targetContainerId, quantity - itemsInTarget);
+                return Scripts.Utils.moveItems(serialsInSourceContainer, targetContainerId, quantity - itemsInTarget, obj.bag);
             }
             return 0;
         };
@@ -7577,7 +8097,7 @@ var Scripts;
             if (isMyGameObject(obj)) {
                 var count = Scripts.Utils.countObjectInContainer(obj, fromContainer);
                 var serials = Scripts.Utils.getObjSerials(obj, fromContainer);
-                Scripts.Utils.moveItems(serials, targetContainer, count);
+                Scripts.Utils.moveItems(serials, targetContainer, count, obj.bag);
             }
             else {
                 for (var key in obj) {
@@ -7585,7 +8105,7 @@ var Scripts;
                 }
             }
         };
-        Utils.moveItems = function (itemsSerials, targetContainerId, quantity) {
+        Utils.moveItems = function (itemsSerials, targetContainerId, quantity, coordinates) {
             if (quantity < 1) {
                 return 0;
             }
@@ -7594,22 +8114,22 @@ var Scripts;
                 var item = itemsSerials_2[_i];
                 var itemCount = Orion.FindObject(item).Count();
                 if (needToMove > itemCount) {
-                    Orion.MoveItem(item, itemCount, targetContainerId);
+                    Orion.MoveItem(item, itemCount, targetContainerId, coordinates === null || coordinates === void 0 ? void 0 : coordinates.x, coordinates === null || coordinates === void 0 ? void 0 : coordinates.y);
                     needToMove -= itemCount;
+                    Orion.Wait(responseDelay);
                 }
                 else {
                     Orion.ClearJournal();
-                    Orion.MoveItem(item, quantity, targetContainerId);
-                    Orion.Wait(responseDelay * 2);
+                    Orion.MoveItem(item, quantity, targetContainerId, coordinates === null || coordinates === void 0 ? void 0 : coordinates.x, coordinates === null || coordinates === void 0 ? void 0 : coordinates.y);
+                    Orion.Wait(responseDelay);
                     var i = Orion.FindObject(item);
                     if (quantity === 1 &&
                         !Scripts.Utils.countObjectInContainer({ graphic: i.Graphic(), color: i.Color() })) {
-                        Orion.MoveItem(item, 2, targetContainerId);
+                        Orion.MoveItem(item, 2, targetContainerId, coordinates === null || coordinates === void 0 ? void 0 : coordinates.x, coordinates === null || coordinates === void 0 ? void 0 : coordinates.y);
                         Orion.Wait(responseDelay);
                     }
                     needToMove = 0;
                 }
-                Orion.Wait(responseDelay);
                 if (needToMove < 1) {
                     break;
                 }
@@ -8038,9 +8558,10 @@ var Scripts;
             }
             return stackable;
         };
-        Utils.askForCount = function () {
+        Utils.askForCount = function (ask) {
             var _a;
-            Scripts.Utils.playerPrint('Po kolika kusech to budes prehazovat ?');
+            if (ask === void 0) { ask = 'Kolik ?'; }
+            Scripts.Utils.playerPrint(ask);
             Orion.ClearJournal();
             while (!Orion.InJournal('', 'my')) {
                 Orion.Wait(500);
@@ -8131,6 +8652,54 @@ var Scripts;
                 }
             }
             return;
+        };
+        Utils.OpenContainerPath = function (path) {
+            for (var _i = 0, path_2 = path; _i < path_2.length; _i++) {
+                var p = path_2[_i];
+                if (!Orion.GumpExists('container', p)) {
+                    Orion.OpenContainer(p);
+                    Orion.Wait(responseDelay);
+                }
+            }
+        };
+        Utils.isItemInBank = function (obj) {
+            var bankSerial = Player.BankSerial();
+            var objContainer = obj.Container();
+            while (objContainer !== '0xFFFFFFFF' && objContainer !== bankSerial) {
+                var parent_1 = Orion.FindObject(objContainer);
+                objContainer = parent_1.Container();
+            }
+            return objContainer === bankSerial;
+        };
+        Utils.findMyGameObject = function (graphic, color, obj) {
+            var ret;
+            !obj && (obj = gameObject);
+            for (var _i = 0, obj_1 = obj; _i < obj_1.length; _i++) {
+                var prop = obj_1[_i];
+                var p = obj[prop];
+                if (p.graphic === graphic) {
+                    if (color) {
+                        if (p.color === color) {
+                            return p;
+                        }
+                        else {
+                            ret = Scripts.Utils.findMyGameObject(graphic, color, p);
+                            if (ret) {
+                                return ret;
+                            }
+                        }
+                    }
+                    else {
+                        return p;
+                    }
+                }
+                else {
+                    ret = Scripts.Utils.findMyGameObject(graphic, color, p);
+                    if (ret) {
+                        return ret;
+                    }
+                }
+            }
         };
         return Utils;
     }());
@@ -8598,6 +9167,50 @@ var Scripts;
         return TbGump;
     }());
     Scripts.TbGump = TbGump;
+})(Scripts || (Scripts = {}));
+var Scripts;
+(function (Scripts) {
+    var Drticka = (function () {
+        function Drticka() {
+        }
+        Drticka.lilith = function () {
+            var directions = [
+                '"North"',
+                '"North East"',
+                '"East"',
+                '"South East"',
+                '"South"',
+                '"South West"',
+                '"West"',
+                '"North West"'
+            ];
+            Orion.ClearJournal();
+            Scripts.Utils.playerPrint('Mas 10 vterin na to aby ti Lilith rekla smer, jinak se script ukonci', ColorEnum.orange);
+            while (true) {
+                var result = Scripts.Utils.waitWhileSomethingInJournal(directions, 10000);
+                Orion.ClearJournal();
+                if (result > -1) {
+                    if (Player.Direction() === result) {
+                        Scripts.Utils.log("uz jsem otoceny na " + directions[result]);
+                    }
+                    Orion.Turn(result);
+                    Scripts.Utils.log(directions[result]);
+                    Orion.Wait(200);
+                    while (Player.Direction() !== result) {
+                        Orion.Turn(result);
+                        Scripts.Utils.log("neco se posralo, otacim se znovu na " + directions[result]);
+                        Orion.Wait(200);
+                    }
+                }
+                else {
+                    Scripts.Utils.playerPrint('no direction found - terminating script', ColorEnum.red);
+                    break;
+                }
+            }
+        };
+        return Drticka;
+    }());
+    Scripts.Drticka = Drticka;
 })(Scripts || (Scripts = {}));
 var Scripts;
 (function (Scripts) {
