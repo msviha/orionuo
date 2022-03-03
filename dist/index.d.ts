@@ -624,7 +624,6 @@ declare namespace Scripts {
         static bowcraftTrain(): void;
         static tailoringTrain(): void;
         static blacksmithyTrain(): void;
-        static petardy(): void;
     }
 }
 declare namespace Scripts {

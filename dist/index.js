@@ -387,7 +387,7 @@ var gameObject = {
     },
     tools: {
         saw: {
-            graphic: '0x1035',
+            graphic: '0x1034|0x1035',
             color: '0x0000'
         },
         sewingKit: {
@@ -565,6 +565,10 @@ var gameObject = {
         magicCoins: {
             graphic: '0x0EED',
             color: '0x0B81'
+        },
+        magicWires: {
+            graphic: '0x1876',
+            color: '0x0782'
         }
     },
     crafting: {
@@ -1614,6 +1618,30 @@ var gameObject = {
                         menu: {
                             name: 'Blacksmithing',
                             selections: ['Tools', 'Mytheril Sphere']
+                        }
+                    }
+                },
+                magicArmorSphere: {
+                    graphic: '0x0E2D',
+                    color: '0x0782',
+                    make: {
+                        tool: 'gameObject.tools.silverHammer',
+                        toolTarget: 'gameObject.resources.ingots.iron',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.iron', count: 5 },
+                                { item: 'gameObject.resources.magicWires', count: 150 },
+                            ],
+                            crafting: [
+                                { item: 'gameObject.crafting.tinkering.wires.silver', count: 50 },
+                                { item: 'gameObject.crafting.tinkering.wires.rose', count: 25 },
+                                { item: 'gameObject.crafting.tinkering.wires.shadow', count: 25 },
+                                { item: 'gameObject.crafting.tinkering.wires.gold', count: 25 },
+                            ]
+                        },
+                        menu: {
+                            name: 'Blacksmithing',
+                            selections: ['Tools', 'Magic Armor Sphere']
                         }
                     }
                 }
@@ -3042,7 +3070,7 @@ var __assign = (this && this.__assign) || function () {
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 1.7.0');
+    Orion.Print(-1, 'version 1.8.0');
     Orion.Print(-1, '-------------+');
 }
 function Autostart() {
