@@ -23,7 +23,7 @@
 
 •  **moving**: number
 
-*Defined in [scripts/spells.ts:21](https://github.com/msviha/orionuo/blob/9d75b1e/src/scripts/spells.ts#L21)*
+*Defined in [scripts/spells.ts:21](https://github.com/msviha/orionuo/blob/5f19aed/src/scripts/spells.ts#L21)*
 
 ___
 
@@ -31,4 +31,4 @@ ___
 
 •  **standing**: number
 
-*Defined in [scripts/spells.ts:22](https://github.com/msviha/orionuo/blob/9d75b1e/src/scripts/spells.ts#L22)*
+*Defined in [scripts/spells.ts:22](https://github.com/msviha/orionuo/blob/5f19aed/src/scripts/spells.ts#L22)*

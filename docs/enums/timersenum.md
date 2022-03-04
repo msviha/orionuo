@@ -25,7 +25,7 @@
 
 •  **bandage**:  = "bandage"
 
-*Defined in [types/enums.ts:221](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L221)*
+*Defined in [types/enums.ts:221](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L221)*
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 •  **drink**:  = "drink"
 
-*Defined in [types/enums.ts:213](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L213)*
+*Defined in [types/enums.ts:213](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L213)*
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 •  **gs**:  = "gs"
 
-*Defined in [types/enums.ts:214](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L214)*
+*Defined in [types/enums.ts:214](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L214)*
 
 ___
 
@@ -49,7 +49,7 @@ ___
 
 •  **hiding**:  = "hiding"
 
-*Defined in [types/enums.ts:215](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L215)*
+*Defined in [types/enums.ts:215](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L215)*
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 •  **invis**:  = "invis"
 
-*Defined in [types/enums.ts:216](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L216)*
+*Defined in [types/enums.ts:216](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L216)*
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 •  **invisLong**:  = "invisLong"
 
-*Defined in [types/enums.ts:217](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L217)*
+*Defined in [types/enums.ts:217](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L217)*
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 •  **klamak**:  = "klamak"
 
-*Defined in [types/enums.ts:218](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L218)*
+*Defined in [types/enums.ts:218](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L218)*
 
 ___
 
@@ -81,7 +81,7 @@ ___
 
 •  **scroll**:  = "scroll"
 
-*Defined in [types/enums.ts:219](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L219)*
+*Defined in [types/enums.ts:219](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L219)*
 
 ___
 
@@ -89,7 +89,7 @@ ___
 
 •  **statusBarTimer**:  = "statusBarTimer"
 
-*Defined in [types/enums.ts:222](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L222)*
+*Defined in [types/enums.ts:222](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L222)*
 
 ___
 
@@ -97,4 +97,4 @@ ___
 
 •  **teleport**:  = "teleport"
 
-*Defined in [types/enums.ts:220](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L220)*
+*Defined in [types/enums.ts:220](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L220)*

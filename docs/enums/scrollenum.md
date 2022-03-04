@@ -35,7 +35,7 @@
 
 •  **bless**:  = "bless"
 
-*Defined in [types/enums.ts:107](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L107)*
+*Defined in [types/enums.ts:107](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L107)*
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 •  **bolt**:  = "bolt"
 
-*Defined in [types/enums.ts:94](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L94)*
+*Defined in [types/enums.ts:94](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L94)*
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 •  **bs**:  = "bs"
 
-*Defined in [types/enums.ts:110](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L110)*
+*Defined in [types/enums.ts:110](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L110)*
 
 ___
 
@@ -59,7 +59,7 @@ ___
 
 •  **dispel**:  = "dispel"
 
-*Defined in [types/enums.ts:109](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L109)*
+*Defined in [types/enums.ts:109](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L109)*
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 •  **eelm**:  = "eelm"
 
-*Defined in [types/enums.ts:112](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L112)*
+*Defined in [types/enums.ts:112](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L112)*
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 •  **ef**:  = "ef"
 
-*Defined in [types/enums.ts:98](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L98)*
+*Defined in [types/enums.ts:98](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L98)*
 
 ___
 
@@ -83,7 +83,7 @@ ___
 
 •  **heal**:  = "heal"
 
-*Defined in [types/enums.ts:104](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L104)*
+*Defined in [types/enums.ts:104](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L104)*
 
 ___
 
@@ -91,7 +91,7 @@ ___
 
 •  **ijs**:  = "ijs"
 
-*Defined in [types/enums.ts:96](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L96)*
+*Defined in [types/enums.ts:96](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L96)*
 
 ___
 
@@ -99,7 +99,7 @@ ___
 
 •  **ivm**:  = "ivm"
 
-*Defined in [types/enums.ts:101](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L101)*
+*Defined in [types/enums.ts:101](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L101)*
 
 ___
 
@@ -107,7 +107,7 @@ ___
 
 •  **kvf**:  = "kvf"
 
-*Defined in [types/enums.ts:93](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L93)*
+*Defined in [types/enums.ts:93](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L93)*
 
 ___
 
@@ -115,7 +115,7 @@ ___
 
 •  **para**:  = "para"
 
-*Defined in [types/enums.ts:99](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L99)*
+*Defined in [types/enums.ts:99](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L99)*
 
 ___
 
@@ -123,7 +123,7 @@ ___
 
 •  **pf**:  = "pf"
 
-*Defined in [types/enums.ts:108](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L108)*
+*Defined in [types/enums.ts:108](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L108)*
 
 ___
 
@@ -131,7 +131,7 @@ ___
 
 •  **pog**:  = "pog"
 
-*Defined in [types/enums.ts:95](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L95)*
+*Defined in [types/enums.ts:95](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L95)*
 
 ___
 
@@ -139,7 +139,7 @@ ___
 
 •  **port**:  = "port"
 
-*Defined in [types/enums.ts:97](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L97)*
+*Defined in [types/enums.ts:97](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L97)*
 
 ___
 
@@ -147,7 +147,7 @@ ___
 
 •  **protect**:  = "protect"
 
-*Defined in [types/enums.ts:111](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L111)*
+*Defined in [types/enums.ts:111](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L111)*
 
 ___
 
@@ -155,7 +155,7 @@ ___
 
 •  **react**:  = "react"
 
-*Defined in [types/enums.ts:106](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L106)*
+*Defined in [types/enums.ts:106](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L106)*
 
 ___
 
@@ -163,7 +163,7 @@ ___
 
 •  **recall**:  = "recall"
 
-*Defined in [types/enums.ts:103](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L103)*
+*Defined in [types/enums.ts:103](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L103)*
 
 ___
 
@@ -171,7 +171,7 @@ ___
 
 •  **ress**:  = "ress"
 
-*Defined in [types/enums.ts:102](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L102)*
+*Defined in [types/enums.ts:102](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L102)*
 
 ___
 
@@ -179,7 +179,7 @@ ___
 
 •  **str**:  = "str"
 
-*Defined in [types/enums.ts:105](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L105)*
+*Defined in [types/enums.ts:105](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L105)*
 
 ___
 
@@ -187,4 +187,4 @@ ___
 
 •  **wos**:  = "wos"
 
-*Defined in [types/enums.ts:100](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/enums.ts#L100)*
+*Defined in [types/enums.ts:100](https://github.com/msviha/orionuo/blob/5f19aed/src/types/enums.ts#L100)*

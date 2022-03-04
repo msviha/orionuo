@@ -22,7 +22,7 @@
 
 • `Optional` **color**: number
 
-*Defined in [types/interfaces.ts:119](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/interfaces.ts#L119)*
+*Defined in [types/interfaces.ts:119](https://github.com/msviha/orionuo/blob/5f19aed/src/types/interfaces.ts#L119)*
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 • `Optional` **msg**: string
 
-*Defined in [types/interfaces.ts:118](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/interfaces.ts#L118)*
+*Defined in [types/interfaces.ts:118](https://github.com/msviha/orionuo/blob/5f19aed/src/types/interfaces.ts#L118)*
 
 ___
 
@@ -38,4 +38,4 @@ ___
 
 •  **name**: string
 
-*Defined in [types/interfaces.ts:117](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/interfaces.ts#L117)*
+*Defined in [types/interfaces.ts:117](https://github.com/msviha/orionuo/blob/5f19aed/src/types/interfaces.ts#L117)*

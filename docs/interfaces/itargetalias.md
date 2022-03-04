@@ -21,7 +21,7 @@
 
 •  **alias**: [TargetEnum](../enums/targetenum.md) \| string
 
-*Defined in [types/interfaces.ts:101](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/interfaces.ts#L101)*
+*Defined in [types/interfaces.ts:101](https://github.com/msviha/orionuo/blob/5f19aed/src/types/interfaces.ts#L101)*
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 • `Optional` **maxDistance**: number
 
-*Defined in [types/interfaces.ts:102](https://github.com/msviha/orionuo/blob/9d75b1e/src/types/interfaces.ts#L102)*
+*Defined in [types/interfaces.ts:102](https://github.com/msviha/orionuo/blob/5f19aed/src/types/interfaces.ts#L102)*

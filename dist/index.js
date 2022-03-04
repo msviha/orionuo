@@ -6462,7 +6462,7 @@ var Scripts;
             !refillKadSerial && Scripts.Utils.createGameObjectSelections([
                 { ask: 'Vyber kad ze ktere chces cepovat', addObject: 'refillKadSerial' }
             ]);
-            refillKadSerial = 'refillKadSerial';
+            !refillKadSerial && (refillKadSerial = 'refillKadSerial');
             !targetContainer && Scripts.Utils.createGameObjectSelections([
                 { ask: 'Vyber bednu kam das hotovou kad', addObject: 'refillKadTarget' }
             ]);
@@ -6500,8 +6500,9 @@ var Scripts;
             Orion.TargetObject(cepnutaFlaska);
             Orion.Wait(500);
             var cepnutaKad = Orion.FindType(kad.graphic, kad.color).filter(function (k) { return kadeNaKtereNesaham.indexOf(k) === -1; })[0];
+            Orion.MoveItem(cepnutaKad);
+            Orion.Wait(500);
             var times = Math.floor(count / 50) + (((count / 50) % 1) >= 0.5 ? 1 : 0);
-            Orion.Print(times);
             for (times; times > 0; times--) {
                 Orion.UseObject(refillKadSerial);
                 Orion.WaitForTarget();
