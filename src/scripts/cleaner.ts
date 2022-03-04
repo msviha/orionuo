@@ -1,4 +1,6 @@
-//private fn
+/**
+ * @internal
+ */
 function _startUpdateContainerItemsProgress() {
     let isUpdateRunning = Shared.GetVar('updateContainerItemsProgress', false);
     if (isUpdateRunning) {
@@ -12,6 +14,9 @@ function _startUpdateContainerItemsProgress() {
     }
 }
 
+/**
+ * @internal
+ */
 function _stopUpdateContainerItemsProgress() {
     Shared.AddVar('updateContainerItemsProgress', false);
     Orion.RemoveDisplayTimer('updateContainerItemsProgress');
@@ -78,8 +83,8 @@ namespace Scripts {
             }
 
             const messContainer = Scripts.Cleaner.loadMessContainer(messContainerSerial);
-            // Scripts.Cleaner.updateContainerItemsWithProgress(cleanContainer); //todo pokud by se mel obsah nejprve updatovat
             Scripts.Cleaner.cleanItems(messContainer.nestedItems, cleanContainer);
+            Orion.CloseGump('container');
             Scripts.Cleaner.saveItemsToFile(structure);
         }
 
@@ -99,19 +104,33 @@ namespace Scripts {
          * @param cleanItem
          */
         static cleanItems(messItems:ICleanerItem[], cleanItem:ICleanerItem) {
+            const updatedContainers:string[] = []; // trackuje ktere containery byly updatnute aby se neupdatovali vice nez treba
             for (const item of messItems) {
                 if (item.nestedItems) {
                     Scripts.Cleaner.cleanItems(item.nestedItems, cleanItem);
                 }
                 else {
-                    const result = Scripts.Cleaner.findSameItemInContainer(item, cleanItem);
+                    let result = Scripts.Cleaner.findSameItemInContainer(item, cleanItem);
                     if (!result) {
-                        // Scripts.Utils.log(`${item.name} ${item.serial} nenalezen v uklizene bedne`);
                         continue;
                     }
+
+                    // otevreme containery kde by item mel byt, provedeme update (pro jistotu)
                     Scripts.Utils.OpenContainerPath(result.path);
+
+                    if (updatedContainers.indexOf(result.parent.serial) === -1) {
+                        Scripts.Cleaner.updateContainerItemsWithProgress(result.parent, false, false);
+                        result = Scripts.Cleaner.findSameItemInContainer(item, result.parent);
+                        if (!result) {
+                            Scripts.Utils.log(`${item.name} ${item.serial} nenalezen v uklizene bedne`);
+                            continue;
+                        }
+                    }
+
+                    // pokud tam je stejny item, tak uklidime a updatneme si objekt (v pripade stackovani se nam totiz prepise serial)
                     Scripts.Cleaner.moveItem(item, result.item);
-                    Scripts.Cleaner.updateContainerItems(result.parent, false);
+                    Scripts.Cleaner.updateContainerItems(result.parent, false, false);
+                    updatedContainers.indexOf(result.parent.serial) === -1 && updatedContainers.push(result.parent.serial);
                 }
             }
         }
@@ -263,10 +282,10 @@ namespace Scripts {
             return itemStructure;
         }
 
-        static updateContainerItemsWithProgress(container:ICleanerItem) {
+        static updateContainerItemsWithProgress(container:ICleanerItem, recurse = true, closeAfterUpdate = true) {
             Orion.Exec('_stopUpdateContainerItemsProgress', false);
             Orion.Exec('_startUpdateContainerItemsProgress', false);
-            Scripts.Cleaner.updateContainerItems(container);
+            Scripts.Cleaner.updateContainerItems(container, recurse, closeAfterUpdate);
             Orion.Exec('_stopUpdateContainerItemsProgress', false);
         }
 
@@ -276,7 +295,7 @@ namespace Scripts {
          * Nacita si informace o vsech zanorenych itemech a doplnuje jmena neznamym itemum
          * @param container
          */
-        static updateContainerItems(container:ICleanerItem, recurse = true) {
+        static updateContainerItems(container:ICleanerItem, recurse = true, closeAfterUpdate = true) {
             const isContainer = Scripts.Cleaner.isContainer(container);
 
             if (!isContainer) {
@@ -310,7 +329,7 @@ namespace Scripts {
             }
 
             // nakonec container po updatu zavreme
-            if (Orion.GumpExists('container', container.serial)) {
+            if (closeAfterUpdate && Orion.GumpExists('container', container.serial)) {
                 Orion.CloseGump('container', container.serial);
                 Orion.Wait(responseDelay);
             }
@@ -322,6 +341,7 @@ namespace Scripts {
          */
         static getAllItemsSerialsFromContainer(container:string):string[] {
             if (!Orion.GumpExists('container', container)) {
+                Orion.Print('otevrit ' + container);
                 Orion.OpenContainer(container);
                 Orion.Wait(responseDelay);
             }
@@ -369,7 +389,8 @@ namespace Scripts {
         static truncateName(name:string) {
             // todo crafted by xyz ? asi neni potreba, vetsinou se tak dlouhy text neulozi
             name = name.replace(/^\d*\s*/, ''); // '61 mystical stick' -> 'mystical stick'
-            name = name.replace(/\s\(.*\)$/, ''); // 'star dust (35 nabiti)' -> 'star dust'
+            name = name.replace(/\s\(\d+.*$/, ''); // 'star dust (35 nabi' -> 'star dust'
+            name = name.replace(/\scrafted\sb.*$/, ''); // 'Robe of Blood crafted by Urci' -> 'Robe of Blood'
             return name;
         }
 

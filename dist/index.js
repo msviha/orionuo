@@ -3864,6 +3864,7 @@ var Scripts;
             }
             var messContainer = Scripts.Cleaner.loadMessContainer(messContainerSerial);
             Scripts.Cleaner.cleanItems(messContainer.nestedItems, cleanContainer);
+            Orion.CloseGump('container');
             Scripts.Cleaner.saveItemsToFile(structure);
         };
         Cleaner.loadMessContainer = function (messContainerSerial) {
@@ -3872,6 +3873,7 @@ var Scripts;
             return messContainer;
         };
         Cleaner.cleanItems = function (messItems, cleanItem) {
+            var updatedContainers = [];
             for (var _i = 0, messItems_1 = messItems; _i < messItems_1.length; _i++) {
                 var item = messItems_1[_i];
                 if (item.nestedItems) {
@@ -3883,8 +3885,17 @@ var Scripts;
                         continue;
                     }
                     Scripts.Utils.OpenContainerPath(result.path);
+                    if (updatedContainers.indexOf(result.parent.serial) === -1) {
+                        Scripts.Cleaner.updateContainerItemsWithProgress(result.parent, false, false);
+                        result = Scripts.Cleaner.findSameItemInContainer(item, result.parent);
+                        if (!result) {
+                            Scripts.Utils.log(item.name + " " + item.serial + " nenalezen v uklizene bedne");
+                            continue;
+                        }
+                    }
                     Scripts.Cleaner.moveItem(item, result.item);
-                    Scripts.Cleaner.updateContainerItems(result.parent, false);
+                    Scripts.Cleaner.updateContainerItems(result.parent, false, false);
+                    updatedContainers.indexOf(result.parent.serial) === -1 && updatedContainers.push(result.parent.serial);
                 }
             }
         };
@@ -3983,14 +3994,17 @@ var Scripts;
             }
             return itemStructure;
         };
-        Cleaner.updateContainerItemsWithProgress = function (container) {
+        Cleaner.updateContainerItemsWithProgress = function (container, recurse, closeAfterUpdate) {
+            if (recurse === void 0) { recurse = true; }
+            if (closeAfterUpdate === void 0) { closeAfterUpdate = true; }
             Orion.Exec('_stopUpdateContainerItemsProgress', false);
             Orion.Exec('_startUpdateContainerItemsProgress', false);
-            Scripts.Cleaner.updateContainerItems(container);
+            Scripts.Cleaner.updateContainerItems(container, recurse, closeAfterUpdate);
             Orion.Exec('_stopUpdateContainerItemsProgress', false);
         };
-        Cleaner.updateContainerItems = function (container, recurse) {
+        Cleaner.updateContainerItems = function (container, recurse, closeAfterUpdate) {
             if (recurse === void 0) { recurse = true; }
+            if (closeAfterUpdate === void 0) { closeAfterUpdate = true; }
             var isContainer = Scripts.Cleaner.isContainer(container);
             if (!isContainer) {
                 return;
@@ -4013,13 +4027,14 @@ var Scripts;
                     Scripts.Cleaner.updateContainerItems(nestedItem);
                 }
             }
-            if (Orion.GumpExists('container', container.serial)) {
+            if (closeAfterUpdate && Orion.GumpExists('container', container.serial)) {
                 Orion.CloseGump('container', container.serial);
                 Orion.Wait(responseDelay);
             }
         };
         Cleaner.getAllItemsSerialsFromContainer = function (container) {
             if (!Orion.GumpExists('container', container)) {
+                Orion.Print('otevrit ' + container);
                 Orion.OpenContainer(container);
                 Orion.Wait(responseDelay);
             }
@@ -4048,7 +4063,8 @@ var Scripts;
         };
         Cleaner.truncateName = function (name) {
             name = name.replace(/^\d*\s*/, '');
-            name = name.replace(/\s\(.*\)$/, '');
+            name = name.replace(/\s\(\d+.*$/, '');
+            name = name.replace(/\scrafted\sb.*$/, '');
             return name;
         };
         return Cleaner;

@@ -197,8 +197,8 @@ declare namespace Scripts {
         static isContainer(item: ICleanerItem): boolean;
         static findNestedContainerBySerial(structure: ICleanerItem[], targetContainerSerial: any): ICleanerItem | undefined;
         static createStructureForContainer(itemStructure: ICleanerItem): ICleanerItem;
-        static updateContainerItemsWithProgress(container: ICleanerItem): void;
-        static updateContainerItems(container: ICleanerItem, recurse?: boolean): void;
+        static updateContainerItemsWithProgress(container: ICleanerItem, recurse?: boolean, closeAfterUpdate?: boolean): void;
+        static updateContainerItems(container: ICleanerItem, recurse?: boolean, closeAfterUpdate?: boolean): void;
         static getAllItemsSerialsFromContainer(container: string): string[];
         static createBasicItemStructure(itemSerial: string): ICleanerItem;
         static getObjectName(itemObject: GameObject): string;
