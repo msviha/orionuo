@@ -17,5 +17,19 @@
     "exclude": [
 		"node_modules",
 		"dist/**/*"
-    ]
+    ],
+    "typedocOptions": {
+        "includeDeclarations": true,
+        "ignoreCompilerErrors": true,
+        "excludeExternals": true,
+        "stripInternal": true,
+        "mode": "file",
+        "exclude": [
+            "src/types/typeguards.ts",
+            "src/utils.ts",
+            "src/private-exec.ts"
+        ],
+        "plugin": "typedoc-plugin-markdown",
+        "out": "docs"
+    }
 }

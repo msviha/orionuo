@@ -9,7 +9,7 @@
     "build-config": "tsc -p config",
     "build-refill": "tsc -p _dependent/refill-manager",
     "watch": "tsc -w",
-    "doc": "typedoc --out docs src --includeDeclarations --stripInternal --excludeExternals --ignoreCompilerErrors --mode file --plugin typedoc-plugin-markdown --exclude \"src/+(utils|typeguards|private-exec).ts\""
+    "doc": "typedoc src"
   },
   "author": "Michal Sviha",
   "license": "ISC",
