@@ -22,7 +22,7 @@
 
 • `Optional` **handleWarMode**: boolean
 
-*Defined in [types/interfaces.ts:35](https://github.com/msviha/orionuo/blob/5f19aed/src/types/interfaces.ts#L35)*
+*Defined in [types/interfaces.ts:35](https://github.com/msviha/orionuo/blob/2f31050/src/types/interfaces.ts#L35)*
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 • `Optional` **hiding**: boolean
 
-*Defined in [types/interfaces.ts:34](https://github.com/msviha/orionuo/blob/5f19aed/src/types/interfaces.ts#L34)*
+*Defined in [types/interfaces.ts:34](https://github.com/msviha/orionuo/blob/2f31050/src/types/interfaces.ts#L34)*
 
 ___
 
@@ -38,4 +38,4 @@ ___
 
 • `Optional` **walkTo**: boolean
 
-*Defined in [types/interfaces.ts:33](https://github.com/msviha/orionuo/blob/5f19aed/src/types/interfaces.ts#L33)*
+*Defined in [types/interfaces.ts:33](https://github.com/msviha/orionuo/blob/2f31050/src/types/interfaces.ts#L33)*

@@ -24,7 +24,7 @@
 
 •  **count**: number
 
-*Defined in [scripts/skills/repair.ts:3](https://github.com/msviha/orionuo/blob/5f19aed/src/scripts/skills/repair.ts#L3)*
+*Defined in [scripts/skills/repair.ts:3](https://github.com/msviha/orionuo/blob/2f31050/src/scripts/skills/repair.ts#L3)*
 
 ___
 
@@ -32,7 +32,7 @@ ___
 
 •  **name**: any
 
-*Defined in [scripts/skills/repair.ts:4](https://github.com/msviha/orionuo/blob/5f19aed/src/scripts/skills/repair.ts#L4)*
+*Defined in [scripts/skills/repair.ts:4](https://github.com/msviha/orionuo/blob/2f31050/src/scripts/skills/repair.ts#L4)*
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 •  **serial**: string
 
-*Defined in [scripts/skills/repair.ts:2](https://github.com/msviha/orionuo/blob/5f19aed/src/scripts/skills/repair.ts#L2)*
+*Defined in [scripts/skills/repair.ts:2](https://github.com/msviha/orionuo/blob/2f31050/src/scripts/skills/repair.ts#L2)*
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 • `Optional` **x**: number
 
-*Defined in [scripts/skills/repair.ts:5](https://github.com/msviha/orionuo/blob/5f19aed/src/scripts/skills/repair.ts#L5)*
+*Defined in [scripts/skills/repair.ts:5](https://github.com/msviha/orionuo/blob/2f31050/src/scripts/skills/repair.ts#L5)*
 
 ___
 
@@ -56,4 +56,4 @@ ___
 
 • `Optional` **y**: number
 
-*Defined in [scripts/skills/repair.ts:6](https://github.com/msviha/orionuo/blob/5f19aed/src/scripts/skills/repair.ts#L6)*
+*Defined in [scripts/skills/repair.ts:6](https://github.com/msviha/orionuo/blob/2f31050/src/scripts/skills/repair.ts#L6)*

@@ -21,7 +21,7 @@
 
 •  **graphic**: string \| number
 
-*Defined in [types/interfaces.ts:97](https://github.com/msviha/orionuo/blob/5f19aed/src/types/interfaces.ts#L97)*
+*Defined in [types/interfaces.ts:97](https://github.com/msviha/orionuo/blob/2f31050/src/types/interfaces.ts#L97)*
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 •  **serial**: string
 
-*Defined in [types/interfaces.ts:96](https://github.com/msviha/orionuo/blob/5f19aed/src/types/interfaces.ts#L96)*
+*Defined in [types/interfaces.ts:96](https://github.com/msviha/orionuo/blob/2f31050/src/types/interfaces.ts#L96)*

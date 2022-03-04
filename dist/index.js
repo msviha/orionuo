@@ -3172,6 +3172,9 @@ function craftSelect() {
 function createKad(emptyKadContainerPath, emptyBottleContainerPath, count, refillKadSerial, targetContainer) {
     Scripts.Refill.createKad(emptyKadContainerPath, emptyBottleContainerPath, count, refillKadSerial, targetContainer);
 }
+function createKade(emptyKadContainerPath, emptyBottleContainerPath, sourceKade) {
+    Scripts.Refill.createKade(emptyKadContainerPath, emptyBottleContainerPath, sourceKade);
+}
 function drink(potionName, switchWarModeWhenNeeded, displayTimers, refillEmptyLimit, displayInvisLongTimer) {
     if (switchWarModeWhenNeeded === void 0) { switchWarModeWhenNeeded = true; }
     if (displayTimers === void 0) { displayTimers = true; }
@@ -6534,6 +6537,12 @@ var Scripts;
                 Orion.Wait(500);
             }
             return cepnutaKad;
+        };
+        Refill.createKade = function (emptyKadContainerPath, emptyBottleContainerPath, sourceKade) {
+            Scripts.Utils.createGameObjectSelections([{ ask: 'target container ?', addObject: 'targetContainerCreateKade' }]);
+            for (var i = 0; i < sourceKade.length; i++) {
+                createKad(emptyKadContainerPath, emptyBottleContainerPath, sourceKade[i].count, sourceKade[i].kad, 'targetContainerCreateKade');
+            }
         };
         Refill.regy = function (count) {
             var source = 'refillRegySource';

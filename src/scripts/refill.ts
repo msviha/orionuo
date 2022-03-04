@@ -279,6 +279,16 @@ namespace Scripts {
             return cepnutaKad;
         }
 
+        static createKade(
+            emptyKadContainerPath:string[],
+            emptyBottleContainerPath:string[],
+            sourceKade:Array<{kad:string, count:number}>
+        ) {
+            Scripts.Utils.createGameObjectSelections([{ask: 'target container ?', addObject: 'targetContainerCreateKade'}]);
+            for (var i = 0; i < sourceKade.length; i++) {
+                createKad(emptyKadContainerPath, emptyBottleContainerPath,	sourceKade[i].count, sourceKade[i].kad, 'targetContainerCreateKade');
+            }
+        }
         static regy(count?:number) {
             const source = 'refillRegySource';
             const target = 'refillRegyTarget';

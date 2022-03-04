@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## 1.8.0
+
+### fixes
+- `gameObject.tools.saw` - pridana dalsi grafika pro pilu
+
+### features
+- `refill` - refuje zakladni vybaveni podle nastavene konfigurace (refill-manager presunuty z external code do techto scriptu)
+- `regy` - refuje standardni regy (i urcity pocet)
+- `createKad` - veme si a naplni prazdnou kad (nutno trochu nakonfigurovat)
+- `createKade` - naplni tolik kadi kolik jich nakonfigurujete a nahaze do bedynky co si zvolite
+- `lilith` - script na sochu na drticce
+- `uklizeno` - nacte jakykoliv kontejner a ulozi si jeho obsah do souboru C:\0git\clean.json
+- `uklid` - uklizi itemy z vybraneho kontejneru do zvoleneho kontejneru (nejprve je poprve potreba si alespon jednou na ten cilovy kontejner dat `uklizeno`)
+
+### gameObject added
+- magicArmorSphere
+
 ## 1.7.0
 
 ### fixes

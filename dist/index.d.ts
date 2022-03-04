@@ -43,6 +43,10 @@ declare function craftBandana(): void;
 declare function craftNext(): void;
 declare function craftSelect(): void;
 declare function createKad(emptyKadContainerPath: string[], emptyBottleContainerPath: string[], count: number, refillKadSerial?: string, targetContainer?: string): void;
+declare function createKade(emptyKadContainerPath: string[], emptyBottleContainerPath: string[], sourceKade: Array<{
+    kad: string;
+    count: number;
+}>): void;
 declare function drink(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean, displayTimers?: boolean, refillEmptyLimit?: number, displayInvisLongTimer?: boolean): void;
 declare function drinkFill(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean, displayTimers?: boolean, refillEmptyLimit?: number, displayInvisLongTimer?: boolean): void;
 declare function drum(target?: TargetEnum): void;
@@ -365,6 +369,10 @@ declare namespace Scripts {
         static universalRefill(gameObjectAsString: string, total: number, canTakeFromBank?: boolean, containerPathsToSearch?: Array<string[]> | string[]): void;
         static refillPotions(potionName: PotionsEnum, total: number, kadSerial: string, needToTakeKadToBackpack?: boolean, emptyBottleSerial?: string): void;
         static createKad(emptyKadContainerPath: string[], emptyBottleContainerPath: string[], count: number, refillKadSerial?: string, targetContainer?: string): string;
+        static createKade(emptyKadContainerPath: string[], emptyBottleContainerPath: string[], sourceKade: Array<{
+            kad: string;
+            count: number;
+        }>): void;
         static regy(count?: number): void;
     }
 }

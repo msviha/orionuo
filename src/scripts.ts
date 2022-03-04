@@ -283,6 +283,20 @@ function createKad(
 }
 
 /**
+ * Veme prazdnou kad, naplni a hodi do pozadovaneho kontejneru - Pozor nehlida jestli mate dostatek potionu v kadi
+ * @param emptyKadContainerPath serialy v poli (kazdy odpovida bedne, kdyz se chcete proklikat k prazdne kadi)
+ * @param emptyBottleContainerPath serialy v poli (kazdy odpovida bedne, kdyz se chcete proklikat k prazdne lahvicce)
+ * @param sourceKade pole kadi a poctu napr. [{kad: '0x40398D6B', count: 100}, {kad: '0x403D63CD', count: 100}] // ns a tr
+ */
+function createKade(
+    emptyKadContainerPath:string[],
+    emptyBottleContainerPath:string[],
+    sourceKade:Array<{kad:string, count:number}>
+) {
+    Scripts.Refill.createKade(emptyKadContainerPath, emptyBottleContainerPath, sourceKade);
+}
+
+/**
  * Chlasta lahvicky
  * @param potionName zkratka potionu
  * @param switchWarModeWhenNeeded date li 'false' pak neprepina war pokud nejde cepovat, tak necepne

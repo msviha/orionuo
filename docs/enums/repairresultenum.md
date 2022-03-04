@@ -18,7 +18,7 @@
 
 •  **cant**: 
 
-*Defined in [scripts/skills/repair.ts:10](https://github.com/msviha/orionuo/blob/5f19aed/src/scripts/skills/repair.ts#L10)*
+*Defined in [scripts/skills/repair.ts:10](https://github.com/msviha/orionuo/blob/2f31050/src/scripts/skills/repair.ts#L10)*
 
 ___
 
@@ -26,7 +26,7 @@ ___
 
 •  **fully**: 
 
-*Defined in [scripts/skills/repair.ts:12](https://github.com/msviha/orionuo/blob/5f19aed/src/scripts/skills/repair.ts#L12)*
+*Defined in [scripts/skills/repair.ts:12](https://github.com/msviha/orionuo/blob/2f31050/src/scripts/skills/repair.ts#L12)*
 
 ___
 
@@ -34,4 +34,4 @@ ___
 
 •  **progress**: 
 
-*Defined in [scripts/skills/repair.ts:11](https://github.com/msviha/orionuo/blob/5f19aed/src/scripts/skills/repair.ts#L11)*
+*Defined in [scripts/skills/repair.ts:11](https://github.com/msviha/orionuo/blob/2f31050/src/scripts/skills/repair.ts#L11)*
