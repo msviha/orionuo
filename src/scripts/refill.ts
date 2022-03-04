@@ -199,7 +199,7 @@ namespace Scripts {
             !refillKadSerial && Scripts.Utils.createGameObjectSelections([
                 {ask: 'Vyber kad ze ktere chces cepovat', addObject: 'refillKadSerial'}
             ]);
-            refillKadSerial = 'refillKadSerial';
+            !refillKadSerial && (refillKadSerial = 'refillKadSerial');
             !targetContainer && Scripts.Utils.createGameObjectSelections([
                 {ask: 'Vyber bednu kam das hotovou kad', addObject: 'refillKadTarget'}
             ]);
@@ -253,11 +253,12 @@ namespace Scripts {
             Orion.TargetObject(cepnutaFlaska);
             Orion.Wait(500);
             const cepnutaKad = Orion.FindType(kad.graphic, kad.color).filter((k) => kadeNaKtereNesaham.indexOf(k) === -1)[0];
+            Orion.MoveItem(cepnutaKad); // Target item moved ?
+            Orion.Wait(500);
 
             // zaokrouhlime pocet preliti mezi kademi
             let times = Math.floor(count / 50) + (((count / 50) % 1) >= 0.5 ? 1 : 0);
 
-            Orion.Print(times);
             for (times; times > 0; times--) {
                 Orion.UseObject(refillKadSerial);
                 Orion.WaitForTarget();
