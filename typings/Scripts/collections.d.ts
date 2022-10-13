@@ -107,7 +107,7 @@ export default interface Collections {
      * StringList Orion.GetFriendList();
      * Return string list with friends id's.
      */
-    GetFriendList(): Array<string>;
+    GetFriendList(names?: boolean): Array<string>;
 
     /**
      * StringList Orion.GetEnemyList();
