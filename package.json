@@ -1,7 +1,7 @@
 {
   "name": "orionuo",
   "version": "1.8.0",
-  "description": "Scripts for OrionUO assistant on Darkparadise.cz",
+  "description": "Scripts for OrionUO assistant on Darkparadise.eu",
   "scripts": {
     "lint": "eslint ./**/*.ts --quiet --fix",
     "build": "tsc",
