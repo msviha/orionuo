@@ -454,15 +454,6 @@ function harp(target?: TargetEnum) {
 }
 
 /**
- * Zacne lecit pety (vlastni!) okolo sebe. Pri opakovanem volani prestane lecit, stejne jako pokud se od petu vzdalite
- * @example in client `_healPets`
- * @example external code `healPets()`
- */
-function healPets() {
-    Scripts.PetCommander.healPetsToggle();
-}
-
-/**
  * Prepina mezi dvema stavy - hiduje hrace v okruhu 15ti policek a dalsi volani dava resync/resend. Nevidim na cudlik protoze mi tam nekdo stoji atd.
  * @example in client `_hideAll`
  * @example external code `hideAll();`
@@ -499,24 +490,6 @@ function hoverCheck() {
  */
 function inscription(circle: number, spell: string, quantity = 0, useManaRef = false) {
     Scripts.Inscription.inscription(circle, spell, quantity, useManaRef);
-}
-
-/**
- * Prejmenuje vsechny summony a posle na lastattack
- * @example `_killAll`
- * @example external code `killAll();`
- */
-function killAll() {
-    Scripts.PetCommander.killAll();
-}
-
-/**
- * Prejmenuje summa a zarve s nim kill a necha vyhozenej target. Dobre na posilani summu na ruzne targety (toci je to)
- * @example `_killTarget`
- * @example external code `killTarget();`
- */
-function killTarget() {
-    Scripts.PetCommander.killTarget();
 }
 
 /**
