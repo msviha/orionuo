@@ -568,8 +568,8 @@ function lockpicking() {
  * @example external code `loot();`
  * @example external code `loot(false);`
  */
-function loot(cut = true) {
-    Scripts.Loot.corpses(parseParam(cut));
+function loot(cut = true, silent = false, closeGumps = false) {
+    Scripts.Loot.corpses(parseParam(cut), parseParam(silent), parseParam(closeGumps));
 }
 
 /**

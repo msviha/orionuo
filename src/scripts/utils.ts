@@ -889,5 +889,23 @@ namespace Scripts {
                 }
             }
         }
+
+        static getFriendsNames(): string[] {
+            const f = Orion.GetFriendList(true);
+            for (var i = 0; i < f.length; i++) {
+                f[i] = f[i].replace(/0x.*\s/, '');
+            }
+            return f;
+        }
+
+        static waitForContainerGump(serial: string, delay = 1000, msgNotFound?: string) {
+            while (delay > 0 && !Orion.GumpExists('container', serial)) {
+                delay -= 50;
+                Orion.Wait(50);
+            }
+
+            delay <= 0 && msgNotFound && Scripts.Utils.log(msgNotFound);
+            return delay > 0;
+        }
     }
 }
