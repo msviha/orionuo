@@ -1684,7 +1684,7 @@ const gameObject: any = {
             },
             gmMortarSelection: 'Shrink (306 Batwings)',
             alchemySelection: 'Shrink',
-            reagent: 'batwing',
+            reagent: 'batwings',
             reagentsCount: 3,
         },
         lavabomb: {
