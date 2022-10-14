@@ -76,8 +76,17 @@ function addMount() {
 /**
  * Micha pres obyc mortar
  * @param potionName zkratka potionu
- * @example in client `_alchemy tmr`
+ * @example in client `_alchemy tmr;`
+ */
+function alch(potionName: PotionsEnum) {
+    Scripts.Alchemy.mix(potionName);
+}
+
+/**
+ * Micha pres obyc mortar
+ * @param potionName zkratka potionu
  * @example external code `alchemy('tmr');`
+ * @example nelze volat z clienta - pouzijte `_alch tmr`
  */
 function alchemy(potionName: PotionsEnum) {
     Scripts.Alchemy.mix(potionName);
