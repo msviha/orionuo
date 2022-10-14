@@ -115,6 +115,8 @@ export default interface Collections {
      */
     GetEnemyList(): Array<string>;
 
+    GetFriendsStatus(): void;
+
     /**
      * void Orion.AddFriend('friendName', ['serial'=targetRequest]);
      * Add a friend or select one to add by a target if there's no 'serial' argument.

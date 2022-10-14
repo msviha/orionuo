@@ -1,5 +1,10 @@
 const config = Shared.AddVar('config', {
     updateRate: 500,
+    experimental: {
+        statusbar: {
+            useGetFriendsStatus: false
+        }
+    },
     mobMaster: {
         sayColor: '0x00B3',
         renameNameType: 'autoName',

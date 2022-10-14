@@ -14,6 +14,7 @@ function Autostart() {
     Shared.AddArray('customStatusBars', []);
     Shared.AddVar('ws', false);
     const autoRename = config?.autoHandlers.autoRename.enabled;
+    const getFriendsStatus = config?.experimental?.statusbar?.useGetFriendsStatus;
     const autoHandlers = autoRename;
     const autoDinstance = 20; //TODO konfig
 
@@ -22,6 +23,7 @@ function Autostart() {
     Scripts.Dress.saveEquip();
     Orion.Exec('userAutostart');
     while (true) {
+        getFriendsStatus && Orion.GetFriendsStatus();
         Scripts.Autostart.updatePlayerHp();
         Scripts.Autostart.updateLastAttackHp();
         Scripts.Autostart.checkWorldSave();
