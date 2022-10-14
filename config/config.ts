@@ -8,11 +8,16 @@ const config = Shared.AddVar('config', {
         autoRename: {
             enabled: true,
             renameMounts: false,
+            renamePacks: false
         },
         printDamageDiffOnly: false
     },
     targeting: {
-        highlightEnemySilent: true
+        highlightEnemySilent: true,
+        friendlyTargetTypes: [
+            { graphic: '0x000E', color: '0x0000', exceptionNames: ['Summoner', 'Matriarch', 'Firestarter'] },
+            { graphic: '0x000D', color: '0x0B77', exceptionNames: ['Vortex'] }
+        ]
     },
     statusBarWrapper: {
         autoCloseTimer: 10000,
@@ -28,28 +33,21 @@ const config = Shared.AddVar('config', {
     },
     klamak: {
         showReadyMessage: true,
-        position: 'LeftTop',
-        type: 'Line|Bar',
-        text: 'Klamak',
-        xFromPosition: 0,
-        yFromPosition: 215,
-        textColor: '0x88B',
-        font: 0,
-        backgroundColor: '0x88B',
-    },
-    teleport: {
-        showReadyMessage: true,
-        position: 'LeftTop',
-        type: 'Line|Bar',
-        text: 'Teleport Scroll',
-        xFromPosition: 0,
-        yFromPosition: 265,
-        textColor: '0x88B',
-        font: 0,
-        backgroundColor: '0x88B',
+        timer: {
+            displayTimer: true,
+            position: 'LeftTop',
+            type: 'Line|Bar',
+            text: 'Klamak',
+            xFromPosition: 0,
+            yFromPosition: 215,
+            textColor: '0x88B',
+            font: 0,
+            backgroundColor: '0x88B',
+        }
     },
     drinkPotion: {
         timer: {
+            displayTimer: true,
             position: 'LeftTop',
             type: 'Line|Bar',
             text: 'Drink',
@@ -60,6 +58,7 @@ const config = Shared.AddVar('config', {
             backgroundColor: '0x88B',
         },
         gsTimer: {
+            displayTimer: true,
             position: 'LeftTop',
             type: 'Line|Bar',
             text: 'GS',
@@ -70,6 +69,7 @@ const config = Shared.AddVar('config', {
             backgroundColor: '0x88B',
         },
         invisTimer: {
+            displayTimer: true,
             position: 'LeftTop',
             type: 'Line|Bar',
             text: 'Invis',
@@ -80,6 +80,7 @@ const config = Shared.AddVar('config', {
             backgroundColor: '0x88B',
         },
         invisLongTimer: {
+            displayTimer: true,
             position: 'LeftTop',
             type: 'Line|Bar',
             text: 'InvisL',
@@ -103,4 +104,30 @@ const config = Shared.AddVar('config', {
         },
         showInnerMessages: true,
     },
+    castScroll: {
+        timer: {
+            displayTimer: true,
+            position: 'AboveChar',
+            type: 'bar',
+            text: '',
+            xFromPosition: 0,
+            yFromPosition: 75,
+            textColor: '0x100',
+            font: 1,
+            backgroundColor: 'yellow'
+        }
+    },
+    teleportTimer: {
+        timer: {
+            displayTimer: true,
+            position:  'RightTop',
+            type: 'Line|Bar',
+            text: 'Teleport',
+            xFromPosition: 0,
+            yFromPosition: 265,
+            textColor: '0x88B',
+            font: 0,
+            backgroundColor: '0x88B'
+        }
+    }
 });
