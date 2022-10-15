@@ -10,6 +10,7 @@ function version() {
  */
 function Autostart() {
     version();
+    Scripts.Autostart.updateWsFromWebsite();
     Orion.ClearJournal();
     Shared.AddArray('customStatusBars', []);
     Shared.AddVar('ws', false);
@@ -1383,4 +1384,8 @@ function vendorBuy() {
  */
 function vendorSell() {
     Scripts.Common.vendor('sell');
+}
+
+function ws() {
+    Scripts.TimeUtils.ws();
 }

@@ -1,5 +1,18 @@
 namespace Scripts {
     export class Autostart {
+        static updateWsFromWebsite() {
+            const saveDate = Scripts.TimeUtils.parseWsTimeFromWeb();
+            const timeBetweenTwoSaves = 7875000;
+
+            const nextSave = saveDate + timeBetweenTwoSaves;
+
+            let remainingTimeToNextSave = nextSave - Date.now();
+            remainingTimeToNextSave < 0 && (remainingTimeToNextSave += timeBetweenTwoSaves); // website not updated
+
+            const remainingTimeToNextSaveFromLogin = remainingTimeToNextSave + Orion.Now();
+            Shared.AddVar('remainingTimeToNextSaveFromLogin', remainingTimeToNextSaveFromLogin);
+            Orion.Print(`dalsi Save bude za ${Scripts.TimeUtils.parseTimeToHourMinuteSecString(remainingTimeToNextSave)}`);
+        }
 
         static updatePlayerHp() {
             const playerHp = Shared.GetVar('playerHp', undefined)
@@ -85,6 +98,9 @@ namespace Scripts {
 
         static checkWorldSave() {
             if (Orion.InJournal('World save has been initiated.', 'sys')) {
+                const timeBetweenTwoSaves = 7875000;
+                Orion.RemoveDisplayTimer('save');
+                Shared.AddVar('remainingTimeToNextSaveFromLogin', Orion.Now() + timeBetweenTwoSaves);
                 Shared.AddVar('ws', true);
                 Scripts.Utils.playerPrint(`World save !!!`, ColorEnum.red);
                 Orion.ClearJournal('World save has been initiated.', 'sys');
@@ -102,6 +118,15 @@ namespace Scripts {
                 Scripts.Utils.playerPrint(`World save DONE`, ColorEnum.green);
                 Orion.Wait(1500);
                 Shared.AddVar('ws', false);
+            }
+            if (Shared.GetVar('remainingTimeToNextSaveFromLogin') && !Orion.DisplayTimerExists('save')) {
+                const timeFromLogin = Orion.Now();
+                const fiveMins = 1000*60*5;
+                const remainingTimeToNextSaveFromLogin = Shared.GetVar('remainingTimeToNextSaveFromLogin');
+                if (timeFromLogin > remainingTimeToNextSaveFromLogin - fiveMins) {
+                    Scripts.Utils.playerPrint('[ za 5 minut SAVE !!! ]', ColorEnum.red);
+                    Orion.AddDisplayTimer('save', fiveMins,  'RightBottom', 'Rectangle', 'SAVE', 0, 0, 'any');
+                }
             }
         }
     }
