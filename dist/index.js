@@ -3,6 +3,16 @@ var Scripts;
     var Autostart = (function () {
         function Autostart() {
         }
+        Autostart.updateWsFromWebsite = function () {
+            var saveDate = Scripts.TimeUtils.parseWsTimeFromWeb();
+            var timeBetweenTwoSaves = 7875000;
+            var nextSave = saveDate + timeBetweenTwoSaves;
+            var remainingTimeToNextSave = nextSave - Date.now();
+            remainingTimeToNextSave < 0 && (remainingTimeToNextSave += timeBetweenTwoSaves);
+            var remainingTimeToNextSaveFromLogin = remainingTimeToNextSave + Orion.Now();
+            Shared.AddVar('remainingTimeToNextSaveFromLogin', remainingTimeToNextSaveFromLogin);
+            Orion.Print("dalsi Save bude za " + Scripts.TimeUtils.parseTimeToHourMinuteSecString(remainingTimeToNextSave));
+        };
         Autostart.updatePlayerHp = function () {
             var playerHp = Shared.GetVar('playerHp', undefined);
             Scripts.Utils.printDamage(Player.Serial(), playerHp);
@@ -75,6 +85,9 @@ var Scripts;
         Autostart.checkWorldSave = function () {
             var _a;
             if (Orion.InJournal('World save has been initiated.', 'sys')) {
+                var timeBetweenTwoSaves = 7875000;
+                Orion.RemoveDisplayTimer('save');
+                Shared.AddVar('remainingTimeToNextSaveFromLogin', Orion.Now() + timeBetweenTwoSaves);
                 Shared.AddVar('ws', true);
                 Scripts.Utils.playerPrint("World save !!!", ColorEnum.red);
                 Orion.ClearJournal('World save has been initiated.', 'sys');
@@ -90,6 +103,15 @@ var Scripts;
                 Orion.Wait(1500);
                 Shared.AddVar('ws', false);
             }
+            if (Shared.GetVar('remainingTimeToNextSaveFromLogin') && !Orion.DisplayTimerExists('save')) {
+                var timeFromLogin = Orion.Now();
+                var fiveMins = 1000 * 60 * 5;
+                var remainingTimeToNextSaveFromLogin = Shared.GetVar('remainingTimeToNextSaveFromLogin');
+                if (timeFromLogin > remainingTimeToNextSaveFromLogin - fiveMins) {
+                    Scripts.Utils.playerPrint('[ za 5 minut SAVE !!! ]', ColorEnum.red);
+                    Orion.AddDisplayTimer('save', fiveMins, 'RightBottom', 'Rectangle', 'SAVE', 0, 0, 'any');
+                }
+            }
         };
         return Autostart;
     }());
@@ -97,6 +119,11 @@ var Scripts;
 })(Scripts || (Scripts = {}));
 var config = Shared.GetVar('config', {
     updateRate: 500,
+    experimental: {
+        statusbar: {
+            useGetFriendsStatus: false
+        }
+    },
     mobMaster: {
         sayColor: '0x00B3',
         renameNameType: 'autoName'
@@ -312,6 +339,14 @@ var gameObject = {
         },
         nbDagger: {
             graphic: '0x0F51',
+            color: '0x0B80',
+            bag: {
+                x: 150,
+                y: 30
+            }
+        },
+        nbDrawing: {
+            graphic: '0x10E4',
             color: '0x0B80',
             bag: {
                 x: 150,
@@ -1900,7 +1935,7 @@ var gameObject = {
             },
             gmMortarSelection: 'Shrink (306 Batwings)',
             alchemySelection: 'Shrink',
-            reagent: 'batwing',
+            reagent: 'batwings',
             reagentsCount: 3
         },
         lavabomb: {
@@ -3070,21 +3105,25 @@ var __assign = (this && this.__assign) || function () {
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 1.8.0');
+    Orion.Print(-1, 'version 1.9.0');
     Orion.Print(-1, '-------------+');
 }
 function Autostart() {
+    var _a, _b;
     version();
+    Scripts.Autostart.updateWsFromWebsite();
     Orion.ClearJournal();
     Shared.AddArray('customStatusBars', []);
     Shared.AddVar('ws', false);
     var autoRename = config === null || config === void 0 ? void 0 : config.autoHandlers.autoRename.enabled;
+    var getFriendsStatus = (_b = (_a = config === null || config === void 0 ? void 0 : config.experimental) === null || _a === void 0 ? void 0 : _a.statusbar) === null || _b === void 0 ? void 0 : _b.useGetFriendsStatus;
     var autoHandlers = autoRename;
     var autoDinstance = 20;
     var previousPlayerHp;
     Scripts.Dress.saveEquip();
     Orion.Exec('userAutostart');
     while (true) {
+        getFriendsStatus && Orion.GetFriendsStatus();
         Scripts.Autostart.updatePlayerHp();
         Scripts.Autostart.updateLastAttackHp();
         Scripts.Autostart.checkWorldSave();
@@ -3106,6 +3145,9 @@ function addLootBag() {
 }
 function addMount() {
     Scripts.Mount.addMount();
+}
+function alch(potionName) {
+    Scripts.Alchemy.mix(potionName);
 }
 function alchemy(potionName) {
     Scripts.Alchemy.mix(potionName);
@@ -3223,9 +3265,6 @@ function gmMortar(potionName) {
 function harp(target) {
     Scripts.Music.harp(target);
 }
-function healPets() {
-    Scripts.PetCommander.healPetsToggle();
-}
 function hideAll(toggleResend) {
     if (toggleResend === void 0) { toggleResend = true; }
     Scripts.Common.hideAll(toggleResend);
@@ -3243,12 +3282,6 @@ function inscription(circle, spell, quantity, useManaRef) {
     if (useManaRef === void 0) { useManaRef = false; }
     Scripts.Inscription.inscription(circle, spell, quantity, useManaRef);
 }
-function killAll() {
-    Scripts.PetCommander.killAll();
-}
-function killTarget() {
-    Scripts.PetCommander.killTarget();
-}
 function lavaBomb() {
     Scripts.Common.lavaBomb();
 }
@@ -3263,9 +3296,11 @@ function lilith() {
 function lockpicking() {
     Scripts.Lockpicking.lockpicking();
 }
-function loot(cut) {
+function loot(cut, silent, closeGumps) {
     if (cut === void 0) { cut = true; }
-    Scripts.Loot.corpses(parseParam(cut));
+    if (silent === void 0) { silent = false; }
+    if (closeGumps === void 0) { closeGumps = false; }
+    Scripts.Loot.corpses(parseParam(cut), parseParam(silent), parseParam(closeGumps));
 }
 function lootAll(delay) {
     if (delay === void 0) { delay = responseDelay; }
@@ -3553,6 +3588,9 @@ function vendorBuy() {
 }
 function vendorSell() {
     Scripts.Common.vendor('sell');
+}
+function ws() {
+    Scripts.TimeUtils.ws();
 }
 function parseParam(param) {
     if (param === 'true') {
@@ -4632,6 +4670,14 @@ var Scripts;
             Scripts.Dress.addShield();
             Shared.AddArray('weapons', weapons);
         };
+        Dress.getCurrentHandsSerials = function () {
+            var zbran = Orion.ObjAtLayer(1, 'self');
+            var stit = Orion.ObjAtLayer(2, 'self');
+            var hands = [];
+            zbran && hands.push(zbran.Serial());
+            stit && hands.push(stit.Serial());
+            return hands;
+        };
         return Dress;
     }());
     Scripts.Dress = Dress;
@@ -4896,11 +4942,13 @@ var Scripts;
             }
             Orion.UseObject(cutWeapon.Serial());
         };
-        Loot.corpses = function (cut) {
+        Loot.corpses = function (cut, silent, closeGumps) {
             if (cut === void 0) { cut = true; }
+            if (silent === void 0) { silent = false; }
+            if (closeGumps === void 0) { closeGumps = false; }
             Orion.ClearJournal('You put the');
-            var snapshot = this.getBagSnapshot();
-            this.lootCorpsesAround(cut);
+            var snapshot = __spreadArrays(this.getBagSnapshot(), Scripts.Dress.getCurrentHandsSerials());
+            this.lootCorpsesAround(cut, silent, closeGumps);
             Orion.Wait(350);
             this.displayLoot();
             this.moveLootToLootBag(snapshot);
@@ -4918,38 +4966,90 @@ var Scripts;
                 }
             }
         };
-        Loot.lootCorpsesAround = function (cut) {
+        Loot.getCorpseName = function (serial) {
+            var o = Orion.FindObject(serial);
+            var name = o === null || o === void 0 ? void 0 : o.Name().replace('Body of ', '');
+            return name;
+        };
+        Loot.lootCorpsesAround = function (cut, silent, closeGumps) {
+            if (silent === void 0) { silent = false; }
+            if (closeGumps === void 0) { closeGumps = false; }
+            Orion.ClearIgnoreList('cantLootNow');
             var listOfCorpses = Orion.FindType('0x2006', '-1', 'ground', 'fast', 2, 'red');
             var LHand = Orion.ObjAtLayer(1);
             var RHand = Orion.ObjAtLayer(2);
+            var friends = Scripts.Utils.getFriendsNames();
+            var lootIterator = 0;
             while (listOfCorpses.length) {
                 for (var _i = 0, listOfCorpses_1 = listOfCorpses; _i < listOfCorpses_1.length; _i++) {
                     var id = listOfCorpses_1[_i];
-                    Scripts.Loot.lootCorpseId(id, cut);
-                    Orion.Ignore(id);
-                    Orion.Wait(100);
+                    var corpseName = Scripts.Loot.getCorpseName(id);
+                    if (friends.indexOf(Scripts.Loot.getCorpseName(id)) > -1) {
+                        !silent && Scripts.Utils.playerPrint("nelootuju " + corpseName + " (friend)", ColorEnum.red);
+                        Orion.Ignore(id);
+                        continue;
+                    }
+                    if (Scripts.Loot.lootCorpseId(id, cut, corpseName, silent, closeGumps)) {
+                        Orion.Ignore(id);
+                    }
+                    else {
+                        Orion.AddIgnoreListObject('cantLootNow', id);
+                    }
+                    Orion.Wait(lootIterator < 5 ? 100 : 500);
+                    lootIterator++;
                 }
-                listOfCorpses = Orion.FindType('0x2006', '-1', 'ground', 'fast', 2, 'red');
+                listOfCorpses = Orion.FindType('0x2006', '-1', 'ground', 'fast', 2, 'red', true, 'cantLootNow');
             }
             Scripts.Dress.equip([LHand === null || LHand === void 0 ? void 0 : LHand.Serial(), RHand === null || RHand === void 0 ? void 0 : RHand.Serial()]);
             var itemsOnGround = Orion.FindList('lootItems', 'ground', 'fast', 4);
             this.grabItems(itemsOnGround);
         };
-        Loot.lootCorpseId = function (corpseId, cut) {
-            Orion.OpenContainer(corpseId, 5000, "Container id " + corpseId + " not found");
-            var hasLootBag = Orion.Count('0x0E76', '0x049A', corpseId) > 0;
-            if (hasLootBag && cut) {
-                if (Orion.FindObject('cutWeapon')) {
+        Loot.lootCorpseId = function (corpseId, cut, corpseName, silent, closeGumps) {
+            if (silent === void 0) { silent = false; }
+            if (closeGumps === void 0) { closeGumps = false; }
+            Orion.OpenContainer(corpseId);
+            var isOpened = Scripts.Utils.waitForContainerGump(corpseId, 5000, silent ? '' : "Container id " + corpseId + " not found");
+            if (!isOpened) {
+                return false;
+            }
+            var corpseObject = Orion.FindObject(corpseId);
+            var hasLootBag = Orion.FindType('0x0E76', '0x049A', corpseId).length > 0;
+            if (hasLootBag && cut && !corpseObject.IsHuman()) {
+                var nbDrawing = Orion.FindType(gameObject.uncategorized.nbDrawing.graphic, gameObject.uncategorized.nbDrawing.color);
+                var nbDagger = Orion.FindType(gameObject.uncategorized.nbDagger.graphic, gameObject.uncategorized.nbDagger.color);
+                var carvingWeapon = '';
+                if (nbDrawing.length) {
+                    carvingWeapon = nbDrawing[0];
+                }
+                else if (nbDagger.length) {
+                    carvingWeapon = nbDagger[0];
+                }
+                else if (Orion.FindObject('cutWeapon')) {
+                    carvingWeapon = 'cutWeapon';
+                }
+                if (carvingWeapon) {
                     Orion.CancelWaitTarget();
                     Orion.WaitTargetObject(corpseId);
                     Orion.UseObject('cutWeapon');
                 }
                 Orion.Wait(250);
             }
-            var itemsInCorpse = Orion.FindList('lootItems', corpseId);
-            if (itemsInCorpse.length) {
-                this.grabItems(itemsInCorpse);
+            var ret = true;
+            if (hasLootBag) {
+                var itemsInCorpse = Orion.FindList('lootItems', corpseId);
+                if (itemsInCorpse.length) {
+                    this.grabItems(itemsInCorpse);
+                    if (Orion.FindList('lootItems', corpseId).length) {
+                        !silent && Scripts.Utils.log(corpseName + " neco tam jeste je");
+                        ret = false;
+                    }
+                }
             }
+            else {
+                !silent && Scripts.Utils.log(corpseName + " nema loot pytel");
+            }
+            closeGumps && Orion.CloseGump('container', corpseId);
+            return ret;
         };
         Loot.grabItems = function (serials) {
             var serverLagActionsLeft = 4;
@@ -5417,6 +5517,9 @@ var Scripts;
                     var mid = (name_1.length / 2) | 0;
                     playerShorCode = name_1[0] + name_1[mid] + name_1[name_1.length - 1];
                 }
+                if (playerShorCode.indexOf('gm') > -1) {
+                    playerShorCode = 'ggg';
+                }
                 Shared.AddVar('playerShorCode', playerShorCode);
             }
             return playerShorCode;
@@ -5522,515 +5625,6 @@ var Scripts;
         return Mount;
     }());
     Scripts.Mount = Mount;
-})(Scripts || (Scripts = {}));
-var Scripts;
-(function (Scripts) {
-    var PetCommander = (function () {
-        function PetCommander() {
-        }
-        PetCommander.getUsedNames = function () {
-            var usedNames = [];
-            var myPets = Scripts.PetCommander.getMyPets();
-            for (var _i = 0, myPets_1 = myPets; _i < myPets_1.length; _i++) {
-                var pet = myPets_1[_i];
-                usedNames.push(pet.name);
-            }
-            return usedNames;
-        };
-        PetCommander.getMyPets = function () {
-            return Shared.GetArray('myPets', []);
-        };
-        PetCommander.filterPetsInDistance = function () {
-            var myPets = Scripts.PetCommander.getMyPets();
-            for (var _i = 0, myPets_2 = myPets; _i < myPets_2.length; _i++) {
-                var pet = myPets_2[_i];
-                var petObject = Orion.FindObject(pet.serial);
-                if (!petObject || petObject.Distance() > 12) {
-                    Scripts.PetCommander.removeFromMyPets(pet.name);
-                }
-            }
-            return Scripts.PetCommander.getMyPets();
-        };
-        PetCommander.removeFromMyPets = function (name) {
-            var myPets = Scripts.PetCommander.getMyPets();
-            for (var i = 0; i < myPets.length; i++) {
-                if (myPets[i].name === name) {
-                    myPets.splice(i, 1);
-                    Shared.AddArray('myPets', myPets);
-                    break;
-                }
-            }
-        };
-        PetCommander.renameAndSavePet = function (petSerial) {
-            var petName = Scripts.PetCommander.getRandomAvailableName();
-            var pet = { serial: petSerial, name: petName };
-            Orion.RenameMount(pet.serial, pet.name);
-            Scripts.PetCommander.savePet(pet);
-            return pet;
-        };
-        PetCommander.getNextPetByIndex = function (index) {
-            var myPets = Shared.GetArray('myPets', []);
-            if (myPets.length - 1 < index) {
-                return;
-            }
-            return myPets[index];
-        };
-        PetCommander.ignoreMyPets = function () {
-            var myPets = Scripts.PetCommander.getMyPets();
-            for (var _i = 0, myPets_3 = myPets; _i < myPets_3.length; _i++) {
-                var p = myPets_3[_i];
-                Orion.Ignore(p.serial);
-            }
-        };
-        PetCommander.getAvailableNames = function () {
-            var usedNames = Scripts.PetCommander.getUsedNames();
-            var namesPool = [
-                'Andres',
-                'Blanca',
-                'Carlos',
-                'Dolores',
-                'Enrique',
-                'Felicia',
-                'Guillermo',
-                'Hilda',
-                'Ignacio',
-                'Jimena',
-                'Kevin',
-                'Linda',
-                'Marty',
-                'Nora',
-                'Olaf',
-                'Damrey',
-                'Haikui',
-                'Kirogi',
-                'Tembin',
-                'Bolaven',
-                'Sanba',
-                'Jelawat',
-                'Ewiniar',
-                'Malaksi',
-                'Gaemi',
-                'Prapiroon',
-                'Maria',
-                'SonTinh',
-                'Bopha',
-                'Wukong',
-                'Sonamu',
-                'Shanshan',
-                'Yagi',
-                'Leepi',
-                'Bebinca',
-                'Rumbia',
-                'Soulik',
-                'Cimaron',
-                'Jebi',
-                'Mangkhut',
-                'Utor',
-                'Trami',
-                'Yutu',
-                'Toraji',
-                'Usagi',
-                'Pabuk',
-                'Wutip',
-                'Sepat',
-                'Fitow',
-                'Danas',
-                'Nari',
-                'Wipha',
-                'Francisco',
-                'Lekima',
-                'Krosa',
-                'Haiyan',
-                'Podul',
-                'Lingling',
-                'Kaziki',
-                'Faxai',
-                'Peipah',
-                'Tapah',
-                'Mitag',
-                'Hagibis',
-                'Neoguri',
-                'Rammasun',
-                'Matmo',
-                'Halong',
-                'Nakri',
-                'Fengshen',
-                'Kalmaegi',
-                'Kanmuri',
-                'Phanfone',
-                'Vongfong',
-                'Nuri',
-                'Sinlaku',
-                'Hagupit',
-                'Jangmi',
-                'Mekkhala',
-                'Higos',
-                'Bavi',
-                'Maysak',
-                'Haishen',
-                'Noul',
-                'Dolphin',
-                'Kujira',
-                'Chanhom',
-                'Linfa',
-                'Nangka',
-                'Soudelor',
-                'Molave',
-                'Goni',
-                'Morakot',
-                'Etau',
-                'Vamco',
-                'Krovanh',
-                'Dujuan',
-                'Mujigae',
-                'Choiwan',
-                'Koppu',
-                'Ketsana',
-                'Parma',
-                'Melor',
-                'Nepartak',
-                'Lupit',
-                'Mirinae',
-                'Nida',
-                'Omais',
-                'Conson',
-                'Chanthu',
-                'Dianmu',
-                'Mindulle',
-                'Lionrock',
-                'Kompasu',
-                'Namtheun',
-                'Malou',
-                'Meranti',
-                'Fanapi',
-                'Malakas',
-                'Megi',
-                'Chaba',
-                'Aere',
-                'Songda',
-                'Sarika',
-                'Haima',
-                'Meari',
-                'Tokage',
-                'Muifa',
-                'Merbok',
-                'Nanmadol',
-                'Talas',
-                'Noru',
-                'Kulap',
-                'Roke',
-                'Sonca',
-                'Nesat',
-                'Haitang',
-                'Nalgae',
-                'Banyan',
-                'Washi',
-                'Pakhar',
-                'Sanvu',
-                'Mawar',
-                'Guchol',
-                'Patricia',
-                'Rick',
-                'Sandra',
-                'Terry',
-                'Vivian',
-                'Waldo',
-                'Xina',
-                'York',
-                'Zelda',
-                'Agatha',
-                'Blas',
-                'Celia',
-                'Darby',
-                'Estelle',
-                'Frank',
-                'Georgette',
-                'Howard',
-                'Isis',
-                'Javier',
-                'Kay',
-                'Lester',
-                'Madeline',
-                'Newton',
-                'Orlene',
-                'Paine',
-                'Roslyn',
-                'Seymour',
-                'Tina',
-                'Virgil',
-                'Winifred',
-                'Xavier',
-                'Yolanda',
-                'Zeke',
-                'Adrian',
-                'Beatriz',
-                'Calvin',
-                'Dora',
-                'Eugene',
-                'Fernanda',
-                'Greg',
-                'Hilary',
-                'Irwin',
-                'Jova',
-                'Kenneth',
-                'Lidia',
-                'Max',
-                'Norma',
-                'Otis',
-                'Pilar',
-                'Ramon',
-                'Selma',
-                'Todd',
-                'Veronica',
-                'Wiley',
-                'Xina',
-                'York',
-                'Zelda',
-                'Aletta',
-                'Bud',
-                'Carlotta',
-                'Daniel',
-                'Emilia',
-                'Fabio',
-                'Gilma',
-                'Hector',
-                'Ileana',
-                'John',
-                'Kristy',
-                'Lane',
-                'Miriam',
-                'Norman',
-                'Olivia',
-                'Paul',
-                'Rosa',
-                'Sergio',
-                'Tara',
-                'Vicente',
-                'Willa',
-                'Xavier',
-                'Yolanda',
-                'Zeke',
-                'Alvin',
-                'Barbara',
-                'Cosme',
-                'Dalila',
-                'Erick',
-                'Flossie',
-                'Gil',
-                'Henriette',
-                'Ivo',
-                'Juliette',
-                'Kiko',
-                'Lorena',
-                'Manuel',
-                'Narda',
-                'Octave',
-                'Priscilla',
-                'Raymond',
-                'Sonia',
-                'Tico',
-                'Velma',
-                'Wallis',
-                'Xina',
-                'York',
-                'Zelda',
-                'Amanda',
-                'Boris',
-                'Cristina',
-                'Douglas',
-                'Elida',
-                'Fausto',
-                'Genevieve',
-                'Hernan',
-                'Iselle',
-                'Julio',
-                'Karina',
-                'Lowell',
-                'Marie',
-                'Norbert',
-                'Odile',
-                'Polo',
-                'Rachel',
-                'Simon',
-                'Trudy',
-                'Vance',
-                'Winnie',
-                'Xavier',
-                'Yolanda',
-                'Zeke',
-                'Talim',
-                'Doksuri',
-                'Khanun',
-                'Vicente',
-                'Saola',
-            ];
-            var availableNames = namesPool.filter(function (i) { return usedNames.indexOf(i) === -1; });
-            return availableNames;
-        };
-        PetCommander.getRandomAvailableName = function () {
-            var namesPool = Scripts.PetCommander.getAvailableNames();
-            if (!namesPool.length) {
-                Scripts.Utils.playerPrint('chyba');
-                return 'Chyba';
-            }
-            var random = Math.floor(Math.random() * namesPool.length);
-            return namesPool[random];
-        };
-        PetCommander.savePet = function (pet) {
-            var myPets = Scripts.PetCommander.getMyPets();
-            myPets.push(pet);
-            Shared.AddArray('myPets', myPets);
-        };
-        PetCommander.getNewPet = function () {
-            var monstersAlive = Orion.FindType('!0x0190|!0x0191', '0xFFFF', 'ground', 'live', 12);
-            for (var _i = 0, monstersAlive_1 = monstersAlive; _i < monstersAlive_1.length; _i++) {
-                var serial = monstersAlive_1[_i];
-                var isMyMonster = Orion.FindObject(serial).CanChangeName();
-                if (isMyMonster) {
-                    var pet = Scripts.PetCommander.renameAndSavePet(serial);
-                    Orion.Ignore(serial);
-                    return pet;
-                }
-            }
-        };
-        PetCommander.killTarget = function () {
-            var pet = Scripts.PetCommander.getNewPet();
-            var myPets = Scripts.PetCommander.filterPetsInDistance();
-            if (!pet && myPets.length) {
-                var killIndex = Shared.GetVar('nextPetKillIndex', 0);
-                if (killIndex >= myPets.length) {
-                    killIndex = 0;
-                }
-                pet = Scripts.PetCommander.getNextPetByIndex(killIndex);
-                Shared.AddVar('nextPetKillIndex', ++killIndex);
-            }
-            if (!pet) {
-                return;
-            }
-            Orion.IgnoreReset();
-            var petObject = Orion.FindObject(pet.serial);
-            Scripts.PetCommander.ignoreMyPets();
-            if (!petObject) {
-                Scripts.PetCommander.removeFromMyPets(pet.name);
-                myPets = Scripts.PetCommander.getMyPets();
-                if (myPets.length) {
-                    Scripts.PetCommander.killTarget();
-                    return;
-                }
-                return;
-            }
-            Orion.Say(pet.name + " kill");
-        };
-        PetCommander.killAll = function () {
-            while (Scripts.PetCommander.getNewPet()) { }
-            var myPets = Scripts.PetCommander.filterPetsInDistance();
-            if (!myPets.length) {
-                return;
-            }
-            Orion.IgnoreReset();
-            for (var _i = 0, myPets_4 = myPets; _i < myPets_4.length; _i++) {
-                var pet = myPets_4[_i];
-                var petObject = Orion.FindObject(pet.serial);
-                if (!petObject || petObject.Distance() > 12) {
-                    Scripts.PetCommander.removeFromMyPets(pet.name);
-                }
-                else {
-                    Orion.WaitTargetObject(Orion.ClientLastAttack());
-                    Orion.Say(pet.name + " kill");
-                    var success = Orion.WaitForTarget(1000);
-                    !success && Scripts.PetCommander.removeFromMyPets(pet.name);
-                }
-            }
-            Scripts.PetCommander.ignoreMyPets();
-        };
-        PetCommander.healPetsToggleStart = function () {
-            Scripts.Utils.playerPrint('Healing pets START', ColorEnum.green);
-            Shared.AddVar('healPetsToggle', true);
-        };
-        PetCommander.healPetsToggleStop = function (message) {
-            Scripts.Utils.playerPrint('Healing pets STOP', ColorEnum.red);
-            message && Scripts.Utils.playerPrint(message, ColorEnum.orange);
-            Shared.AddVar('healPetsToggle', false);
-        };
-        PetCommander.sortPetsByHits = function (arr) {
-            return arr.sort(function (a, b) {
-                var pet1 = Orion.FindObject(a.serial);
-                var pet2 = Orion.FindObject(b.serial);
-                if (!pet1) {
-                    return -1;
-                }
-                if (!pet2) {
-                    return 1;
-                }
-                return pet1.MaxHits() - pet1.Hits() > pet2.MaxHits() - pet2.Hits() ? 1 : -1;
-            });
-        };
-        PetCommander.healPetsToggle = function () {
-            Orion.ClearJournal();
-            var toggle = Shared.GetVar('healPetsToggle', false);
-            toggle ? Scripts.PetCommander.healPetsToggleStop() : Scripts.PetCommander.healPetsToggleStart();
-            toggle = Shared.GetVar('healPetsToggle');
-            while (toggle) {
-                while (Scripts.PetCommander.getNewPet()) { }
-                var myPets = Scripts.PetCommander.filterPetsInDistance();
-                if (!myPets.length) {
-                    Scripts.PetCommander.healPetsToggleStop('Nemas zadne pety');
-                    break;
-                }
-                else if (myPets.length > 1) {
-                    Scripts.PetCommander.sortPetsByHits(myPets);
-                }
-                var distance = false;
-                var heal = false;
-                for (var _i = 0, myPets_5 = myPets; _i < myPets_5.length; _i++) {
-                    var p = myPets_5[_i];
-                    Orion.ClearJournal();
-                    var pet = Orion.FindObject(p.serial);
-                    if (!pet) {
-                        continue;
-                    }
-                    if (pet.Distance() <= 6) {
-                        distance = true;
-                        if (pet.MaxHits() <= pet.Hits() || heal) {
-                            continue;
-                        }
-                        Scripts.Utils.playerPrint("Healing [" + pet.Name() + "]");
-                        var b = Scripts.Utils.findFirstType(gameObject.uncategorized.bandy);
-                        Orion.WaitTargetObject(p.serial);
-                        Orion.UseObject(b);
-                        var previousHp = pet.Hits();
-                        Scripts.Utils.waitWhileSomethingInJournal([
-                            'You put',
-                            'You apply',
-                            'Chces vytvorit',
-                            'must be able to reach',
-                            'Nemuzes pouzit bandy',
-                        ]);
-                        if (Orion.InJournal('Chces vytvorit|Nemuzes pouzit bandy|must be able to reach')) {
-                            Orion.Wait(responseDelay);
-                            continue;
-                        }
-                        heal = true;
-                        Scripts.Utils.printDamage(p.serial, previousHp);
-                    }
-                    else if (pet.MaxHits() > pet.Hits()) {
-                        Orion.PrintFast(p.serial, '0x0021', 0, "potrebuji heal");
-                    }
-                }
-                if (!distance) {
-                    Scripts.PetCommander.healPetsToggleStop('Musis jit bliz');
-                    break;
-                }
-                if (!heal) {
-                    Scripts.Utils.playerPrint('hlidam pety');
-                    Orion.Wait(1000);
-                }
-                toggle = Shared.GetVar('healPetsToggle');
-            }
-        };
-        return PetCommander;
-    }());
-    Scripts.PetCommander = PetCommander;
 })(Scripts || (Scripts = {}));
 var Scripts;
 (function (Scripts) {
@@ -6822,7 +6416,7 @@ var Scripts;
                 timer -= wait;
             }
             var id = Math.random().toString();
-            Orion.AddDisplayTimer(id, displayTimer, 'AboveChar', 'Rectangle', undefined, Orion.ClientOptionGet('GameWindowX'), Orion.ClientOptionGet('GameWindowY') + 30, 'any', 1, '0x000000FE');
+            Orion.AddDisplayTimer(id, displayTimer, 'AboveChar', 'Rectangle', undefined, 0, 30, 'any', 1, '0x000000FE');
             Orion.DisplayTimerSetObject(id, timerObjectSerial);
         };
         Spells.efMount = function (scroll, timer) {
@@ -6916,7 +6510,7 @@ var Scripts;
             }
             if (timerObjectSerial) {
                 var id = Math.random().toString();
-                Orion.AddDisplayTimer(id, timer, 'AboveChar', 'Rectangle', undefined, Orion.ClientOptionGet('GameWindowX'), Orion.ClientOptionGet('GameWindowY') + 30, 'any', 1, '0x000000FE');
+                Orion.AddDisplayTimer(id, timer, 'AboveChar', 'Rectangle', undefined, 0, 30, 'any', 1, '0x000000FE');
                 Orion.DisplayTimerSetObject(id, timerObjectSerial);
             }
         };
@@ -8039,6 +7633,61 @@ var Scripts;
 })(Scripts || (Scripts = {}));
 var Scripts;
 (function (Scripts) {
+    var TimeUtils = (function () {
+        function TimeUtils() {
+        }
+        TimeUtils.ws = function () {
+            var remainingTimeToNextSaveFromLogin = Shared.GetVar('remainingTimeToNextSaveFromLogin');
+            var timeLeftToWs = remainingTimeToNextSaveFromLogin - Orion.Now();
+            if (timeLeftToWs < 3000) {
+                Scripts.Utils.playerPrint("Save kazdou chvilkou");
+            }
+            else {
+                Scripts.Utils.playerPrint("Save za " + Scripts.TimeUtils.parseTimeToHourMinuteSecString(timeLeftToWs));
+            }
+        };
+        TimeUtils.parseWsTimeFromWeb = function () {
+            var response = Orion.HttpGet('https://www.darkparadise.eu/');
+            var webstatus = response
+                .replace(/\n/gm, '')
+                .replace(/\r/gm, '')
+                .replace(/\t/gm, '')
+                .replace(/.*id="webstatus"/gm, '')
+                .replace(/\/table.*/gm, '');
+            var timeNonParsed = webstatus
+                .replace(/\s/g, '')
+                .replace(/.*Poslednísave:<\/b><\/td><td>/, '')
+                .replace(/<\/td>.*/, '');
+            var hour = timeNonParsed.replace(/:.*/, '');
+            timeNonParsed = timeNonParsed.substring(hour.length + 1, timeNonParsed.length);
+            var min = timeNonParsed.substring(0, 2);
+            timeNonParsed = timeNonParsed.substring(min.length, timeNonParsed.length);
+            var day = timeNonParsed.replace(/\..*/, '');
+            timeNonParsed = timeNonParsed.substring(day.length + 1, timeNonParsed.length);
+            var month = timeNonParsed.replace(/\..*/, '');
+            var year = timeNonParsed.substring(day.length + 1, timeNonParsed.length);
+            var saveDate = Date.parse(new Date(parseInt(year), parseInt(month) - 1, parseInt(day)));
+            saveDate += (parseInt(hour) * 1000 * 60 * 60) + (parseInt(min) * 1000 * 60);
+            return saveDate;
+        };
+        TimeUtils.parseTimeToHourMinuteSecString = function (time) {
+            var timeLeft = time;
+            var h = Math.floor(timeLeft / (1000 * 60 * 60));
+            timeLeft -= (h * (1000 * 60 * 60));
+            var m = Math.floor(timeLeft / (1000 * 60));
+            timeLeft -= (m * (1000 * 60));
+            var s = Math.floor(timeLeft / 1000);
+            var hString = h ? h + 'h' : '';
+            var mString = m ? m.toString().length > 1 ? m + 'm' : '0' + m + 'm' : '';
+            var sString = s ? s.toString().length > 1 ? s + 's' : '0' + s + 's' : '';
+            return "" + hString + mString + sString;
+        };
+        return TimeUtils;
+    }());
+    Scripts.TimeUtils = TimeUtils;
+})(Scripts || (Scripts = {}));
+var Scripts;
+(function (Scripts) {
     var Utils = (function () {
         function Utils() {
         }
@@ -8159,6 +7808,42 @@ var Scripts;
                 }
             }
         };
+        Utils.moveItemEnsure = function (serial, count, container, x, y, z) {
+            var item = Orion.FindObject(serial);
+            if (count === 1) {
+                var c = 1;
+                var itemWeightVar = "weight|" + item.Graphic() + "|" + item.Color();
+                var weight = Shared.GetVar(itemWeightVar);
+                if (typeof weight === 'undefined') {
+                    var previousWeight = Player.Weight();
+                    var inContainer = Scripts.Utils.countObjectInContainer({ graphic: item.Graphic(), color: item.Color() });
+                    Scripts.Utils.moveItemAndWait(serial, c, container, x, y, z);
+                    if (inContainer + 1 !== Scripts.Utils.countObjectInContainer({ graphic: item.Graphic(), color: item.Color() })) {
+                        c = 2;
+                        Scripts.Utils.moveItemAndWait(serial, c, container, x, y, z);
+                    }
+                    var itemWeight = (Player.Weight() - previousWeight) / c;
+                    Shared.AddVar(itemWeightVar, itemWeight);
+                }
+                else {
+                    var stackCount = item.Count();
+                    if (Player.MaxWeight() * 3 < Player.Weight() + stackCount * weight) {
+                        c = 2;
+                    }
+                    Scripts.Utils.moveItemAndWait(serial, c, container, x, y, z);
+                }
+            }
+            else {
+                Scripts.Utils.moveItemAndWait(serial, count, container, x, y, z);
+            }
+        };
+        Utils.moveItemAndWait = function (serial, count, container, x, y, z) {
+            Orion.MoveItem(serial, count, container, x, y, z);
+            Orion.Wait(responseDelay);
+            while (!Orion.FindObject(serial)) {
+                Orion.Wait(50);
+            }
+        };
         Utils.moveItems = function (itemsSerials, targetContainerId, quantity, coordinates) {
             if (quantity < 1) {
                 return 0;
@@ -8168,20 +7853,12 @@ var Scripts;
                 var item = itemsSerials_2[_i];
                 var itemCount = Orion.FindObject(item).Count();
                 if (needToMove > itemCount) {
-                    Orion.MoveItem(item, itemCount, targetContainerId, coordinates === null || coordinates === void 0 ? void 0 : coordinates.x, coordinates === null || coordinates === void 0 ? void 0 : coordinates.y);
+                    Scripts.Utils.moveItemAndWait(item, itemCount, targetContainerId, coordinates === null || coordinates === void 0 ? void 0 : coordinates.x, coordinates === null || coordinates === void 0 ? void 0 : coordinates.y);
                     needToMove -= itemCount;
-                    Orion.Wait(responseDelay);
                 }
                 else {
                     Orion.ClearJournal();
-                    Orion.MoveItem(item, quantity, targetContainerId, coordinates === null || coordinates === void 0 ? void 0 : coordinates.x, coordinates === null || coordinates === void 0 ? void 0 : coordinates.y);
-                    Orion.Wait(responseDelay);
-                    var i = Orion.FindObject(item);
-                    if (quantity === 1 &&
-                        !Scripts.Utils.countObjectInContainer({ graphic: i.Graphic(), color: i.Color() })) {
-                        Orion.MoveItem(item, 2, targetContainerId, coordinates === null || coordinates === void 0 ? void 0 : coordinates.x, coordinates === null || coordinates === void 0 ? void 0 : coordinates.y);
-                        Orion.Wait(responseDelay);
-                    }
+                    Scripts.Utils.moveItemEnsure(item, quantity, targetContainerId, coordinates === null || coordinates === void 0 ? void 0 : coordinates.x, coordinates === null || coordinates === void 0 ? void 0 : coordinates.y);
                     needToMove = 0;
                 }
                 if (needToMove < 1) {
@@ -8754,6 +8431,22 @@ var Scripts;
                     }
                 }
             }
+        };
+        Utils.getFriendsNames = function () {
+            var f = Orion.GetFriendList(true);
+            for (var i = 0; i < f.length; i++) {
+                f[i] = f[i].replace(/0x.*\s/, '');
+            }
+            return f;
+        };
+        Utils.waitForContainerGump = function (serial, delay, msgNotFound) {
+            if (delay === void 0) { delay = 1000; }
+            while (delay > 0 && !Orion.GumpExists('container', serial)) {
+                delay -= 50;
+                Orion.Wait(50);
+            }
+            delay <= 0 && msgNotFound && Scripts.Utils.log(msgNotFound);
+            return delay > 0;
         };
         return Utils;
     }());
@@ -9825,7 +9518,15 @@ var Scripts;
                 Scripts.Utils.resetTimer(TimersEnum.bandage);
                 target.waitTarget();
                 Orion.UseObject(bandagesSerials[0]);
-                Scripts.Utils.charPrint(target.gameObject().Serial(), 'band..', ColorEnum.green, true);
+                var targetGameObject = target.gameObject();
+                if (targetGameObject) {
+                    if (targetGameObject.Hits() < targetGameObject.MaxHits()) {
+                        Scripts.Utils.charPrint(target.gameObject().Serial(), 'band..', ColorEnum.green, true);
+                    }
+                    else {
+                        Orion.RemoveDisplayTimer(TimersEnum.bandage);
+                    }
+                }
             }
             else {
                 Scripts.Utils.playerPrint('[ vsichni ok ]', ColorEnum.green, true);

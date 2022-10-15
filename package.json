@@ -1,6 +1,6 @@
 {
   "name": "orionuo",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "Scripts for OrionUO assistant on Darkparadise.eu",
   "scripts": {
     "lint": "eslint ./**/*.ts --quiet --fix",
