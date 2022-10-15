@@ -110,6 +110,7 @@ namespace Scripts {
             const LHand = Orion.ObjAtLayer(1);
             const RHand = Orion.ObjAtLayer(2);
             const friends = Scripts.Utils.getFriendsNames();
+            let lootIterator = 0;
             while (listOfCorpses.length) {
                 for (const id of listOfCorpses) {
                     const corpseName = Scripts.Loot.getCorpseName(id);
@@ -125,7 +126,8 @@ namespace Scripts {
                         // para / not in LOS ?
                         Orion.AddIgnoreListObject('cantLootNow', id);
                     }
-                    Orion.Wait(100);
+                    Orion.Wait(lootIterator < 5 ? 100 : 500);
+                    lootIterator++;
                 }
                 listOfCorpses = Orion.FindType('0x2006', '-1', 'ground', 'fast', 2, 'red', true, 'cantLootNow');
             }
