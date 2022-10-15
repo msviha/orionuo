@@ -149,9 +149,9 @@ namespace Scripts {
             if (!isOpened) {
                 return false;
             }
-
+            const corpseObject = Orion.FindObject(corpseId);
             const hasLootBag = Orion.FindType('0x0E76', '0x049A', corpseId).length > 0;
-            if (hasLootBag && cut) {
+            if (hasLootBag && cut && !corpseObject.IsHuman()) {
                 const nbDrawing = Orion.FindType(gameObject.uncategorized.nbDrawing.graphic, gameObject.uncategorized.nbDrawing.color);
                 const nbDagger = Orion.FindType(gameObject.uncategorized.nbDagger.graphic, gameObject.uncategorized.nbDagger.color);
                 let carvingWeapon = ''
