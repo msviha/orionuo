@@ -570,11 +570,13 @@ function lockpicking() {
 }
 
 /**
- * Lotuje vse (vcetne hracu) v dosahu.
+ * Lotuje vse v dosahu, nelootuje friendy a nereze human mrtvoly.
  * Vyzaduje nastaveni Objects a Find v Orion assistantovi v zalozce Lists
  * 1. nastavit `cutWeapon` na zbran kterou chcete rezat v Objects pripadne zavolat `_addCutWeapon` ve hre
  * 2. nastavit `lootItems` na veci ktere chcete z mrtvolky vybrat v Find
  * @param cut {boolean} default je true, takze reze tela (krome lidskych - nevyzkouseno)
+ * @param silent {boolean} default je false, takze nevypisuje informativni hlasky do journalu
+ * @param closeGumps {boolean} default je false, takze nezavira tela po vylootovani
  * @example in client `_loot`
  * @example in client `_loot false` - nereze tela
  * @example external code `loot();`
