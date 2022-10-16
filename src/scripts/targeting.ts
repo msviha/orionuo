@@ -12,6 +12,18 @@ namespace Scripts {
             return friend.Serial();
         }
 
+        static removeFriend(): string {
+            Scripts.Utils.playerPrint('Remove friend');
+            const selection = Orion.WaitForAddObject('lastRemovedFriend', 60000);
+            if (selection !== 1) {
+                throw 'e';
+            }
+
+            const friend = Orion.FindObject('lastRemovedFriend');
+            Orion.RemoveFriend(friend.Serial());
+            return friend.Serial();
+        }
+
         static addEnemy(): string {
             Scripts.Utils.playerPrint('Add enemy');
             const selection = Orion.WaitForAddObject('lastAddedEnemy', 60000);
@@ -22,6 +34,14 @@ namespace Scripts {
             const enemy = Orion.FindObject('lastAddedEnemy');
             Orion.AddEnemy(enemy.Name(), enemy.Serial());
             return enemy.Serial();
+        }
+
+        static allFriends() {
+            const nearCharacters = Orion.FindTypeEx('0xFFFF', '0xFFFF', 'ground', 'mobile|ignoreself', 18,
+                NotorietyEnum.blue + "|" + NotorietyEnum.green);
+            for (const charObj of nearCharacters) {
+                Orion.AddFriend(charObj.Name(), charObj.Serial());
+            }
         }
 
         static resetFriends() {

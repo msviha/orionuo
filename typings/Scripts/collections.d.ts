@@ -124,10 +124,10 @@ export default interface Collections {
     AddFriend(friendName: string, serial?: string): void;
 
     /**
-     * void Orion.RemoveFriend('friendName');
+     * void Orion.RemoveFriend('serial');
      * Remove a friend from friends list.
      */
-    RemoveFriend(friendName: string): void;
+    RemoveFriend(serial: string): void;
 
     /**
      * void Orion.ClearFriendList();

@@ -96,6 +96,15 @@ function alchemy(potionName: PotionsEnum) {
 }
 
 /**
+ * Prida vsechny modre a zelene viditene hrace do friendu
+ * @example external code `_;`
+ * @example nelze volat z clienta - pouzijte `_alch tmr`
+ */
+function allFriends(potionName: PotionsEnum) {
+    Scripts.Targeting.allFriends();
+}
+
+/**
  * Bezi na pozadi, hlida a doplnuje strelivo z toulcu
  * @example in client `_autoAmmoRefill`
  * @example external code `autoAmmoRefill();`
@@ -441,6 +450,24 @@ function fishTrain(walkingCoordinates?: ICoordinates[]) {
  */
 function friend() {
     Scripts.Targeting.addFriend();
+}
+
+/**
+ * Prida frienda do friendlistu - stejne jako funkce '_friend'
+ * @example in client `_friendadd`
+ * @example external code `friendAdd()`
+ */
+function friendAdd() {
+    Scripts.Targeting.addFriend();
+}
+
+/**
+ * Odebere frienda z friendlistu
+ * @example in client `_friendremove`
+ * @example external code `friendRemove()`
+ */
+function friendRemove() {
+    Scripts.Targeting.removeFriend();
 }
 
 /**
@@ -1386,6 +1413,11 @@ function vendorSell() {
     Scripts.Common.vendor('sell');
 }
 
+/**
+ * Zjisti kolik casu zbyva do dalsiho world save
+ * @example in client `_ws`
+ * @example external code `ws();`
+ */
 function ws() {
     Scripts.TimeUtils.ws();
 }
