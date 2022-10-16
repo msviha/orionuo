@@ -7,7 +7,9 @@ namespace Scripts {
             const nextSave = saveDate + timeBetweenTwoSaves;
 
             let remainingTimeToNextSave = nextSave - Date.now();
-            remainingTimeToNextSave < 0 && (remainingTimeToNextSave += timeBetweenTwoSaves); // website not updated
+            while (remainingTimeToNextSave < 0) {
+                remainingTimeToNextSave += timeBetweenTwoSaves; // website not updated
+            }
 
             const remainingTimeToNextSaveFromLogin = remainingTimeToNextSave + Orion.Now();
             Shared.AddVar('remainingTimeToNextSaveFromLogin', remainingTimeToNextSaveFromLogin);

@@ -8,7 +8,9 @@ var Scripts;
             var timeBetweenTwoSaves = 7875000;
             var nextSave = saveDate + timeBetweenTwoSaves;
             var remainingTimeToNextSave = nextSave - Date.now();
-            remainingTimeToNextSave < 0 && (remainingTimeToNextSave += timeBetweenTwoSaves);
+            while (remainingTimeToNextSave < 0) {
+                remainingTimeToNextSave += timeBetweenTwoSaves;
+            }
             var remainingTimeToNextSaveFromLogin = remainingTimeToNextSave + Orion.Now();
             Shared.AddVar('remainingTimeToNextSaveFromLogin', remainingTimeToNextSaveFromLogin);
             Orion.Print("dalsi Save bude za " + Scripts.TimeUtils.parseTimeToHourMinuteSecString(remainingTimeToNextSave));
