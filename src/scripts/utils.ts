@@ -144,6 +144,58 @@ namespace Scripts {
             }
         }
 
+        static moveItemEnsure(
+            serial: string,
+            count?: number,
+            container?: string,
+            x?: number,
+            y?: number,
+            z?: number
+        ) {
+            const item = Orion.FindObject(serial);
+            if (count === 1) {
+                let c = 1;
+                const itemWeightVar = `weight|${item.Graphic()}|${item.Color()}`;
+                const weight = Shared.GetVar(itemWeightVar);
+                if (typeof weight === 'undefined') {
+                    const previousWeight = Player.Weight();
+                    const inContainer = Scripts.Utils.countObjectInContainer({ graphic: item.Graphic(), color: item.Color() });
+                    Scripts.Utils.moveItemAndWait(serial, c, container, x, y, z);
+                    if (inContainer + 1 !== Scripts.Utils.countObjectInContainer({ graphic: item.Graphic(), color: item.Color() })) {
+                        c = 2;
+                        Scripts.Utils.moveItemAndWait(serial, c, container, x, y, z);
+                    }
+                    const itemWeight = (Player.Weight() - previousWeight) / c;
+                    Shared.AddVar(itemWeightVar, itemWeight);
+                }
+                else {
+                    const stackCount = item.Count();
+                    if (Player.MaxWeight() * 3 < Player.Weight() + stackCount * weight) {
+                        c = 2;
+                    }
+                    Scripts.Utils.moveItemAndWait(serial, c, container, x, y, z);
+                }
+            }
+            else {
+                Scripts.Utils.moveItemAndWait(serial, count, container, x, y, z);
+            }
+        }
+
+        static moveItemAndWait(
+            serial: string,
+            count?: number,
+            container?: string,
+            x?: number,
+            y?: number,
+            z?: number
+        ) {
+            Orion.MoveItem(serial, count, container, x, y, z);
+            Orion.Wait(responseDelay);
+            while (!Orion.FindObject(serial)) {
+                Orion.Wait(50);
+            }
+        }
+
         // return missing quantity
         static moveItems(
             itemsSerials: string[],
@@ -157,21 +209,11 @@ namespace Scripts {
             for (const item of itemsSerials) {
                 const itemCount = Orion.FindObject(item).Count();
                 if (needToMove > itemCount) {
-                    Orion.MoveItem(item, itemCount, targetContainerId, coordinates?.x, coordinates?.y);
+                    Scripts.Utils.moveItemAndWait(item, itemCount, targetContainerId, coordinates?.x, coordinates?.y);
                     needToMove -= itemCount;
-                    Orion.Wait(responseDelay);
                 } else {
                     Orion.ClearJournal();
-                    Orion.MoveItem(item, quantity, targetContainerId, coordinates?.x, coordinates?.y);
-                    Orion.Wait(responseDelay);
-                    const i = Orion.FindObject(item);
-                    if (
-                        quantity === 1 &&
-                        !Scripts.Utils.countObjectInContainer({ graphic: i.Graphic(), color: i.Color() })
-                    ) {
-                        Orion.MoveItem(item, 2, targetContainerId, coordinates?.x, coordinates?.y);
-                        Orion.Wait(responseDelay);
-                    }
+                    Scripts.Utils.moveItemEnsure(item, quantity, targetContainerId, coordinates?.x, coordinates?.y);
                     needToMove = 0;
                 }
                 if (needToMove < 1) {
@@ -846,6 +888,24 @@ namespace Scripts {
                     }
                 }
             }
+        }
+
+        static getFriendsNames(): string[] {
+            const f = Orion.GetFriendList(true);
+            for (var i = 0; i < f.length; i++) {
+                f[i] = f[i].replace(/0x.*\s/, '');
+            }
+            return f;
+        }
+
+        static waitForContainerGump(serial: string, delay = 1000, msgNotFound?: string) {
+            while (delay > 0 && !Orion.GumpExists('container', serial)) {
+                delay -= 50;
+                Orion.Wait(50);
+            }
+
+            delay <= 0 && msgNotFound && Scripts.Utils.log(msgNotFound);
+            return delay > 0;
         }
     }
 }

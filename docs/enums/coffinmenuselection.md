@@ -18,7 +18,7 @@
 
 •  **high**:  = "Sila hlubokeho spanku (-3 nabiti)"
 
-*Defined in [types/enums.ts:255](https://github.com/msviha/orionuo/blob/2f31050/src/types/enums.ts#L255)*
+*Defined in [types/enums.ts:255](https://github.com/msviha/orionuo/blob/0a4af4e/src/types/enums.ts#L255)*
 
 ___
 
@@ -26,7 +26,7 @@ ___
 
 •  **low**:  = "Sila odpocinku (-1 nabiti)"
 
-*Defined in [types/enums.ts:253](https://github.com/msviha/orionuo/blob/2f31050/src/types/enums.ts#L253)*
+*Defined in [types/enums.ts:253](https://github.com/msviha/orionuo/blob/0a4af4e/src/types/enums.ts#L253)*
 
 ___
 
@@ -34,4 +34,4 @@ ___
 
 •  **medium**:  = "Sila spanku (-2 nabiti)"
 
-*Defined in [types/enums.ts:254](https://github.com/msviha/orionuo/blob/2f31050/src/types/enums.ts#L254)*
+*Defined in [types/enums.ts:254](https://github.com/msviha/orionuo/blob/0a4af4e/src/types/enums.ts#L254)*

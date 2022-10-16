@@ -68,10 +68,10 @@ namespace Scripts {
          *
          * @param cut boolean - rezanie mrtvol? (default = true)
          */
-        static corpses(cut = true) {
+        static corpses(cut = true, silent = false, closeGumps = false) {
             Orion.ClearJournal('You put the');
-            const snapshot = this.getBagSnapshot();
-            this.lootCorpsesAround(cut);
+            const snapshot = [...this.getBagSnapshot(), ...Scripts.Dress.getCurrentHandsSerials()];
+            this.lootCorpsesAround(cut, silent, closeGumps);
             Orion.Wait(350);
             this.displayLoot();
             this.moveLootToLootBag(snapshot);
@@ -95,20 +95,41 @@ namespace Scripts {
             }
         }
 
+        static getCorpseName(serial:string): string|undefined {
+            const o = Orion.FindObject(serial);
+            const name = o?.Name().replace('Body of ', '');
+            return name;
+        }
+
         /**
          * Loot mrtvol okolo v radiuse 2 policka
          */
-        private static lootCorpsesAround(cut?: boolean) {
+        private static lootCorpsesAround(cut?: boolean, silent = false, closeGumps = false) {
+            Orion.ClearIgnoreList('cantLootNow');
             let listOfCorpses = Orion.FindType('0x2006', '-1', 'ground', 'fast', 2, 'red');
             const LHand = Orion.ObjAtLayer(1);
             const RHand = Orion.ObjAtLayer(2);
+            const friends = Scripts.Utils.getFriendsNames();
+            let lootIterator = 0;
             while (listOfCorpses.length) {
                 for (const id of listOfCorpses) {
-                    Scripts.Loot.lootCorpseId(id, cut);
-                    Orion.Ignore(id);
-                    Orion.Wait(100);
+                    const corpseName = Scripts.Loot.getCorpseName(id);
+                    if (friends.indexOf(Scripts.Loot.getCorpseName(id)) > -1) {
+                        !silent && Scripts.Utils.playerPrint(`nelootuju ${corpseName} (friend)`, ColorEnum.red);
+                        Orion.Ignore(id);
+                        continue; // nelootovat frienda
+                    }
+                    if (Scripts.Loot.lootCorpseId(id, cut, corpseName, silent, closeGumps)) {
+                        Orion.Ignore(id);
+                    }
+                    else {
+                        // para / not in LOS ?
+                        Orion.AddIgnoreListObject('cantLootNow', id);
+                    }
+                    Orion.Wait(lootIterator < 5 ? 100 : 500);
+                    lootIterator++;
                 }
-                listOfCorpses = Orion.FindType('0x2006', '-1', 'ground', 'fast', 2, 'red');
+                listOfCorpses = Orion.FindType('0x2006', '-1', 'ground', 'fast', 2, 'red', true, 'cantLootNow');
             }
             Scripts.Dress.equip([LHand?.Serial(), RHand?.Serial()]);
 
@@ -121,26 +142,59 @@ namespace Scripts {
          *
          * @param corpseId string - serial mrtvoly
          * @param cut boolean - rezat?
-         * @param weapon boolean - pouzivat zbran na rezanie?
+         * @return boolean jestli je loot uspesny (z pohledu LOS/para)
          */
-        static lootCorpseId(corpseId: string, cut?: boolean) {
-            Orion.OpenContainer(corpseId, 5000, `Container id ${corpseId} not found`);
+        static lootCorpseId(corpseId: string, cut?: boolean, corpseName?: string, silent = false, closeGumps = false): boolean {
+            Orion.OpenContainer(corpseId);
+            const isOpened = Scripts.Utils.waitForContainerGump(corpseId, 5000, silent ? '' : `Container id ${corpseId} not found`);
 
-            const hasLootBag = Orion.Count('0x0E76', '0x049A', corpseId) > 0;
-            if (hasLootBag && cut) {
-                if (Orion.FindObject('cutWeapon')) {
+            if (!isOpened) {
+                return false;
+            }
+            const corpseObject = Orion.FindObject(corpseId);
+            const hasLootBag = Orion.FindType('0x0E76', '0x049A', corpseId).length > 0;
+            if (hasLootBag && cut && !corpseObject.IsHuman()) {
+                const nbDrawing = Orion.FindType(gameObject.uncategorized.nbDrawing.graphic, gameObject.uncategorized.nbDrawing.color);
+                const nbDagger = Orion.FindType(gameObject.uncategorized.nbDagger.graphic, gameObject.uncategorized.nbDagger.color);
+                let carvingWeapon = ''
+                if (nbDrawing.length) {
+                    carvingWeapon = nbDrawing[0];
+                }
+                else if (nbDagger.length) {
+                    carvingWeapon = nbDagger[0];
+                }
+                else if (Orion.FindObject('cutWeapon')) {
+                    carvingWeapon = 'cutWeapon';
+                }
+
+                if (carvingWeapon) {
                     Orion.CancelWaitTarget();
                     Orion.WaitTargetObject(corpseId);
                     Orion.UseObject('cutWeapon');
                 }
                 Orion.Wait(250);
             }
-
-            const itemsInCorpse = Orion.FindList('lootItems', corpseId);
-            if (itemsInCorpse.length) {
-                this.grabItems(itemsInCorpse);
+            let ret = true;
+            if (hasLootBag) {
+                const itemsInCorpse = Orion.FindList('lootItems', corpseId);
+                if (itemsInCorpse.length) {
+                    this.grabItems(itemsInCorpse);
+                    // check ze nic nezustalo
+                    if (Orion.FindList('lootItems', corpseId).length) {
+                        !silent && Scripts.Utils.log(`${corpseName} neco tam jeste je`);
+                        ret = false;
+                    }
+                }
             }
+            else {
+                !silent && Scripts.Utils.log(`${corpseName} nema loot pytel`);
+            }
+
+            closeGumps && Orion.CloseGump('container', corpseId);
+            return ret;
         }
+
+
 
         private static grabItems(serials: string[]) {
             let serverLagActionsLeft = 4;

@@ -449,6 +449,10 @@ namespace Scripts {
                     const mid = (name.length / 2) | 0;
                     playerShorCode = name[0] + name[mid] + name[name.length - 1];
                 }
+
+                if (playerShorCode.indexOf('gm') > -1) {
+                    playerShorCode = 'ggg';
+                }
                 Shared.AddVar('playerShorCode', playerShorCode);
             }
 

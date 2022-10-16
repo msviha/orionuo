@@ -21,7 +21,7 @@
 
 •  **name**: string
 
-*Defined in [types/interfaces.ts:71](https://github.com/msviha/orionuo/blob/2f31050/src/types/interfaces.ts#L71)*
+*Defined in [types/interfaces.ts:71](https://github.com/msviha/orionuo/blob/0a4af4e/src/types/interfaces.ts#L71)*
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 •  **selections**: string[]
 
-*Defined in [types/interfaces.ts:72](https://github.com/msviha/orionuo/blob/2f31050/src/types/interfaces.ts#L72)*
+*Defined in [types/interfaces.ts:72](https://github.com/msviha/orionuo/blob/0a4af4e/src/types/interfaces.ts#L72)*

@@ -59,6 +59,7 @@ export default interface ObjectsSearching {
         distance?: number | string,
         notoriety?: string,
         recurse?: boolean,
+        ignoreLists?: any
     ): Array<string> | null;
 
     /**
@@ -149,6 +150,8 @@ export default interface ObjectsSearching {
         notoriety?: string,
         recurse?: boolean,
     ): Array<string> | null;
+
+    GetFindList(listName: string): any
 
     /**
      * GameObject Orion.ObjAtLayer('layerName', ['serial'=self]);

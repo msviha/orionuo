@@ -1,5 +1,10 @@
 var config = Shared.AddVar('config', {
     updateRate: 500,
+    experimental: {
+        statusbar: {
+            useGetFriendsStatus: false
+        }
+    },
     mobMaster: {
         sayColor: '0x00B3',
         renameNameType: 'autoName'
@@ -15,7 +20,7 @@ var config = Shared.AddVar('config', {
     targeting: {
         highlightEnemySilent: true,
         friendlyTargetTypes: [
-            { graphic: '0x0005', color: '0x0000', exceptionNames: ['Summoner', 'Matriarch', 'Firestarter'] },
+            { graphic: '0x000E', color: '0x0000', exceptionNames: ['Summoner', 'Matriarch', 'Firestarter'] },
             { graphic: '0x000D', color: '0x0B77', exceptionNames: ['Vortex'] }
         ]
     },
@@ -121,7 +126,7 @@ var config = Shared.AddVar('config', {
     teleportTimer: {
         timer: {
             displayTimer: true,
-            position:  'RightTop',
+            position: 'RightTop',
             type: 'Line|Bar',
             text: 'Teleport',
             xFromPosition: 0,
@@ -129,6 +134,19 @@ var config = Shared.AddVar('config', {
             textColor: '0x88B',
             font: 0,
             backgroundColor: '0x88B'
+        }
+    },
+    save: {
+        timer: {
+            displayTimer: true,
+            position: 'RightBottom',
+            type: 'Rectangle',
+            text: 'SAVE',
+            xFromPosition: 0,
+            yFromPosition: 0,
+            textColor: '0x88B',
+            font: 0,
+            backgroundColor: '0xFF0000BB'
         }
     }
 });

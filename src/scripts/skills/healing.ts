@@ -48,7 +48,15 @@ namespace Scripts {
                 Scripts.Utils.resetTimer(TimersEnum.bandage);
                 target.waitTarget();
                 Orion.UseObject(bandagesSerials[0]);
-                Utils.charPrint(target.gameObject().Serial(), 'band..', ColorEnum.green, true);
+                const targetGameObject = target.gameObject();
+                if (targetGameObject) {
+                    if (targetGameObject.Hits() < targetGameObject.MaxHits()) {
+                        Utils.charPrint(target.gameObject().Serial(), 'band..', ColorEnum.green, true);
+                    }
+                    else {
+                        Orion.RemoveDisplayTimer(TimersEnum.bandage);
+                    }
+                }
             } else {
                 Utils.playerPrint('[ vsichni ok ]', ColorEnum.green, true);
             }

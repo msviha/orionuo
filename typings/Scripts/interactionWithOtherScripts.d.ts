@@ -44,6 +44,8 @@ export default interface InteractionWithOtherScripts {
      */
     Now(): number;
 
+    HttpGet(path:string):string
+
     /**
      * void Orion.LoadScript('filePath');
      * Load the script file.

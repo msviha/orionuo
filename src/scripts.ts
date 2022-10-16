@@ -1,7 +1,7 @@
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 1.8.0');
+    Orion.Print(-1, 'version 1.9.0');
     Orion.Print(-1, '-------------+');
 }
 
@@ -10,10 +10,12 @@ function version() {
  */
 function Autostart() {
     version();
+    Scripts.Autostart.updateWsFromWebsite();
     Orion.ClearJournal();
     Shared.AddArray('customStatusBars', []);
     Shared.AddVar('ws', false);
     const autoRename = config?.autoHandlers.autoRename.enabled;
+    const getFriendsStatus = config?.experimental?.statusbar?.useGetFriendsStatus;
     const autoHandlers = autoRename;
     const autoDinstance = 20; //TODO konfig
 
@@ -22,6 +24,7 @@ function Autostart() {
     Scripts.Dress.saveEquip();
     Orion.Exec('userAutostart');
     while (true) {
+        getFriendsStatus && Orion.GetFriendsStatus();
         Scripts.Autostart.updatePlayerHp();
         Scripts.Autostart.updateLastAttackHp();
         Scripts.Autostart.checkWorldSave();
@@ -76,11 +79,29 @@ function addMount() {
 /**
  * Micha pres obyc mortar
  * @param potionName zkratka potionu
- * @example in client `_alchemy tmr`
+ * @example in client `_alchemy tmr;`
+ */
+function alch(potionName: PotionsEnum) {
+    Scripts.Alchemy.mix(potionName);
+}
+
+/**
+ * Micha pres obyc mortar
+ * @param potionName zkratka potionu
  * @example external code `alchemy('tmr');`
+ * @example nelze volat z clienta - pouzijte `_alch tmr`
  */
 function alchemy(potionName: PotionsEnum) {
     Scripts.Alchemy.mix(potionName);
+}
+
+/**
+ * Prida vsechny modre a zelene viditene hrace do friendu
+ * @example external code `_;`
+ * @example nelze volat z clienta - pouzijte `_alch tmr`
+ */
+function allFriends(potionName: PotionsEnum) {
+    Scripts.Targeting.allFriends();
 }
 
 /**
@@ -432,6 +453,24 @@ function friend() {
 }
 
 /**
+ * Prida frienda do friendlistu - stejne jako funkce '_friend'
+ * @example in client `_friendadd`
+ * @example external code `friendAdd()`
+ */
+function friendAdd() {
+    Scripts.Targeting.addFriend();
+}
+
+/**
+ * Odebere frienda z friendlistu
+ * @example in client `_friendremove`
+ * @example external code `friendRemove()`
+ */
+function friendRemove() {
+    Scripts.Targeting.removeFriend();
+}
+
+/**
  * Micha na gm mortaru
  * @param potionName zkratka potionu
  * @example in client `_gmMortar tmr`
@@ -451,15 +490,6 @@ function gmMortar(potionName: PotionsEnum) {
  */
 function harp(target?: TargetEnum) {
     Scripts.Music.harp(target);
-}
-
-/**
- * Zacne lecit pety (vlastni!) okolo sebe. Pri opakovanem volani prestane lecit, stejne jako pokud se od petu vzdalite
- * @example in client `_healPets`
- * @example external code `healPets()`
- */
-function healPets() {
-    Scripts.PetCommander.healPetsToggle();
 }
 
 /**
@@ -502,24 +532,6 @@ function inscription(circle: number, spell: string, quantity = 0, useManaRef = f
 }
 
 /**
- * Prejmenuje vsechny summony a posle na lastattack
- * @example `_killAll`
- * @example external code `killAll();`
- */
-function killAll() {
-    Scripts.PetCommander.killAll();
-}
-
-/**
- * Prejmenuje summa a zarve s nim kill a necha vyhozenej target. Dobre na posilani summu na ruzne targety (toci je to)
- * @example `_killTarget`
- * @example external code `killTarget();`
- */
-function killTarget() {
-    Scripts.PetCommander.killTarget();
-}
-
-/**
  * Hodi na zem a veme + odpali lavabombu - vyhodi target na koho ji chces pouzit
  * pokud nemas cepnutou tak cepne a odpali lavabombu - vyhodi target na koho ji chces pouzit
  * @example in client `_lavaBomb`
@@ -558,18 +570,20 @@ function lockpicking() {
 }
 
 /**
- * Lotuje vse (vcetne hracu) v dosahu.
+ * Lotuje vse v dosahu, nelootuje friendy a nereze human mrtvoly.
  * Vyzaduje nastaveni Objects a Find v Orion assistantovi v zalozce Lists
  * 1. nastavit `cutWeapon` na zbran kterou chcete rezat v Objects pripadne zavolat `_addCutWeapon` ve hre
  * 2. nastavit `lootItems` na veci ktere chcete z mrtvolky vybrat v Find
  * @param cut {boolean} default je true, takze reze tela (krome lidskych - nevyzkouseno)
+ * @param silent {boolean} default je false, takze nevypisuje informativni hlasky do journalu
+ * @param closeGumps {boolean} default je false, takze nezavira tela po vylootovani
  * @example in client `_loot`
  * @example in client `_loot false` - nereze tela
  * @example external code `loot();`
  * @example external code `loot(false);`
  */
-function loot(cut = true) {
-    Scripts.Loot.corpses(parseParam(cut));
+function loot(cut = true, silent = false, closeGumps = false) {
+    Scripts.Loot.corpses(parseParam(cut), parseParam(silent), parseParam(closeGumps));
 }
 
 /**
@@ -1399,4 +1413,13 @@ function vendorBuy() {
  */
 function vendorSell() {
     Scripts.Common.vendor('sell');
+}
+
+/**
+ * Zjisti kolik casu zbyva do dalsiho world save
+ * @example in client `_ws`
+ * @example external code `ws();`
+ */
+function ws() {
+    Scripts.TimeUtils.ws();
 }

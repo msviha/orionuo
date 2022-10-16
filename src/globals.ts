@@ -91,6 +91,14 @@ const gameObject: any = {
                 y: 30,
             },
         },
+        nbDrawing: {
+            graphic: '0x10E4',
+            color: '0x0B80',
+            bag: {
+                x: 150,
+                y: 30,
+            },
+        },
         mortar: {
             graphic: '0x0E9B',
             color: '0x0000',
@@ -1676,7 +1684,7 @@ const gameObject: any = {
             },
             gmMortarSelection: 'Shrink (306 Batwings)',
             alchemySelection: 'Shrink',
-            reagent: 'batwing',
+            reagent: 'batwings',
             reagentsCount: 3,
         },
         lavabomb: {

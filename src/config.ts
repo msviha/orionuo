@@ -1,5 +1,10 @@
 const config = Shared.GetVar('config', {
     updateRate: 500,
+    experimental: {
+        statusbar: {
+            useGetFriendsStatus: false
+        }
+    },
     mobMaster: {
         sayColor: '0x00B3',
         renameNameType: 'autoName',
@@ -129,6 +134,19 @@ const config = Shared.GetVar('config', {
             textColor: '0x88B',
             font: 0,
             backgroundColor: '0x88B'
+        }
+    },
+    save: {
+        timer: {
+            displayTimer: true,
+            position: 'RightBottom',
+            type: 'Rectangle',
+            text: 'SAVE',
+            xFromPosition: 0,
+            yFromPosition: 0,
+            textColor: '0x88B',
+            font: 0,
+            backgroundColor: '0xFF0000BB',
         }
     }
 });

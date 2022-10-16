@@ -161,5 +161,19 @@ namespace Scripts {
 
             Shared.AddArray('weapons', weapons);
         }
+
+        /**
+         * Vrati array serialov leva + prava ruka
+         *
+         * @returns string[]
+         */
+        static getCurrentHandsSerials(): string[] {
+            const zbran = Orion.ObjAtLayer(1, 'self'); // zbran
+            const stit = Orion.ObjAtLayer(2, 'self'); // stit
+            const hands = [];
+            zbran && hands.push(zbran.Serial());
+            stit && hands.push(stit.Serial());
+            return hands;
+        }
     }
 }

@@ -107,13 +107,15 @@ export default interface Collections {
      * StringList Orion.GetFriendList();
      * Return string list with friends id's.
      */
-    GetFriendList(): Array<string>;
+    GetFriendList(names?: boolean): Array<string>;
 
     /**
      * StringList Orion.GetEnemyList();
      * Return string list with enemies id's.
      */
     GetEnemyList(): Array<string>;
+
+    GetFriendsStatus(): void;
 
     /**
      * void Orion.AddFriend('friendName', ['serial'=targetRequest]);
@@ -122,10 +124,10 @@ export default interface Collections {
     AddFriend(friendName: string, serial?: string): void;
 
     /**
-     * void Orion.RemoveFriend('friendName');
+     * void Orion.RemoveFriend('serial');
      * Remove a friend from friends list.
      */
-    RemoveFriend(friendName: string): void;
+    RemoveFriend(serial: string): void;
 
     /**
      * void Orion.ClearFriendList();

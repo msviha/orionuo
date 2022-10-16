@@ -1,5 +1,6 @@
 declare namespace Scripts {
     class Autostart {
+        static updateWsFromWebsite(): void;
         static updatePlayerHp(): void;
         static updateLastAttackHp(): void;
         static autoRename(nearCharacters: GameObject[]): void;
@@ -23,7 +24,9 @@ declare function autoStealing(autoheal: boolean): void;
 declare function addCutWeapon(): void;
 declare function addLootBag(): void;
 declare function addMount(): void;
+declare function alch(potionName: PotionsEnum): void;
 declare function alchemy(potionName: PotionsEnum): void;
+declare function allFriends(potionName: PotionsEnum): void;
 declare function autoAmmoRefill(): void;
 declare function mix(potionName: PotionsEnum): void;
 declare function attackLast(): void;
@@ -57,20 +60,19 @@ declare function equip(): void;
 declare function fillPotion(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean): void;
 declare function fishTrain(walkingCoordinates?: ICoordinates[]): void;
 declare function friend(): void;
+declare function friendAdd(): void;
+declare function friendRemove(): void;
 declare function gmMortar(potionName: PotionsEnum): void;
 declare function harp(target?: TargetEnum): void;
-declare function healPets(): void;
 declare function hideAll(toggleResend?: boolean): void;
 declare function hiding(allowRehid?: boolean, doubleTapToRehid?: boolean): void;
 declare function hoverCheck(): void;
 declare function inscription(circle: number, spell: string, quantity?: number, useManaRef?: boolean): void;
-declare function killAll(): void;
-declare function killTarget(): void;
 declare function lavaBomb(): void;
 declare function light(shouldCast?: boolean): void;
 declare function lilith(): void;
 declare function lockpicking(): void;
-declare function loot(cut?: boolean): void;
+declare function loot(cut?: boolean, silent?: boolean, closeGumps?: boolean): void;
 declare function lootAll(delay?: number): void;
 declare function lumber(): void;
 declare function lute(target?: TargetEnum): void;
@@ -153,6 +155,7 @@ declare function vampRakevMedium(): void;
 declare function vampRakevHigh(): void;
 declare function vendorBuy(): void;
 declare function vendorSell(): void;
+declare function ws(): void;
 declare function parseParam(param: any): any;
 declare namespace Scripts {
     class Auto {
@@ -248,6 +251,7 @@ declare namespace Scripts {
         static addWeapon(index: number): boolean;
         static addShield(): boolean;
         static resetWeaponsArray(): void;
+        static getCurrentHandsSerials(): string[];
     }
 }
 declare namespace Scripts {
@@ -278,10 +282,11 @@ declare namespace Scripts {
         static addLootBag(): number;
         static addCutWeapon(): number;
         static carveBody(carveNearestBodyAutomatically?: boolean): void;
-        static corpses(cut?: boolean): void;
+        static corpses(cut?: boolean, silent?: boolean, closeGumps?: boolean): void;
         static lootAllFrom(delay?: number): void;
+        static getCorpseName(serial: string): string | undefined;
         private static lootCorpsesAround;
-        static lootCorpseId(corpseId: string, cut?: boolean): void;
+        static lootCorpseId(corpseId: string, cut?: boolean, corpseName?: string, silent?: boolean, closeGumps?: boolean): boolean;
         private static grabItems;
         static getBagSnapshot(): string[];
         static moveLootToLootBag(oldSnapshot: string[], lootBag?: string): void;
@@ -316,30 +321,6 @@ declare namespace Scripts {
         static mountMyPet(): boolean;
         static unshrinkAndMount(): void;
         static addMount(): void;
-    }
-}
-declare namespace Scripts {
-    class PetCommander {
-        static getUsedNames(): string[];
-        static getMyPets(): IMyPet[];
-        static filterPetsInDistance(): IMyPet[];
-        static removeFromMyPets(name: string): void;
-        static renameAndSavePet(petSerial: string): IMyPet;
-        static getNextPetByIndex(index: number): IMyPet | undefined;
-        static ignoreMyPets(): void;
-        static getAvailableNames(): string[];
-        static getRandomAvailableName(): string;
-        static savePet(pet: {
-            serial: string;
-            name: string;
-        }): void;
-        static getNewPet(): IMyPet | undefined;
-        static killTarget(): void;
-        static killAll(): void;
-        static healPetsToggleStart(): void;
-        static healPetsToggleStop(message?: string): void;
-        static sortPetsByHits(arr: IMyPet[]): IMyPet[];
-        static healPetsToggle(): void;
     }
 }
 declare namespace Scripts {
@@ -448,7 +429,9 @@ declare namespace Scripts {
 declare namespace Scripts {
     class Targeting {
         static addFriend(): string;
+        static removeFriend(): string;
         static addEnemy(): string;
+        static allFriends(): void;
         static resetFriends(): void;
         static resetEnemies(): void;
         static targetNext(reverse: boolean, timeToStorePreviousTargets: number, additionalFlags: string[], notoriety: string[], opts: ITargetNextOpts): void;
@@ -494,6 +477,13 @@ declare namespace Scripts {
     }
 }
 declare namespace Scripts {
+    class TimeUtils {
+        static ws(): void;
+        static parseWsTimeFromWeb(): number;
+        static parseTimeToHourMinuteSecString(time: number): string;
+    }
+}
+declare namespace Scripts {
     class Utils {
         static selectMenu(menuName: string | ISpecialSelection, selections: Array<string | ISpecialSelection>, firstCall?: boolean): void;
         static useAndSelect(serial: string, selections: ISelect[], use?: boolean): void;
@@ -503,6 +493,8 @@ declare namespace Scripts {
         static countObjectInContainer(obj: IMyGameObject, container?: string, containerIsObjItemOnGround?: boolean): number;
         static countItemsBySerials(itemsSerials: string[]): number;
         static moveObjectToContainer(obj: any, fromContainer: string, targetContainer: string): void;
+        static moveItemEnsure(serial: string, count?: number, container?: string, x?: number, y?: number, z?: number): void;
+        static moveItemAndWait(serial: string, count?: number, container?: string, x?: number, y?: number, z?: number): void;
         static moveItems(itemsSerials: string[], targetContainerId: string, quantity: number, coordinates?: ICoordinates): number;
         static waitWhileSomethingInJournal(messages: string[], wait?: number, timeAhead?: number, flags?: string): number;
         static worldSaveCheckWait(): void;
@@ -546,6 +538,8 @@ declare namespace Scripts {
         static OpenContainerPath(path: string[]): void;
         static isItemInBank(obj: GameObject): boolean;
         static findMyGameObject(graphic: string, color?: string, obj?: any): IMyGameObject | undefined;
+        static getFriendsNames(): string[];
+        static waitForContainerGump(serial: string, delay?: number, msgNotFound?: string): boolean;
     }
 }
 declare namespace Scripts {
