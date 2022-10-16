@@ -26,6 +26,7 @@ declare function addLootBag(): void;
 declare function addMount(): void;
 declare function alch(potionName: PotionsEnum): void;
 declare function alchemy(potionName: PotionsEnum): void;
+declare function allFriends(potionName: PotionsEnum): void;
 declare function autoAmmoRefill(): void;
 declare function mix(potionName: PotionsEnum): void;
 declare function attackLast(): void;
@@ -59,6 +60,8 @@ declare function equip(): void;
 declare function fillPotion(potionName: PotionsEnum, switchWarModeWhenNeeded?: boolean): void;
 declare function fishTrain(walkingCoordinates?: ICoordinates[]): void;
 declare function friend(): void;
+declare function friendAdd(): void;
+declare function friendRemove(): void;
 declare function gmMortar(potionName: PotionsEnum): void;
 declare function harp(target?: TargetEnum): void;
 declare function hideAll(toggleResend?: boolean): void;
@@ -426,7 +429,9 @@ declare namespace Scripts {
 declare namespace Scripts {
     class Targeting {
         static addFriend(): string;
+        static removeFriend(): string;
         static addEnemy(): string;
+        static allFriends(): void;
         static resetFriends(): void;
         static resetEnemies(): void;
         static targetNext(reverse: boolean, timeToStorePreviousTargets: number, additionalFlags: string[], notoriety: string[], opts: ITargetNextOpts): void;

@@ -83,7 +83,7 @@ var Scripts;
             }
         };
         Autostart.checkWorldSave = function () {
-            var _a;
+            var _a, _b, _c, _d;
             if (Orion.InJournal('World save has been initiated.', 'sys')) {
                 var timeBetweenTwoSaves = 7875000;
                 Orion.RemoveDisplayTimer('save');
@@ -103,13 +103,16 @@ var Scripts;
                 Orion.Wait(1500);
                 Shared.AddVar('ws', false);
             }
-            if (Shared.GetVar('remainingTimeToNextSaveFromLogin') && !Orion.DisplayTimerExists('save')) {
+            if (Shared.GetVar('remainingTimeToNextSaveFromLogin') &&
+                !Orion.DisplayTimerExists('save') && ((_c = (_b = config === null || config === void 0 ? void 0 : config.save) === null || _b === void 0 ? void 0 : _b.timer) === null || _c === void 0 ? void 0 : _c.displayTimer)) {
                 var timeFromLogin = Orion.Now();
                 var fiveMins = 1000 * 60 * 5;
                 var remainingTimeToNextSaveFromLogin = Shared.GetVar('remainingTimeToNextSaveFromLogin');
-                if (timeFromLogin > remainingTimeToNextSaveFromLogin - fiveMins) {
-                    Scripts.Utils.playerPrint('[ za 5 minut SAVE !!! ]', ColorEnum.red);
-                    Orion.AddDisplayTimer('save', fiveMins, 'RightBottom', 'Rectangle', 'SAVE', 0, 0, 'any');
+                var remainingTime = remainingTimeToNextSaveFromLogin - timeFromLogin;
+                if (remainingTime > 0 && remainingTime < fiveMins) {
+                    var timerDef = (_d = config === null || config === void 0 ? void 0 : config.klamak) === null || _d === void 0 ? void 0 : _d.timer;
+                    Scripts.Utils.playerPrint("[ za " + Scripts.TimeUtils.parseTimeToHourMinuteSecString(remainingTime) + " SAVE !!! ]", ColorEnum.red);
+                    Orion.AddDisplayTimer('save', remainingTime, timerDef.position, timerDef.type, timerDef.text, timerDef.xFromPosition, timerDef.yFromPosition, timerDef.textColor, timerDef.font, timerDef.backgroundColor);
                 }
             }
         };
@@ -253,6 +256,19 @@ var config = Shared.GetVar('config', {
             textColor: '0x88B',
             font: 0,
             backgroundColor: '0x88B'
+        }
+    },
+    save: {
+        timer: {
+            displayTimer: true,
+            position: 'RightBottom',
+            type: 'Rectangle',
+            text: 'SAVE',
+            xFromPosition: 0,
+            yFromPosition: 0,
+            textColor: '0x88B',
+            font: 0,
+            backgroundColor: '0xFF0000BB'
         }
     }
 });
@@ -3152,6 +3168,9 @@ function alch(potionName) {
 function alchemy(potionName) {
     Scripts.Alchemy.mix(potionName);
 }
+function allFriends(potionName) {
+    Scripts.Targeting.allFriends();
+}
 function autoAmmoRefill() {
     Scripts.Rang.autoAmmoRefill();
 }
@@ -3258,6 +3277,12 @@ function fishTrain(walkingCoordinates) {
 }
 function friend() {
     Scripts.Targeting.addFriend();
+}
+function friendAdd() {
+    Scripts.Targeting.addFriend();
+}
+function friendRemove() {
+    Scripts.Targeting.removeFriend();
 }
 function gmMortar(potionName) {
     Scripts.Alchemy.gmMortar(potionName);
@@ -7016,6 +7041,16 @@ var Scripts;
             Orion.AddFriend(friend.Name(), friend.Serial());
             return friend.Serial();
         };
+        Targeting.removeFriend = function () {
+            Scripts.Utils.playerPrint('Remove friend');
+            var selection = Orion.WaitForAddObject('lastRemovedFriend', 60000);
+            if (selection !== 1) {
+                throw 'e';
+            }
+            var friend = Orion.FindObject('lastRemovedFriend');
+            Orion.RemoveFriend(friend.Serial());
+            return friend.Serial();
+        };
         Targeting.addEnemy = function () {
             Scripts.Utils.playerPrint('Add enemy');
             var selection = Orion.WaitForAddObject('lastAddedEnemy', 60000);
@@ -7025,6 +7060,13 @@ var Scripts;
             var enemy = Orion.FindObject('lastAddedEnemy');
             Orion.AddEnemy(enemy.Name(), enemy.Serial());
             return enemy.Serial();
+        };
+        Targeting.allFriends = function () {
+            var nearCharacters = Orion.FindTypeEx('0xFFFF', '0xFFFF', 'ground', 'mobile|ignoreself', 18, NotorietyEnum.blue + "|" + NotorietyEnum.green);
+            for (var _i = 0, nearCharacters_2 = nearCharacters; _i < nearCharacters_2.length; _i++) {
+                var charObj = nearCharacters_2[_i];
+                Orion.AddFriend(charObj.Name(), charObj.Serial());
+            }
         };
         Targeting.resetFriends = function () {
             Orion.ClearFriendList();
@@ -7208,8 +7250,8 @@ var Scripts;
                 var nearCharacters = Orion.FindTypeEx('any', '0xFFFF', 'ground', 'mobile|live|ignoreself', 18, noto)
                     .filter(function (a) { return !a.CanChangeName() && !friendList_1.some(function (f) { return f === a.Serial(); }); })
                     .sort(function (a, b) { return a.Distance() - b.Distance(); });
-                for (var _i = 0, nearCharacters_2 = nearCharacters; _i < nearCharacters_2.length; _i++) {
-                    var char = nearCharacters_2[_i];
+                for (var _i = 0, nearCharacters_3 = nearCharacters; _i < nearCharacters_3.length; _i++) {
+                    var char = nearCharacters_3[_i];
                     Scripts.Utils.ensureName(char);
                     if ((char.Name() &&
                         char.Name().length === 8 &&

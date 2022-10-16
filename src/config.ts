@@ -135,5 +135,18 @@ const config = Shared.GetVar('config', {
             font: 0,
             backgroundColor: '0x88B'
         }
+    },
+    save: {
+        timer: {
+            displayTimer: true,
+            position: 'RightBottom',
+            type: 'Rectangle',
+            text: 'SAVE',
+            xFromPosition: 0,
+            yFromPosition: 0,
+            textColor: '0x88B',
+            font: 0,
+            backgroundColor: '0xFF0000BB',
+        }
     }
 });

@@ -119,14 +119,30 @@ namespace Scripts {
                 Orion.Wait(1500);
                 Shared.AddVar('ws', false);
             }
-            if (Shared.GetVar('remainingTimeToNextSaveFromLogin') && !Orion.DisplayTimerExists('save')) {
+            if (
+                Shared.GetVar('remainingTimeToNextSaveFromLogin') &&
+                !Orion.DisplayTimerExists('save') &&
+                config?.save?.timer?.displayTimer
+            ) {
                 const timeFromLogin = Orion.Now();
                 const fiveMins = 1000*60*5;
                 const remainingTimeToNextSaveFromLogin = Shared.GetVar('remainingTimeToNextSaveFromLogin');
                 const remainingTime = remainingTimeToNextSaveFromLogin - timeFromLogin;
                 if (remainingTime > 0 && remainingTime < fiveMins) {
+                    const timerDef = config?.klamak?.timer;
                     Scripts.Utils.playerPrint(`[ za ${Scripts.TimeUtils.parseTimeToHourMinuteSecString(remainingTime)} SAVE !!! ]`, ColorEnum.red);
-                    Orion.AddDisplayTimer('save', remainingTime,  'RightBottom', 'Rectangle', 'SAVE', 0, 0, 'any');
+                    Orion.AddDisplayTimer(
+                        'save',
+                        remainingTime,
+                        timerDef.position,
+                        timerDef.type,
+                        timerDef.text,
+                        timerDef.xFromPosition,
+                        timerDef.yFromPosition,
+                        timerDef.textColor,
+                        timerDef.font,
+                        timerDef.backgroundColor
+                    );
                 }
             }
         }
