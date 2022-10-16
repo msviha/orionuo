@@ -123,9 +123,10 @@ namespace Scripts {
                 const timeFromLogin = Orion.Now();
                 const fiveMins = 1000*60*5;
                 const remainingTimeToNextSaveFromLogin = Shared.GetVar('remainingTimeToNextSaveFromLogin');
-                if (timeFromLogin > remainingTimeToNextSaveFromLogin - fiveMins) {
-                    Scripts.Utils.playerPrint('[ za 5 minut SAVE !!! ]', ColorEnum.red);
-                    Orion.AddDisplayTimer('save', fiveMins,  'RightBottom', 'Rectangle', 'SAVE', 0, 0, 'any');
+                const remainingTime = remainingTimeToNextSaveFromLogin - timeFromLogin;
+                if (remainingTime > 0 && remainingTime < fiveMins) {
+                    Scripts.Utils.playerPrint(`[ za ${Scripts.TimeUtils.parseTimeToHourMinuteSecString(remainingTime)} SAVE !!! ]`, ColorEnum.red);
+                    Orion.AddDisplayTimer('save', remainingTime,  'RightBottom', 'Rectangle', 'SAVE', 0, 0, 'any');
                 }
             }
         }
