@@ -131,7 +131,7 @@ namespace Scripts {
                 const remainingTimeToNextSaveFromLogin = Shared.GetVar('remainingTimeToNextSaveFromLogin');
                 const remainingTime = remainingTimeToNextSaveFromLogin - timeFromLogin;
                 if (remainingTime > 0 && remainingTime < fiveMins) {
-                    const timerDef = config?.klamak?.timer;
+                    const timerDef = config?.save?.timer;
                     Scripts.Utils.playerPrint(`[ za ${Scripts.TimeUtils.parseTimeToHourMinuteSecString(remainingTime)} SAVE !!! ]`, ColorEnum.red);
                     Orion.AddDisplayTimer(
                         'save',

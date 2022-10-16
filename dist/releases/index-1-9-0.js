@@ -112,7 +112,7 @@ var Scripts;
                 var remainingTimeToNextSaveFromLogin = Shared.GetVar('remainingTimeToNextSaveFromLogin');
                 var remainingTime = remainingTimeToNextSaveFromLogin - timeFromLogin;
                 if (remainingTime > 0 && remainingTime < fiveMins) {
-                    var timerDef = (_d = config === null || config === void 0 ? void 0 : config.klamak) === null || _d === void 0 ? void 0 : _d.timer;
+                    var timerDef = (_d = config === null || config === void 0 ? void 0 : config.save) === null || _d === void 0 ? void 0 : _d.timer;
                     Scripts.Utils.playerPrint("[ za " + Scripts.TimeUtils.parseTimeToHourMinuteSecString(remainingTime) + " SAVE !!! ]", ColorEnum.red);
                     Orion.AddDisplayTimer('save', remainingTime, timerDef.position, timerDef.type, timerDef.text, timerDef.xFromPosition, timerDef.yFromPosition, timerDef.textColor, timerDef.font, timerDef.backgroundColor);
                 }
