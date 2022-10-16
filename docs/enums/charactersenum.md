@@ -27,7 +27,7 @@
 
 •  **brujah**:  = "brujah"
 
-*Defined in [types/enums.ts:277](https://github.com/msviha/orionuo/blob/2f31050/src/types/enums.ts#L277)*
+*Defined in [types/enums.ts:277](https://github.com/msviha/orionuo/blob/0a4af4e/src/types/enums.ts#L277)*
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 •  **cleric**:  = "cleric"
 
-*Defined in [types/enums.ts:279](https://github.com/msviha/orionuo/blob/2f31050/src/types/enums.ts#L279)*
+*Defined in [types/enums.ts:279](https://github.com/msviha/orionuo/blob/0a4af4e/src/types/enums.ts#L279)*
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 •  **craftsman**:  = "craftsman"
 
-*Defined in [types/enums.ts:272](https://github.com/msviha/orionuo/blob/2f31050/src/types/enums.ts#L272)*
+*Defined in [types/enums.ts:272](https://github.com/msviha/orionuo/blob/0a4af4e/src/types/enums.ts#L272)*
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 •  **druid**:  = "druid"
 
-*Defined in [types/enums.ts:278](https://github.com/msviha/orionuo/blob/2f31050/src/types/enums.ts#L278)*
+*Defined in [types/enums.ts:278](https://github.com/msviha/orionuo/blob/0a4af4e/src/types/enums.ts#L278)*
 
 ___
 
@@ -59,7 +59,7 @@ ___
 
 •  **gangrel**:  = "gangrel"
 
-*Defined in [types/enums.ts:271](https://github.com/msviha/orionuo/blob/2f31050/src/types/enums.ts#L271)*
+*Defined in [types/enums.ts:271](https://github.com/msviha/orionuo/blob/0a4af4e/src/types/enums.ts#L271)*
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 •  **mage**:  = "mage"
 
-*Defined in [types/enums.ts:270](https://github.com/msviha/orionuo/blob/2f31050/src/types/enums.ts#L270)*
+*Defined in [types/enums.ts:270](https://github.com/msviha/orionuo/blob/0a4af4e/src/types/enums.ts#L270)*
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 •  **medic**:  = "medic"
 
-*Defined in [types/enums.ts:273](https://github.com/msviha/orionuo/blob/2f31050/src/types/enums.ts#L273)*
+*Defined in [types/enums.ts:273](https://github.com/msviha/orionuo/blob/0a4af4e/src/types/enums.ts#L273)*
 
 ___
 
@@ -83,7 +83,7 @@ ___
 
 •  **necromancer**:  = "necromancer"
 
-*Defined in [types/enums.ts:269](https://github.com/msviha/orionuo/blob/2f31050/src/types/enums.ts#L269)*
+*Defined in [types/enums.ts:269](https://github.com/msviha/orionuo/blob/0a4af4e/src/types/enums.ts#L269)*
 
 ___
 
@@ -91,7 +91,7 @@ ___
 
 •  **paladin**:  = "paladin"
 
-*Defined in [types/enums.ts:275](https://github.com/msviha/orionuo/blob/2f31050/src/types/enums.ts#L275)*
+*Defined in [types/enums.ts:275](https://github.com/msviha/orionuo/blob/0a4af4e/src/types/enums.ts#L275)*
 
 ___
 
@@ -99,7 +99,7 @@ ___
 
 •  **shaman**:  = "shaman"
 
-*Defined in [types/enums.ts:280](https://github.com/msviha/orionuo/blob/2f31050/src/types/enums.ts#L280)*
+*Defined in [types/enums.ts:280](https://github.com/msviha/orionuo/blob/0a4af4e/src/types/enums.ts#L280)*
 
 ___
 
@@ -107,7 +107,7 @@ ___
 
 •  **sharpshooter**:  = "sharpshooter"
 
-*Defined in [types/enums.ts:274](https://github.com/msviha/orionuo/blob/2f31050/src/types/enums.ts#L274)*
+*Defined in [types/enums.ts:274](https://github.com/msviha/orionuo/blob/0a4af4e/src/types/enums.ts#L274)*
 
 ___
 
@@ -115,4 +115,4 @@ ___
 
 •  **warrior**:  = "warrior"
 
-*Defined in [types/enums.ts:276](https://github.com/msviha/orionuo/blob/2f31050/src/types/enums.ts#L276)*
+*Defined in [types/enums.ts:276](https://github.com/msviha/orionuo/blob/0a4af4e/src/types/enums.ts#L276)*

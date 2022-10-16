@@ -17,7 +17,7 @@
 
 •  **large**:  = "large"
 
-*Defined in [types/enums.ts:117](https://github.com/msviha/orionuo/blob/2f31050/src/types/enums.ts#L117)*
+*Defined in [types/enums.ts:117](https://github.com/msviha/orionuo/blob/0a4af4e/src/types/enums.ts#L117)*
 
 ___
 
@@ -25,4 +25,4 @@ ___
 
 •  **none**:  = "none"
 
-*Defined in [types/enums.ts:116](https://github.com/msviha/orionuo/blob/2f31050/src/types/enums.ts#L116)*
+*Defined in [types/enums.ts:116](https://github.com/msviha/orionuo/blob/0a4af4e/src/types/enums.ts#L116)*

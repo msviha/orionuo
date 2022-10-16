@@ -21,7 +21,7 @@
 
 •  **selection**: number \| [IMenuSelection](imenuselection.md)
 
-*Defined in [types/interfaces.ts:87](https://github.com/msviha/orionuo/blob/2f31050/src/types/interfaces.ts#L87)*
+*Defined in [types/interfaces.ts:87](https://github.com/msviha/orionuo/blob/0a4af4e/src/types/interfaces.ts#L87)*
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 •  **type**: [SelectionTypeEnum](../enums/selectiontypeenum.md)
 
-*Defined in [types/interfaces.ts:86](https://github.com/msviha/orionuo/blob/2f31050/src/types/interfaces.ts#L86)*
+*Defined in [types/interfaces.ts:86](https://github.com/msviha/orionuo/blob/0a4af4e/src/types/interfaces.ts#L86)*
