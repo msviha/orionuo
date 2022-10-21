@@ -207,7 +207,13 @@ namespace Scripts {
             }
             let needToMove = quantity;
             for (const item of itemsSerials) {
-                const itemCount = Orion.FindObject(item).Count();
+                const itemObject = Orion.FindObject(item);
+                const itemCount = itemObject.Count();
+                // stackovatelne itemy radeji stacknout nez hazet na souradnice
+                if (coordinates && itemCount > 1 && Orion.FindType(itemObject.Graphic(), itemObject.Color(), targetContainerId).length) {
+                    coordinates = undefined;
+                }
+
                 if (needToMove > itemCount) {
                     Scripts.Utils.moveItemAndWait(item, itemCount, targetContainerId, coordinates?.x, coordinates?.y);
                     needToMove -= itemCount;
