@@ -36,13 +36,13 @@ namespace Scripts {
 
             let saveDate = Date.parse(
                 new Date(
-                    parseInt(year),
-                    parseInt(month)-1,
-                    parseInt(day)
+                    parseInt(year, 10),
+                    parseInt(month, 10) - 1,
+                    parseInt(day, 10)
                 ) as unknown as string
             );
 
-            saveDate += (parseInt(hour) * 1000 * 60 * 60) + (parseInt(min)  * 1000 * 60);
+            saveDate += (parseInt(hour, 10) * 1000 * 60 * 60) + (parseInt(min, 10)  * 1000 * 60);
 
             return saveDate;
         }
