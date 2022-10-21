@@ -331,6 +331,10 @@ const gameObject: any = {
             graphic: '0x1078',
             color: '0x0000',
         },
+        darkHide: {
+            graphic: '0x1078',
+            color: '0x0615',
+        },
         pitcherOfWater: {
             graphic: '0x0FF8',
             color: '0x0000',
@@ -1239,10 +1243,58 @@ const gameObject: any = {
                             selections: ['Special Items','Star Stone Weapon Form']
                         }
                     }
+                },
+                magicSphere: {
+                    graphic: '0x0E2E',
+                    color: '0x0B77',
+                    make: {
+                        tool: 'gameObject.tools.tinkerTools',
+                        refill: {
+                            resources: [
+                                { item: 'gameObject.resources.ingots.gold', count: 10 },
+                                { item: 'gameObject.resources.ingots.shadow', count: 5 },
+                                { item: 'gameObject.resources.stones.sapphires', count: 2 },
+                                { item: 'gameObject.resources.stones.diamonds', count: 2 },
+                                { item: 'gameObject.resources.darkHide', count: 1 }
+
+                            ],
+                            crafting: [
+                                { item: 'gameObject.crafting.tinkering.wires.iron', count: 20 },
+                                { item: 'gameObject.crafting.tinkering.wires.silver', count: 20 }
+                            ]
+                        },
+                        menu: {
+                            name: 'Tinkering',
+                            selections: ['Special Items','Magic Sphere']
+                        }
+                    }
                 }
             },
         },
         tailoring: {
+            coloredRobe: {
+                panskeKovovky: {
+                    mytherilRobe: {
+                        graphic: '0x1F03',
+                        color: '0x052D',
+                        make: {
+                            tool: 'gameObject.tools.sewingKit',
+                            toolTarget: 'gameObject.resources.foldedCloth',
+                            refill: {
+                                resources: [
+                                    { item: 'gameObject.resources.foldedCloth', count: 15 },
+                                    { item: 'gameObject.resources.ingots.mytheril', count: 15 },
+                                    { item: 'gameObject.resources.thread', count: 5 }
+                                ],
+                            },
+                            menu: {
+                                name: 'Cloth',
+                                selections: [{ item: 'Colored Robe', menu: 'Colored Robes' }, 'Panske kovovky', 'Mytheril Robe'],
+                            },
+                        }
+                    }
+                }
+            },
             headwear: {
                 bandana: {
                     graphic: '0x153F',
