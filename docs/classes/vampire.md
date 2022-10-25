@@ -20,7 +20,7 @@
 
 ▸ `Static`**coffin**(`menuSelection`: [CoffinMenuSelection](../enums/coffinmenuselection.md)): any
 
-*Defined in [scripts/class-specific/vampire.ts:2](https://github.com/msviha/orionuo/blob/0a4af4e/src/scripts/class-specific/vampire.ts#L2)*
+*Defined in [scripts/class-specific/vampire.ts:2](https://github.com/msviha/orionuo/blob/692d718/src/scripts/class-specific/vampire.ts#L2)*
 
 #### Parameters:
 

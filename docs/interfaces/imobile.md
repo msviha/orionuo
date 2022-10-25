@@ -21,7 +21,7 @@
 
 •  **notoriety**: number
 
-*Defined in [types/interfaces.ts:107](https://github.com/msviha/orionuo/blob/0a4af4e/src/types/interfaces.ts#L107)*
+*Defined in [types/interfaces.ts:107](https://github.com/msviha/orionuo/blob/692d718/src/types/interfaces.ts#L107)*
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 •  **serial**: string
 
-*Defined in [types/interfaces.ts:106](https://github.com/msviha/orionuo/blob/0a4af4e/src/types/interfaces.ts#L106)*
+*Defined in [types/interfaces.ts:106](https://github.com/msviha/orionuo/blob/692d718/src/types/interfaces.ts#L106)*

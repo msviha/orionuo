@@ -24,7 +24,7 @@
 
 • `Optional` **bonus**: [ITeleportTimerMoving](iteleporttimermoving.md)
 
-*Defined in [scripts/spells.ts:17](https://github.com/msviha/orionuo/blob/0a4af4e/src/scripts/spells.ts#L17)*
+*Defined in [scripts/spells.ts:17](https://github.com/msviha/orionuo/blob/692d718/src/scripts/spells.ts#L17)*
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 *Inherited from [ITeleportTimerType](iteleporttimertype.md).[moving](iteleporttimertype.md#moving)*
 
-*Defined in [scripts/spells.ts:21](https://github.com/msviha/orionuo/blob/0a4af4e/src/scripts/spells.ts#L21)*
+*Defined in [scripts/spells.ts:21](https://github.com/msviha/orionuo/blob/692d718/src/scripts/spells.ts#L21)*
 
 ___
 
@@ -44,4 +44,4 @@ ___
 
 *Inherited from [ITeleportTimerType](iteleporttimertype.md).[standing](iteleporttimertype.md#standing)*
 
-*Defined in [scripts/spells.ts:22](https://github.com/msviha/orionuo/blob/0a4af4e/src/scripts/spells.ts#L22)*
+*Defined in [scripts/spells.ts:22](https://github.com/msviha/orionuo/blob/692d718/src/scripts/spells.ts#L22)*

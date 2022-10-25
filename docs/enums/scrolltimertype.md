@@ -19,7 +19,7 @@
 
 •  **bladeSpirit**:  = "bladeSpirit"
 
-*Defined in [scripts/spells.ts:28](https://github.com/msviha/orionuo/blob/0a4af4e/src/scripts/spells.ts#L28)*
+*Defined in [scripts/spells.ts:28](https://github.com/msviha/orionuo/blob/692d718/src/scripts/spells.ts#L28)*
 
 ___
 
@@ -27,7 +27,7 @@ ___
 
 •  **ivm**:  = "ivm"
 
-*Defined in [scripts/spells.ts:26](https://github.com/msviha/orionuo/blob/0a4af4e/src/scripts/spells.ts#L26)*
+*Defined in [scripts/spells.ts:26](https://github.com/msviha/orionuo/blob/692d718/src/scripts/spells.ts#L26)*
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 •  **regular**:  = "regular"
 
-*Defined in [scripts/spells.ts:27](https://github.com/msviha/orionuo/blob/0a4af4e/src/scripts/spells.ts#L27)*
+*Defined in [scripts/spells.ts:27](https://github.com/msviha/orionuo/blob/692d718/src/scripts/spells.ts#L27)*
 
 ___
 
@@ -43,4 +43,4 @@ ___
 
 •  **teleport**:  = "teleport"
 
-*Defined in [scripts/spells.ts:29](https://github.com/msviha/orionuo/blob/0a4af4e/src/scripts/spells.ts#L29)*
+*Defined in [scripts/spells.ts:29](https://github.com/msviha/orionuo/blob/692d718/src/scripts/spells.ts#L29)*

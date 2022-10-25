@@ -23,7 +23,7 @@
 
 •  **bladeSpirit**: [IScrollTimersMagery](iscrolltimersmagery.md)
 
-*Defined in [scripts/spells.ts:4](https://github.com/msviha/orionuo/blob/0a4af4e/src/scripts/spells.ts#L4)*
+*Defined in [scripts/spells.ts:4](https://github.com/msviha/orionuo/blob/692d718/src/scripts/spells.ts#L4)*
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 •  **ivm**: [IScrollTimersMagery](iscrolltimersmagery.md)
 
-*Defined in [scripts/spells.ts:2](https://github.com/msviha/orionuo/blob/0a4af4e/src/scripts/spells.ts#L2)*
+*Defined in [scripts/spells.ts:2](https://github.com/msviha/orionuo/blob/692d718/src/scripts/spells.ts#L2)*
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 •  **regular**: [IScrollTimersMagery](iscrolltimersmagery.md)
 
-*Defined in [scripts/spells.ts:3](https://github.com/msviha/orionuo/blob/0a4af4e/src/scripts/spells.ts#L3)*
+*Defined in [scripts/spells.ts:3](https://github.com/msviha/orionuo/blob/692d718/src/scripts/spells.ts#L3)*
 
 ___
 
@@ -47,4 +47,4 @@ ___
 
 •  **teleport**: [ITeleportTimerByChar](iteleporttimerbychar.md)
 
-*Defined in [scripts/spells.ts:5](https://github.com/msviha/orionuo/blob/0a4af4e/src/scripts/spells.ts#L5)*
+*Defined in [scripts/spells.ts:5](https://github.com/msviha/orionuo/blob/692d718/src/scripts/spells.ts#L5)*

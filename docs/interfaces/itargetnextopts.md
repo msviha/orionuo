@@ -22,7 +22,7 @@
 
 • `Optional` **showStatusBar**: boolean
 
-*Defined in [types/interfaces.ts:20](https://github.com/msviha/orionuo/blob/0a4af4e/src/types/interfaces.ts#L20)*
+*Defined in [types/interfaces.ts:20](https://github.com/msviha/orionuo/blob/692d718/src/types/interfaces.ts#L20)*
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 • `Optional` **statusBarPosition**: [ICoordinates](icoordinates.md)
 
-*Defined in [types/interfaces.ts:21](https://github.com/msviha/orionuo/blob/0a4af4e/src/types/interfaces.ts#L21)*
+*Defined in [types/interfaces.ts:21](https://github.com/msviha/orionuo/blob/692d718/src/types/interfaces.ts#L21)*
 
 ___
 
@@ -38,4 +38,4 @@ ___
 
 • `Optional` **targetIndication**: [TargetIndicationEnum](../enums/targetindicationenum.md)
 
-*Defined in [types/interfaces.ts:19](https://github.com/msviha/orionuo/blob/0a4af4e/src/types/interfaces.ts#L19)*
+*Defined in [types/interfaces.ts:19](https://github.com/msviha/orionuo/blob/692d718/src/types/interfaces.ts#L19)*

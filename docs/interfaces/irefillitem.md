@@ -21,7 +21,7 @@
 
 •  **count**: number
 
-*Defined in [types/interfaces.ts:67](https://github.com/msviha/orionuo/blob/0a4af4e/src/types/interfaces.ts#L67)*
+*Defined in [types/interfaces.ts:67](https://github.com/msviha/orionuo/blob/692d718/src/types/interfaces.ts#L67)*
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 •  **item**: string
 
-*Defined in [types/interfaces.ts:66](https://github.com/msviha/orionuo/blob/0a4af4e/src/types/interfaces.ts#L66)*
+*Defined in [types/interfaces.ts:66](https://github.com/msviha/orionuo/blob/692d718/src/types/interfaces.ts#L66)*
