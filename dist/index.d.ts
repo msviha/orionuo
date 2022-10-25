@@ -87,6 +87,7 @@ declare function mysticCounter(): void;
 declare function nbRune(): void;
 declare function necroMystic(message: string): void;
 declare function nextWeapon(showName?: boolean): void;
+declare function nregy(count?: number): void;
 declare function ocaruj(dusty?: OcarovaniEnum): void;
 declare function openContainer(): void;
 declare function poisonGuns(): void;
@@ -354,7 +355,7 @@ declare namespace Scripts {
             kad: string;
             count: number;
         }>): void;
-        static regy(count?: number): void;
+        static regy(count?: number, necroRegs?: boolean): void;
     }
 }
 interface IScrollTimers {
