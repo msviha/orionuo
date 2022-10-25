@@ -114,6 +114,11 @@ namespace Scripts {
             let totalInTarget = Scripts.Utils.countObjectInContainer({ graphic, color }, 'massMoveTargetContainer');
 
             while (serialsToMove.length && (!requiredCountInTarget || totalInTarget !== requiredCountInTarget)) {
+                const containerItemsCount = Orion.FindType('0xFFFF', '0xFFFF', 'massMoveTargetContainer').length;
+                if (containerItemsCount >= 255) {
+                    Scripts.Utils.playerPrint('Container je uz plny..', ColorEnum.red);
+                    break;
+                }
                 const s = serialsToMove[0];
                 if (typesInTargetContainer.length) {
                     if (!coordinates && !stackableTarget) {
