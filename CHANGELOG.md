@@ -1,5 +1,30 @@
 # CHANGELOG
 
+## 1.9.0
+
+### fixes
+- `crafting` - pridan check na presouvani 1 item z tezkeho stacku - crafteni by ted u slabsiho pripojeni nemelo hazet error
+- `loot` - nereze human mrtvolky, neignoruje nevylotovana tela (napr pri paralyze/kdyz nevidis na telo pri lootu), nelotuje friendy, a pokud je v okoli vice mrtvol tak se zpomali na doporucenou pauzu, aby se neodpojil od serveru
+- `alchemy shrink` - nemichalo shrinky - koncilo errorem
+- `config` - updatnuta struktura configu - JE DOPORUCENE si nahrat novy config.js (puvodni mel spatnou strukturu a v nekolika prechozich verzich nemusel fungovat spravne)
+- `automaticke prejmenovani summu` - fixnuto aby neprejmenovavalo na nazev zacinajici `gm`
+- `wos/ef` - opraveno aby nevadilo posunute herni okno zobrazeni timeru u zdi
+- `bandageTarget` - nezobrazuje timer pokud je cil full (lecite poison / nahazujete s medikem)
+
+### features
+- `loot` - moznost nastaveni automatickeho zavirani containeru mrtvolky po vylootovani
+- `alch` - nova zkratka aby slo volat michani primo z clienta `_alch shrink` napr.
+- `config` - obsahuje experimentalni propertu pro statusbar `useGetFriendsStatus` - po nastaveni na true je mozne ze to bude u friendu lepe aktualizovat zivoty na zalozkach (je to potreba otestovat)
+- `ws` - zobrazi zbyvajici cas do World Save (v configu se da zobrazovat i timer ktery se ukazuje 5 minut pred WS)
+- `friendRemove` - odebere vybraneho hrace z friend listu
+- `allFriends` - prida vsechny zelene a modre viditelne hrace do friendlistu
+
+### removed
+- `PetCommander` a s nim spojene funkce `healPets`, `killAll` a `killTarget` byly odstraneny
+
+### gameObject added
+- `uncategorized.nbDrawing` - pridano nb rezatko do gameobjectu
+
 ## 1.8.0
 
 ### fixes
