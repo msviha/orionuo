@@ -736,6 +736,18 @@ function nextWeapon(showName = false) {
 }
 
 /**
+ * Prehodi urceny pocet necro regu mezi dvema containery
+ * @param count
+ */
+function nregy(count?:number) {
+    if (count) {
+        const parsedParam = parseParam(count);
+        count = typeof parsedParam === 'number' ? parsedParam : 0;
+    }
+    Scripts.Refill.regy(count, true);
+}
+
+/**
  * Ocaruje pytel v mrtvolce mytheril dustem
  * Zepta se na target, zamerite mrtvolku a pokud jste daleko tak vam vypise 5ti vterinovy timer kdy musite k mrtvole dojit aby ji ocaroval
  * @param dusty {OcarovaniEnum} cim budes carovat

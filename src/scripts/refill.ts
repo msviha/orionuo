@@ -289,7 +289,7 @@ namespace Scripts {
                 createKad(emptyKadContainerPath, emptyBottleContainerPath,	sourceKade[i].count, sourceKade[i].kad, 'targetContainerCreateKade');
             }
         }
-        static regy(count?:number) {
+        static regy(count?:number, necroRegs = false) {
             const source = 'refillRegySource';
             const target = 'refillRegyTarget';
             Scripts.Utils.createGameObjectSelections([
@@ -299,7 +299,7 @@ namespace Scripts {
 
             typeof count !== 'number' && (count = Scripts.Utils.askForCount());
 
-            const regs = gameObject.regy;
+            const regs = necroRegs ? gameObject.necroRegy : gameObject.regy;
             for (const r in regs) {
                 const reg = regs[r];
                 Scripts.Utils.refill(reg, source, count, target, false, r);
