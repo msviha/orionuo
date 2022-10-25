@@ -1,7 +1,7 @@
 function version() {
     Orion.Print(-1, '+-------------');
     Orion.Print(-1, 'msviha/orionuo');
-    Orion.Print(-1, 'version 1.9.0');
+    Orion.Print(-1, 'version 1.9.1');
     Orion.Print(-1, '-------------+');
 }
 
@@ -241,8 +241,8 @@ function cestovniKniha(selection = PortBookOptionsEnum.kop, destination?:PortBoo
  * Uklizi bagl !! Pozor pokud davate souradnice, nad/pod bagl tak je treba mit v Clientovi nastavene "Dont fix item positions in container" !!
  * @param object objekt ktery chcete uklidit nebo cestu k itemu skrze [gameObject](./globals.md#gameObject)
  * @param objectName nazev pro vypisovani behem uklidu
- * @example external code `Scripts.Clean.cleanObjectInBag(gameObject.potions, 'potions');`
- * @example external code `Scripts.Clean.cleanObjectInBag(gameObject.regy, 'regy');`
+ * @example external code `cleanObjectInBag(gameObject.potions, 'potions');`
+ * @example external code `cleanObjectInBag(gameObject.regy, 'regy');`
  * @example external code - pokud si to budete definovat sami `Scripts.Clean.cleanObjectInBag({graphic: '0x0E9C', color: '0x0000', bag: {x: 20, y: 50}}, 'buben');`
  * takto je mozne si na jeden hotkey dat tuto funkci vicekrat pod sebe, aby to na zmacknuti uklidilo vice veci
  */

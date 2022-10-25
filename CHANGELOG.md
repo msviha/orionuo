@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 1.9.1
+
+### fixes
+- `ws` - opraveno parsovani casu hodin/minut zacinajicich nulou (z webu)
+- `regy` - pokud jsou v nekterem z kontaineru tak se stackuji namisto zarovnani na presne souradnice. Zarovnat je muzete dale pomoci `cleanObjectInBag(gameObject.regy, 'regy');`
+- `mm` - pridana kontrola plneho containeru (aby se nezacyklil)
+
+### features
+- `nregy` - moznost pro presun necro regu mezi containery (napr. `_nregy 0` na odrefnuti necro regu)
+
 ## 1.9.0
 
 ### fixes
