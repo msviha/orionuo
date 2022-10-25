@@ -10,6 +10,9 @@
 ### features
 - `nregy` - moznost pro presun necro regu mezi containery (napr. `_nregy 0` na odrefnuti necro regu)
 
+### crafting
+- `magicSphere`, `mytherilRobe`
+
 ## 1.9.0
 
 ### fixes
